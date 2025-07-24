@@ -37,6 +37,9 @@ export default function MentionsLegalesPage() {
                 Le site raccordement-elec.fr est édité par une entreprise spécialisée dans les démarches administratives liées au raccordement électrique.
                 <br />Email : contact@raccordement-elec.fr
               </p>
+              <p>
+                Protectassur Ltd – 61 Bridge Street, Kington, HR5 3DJ, Royaume-Uni – N° d'immatriculation 14112679
+              </p>
               
               <h2 className="text-xl font-semibold text-blue-700 mt-8 mb-4">2. Directeur de la publication</h2>
               <p>
