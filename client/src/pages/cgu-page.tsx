@@ -82,6 +82,10 @@ export default function CGUPage() {
               <p>
                 Pour toute question concernant ces Conditions Générales d'Utilisation, veuillez nous contacter à l'adresse suivante : contact@raccordement-elec.fr ou par téléphone au +33 (0) 9 70 70 95 70.
               </p>
+              
+              <div className="text-sm text-gray-500 mt-12 text-center italic">
+                Raccordement-Elec.fr n'est pas affilié à Enedis. Enedis est une marque déposée.
+              </div>
             </div>
           </div>
         </div>
