@@ -1,0 +1,1 @@
+// Backup of original home-page.tsx before fixing JSX errors

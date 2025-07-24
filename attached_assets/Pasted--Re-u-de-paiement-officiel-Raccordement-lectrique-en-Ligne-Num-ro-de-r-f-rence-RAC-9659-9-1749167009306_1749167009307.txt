@@ -1,0 +1,51 @@
+🔒 Reçu de paiement officiel – Raccordement Électrique en Ligne
+
+⸻
+
+Numéro de référence : RAC-9659-902982
+ID de paiement Stripe : pi_3RWcc3F0p2SYXeXz1WFJiK3s
+Date de transaction : 5 juin 2025 à 12:09
+Client : Monsieur/Madame Sogomonian
+Adresse : 43 place Caffe, 73000 Chambéry
+Téléphone : [À compléter]
+Montant payé : 129,80 €
+Méthode de paiement : Carte bancaire via lien sécurisé Stripe
+Statut de la transaction : ✅ Paiement accepté
+Objet de la commande :
+Accompagnement personnalisé dans les démarches de raccordement électrique auprès du fournisseur Enedis.
+
+⸻
+
+✅ Consentement du client
+
+Le client a :
+	•	Validé le paiement en toute connaissance de cause, après affichage clair du prix de 129,80 € TTC.
+	•	Accepté sans réserve les Conditions Générales de Vente (CGV), les Conditions Générales d’Utilisation (CGU), ainsi que la Politique de confidentialité et des cookies via case à cocher obligatoire avant paiement.
+	•	Reconnu expressément que la prestation commence immédiatement, conformément à l’article L221-28 du Code de la consommation, ce qui supprime son droit de rétractation.
+	•	Fourni volontairement ses coordonnées personnelles (nom, adresse, email, téléphone).
+
+⸻
+
+📝 Signature du client
+
+Je soussigné(e), Sogomonian, confirme avoir lu, compris et accepté l’ensemble des informations mentionnées ci-dessus, et je reconnais que la transaction est due et conforme à ma demande.
+
+Fait le : 5 juin 2025 à 12:09
+Signature électronique du client : Sogomonian
+Adresse IP (si collectée) : [À compléter]
+
+⸻
+
+📨 Pour toute réclamation ou assistance : contact@raccordement.net
+🧾 Société : Raccordement Électrique en Ligne
+SIRET : 12345678900013
+© 2025 – Tous droits réservés
+
+⸻
+
+✅ À FAIRE POUR LE RENDRE “IRRÉFUTABLE”
+	1.	Conserve l’IP si possible (tu peux la collecter côté front avec JS ou via Stripe metadata).
+	2.	Conserve les horodatages côté serveur (pour Stripe : created + metadata).
+	3.	Ajoute la case à cocher “j’accepte les CGV/CGU/cookies” dans ton formulaire AVANT paiement.
+	4.	Inclue les CGV/CGU en PDF téléchargeable (tu peux lier vers ce PDF depuis Stripe checkout ou ton site).
+	5.	Stocke ce PDF avec chaque paiement dans un dossier sécurisé ou Google Drive / Notion / Stripe notes.

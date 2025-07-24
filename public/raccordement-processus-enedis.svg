@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="540" height="240" viewBox="0 0 540 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fond technique -->
+  <rect width="540" height="240" fill="#0f2a53" rx="4" ry="4"/>
+  <g opacity="0.1">
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#3b82f6" stroke-width="0.5"/>
+    </pattern>
+    <rect width="540" height="240" fill="url(#grid)"/>
+  </g>
+  
+  <!-- Dégradé de fond -->
+  <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" style="stop-color:#0f2a53;stop-opacity:1"/>
+    <stop offset="100%" style="stop-color:#1e3a64;stop-opacity:1"/>
+  </linearGradient>
+  <rect width="540" height="240" fill="url(#bg-gradient)" opacity="0.6" rx="4" ry="4"/>
+  
+  <!-- Titre -->
+  <text x="270" y="30" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold">PROCESSUS DE RACCORDEMENT ÉLECTRIQUE</text>
+  
+  <!-- Ligne souterraine -->
+  <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" style="stop-color:#1e40af;stop-opacity:0.2"/>
+    <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:0.4"/>
+    <stop offset="100%" style="stop-color:#1e40af;stop-opacity:0.2"/>
+  </linearGradient>
+  <rect x="90" y="150" width="360" height="4" fill="url(#line-gradient)" rx="2" ry="2"/>
+  
+  <!-- Maison -->
+  <g transform="translate(120, 100)">
+    <!-- Base de la maison -->
+    <rect x="5" y="30" width="50" height="30" fill="#1e293b" stroke="#94a3b8" stroke-width="1" opacity="0.7"/>
+    <!-- Toit -->
+    <path d="M 0 30 L 30 0 L 60 30" fill="none" stroke="#94a3b8" stroke-width="1" opacity="0.7"/>
+    <path d="M 5 30 L 30 5 L 55 30" fill="#334155" stroke="#94a3b8" stroke-width="0.5" opacity="0.5"/>
+    <!-- Fenêtres -->
+    <rect x="15" y="40" width="10" height="10" fill="#f1f5f9" opacity="0.2"/>
+    <rect x="35" y="40" width="10" height="10" fill="#f1f5f9" opacity="0.2"/>
+    <!-- Légende -->
+    <text x="30" y="85" font-family="Arial, sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">Habitation</text>
+  </g>
+  
+  <!-- Compteur Linky -->
+  <g transform="translate(250, 90)">
+    <!-- Boîtier -->
+    <rect x="0" y="0" width="40" height="50" fill="#32b34a" stroke="#2a9940" stroke-width="1" rx="2" ry="2"/>
+    <!-- Écran -->
+    <rect x="5" y="10" width="30" height="10" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+    <!-- Affichage -->
+    <rect x="8" y="13" width="24" height="4" fill="#f1f5f9" opacity="0.2"/>
+    <!-- Boutons -->
+    <rect x="10" y="30" width="20" height="10" fill="#0f172a" stroke="#1e293b" stroke-width="0.5"/>
+    <text x="20" y="38" font-family="Arial, sans-serif" font-size="6" fill="#ffffff" text-anchor="middle">LINKY</text>
+    <!-- Légende -->
+    <text x="20" y="70" font-family="Arial, sans-serif" font-size="12" fill="#32b34a" text-anchor="middle">Compteur</text>
+  </g>
+  
+  <!-- Réseau Enedis -->
+  <g transform="translate(380, 90)">
+    <!-- Boîtier -->
+    <rect x="0" y="0" width="50" height="40" fill="#1e3a67" stroke="#2c5282" stroke-width="1" rx="2" ry="2"/>
+    <!-- Grille -->
+    <g transform="translate(10, 10)">
+      <rect x="0" y="0" width="30" height="20" fill="none" stroke="#3b82f6" stroke-width="0.5" opacity="0.5"/>
+      <rect x="0" y="0" width="10" height="10" fill="#3b82f6" opacity="0.2"/>
+      <rect x="10" y="0" width="10" height="10" fill="#3b82f6" opacity="0.15"/>
+      <rect x="20" y="0" width="10" height="10" fill="#3b82f6" opacity="0.2"/>
+      <rect x="0" y="10" width="10" height="10" fill="#3b82f6" opacity="0.15"/>
+      <rect x="10" y="10" width="10" height="10" fill="#3b82f6" opacity="0.2"/>
+      <rect x="20" y="10" width="10" height="10" fill="#3b82f6" opacity="0.15"/>
+    </g>
+    <!-- Indicateur lumineux -->
+    <circle cx="5" cy="5" r="2" fill="#4ade80"/>
+    <!-- Légende -->
+    <text x="25" y="60" font-family="Arial, sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">Réseau Enedis</text>
+  </g>
+  
+  <!-- Connexions -->
+  <line x1="180" y1="120" x2="240" y2="120" stroke="#60a5fa" stroke-width="2" opacity="0.7"/>
+  <line x1="300" y1="120" x2="370" y2="120" stroke="#60a5fa" stroke-width="2" opacity="0.7"/>
+  
+  <!-- Poteau électrique -->
+  <g transform="translate(270, 150)">
+    <line x1="0" y1="0" x2="0" y2="30" stroke="#64748b" stroke-width="3"/>
+    <line x1="-15" y1="5" x2="15" y2="5" stroke="#64748b" stroke-width="2"/>
+  </g>
+  
+  <!-- 3 étapes du processus -->
+  <g transform="translate(40, 200)">
+    <circle cx="70" cy="0" r="15" fill="#1e3a6720"/>
+    <text x="70" y="4" font-family="Arial, sans-serif" font-size="12" fill="#32b34a" text-anchor="middle" font-weight="bold">1</text>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">Demande</text>
+  </g>
+  
+  <g transform="translate(180, 200)">
+    <circle cx="80" cy="0" r="15" fill="#1e3a6720"/>
+    <text x="80" y="4" font-family="Arial, sans-serif" font-size="12" fill="#3b82f6" text-anchor="middle" font-weight="bold">2</text>
+    <text x="80" y="30" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">Étude technique</text>
+  </g>
+  
+  <g transform="translate(350, 200)">
+    <circle cx="80" cy="0" r="15" fill="#1e3a6720"/>
+    <text x="80" y="4" font-family="Arial, sans-serif" font-size="12" fill="#3b82f6" text-anchor="middle" font-weight="bold">3</text>
+    <text x="80" y="30" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">Raccordement</text>
+  </g>
+  
+  <!-- Statut du réseau -->
+  <g transform="translate(430, 30)">
+    <circle cx="5" cy="5" r="3" fill="#4ade80"/>
+    <text x="15" y="8" font-family="Arial, sans-serif" font-size="9" fill="#4ade80">RÉSEAU ACTIF</text>
+  </g>
+</svg>

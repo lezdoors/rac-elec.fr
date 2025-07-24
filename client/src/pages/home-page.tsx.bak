@@ -1,0 +1,721 @@
+import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
+import { Zap, CheckCircle, ArrowRight, Building, Home as HomeIcon, BarChart, Clock, Shield, User, BatteryCharging, Calculator, Server, PanelTop, Send, Bolt, CheckCheck, Wrench, Phone, AlertCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { CookieConsent } from "@/components/cookie-consent";
+
+export default function HomePage() {
+  const [scrollY, setScrollY] = useState(0);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div className="flex flex-col">
+      <CookieConsent />
+      {/* Hero Section - Full screen with modern design */}
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-indigo-950 via-blue-900 to-indigo-950">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute w-96 h-96 -top-20 -left-20 bg-blue-600/20 rounded-full blur-3xl" />
+          <div className="absolute w-96 h-96 top-1/3 right-1/4 bg-indigo-500/20 rounded-full blur-3xl" />
+          <div className="absolute w-80 h-80 bottom-1/4 -right-20 bg-indigo-700/20 rounded-full blur-3xl" />
+          
+          {/* Grid pattern overlay */}
+          <div 
+            className="absolute inset-0 opacity-[0.03]" 
+            style={{
+              backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
+              backgroundSize: '4rem 4rem',
+            }}
+          />
+        </div>
+        
+        {/* Content */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div 
+              className="text-white max-w-2xl space-y-6"
+              style={{
+                transform: `translateY(${scrollY * 0.1}px)`,
+                opacity: Math.max(1 - scrollY * 0.002, 0.5),
+                transition: 'transform 0.1s ease-out'
+              }}
+            >
+              <div className="inline-flex items-center space-x-2 bg-white/10 rounded-full px-4 py-1.5 backdrop-blur-sm mb-4">
+                <Bolt className="h-5 w-5 text-yellow-400" />
+                <span className="text-white/90 text-sm font-medium">Solution n°1 de raccordement électrique</span>
+              </div>
+              
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                Votre Raccordement Électrique avec <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-400">Enedis</span> : Informations et Démarches
+              </h1>
+              
+              <p className="text-lg sm:text-xl text-blue-100/90 max-w-xl">
+                Simplifiez votre raccordement électrique grâce à notre processus innovant, rapide et entièrement digital.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row items-center gap-4 mt-8">
+                <Link href="/raccordement-enedis#top">
+                  <Button size="lg" className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0 shadow-lg shadow-blue-600/30 transition-all duration-300 hover:scale-105 w-full sm:w-auto">
+                    Demande en ligne
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                {/* Le bouton "Explorer nos services" a été supprimé comme demandé */}
+              </div>
+              
+              <div className="grid grid-cols-3 gap-4 mt-12 pt-6 border-t border-white/10">
+                <div className="text-center">
+                  <div className="font-bold text-2xl text-white">38,8 M</div>
+                  <div className="text-blue-200/70 text-sm">Clients satisfaits</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-bold text-2xl text-white">24/7</div>
+                  <div className="text-blue-200/70 text-sm">Support technique</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-bold text-2xl text-white">100%</div>
+                  <div className="text-blue-200/70 text-sm">Taux de réussite</div>
+                </div>
+              </div>
+            </div>
+            
+            <div 
+              className="lg:block hidden"
+              style={{
+                transform: `translateY(${-scrollY * 0.05}px)`,
+                transition: 'transform 0.1s ease-out'
+              }}
+            >
+              <div className="relative">
+                {/* Glowing effect behind */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-blue-400/20 blur-3xl"></div>
+                
+                {/* 3D-like graphic */}
+                <div className="relative bg-gradient-to-br from-blue-900/40 to-indigo-900/40 backdrop-blur-xl border border-white/10 p-6 rounded-2xl shadow-2xl rotate-3 hover:rotate-0 transition-all duration-700">
+                  <div className="flex justify-between items-start mb-8">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                      <Zap className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="flex space-x-1">
+                      {[1, 2, 3].map(i => (
+                        <div key={i} className="w-2 h-8 bg-blue-500/30 rounded-full" 
+                             style={{height: `${20 + i * 10}px`}} />
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-6">
+                    <div className="h-3 bg-blue-500/20 rounded-full w-3/4"></div>
+                    <div className="h-3 bg-blue-500/20 rounded-full w-5/6"></div>
+                    <div className="h-3 bg-blue-500/20 rounded-full w-2/3"></div>
+                  </div>
+                  
+                  <div className="mt-8 grid grid-cols-2 gap-4">
+                    <div className="bg-white/5 p-4 rounded-xl">
+                      <div className="flex items-center space-x-2 mb-3">
+                        <BatteryCharging className="h-5 w-5 text-blue-300" />
+                        <span className="text-blue-100 text-sm">Puissance</span>
+                      </div>
+                      <div className="text-lg font-bold text-white">9 kVA</div>
+                    </div>
+                    <div className="bg-white/5 p-4 rounded-xl">
+                      <div className="flex items-center space-x-2 mb-3">
+                        <Calculator className="h-5 w-5 text-blue-300" />
+                        <span className="text-blue-100 text-sm">Coût estimé</span>
+                      </div>
+                      <div className="text-lg font-bold text-white">1200 €</div>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-6 flex items-center justify-between bg-gradient-to-r from-blue-600/30 to-indigo-600/30 p-4 rounded-xl">
+                    <div className="text-blue-100">Status</div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                      <span className="text-green-400 text-sm">En cours</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Floating elements */}
+                <div className="absolute -bottom-6 -left-6 bg-gradient-to-br from-yellow-400 to-yellow-500 p-3 rounded-lg shadow-lg rotate-12 animate-pulse">
+                  <Bolt className="h-6 w-6 text-white" />
+                </div>
+                <div className="absolute -top-4 -right-4 bg-gradient-to-br from-blue-400 to-indigo-500 p-3 rounded-lg shadow-lg -rotate-12 animate-bounce">
+                  <PanelTop className="h-6 w-6 text-white" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
+          <span className="text-blue-200 text-xs mb-2">Découvrir</span>
+          <div className="w-6 h-10 border-2 border-blue-200 rounded-full flex justify-center pt-1">
+            <div className="w-1.5 h-1.5 bg-blue-200 rounded-full animate-pulse"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section with 3D cards */}
+      <section className="py-16 bg-gradient-to-b from-slate-50 to-white" id="services">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center mb-24">
+            <div className="inline-flex items-center px-4 py-1 rounded-full bg-blue-100 text-blue-800 mb-4">
+              <span className="text-sm font-semibold">Nos Services Exclusifs</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Raccordement Enedis : Solutions <span className="text-blue-600">Innovantes</span>
+            </h2>
+            <p className="text-xl text-gray-600 mb-0">
+              Découvrez nos services premium adaptés à tous vos besoins de raccordement électrique
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            {/* Raccordement maison/appartement */}
+            <div className="group relative">
+              <div className="absolute inset-0.5 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-2xl blur opacity-20 group-hover:opacity-100 transition duration-500"></div>
+              <div className="relative bg-white rounded-2xl p-8 shadow-xl border border-gray-100 transition duration-300 group-hover:translate-y-[-10px]">
+                <div className="flex items-center justify-center w-16 h-16 mb-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl text-blue-600 group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-indigo-600 group-hover:text-white transition-all duration-300">
+                  <HomeIcon className="h-8 w-8" aria-label="Icône maison" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition duration-300">Raccordement maison/appartement</h3>
+                <p className="text-gray-600 mb-6">
+                  Solutions adaptées pour raccorder votre logement au réseau électrique Enedis.
+                </p>
+                <ul className="space-y-4">
+                  <li className="flex items-center space-x-3">
+                    <div className="flex-shrink-0 w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                      <CheckCircle className="h-3.5 w-3.5" />
+                    </div>
+                    <span className="text-gray-700">Branchement provisoire/définitif</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <div className="flex-shrink-0 w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                      <CheckCircle className="h-3.5 w-3.5" />
+                    </div>
+                    <span className="text-gray-700">Gestion administrative complète</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <div className="flex-shrink-0 w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                      <CheckCircle className="h-3.5 w-3.5" />
+                    </div>
+                    <span className="text-gray-700">Accompagnement personnalisé</span>
+                  </li>
+                </ul>
+                <div className="mt-8 pt-6 border-t border-gray-100">
+                  <Link href="/raccordement-enedis#top">
+                    <span className="inline-flex items-center font-medium text-[#32b34a] hover:text-[#2a9e40]">
+                      Faire ma demande
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            
+            {/* Viabilisation terrain */}
+            <div className="group relative mt-12 md:mt-0">
+              <div className="absolute inset-0.5 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-500"></div>
+              <div className="relative bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-8 shadow-xl transition duration-300 group-hover:translate-y-[-10px]">
+                <div className="absolute right-8 top-8 bg-white/10 backdrop-blur-sm rounded-full p-2">
+                  <span className="text-xs font-bold text-white px-2 uppercase">Populaire</span>
+                </div>
+                <div className="flex items-center justify-center w-16 h-16 mb-8 bg-white/10 backdrop-blur-sm rounded-2xl text-white">
+                  <Building className="h-8 w-8" aria-label="Icône bâtiment" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4">Viabilisation terrain</h3>
+                <p className="text-blue-100 mb-6">
+                  Préparation de votre terrain pour assurer un raccordement optimal aux réseaux essentiels.
+                </p>
+                <ul className="space-y-4">
+                  <li className="flex items-center space-x-3">
+                    <div className="flex-shrink-0 w-5 h-5 bg-white/20 text-white rounded-full flex items-center justify-center">
+                      <CheckCircle className="h-3.5 w-3.5" />
+                    </div>
+                    <span className="text-blue-50">Études techniques</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <div className="flex-shrink-0 w-5 h-5 bg-white/20 text-white rounded-full flex items-center justify-center">
+                      <CheckCircle className="h-3.5 w-3.5" />
+                    </div>
+                    <span className="text-blue-50">Coordination avec Enedis</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <div className="flex-shrink-0 w-5 h-5 bg-white/20 text-white rounded-full flex items-center justify-center">
+                      <CheckCircle className="h-3.5 w-3.5" />
+                    </div>
+                    <span className="text-blue-50">Gestion de projet complète</span>
+                  </li>
+                </ul>
+                <div className="mt-8 pt-6 border-t border-white/20">
+                  <Link href="/raccordement-enedis#top">
+                    <span className="inline-flex items-center font-medium text-white hover:text-blue-100">
+                      Faire ma demande
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            
+            {/* Mise en service */}
+            <div className="group relative">
+              <div className="absolute inset-0.5 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-2xl blur opacity-20 group-hover:opacity-100 transition duration-500"></div>
+              <div className="relative bg-white rounded-2xl p-8 shadow-xl border border-gray-100 transition duration-300 group-hover:translate-y-[-10px]">
+                <div className="flex items-center justify-center w-16 h-16 mb-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl text-blue-600 group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-indigo-600 group-hover:text-white transition-all duration-300">
+                  <Bolt className="h-8 w-8" aria-label="Icône électricité" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition duration-300">Mise en service</h3>
+                <p className="text-gray-600 mb-6">
+                  Activation de votre compteur et mise en service de votre installation électrique.
+                </p>
+                <ul className="space-y-4">
+                  <li className="flex items-center space-x-3">
+                    <div className="flex-shrink-0 w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                      <CheckCircle className="h-3.5 w-3.5" />
+                    </div>
+                    <span className="text-gray-700">Activation rapide</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <div className="flex-shrink-0 w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                      <CheckCircle className="h-3.5 w-3.5" />
+                    </div>
+                    <span className="text-gray-700">Contrôle de conformité</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <div className="flex-shrink-0 w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                      <CheckCircle className="h-3.5 w-3.5" />
+                    </div>
+                    <span className="text-gray-700">Conseil sur les offres</span>
+                  </li>
+                </ul>
+                <div className="mt-8 pt-6 border-t border-gray-100">
+                  <Link href="/raccordement-enedis#top">
+                    <span className="inline-flex items-center font-medium text-[#32b34a] hover:text-[#2a9e40]">
+                      Faire ma demande
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Section SEO optimisée sur Enedis et les raccordements - avec une structure riche en données */}
+      <section className="py-16 bg-gradient-to-b from-white to-blue-50" id="enedis-services">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            {/* En-tête optimisé pour le SEO */}
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" id="services-enedis-raccordement">
+                Services Enedis de Raccordement au Réseau Électrique
+              </h2>
+              <p className="text-xl text-gray-600">
+                Comprendre les services essentiels d'Enedis pour un raccordement réussi
+              </p>
+            </div>
+            
+            {/* Carte avec information riche en données structurées - important pour SEO */}
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+              {/* Bandeau supérieur */}
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-700 py-4 px-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-white font-bold text-xl">Enedis - Gestionnaire du Réseau Public d'Électricité</h3>
+                  <span className="bg-white/20 text-white px-3 py-1 rounded-full text-sm">Couverture de 95% du territoire</span>
+                </div>
+              </div>
+              
+              {/* Contenu principal avec grille responsive */}
+              <div className="p-6">
+                <p className="text-gray-700 mb-8 leading-relaxed">
+                  Enedis (anciennement ERDF) est le gestionnaire principal du réseau public de distribution d'électricité en France. 
+                  Ses services sont essentiels pour garantir un raccordement de qualité et une alimentation électrique fiable 
+                  pour les particuliers, professionnels et collectivités.  
+                </p>
+                
+                <h4 className="text-xl font-bold text-gray-900 mb-4">Services clés pour votre raccordement</h4>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                  {/* Service 1 */}
+                  <div className="bg-blue-50 rounded-xl p-5 border border-blue-100 hover:shadow-md transition-all duration-300">
+                    <div className="flex items-start mb-3">
+                      <div className="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                        <Zap className="h-5 w-5" aria-label="Icône éclair" />
+                      </div>
+                      <h5 className="text-lg font-semibold text-gray-900">Raccordement au Réseau</h5>
+                    </div>
+                    <p className="text-gray-700 text-sm ml-13">
+                      Connexion des installations neuves au réseau électrique, incluant les habitations, immeubles, locaux professionnels 
+                      et installations de production d'énergie renouvelable comme les panneaux solaires.
+                    </p>
+                  </div>
+                  
+                  {/* Service 2 */}
+                  <div className="bg-blue-50 rounded-xl p-5 border border-blue-100 hover:shadow-md transition-all duration-300">
+                    <div className="flex items-start mb-3">
+                      <div className="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                        <Bolt className="h-5 w-5" />
+                      </div>
+                      <h5 className="text-lg font-semibold text-gray-900">Mise en Service</h5>
+                    </div>
+                    <p className="text-gray-700 text-sm ml-13">
+                      Opération technique permettant d'alimenter une installation en électricité après souscription d'un contrat 
+                      auprès d'un fournisseur d'énergie, minimisant les délais d'attente.
+                    </p>
+                  </div>
+                  
+                  {/* Service 3 */}
+                  <div className="bg-blue-50 rounded-xl p-5 border border-blue-100 hover:shadow-md transition-all duration-300">
+                    <div className="flex items-start mb-3">
+                      <div className="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                        <Wrench className="h-5 w-5" />
+                      </div>
+                      <h5 className="text-lg font-semibold text-gray-900">Gestion des Compteurs</h5>
+                    </div>
+                    <p className="text-gray-700 text-sm ml-13">
+                      Installation, remplacement et maintenance des compteurs électriques, y compris le déploiement des compteurs 
+                      communicants Linky, permettant un suivi précis de votre consommation énergétique.
+                    </p>
+                  </div>
+                  
+                  {/* Service 4 */}
+                  <div className="bg-blue-50 rounded-xl p-5 border border-blue-100 hover:shadow-md transition-all duration-300">
+                    <div className="flex items-start mb-3">
+                      <div className="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                        <Phone className="h-5 w-5" />
+                      </div>
+                      <h5 className="text-lg font-semibold text-gray-900">Dépannage 24h/24 et 7j/7</h5>
+                    </div>
+                    <p className="text-gray-700 text-sm ml-13">
+                      Intervention rapide en cas de panne ou d'incident sur le réseau électrique public, comme les coupures de 
+                      courant collectives ou les problèmes de tension, assurant une continuité de service.
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Avantages du raccordement professionnel - liste avec icônes */}
+                <div className="mb-8">
+                  <h4 className="text-xl font-bold text-gray-900 mb-4">Avantages d'un accompagnement professionnel</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex items-start">
+                      <div className="text-green-600 mr-3 mt-1">
+                        <CheckCheck className="h-5 w-5" />
+                      </div>
+                      <p className="text-gray-700">Conformité garantie avec les normes de sécurité et réglementations en vigueur</p>
+                    </div>
+                    <div className="flex items-start">
+                      <div className="text-green-600 mr-3 mt-1">
+                        <CheckCheck className="h-5 w-5" />
+                      </div>
+                      <p className="text-gray-700">Optimisation des coûts et des délais de raccordement</p>
+                    </div>
+                    <div className="flex items-start">
+                      <div className="text-green-600 mr-3 mt-1">
+                        <CheckCheck className="h-5 w-5" />
+                      </div>
+                      <p className="text-gray-700">Expertise technique spécialisée pour tous types de projets</p>
+                    </div>
+                    <div className="flex items-start">
+                      <div className="text-green-600 mr-3 mt-1">
+                        <CheckCheck className="h-5 w-5" />
+                      </div>
+                      <p className="text-gray-700">Intégration simplifiée des énergies renouvelables</p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Note d'information importante - mise en évidence */}
+                <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-md">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <AlertCircle className="h-5 w-5 text-amber-500" />
+                    </div>
+                    <div className="ml-3">
+                      <p className="text-amber-700 text-sm">
+                        <strong>Important :</strong> Enedis assure la gestion technique du réseau et des compteurs, intervient en cas de panne 
+                        sur le réseau public, et réalise les raccordements, indépendamment du fournisseur d'électricité choisi par le client. 
+                        Enedis ne vend pas d'électricité, cette mission relevant des fournisseurs (EDF, Engie, TotalEnergies, etc.).
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Appel à l'action */}
+              <div className="bg-gray-50 py-5 px-6 border-t border-gray-100">
+                <div className="flex flex-col md:flex-row justify-between items-center">
+                  <p className="text-gray-700 mb-4 md:mb-0 md:mr-6">
+                    Besoin d'un raccordement au réseau électrique public ? Notre expertise vous garantit une installation conforme et efficace.
+                  </p>
+                  <Link href="/raccordement-enedis#top">
+                    <Button className="bg-blue-600 hover:bg-blue-700 text-white min-w-[200px]">
+                      Demander un raccordement
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            
+            {/* Micro-données structurées (invisible, mais cruciales pour le SEO) */}
+            <div className="hidden" aria-hidden="true" itemScope itemType="https://schema.org/Service">
+              <meta itemProp="name" content="Services de raccordement au réseau électrique" />
+              <meta itemProp="description" content="Services professionnels de raccordement au réseau électrique Enedis pour particuliers et professionnels, incluant étude technique, installation et mise en service." />
+              <div itemProp="provider" itemScope itemType="https://schema.org/Organization">
+                <meta itemProp="name" content="Enedis" />
+                <meta itemProp="description" content="Gestionnaire du réseau public de distribution d'électricité en France couvrant 95% du territoire métropolitain" />
+              </div>
+              <div itemProp="areaServed" itemScope itemType="https://schema.org/Country">
+                <meta itemProp="name" content="France" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Process Section - Compact Timeline */}
+      <section className="py-12 bg-gradient-to-br from-slate-50 to-slate-100 overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          {/* Subtle Background Element */}
+          <div className="absolute -top-20 -right-20 w-80 h-80 bg-blue-200 rounded-full opacity-20 blur-3xl"></div>
+          
+          {/* Compact Header */}
+          <div className="max-w-3xl mx-auto text-center mb-10 relative z-10">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-800 mb-3">
+              <span className="text-sm font-semibold">Notre processus</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Comment ça <span className="text-blue-600">fonctionne</span>
+            </h2>
+          </div>
+          
+          {/* Compact Steps Grid - 4 steps in a grid layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+            {/* Step 1 */}
+            <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3">
+                  <Send className="h-5 w-5" aria-label="Icône envoi" />
+                </div>
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  1
+                </div>
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Demande en ligne</h3>
+              <p className="text-gray-600 text-sm">
+                Formulaire digital rapide pour collecter les informations essentielles à votre projet.
+              </p>
+            </div>
+            
+            {/* Step 2 */}
+            <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3">
+                  <User className="h-5 w-5" aria-label="Icône utilisateur" />
+                </div>
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  2
+                </div>
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Étude technique</h3>
+              <p className="text-gray-600 text-sm">
+                Analyse professionnelle de votre demande pour un raccordement parfaitement adapté.
+              </p>
+            </div>
+            
+            {/* Step 3 */}
+            <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3">
+                  <Clock className="h-5 w-5" aria-label="Icône horloge" />
+                </div>
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  3
+                </div>
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Devis transparent</h3>
+              <p className="text-gray-600 text-sm">
+                Planification précise et tarification claire, sans surprise ni frais cachés.
+              </p>
+            </div>
+            
+            {/* Step 4 */}
+            <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3">
+                  <Shield className="h-5 w-5" aria-label="Icône bouclier" />
+                </div>
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  4
+                </div>
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Réalisation garantie</h3>
+              <p className="text-gray-600 text-sm">
+                Exécution dans les délais par des techniciens certifiés avec garantie complète.
+              </p>
+            </div>
+          </div>
+          
+          {/* Compact CTA Button */}
+          <div className="mt-10 text-center">
+            <Link href="/raccordement-enedis#top">
+              <Button size="lg" className="bg-[#32b34a] hover:bg-[#2a9e40] text-white shadow-md">
+                Démarrer ma demande
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+      
+      {/* Testimonials - Modern carousel */}
+      <section className="py-16 bg-gradient-to-br from-indigo-950 via-blue-900 to-indigo-950 relative overflow-hidden">
+        {/* Background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute w-96 h-96 -top-20 -left-20 bg-blue-600/20 rounded-full blur-3xl" />
+          <div className="absolute w-96 h-96 top-1/3 right-1/4 bg-indigo-500/20 rounded-full blur-3xl" />
+          <div className="absolute w-80 h-80 bottom-1/4 -right-20 bg-indigo-700/20 rounded-full blur-3xl" />
+          
+          {/* Grid pattern overlay */}
+          <div 
+            className="absolute inset-0 opacity-[0.03]" 
+            style={{
+              backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
+              backgroundSize: '4rem 4rem',
+            }}
+          />
+        </div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <div className="inline-flex items-center px-4 py-1 rounded-full bg-white/10 text-blue-100 backdrop-blur-sm mb-4">
+              <span className="text-sm font-semibold">Témoignages clients</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Ils nous font <span className="text-blue-300">confiance</span>
+            </h2>
+            <p className="text-xl text-blue-100">
+              Découvrez ce que nos clients disent de nos services de raccordement
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Testimonial 1 */}
+            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/10 transition-all duration-300 hover:bg-white/20">
+              <div className="flex items-center mb-6">
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Zap key={i} className="h-5 w-5 fill-current" />
+                  ))}
+                </div>
+              </div>
+              <p className="text-blue-50 mb-8 text-lg">
+                "Service exceptionnel ! Le processus a été incroyablement fluide. Merci pour votre professionnalisme et votre respect des délais."
+              </p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-400 to-indigo-400 flex items-center justify-center text-white font-bold text-xl">
+                  L
+                </div>
+                <div className="ml-4">
+                  <h4 className="font-semibold text-white">Laura Martin</h4>
+                  <p className="text-blue-200 text-sm">Propriétaire, Maison individuelle</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Testimonial 2 */}
+            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/10 transition-all duration-300 hover:bg-white/20">
+              <div className="flex items-center mb-6">
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Zap key={i} className="h-5 w-5 fill-current" />
+                  ))}
+                </div>
+              </div>
+              <p className="text-blue-50 mb-8 text-lg">
+                "Communication claire et techniciens experts. Ils ont résolu rapidement tous les défis techniques rencontrés lors de l'installation."
+              </p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-400 to-indigo-400 flex items-center justify-center text-white font-bold text-xl">
+                  T
+                </div>
+                <div className="ml-4">
+                  <h4 className="font-semibold text-white">Thomas Dubois</h4>
+                  <p className="text-blue-200 text-sm">Gérant, Boulangerie du Centre</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Testimonial 3 */}
+            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/10 transition-all duration-300 hover:bg-white/20">
+              <div className="flex items-center mb-6">
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Zap key={i} className="h-5 w-5 fill-current" />
+                  ))}
+                </div>
+              </div>
+              <p className="text-blue-50 mb-8 text-lg">
+                "Projet complexe géré avec une expertise remarquable. Les solutions proposées étaient parfaitement adaptées à nos besoins spécifiques."
+              </p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-400 to-indigo-400 flex items-center justify-center text-white font-bold text-xl">
+                  É
+                </div>
+                <div className="ml-4">
+                  <h4 className="font-semibold text-white">Émilie Robert</h4>
+                  <p className="text-blue-200 text-sm">Directrice, Immeuble La Perspective</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* CTA Section - Modern glassmorphism */}
+      <section className="py-16 relative">
+        <div className="absolute inset-0 overflow-hidden z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-slate-100"></div>
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="bg-white/60 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl p-8 md:p-12 lg:p-16 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-blue-500/20 to-indigo-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            
+            <div className="md:flex items-center justify-between relative">
+              <div className="mb-8 md:mb-0 md:max-w-xl">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Prêt à électrifier votre avenir ?
+                </h2>
+                <p className="text-lg text-gray-700 mb-0">
+                  Faites votre demande dès aujourd'hui et bénéficiez d'un service de raccordement sur mesure avec un accompagnement d'experts.
+                </p>
+              </div>
+              
+              <Link href="/raccordement-enedis#top">
+                <Button size="lg" className="bg-[#32b34a] hover:bg-[#2a9e40] text-white px-8 py-6 text-lg shadow-lg transition-all duration-300 hover:scale-105 whitespace-nowrap">
+                  Soumettre ma demande de raccordement
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

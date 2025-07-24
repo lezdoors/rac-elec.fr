@@ -1,0 +1,65 @@
+/**
+ * Mobile Form Spacing Enhancement
+ * Adds half-inch spacing between form questions on mobile devices only
+ */
+
+/* Mobile devices only - tablets and phones */
+@media (max-width: 768px) {
+  /* Add spacing between form fields in the raccordement form */
+  .space-y-4 > div:not(:last-child),
+  .space-y-6 > div:not(:last-child),
+  .space-y-8 > div:not(:last-child) {
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Specific spacing for form items */
+  [data-slot="form-item"]:not(:last-child),
+  .form-item:not(:last-child) {
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Enhanced spacing for form fields container */
+  .grid.gap-4 {
+    gap: 1.25rem !important;
+  }
+  
+  .grid.gap-6 {
+    gap: 1.5rem !important;
+  }
+  
+  /* Specific targeting for raccordement form sections */
+  .raccordement-form .space-y-4 > *:not(:last-child) {
+    margin-bottom: 1rem !important;
+  }
+  
+  .raccordement-form .space-y-6 > *:not(:last-child) {
+    margin-bottom: 1.25rem !important;
+  }
+  
+  /* Form field groups spacing */
+  .form-field-group:not(:last-child) {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  /* Step content spacing */
+  .step-content > div:not(:last-child) {
+    margin-bottom: 1rem !important;
+  }
+}
+
+/* Extra small devices (phones in portrait) */
+@media (max-width: 480px) {
+  /* Slightly reduce spacing on very small screens */
+  .space-y-4 > div:not(:last-child),
+  .space-y-6 > div:not(:last-child) {
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .raccordement-form .space-y-4 > *:not(:last-child) {
+    margin-bottom: 0.875rem !important;
+  }
+  
+  .raccordement-form .space-y-6 > *:not(:last-child) {
+    margin-bottom: 1rem !important;
+  }
+}

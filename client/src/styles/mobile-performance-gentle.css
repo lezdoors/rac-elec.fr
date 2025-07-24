@@ -1,0 +1,89 @@
+/* Progressive Mobile Performance Optimizations - Gentle Approach */
+
+/* 1. Critical Resource Hints - Non-aggressive */
+@supports (font-display: swap) {
+  @font-face {
+    font-family: 'Inter';
+    font-display: swap;
+    src: local('Inter');
+  }
+}
+
+/* 2. Above-the-fold content prioritization */
+.hero-section,
+.hero-content,
+[data-lcp-target] {
+  contain: layout style;
+  will-change: auto;
+}
+
+/* 3. Progressive image loading - gentle */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* 4. Gentle layout stabilization */
+.service-card,
+.form-container,
+.navigation-menu {
+  min-height: fit-content;
+  contain: layout;
+}
+
+/* 5. Mobile-first responsive optimizations */
+@media (max-width: 768px) {
+  /* Reduce reflows on mobile */
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Optimize button interactions */
+  button,
+  .btn {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Gentle text optimization */
+  h1, h2, h3 {
+    text-rendering: optimizeSpeed;
+  }
+  
+  /* Progressive enhancement for forms */
+  input, textarea, select {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+}
+
+/* 6. Critical path optimization - non-blocking */
+.above-fold {
+  content-visibility: visible;
+}
+
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 400px;
+}
+
+/* 7. Gentle animation performance */
+@media (prefers-reduced-motion: no-preference) {
+  .smooth-performance {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+}
+
+/* 8. Progressive enhancement markers */
+.js-enhanced {
+  /* Only apply when JavaScript is available */
+}
+
+.no-js .js-enhanced {
+  display: none;
+}

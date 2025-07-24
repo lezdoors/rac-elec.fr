@@ -1,0 +1,95 @@
+eruda.js:2 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=PwG6jhw6os9G' is invalid.Understand this error
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=msiZx8qGgAOM' failed: 
+t @ Network.js:227Understand this error
+Network.js:227 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=msiZx8qGgAOM' is invalid.Understand this error
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=msiZx8qGgAOM' failed: 
+t @ Network.js:227Understand this error
+Network.js:227 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=msiZx8qGgAOM' is invalid.Understand this error
+Console.js:61 Référence dans les params: null
+Console.js:61 Référence sauvegardée: REF-1270-607305
+Console.js:61 Référence à utiliser: REF-1270-607305
+Console.js:61 Statut redirection Stripe: null
+Console.js:61 ID paiement Stripe: null
+Console.js:61 Vérification pour REF-1270-607305 sans PaymentIntent
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/service-requests/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification de la référence: Error: 404: {"success":false,"message":"Demande non trouvée"}
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Vérification pour REF-1270-607305 sans PaymentIntent
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/service-requests/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification initiale de la référence: Error: 404: {"success":false,"message":"Demande non trouvée"}
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+4Console.js:61 Vérification pour REF-1270-607305 sans PaymentIntent
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/service-requests/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/service-requests/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification initiale de la référence: Error: 404: {"success":false,"message":"Demande non trouvée"}
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence","code":"reference_not_found"}
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence","code":"reference_not_found"}
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence","code":"reference_not_found"}
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence","code":"reference_not_found"}
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence","code":"reference_not_found"}
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence","code":"reference_not_found"}
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=msiZx8qGgAOM' failed: 
+t @ Network.js:227Understand this error
+Network.js:227 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=msiZx8qGgAOM' is invalid.
+    at new t (Network.js:227:18)
+    at setupWebSocket (client:536:19)
+    at fallback (client:509:16)
+    at WebSocket.<anonymous> (client:555:7)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la récupération des détails du paiement Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence","code":"reference_not_found"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async fetchPaymentDetails (payment-failure.tsx:46:24)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+
+                
+          
+          
+          
+         Chrome is moving towards a new experience that allows users to choose to browse without third-party cookies.

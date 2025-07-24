@@ -1,0 +1,137 @@
+
+      <!DOCTYPE html>
+      <html lang="fr">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Reçu de paiement - RAC-9659-902982</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+          }
+          .receipt {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            padding: 30px;
+            border-radius: 5px;
+          }
+          .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+          }
+          .header h1 {
+            margin: 0;
+            color: #0066cc;
+          }
+          .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+          }
+          .info-label {
+            font-weight: bold;
+            min-width: 200px;
+          }
+          .amount {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #0066cc;
+          }
+          .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+          }
+          .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-weight: bold;
+          }
+          .status-succeeded {
+            background-color: #d4edda;
+            color: #155724;
+          }
+          .status-failed {
+            background-color: #f8d7da;
+            color: #721c24;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="receipt">
+          <div class="header">
+            <h1>Reçu de paiement</h1>
+            <p>Raccordement Électrique en Ligne</p>
+          </div>
+          
+          <div class="info-row">
+            <div class="info-label">Numéro de référence:</div>
+            <div>RAC-9659-902982</div>
+          </div>
+          
+          <div class="info-row">
+            <div class="info-label">ID de paiement:</div>
+            <div>pi_3RWcc3F0p2SYXeXz1WFiJK3s</div>
+          </div>
+          
+          <div class="info-row">
+            <div class="info-label">Date:</div>
+            <div>5 juin 2025 à 12:09</div>
+          </div>
+          
+          <div class="info-row">
+            <div class="info-label">Client:</div>
+            <div>Sogomonian</div>
+          </div>
+          
+          
+          <div class="info-row">
+            <div class="info-label">Adresse:</div>
+            <div>43 place Caffe , 73000 Chambéry</div>
+          </div>
+          
+          
+          <div class="info-row">
+            <div class="info-label">Statut:</div>
+            <div>
+              <span class="status status-succeeded">
+                Payé
+              </span>
+            </div>
+          </div>
+          
+          <div class="info-row">
+            <div class="info-label">Montant:</div>
+            <div class="amount">129,80 €</div>
+          </div>
+          
+          <div class="info-row">
+            <div class="info-label">Méthode de paiement:</div>
+            <div>card, link</div>
+          </div>
+          
+          
+          <div class="info-row">
+            <div class="info-label">Description:</div>
+            <div>Accompagnement pour raccordement électrique Enedis</div>
+          </div>
+          
+          
+          <div class="footer">
+            <p>Ce reçu a été généré automatiquement et ne nécessite pas de signature.</p>
+            <p>Pour toute question, veuillez nous contacter à contact@raccordement.net</p>
+            <p>© 2025 Raccordement Électrique en Ligne - SIRET: 12345678900013</p>
+          </div>
+        </div>
+      </body>
+      </html>
+      

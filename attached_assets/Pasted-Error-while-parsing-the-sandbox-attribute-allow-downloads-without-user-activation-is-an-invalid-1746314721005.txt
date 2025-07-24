@@ -1,0 +1,170 @@
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.Understand this error
+framework-f386dea716637963.js:1 Unrecognized feature: 'ambient-light-sensor'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'battery'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'execution-while-not-rendered'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'execution-while-out-of-viewport'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'layout-animations'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'legacy-image-formats'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'navigation-override'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'oversized-images'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'publickey-credentials'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'speaker-selection'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'unoptimized-images'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'unsized-media'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'pointer-lock'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Allow attribute will take precedence over 'allowfullscreen'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Allow attribute will take precedence over 'allowpaymentrequest'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+4stallwart.build.js:1 stallwart: failed ping 1
+stallwart.build.js:1 stallwart: failed ping 2
+stallwart.build.js:1 stallwart: failed ping 3
+stallwart.build.js:1 stallwart: failed ping 4
+stallwart.build.js:1 stallwart: failed ping 5
+stallwart.build.js:1 stallwart: session stalled
+8941-f711413822a27423.js:1 WebSocket connection to 'wss://eval2.spock.platform.replit.com/wsv2/v2.public.Q2dZSXZkZlp3QVlTQmdqYzg5bkFCaUlGYzNCdlkyc3dBRHFQQWdva05EUmpaRGRtT1RJdFpEaGhZUzAwTjJSaUxXSTBPVGN0WTJZMU1qQXlNekJpWTJOaUVnTnVhWGdhRjNKbGNHeHBkQzF5WlhCc0xXWnBiR1Z6TFhOd2IyTnJJaHB5WVdOamIzSmtaVzFsYm5RdFkyeGhkV1JsTFhKbGNHeHBkQ29LY25saGJtRnZkV1poYkVKUkNoaHlaWEJzYVhRdGNtVndiQzFpYkc5amEzTXRjM0J2WTJzU0ZuSmxjR3hwZEMxeVpYQnNMVzFsZEdFdGMzQnZZMnNhSFhKbGNHeHBkQzF0WVhKbllYSnBibVV0WW14dlkydHpMWE53YjJOclNnY0krOFAxRXhBQlVBQmFEMmx1ZEdWdWRGOWlkWE5wYm1WemMxb1hiMjVpYjJGeVpHbH...MlZXeG5TM2w1UTNNMmJFOW5OR1JEVURscGMzWlhPVUV6VWxCdVJqUkpNRnBwT0VrM0pUSkdXSGgwYkhKd0pUSkNlakU0SlRKQ2MxQm9NMncyTVhsa04zaFJTakpEVG1neFVXMURSMUJuYUdwalZIUnFKVEpHYjI1aFNpVXlSbFZQVUdkWWMxRkhiRnBYZEhCc1V6QldXRXMyTTNNNFduaFVSRVJEV21KbmRtNDBUMFZpUjBjeGJVd3pSelpJU1dWRlZXYzBUMU56VkVKMFdXbE9VbXRwZFdzM1lVbEJPRlV6YVVsQk1rNTZUamswVlVKblZVbFNZblk0YkcxdFp6ZGlabGRoUkZSWVZtUmFZVmQyTm14YU4xcDNKVE5FSlRORSQ0H1-qp2bUtfpObNQ3SamezvyRE56LWEwsIanxKiUcEcgqBNrZ5qNqV7RctNWTVFfTEWwhoUPzH0Uh0XmVpQs.Q2dad2NtOWtPak1pQ25KbGNHeHBkQzVqYjIwPQ' failed: 
+connect @ 8941-f711413822a27423.js:1Understand this error
+/graphql:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+8941-f711413822a27423.js:1 WebSocket connection to 'wss://eval2.spock.platform.replit.com/wsv2/v2.public.Q2dZSXZkZlp3QVlTQmdqYzg5bkFCaUlGYzNCdlkyc3dBRHFQQWdva05EUmpaRGRtT1RJdFpEaGhZUzAwTjJSaUxXSTBPVGN0WTJZMU1qQXlNekJpWTJOaUVnTnVhWGdhRjNKbGNHeHBkQzF5WlhCc0xXWnBiR1Z6TFhOd2IyTnJJaHB5WVdOamIzSmtaVzFsYm5RdFkyeGhkV1JsTFhKbGNHeHBkQ29LY25saGJtRnZkV1poYkVKUkNoaHlaWEJzYVhRdGNtVndiQzFpYkc5amEzTXRjM0J2WTJzU0ZuSmxjR3hwZEMxeVpYQnNMVzFsZEdFdGMzQnZZMnNhSFhKbGNHeHBkQzF0WVhKbllYSnBibVV0WW14dlkydHpMWE53YjJOclNnY0krOFAxRXhBQlVBQmFEMmx1ZEdWdWRGOWlkWE5wYm1WemMxb1hiMjVpYjJGeVpHbH...MlZXeG5TM2w1UTNNMmJFOW5OR1JEVURscGMzWlhPVUV6VWxCdVJqUkpNRnBwT0VrM0pUSkdXSGgwYkhKd0pUSkNlakU0SlRKQ2MxQm9NMncyTVhsa04zaFJTakpEVG1neFVXMURSMUJuYUdwalZIUnFKVEpHYjI1aFNpVXlSbFZQVUdkWWMxRkhiRnBYZEhCc1V6QldXRXMyTTNNNFduaFVSRVJEV21KbmRtNDBUMFZpUjBjeGJVd3pSelpJU1dWRlZXYzBUMU56VkVKMFdXbE9VbXRwZFdzM1lVbEJPRlV6YVVsQk1rNTZUamswVlVKblZVbFNZblk0YkcxdFp6ZGlabGRoUkZSWVZtUmFZVmQyTm14YU4xcDNKVE5FSlRORSQ0H1-qp2bUtfpObNQ3SamezvyRE56LWEwsIanxKiUcEcgqBNrZ5qNqV7RctNWTVFfTEWwhoUPzH0Uh0XmVpQs.Q2dad2NtOWtPak1pQ25KbGNHeHBkQzVqYjIwPQ' failed: 
+connect @ 8941-f711413822a27423.js:1Understand this error
+/data/repls/44cd7f92-d8aa-47db-b497-cf520230bccb/get_connection_metadata:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+_app-21ea86fa8518c8f7.js:15 WebSocket connection to 'wss://replit.com/graphql_subscriptions' failed: 
+(anonymous) @ _app-21ea86fa8518c8f7.js:15Understand this error
+events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+api.sorryapp.com/v1/pages/27c7b5fc:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+api.sorryapp.com/v1/pages/27c7b5fc:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+/graphql:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+8941-f711413822a27423.js:1 WebSocket connection to 'wss://eval2.spock.platform.replit.com/wsv2/v2.public.Q2dZSXZkZlp3QVlTQmdqYzg5bkFCaUlGYzNCdlkyc3dBRHFQQWdva05EUmpaRGRtT1RJdFpEaGhZUzAwTjJSaUxXSTBPVGN0WTJZMU1qQXlNekJpWTJOaUVnTnVhWGdhRjNKbGNHeHBkQzF5WlhCc0xXWnBiR1Z6TFhOd2IyTnJJaHB5WVdOamIzSmtaVzFsYm5RdFkyeGhkV1JsTFhKbGNHeHBkQ29LY25saGJtRnZkV1poYkVKUkNoaHlaWEJzYVhRdGNtVndiQzFpYkc5amEzTXRjM0J2WTJzU0ZuSmxjR3hwZEMxeVpYQnNMVzFsZEdFdGMzQnZZMnNhSFhKbGNHeHBkQzF0WVhKbllYSnBibVV0WW14dlkydHpMWE53YjJOclNnY0krOFAxRXhBQlVBQmFEMmx1ZEdWdWRGOWlkWE5wYm1WemMxb1hiMjVpYjJGeVpHbH...MlZXeG5TM2w1UTNNMmJFOW5OR1JEVURscGMzWlhPVUV6VWxCdVJqUkpNRnBwT0VrM0pUSkdXSGgwYkhKd0pUSkNlakU0SlRKQ2MxQm9NMncyTVhsa04zaFJTakpEVG1neFVXMURSMUJuYUdwalZIUnFKVEpHYjI1aFNpVXlSbFZQVUdkWWMxRkhiRnBYZEhCc1V6QldXRXMyTTNNNFduaFVSRVJEV21KbmRtNDBUMFZpUjBjeGJVd3pSelpJU1dWRlZXYzBUMU56VkVKMFdXbE9VbXRwZFdzM1lVbEJPRlV6YVVsQk1rNTZUamswVlVKblZVbFNZblk0YkcxdFp6ZGlabGRoUkZSWVZtUmFZVmQyTm14YU4xcDNKVE5FSlRORSQ0H1-qp2bUtfpObNQ3SamezvyRE56LWEwsIanxKiUcEcgqBNrZ5qNqV7RctNWTVFfTEWwhoUPzH0Uh0XmVpQs.Q2dad2NtOWtPak1pQ25KbGNHeHBkQzVqYjIwPQ' failed: 
+connect @ 8941-f711413822a27423.js:1Understand this error
+_app-21ea86fa8518c8f7.js:15 WebSocket connection to 'wss://replit.com/graphql_subscriptions' failed: 
+(anonymous) @ _app-21ea86fa8518c8f7.js:15Understand this error
+/data/repls/44cd7f92-d8aa-47db-b497-cf520230bccb/get_connection_metadata:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+shared-27ee00315533d…d43bb57e237775.js:1 Uncaught (in promise) FetchError: Error fetching https://r.stripe.com/b: Failed to fetch
+    at shared-27ee00315533d62ae7d43bb57e237775.js:1:207861Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2ha%3A:32 Unrecognized feature: 'ambient-light-sensor'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2ha%3A:32 Unrecognized feature: 'battery'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2ha%3A:32 Unrecognized feature: 'execution-while-not-rendered'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2ha%3A:32 Unrecognized feature: 'execution-while-out-of-viewport'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2ha%3A:32 Unrecognized feature: 'layout-animations'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2ha%3A:32 Unrecognized feature: 'legacy-image-formats'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2ha%3A:32 Unrecognized feature: 'navigation-override'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2ha%3A:32 Unrecognized feature: 'oversized-images'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2ha%3A:32 Unrecognized feature: 'publickey-credentials'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2ha%3A:32 Unrecognized feature: 'speaker-selection'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2ha%3A:32 Unrecognized feature: 'unoptimized-images'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2ha%3A:32 Unrecognized feature: 'unsized-media'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2ha%3A:32 Allow attribute will take precedence over 'allowfullscreen'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2ha%3A:32 Allow attribute will take precedence over 'allowpaymentrequest'.Understand this warning
+eruda.js:sourcemap:2 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=Q2g2B3lplsUy' failed: 
+t @ eruda.js:sourcemap:2Understand this error
+eruda.js:sourcemap:2 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=SIt8mZZ0sYJ-' failed: 
+t @ eruda.js:sourcemap:2Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)Understand this error
+eruda.js:sourcemap:2 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=UBhDTVsTBqiP' failed: 
+t @ eruda.js:sourcemap:2Understand this error
+eruda.js:sourcemap:2 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=UBhDTVsTBqiP' is invalid.
+    at new t (eruda.js:sourcemap:2:218737)
+    at setupWebSocket (client:536:19)
+    at fallback (client:509:16)
+    at WebSocket.<anonymous> (client:555:7)Understand this error
+eruda.js:sourcemap:2 Connecting to WebSocket at wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/ws
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+eruda.js:sourcemap:2 WebSocket connected
+
+                
+          
+          
+          
+         Chrome is moving towards a new experience that allows users to choose to browse without third-party cookies.

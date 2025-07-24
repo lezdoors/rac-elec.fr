@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reçu de paiement - RAC-9659-902982</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    
+    .receipt {
+      max-width: 800px;
+      margin: 0 auto;
+      border: 1px solid #ddd;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #1e40af;
+      padding-bottom: 10px;
+    }
+    
+    .logo {
+      max-width: 200px;
+      margin-bottom: 10px;
+    }
+    
+    h1 {
+      color: #1e40af;
+      font-size: 24px;
+      margin: 0;
+    }
+    
+    .receipt-number {
+      font-size: 16px;
+      color: #666;
+      margin-top: 5px;
+    }
+    
+    .info-section {
+      margin-bottom: 20px;
+    }
+    
+    .info-section h2 {
+      font-size: 18px;
+      color: #1e40af;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 5px;
+    }
+    
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    
+    .info-item {
+      margin-bottom: 15px;
+    }
+    
+    .info-item .label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #555;
+      font-size: 14px;
+    }
+    
+    .info-item .value {
+      font-size: 16px;
+    }
+    
+    .amount {
+      font-size: 24px;
+      color: #1e40af;
+      font-weight: bold;
+      text-align: right;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .payment-details {
+      background-color: #f9fafb;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    
+    .legal-info {
+      font-size: 12px;
+      color: #666;
+      margin-top: 30px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+    
+    .signature-section {
+      margin-top: 40px;
+      border-top: 1px dashed #ccc;
+      padding-top: 20px;
+    }
+    
+    .signature-box {
+      margin-top: 20px;
+      border: 1px solid #ddd;
+      height: 100px;
+      position: relative;
+    }
+    
+    .signature-label {
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+    }
+    
+    .acceptance {
+      font-size: 14px;
+      margin-top: 30px;
+      padding: 15px;
+      background-color: #f0f9ff;
+      border-left: 3px solid #1e40af;
+    }
+    
+    .footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #999;
+      text-align: center;
+    }
+    
+    @media print {
+      body {
+        padding: 0;
+      }
+      .receipt {
+        border: none;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="receipt">
+    <div class="header">
+      <h1>REÇU DE PAIEMENT</h1>
+      <div class="receipt-number">N° RAC-9659-902982</div>
+    </div>
+    
+    <div class="info-section">
+      <h2>Informations du client</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="label">Nom</div>
+          <div class="value">Sogomonian</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Email</div>
+          <div class="value">katia.sogomonian@gmail.com</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Téléphone</div>
+          <div class="value">06 68 42 97 95</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Adresse</div>
+          <div class="value">43 place Caffe , 73000 Chambéry</div>
+        </div>
+        
+        <div class="info-item">
+          <div class="label">SIRET</div>
+          <div class="value">Non spécifié</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="info-section">
+      <h2>Détails du paiement</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="label">Référence</div>
+          <div class="value">RAC-9659-902982</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Date</div>
+          <div class="value">5 juin 2025 à 12:09:39</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Méthode</div>
+          <div class="value">card</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Statut</div>
+          <div class="value">Payé</div>
+        </div>
+      </div>
+      
+      <div class="amount">
+        Montant total : 129,80 €
+      </div>
+      
+      <div class="payment-details">
+        
+        
+        
+        
+        <div class="info-item">
+          <div class="label">Adresse IP</div>
+          <div class="value">192.168.1.100</div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="info-section">
+      <h2>Détails de la demande de service</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="label">Type de service</div>
+          <div class="value">electricity</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Puissance demandée</div>
+          <div class="value">6</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Date de soumission</div>
+          <div class="value">5 juin 2025 à 10:27</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Statut</div>
+          <div class="value">paid</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="info-section">
+      <h2>CONSENTEMENT ET ACCEPTATION LÉGALE</h2>
+      <div style="background-color: #f0f9ff; padding: 15px; border-left: 4px solid #1e40af; margin: 15px 0;">
+        <h3 style="color: #1e40af; margin-top: 0;">Déclaration de consentement client</h3>
+        <p><strong>Je, Sogomonian, déclare par la présente :</strong></p>
+        <ul style="margin: 10px 0; padding-left: 20px;">
+          <li>Avoir lu et accepté les Conditions Générales d'Utilisation du service raccordement-elec.fr</li>
+          <li>Avoir donné mon consentement libre et éclairé pour le traitement de mes données personnelles</li>
+          <li>Avoir effectué volontairement le paiement de 129,80 € pour la demande référence RAC-9659-902982</li>
+          <li>Être pleinement conscient(e) de la nature du service commandé et de ses implications</li>
+          <li>Accepter que ce paiement constitue un engagement ferme pour la prestation de service</li>
+        </ul>
+        <p><strong>Date et heure de consentement :</strong> 5 juin 2025 à 12:09:39</p>
+        <p><strong>Adresse IP de validation :</strong> 192.168.1.100</p>
+      </div>
+    </div>
+    
+    <div class="info-section">
+      <h2>PREUVES TECHNIQUES DE TRANSACTION</h2>
+      <div style="background-color: #f8fafc; padding: 15px; border: 1px solid #e2e8f0;">
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="label">ID Transaction Stripe</div>
+            <div class="value">pi_3RWcc3F0p2SYXeXz1WFiJK3s</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Horodatage de création</div>
+            <div class="value">5 juin 2025 à 12:09:39</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Méthode de paiement</div>
+            <div class="value">card</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Statut de paiement</div>
+            <div class="value">SUCCÈS - Paiement validé par Stripe</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="signature-section">
+      <h3 style="color: #1e40af;">Signature électronique</h3>
+      <p>Ce document constitue une preuve légale de transaction et de consentement client.</p>
+      <div class="signature-box">
+        <div class="signature-label">Document généré électroniquement le 5 juin 2025 à 22:58</div>
+        <div class="signature-label">Référence système : RAC-9659-902982-pi_3RWcc3F0p2SYXeXz1WFiJK3s</div>
+      </div>
+    </div>
+    
+    <div class="legal-info">
+      <p>Ce reçu officiel atteste que le paiement a bien été reçu et enregistré. Il peut être utilisé comme preuve de paiement.</p>
+      <p>Conformément à la réglementation en vigueur, les informations personnelles sont protégées et ne seront pas divulguées à des tiers sans votre consentement explicite.</p>
+    </div>
+    
+    <div class="footer">
+      <p>Pour toute question concernant ce reçu, veuillez contacter notre service client en précisant votre numéro de référence.</p>
+      <p>&copy; 2025 Raccordement.net - Tous droits réservés</p>
+    </div>
+  </div>
+</body>
+</html>

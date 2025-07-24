@@ -1,0 +1,147 @@
+/* Design ultra-moderne et professionnel pour le formulaire */
+
+/* Amélioration des inputs avec design moderne */
+.modern-input {
+  height: 56px !important;
+  border: 2px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  padding: 16px 20px !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  background: white !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.modern-input:hover {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1) !important;
+}
+
+.modern-input:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2) !important;
+  outline: none !important;
+}
+
+/* Boutons de sélection ultra-visibles */
+.modern-select-trigger {
+  height: 60px !important;
+  border: 2px solid #6b7280 !important;
+  border-radius: 16px !important;
+  padding: 16px 24px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  background: white !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.modern-select-trigger:hover {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 6px 12px rgba(59, 130, 246, 0.15) !important;
+  transform: translateY(-1px) !important;
+}
+
+.modern-select-trigger:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2) !important;
+}
+
+/* Labels avec design moderne */
+.modern-label {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #374151 !important;
+  margin-bottom: 8px !important;
+  display: block !important;
+}
+
+/* Cartes de section améliorées */
+.modern-section-card {
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 20px !important;
+  padding: 32px !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+  margin-bottom: 32px !important;
+}
+
+/* Toggle ultra-moderne */
+.modern-toggle-container {
+  background: white !important;
+  border: 2px solid #e5e7eb !important;
+  border-radius: 16px !important;
+  padding: 24px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.modern-toggle-container:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1) !important;
+  transform: translateY(-2px) !important;
+}
+
+.modern-toggle-container.active {
+  border-color: #10b981 !important;
+  background: linear-gradient(135deg, #ecfdf5, #ffffff) !important;
+}
+
+.modern-toggle-container.inactive {
+  border-color: #3b82f6 !important;
+  background: linear-gradient(135deg, #eff6ff, #ffffff) !important;
+}
+
+/* Options radio modernes */
+.modern-radio-option {
+  background: white !important;
+  border: 2px solid #e5e7eb !important;
+  border-radius: 16px !important;
+  padding: 20px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+}
+
+.modern-radio-option:hover {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.1) !important;
+  transform: translateY(-1px) !important;
+}
+
+.modern-radio-option.selected {
+  border-color: #10b981 !important;
+  background: linear-gradient(135deg, #ecfdf5, #ffffff) !important;
+  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.15) !important;
+}
+
+/* Espacement professionnel */
+.form-section-spacing {
+  margin-bottom: 40px !important;
+}
+
+.field-spacing {
+  margin-bottom: 24px !important;
+}
+
+/* Responsive amélioré */
+@media (max-width: 768px) {
+  .modern-input {
+    height: 52px !important;
+    padding: 14px 18px !important;
+  }
+  
+  .modern-select-trigger {
+    height: 56px !important;
+    padding: 14px 20px !important;
+  }
+  
+  .modern-section-card {
+    padding: 24px !important;
+    margin-bottom: 24px !important;
+  }
+  
+  .modern-toggle-container {
+    padding: 20px !important;
+  }
+}

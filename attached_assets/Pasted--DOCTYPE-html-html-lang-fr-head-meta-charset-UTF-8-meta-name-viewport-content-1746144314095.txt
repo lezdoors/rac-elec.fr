@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmation de paiement - Raccordement Électrique</title>
+  <style>
+    :root {
+      --primary-color: #3366ff;
+      --secondary-color: #f0f4ff;
+      --success-color: #4CAF50;
+      --danger-color: #e74c3c;
+      --gray-color: #e0e0e0;
+      --dark-color: #333;
+      --radius: 6px;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--dark-color);
+      background-color: #f5f7fa;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 550px;
+      margin: 20px auto;
+      background-color: white;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+    
+    .logo-container {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    h1, h2 {
+      color: var(--primary-color);
+      text-align: center;
+    }
+    
+    h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    
+    p {
+      margin-bottom: 16px;
+      color: #555;
+      text-align: center;
+    }
+    
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background-color: var(--success-color);
+      border-radius: 50%;
+      margin: 0 auto 25px;
+      position: relative;
+    }
+    
+    .success-icon:after {
+      content: '';
+      width: 40px;
+      height: 20px;
+      border-left: 5px solid white;
+      border-bottom: 5px solid white;
+      position: absolute;
+      top: 26px;
+      left: 20px;
+      transform: rotate(-45deg);
+    }
+    
+    .confirmation-details {
+      margin: 30px 0;
+      border: 1px solid var(--gray-color);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    
+    .confirmation-header {
+      background-color: var(--secondary-color);
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid var(--gray-color);
+    }
+    
+    .confirmation-body {
+      padding: 20px;
+    }
+    
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-color);
+    }
+    
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+    
+    .detail-label {
+      font-weight: 600;
+      color: #555;
+    }
+    
+    .detail-value {
+      text-align: right;
+      font-weight: 400;
+    }
+    
+    .next-steps {
+      background-color: var(--secondary-color);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 30px;
+    }
+    
+    .next-steps h3 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    .next-steps ul {
+      padding-left: 25px;
+    }
+    
+    .next-steps li {
+      margin-bottom: 10px;
+    }
+    
+    .button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s, transform 0.2s;
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+      margin-top: 20px;
+    }
+    
+    .button:hover {
+      background-color: #2952cc;
+      transform: translateY(-1px);
+    }
+    
+    .button:active {
+      transform: translateY(1px);
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 50px 0;
+    }
+    
+    .spinner {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(51, 102, 255, 0.2);
+      border-radius: 50%;
+      border-top-color: var(--primary-color);
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+    
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .error-container {
+      text-align: center;
+      padding: 50px 0;
+      display: none;
+    }
+    
+    .error-icon {
+      width: 80px;
+      height: 80px;
+      background-color: var(--danger-color);
+      border-radius: 50%;
+      margin: 0 auto 25px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      color: white;
+      font-weight: bold;
+    }
+    
+    .error-message {
+      color: var(--danger-color);
+      margin-bottom: 20px;
+    }
+    
+    @media print {
+      body {
+        background-color: white;
+        padding: 0;
+      }
+      
+      .container {
+        max-width: 100%;
+        margin: 0;
+        box-shadow: none;
+        padding: 20px;
+      }
+      
+      .button {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+      <h1>Raccordement Électrique</h1>
+      <p>Confirmation de paiement</p>
+    </div>
+    
+    <!-- Section de chargement (visible au début) -->
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p>Vérification de votre paiement...</p>
+    </div>
+    
+    <!-- Section de confirmation (masquée jusqu'à vérification) -->
+    <div id="confirmation" style="display: none;">
+      <div class="success-icon"></div>
+      <h2>Paiement confirmé</h2>
+      <p>Votre paiement a été traité avec succès. Voici les détails de votre transaction :</p>
+      
+      <div class="confirmation-details">
+        <div class="confirmation-header">
+          <strong>Récapitulatif de votre commande</strong>
+        </div>
+        <div class="confirmation-body">
+          <div class="detail-row">
+            <span class="detail-label">Référence</span>
+            <span class="detail-value" id="reference">REF-7857-902123</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Transaction</span>
+            <span class="detail-value" id="transaction">TR-XXXXXXXXXXXX</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Date</span>
+            <span class="detail-value" id="date">02/05/2025</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Montant</span>
+            <span class="detail-value" id="amount">129.80 € TTC</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Statut</span>
+            <span class="detail-value" id="status" style="color: var(--success-color); font-weight: 600;">Payé</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="next-steps">
+        <h3>Prochaines étapes</h3>
+        <ul>
+          <li>Un e-mail de confirmation a été envoyé à l'adresse associée à votre dossier.</li>
+          <li>Notre équipe va étudier votre demande de raccordement dans les meilleurs délais.</li>
+          <li>Vous serez contacté dans un délai de 5 jours ouvrés pour la planification de votre raccordement.</li>
+        </ul>
+      </div>
+      
+      <a href="#" class="button" id="print-button">Imprimer cette confirmation</a>
+      <a href="/" class="button" style="background-color: #555; margin-top: 10px;">Retour à l'accueil</a>
+    </div>
+    
+    <!-- Section d'erreur (masquée par défaut) -->
+    <div id="error" class="error-container">
+      <div class="error-icon">!</div>
+      <h2>Erreur de vérification</h2>
+      <p class="error-message" id="error-message">Impossible de vérifier votre paiement. Veuillez contacter notre service client.</p>
+      <a href="/" class="button">Retour à l'accueil</a>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Récupérer les paramètres d'URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const reference = urlParams.get('ref') || localStorage.getItem('paymentReference');
+      const transaction = urlParams.get('transaction') || localStorage.getItem('paymentTransaction');
+      
+      // Vérifier si nous avons les informations nécessaires
+      if (!reference && !transaction) {
+        showError('Informations de paiement manquantes. Veuillez vérifier votre e-mail pour les détails de la transaction.');
+        return;
+      }
+      
+      // Vérifier le statut du paiement
+      if (transaction) {
+        verifyPayment(transaction);
+      } else {
+        // Si nous n'avons que la référence, afficher un message générique
+        showConfirmation({
+          reference: reference,
+          transaction: 'Transaction confirmée',
+          date: new Date().toLocaleDateString('fr-FR'),
+          amount: '129.80 € TTC',
+          status: 'Payé'
+        });
+      }
+    });
+    
+    // Fonction pour vérifier le paiement
+    async function verifyPayment(paymentIntentId) {
+      try {
+        const response = await fetch(`/api/payment-status/${paymentIntentId}`);
+        
+        if (!response.ok) {
+          throw new Error('Erreur serveur');
+        }
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          // Formater les données pour l'affichage
+          const transaction = data.transaction;
+          showConfirmation({
+            reference: transaction.reference,
+            transaction: transaction.id,
+            date: new Date(transaction.created).toLocaleDateString('fr-FR'),
+            amount: `${transaction.amount.toFixed(2)} ${transaction.currency.toUpperCase()}`,
+            status: getStatusText(transaction.status)
+          });
+          
+          // Sauvegarder dans le localStorage
+          localStorage.setItem('paymentReference', transaction.reference);
+          localStorage.setItem('paymentTransaction', transaction.id);
+        } else {
+          showError('Paiement non trouvé. Veuillez vérifier votre e-mail pour les détails de la transaction.');
+        }
+      } catch (error) {
+        console.error('Erreur lors de la vérification:', error);
+        showError('Une erreur est survenue lors de la vérification du paiement. Veuillez réessayer ultérieurement.');
+      }
+    }
+    
+    // Fonction pour afficher la confirmation
+    function showConfirmation(details) {
+      // Remplir les détails
+      document.getElementById('reference').textContent = details.reference;
+      document.getElementById('transaction').textContent = details.transaction;
+      document.getElementById('date').textContent = details.date;
+      document.getElementById('amount').textContent = details.amount;
+      document.getElementById('status').textContent = details.status;
+      
+      // Cacher le chargement et afficher la confirmation
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('confirmation').style.display = 'block';
+      
+      // Configurer le bouton d'impression
+      document.getElementById('print-button').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.print();
+      });
+    }
+    
+    // Fonction pour afficher une erreur
+    function showError(message) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('error-message').textContent = message;
+      document.getElementById('error').style.display = 'block';
+    }
+    
+    // Fonction pour obtenir le texte du statut
+    function getStatusText(status) {
+      switch (status) {
+        case 'succeeded':
+          return 'Payé';
+        case 'processing':
+          return 'En cours de traitement';
+        case 'requires_payment_method':
+          return 'Nécessite un moyen de paiement';
+        case 'requires_action':
+          return 'Nécessite une action';
+        default:
+          return status.charAt(0).toUpperCase() + status.slice(1);
+      }
+    }
+  </script>
+</body>
+</html>

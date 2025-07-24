@@ -1,0 +1,101 @@
+Vérification pour REF-1270-607305 sans PaymentIntent
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du statut du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Vérification pour REF-1270-607305 sans PaymentIntent
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/service-requests/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification initiale de la référence: Error: 404: {"success":false,"message":"Demande non trouvée"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:177:28)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+4Console.js:61 Vérification pour REF-1270-607305 sans PaymentIntent
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/service-requests/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:199:19)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/service-requests/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification initiale de la référence: Error: 404: {"success":false,"message":"Demande non trouvée"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:177:28)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:199:19)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:199:19)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:199:19)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:199:19)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:199:19)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+
+                
+          
+          
+          
+         Chrome is moving towards a new experience that allows users to choose to browse without third-party cookies.

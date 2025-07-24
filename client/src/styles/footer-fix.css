@@ -1,0 +1,74 @@
+/* 
+ * Règles spécifiques pour le footer sur mobile
+ * Cible explicitement le footer de la page de raccordement premium
+ */
+
+@media (max-width: 768px) {
+  /* Sélecteur exact pour le footer basé sur le code source */
+  .mt-16.bg-blue-50.rounded-xl.p-6.max-w-2xl.mx-auto,
+  div.mt-16.bg-blue-50.rounded-xl.p-6.max-w-2xl.mx-auto {
+    background-color: #f0f7ff !important;
+    padding: 10px !important;
+    margin-top: 16px !important;
+    border-radius: 8px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  /* Titre du footer */
+  .mt-16.bg-blue-50 h2,
+  div.mt-16.bg-blue-50 h2 {
+    font-size: 14px !important;
+    margin-bottom: 6px !important;
+    font-weight: 600 !important;
+  }
+  
+  /* Liste d'avantages */
+  .mt-16.bg-blue-50 ul,
+  div.mt-16.bg-blue-50 ul {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Espacements entre éléments */
+  .mt-16.bg-blue-50 .space-y-3,
+  div.mt-16.bg-blue-50 .space-y-3 {
+    gap: 4px !important;
+    margin: 0 !important;
+  }
+  
+  /* Styles pour chaque élément de liste */
+  .mt-16.bg-blue-50 li,
+  div.mt-16.bg-blue-50 li {
+    margin-bottom: 4px !important;
+    font-size: 12px !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* Masquer les éléments au-delà du deuxième */
+  .mt-16.bg-blue-50 li:nth-child(n+3),
+  div.mt-16.bg-blue-50 li:nth-child(n+3) {
+    display: none !important;
+  }
+  
+  /* Réduire la taille des icônes */
+  .mt-16.bg-blue-50 svg,
+  div.mt-16.bg-blue-50 svg {
+    width: 12px !important;
+    height: 12px !important;
+    min-width: 12px !important;
+    margin-top: 1px !important;
+  }
+  
+  /* Optimiser le texte des avantages */
+  .mt-16.bg-blue-50 span,
+  div.mt-16.bg-blue-50 span {
+    font-size: 12px !important;
+  }
+  
+  /* Force !important sur tous les styles */
+  .container {
+    padding-bottom: 20px !important;
+  }
+}

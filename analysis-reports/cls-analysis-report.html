@@ -1,0 +1,4509 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rapport d'analyse CLS (Cumulative Layout Shift)</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+    }
+    h2 {
+      color: #2980b9;
+      margin-top: 30px;
+    }
+    h3 {
+      color: #3498db;
+    }
+    h4 {
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    tr.high {
+      background-color: #ffecec;
+    }
+    tr.medium {
+      background-color: #fff5e6;
+    }
+    tr.low {
+      background-color: #f1f8e9;
+    }
+    .summary {
+      background-color: #e8f4fc;
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    .file-details {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border-left: 4px solid #3498db;
+    }
+    .issue {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .issue.high {
+      background-color: #ffecec;
+      border-left: 4px solid #e74c3c;
+    }
+    .issue.medium {
+      background-color: #fff5e6;
+      border-left: 4px solid #f39c12;
+    }
+    .issue.low {
+      background-color: #f8f9fa;
+      border-left: 4px solid #95a5a6;
+    }
+    button {
+      background-color: #3498db;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 3px;
+      overflow-x: auto;
+      font-size: 14px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #3498db;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    ul li {
+      margin-bottom: 8px;
+    }
+    .chart-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .chart {
+      width: 48%;
+      min-width: 300px;
+      margin-bottom: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 15px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .chart h3 {
+      margin-top: 0;
+    }
+    .bar {
+      height: 30px;
+      margin: 10px 0;
+      background-color: #3498db;
+      text-align: right;
+      color: white;
+      padding-right: 10px;
+      line-height: 30px;
+      border-radius: 3px;
+    }
+    .bar.high {
+      background-color: #e74c3c;
+    }
+    .bar.medium {
+      background-color: #f39c12;
+    }
+    .bar.low {
+      background-color: #95a5a6;
+    }
+    .bar.html {
+      background-color: #3498db;
+    }
+    .bar.css {
+      background-color: #9b59b6;
+    }
+    .bar.js {
+      background-color: #2ecc71;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rapport d'analyse CLS (Cumulative Layout Shift)</h1>
+  <p>Date de l'analyse: 5/21/2025 8:15:48 PM</p>
+  
+  <div class="summary">
+    <h2>Résumé</h2>
+    <p><strong>Nombre total de fichiers analysés:</strong> 528</p>
+    <p><strong>Fichiers avec problèmes potentiels de CLS:</strong> 177 (34%)</p>
+    <p><strong>Nombre total de problèmes détectés:</strong> 188</p>
+    <p><strong>Problèmes de haute sévérité:</strong> 2</p>
+    <p><strong>Problèmes de sévérité moyenne:</strong> 11</p>
+    <p><strong>Problèmes de faible sévérité:</strong> 175</p>
+    
+    <div class="chart-container">
+      <div class="chart">
+        <h3>Problèmes par sévérité</h3>
+        <div class="bar high" style="width: 1.0638297872340425%">2 (1%)</div>
+        <div class="bar medium" style="width: 5.851063829787234%">11 (6%)</div>
+        <div class="bar low" style="width: 93.08510638297872%">175 (93%)</div>
+      </div>
+      
+      <div class="chart">
+        <h3>Problèmes par type de fichier</h3>
+        <div class="bar html" style="width: 93.67816091954023%">HTML: 163 (94%)</div>
+        <div class="bar css" style="width: 4.597701149425287%">CSS: 8 (5%)</div>
+        <div class="bar js" style="width: 1.7241379310344827%">JS: 3 (2%)</div>
+      </div>
+    </div>
+  </div>
+  
+  
+    <h2>Recommandations générales pour réduire le CLS</h2>
+    
+    <h3>Pour les images et médias</h3>
+    <ul>
+      <li><strong>Toujours spécifier width et height</strong> - Cela permet au navigateur de réserver l'espace nécessaire.</li>
+      <li><strong>Utiliser l'attribut aspect-ratio</strong> - Pour maintenir le rapport hauteur/largeur et éviter les sauts.</li>
+      <li><strong>Implémenter des placeholders</strong> - Utiliser des techniques comme le blur-up ou les squelettes de chargement.</li>
+      <li><strong>Éviter les images sans dimensions</strong> - Toujours définir des dimensions explicites pour les images.</li>
+    </ul>
+    
+    <h3>Pour les polices</h3>
+    <ul>
+      <li><strong>Utiliser font-display: swap</strong> - Pour éviter que le texte ne soit invisible pendant le chargement de la police.</li>
+      <li><strong>Précharger les polices critiques</strong> - Avec &lt;link rel="preload" as="font"&gt;.</li>
+      <li><strong>Considérer le system font stack</strong> - Utiliser des polices système pour les performances.</li>
+      <li><strong>Utiliser size-adjust et font-family fallbacks</strong> - Pour minimiser les changements de taille entre les polices de substitution et les polices web.</li>
+    </ul>
+    
+    <h3>Pour les annonces et embeds</h3>
+    <ul>
+      <li><strong>Réserver un espace fixe</strong> - Toujours définir une hauteur et une largeur fixes pour les conteneurs d'annonces.</li>
+      <li><strong>Utiliser des dimensions fixes pour les iframes</strong> - Définir width et height pour tous les iframes.</li>
+      <li><strong>Injecter le contenu dynamique vers le bas</strong> - Éviter d'insérer du contenu au-dessus du contenu existant après le chargement.</li>
+    </ul>
+    
+    <h3>Pour le contenu dynamique</h3>
+    <ul>
+      <li><strong>Préallouer l'espace</strong> - Utiliser min-height pour réserver de l'espace pour le contenu qui sera chargé.</li>
+      <li><strong>Utiliser des squelettes de chargement</strong> - Montrer une version "squelette" du contenu pendant le chargement.</li>
+      <li><strong>Éviter les transformations qui changent la taille</strong> - Préférer transform aux changements de taille pour les animations.</li>
+      <li><strong>Utiliser position: absolute</strong> - Pour les éléments qui ne devraient pas affecter le flux de la page.</li>
+    </ul>
+    
+    <h3>Techniques de chargement</h3>
+    <ul>
+      <li><strong>Charger les styles critiques en ligne</strong> - Mettre les styles essentiels dans le &lt;head&gt; pour éviter les FOUC.</li>
+      <li><strong>Différer les scripts non critiques</strong> - Utiliser async ou defer pour les scripts qui ne sont pas essentiels.</li>
+      <li><strong>Charger le contenu tiers de manière asynchrone</strong> - Utiliser des techniques comme l'Intersection Observer pour charger le contenu uniquement lorsqu'il est nécessaire.</li>
+    </ul>
+  
+  
+  <h2>Fichiers avec problèmes potentiels de CLS</h2>
+  <table>
+      <tr>
+        <th>Fichier</th>
+        <th>Problèmes haute sévérité</th>
+        <th>Problèmes sévérité moyenne</th>
+        <th>Problèmes faible sévérité</th>
+        <th>Actions</th>
+      </tr>
+      
+      <tr class="low">
+        <td>../client/src/components/admin/advanced-email-dialog.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/advanced-email-dialog.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/agent-dashboard/agent-payments.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/agent-dashboard/agent-payments.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/agent-dashboard/agent-tasks.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/agent-dashboard/agent-tasks.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/agent-dashboard.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/agent-dashboard.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/client-details.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/client-details.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/client-email-dialog.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/client-email-dialog.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/email-composer.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/email-composer.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/email-notification-dropdown.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/email-notification-dropdown.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/email-send-dialog.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/email-send-dialog.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/notification-dropdown.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/notification-dropdown.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/signature-wizard.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/signature-wizard.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/stripe-payment-sync.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/stripe-payment-sync.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/client-type-cards.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/client-type-cards.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/contact-modal.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/contact-modal.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/cookie-consent.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/cookie-consent.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/enhanced-form-wrapper.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/enhanced-form-wrapper.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/mobile-form-container.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/mobile-form-container.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/mobile-navigation.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/mobile-navigation.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/multi-step-form-progressive.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/multi-step-form-progressive.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/multi-step-form.fixed.backup.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/multi-step-form.fixed.backup.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/multi-step-form.fixed.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/multi-step-form.fixed.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/multi-step-form.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/multi-step-form.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/payment-links-generator.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/payment-links-generator.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/providers/animation-provider.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/providers/animation-provider.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/responsive-card.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/responsive-card.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/responsive-dashboard.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/responsive-dashboard.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/responsive-footer.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/responsive-footer.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/responsive-multi-step-form.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/responsive-multi-step-form.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/responsive-notification.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/responsive-notification.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/seo-rich-content.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/seo-rich-content.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/service-request-form.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/service-request-form.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/ui/action-card.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/ui/action-card.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/ui/electric-loading-animation.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/ui/electric-loading-animation.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/ui/enedis-enhanced-loader.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/ui/enedis-enhanced-loader.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/ui/input-otp.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/ui/input-otp.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/ui/mobile-toggle.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/ui/mobile-toggle.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/animation-preview.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/animation-preview.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/animations.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/animations.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/clients.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/clients.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/components/manager-welcome-banner.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/components/manager-welcome-banner.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/contacts.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/contacts.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/dashboard.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/dashboard.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/demandes.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/demandes.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/email-sender.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/email-sender.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/emails.backup.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/emails.backup.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/emails.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/emails.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/enhanced-dashboard.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/enhanced-dashboard.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/google-snippets.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/google-snippets.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/leads.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/leads.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/paiements.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/paiements.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/payment-debug.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/payment-debug.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/performance-monitor.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/performance-monitor.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/rendez-vous.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/rendez-vous.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/settings.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/settings.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/smtp-config.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/smtp-config.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/smtp.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/smtp.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/user-statistics-enhanced.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/user-statistics-enhanced.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/user-statistics.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/user-statistics.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/users.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/users.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin-dashboard.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin-dashboard.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin-example.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin-example.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/auth-page.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/auth-page.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/card-payment-page.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/card-payment-page.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/confirmation.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/confirmation.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/contact-page.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/contact-page.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/faq-page.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/faq-page.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/home-page-fixed.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/home-page-fixed.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/home-page.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/home-page.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/paiement-confirmation.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/paiement-confirmation.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/paiement-direct.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/paiement-direct.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/paiement-multiple.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/paiement-multiple.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="high">
+        <td>../client/src/pages/paiement-simple.tsx</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/paiement-simple.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/paiement-test.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/paiement-test.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/particulier.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/particulier.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/payment-debug.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/payment-debug.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/professionnel.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/professionnel.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/raccordement-enedis-new.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/raccordement-enedis-new.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/raccordement-enedis.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/raccordement-enedis.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/service-request-page.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/service-request-page.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/simple-payment-page.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/simple-payment-page.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/solaire.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/solaire.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="medium">
+        <td>../client/src/index.css</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/index.css')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="medium">
+        <td>../client/src/styles/direct-mobile-fixes.css</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/styles/direct-mobile-fixes.css')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/styles/direct-style-fix.css</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/styles/direct-style-fix.css')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/styles/footer-fix.css</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/styles/footer-fix.css')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="medium">
+        <td>../client/src/styles/form-mobile-optimizations.css</td>
+        <td>0</td>
+        <td>2</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/styles/form-mobile-optimizations.css')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/styles/loader-animations.css</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/styles/loader-animations.css')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="medium">
+        <td>../client/src/styles/mobile-adjustments.css</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/styles/mobile-adjustments.css')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="medium">
+        <td>../client/src/styles/mobile-buttons.css</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/styles/mobile-buttons.css')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="medium">
+        <td>../client/src/styles/mobile-fixes-v2.css</td>
+        <td>0</td>
+        <td>2</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/styles/mobile-fixes-v2.css')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/styles/mobile-form-improvements.css</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/styles/mobile-form-improvements.css')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/styles/sidebar-mobile-summary.css</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/styles/sidebar-mobile-summary.css')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/advanced-email-dialog.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/advanced-email-dialog.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/agent-dashboard/agent-payments.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/agent-dashboard/agent-payments.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/agent-dashboard/agent-tasks.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/agent-dashboard/agent-tasks.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/agent-dashboard.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/agent-dashboard.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/client-details.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/client-details.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/client-email-dialog.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/client-email-dialog.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/email-composer.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/email-composer.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/email-notification-dropdown.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/email-notification-dropdown.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/email-send-dialog.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/email-send-dialog.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/notification-dropdown.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/notification-dropdown.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/signature-wizard.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/signature-wizard.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/admin/stripe-payment-sync.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/admin/stripe-payment-sync.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/client-type-cards.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/client-type-cards.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/contact-modal.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/contact-modal.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/cookie-consent.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/cookie-consent.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/enhanced-form-wrapper.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/enhanced-form-wrapper.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/mobile-form-container.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/mobile-form-container.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/mobile-navigation.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/mobile-navigation.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/multi-step-form-progressive.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/multi-step-form-progressive.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/multi-step-form.fixed.backup.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/multi-step-form.fixed.backup.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/multi-step-form.fixed.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/multi-step-form.fixed.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/multi-step-form.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/multi-step-form.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/payment-links-generator.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/payment-links-generator.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/providers/animation-provider.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/providers/animation-provider.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/responsive-card.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/responsive-card.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/responsive-dashboard.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/responsive-dashboard.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/responsive-footer.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/responsive-footer.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/responsive-multi-step-form.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/responsive-multi-step-form.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/responsive-notification.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/responsive-notification.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/seo-rich-content.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/seo-rich-content.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/service-request-form.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/service-request-form.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/ui/action-card.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/ui/action-card.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/ui/electric-loading-animation.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/ui/electric-loading-animation.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/ui/enedis-enhanced-loader.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/ui/enedis-enhanced-loader.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/ui/input-otp.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/ui/input-otp.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/components/ui/mobile-toggle.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/components/ui/mobile-toggle.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="medium">
+        <td>../client/src/lib/applyMobileOptimizations.ts</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/lib/applyMobileOptimizations.ts')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="medium">
+        <td>../client/src/lib/google-snippets.ts</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/lib/google-snippets.ts')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/animation-preview.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/animation-preview.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/animations.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/animations.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/clients.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/clients.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/components/manager-welcome-banner.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/components/manager-welcome-banner.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/contacts.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/contacts.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/dashboard.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/dashboard.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/demandes.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/demandes.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/email-sender.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/email-sender.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/emails.backup.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/emails.backup.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/emails.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/emails.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/enhanced-dashboard.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/enhanced-dashboard.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/google-snippets.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/google-snippets.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/leads.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/leads.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/paiements.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/paiements.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/payment-debug.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/payment-debug.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/performance-monitor.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/performance-monitor.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/rendez-vous.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/rendez-vous.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/settings.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/settings.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/smtp-config.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/smtp-config.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/smtp.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/smtp.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/user-statistics-enhanced.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/user-statistics-enhanced.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/user-statistics.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/user-statistics.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin/users.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin/users.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin-dashboard.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin-dashboard.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/admin-example.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/admin-example.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/auth-page.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/auth-page.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/card-payment-page.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/card-payment-page.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/confirmation.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/confirmation.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/contact-page.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/contact-page.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/faq-page.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/faq-page.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/home-page-fixed.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/home-page-fixed.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/home-page.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/home-page.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/paiement-confirmation.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/paiement-confirmation.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/paiement-direct.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/paiement-direct.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/paiement-multiple.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/paiement-multiple.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="high">
+        <td>../client/src/pages/paiement-simple.tsx</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/paiement-simple.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/paiement-test.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/paiement-test.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/particulier.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/particulier.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/payment-debug.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/payment-debug.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/professionnel.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/professionnel.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/raccordement-enedis-new.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/raccordement-enedis-new.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/raccordement-enedis.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/raccordement-enedis.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/service-request-page.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/service-request-page.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/simple-payment-page.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/simple-payment-page.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../client/src/pages/solaire.tsx</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/pages/solaire.tsx')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="medium">
+        <td>../client/src/services/lead-pdf-service.ts</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>
+          <button onclick="toggleDetails('../client/src/services/lead-pdf-service.ts')">Voir détails</button>
+        </td>
+      </tr>
+    
+      <tr class="low">
+        <td>../public/contracts/contrat-lead-15.html</td>
+        <td>0</td>
+        <td>0</td>
+        <td>2</td>
+        <td>
+          <button onclick="toggleDetails('../public/contracts/contrat-lead-15.html')">Voir détails</button>
+        </td>
+      </tr>
+    
+    </table>
+  
+  <h2>Détails par fichier</h2>
+  
+      <div id="details----client-src-components-admin-advanced-email-dialog-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/advanced-email-dialog.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (5 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-agent-dashboard-agent-payments-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/agent-dashboard/agent-payments.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-agent-dashboard-agent-tasks-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/agent-dashboard/agent-tasks.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-agent-dashboard-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/agent-dashboard.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-client-details-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/client-details.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (9 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-client-email-dialog-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/client-email-dialog.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div key={category}></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-email-composer-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/email-composer.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-email-notification-dropdown-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/email-notification-dropdown.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div key={email.id}></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-email-send-dialog-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/email-send-dialog.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (6 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-notification-dropdown-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/notification-dropdown.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div key={notification.id}></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-signature-wizard-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/signature-wizard.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Transformations ou marges qui peuvent modifier la position des éléments (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préférer transform pour les animations et éviter de modifier les marges après le chargement</p>
+          <p><strong>Exemples:</strong></p><pre>margin-left</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-stripe-payment-sync-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/stripe-payment-sync.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-client-type-cards-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/client-type-cards.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-contact-modal-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/contact-modal.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-cookie-consent-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/cookie-consent.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-enhanced-form-wrapper-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/enhanced-form-wrapper.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-mobile-form-container-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/mobile-form-container.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-mobile-navigation-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/mobile-navigation.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div key={index}>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-multi-step-form-progressive-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/multi-step-form-progressive.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-multi-step-form-fixed-backup-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/multi-step-form.fixed.backup.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (15 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-multi-step-form-fixed-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/multi-step-form.fixed.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (15 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-multi-step-form-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/multi-step-form.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-payment-links-generator-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/payment-links-generator.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-providers-animation-provider-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/providers/animation-provider.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div key={location}></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-responsive-card-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/responsive-card.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-responsive-dashboard-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/responsive-dashboard.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-responsive-footer-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/responsive-footer.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (7 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-responsive-multi-step-form-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/responsive-multi-step-form.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div /></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-responsive-notification-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/responsive-notification.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-seo-rich-content-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/seo-rich-content.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-service-request-form-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/service-request-form.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (20 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-ui-action-card-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/ui/action-card.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-ui-electric-loading-animation-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/ui/electric-loading-animation.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-ui-enedis-enhanced-loader-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/ui/enedis-enhanced-loader.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-ui-input-otp-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/ui/input-otp.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div ref={ref} role="separator" {...props}></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-ui-mobile-toggle-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/ui/mobile-toggle.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div
+      role="switch"
+      aria-checked={checked}
+      id={id}
+      tabIndex={disabled ? -1 : </pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-animation-preview-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/animation-preview.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-animations-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/animations.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-clients-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/clients.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-components-manager-welcome-banner-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/components/manager-welcome-banner.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (5 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-contacts-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/contacts.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (5 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-dashboard-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/dashboard.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (8 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-demandes-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/demandes.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (29 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-email-sender-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/email-sender.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-emails-backup-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/emails.backup.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (19 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-emails-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/emails.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (8 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-enhanced-dashboard-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/enhanced-dashboard.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (6 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-google-snippets-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/google-snippets.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-leads-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/leads.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (6 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-paiements-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/paiements.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (16 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-payment-debug-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/payment-debug.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-performance-monitor-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/performance-monitor.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-rendez-vous-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/rendez-vous.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (10 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-settings-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/settings.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-smtp-config-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/smtp-config.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-smtp-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/smtp.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-user-statistics-enhanced-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/user-statistics-enhanced.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (7 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-user-statistics-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/user-statistics.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (13 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-users-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/users.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div title={format(new Date(user.lastLogin), "dd/MM/yyyy HH:mm", { locale: fr })}>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-dashboard-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin-dashboard.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (24 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-example-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin-example.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (5 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-auth-page-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/auth-page.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-card-payment-page-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/card-payment-page.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-confirmation-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/confirmation.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-contact-page-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/contact-page.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (5 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-faq-page-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/faq-page.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-home-page-fixed-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/home-page-fixed.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div itemProp="provider" itemScope itemType="https://schema.org/Organization">
+
+<div itemProp="areaServed" itemScope itemType="https://schema.org/Country"></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-home-page-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/home-page.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div itemProp="provider" itemScope itemType="https://schema.org/Organization">
+
+<div itemProp="areaServed" itemScope itemType="https://schema.org/Country"></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-paiement-confirmation-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/paiement-confirmation.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-paiement-direct-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/paiement-direct.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-paiement-multiple-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/paiement-multiple.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-paiement-simple-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/paiement-simple.tsx</h3>
+        
+        <div class="issue high">
+          <h4>Image sans attributs width et height spécifiés (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Ajouter des attributs width et height à toutes les images</p>
+          <p><strong>Exemples:</strong></p><pre><img src="/visa.svg" alt="Visa - Paiement sécurisé pour votre raccordement Enedis" className="h-6" /
+
+<img src="/mastercard.svg" alt="Mastercard - Paiement sécurisé pour branchement électrique" classNam
+
+<img src="/cb.svg" alt="Carte Bancaire - Service raccordement électrique Enedis" className="h-6" /></pre>
+        </div>
+      
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-paiement-test-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/paiement-test.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (7 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-particulier-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/particulier.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-payment-debug-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/payment-debug.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-professionnel-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/professionnel.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-raccordement-enedis-new-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/raccordement-enedis-new.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (7 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-raccordement-enedis-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/raccordement-enedis.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div ref={topRef}>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-service-request-page-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/service-request-page.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div id="top" ref={topRef}>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-simple-payment-page-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/simple-payment-page.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (11 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-solaire-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/solaire.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-index-css" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/index.css</h3>
+        
+        <div class="issue medium">
+          <h4>Éléments positionnés en fixe ou absolu qui peuvent causer des décalages (12 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> S'assurer que les éléments positionnés ont une taille définie et n'affectent pas le flux</p>
+          <p><strong>Exemples:</strong></p><pre>position: absolute
+
+position: absolute
+
+position: absolute</pre>
+        </div>
+      
+        <div class="issue low">
+          <h4>Transformations ou marges qui peuvent modifier la position des éléments (86 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préférer transform pour les animations et éviter de modifier les marges après le chargement</p>
+          <p><strong>Exemples:</strong></p><pre>transform: translate
+
+transform: translate
+
+transform: translate</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-styles-direct-mobile-fixes-css" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/styles/direct-mobile-fixes.css</h3>
+        
+        <div class="issue medium">
+          <h4>Hauteur automatique qui peut changer lors du chargement du contenu (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des hauteurs fixes pour les conteneurs, surtout pour les images et médias</p>
+          <p><strong>Exemples:</strong></p><pre>height: auto</pre>
+        </div>
+      
+        <div class="issue low">
+          <h4>Transformations ou marges qui peuvent modifier la position des éléments (6 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préférer transform pour les animations et éviter de modifier les marges après le chargement</p>
+          <p><strong>Exemples:</strong></p><pre>margin-left
+
+margin-top
+
+margin-top</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-styles-direct-style-fix-css" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/styles/direct-style-fix.css</h3>
+        
+        <div class="issue low">
+          <h4>Transformations ou marges qui peuvent modifier la position des éléments (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préférer transform pour les animations et éviter de modifier les marges après le chargement</p>
+          <p><strong>Exemples:</strong></p><pre>margin-top</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-styles-footer-fix-css" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/styles/footer-fix.css</h3>
+        
+        <div class="issue low">
+          <h4>Transformations ou marges qui peuvent modifier la position des éléments (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préférer transform pour les animations et éviter de modifier les marges après le chargement</p>
+          <p><strong>Exemples:</strong></p><pre>margin-top
+
+margin-top</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-styles-form-mobile-optimizations-css" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/styles/form-mobile-optimizations.css</h3>
+        
+        <div class="issue medium">
+          <h4>Éléments positionnés en fixe ou absolu qui peuvent causer des décalages (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> S'assurer que les éléments positionnés ont une taille définie et n'affectent pas le flux</p>
+          <p><strong>Exemples:</strong></p><pre>position: absolute
+
+position: absolute
+
+position: absolute</pre>
+        </div>
+      
+        <div class="issue medium">
+          <h4>Hauteur automatique qui peut changer lors du chargement du contenu (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des hauteurs fixes pour les conteneurs, surtout pour les images et médias</p>
+          <p><strong>Exemples:</strong></p><pre>height: auto</pre>
+        </div>
+      
+        <div class="issue low">
+          <h4>Transformations ou marges qui peuvent modifier la position des éléments (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préférer transform pour les animations et éviter de modifier les marges après le chargement</p>
+          <p><strong>Exemples:</strong></p><pre>margin-top
+
+margin-top
+
+transform: translate</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-styles-loader-animations-css" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/styles/loader-animations.css</h3>
+        
+        <div class="issue low">
+          <h4>Transformations ou marges qui peuvent modifier la position des éléments (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préférer transform pour les animations et éviter de modifier les marges après le chargement</p>
+          <p><strong>Exemples:</strong></p><pre>transform: translate
+
+transform: translate</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-styles-mobile-adjustments-css" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/styles/mobile-adjustments.css</h3>
+        
+        <div class="issue medium">
+          <h4>Éléments positionnés en fixe ou absolu qui peuvent causer des décalages (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> S'assurer que les éléments positionnés ont une taille définie et n'affectent pas le flux</p>
+          <p><strong>Exemples:</strong></p><pre>position: fixed</pre>
+        </div>
+      
+        <div class="issue low">
+          <h4>Transformations ou marges qui peuvent modifier la position des éléments (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préférer transform pour les animations et éviter de modifier les marges après le chargement</p>
+          <p><strong>Exemples:</strong></p><pre>transform: translate
+
+transform: translate
+
+margin-left</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-styles-mobile-buttons-css" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/styles/mobile-buttons.css</h3>
+        
+        <div class="issue medium">
+          <h4>Hauteur automatique qui peut changer lors du chargement du contenu (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des hauteurs fixes pour les conteneurs, surtout pour les images et médias</p>
+          <p><strong>Exemples:</strong></p><pre>height: auto</pre>
+        </div>
+      
+        <div class="issue low">
+          <h4>Transformations ou marges qui peuvent modifier la position des éléments (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préférer transform pour les animations et éviter de modifier les marges après le chargement</p>
+          <p><strong>Exemples:</strong></p><pre>margin-top
+
+margin-left
+
+transform: translate</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-styles-mobile-fixes-v2-css" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/styles/mobile-fixes-v2.css</h3>
+        
+        <div class="issue medium">
+          <h4>Éléments positionnés en fixe ou absolu qui peuvent causer des décalages (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> S'assurer que les éléments positionnés ont une taille définie et n'affectent pas le flux</p>
+          <p><strong>Exemples:</strong></p><pre>position: absolute</pre>
+        </div>
+      
+        <div class="issue medium">
+          <h4>Hauteur automatique qui peut changer lors du chargement du contenu (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des hauteurs fixes pour les conteneurs, surtout pour les images et médias</p>
+          <p><strong>Exemples:</strong></p><pre>height: auto</pre>
+        </div>
+      
+        <div class="issue low">
+          <h4>Transformations ou marges qui peuvent modifier la position des éléments (7 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préférer transform pour les animations et éviter de modifier les marges après le chargement</p>
+          <p><strong>Exemples:</strong></p><pre>margin-top
+
+margin-top
+
+margin-left</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-styles-mobile-form-improvements-css" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/styles/mobile-form-improvements.css</h3>
+        
+        <div class="issue low">
+          <h4>Transformations ou marges qui peuvent modifier la position des éléments (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préférer transform pour les animations et éviter de modifier les marges après le chargement</p>
+          <p><strong>Exemples:</strong></p><pre>margin-top
+
+margin-top
+
+margin-top</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-styles-sidebar-mobile-summary-css" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/styles/sidebar-mobile-summary.css</h3>
+        
+        <div class="issue low">
+          <h4>Transformations ou marges qui peuvent modifier la position des éléments (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préférer transform pour les animations et éviter de modifier les marges après le chargement</p>
+          <p><strong>Exemples:</strong></p><pre>margin-left
+
+transform: translate
+
+transform: translate</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-advanced-email-dialog-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/advanced-email-dialog.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (5 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-agent-dashboard-agent-payments-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/agent-dashboard/agent-payments.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-agent-dashboard-agent-tasks-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/agent-dashboard/agent-tasks.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-agent-dashboard-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/agent-dashboard.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-client-details-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/client-details.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (9 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-client-email-dialog-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/client-email-dialog.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div key={category}></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-email-composer-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/email-composer.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-email-notification-dropdown-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/email-notification-dropdown.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div key={email.id}></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-email-send-dialog-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/email-send-dialog.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (6 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-notification-dropdown-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/notification-dropdown.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div key={notification.id}></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-signature-wizard-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/signature-wizard.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Transformations ou marges qui peuvent modifier la position des éléments (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préférer transform pour les animations et éviter de modifier les marges après le chargement</p>
+          <p><strong>Exemples:</strong></p><pre>margin-left</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-admin-stripe-payment-sync-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/admin/stripe-payment-sync.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-client-type-cards-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/client-type-cards.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-contact-modal-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/contact-modal.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-cookie-consent-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/cookie-consent.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-enhanced-form-wrapper-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/enhanced-form-wrapper.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-mobile-form-container-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/mobile-form-container.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-mobile-navigation-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/mobile-navigation.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div key={index}>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-multi-step-form-progressive-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/multi-step-form-progressive.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-multi-step-form-fixed-backup-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/multi-step-form.fixed.backup.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (15 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-multi-step-form-fixed-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/multi-step-form.fixed.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (15 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-multi-step-form-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/multi-step-form.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-payment-links-generator-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/payment-links-generator.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-providers-animation-provider-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/providers/animation-provider.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div key={location}></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-responsive-card-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/responsive-card.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-responsive-dashboard-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/responsive-dashboard.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-responsive-footer-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/responsive-footer.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (7 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-responsive-multi-step-form-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/responsive-multi-step-form.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div /></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-responsive-notification-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/responsive-notification.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-seo-rich-content-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/seo-rich-content.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-service-request-form-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/service-request-form.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (20 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-ui-action-card-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/ui/action-card.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-ui-electric-loading-animation-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/ui/electric-loading-animation.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-ui-enedis-enhanced-loader-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/ui/enedis-enhanced-loader.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-ui-input-otp-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/ui/input-otp.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div ref={ref} role="separator" {...props}></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-components-ui-mobile-toggle-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/components/ui/mobile-toggle.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div
+      role="switch"
+      aria-checked={checked}
+      id={id}
+      tabIndex={disabled ? -1 : </pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-lib-applyMobileOptimizations-ts" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/lib/applyMobileOptimizations.ts</h3>
+        
+        <div class="issue medium">
+          <h4>Insertion dynamique de contenu qui peut provoquer des décalages (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préallouer de l'espace pour le contenu dynamique et utiliser des placeholders</p>
+          <p><strong>Exemples:</strong></p><pre>appendChild</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-lib-google-snippets-ts" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/lib/google-snippets.ts</h3>
+        
+        <div class="issue medium">
+          <h4>Insertion dynamique de contenu qui peut provoquer des décalages (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préallouer de l'espace pour le contenu dynamique et utiliser des placeholders</p>
+          <p><strong>Exemples:</strong></p><pre>appendChild
+
+appendChild</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-animation-preview-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/animation-preview.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-animations-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/animations.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-clients-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/clients.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-components-manager-welcome-banner-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/components/manager-welcome-banner.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (5 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-contacts-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/contacts.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (5 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-dashboard-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/dashboard.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (8 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-demandes-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/demandes.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (29 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-email-sender-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/email-sender.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-emails-backup-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/emails.backup.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (19 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-emails-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/emails.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (8 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-enhanced-dashboard-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/enhanced-dashboard.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (6 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-google-snippets-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/google-snippets.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-leads-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/leads.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (6 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-paiements-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/paiements.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (16 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-payment-debug-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/payment-debug.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-performance-monitor-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/performance-monitor.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-rendez-vous-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/rendez-vous.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (10 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-settings-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/settings.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-smtp-config-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/smtp-config.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-smtp-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/smtp.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-user-statistics-enhanced-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/user-statistics-enhanced.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (7 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-user-statistics-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/user-statistics.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (13 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-users-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin/users.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div title={format(new Date(user.lastLogin), "dd/MM/yyyy HH:mm", { locale: fr })}>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-dashboard-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin-dashboard.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (24 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-admin-example-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/admin-example.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (5 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-auth-page-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/auth-page.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-card-payment-page-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/card-payment-page.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-confirmation-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/confirmation.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (1 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-contact-page-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/contact-page.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (5 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-faq-page-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/faq-page.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-home-page-fixed-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/home-page-fixed.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div itemProp="provider" itemScope itemType="https://schema.org/Organization">
+
+<div itemProp="areaServed" itemScope itemType="https://schema.org/Country"></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-home-page-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/home-page.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div itemProp="provider" itemScope itemType="https://schema.org/Organization">
+
+<div itemProp="areaServed" itemScope itemType="https://schema.org/Country"></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-paiement-confirmation-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/paiement-confirmation.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-paiement-direct-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/paiement-direct.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-paiement-multiple-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/paiement-multiple.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-paiement-simple-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/paiement-simple.tsx</h3>
+        
+        <div class="issue high">
+          <h4>Image sans attributs width et height spécifiés (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Ajouter des attributs width et height à toutes les images</p>
+          <p><strong>Exemples:</strong></p><pre><img src="/visa.svg" alt="Visa - Paiement sécurisé pour votre raccordement Enedis" className="h-6" /
+
+<img src="/mastercard.svg" alt="Mastercard - Paiement sécurisé pour branchement électrique" classNam
+
+<img src="/cb.svg" alt="Carte Bancaire - Service raccordement électrique Enedis" className="h-6" /></pre>
+        </div>
+      
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-paiement-test-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/paiement-test.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (7 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-particulier-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/particulier.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-payment-debug-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/payment-debug.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-professionnel-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/professionnel.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-raccordement-enedis-new-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/raccordement-enedis-new.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (7 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-raccordement-enedis-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/raccordement-enedis.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div ref={topRef}>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-service-request-page-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/service-request-page.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div id="top" ref={topRef}>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-simple-payment-page-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/simple-payment-page.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (11 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-pages-solaire-tsx" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/pages/solaire.tsx</h3>
+        
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (2 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----client-src-services-lead-pdf-service-ts" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../client/src/services/lead-pdf-service.ts</h3>
+        
+        <div class="issue medium">
+          <h4>Insertion dynamique de contenu qui peut provoquer des décalages (26 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préallouer de l'espace pour le contenu dynamique et utiliser des placeholders</p>
+          <p><strong>Exemples:</strong></p><pre>appendChild
+
+appendChild
+
+appendChild</pre>
+        </div>
+      
+      </div>
+    
+      <div id="details----public-contracts-contrat-lead-15-html" class="file-details" style="display: none;">
+        <h3>Problèmes de CLS dans ../public/contracts/contrat-lead-15.html</h3>
+        
+        <div class="issue low">
+          <h4>Transformations ou marges qui peuvent modifier la position des éléments (4 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Préférer transform pour les animations et éviter de modifier les marges après le chargement</p>
+          <p><strong>Exemples:</strong></p><pre>margin-top
+
+margin-top
+
+margin-top</pre>
+        </div>
+      
+        <div class="issue low">
+          <h4>Éléments sans styles définis qui peuvent changer de taille (3 occurrences)</h4>
+          <p><strong>Correction recommandée:</strong> Définir des classes ou styles pour tous les conteneurs principaux</p>
+          <p><strong>Exemples:</strong></p><pre><div>
+
+<div>
+
+<div></pre>
+        </div>
+      
+      </div>
+    
+  
+  <a href="#" class="back-to-top">Retour en haut ↑</a>
+  
+  <script>
+    function toggleDetails(filePath) {
+      // Convertir le chemin en un identifiant valide
+      const id = filePath.replace(///g, '-').replace(/\\/g, '-').replace(/\./g, '-');
+      const element = document.getElementById('details-' + id);
+      if (element) {
+        if (element.style.display === 'none') {
+          element.style.display = 'block';
+          // Faire défiler jusqu'à l'élément
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          element.style.display = 'none';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
+  

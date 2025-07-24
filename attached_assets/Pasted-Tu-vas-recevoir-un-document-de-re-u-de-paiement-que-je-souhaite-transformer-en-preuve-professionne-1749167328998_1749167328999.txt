@@ -1,0 +1,48 @@
+Tu vas recevoir un document de reçu de paiement que je souhaite transformer en **preuve professionnelle et juridiquement irréfutable** à présenter à Stripe en cas de litige.
+
+Voici ce que je te demande :
+
+🔧 1. Mise en page professionnelle :
+- Supprime tous les symboles étranges ("Ø=Ÿ", etc.).
+- Utilise une police propre et moderne (par ex. Helvetica, Arial ou Roboto).
+- Structure clairement avec des titres bien espacés et visibles.
+- Aligne bien les paragraphes, évite les sauts de ligne inutiles.
+- Utilise des tailles de police hiérarchisées (titre principal > sous-titres > texte).
+
+🧾 2. Contenu obligatoire (reprendre les informations déjà présentes) :
+- Titre : **Reçu de paiement officiel**
+- Sous-titre : **Raccordement Électrique en Ligne**
+- Numéro de référence : RAC-9659-902982
+- ID de paiement Stripe : pi_3RWcc3F0p2SYXeXz1WFJiK3s
+- Date et heure de transaction : 5 juin 2025 à 12:09
+- Nom du client : Monsieur/Madame Sogomonian
+- Adresse : 43 place Caffe, 73000 Chambéry
+- Montant : 129,80 €
+- Méthode de paiement : Carte bancaire via lien Stripe sécurisé
+- Statut de la transaction : **Payé**
+- Objet : Accompagnement personnalisé dans les démarches de raccordement électrique auprès d’Enedis.
+
+📜 3. Bloc juridique clair :
+- Le client a accepté le montant TTC avant validation.
+- Le client a validé les CGV, CGU et la politique de confidentialité via case obligatoire.
+- Le client a renoncé à son droit de rétractation (L221-28 du Code de la consommation).
+- Le client a fourni volontairement ses données personnelles.
+
+✍️ 4. Bloc de confirmation avec signature électronique :
+Titre : **Confirmation du client**
+Texte :
+> Je soussigné(e), Sogomonian, confirme avoir lu, compris et accepté l’ensemble des informations ci-dessus.  
+> Je reconnais que la transaction est due et conforme à ma demande.  
+> Fait le 5 juin 2025 à 12:09  
+> Signature électronique du client : Sogomonian  
+> Adresse IP : [à insérer si disponible]
+
+📬 5. Pied de page :
+- Pour toute réclamation ou assistance : contact@raccordement.net  
+- Société : Raccordement Électrique en Ligne  
+- Numéro SIRET : 12345678900013
+
+🎯 6. Objectif final :
+➡️ Génère un **PDF propre, professionnel, bien structuré et clair**, respectant les normes d’un reçu légal à usage juridique. Il doit inspirer confiance et être utilisable tel quel auprès de Stripe.
+
+Je joins maintenant l'exemple brut que tu dois corriger.

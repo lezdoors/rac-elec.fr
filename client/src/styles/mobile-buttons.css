@@ -1,0 +1,102 @@
+/**
+ * Optimisation des boutons pour mobile
+ * Version 2.0 - Amélioration de l'interface tactile et de la visibilité
+ */
+
+@media (max-width: 768px) {
+  /* Réduction générale de tous les boutons avec meilleure zone tactile */
+  button,
+  .btn,
+  button[type="button"],
+  button[type="submit"],
+  button[class*="bg-"],
+  button[class*="text-"],
+  div[role="button"] {
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+    height: auto !important;
+    min-height: 42px !important;
+    line-height: 1.2 !important;
+    border-radius: 8px !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+  }
+  
+  /* Boutons de navigation du formulaire - plus grands pour zone tactile */
+  .flex.justify-between.mt-8 button,
+  .flex.justify-between.mt-6 button,
+  button[class*="justify-between"] {
+    min-width: 110px !important;
+    height: 42px !important;
+    padding: 0 12px !important;
+    margin: 0 4px !important;
+  }
+  
+  /* Boutons suivant/précédent avec icônes - plus grands pour zone tactile */
+  button.flex.items-center.space-x-1,
+  button.flex.items-center.space-x-2 {
+    padding: 10px 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Icônes dans les boutons - taille optimisée pour l'affichage mobile */
+  button svg,
+  .btn svg,
+  button[type="submit"] svg {
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    stroke-width: 2px !important; /* Pour une meilleure visibilité */
+  }
+
+  /* Boutons principaux - plus proéminents et avec meilleure accessibilité */
+  button[type="submit"],
+  button[class*="bg-primary"],
+  button[class*="bg-blue"],
+  button.bg-primary,
+  button.bg-blue-600 {
+    font-weight: 600 !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    min-height: 48px !important; /* Plus grand pour CTA principal */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important; /* Ombre légère pour effet 3D */
+  }
+  
+  /* Boutons dans le footer du formulaire - adaptés pour le toucher */
+  .form-footer button,
+  .flex.justify-between button {
+    padding: 10px 14px !important;
+    height: 44px !important;
+    min-width: 100px !important;
+  }
+  
+  /* Espacement optimisé entre les boutons pour éviter les erreurs de toucher */
+  .space-x-2 > button {
+    margin-left: 6px !important;
+    margin-right: 6px !important;
+  }
+  
+  /* État actif amélioré pour le feedback sur mobiles */
+  button:active,
+  .btn:active {
+    transform: translateY(1px) !important;
+    opacity: 0.9 !important;
+    transition: transform 0.1s, opacity 0.1s !important;
+  }
+  
+  /* Effets de transition optimisés pour les performances mobiles */
+  button {
+    transition: transform 0.1s, opacity 0.1s !important;
+  }
+  
+  /* Container de navigation plus adapté à la navigation tactile */
+  .flex.justify-between.mt-8,
+  .flex.justify-between.mt-6 {
+    margin-top: 20px !important;
+    padding-top: 10px !important;
+    padding-bottom: 5px !important;
+    justify-content: space-around !important; /* Distribution égale */
+  }
+}

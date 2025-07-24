@@ -1,0 +1,131 @@
+/* Optimisation des icônes de formulaire pour mobile */
+
+.form-input-icon-container {
+  @apply absolute inset-y-0 left-0 pl-2 sm:pl-3 flex items-center pointer-events-none text-gray-400;
+}
+
+.form-input-icon {
+  @apply w-3.5 h-3.5 sm:w-[18px] sm:h-[18px];
+}
+
+.form-input-with-icon {
+  @apply pl-7 sm:pl-10 transition-all duration-200 focus:ring-2 focus:ring-blue-100;
+}
+
+/* Empêcher le scrolling horizontal dans les grilles d'options */
+.type-options-container {
+  @apply overflow-visible;
+}
+
+.type-option-item {
+  @apply min-h-[85px] flex-shrink-0;
+}
+
+/* Adaptation du texte dans les options pour petit écran */
+@media (max-width: 479px) {
+  .type-option-item div.text-center {
+    font-size: 0.625rem;
+    line-height: 1.2;
+  }
+  
+  .type-alimentation-option span.text-xs {
+    font-size: 0.625rem;
+    line-height: 1.2;
+  }
+  
+  .type-alimentation-option span.font-medium {
+    font-size: 0.75rem;
+  }
+  
+  /* Modern client type */
+  input[name="clientType"] {
+    transform: scale(0.9);
+  }
+  
+  /* Réduire la taille du texte des options client sur mobile */
+  input[name="clientType"] + div + div span.font-bold {
+    font-size: 0.875rem;
+  }
+  
+  input[name="clientType"] + div + div span.text-xs {
+    font-size: 0.625rem;
+    line-height: 1.2;
+  }
+  
+  /* Optimisation des cases à cocher pour mobile */
+  input[type="checkbox"] {
+    transform: scale(0.8);
+    width: 16px !important;
+    height: 16px !important;
+  }
+  
+  /* Ajuster le texte à côté des checkboxes */
+  input[type="checkbox"] + div label {
+    font-size: 0.75rem !important;
+  }
+  
+  /* Réduire l'espace entre le checkbox et le texte */
+  .form-checkbox-container {
+    column-gap: 0.25rem !important;
+  }
+  
+  /* Ajuster le padding des containers de checkbox */
+  .checkbox-container {
+    padding: 0.35rem !important;
+  }
+  
+  /* Ciblage spécifique des cases à cocher dans la page raccordement */
+  #architecte, #adresse-facturation, #conditions {
+    transform: scale(0.7) !important;
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  /* Texte à côté des cases à cocher des conditions */
+  label[for="architecte"], label[for="adresse-facturation"], label[for="conditions"] {
+    font-size: 0.7rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* Réduire le padding des containers de checkbox dans le formulaire */
+  [id="architecte"], [id="adresse-facturation"], [id="conditions"] {
+    margin: 0 !important;
+  }
+  
+  /* Cibler les classes spécifiques de ShadCN */
+  [data-shadcn="checkbox"] {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  /* Cibler les checkbox avec la classe générée par ShadCN */
+  [class*="checkbox-"] {
+    width: 14px !important;
+    height: 14px !important;
+    transform: scale(0.7) !important;
+  }
+  
+  /* Ajouter une règle pour tous les components Checkbox */
+  .checkbox-core, [class*="-checkbox-"] {
+    transform: scale(0.7) !important;
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  /* Règle spécifique aux très petits écrans (iPhone SE, etc.) */
+  @media (max-width: 360px) {
+    input[type="checkbox"] {
+      transform: scale(0.65) !important;
+      width: 12px !important;
+      height: 12px !important;
+    }
+    
+    #architecte, #adresse-facturation, #conditions {
+      transform: scale(0.65) !important;
+    }
+    
+    label[for="architecte"], label[for="adresse-facturation"], label[for="conditions"] {
+      font-size: 0.65rem !important;
+    }
+  }
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmation de Commande</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f7fa;
+    }
+    
+    .container {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    }
+    
+    h1, h2 {
+      color: #2d2d2d;
+      text-align: center;
+    }
+    
+    h1 {
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    
+    h2 {
+      font-weight: 400;
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      color: #666;
+    }
+    
+    .confirmation-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .confirmation-icon {
+      width: 90px;
+      height: 90px;
+      background-color: #4CAF50;
+      border-radius: 50%;
+      margin: 0 auto 25px;
+      position: relative;
+    }
+    
+    .confirmation-icon:after {
+      content: '';
+      width: 45px;
+      height: 22px;
+      border-left: 6px solid white;
+      border-bottom: 6px solid white;
+      position: absolute;
+      top: 27px;
+      left: 22px;
+      transform: rotate(-45deg);
+    }
+    
+    .reference {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      margin: 30px 0;
+      border: 1px dashed #ddd;
+    }
+    
+    .reference p {
+      margin: 5px 0;
+      font-size: 0.9em;
+      color: #666;
+    }
+    
+    .reference h3 {
+      margin: 0;
+      font-size: 1.2em;
+      color: #333;
+    }
+    
+    .order-details {
+      margin-top: 40px;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+    
+    .order-details h3 {
+      margin-bottom: 20px;
+      color: #4a4a4a;
+    }
+    
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      color: #555;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .detail-row:last-of-type {
+      border-bottom: none;
+    }
+    
+    .total {
+      font-weight: bold;
+      font-size: 1.25em;
+      margin-top: 15px;
+      border-top: 2px solid #eee;
+      padding-top: 15px;
+      color: #333;
+    }
+    
+    .action-button {
+      background-color: #6772e5;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      margin-top: 30px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(103, 114, 229, 0.2);
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+    
+    .action-button:hover {
+      background-color: #5469d4;
+      transform: translateY(-1px);
+      box-shadow: 0 7px 14px rgba(103, 114, 229, 0.25);
+    }
+    
+    .buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    
+    .buttons .action-button {
+      flex: 1;
+      margin-top: 0;
+    }
+    
+    .secondary-button {
+      background-color: #f8f9fa;
+      color: #6772e5;
+      border: 1px solid #e0e0e0;
+      box-shadow: none;
+    }
+    
+    .secondary-button:hover {
+      background-color: #f1f3f5;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
+    }
+    
+    @media screen and (max-width: 600px) {
+      .buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="confirmation-header">
+      <div class="confirmation-icon"></div>
+      <h1>Merci pour votre commande !</h1>
+      <h2>Votre paiement a été traité avec succès</h2>
+    </div>
+    
+    <div class="reference">
+      <p>Numéro de référence</p>
+      <h3 id="reference-number">REF-123456789</h3>
+      <p>Veuillez conserver cette référence pour tout suivi</p>
+    </div>
+    
+    <div class="order-details">
+      <h3>Détails de la commande</h3>
+      <div id="order-items">
+        <!-- Les détails de la commande seront insérés ici par JavaScript -->
+      </div>
+      
+      <div class="detail-row total">
+        <span>Total</span>
+        <span id="order-total">99.99 EUR</span>
+      </div>
+    </div>
+    
+    <div class="buttons">
+      <a href="/" class="action-button secondary-button">Retour à l'accueil</a>
+      <a href="/compte" class="action-button">Mon compte</a>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Récupérer les données de commande depuis localStorage
+      const referenceNumber = localStorage.getItem('orderReference');
+      const orderDetailsString = localStorage.getItem('orderDetails');
+      
+      if (referenceNumber) {
+        document.getElementById('reference-number').textContent = referenceNumber;
+      }
+      
+      // Récupérer également depuis l'URL (prioritaire)
+      const urlParams = new URLSearchParams(window.location.search);
+      const refFromUrl = urlParams.get('ref');
+      
+      if (refFromUrl) {
+        document.getElementById('reference-number').textContent = refFromUrl;
+      }
+      
+      if (orderDetailsString) {
+        try {
+          const orderDetails = JSON.parse(orderDetailsString);
+          
+          // Remplir les détails de la commande
+          const orderItemsContainer = document.getElementById('order-items');
+          orderItemsContainer.innerHTML = '';
+          
+          orderDetails.items.forEach(item => {
+            const row = document.createElement('div');
+            row.className = 'detail-row';
+            
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = `${item.name} x ${item.quantity}`;
+            
+            const priceSpan = document.createElement('span');
+            priceSpan.textContent = `${item.price.toFixed(2)} ${orderDetails.currency}`;
+            
+            row.appendChild(nameSpan);
+            row.appendChild(priceSpan);
+            orderItemsContainer.appendChild(row);
+          });
+          
+          document.getElementById('order-total').textContent = 
+            `${orderDetails.total.toFixed(2)} ${orderDetails.currency}`;
+        } catch (e) {
+          console.error('Erreur lors du parsing des détails de commande:', e);
+        }
+      }
+      
+      // Nettoyer le localStorage après utilisation
+      // localStorage.removeItem('orderReference');
+      // localStorage.removeItem('orderDetails');
+    });
+  </script>
+</body>
+</html>

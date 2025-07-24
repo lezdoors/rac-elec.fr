@@ -1,0 +1,306 @@
+/* 
+ * Optimisations spécifiques pour le formulaire de raccordement sur mobile
+ * Ces styles ne s'appliquent que sur les appareils mobiles (max-width: 768px)
+ */
+
+@media (max-width: 768px) {
+  /* Optimisations des boutons radio du type de client */
+  .radio-client-type-container {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+    gap: 4px !important;
+  }
+  
+  .radio-client-type-option {
+    flex: 1 !important;
+    padding: 6px 8px !important;
+    border-radius: 6px !important;
+    margin-bottom: 0 !important;
+    min-height: auto !important;
+  }
+  
+  .radio-client-type-option input[type="radio"] {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  .radio-client-type-label {
+    font-size: 13px !important;
+    white-space: nowrap !important;
+    margin-top: 0 !important;
+  }
+  
+  .radio-client-type-icon {
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 4px !important;
+  }
+  
+  .radio-client-type-description {
+    display: none !important; /* Masquer les descriptions trop longues sur mobile */
+  }
+  
+  /* Réduire la marge entre le titre et les options */
+  [data-name="clientType"] > div > div:first-of-type {
+    margin-bottom: 8px !important;
+  }
+  
+  /* Optimiser l'affichage des cartes d'options */
+  [data-name="clientType"] > div > div > div {
+    padding: 8px !important;
+  }
+  
+  /* Optimisations de la barre de progression */
+  .progress-steps {
+    padding: 0 8px !important;
+  }
+  
+  .progress-step-circle {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 12px !important;
+  }
+  
+  .progress-step-label {
+    font-size: 10px !important;
+    max-width: 70px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    text-align: center !important;
+  }
+  
+  .progress-connector {
+    height: 2px !important;
+  }
+  
+  /* Réduire l'espacement vertical sur mobile */
+  .progress-container {
+    margin-bottom: 16px !important;
+  }
+  
+  /* Optimiser la barre de progression en pourcentage */
+  .progress-percentage {
+    padding: 4px 8px !important;
+    font-size: 10px !important;
+  }
+  
+  .progress-bar-container {
+    height: 8px !important;
+  }
+  
+  /* Radio boutons des étapes techniques */
+  .radio-technical-option {
+    padding: 8px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .radio-technical-icon {
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 4px !important;
+  }
+  
+  .radio-technical-label {
+    font-size: 13px !important;
+  }
+  
+  /* Navigation entre étapes */
+  .step-buttons-container {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    margin-top: 16px !important;
+  }
+  
+  .step-button {
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+  }
+  
+  .step-button svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  /* Réduire la taille des titres */
+  .form-step-title {
+    font-size: 16px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  /* Ajustement pour tous les boutons radio du formulaire */
+  input[type="radio"] {
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
+  }
+  
+  /* Optimisation des sections pour le type de projet */
+  .project-type-container {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+  }
+  
+  .project-type-option {
+    flex: 0 0 calc(50% - 4px) !important;
+    padding: 6px !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Optimiser l'affichage pour les radios monophasé/triphasé */
+  .phase-type-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+  }
+  
+  .phase-type-option {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* Styles pour le formulaire entier pour les entrées spécifiques */
+@media (max-width: 768px) {
+  /* Adapte les champs spécifiques pour Puissance */
+  [data-name="kva"] .flex-col {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+  
+  [data-name="kva"] .w-full {
+    width: auto !important;
+    min-width: 80px !important;
+  }
+  
+  /* Optimisations pour les cases à cocher et textes adjacents */
+  [data-name="pdlUnknown"] .items-start {
+    align-items: center !important;
+  }
+  
+  [data-name="hasTVA"] .items-start {
+    align-items: center !important;
+  }
+  
+  [data-name="terrainViabilise"] .items-start {
+    align-items: center !important;
+  }
+  
+  /* Adapte les sections de dates */
+  [data-name="desiredDate"] .react-datepicker-wrapper,
+  [data-name="provDate"] .react-datepicker-wrapper {
+    width: 100% !important;
+  }
+  
+  /* Optimisations pour le sélecteur d'adresses */
+  .address-autocomplete-container {
+    position: relative !important;
+  }
+  
+  .address-autocomplete-dropdown {
+    position: absolute !important;
+    width: 100% !important;
+    z-index: 50 !important;
+    max-height: 200px !important;
+    overflow-y: auto !important;
+  }
+  
+  /* Adaptations pour les champs texte longs */
+  textarea {
+    min-height: 80px !important;
+  }
+  
+  .textarea-container label {
+    margin-bottom: 4px !important;
+  }
+  
+  /* Optimisations pour les sections de téléphone */
+  [data-name="phone"] input {
+    height: 40px !important;
+    font-size: 14px !important;
+  }
+  
+  /* Optimisations pour les sections d'adresse email */
+  [data-name="email"] input {
+    height: 40px !important;
+    font-size: 14px !important;
+  }
+  
+  /* Section récapitulative */
+  .summary-section {
+    padding: 12px !important;
+    margin-bottom: 16px !important;
+  }
+  
+  .summary-section h3 {
+    font-size: 14px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .summary-section p {
+    font-size: 12px !important;
+    margin-bottom: 4px !important;
+  }
+}
+
+/* Styles pour les boutons radio personnalisés */
+.custom-radio-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.custom-radio-card.selected {
+  border-color: #3b82f6;
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.custom-radio-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.custom-radio-card .radio-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.custom-radio-indicator {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 2px solid #cbd5e0;
+  margin-right: 0.5rem;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.custom-radio-card.selected .custom-radio-indicator {
+  border-color: #3b82f6;
+}
+
+.custom-radio-card.selected .custom-radio-indicator:after {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

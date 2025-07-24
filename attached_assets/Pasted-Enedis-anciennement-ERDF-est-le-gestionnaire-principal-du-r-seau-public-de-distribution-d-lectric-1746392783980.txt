@@ -1,0 +1,28 @@
+Enedis, anciennement ERDF, est le gestionnaire principal du réseau public de distribution d'électricité en France (couvrant environ 95% du territoire métropolitain). Ses services sont essentiels au bon fonctionnement du système électrique et s'adressent aux particuliers, aux entreprises, aux collectivités et aux fournisseurs d'électricité.
+
+Voici les principaux services proposés par Enedis :
+
+Gestion et Exploitation du Réseau :
+
+Distribution de l'électricité : Acheminer l'électricité en moyenne et basse tension depuis le réseau de transport (géré par RTE) jusqu'aux consommateurs finaux.
+Maintenance et Modernisation : Entretenir, réparer et moderniser les lignes électriques (environ 1,4 million de kilomètres), les postes de transformation et autres équipements du réseau pour garantir sa fiabilité et sa sécurité.
+Développement du Réseau : Planifier et réaliser les extensions ou renforcements nécessaires pour répondre aux nouveaux besoins (nouveaux quartiers, développement des énergies renouvelables, bornes de recharge pour véhicules électriques...).
+Services aux Clients (Particuliers, Professionnels, Entreprises) :
+
+Raccordement au Réseau : Connecter les nouvelles installations (maisons, immeubles, locaux professionnels, installations de production d'énergie renouvelable comme les panneaux solaires) au réseau public de distribution.
+Mise en Service : Réaliser l'opération technique permettant d'alimenter une installation en électricité après la souscription d'un contrat auprès d'un fournisseur.
+Dépannage Réseau 24h/24 et 7j/7 : Intervenir en cas de panne ou d'incident sur le réseau électrique public (coupures de courant collectives, problèmes de tension, câbles endommagés...). Numéro d'urgence : 09 726 750 XX (XX = numéro de votre département). Attention, Enedis n'intervient pas pour les pannes sur l'installation intérieure privée.
+Gestion des Compteurs :
+Installation, remplacement et maintenance des compteurs électriques, y compris le déploiement et la gestion des compteurs communicants Linky.
+Réalisation des relevés de consommation (de plus en plus à distance grâce à Linky).
+Modifications techniques liées au compteur (changement de puissance, passage monophasé/triphasé...).
+Services liés au Compteur Linky :
+
+Télé-opérations : Réalisation à distance de nombreuses opérations (mise en service, changement de puissance, relevé) réduisant les délais et les coûts.
+Accès aux Données de Consommation : Mise à disposition des données de consommation fines (parfois jusqu'à la demi-heure) via l'espace client Enedis ou les fournisseurs, permettant un meilleur suivi et une maîtrise de l'énergie.
+Services aux Acteurs du Marché de l'Électricité :
+
+Accès Neutre au Réseau : Garantir un accès transparent et non discriminatoire au réseau de distribution pour tous les fournisseurs d'électricité et les producteurs raccordés.
+Gestion des Flux d'Information : Transmettre les données de comptage et autres informations techniques nécessaires aux fournisseurs pour la facturation et la gestion de leurs clients.
+Intégration des Énergies Renouvelables : Faciliter le raccordement et l'intégration des installations de production décentralisée (solaire, éolien...) sur le réseau.
+En résumé, Enedis est le garant de la qualité et de la continuité de l'alimentation électrique pour la grande majorité des Français. Il assure la gestion technique du réseau et des compteurs, intervient en cas de panne sur le réseau public, et réalise les raccordements, indépendamment du fournisseur d'électricité choisi par le client. Il ne vend pas d'électricité, cette mission relevant des fournisseurs (EDF, Engie, TotalEnergies, etc.).

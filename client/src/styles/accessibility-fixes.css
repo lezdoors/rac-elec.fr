@@ -1,0 +1,59 @@
+/* Améliorations d'accessibilité - Corrections de contraste */
+
+/* Remplacement des couleurs vertes pour les boutons avec contraste amélioré */
+.bg-green-600 {
+  background-color: #0D8A45 !important; /* Vert plus foncé pour meilleur contraste */
+}
+
+.hover\:bg-green-700:hover {
+  background-color: #086134 !important; /* Vert encore plus foncé au survol */
+}
+
+/* Remplacement des textes verts pour meilleur contraste */
+.text-green-600 {
+  color: #0D7A3E !important; /* Vert plus foncé pour le texte */
+}
+
+/* Améliorer le contraste des bordures grises */
+.border-gray-200 {
+  border-color: #9CA3AF !important; /* Gris plus foncé pour les bordures */
+}
+
+/* Améliorer le contraste des textes sur fond gris */
+.text-gray-500 {
+  color: #4B5563 !important; /* Gris plus foncé pour le texte */
+}
+
+.text-gray-600 {
+  color: #374151 !important; /* Gris encore plus foncé pour le texte */
+}
+
+/* Style spécifique pour les pourcentages de satisfaction */
+span.text-green-600.font-semibold {
+  color: #046C34 !important; /* Vert foncé pour contraste AA+ */
+  font-weight: 600;
+}
+
+/* Améliorer le contraste des cartes blanches */
+.bg-white.p-4.rounded-lg.border.border-gray-200.shadow-sm {
+  border-color: #9CA3AF !important; /* Bordure plus visible */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important; /* Ombre plus prononcée */
+}
+
+/* Améliorer le contraste des liens */
+a.text-blue-500, .text-blue-500 {
+  color: #0052CC !important; /* Bleu plus foncé pour contraste AA+ */
+}
+
+a.text-blue-500:hover, .text-blue-500:hover {
+  color: #003E9A !important; /* Bleu encore plus foncé au survol */
+}
+
+/* Améliorer le contraste du texte sur les boutons bleus */
+.bg-blue-600 {
+  background-color: #0052CC !important;
+}
+
+.hover\:bg-blue-700:hover {
+  background-color: #003E9A !important;
+}

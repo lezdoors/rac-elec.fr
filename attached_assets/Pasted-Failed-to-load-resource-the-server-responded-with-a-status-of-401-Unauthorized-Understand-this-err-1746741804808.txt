@@ -1,0 +1,112 @@
+Failed to load resource: the server responded with a status of 401 (Unauthorized)Understand this error
+Console.js:61 Erreur lors du rafraîchissement du compteur d'emails: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Détails de l'erreur: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Erreur lors du rafraîchissement du compteur d'emails: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Détails de l'erreur: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Erreur lors du rafraîchissement du compteur de notifications: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Détails de l'erreur: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Erreur lors du chargement des notifications: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Erreur lors du rafraîchissement du compteur de notifications: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Détails de l'erreur: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 WebSocket Provider: Connexion centralisée établie
+Console.js:61 WebSocket Provider: Abonnement au type notifications via le système centralisé
+Console.js:61 WebSocket Provider: Abonnement au type emails via le système centralisé
+Console.js:61 WebSocket Provider: Abonnement au type leads via le système centralisé
+Console.js:61 WebSocket Provider: Abonnement au type demandes via le système centralisé
+Console.js:61 WebSocket Provider: Abonnement au type paiements via le système centralisé
+Console.js:61 WebSocket Provider: Abonnement au type dashboard via le système centralisé
+Console.js:61 WebSocket Provider: Abonnement au type performance via le système centralisé
+Console.js:61 WebSocket Provider: Abonnement au type contacts via le système centralisé
+Console.js:61 AdminProtectedRoute - Rôles autorisés: Array(3)
+Console.js:61 AdminProtectedRoute - Chemin actuel: /admin/paiements
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/notifications:1 
+            
+            
+           Failed to load resource: the server responded with a status of 401 (Unauthorized)Understand this error
+Console.js:61 AdminProtectedRoute - Rôles autorisés: Array(3)
+Console.js:61 AdminProtectedRoute - Chemin actuel: /admin/paiements
+Console.js:61 SideNav - Données utilisateur: Object
+Console.js:61 WebSocket Provider: Connexion à wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/ws?timestamp=1746741761559&client=webapp
+Console.js:61 SideNav - Données utilisateur: Object
+Console.js:61 Erreur lors du chargement des notifications: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Connexion WebSocket fermée
+Console.js:61 SideNav - Données utilisateur: Object
+Console.js:61 WebSocket Provider: Connexion fermée (code: 1005)
+Console.js:61 useAuth - Refetch forcé des données utilisateur
+Console.js:61 fetchUser - Utilisation des données en cache (134s)
+Console.js:61 useAuth - Refetch forcé des données utilisateur
+Console.js:61 fetchUser - Utilisation des données en cache (134s)
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/notifications:1 
+            
+            
+           Failed to load resource: the server responded with a status of 401 (Unauthorized)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/stripe/payments:1 
+            
+            
+           Failed to load resource: the server responded with a status of 403 (Forbidden)Understand this error
+Console.js:61 Erreur lors du rafraîchissement du compteur d'emails: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Détails de l'erreur: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Erreur lors du rafraîchissement du compteur de notifications: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Détails de l'erreur: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+2Console.js:61 Erreur lors du chargement des notifications: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Erreur lors du rafraîchissement du compteur de notifications: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Détails de l'erreur: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Erreur lors du rafraîchissement du compteur d'emails: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Détails de l'erreur: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/notifications:1 
+            
+            
+           Failed to load resource: the server responded with a status of 401 (Unauthorized)Understand this error
+Console.js:61 Connexion WebSocket établie
+Console.js:61 SideNav - Données utilisateur: Object
+Console.js:61 WebSocket Provider: Connexion centralisée établie
+Console.js:61 WebSocket Provider: Abonnement au type notifications via le système centralisé
+Console.js:61 WebSocket Provider: Abonnement au type emails via le système centralisé
+Console.js:61 WebSocket Provider: Abonnement au type leads via le système centralisé
+Console.js:61 WebSocket Provider: Abonnement au type demandes via le système centralisé
+Console.js:61 WebSocket Provider: Abonnement au type paiements via le système centralisé
+Console.js:61 WebSocket Provider: Abonnement au type dashboard via le système centralisé
+Console.js:61 WebSocket Provider: Abonnement au type performance via le système centralisé
+Console.js:61 WebSocket Provider: Abonnement au type contacts via le système centralisé
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/stripe/payments:1 
+            
+            
+           Failed to load resource: the server responded with a status of 403 (Forbidden)Understand this error
+Console.js:61 SideNav - Données utilisateur: Object
+Console.js:61 SideNav - Données utilisateur: Object
+Console.js:61 SideNav - Données utilisateur: Object
+2Console.js:61 Connexion WebSocket établie
+
+                
+          
+          
+          
+         Chrome is moving towards a new experience that allows users to choose to browse without third-party cookies.Understand this warning
+stallwart.build.js:1 stallwart: failed ping 1
+stallwart.build.js:1 stallwart: failed ping 2
+stallwart.build.js:1 stallwart: failed ping 3
+stallwart.build.js:1 stallwart: failed ping 4
+stallwart.build.js:1 stallwart: failed ping 5
+stallwart.build.js:1 stallwart: session stalled
+Console.js:61 SideNav - Données utilisateur: {id: 3, username: 'Sophie', role: 'manager', isAdmin: false, isManager: true, …}
+Console.js:61 SideNav - Données utilisateur: {id: 3, username: 'Sophie', role: 'manager', isAdmin: false, isManager: true, …}
+Console.js:61 SideNav - Données utilisateur: 

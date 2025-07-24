@@ -1,0 +1,93 @@
+/* Styles unifiés pour les options de raccordement */
+
+/* Container principal avec une apparence compacte */
+.connection-options-container {
+  margin-top: 0.5rem;
+}
+
+/* Style vertical avec séparateurs fins entre options */
+.connection-options-list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+/* Style de chaque option individuelle */
+.connection-option-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #e5e7eb;
+  position: relative;
+}
+
+.connection-option-item:last-child {
+  border-bottom: none;
+}
+
+/* Mise en évidence bleu clair pour les options sélectionnées */
+.connection-option-item.selected {
+  background-color: #ebf5ff;
+  border-color: #3b82f6;
+}
+
+/* Icône à gauche */
+.connection-option-icon {
+  flex-shrink: 0;
+  margin-right: 0.75rem;
+  color: #6b7280;
+}
+
+.connection-option-item.selected .connection-option-icon {
+  color: #3b82f6;
+}
+
+/* Contenu textuel au centre */
+.connection-option-content {
+  flex-grow: 1;
+}
+
+.connection-option-title {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+.connection-option-description {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+/* Checkmark à droite pour l'option sélectionnée */
+.connection-option-checkmark {
+  flex-shrink: 0;
+  margin-left: 0.75rem;
+  color: #3b82f6;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.connection-option-item.selected .connection-option-checkmark {
+  opacity: 1;
+}
+
+/* Responsive : styles légèrement plus compacts sur mobile */
+@media (max-width: 640px) {
+  .connection-option-item {
+    padding: 0.625rem 0.75rem;
+  }
+  
+  .connection-option-title {
+    font-size: 0.85rem;
+  }
+  
+  .connection-option-description {
+    font-size: 0.7rem;
+  }
+}

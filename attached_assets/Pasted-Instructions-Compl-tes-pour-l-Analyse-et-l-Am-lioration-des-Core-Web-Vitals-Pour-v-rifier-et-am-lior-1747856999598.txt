@@ -1,0 +1,100 @@
+Instructions Complètes pour l'Analyse et l'Amélioration des Core Web Vitals
+Pour vérifier et améliorer vos Core Web Vitals avec Replit, voici les instructions précises que vous devriez fournir:
+
+1. Instructions pour l'Analyse Initiale
+
+Créer un script d'analyse des Core Web Vitals pour le site https://raccordement.net/ avec les spécifications suivantes:
+
+1. Utiliser Lighthouse via Node.js pour générer un rapport complet:
+   - Installer les packages nécessaires: lighthouse, chrome-launcher
+   - Configurer Lighthouse pour analyser les trois Core Web Vitals (LCP, INP, CLS)
+   - Tester à la fois en version mobile et desktop
+   - Exporter les résultats dans un fichier JSON et HTML
+
+2. Créer un script d'analyse comparative avec nos concurrents:
+   - Analyser également https://mon-raccordement-electricite.fr/
+   - Analyser également https://raccordement-connect.com/
+   - Générer un tableau comparatif des Core Web Vitals
+
+3. Intégrer l'API PageSpeed Insights de Google pour obtenir à la fois:
+   - Les données de laboratoire (simulées)
+   - Les données de terrain (Field Data) si disponibles
+
+4. Générer un rapport détaillé identifiant:
+   - Le score actuel pour chaque Core Web Vital
+   - Les ressources spécifiques causant des problèmes
+   - Les opportunités d'amélioration classées par impact potentiel
+2. Instructions pour l'Amélioration
+
+Sur base des résultats d'analyse, créer des scripts d'optimisation pour améliorer les Core Web Vitals:
+
+1. Optimisation des images:
+   - Script pour identifier les images non optimisées
+   - Convertir automatiquement les images en WebP
+   - Appliquer une compression intelligente sans perte visible de qualité
+   - Générer et injecter les attributs width/height pour toutes les images
+
+2. Optimisation du CSS:
+   - Extraire le CSS critique pour le rendu initial
+   - Créer un script pour injecter ce CSS critique dans l'en-tête
+   - Différer le chargement du CSS non critique
+   - Minimiser et purger le CSS inutilisé
+
+3. Optimisation JavaScript:
+   - Créer un script pour analyser et diviser le JavaScript
+   - Implémenter le chargement différé avec import dynamique
+   - Identifier et résoudre les longues tâches JavaScript
+   - Minimiser et compresser tous les fichiers JS
+
+4. Amélioration du CLS:
+   - Générer un CSS qui réserve l'espace pour tous les éléments dynamiques
+   - Créer un script qui détecte les décalages de mise en page
+   - Proposer des corrections spécifiques pour chaque élément problématique
+
+5. Service Worker et mise en cache:
+   - Implémenter un service worker pour la mise en cache stratégique
+   - Configurer la précharge des ressources critiques
+   - Optimiser la stratégie de mise en cache pour les ressources statiques
+3. Instructions pour les Tests Continus
+
+Créer un système de surveillance continue des Core Web Vitals:
+
+1. Développer un script qui s'exécute quotidiennement pour:
+   - Tester les Core Web Vitals sur les pages principales
+   - Comparer avec les résultats précédents
+   - Alerter si une régression est détectée
+
+2. Intégrer l'API CrUX (Chrome User Experience Report) pour:
+   - Suivre les données d'utilisateurs réels
+   - Générer des graphiques de tendance sur 28 jours
+   - Comparer avec les benchmarks du secteur
+
+3. Créer un dashboard de visualisation avec:
+   - Historique des scores des Core Web Vitals
+   - Comparaison avec les concurrents
+   - Vue détaillée par page
+   - Recommandations d'optimisation priorisées
+4. Instructions pour l'Implémentation des Améliorations
+
+Sur base des analyses précédentes, générer les modifications nécessaires pour notre site:
+
+1. Créer les fichiers optimisés:
+   - Images converties et redimensionnées
+   - CSS critique à injecter dans l'en-tête
+   - JavaScript optimisé et divisé
+
+2. Générer les modifications HTML requises:
+   - Balises <link> et <script> avec attributs appropriés
+   - Préchargement des ressources critiques
+   - Structure adaptée pour minimiser le CLS
+
+3. Configurer les en-têtes de réponse HTTP:
+   - Cache-Control optimisé
+   - Content-Encoding pour la compression
+   - Règles de préchargement et de prérécupération
+
+4. Fournir un guide d'implémentation avec:
+   - Instructions étape par étape
+   - Captures d'écran avant/après
+   - Impact estimé sur les Core Web Vitals
+   - Recommandations pour les tests après déploiement

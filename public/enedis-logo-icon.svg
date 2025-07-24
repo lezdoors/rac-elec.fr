@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <!-- Dégradé vert Enedis principal -->
+    <linearGradient id="enedis-green-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00B95B" />
+      <stop offset="100%" stop-color="#009E4D" />
+    </linearGradient>
+    
+    <!-- Dégradé vert légèrement plus foncé pour effets de profondeur -->
+    <linearGradient id="enedis-dark-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#009E4D" />
+      <stop offset="100%" stop-color="#008440" />
+    </linearGradient>
+    
+    <!-- Effet de brillance subtil -->
+    <linearGradient id="shine-gradient" x1="0%" y1="0%" x2="70%" y2="70%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+    
+    <!-- Définition du clip-path pour le E stylisé -->
+    <clipPath id="e-shape">
+      <path d="M20,16 L44,16 L44,20 L24,20 L24,30 L40,30 L40,34 L24,34 L24,44 L44,44 L44,48 L20,48 Z" />
+    </clipPath>
+    
+    <!-- Filtre pour ombre douce -->
+    <filter id="soft-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="1" stdDeviation="0.5" flood-color="#006837" flood-opacity="0.3" />
+    </filter>
+  </defs>
+  
+  <!-- Fond carré arrondi -->
+  <rect x="2" y="2" width="60" height="60" rx="15" ry="15" fill="url(#enedis-green-gradient)" />
+  
+  <!-- Lignes interconnectées représentant le réseau (abstrait) -->
+  <g stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.9">
+    <path d="M12,32 L20,32 M44,32 L52,32" />
+    <path d="M20,16 L44,16 M20,48 L44,48" />
+    <path d="M32,16 L32,20 M32,44 L32,48" />
+    <path d="M24,24 L40,24 M24,40 L40,40" />
+    <path d="M32,24 L32,40" />
+  </g>
+  
+  <!-- E stylisé (abstrait) représentant Enedis -->
+  <path d="M20,16 L44,16 L44,20 L24,20 L24,30 L40,30 L40,34 L24,34 L24,44 L44,44 L44,48 L20,48 Z" 
+        fill="url(#enedis-dark-gradient)" 
+        filter="url(#soft-shadow)" />
+  
+  <!-- Impulsion énergétique (très subtile) -->
+  <circle cx="32" cy="32" r="14" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-dasharray="1,2" opacity="0.6" />
+  
+  <!-- Touche de brillance pour effet moderne -->
+  <rect x="2" y="2" width="25" height="15" fill="url(#shine-gradient)" />
+  
+  <!-- Point de connexion ou nœud énergétique -->
+  <circle cx="32" cy="32" r="4" fill="#FFFFFF" />
+  
+  <!-- Style adaptatif pour mode sombre -->
+  <style>
+    @media (prefers-color-scheme: dark) {
+      #enedis-green-gradient stop[offset="0%"] { stop-color: #00D570; }
+      #enedis-green-gradient stop[offset="100%"] { stop-color: #00B95B; }
+    }
+  </style>
+</svg>

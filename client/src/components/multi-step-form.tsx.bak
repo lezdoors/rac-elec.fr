@@ -1,0 +1,1819 @@
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { serviceRequestSchema, type ServiceRequestFormData } from "@/lib/validators";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  FormDescription,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { 
+  User, 
+  MapPin, 
+  Calendar, 
+  Loader2,
+  CheckCircle,
+  AlertCircle,
+  Building,
+  Bolt,
+  FileText,
+  CreditCard,
+  ChevronRight,
+  ChevronLeft,
+  HomeIcon,
+  LayoutDashboard,
+  Workflow,
+  Pencil,
+  ArrowRightCircle,
+  Info as InfoIcon,
+  Compass,
+  ReceiptText,
+  Clock,
+  AlertTriangle
+} from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { cn } from "@/lib/utils";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
+interface SuccessResponseData {
+  success: boolean;
+  message: string;
+  referenceNumber: string;
+}
+
+export function MultiStepForm() {
+  const { toast } = useToast();
+  const [currentStep, setCurrentStep] = useState(0);
+  const [formData, setFormData] = useState<ServiceRequestFormData | null>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [referenceNumber, setReferenceNumber] = useState<string | null>(null);
+  const [completeManuallyCity, setCompleteManuallyCity] = useState(false);
+  const [power, setPower] = useState<string>("monophase");
+  const [autoCompleteCity, setAutoCompleteCity] = useState("");
+  const [projectType, setProjectType] = useState<string>("maison");
+  const [otherProjectType, setOtherProjectType] = useState("");
+  
+  // Tabs pour les étapes du formulaire
+  const steps = [
+    {
+      id: "step-1",
+      name: "Vos coordonnées",
+      icon: <User className="h-5 w-5" />,
+    },
+    {
+      id: "step-2",
+      name: "Détails techniques",
+      icon: <FileText className="h-5 w-5" />,
+    },
+    {
+      id: "step-3",
+      name: "Adresse et TVA",
+      icon: <MapPin className="h-5 w-5" />,
+    },
+    {
+      id: "step-4",
+      name: "Validation finale",
+      icon: <CheckCircle className="h-5 w-5" />,
+    },
+  ];
+  
+  // Get tomorrow's date for min date input
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+  
+  // Define the form
+  const form = useForm<ServiceRequestFormData>({
+    resolver: zodResolver(serviceRequestSchema),
+    defaultValues: {
+      // Informations du demandeur
+      clientType: "particulier",
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      company: "",
+      siret: "",
+      
+      // Type de demande
+      serviceType: "electricity",
+      requestType: "new_connection",
+      buildingType: "individual_house",
+      projectStatus: "planning",
+      permitNumber: "",
+      permitDeliveryDate: "",
+      
+      // Adresse
+      address: "",
+      addressComplement: "",
+      city: "",
+      postalCode: "",
+      cadastralReference: "",
+      
+      // Puissance
+      powerRequired: "9",
+      phaseType: "monophase",
+      
+      // Planning
+      desiredCompletionDate: "",
+      
+      // Facturation
+      billingAddress: "",
+      billingCity: "",
+      billingPostalCode: "",
+      
+      // Architecte
+      hasArchitect: false,
+      architectName: "",
+      architectPhone: "",
+      architectEmail: "",
+      
+      // Commentaires
+      comments: ""
+    }
+  });
+  
+  // Get form values to conditionally show fields
+  const clientType = form.watch("clientType");
+  const buildingType = form.watch("buildingType");
+  const projectStatus = form.watch("projectStatus");
+  const hasArchitect = form.watch("hasArchitect");
+  
+  // Fonction pour la complétion automatique des villes françaises
+  async function lookupCity(postalCode: string) {
+    if (postalCode.length === 5) {
+      try {
+        // Cette API gratuite permet de récupérer les communes françaises par code postal
+        const response = await fetch(`https://geo.api.gouv.fr/communes?codePostal=${postalCode}&fields=nom&format=json`);
+        const data = await response.json();
+        
+        if (data && data.length > 0) {
+          // Si une seule ville correspond, on l'utilise automatiquement
+          if (data.length === 1 && !completeManuallyCity) {
+            form.setValue("city", data[0].nom);
+            setAutoCompleteCity(data[0].nom);
+          } 
+          // Si plusieurs villes correspondent, on peut proposer un choix
+          else if (data.length > 1) {
+            setAutoCompleteCity(data.map((c: any) => c.nom).join(", "));
+          }
+        }
+      } catch (error) {
+        console.error("Erreur lors de la récupération de la ville:", error);
+      }
+    }
+  }
+  
+  // Observer pour le code postal
+  useEffect(() => {
+    const subscription = form.watch((value, { name }) => {
+      if (name === "postalCode" && value.postalCode && !completeManuallyCity) {
+        lookupCity(value.postalCode);
+      }
+      
+      // Faire la même chose pour l'adresse de facturation
+      if (name === "billingPostalCode" && value.billingPostalCode) {
+        try {
+          fetch(`https://geo.api.gouv.fr/communes?codePostal=${value.billingPostalCode}&fields=nom&format=json`)
+            .then(response => response.json())
+            .then(data => {
+              if (data && data.length === 1) {
+                form.setValue("billingCity", data[0].nom);
+              }
+            });
+        } catch (error) {
+          console.error("Erreur lors de la récupération de la ville de facturation:", error);
+        }
+      }
+    });
+    
+    return () => subscription.unsubscribe();
+  }, [form, completeManuallyCity]);
+  
+  // Fonction pour passer à l'étape suivante du formulaire
+  const nextStep = () => {
+    // Valider seulement les champs de l'étape courante
+    let fieldsToValidate: string[] = [];
+    
+    if (currentStep === 0) {
+      fieldsToValidate = [
+        "clientType", "firstName", "lastName", "email", "phone", 
+        "billingAddress", "billingPostalCode", "billingCity"
+      ];
+      
+      if (clientType === "professionnel") {
+        fieldsToValidate.push("company", "siret");
+      }
+    } else if (currentStep === 1) {
+      fieldsToValidate = [
+        "requestType", "buildingType", "projectStatus", 
+        "powerRequired", "phaseType", "comments"
+      ];
+      
+      if (projectStatus === "permit_approved" || projectStatus === "permit_pending") {
+        fieldsToValidate.push("permitNumber");
+      }
+    } else if (currentStep === 2) {
+      fieldsToValidate = [
+        "address", "city", "postalCode",
+        "connectionDelay", "vatRate", "termsAccepted", "immediatePurchaseAccepted"
+      ];
+    }
+    
+    form.trigger(fieldsToValidate as any).then((isValid) => {
+      if (isValid) {
+        // Ajouter des effets visuels de validation
+        const formElement = document.querySelector('form');
+        
+        if (formElement) {
+          // Ajouter la classe pour l'animation de succès
+          formElement.classList.add('electric-pulse');
+          
+          // Ajouter des effets de validation aux champs validés
+          fieldsToValidate.forEach(fieldName => {
+            const input = document.querySelector(`[name="${fieldName}"]`) as HTMLElement;
+            if (input) {
+              input.classList.add('form-field-valid', 'animate-pulseSuccess');
+              
+              // Créer un effet d'étincelle
+              const sparkle = document.createElement('div');
+              sparkle.className = 'absolute w-4 h-4 bg-blue-400 rounded-full z-10 opacity-80 animate-sparkle';
+              sparkle.style.top = `${Math.random() * 80 + 10}%`;
+              sparkle.style.left = `${Math.random() * 80 + 10}%`;
+              if (input.parentNode) {
+                (input.parentNode as HTMLElement).style.position = 'relative';
+                input.parentNode.appendChild(sparkle);
+                
+                // Supprimer l'étincelle après l'animation
+                setTimeout(() => {
+                  if (sparkle.parentNode) {
+                    sparkle.parentNode.removeChild(sparkle);
+                  }
+                }, 1000);
+              }
+            }
+          });
+          
+          // Timer pour laisser l'animation se jouer avant de passer à l'étape suivante
+          setTimeout(() => {
+            formElement.classList.remove('electric-pulse');
+            
+            fieldsToValidate.forEach(fieldName => {
+              const input = document.querySelector(`[name="${fieldName}"]`) as HTMLElement;
+              if (input) {
+                input.classList.remove('animate-pulseSuccess');
+              }
+            });
+            
+            if (currentStep < steps.length - 1) {
+              // Transition plus subtile entre les étapes
+              const formContent = document.querySelector('.bg-white.p-8');
+              if (formContent) {
+                formContent.classList.add('opacity-80', 'transition-opacity', 'duration-150');
+                setTimeout(() => {
+                  setCurrentStep(prev => prev + 1);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  setTimeout(() => {
+                    formContent.classList.remove('opacity-80');
+                  }, 50);
+                }, 150);
+              } else {
+                setCurrentStep(prev => prev + 1);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            } else {
+              // Si c'est la dernière étape, préparer la soumission
+              const formValues = form.getValues();
+              setFormData(formValues);
+              // Soumettre le formulaire
+              submitMutation.mutate(formValues);
+              // Afficher l'animation de chargement
+              setIsAnimating(true);
+            }
+          }, 700);
+        } else {
+          // Fallback si le DOM n'est pas disponible
+          if (currentStep < steps.length - 1) {
+            setCurrentStep(prev => prev + 1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            const formValues = form.getValues();
+            setFormData(formValues);
+            submitMutation.mutate(formValues);
+            setIsAnimating(true);
+          }
+        }
+      } else {
+        // Animation des champs avec erreurs
+        const errorFields = document.querySelectorAll('.border-destructive');
+        
+        errorFields.forEach(field => {
+          field.classList.add('form-field-invalid');
+          field.classList.add('animate-shake');
+          
+          setTimeout(() => {
+            field.classList.remove('animate-shake');
+          }, 500);
+        });
+        
+        toast({
+          title: "Formulaire incomplet",
+          description: "Veuillez remplir tous les champs obligatoires avant de continuer.",
+          variant: "destructive",
+        });
+      }
+    });
+  };
+  
+  // Fonction pour revenir à l'étape précédente du formulaire
+  const prevStep = () => {
+    if (currentStep > 0) {
+      // Transition plus subtile entre les étapes
+      const formContent = document.querySelector('.bg-white.p-8');
+      if (formContent) {
+        formContent.classList.add('opacity-80', 'transition-opacity', 'duration-150');
+        setTimeout(() => {
+          setCurrentStep(prev => prev - 1);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setTimeout(() => {
+            formContent.classList.remove('opacity-80');
+          }, 50);
+        }, 150);
+      } else {
+        setCurrentStep(prev => prev - 1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
+  
+  // Mutation pour envoyer le formulaire
+  const submitMutation = useMutation({
+    mutationFn: async (data: ServiceRequestFormData) => {
+      // Ajouter les types de projet personnalisés au commentaire si nécessaire
+      if (projectType === "autre" && otherProjectType) {
+        data.comments = `Type de projet: ${otherProjectType}\n\n${data.comments || ''}`;
+      }
+      
+      // Adapter le format pour la compatibilité avec le backend
+      // Combiner firstName et lastName en un seul champ name
+      const { firstName, lastName, useDifferentBillingAddress, ...restData } = data as any;
+      const formData = {
+        ...restData,
+        name: `${firstName} ${lastName}`.trim()
+      };
+      
+      const response = await apiRequest('POST', '/api/service-requests', formData);
+      return await response.json() as SuccessResponseData;
+    },
+    onSuccess: (data) => {
+      // Rediriger directement vers la page de paiement
+      const amount = form.getValues().vatRate === "5.5" ? "136.94" : 
+                     form.getValues().vatRate === "10" ? "142.78" : "155.76";
+      
+      toast({
+        title: "Demande envoyée avec succès!",
+        description: `Redirection vers la page de paiement...`,
+        variant: "default",
+      });
+      
+      // Rediriger immédiatement vers la page de paiement
+      window.location.href = `/payment-link-page?ref=${data.referenceNumber}&amount=${amount}&name=${encodeURIComponent(form.getValues().firstName + ' ' + form.getValues().lastName)}`;
+      
+      // On ne reset pas le formulaire car l'utilisateur va être redirigé
+    },
+    onError: (error) => {
+      setIsAnimating(false);
+      toast({
+        title: "Une erreur est survenue",
+        description: error instanceof Error ? error.message : "Veuillez vérifier votre connexion internet et réessayer.",
+        variant: "destructive",
+      });
+    }
+  });
+  
+  // Animation de transition vers paiement
+  if (isAnimating) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-90 z-50">
+        <div className="text-center">
+          <div className="relative">
+            <div className="animate-spin w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-12 h-12 bg-white bg-opacity-80 rounded-full flex items-center justify-center animate-pulse">
+                <CreditCard className="h-6 w-6 text-blue-600" />
+              </div>
+            </div>
+          </div>
+          <h3 className="text-xl font-semibold text-primary mb-2">Redirection vers le paiement...</h3>
+          <p className="text-blue-700 mt-2">Veuillez patienter pendant la préparation de votre transaction sécurisée</p>
+          <div className="mt-6 flex justify-center items-center space-x-1">
+            <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
+            <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
+            <span className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
+            <span className="w-2 h-2 bg-blue-700 rounded-full animate-bounce" style={{ animationDelay: "450ms" }}></span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+                  <div>
+                    <p className="text-gray-500 mb-1 text-xs">Puissance souhaitée</p>
+                    <p className="font-medium">{form.getValues().powerRequired || "-"} kVA</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-500 mb-1 text-xs">Type de phase</p>
+                    <p className="font-medium">{form.getValues().phaseType === "monophase" ? "Monophasé" : "Triphasé"}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-500 mb-1 text-xs">Type de logement</p>
+                    <p className="font-medium">{
+                      form.getValues().buildingType === "individual_house" ? "Maison individuelle" : 
+                      form.getValues().buildingType === "apartment_building" ? "Appartement/Collectif" : 
+                      form.getValues().buildingType === "commercial" ? "Local commercial" :
+                      form.getValues().buildingType === "industrial" ? "Bâtiment industriel" :
+                      form.getValues().buildingType === "agricultural" ? "Exploitation agricole" : 
+                      "Établissement public"
+                    }</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-500 mb-1 text-xs">État du projet</p>
+                    <p className="font-medium">{
+                      form.getValues().projectStatus === "planning" ? "En phase de planification" :
+                      form.getValues().projectStatus === "permit_pending" ? "Permis de construire en cours" :
+                      form.getValues().projectStatus === "permit_approved" ? "Permis de construire accordé" :
+                      form.getValues().projectStatus === "construction_started" ? "Construction démarrée" :
+                      "Construction terminée"
+                    }</p>
+                  </div>
+
+                  {(form.getValues().projectStatus === "permit_pending" || form.getValues().projectStatus === "permit_approved") && (
+                    <div>
+                      <p className="text-gray-500 mb-1 text-xs">Numéro de permis</p>
+                      <p className="font-medium">{form.getValues().permitNumber || "-"}</p>
+                    </div>
+                  )}
+                  
+                  {form.getValues().comments && (
+                    <div className="md:col-span-2 border-t border-blue-100 pt-3 mt-2">
+                      <p className="text-gray-500 mb-1 text-xs">Commentaires additionnels</p>
+                      <p className="font-medium text-sm bg-white p-3 rounded border border-blue-100">{form.getValues().comments}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+              
+              {/* Adresse du projet */}
+              <div className="mb-8">
+                <div className="flex justify-between items-center mb-4">
+                  <h4 className="font-semibold text-primary text-lg flex items-center">
+                    <MapPin className="h-5 w-5 mr-2 text-blue-500" />
+                    Adresse du projet
+                  </h4>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="text-xs h-7 border-blue-200 text-blue-600 hover:bg-blue-50"
+                    onClick={() => setCurrentStep(2)}
+                  >
+                    <Pencil className="h-3 w-3 mr-1" />
+                    Modifier
+                  </Button>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-sm bg-blue-50/30 p-4 rounded-lg">
+                  <div className="md:col-span-2">
+                    <p className="text-gray-500 mb-1 text-xs">Adresse</p>
+                    <p className="font-medium">{form.getValues().address || "-"}</p>
+                  </div>
+                  {form.getValues().addressComplement && (
+                    <div className="md:col-span-2">
+                      <p className="text-gray-500 mb-1 text-xs">Complément d'adresse</p>
+                      <p className="font-medium">{form.getValues().addressComplement}</p>
+                    </div>
+                  )}
+                  <div>
+                    <p className="text-gray-500 mb-1 text-xs">Code postal</p>
+                    <p className="font-medium">{form.getValues().postalCode || "-"}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-500 mb-1 text-xs">Ville</p>
+                    <p className="font-medium">{form.getValues().city || "-"}</p>
+                  </div>
+                  
+                  {form.getValues().cadastralReference && (
+                    <div>
+                      <p className="text-gray-500 mb-1 text-xs">Référence cadastrale</p>
+                      <p className="font-medium">{form.getValues().cadastralReference}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+              
+              {/* Délais et TVA */}
+              <div className="mb-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h4 className="font-semibold text-primary text-lg flex items-center">
+                    <Clock className="h-5 w-5 mr-2 text-blue-500" />
+                    Délais et TVA
+                  </h4>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="text-xs h-7 border-blue-200 text-blue-600 hover:bg-blue-50"
+                    onClick={() => setCurrentStep(2)}
+                  >
+                    <Pencil className="h-3 w-3 mr-1" />
+                    Modifier
+                  </Button>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-sm bg-blue-50/30 p-4 rounded-lg">
+                  <div>
+                    <p className="text-gray-500 mb-1 text-xs">Délai souhaité</p>
+                    <p className="font-medium">{
+                      form.getValues().connectionDelay === "1.5m" ? "1,5 mois" :
+                      form.getValues().connectionDelay === "1.5-3m" ? "Entre 1,5 et 3 mois" :
+                      form.getValues().connectionDelay === "3-6m" ? "Entre 3 et 6 mois" :
+                      form.getValues().connectionDelay === "6m+" ? "Plus de 6 mois" : "-"
+                    }</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-500 mb-1 text-xs">Taux de TVA</p>
+                    <p className="font-medium">{
+                      form.getValues().vatRate === "20" ? "TVA normale (20%)" :
+                      form.getValues().vatRate === "10" ? "TVA réduite (10%)" :
+                      form.getValues().vatRate === "5.5" ? "TVA réduite (5,5%)" : "-"
+                    }</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Section des coûts */}
+              <div className="border-t border-blue-200 pt-6 mt-10">
+                <div className="flex justify-between items-center mb-6">
+                  <h4 className="font-semibold text-primary text-lg flex items-center">
+                    <ReceiptText className="h-5 w-5 mr-2 text-blue-500" />
+                    Détail des coûts
+                  </h4>
+                </div>
+                
+                <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border border-blue-200">
+                  <div className="flex justify-between items-center py-2">
+                    <p className="text-gray-700">Frais de dossier</p>
+                    <p className="font-medium">89,80 € HT</p>
+                  </div>
+                  <div className="flex justify-between items-center py-2">
+                    <p className="text-gray-700">Frais d'étude technique</p>
+                    <p className="font-medium">40,00 € HT</p>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-t border-blue-200 mt-2 pt-2">
+                    <p className="text-gray-700">Total HT</p>
+                    <p className="font-medium">129,80 € HT</p>
+                  </div>
+                  <div className="flex justify-between items-center py-2">
+                    <p className="text-gray-700">TVA ({form.getValues().vatRate || "20"}%)</p>
+                    <p className="font-medium">{form.getValues().vatRate === "5.5" ? "7,14" : form.getValues().vatRate === "10" ? "12,98" : "25,96"} €</p>
+                  </div>
+                  <div className="flex justify-between items-center py-3 border-t border-blue-200 mt-2 font-bold text-lg">
+                    <p className="text-primary">Total TTC</p>
+                    <p className="text-primary">{form.getValues().vatRate === "5.5" ? "136,94" : form.getValues().vatRate === "10" ? "142,78" : "155,76"} € TTC</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Étapes suivantes */}
+              <div className="border-t border-blue-200 pt-6 mt-8">
+                <h4 className="font-semibold text-primary mb-4 text-lg flex items-center">
+                  <ArrowRightCircle className="h-5 w-5 mr-2 text-blue-500" />
+                  Prochaines étapes
+                </h4>
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <div className="bg-blue-100 rounded-full p-1 mr-3 mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-4 w-4 text-primary" />
+                    </div>
+                    <span>Après paiement, notre équipe technique analysera votre demande dans les plus brefs délais</span>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="bg-blue-100 rounded-full p-1 mr-3 mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-4 w-4 text-primary" />
+                    </div>
+                    <span>Vous recevrez un e-mail de confirmation avec les détails de votre demande</span>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="bg-blue-100 rounded-full p-1 mr-3 mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-4 w-4 text-primary" />
+                    </div>
+                    <span>Un conseiller Enedis vous contactera pour planifier les prochaines étapes de votre raccordement</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          {/* Boutons d'action */}
+          <div className="flex flex-col sm:flex-row gap-5 justify-center mt-8 animate-fadeIn" style={{ animationDelay: "400ms" }}>
+            <Button 
+              variant="outline" 
+              className="px-8 py-3 h-auto shadow-sm border-primary text-primary hover:bg-blue-50 transition-all duration-300"
+              onClick={() => setReferenceNumber(null)}
+            >
+              Faire une nouvelle demande
+            </Button>
+            
+            <Button 
+              className="px-8 py-3 h-auto bg-gradient-to-r from-blue-400 to-primary hover:from-primary hover:to-blue-700 shadow-md transition-all duration-300"
+              onClick={() => {
+                const amount = form.getValues().vatRate === "5.5" ? "136.94" : 
+                              form.getValues().vatRate === "10" ? "142.78" : "155.76";
+                window.location.href = `/payment-link-page?ref=${referenceNumber}&amount=${amount}&name=${encodeURIComponent(form.getValues().firstName + ' ' + form.getValues().lastName)}`;
+              }}
+            >
+              <CreditCard className="h-4 w-4 mr-2" />
+              Procéder au paiement ({form.getValues().vatRate === "5.5" ? "136,94" : form.getValues().vatRate === "10" ? "142,78" : "155,76"} € TTC)
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full max-w-4xl mx-auto">
+      {/* Indicateur d'étape - Design moderne et élégant */}
+      <div className="mb-10">
+        <div className="flex items-center justify-between px-4 md:px-10">
+          {steps.map((step, index) => (
+            <div
+              key={step.id}
+              className={cn(
+                "flex flex-col items-center justify-center relative",
+                {
+                  "text-primary font-medium": currentStep === index,
+                  "text-gray-500": currentStep !== index && currentStep < index,
+                  "text-green-600 font-medium": currentStep > index,
+                }
+              )}
+            >
+              {/* Ligne de connexion entre les étapes */}
+              {index > 0 && (
+                <div 
+                  className={cn(
+                    "absolute h-1 top-5 -left-full w-full -z-10 transition-all duration-500",
+                    currentStep > index ? "bg-gradient-to-r from-green-400 to-green-600" : 
+                    currentStep === index ? "bg-gradient-to-r from-blue-400 to-primary" : "bg-gray-200"
+                  )}
+                />
+              )}
+              
+              <div
+                className={cn(
+                  "flex items-center justify-center w-10 h-10 rounded-full shadow-md transition-all duration-300",
+                  {
+                    "bg-gradient-to-r from-blue-400 to-primary text-white scale-110": currentStep === index,
+                    "bg-white border-2 border-gray-200": currentStep !== index && currentStep < index,
+                    "bg-gradient-to-r from-green-400 to-green-600 text-white": currentStep > index,
+                  }
+                )}
+              >
+                {currentStep > index ? (
+                  <CheckCircle className="h-5 w-5 animate-pulse" />
+                ) : (
+                  <div className="flex items-center justify-center">
+                    {step.icon}
+                  </div>
+                )}
+              </div>
+              <span className={cn(
+                "mt-3 text-sm transition-all duration-300",
+                {
+                  "font-semibold scale-105": currentStep === index,
+                  "font-medium": currentStep > index,
+                  "hidden md:block": true
+                }
+              )}>
+                {step.name}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-white p-8 rounded-xl border border-blue-100 shadow-lg">
+        <h2 className="text-2xl font-bold text-primary mb-6 flex items-center">
+          {steps[currentStep].icon && <span className="mr-2 bg-blue-50 p-2 rounded-lg">{steps[currentStep].icon}</span>}
+          {steps[currentStep].name}
+        </h2>
+
+        <Form {...form}>
+          <form className="space-y-6">
+            {/* ÉTAPE 1: INFORMATIONS PERSONNELLES */}
+            {currentStep === 0 && (
+              <div className="space-y-8">
+                <div className="space-y-6">
+                  <div className="bg-blue-50/50 p-5 border border-blue-100 rounded-lg shadow-sm">
+                    <FormField
+                      control={form.control}
+                      name="clientType"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-primary font-medium text-base after:content-['*'] after:ml-0.5 after:text-error">
+                            Vous êtes
+                          </FormLabel>
+                          <FormControl>
+                            <Select 
+                              value={field.value} 
+                              onValueChange={field.onChange}
+                            >
+                              <SelectTrigger className="border-blue-200 focus:border-primary focus:ring-blue-100 bg-white h-11">
+                                <SelectValue placeholder="Sélectionnez votre profil" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="particulier">Un particulier</SelectItem>
+                                <SelectItem value="professionnel">Un professionnel</SelectItem>
+                                <SelectItem value="collectivite">Une collectivité</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                    <FormField
+                      control={form.control}
+                      name="firstName"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col space-y-1.5">
+                          <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error">
+                            {clientType === "particulier" ? "Prénom" : "Prénom du représentant légal"}
+                          </FormLabel>
+                          <FormControl>
+                            <Input placeholder="Jean" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="lastName"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col space-y-1.5">
+                          <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error">
+                            {clientType === "particulier" ? "Nom" : "Nom du représentant légal"}
+                          </FormLabel>
+                          <FormControl>
+                            <Input placeholder="Dupont" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col space-y-1.5">
+                          <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error">
+                            Adresse Email
+                          </FormLabel>
+                          <FormControl>
+                            <Input placeholder="exemple@email.com" type="email" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col space-y-1.5">
+                          <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error">
+                            Numéro de Téléphone
+                          </FormLabel>
+                          <FormControl>
+                            <Input placeholder="0601020304" type="tel" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    {(clientType === "professionnel" || clientType === "collectivite") && (
+                      <FormField
+                        control={form.control}
+                        name="company"
+                        render={({ field }) => (
+                          <FormItem className="flex flex-col space-y-1.5">
+                            <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error">
+                              Raison Sociale
+                            </FormLabel>
+                            <FormControl>
+                              <Input placeholder="Entreprise SAS" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    )}
+                    
+                    {clientType === "professionnel" && (
+                      <FormField
+                        control={form.control}
+                        name="siret"
+                        render={({ field }) => (
+                          <FormItem className="flex flex-col space-y-1.5 md:col-span-2">
+                            <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error">
+                              Numéro SIRET
+                            </FormLabel>
+                            <FormControl>
+                              <Input placeholder="12345678901234" {...field} />
+                            </FormControl>
+                            <FormDescription>
+                              14 chiffres sans espaces
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    )}
+                  </div>
+
+                  <div className="pt-4">
+                    <h3 className="text-lg font-medium text-gray-900 mb-3">Adresse de facturation</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                      <FormField
+                        control={form.control}
+                        name="billingAddress"
+                        render={({ field }) => (
+                          <FormItem className="md:col-span-2">
+                            <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error">
+                              Adresse
+                            </FormLabel>
+                            <FormControl>
+                              <Input placeholder="1 rue de la Paix" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      
+                      <FormField
+                        control={form.control}
+                        name="billingPostalCode"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error">
+                              Code Postal
+                            </FormLabel>
+                            <FormControl>
+                              <Input placeholder="75000" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      
+                      <FormField
+                        control={form.control}
+                        name="billingCity"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error">
+                              Ville
+                            </FormLabel>
+                            <FormControl>
+                              <Input placeholder="Paris" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ÉTAPE 2: INFORMATIONS DU PROJET */}
+            {currentStep === 1 && (
+              <div className="space-y-8">
+                <FormField
+                  control={form.control}
+                  name="comments"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error">
+                        Veuillez préciser votre besoin
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Décrivez votre projet et les détails importants pour votre raccordement électrique..." 
+                          className="h-32"
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <div>
+                  <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error mb-2 block">
+                    Que souhaitez-vous raccorder au réseau électrique ?
+                  </FormLabel>
+                  <RadioGroup 
+                    value={projectType} 
+                    onValueChange={setProjectType}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                  >
+                    <div className="flex items-center space-x-2 border p-3 rounded-md">
+                      <RadioGroupItem value="maison" id="maison" />
+                      <Label htmlFor="maison" className="flex items-center">
+                        <HomeIcon className="mr-2 h-4 w-4" />
+                        Maison
+                      </Label>
+                    </div>
+                    
+                    <div className="flex items-center space-x-2 border p-3 rounded-md">
+                      <RadioGroupItem value="appartement" id="appartement" />
+                      <Label htmlFor="appartement" className="flex items-center">
+                        <Building className="mr-2 h-4 w-4" />
+                        Appartement ou local en immeuble
+                      </Label>
+                    </div>
+                    
+                    <div className="flex items-center space-x-2 border p-3 rounded-md">
+                      <RadioGroupItem value="terrain" id="terrain" />
+                      <Label htmlFor="terrain" className="flex items-center">
+                        <MapPin className="mr-2 h-4 w-4" />
+                        Terrain
+                      </Label>
+                    </div>
+                    
+                    <div className="flex items-center space-x-2 border p-3 rounded-md">
+                      <RadioGroupItem value="autre" id="autre" />
+                      <Label htmlFor="autre" className="flex items-center">
+                        <LayoutDashboard className="mr-2 h-4 w-4" />
+                        Autre
+                      </Label>
+                    </div>
+                  </RadioGroup>
+                  
+                  {projectType === "autre" && (
+                    <div className="mt-4">
+                      <Label htmlFor="other-project-type" className="mb-2 block">
+                        Précisez ce que vous souhaitez raccorder
+                      </Label>
+                      <Input 
+                        id="other-project-type" 
+                        value={otherProjectType} 
+                        onChange={(e) => setOtherProjectType(e.target.value)} 
+                        placeholder="Précisez votre type de projet..." 
+                      />
+                    </div>
+                  )}
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error mb-2 block">
+                      Est-ce que le terrain est déjà viabilisé ?
+                    </FormLabel>
+                    <RadioGroup 
+                      defaultValue="non"
+                      className="flex space-x-4"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="oui" id="viabilise-oui" />
+                        <Label htmlFor="viabilise-oui">Oui</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="non" id="viabilise-non" />
+                        <Label htmlFor="viabilise-non">Non</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                  
+                  <div>
+                    <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error mb-2 block">
+                      Avez-vous besoin d'un branchement provisoire ou un compteur de chantier pendant les travaux ?
+                    </FormLabel>
+                    <RadioGroup 
+                      defaultValue="non"
+                      className="flex space-x-4"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="oui" id="provisoire-oui" />
+                        <Label htmlFor="provisoire-oui">Oui</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="non" id="provisoire-non" />
+                        <Label htmlFor="provisoire-non">Non</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                  
+                  <div>
+                    <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error mb-2 block">
+                      Disposez-vous de votre autorisation d'urbanisme ?
+                    </FormLabel>
+                    <RadioGroup 
+                      defaultValue="non"
+                      className="flex space-x-4"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="oui" id="autorisation-oui" />
+                        <Label htmlFor="autorisation-oui">Oui</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="non" id="autorisation-non" />
+                        <Label htmlFor="autorisation-non">Non</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                  
+                  <div>
+                    <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error mb-2 block">
+                      Êtes-vous propriétaire ou locataire du projet ?
+                    </FormLabel>
+                    <RadioGroup 
+                      defaultValue="proprietaire"
+                      className="flex space-x-4"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="proprietaire" id="proprietaire" />
+                        <Label htmlFor="proprietaire">Propriétaire</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="locataire" id="locataire" />
+                        <Label htmlFor="locataire">Locataire</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                </div>
+                
+                <div>
+                  <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error mb-2 block">
+                    Connaissez-vous la puissance maximale (en kVA) dont vous aurez besoin pour votre projet ?
+                  </FormLabel>
+                  <RadioGroup 
+                    value={power}
+                    onValueChange={setPower}
+                    className="space-y-3"
+                  >
+                    <div className="flex items-center space-x-2 border p-3 rounded-md">
+                      <RadioGroupItem value="monophase" id="monophase" />
+                      <Label htmlFor="monophase">Monophasée (Maison, Appartement)</Label>
+                    </div>
+                    <div className="flex items-center space-x-2 border p-3 rounded-md">
+                      <RadioGroupItem value="triphase" id="triphase" />
+                      <Label htmlFor="triphase">Triphasée</Label>
+                    </div>
+                    <div className="flex items-center space-x-2 border p-3 rounded-md">
+                      <RadioGroupItem value="jaune" id="jaune" />
+                      <Label htmlFor="jaune">+36 kVA ou tarif Jaune</Label>
+                    </div>
+                    <div className="flex items-center space-x-2 border p-3 rounded-md">
+                      <RadioGroupItem value="unknown" id="unknown" />
+                      <Label htmlFor="unknown">Non, je ne connais pas ma puissance</Label>
+                    </div>
+                  </RadioGroup>
+                  
+                  {power === "monophase" && (
+                    <div className="mt-6 bg-blue-50 p-6 rounded-lg border border-blue-100">
+                      <FormLabel className="text-primary font-medium text-lg block mb-3">
+                        Sélectionnez la puissance monophasée dont vous avez besoin
+                      </FormLabel>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="bg-white p-4 border border-blue-200 rounded-lg hover:shadow-md transition-all duration-300 cursor-pointer group relative">
+                          <RadioGroup 
+                            value={form.watch("powerRequired")}
+                            onValueChange={(value) => form.setValue("powerRequired", value)}
+                          >
+                            <div className="flex items-center space-x-2">
+                              <RadioGroupItem value="6" id="mono-power-6kva" />
+                              <Label htmlFor="mono-power-6kva" className="font-medium">6 kVA</Label>
+                            </div>
+                          </RadioGroup>
+                          
+                          <div className="mt-2 text-sm text-gray-600">
+                            Installation électrique de base
+                          </div>
+                          
+                          <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                            <div className="bg-blue-600 text-white text-xs p-2 rounded shadow-md max-w-xs -mt-12 -mr-4">
+                              Adapté pour un petit appartement avec équipements standards
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="bg-white p-4 border border-blue-200 rounded-lg hover:shadow-md transition-all duration-300 cursor-pointer group relative">
+                          <RadioGroup 
+                            value={form.watch("powerRequired")}
+                            onValueChange={(value) => form.setValue("powerRequired", value)}
+                          >
+                            <div className="flex items-center space-x-2">
+                              <RadioGroupItem value="9" id="mono-power-9kva" />
+                              <Label htmlFor="mono-power-9kva" className="font-medium">9 kVA</Label>
+                            </div>
+                          </RadioGroup>
+                          
+                          <div className="mt-2 text-sm text-gray-600">
+                            Recommandé pour un appartement
+                          </div>
+                          
+                          <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                            <div className="bg-blue-600 text-white text-xs p-2 rounded shadow-md max-w-xs -mt-12 -mr-4">
+                              Idéal pour un appartement avec plusieurs appareils électroménagers
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="bg-white p-4 border border-blue-200 rounded-lg hover:shadow-md transition-all duration-300 cursor-pointer group relative">
+                          <RadioGroup 
+                            value={form.watch("powerRequired")}
+                            onValueChange={(value) => form.setValue("powerRequired", value)}
+                          >
+                            <div className="flex items-center space-x-2">
+                              <RadioGroupItem value="12" id="mono-power-12kva" />
+                              <Label htmlFor="mono-power-12kva" className="font-medium">12 kVA</Label>
+                            </div>
+                          </RadioGroup>
+                          
+                          <div className="mt-2 text-sm text-gray-600">
+                            Recommandé pour une maison
+                          </div>
+                          
+                          <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                            <div className="bg-blue-600 text-white text-xs p-2 rounded shadow-md max-w-xs -mt-12 -mr-4">
+                              Adapté pour une maison avec de nombreux équipements électriques
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {power === "triphase" && (
+                    <div className="mt-6 bg-blue-50 p-6 rounded-lg border border-blue-100">
+                      <FormLabel className="text-primary font-medium text-lg block mb-3">
+                        Sélectionnez la puissance triphasée dont vous avez besoin
+                      </FormLabel>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="bg-white p-4 border border-blue-200 rounded-lg hover:shadow-md transition-all duration-300 cursor-pointer group relative">
+                          <RadioGroup 
+                            value={form.watch("powerRequired")}
+                            onValueChange={(value) => form.setValue("powerRequired", value)}
+                          >
+                            <div className="flex items-center space-x-2">
+                              <RadioGroupItem value="15" id="tri-power-15kva" />
+                              <Label htmlFor="tri-power-15kva" className="font-medium">15 kVA</Label>
+                            </div>
+                          </RadioGroup>
+                          
+                          <div className="mt-2 text-sm text-gray-600">
+                            Installation électrique triphasée de base
+                          </div>
+                          
+                          <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                            <div className="bg-blue-600 text-white text-xs p-2 rounded shadow-md max-w-xs -mt-12 -mr-4">
+                              Adapté pour des équipements industriels légers
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="bg-white p-4 border border-blue-200 rounded-lg hover:shadow-md transition-all duration-300 cursor-pointer group relative">
+                          <RadioGroup 
+                            value={form.watch("powerRequired")}
+                            onValueChange={(value) => form.setValue("powerRequired", value)}
+                          >
+                            <div className="flex items-center space-x-2">
+                              <RadioGroupItem value="18" id="tri-power-18kva" />
+                              <Label htmlFor="tri-power-18kva" className="font-medium">18 kVA</Label>
+                            </div>
+                          </RadioGroup>
+                          
+                          <div className="mt-2 text-sm text-gray-600">
+                            Puissance intermédiaire
+                          </div>
+                          
+                          <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                            <div className="bg-blue-600 text-white text-xs p-2 rounded shadow-md max-w-xs -mt-12 -mr-4">
+                              Idéal pour locaux professionnels avec machines
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="bg-white p-4 border border-blue-200 rounded-lg hover:shadow-md transition-all duration-300 cursor-pointer group relative">
+                          <RadioGroup 
+                            value={form.watch("powerRequired")}
+                            onValueChange={(value) => form.setValue("powerRequired", value)}
+                          >
+                            <div className="flex items-center space-x-2">
+                              <RadioGroupItem value="36" id="tri-power-36kva" />
+                              <Label htmlFor="tri-power-36kva" className="font-medium">36 kVA</Label>
+                            </div>
+                          </RadioGroup>
+                          
+                          <div className="mt-2 text-sm text-gray-600">
+                            Puissance élevée
+                          </div>
+                          
+                          <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                            <div className="bg-blue-600 text-white text-xs p-2 rounded shadow-md max-w-xs -mt-12 -mr-4">
+                              Pour installations industrielles ou commerciales importantes
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* ÉTAPE 3: ADRESSE DU PROJET */}
+            {currentStep === 2 && (
+              <div className="space-y-8">
+                <div className="space-y-6 mb-6">
+                  <h3 className="text-lg font-semibold text-primary">Adresse du projet</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                    <FormField
+                      control={form.control}
+                      name="postalCode"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error">
+                            Code Postal
+                          </FormLabel>
+                          <FormControl>
+                            <Input placeholder="75000" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="city"
+                      render={({ field }) => (
+                        <FormItem>
+                          <div className="flex justify-between">
+                            <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error">
+                              Ville
+                            </FormLabel>
+                            <div className="flex items-center space-x-2 text-sm">
+                              <div className="flex items-center w-full cursor-pointer" onClick={() => {
+                                const newValue = !completeManuallyCity;
+                                setCompleteManuallyCity(newValue);
+                                if (!newValue && form.watch("postalCode")) {
+                                  // Refaire l'autocomplete si on décoche
+                                  lookupCity(form.watch("postalCode"));
+                                }
+                              }}>
+                                <Checkbox 
+                                  id="complete-manually" 
+                                  checked={completeManuallyCity}
+                                  onCheckedChange={(checked) => {
+                                    const newValue = checked === true;
+                                    setCompleteManuallyCity(newValue);
+                                    if (!newValue && form.getValues("postalCode")) {
+                                      // Refaire l'autocomplete si on décoche
+                                      lookupCity(form.getValues("postalCode"));
+                                    }
+                                  }}
+                                  className="cursor-pointer"
+                                />
+                                <Label htmlFor="complete-manually" className="text-gray-500 ml-2 cursor-pointer w-full">
+                                  Remplir manuellement
+                                </Label>
+                              </div>
+                            </div>
+                          </div>
+                          <FormControl>
+                            <Input 
+                              placeholder="Paris" 
+                              {...field} 
+                              disabled={!completeManuallyCity && autoCompleteCity !== ""}
+                            />
+                          </FormControl>
+                          {autoCompleteCity && !completeManuallyCity && (
+                            <FormDescription>
+                              Ville trouvée automatiquement: {autoCompleteCity}
+                            </FormDescription>
+                          )}
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="address"
+                      render={({ field }) => (
+                        <FormItem className="md:col-span-2">
+                          <FormLabel className="after:content-['*'] after:ml-0.5 after:text-error">
+                            Adresse
+                          </FormLabel>
+                          <FormControl>
+                            <Input placeholder="1 rue de la Paix" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="addressComplement"
+                      render={({ field }) => (
+                        <FormItem className="md:col-span-2">
+                          <FormLabel>
+                            Complément d'adresse
+                          </FormLabel>
+                          <FormControl>
+                            <Input placeholder="Bâtiment A, Étage 3, etc." {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+                
+                <div className="space-y-6 mt-10">
+                  <h3 className="text-lg font-semibold text-primary">Délais et TVA</h3>
+                  
+                  <div className="bg-white p-6 border rounded-lg space-y-6">
+                    <div>
+                      <FormLabel className="block mb-3 text-base">
+                        Sous quel délai avez-vous besoin que ce raccordement soit effectué ?
+                      </FormLabel>
+                      <RadioGroup 
+                        value={form.watch("connectionDelay") as "1.5m" | "1.5-3m" | "3-6m" | "6m+" | undefined || "1.5m"}
+                        onValueChange={(value: "1.5m" | "1.5-3m" | "3-6m" | "6m+") => form.setValue("connectionDelay", value)}
+                        className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2"
+                      >
+                        <div className="flex items-center space-x-2 border p-3 rounded-md">
+                          <RadioGroupItem value="1.5m" id="delay-1.5m" />
+                          <Label htmlFor="delay-1.5m">1,5 mois</Label>
+                        </div>
+                        <div className="flex items-center space-x-2 border p-3 rounded-md">
+                          <RadioGroupItem value="1.5-3m" id="delay-1.5-3m" />
+                          <Label htmlFor="delay-1.5-3m">Entre 1,5 et 3 mois</Label>
+                        </div>
+                        <div className="flex items-center space-x-2 border p-3 rounded-md">
+                          <RadioGroupItem value="3-6m" id="delay-3-6m" />
+                          <Label htmlFor="delay-3-6m">Entre 3 et 6 mois</Label>
+                        </div>
+                        <div className="flex items-center space-x-2 border p-3 rounded-md">
+                          <RadioGroupItem value="6m+" id="delay-6m+" />
+                          <Label htmlFor="delay-6m+">Plus de 6 mois</Label>
+                        </div>
+                      </RadioGroup>
+                    </div>
+                    
+                    <div className="pt-4 border-t">
+                      <FormLabel className="block mb-3 text-base">
+                        Taux de TVA applicable à votre projet
+                      </FormLabel>
+                      <RadioGroup 
+                        value={form.watch("vatRate") as "20" | "10" | "5.5" | undefined || "20"}
+                        onValueChange={(value: "20" | "10" | "5.5") => form.setValue("vatRate", value)}
+                        className="space-y-3 mt-2"
+                      >
+                        <div className="flex items-center space-x-2 border p-3 rounded-md group relative">
+                          <RadioGroupItem value="20" id="vat-20" />
+                          <Label htmlFor="vat-20" className="flex-1">Normal - 20%</Label>
+                          <InfoIcon className="h-4 w-4 text-primary cursor-help" />
+                          
+                          <div className="absolute right-0 top-0 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                            <div className="bg-blue-600 text-white text-xs p-2 rounded shadow-md max-w-xs -mt-12 -mr-4">
+                              Construction neuve, moins de 2 ans depuis l'achèvement des travaux
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center space-x-2 border p-3 rounded-md group relative">
+                          <RadioGroupItem value="10" id="vat-10" />
+                          <Label htmlFor="vat-10" className="flex-1">Réduit - 10%</Label>
+                          <InfoIcon className="h-4 w-4 text-primary cursor-help" />
+                          
+                          <div className="absolute right-0 top-0 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                            <div className="bg-blue-600 text-white text-xs p-2 rounded shadow-md max-w-xs -mt-12 -mr-4">
+                              Bâtiment existant achevé depuis plus de 2 ans pour habitation principale ou secondaire
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center space-x-2 border p-3 rounded-md group relative">
+                          <RadioGroupItem value="5.5" id="vat-5.5" />
+                          <Label htmlFor="vat-5.5" className="flex-1">Réduit - 5,5%</Label>
+                          <InfoIcon className="h-4 w-4 text-primary cursor-help" />
+                          
+                          <div className="absolute right-0 top-0 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                            <div className="bg-blue-600 text-white text-xs p-2 rounded shadow-md max-w-xs -mt-12 -mr-4">
+                              Travaux d'amélioration de la qualité énergétique dans un logement achevé depuis plus de 2 ans
+                            </div>
+                          </div>
+                        </div>
+                      </RadioGroup>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-blue-50 p-6 rounded-lg space-y-3 mt-6">
+                    <div className="flex items-start space-x-2">
+                      <Checkbox 
+                        id="terms" 
+                        checked={form.getValues("termsAccepted") || false}
+                        onCheckedChange={(checked) => {
+                          form.setValue("termsAccepted", checked === true, { shouldDirty: true });
+                        }}
+                        className="cursor-pointer mt-1"
+                      />
+                      <Label htmlFor="terms" className="text-sm cursor-pointer">
+                        Je confirme avoir lu, compris et accepté les Conditions Générales d'Utilisation et de vente.
+                      </Label>
+                    </div>
+                    
+                    <div className="flex items-start space-x-2">
+                      <Checkbox 
+                        id="immediatePurchase" 
+                        checked={form.getValues("immediatePurchaseAccepted") || false}
+                        onCheckedChange={(checked) => {
+                          form.setValue("immediatePurchaseAccepted", checked === true, { shouldDirty: true });
+                        }}
+                        className="cursor-pointer mt-1"
+                      />
+                      <Label htmlFor="immediatePurchase" className="text-sm cursor-pointer">
+                        Oui, je reconnais et accepte que le service s'exécute immédiatement après le paiement.
+                      </Label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ÉTAPE 4: RÉCAPITULATIF ET VALIDATION */}
+            {currentStep === 3 && (
+              <div className="space-y-8">
+                <div className="bg-blue-50 p-6 rounded-lg shadow-sm">
+                  <h3 className="text-xl font-bold text-primary mb-6 flex items-center">
+                    <CheckCircle className="h-6 w-6 mr-2" />
+                    Récapitulatif de votre demande
+                  </h3>
+                  
+                  <div className="space-y-6">
+                    {/* Informations personnelles */}
+                    <Card>
+                      <CardHeader className="pb-2 bg-blue-50/80">
+                        <CardTitle className="text-base font-medium flex items-center">
+                          <User className="h-4 w-4 mr-2 text-primary" />
+                          Informations personnelles
+                        </CardTitle>
+                        <Button 
+                          variant="link" 
+                          size="sm" 
+                          className="text-xs p-0 h-auto absolute top-3 right-3 text-primary"
+                          onClick={() => setCurrentStep(0)}
+                        >
+                          <Pencil className="h-3 w-3 mr-1" />
+                          Modifier
+                        </Button>
+                      </CardHeader>
+                      <CardContent className="pt-4">
+                        <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                          <div className="md:col-span-2 pb-2">
+                            <dt className="text-muted-foreground">Type de client</dt>
+                            <dd className="font-medium">
+                              {clientType === "particulier" ? "Particulier" : 
+                               clientType === "professionnel" ? "Professionnel" : "Collectivité"}
+                            </dd>
+                          </div>
+                          
+                          <div>
+                            <dt className="text-muted-foreground">Nom et Prénom</dt>
+                            <dd className="font-medium">{formData?.firstName || ""} {formData?.lastName || ""}</dd>
+                          </div>
+                          
+                          <div>
+                            <dt className="text-muted-foreground">Email</dt>
+                            <dd className="font-medium">{formData?.email || ""}</dd>
+                          </div>
+                          
+                          <div>
+                            <dt className="text-muted-foreground">Téléphone</dt>
+                            <dd className="font-medium">{formData?.phone || ""}</dd>
+                          </div>
+                          
+                          {clientType === "professionnel" && (
+                            <>
+                              <div>
+                                <dt className="text-muted-foreground">Société</dt>
+                                <dd className="font-medium">{form.watch("company")}</dd>
+                              </div>
+                              
+                              <div>
+                                <dt className="text-muted-foreground">SIRET</dt>
+                                <dd className="font-medium">{form.watch("siret")}</dd>
+                              </div>
+                            </>
+                          )}
+                        </dl>
+                      </CardContent>
+                    </Card>
+                    
+                    {/* Détails du projet */}
+                    <Card>
+                      <CardHeader className="pb-2 bg-blue-50/80">
+                        <CardTitle className="text-base font-medium flex items-center">
+                          <FileText className="h-4 w-4 mr-2 text-primary" />
+                          Détails du projet
+                        </CardTitle>
+                        <Button 
+                          variant="link" 
+                          size="sm" 
+                          className="text-xs p-0 h-auto absolute top-3 right-3 text-primary"
+                          onClick={() => setCurrentStep(1)}
+                        >
+                          <Pencil className="h-3 w-3 mr-1" />
+                          Modifier
+                        </Button>
+                      </CardHeader>
+                      <CardContent className="pt-4">
+                        <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                          <div>
+                            <dt className="text-muted-foreground">Type de demande</dt>
+                            <dd className="font-medium">
+                              {form.watch("requestType") === "new_connection" ? "Nouveau raccordement" :
+                               form.watch("requestType") === "power_upgrade" ? "Augmentation de puissance" :
+                               form.watch("requestType") === "temporary_connection" ? "Raccordement provisoire" :
+                               form.watch("requestType") === "relocation" ? "Déplacement d'ouvrage" :
+                               "Visite technique"}
+                            </dd>
+                          </div>
+                          
+                          <div>
+                            <dt className="text-muted-foreground">Type de bâtiment</dt>
+                            <dd className="font-medium">
+                              {form.watch("buildingType") === "individual_house" ? "Maison individuelle" :
+                               form.watch("buildingType") === "apartment_building" ? "Immeuble collectif" :
+                               form.watch("buildingType") === "commercial" ? "Local commercial" :
+                               form.watch("buildingType") === "industrial" ? "Bâtiment industriel" :
+                               form.watch("buildingType") === "agricultural" ? "Exploitation agricole" :
+                               "Bâtiment public"}
+                            </dd>
+                          </div>
+                          
+                          <div>
+                            <dt className="text-muted-foreground">État du projet</dt>
+                            <dd className="font-medium">
+                              {form.watch("projectStatus") === "planning" ? "En phase de planification" :
+                               form.watch("projectStatus") === "permit_pending" ? "Permis de construire en cours" :
+                               form.watch("projectStatus") === "permit_approved" ? "Permis de construire accordé" :
+                               form.watch("projectStatus") === "construction_started" ? "Construction démarrée" :
+                               "Construction terminée"}
+                            </dd>
+                          </div>
+                          
+                          <div>
+                            <dt className="text-muted-foreground">Puissance demandée</dt>
+                            <dd className="font-medium">{form.watch("powerRequired")} kVA</dd>
+                          </div>
+                          
+                          {(form.watch("projectStatus") === "permit_pending" || form.watch("projectStatus") === "permit_approved") && (
+                            <>
+                              <div>
+                                <dt className="text-muted-foreground">Numéro de permis</dt>
+                                <dd className="font-medium">{form.watch("permitNumber")}</dd>
+                              </div>
+                              
+                              {form.watch("permitDeliveryDate") && (
+                                <div>
+                                  <dt className="text-muted-foreground">Date de délivrance</dt>
+                                  <dd className="font-medium">{form.watch("permitDeliveryDate")}</dd>
+                                </div>
+                              )}
+                            </>
+                          )}
+                          
+                          {form.watch("comments") && (
+                            <div className="md:col-span-2 mt-2 pt-2 border-t">
+                              <dt className="text-muted-foreground">Commentaires</dt>
+                              <dd className="font-medium mt-1 whitespace-pre-line">{form.watch("comments")}</dd>
+                            </div>
+                          )}
+                        </dl>
+                      </CardContent>
+                    </Card>
+                    
+                    {/* Adresse du projet */}
+                    <Card>
+                      <CardHeader className="pb-2 bg-blue-50/80">
+                        <CardTitle className="text-base font-medium flex items-center">
+                          <MapPin className="h-4 w-4 mr-2 text-primary" />
+                          Adresse du projet
+                        </CardTitle>
+                        <Button 
+                          variant="link" 
+                          size="sm" 
+                          className="text-xs p-0 h-auto absolute top-3 right-3 text-primary"
+                          onClick={() => setCurrentStep(2)}
+                        >
+                          <Pencil className="h-3 w-3 mr-1" />
+                          Modifier
+                        </Button>
+                      </CardHeader>
+                      <CardContent className="pt-4">
+                        <dl className="space-y-2 text-sm">
+                          <div>
+                            <dt className="text-muted-foreground">Adresse</dt>
+                            <dd className="font-medium">{form.watch("address")}</dd>
+                          </div>
+                          
+                          {form.watch("addressComplement") && (
+                            <div>
+                              <dt className="text-muted-foreground">Complément d'adresse</dt>
+                              <dd className="font-medium">{form.watch("addressComplement")}</dd>
+                            </div>
+                          )}
+                          
+                          <div className="flex space-x-4">
+                            <div>
+                              <dt className="text-muted-foreground">Code postal</dt>
+                              <dd className="font-medium">{form.watch("postalCode")}</dd>
+                            </div>
+                            
+                            <div>
+                              <dt className="text-muted-foreground">Ville</dt>
+                              <dd className="font-medium">{form.watch("city")}</dd>
+                            </div>
+                          </div>
+                          
+                          {form.watch("cadastralReference") && (
+                            <div>
+                              <dt className="text-muted-foreground">Référence cadastrale</dt>
+                              <dd className="font-medium">{form.watch("cadastralReference")}</dd>
+                            </div>
+                          )}
+                          
+                          {hasArchitect && (
+                            <div className="mt-3 pt-3 border-t">
+                              <dt className="text-muted-foreground font-medium mb-1">Architecte / Maître d'œuvre</dt>
+                              <dd className="space-y-1">
+                                <p>{form.watch("architectName")}</p>
+                                <p>{form.watch("architectPhone")}</p>
+                                <p>{form.watch("architectEmail")}</p>
+                              </dd>
+                            </div>
+                          )}
+                        </dl>
+                      </CardContent>
+                    </Card>
+                    
+                    {/* Délais et TVA */}
+                    <Card>
+                      <CardHeader className="pb-2 bg-blue-50/80">
+                        <CardTitle className="text-base font-medium flex items-center">
+                          <Clock className="h-4 w-4 mr-2 text-primary" />
+                          Délais et TVA
+                        </CardTitle>
+                        <Button 
+                          variant="link" 
+                          size="sm" 
+                          className="text-xs p-0 h-auto absolute top-3 right-3 text-primary"
+                          onClick={() => setCurrentStep(2)}
+                        >
+                          <Pencil className="h-3 w-3 mr-1" />
+                          Modifier
+                        </Button>
+                      </CardHeader>
+                      <CardContent className="pt-4">
+                        <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                          <div>
+                            <dt className="text-muted-foreground">Délai souhaité</dt>
+                            <dd className="font-medium">
+                              {form.watch("connectionDelay") === "1.5m" ? "1,5 mois" :
+                               form.watch("connectionDelay") === "1.5-3m" ? "Entre 1,5 et 3 mois" :
+                               form.watch("connectionDelay") === "3-6m" ? "Entre 3 et 6 mois" :
+                               "Plus de 6 mois"}
+                            </dd>
+                          </div>
+                          
+                          <div>
+                            <dt className="text-muted-foreground">Taux de TVA</dt>
+                            <dd className="font-medium">
+                              {form.watch("vatRate") === "20" ? "Normal - 20%" :
+                               form.watch("vatRate") === "10" ? "Réduit - 10%" :
+                               "Réduit - 5,5%"}
+                            </dd>
+                          </div>
+                        </dl>
+                      </CardContent>
+                    </Card>
+                    
+                    {/* Termes et conditions */}
+                    <div className="bg-white p-5 rounded-lg border border-blue-200">
+                      <h4 className="font-medium text-primary mb-2">En validant votre demande :</h4>
+                      <ul className="space-y-2 text-sm text-gray-700">
+                        <li className="flex items-start">
+                          <CheckCircle className="h-4 w-4 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                          <span>Vous confirmez l'exactitude des informations fournies</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle className="h-4 w-4 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                          <span>Une étude technique sera réalisée par Enedis suite à votre demande</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle className="h-4 w-4 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                          <span>Un conseiller vous contactera pour confirmer les détails du raccordement</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle className="h-4 w-4 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                          <span>Vous acceptez nos <span className="text-primary font-medium">conditions générales d'utilisation</span></span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  {/* Bouton de validation final */}
+                  <div className="mt-8 flex justify-center">
+                    <Button
+                      type="button"
+                      onClick={nextStep}
+                      className="w-full sm:w-auto px-10 py-6 h-auto bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-lg font-medium rounded-lg shadow-lg transition-all"
+                    >
+                      Valider ma demande
+                      <CheckCircle className="ml-2 h-5 w-5" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {/* Boutons de navigation */}
+            <div className={cn("flex justify-between mt-10 pt-6 border-t border-gray-200", {
+              "hidden": currentStep === 3
+            })}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={prevStep}
+                disabled={currentStep === 0}
+                className="shadow-sm border-primary text-primary hover:bg-blue-50 transition-all duration-300 px-6 py-5 h-auto font-medium"
+              >
+                <ChevronLeft className="mr-2 h-4 w-4" />
+                Précédent
+              </Button>
+              
+              <Button
+                type="button"
+                onClick={nextStep}
+                className="bg-gradient-to-r from-blue-400 to-primary hover:from-primary hover:to-blue-700 text-white shadow-md transition-all duration-300 px-6 py-5 h-auto font-medium"
+              >
+                {currentStep === steps.length - 2 ? (
+                  <>
+                    Récapitulatif
+                    <ArrowRightCircle className="ml-2 h-4 w-4" />
+                  </>
+                ) : (
+                  <>
+                    Suivant
+                    <ChevronRight className="ml-2 h-4 w-4" />
+                  </>
+                )}
+              </Button>
+            </div>
+          </form>
+        </Form>
+      </div>
+    </div>
+  );
+}

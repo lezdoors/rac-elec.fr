@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raccordement Électrique - Paiement sécurisé</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    :root {
+      --primary-color: #3366ff;
+      --secondary-color: #f0f4ff;
+      --success-color: #4CAF50;
+      --danger-color: #e74c3c;
+      --gray-color: #e0e0e0;
+      --dark-color: #333;
+      --radius: 6px;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--dark-color);
+      background-color: #f5f7fa;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 550px;
+      margin: 20px auto;
+      background-color: white;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+    
+    .logo-container {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    h1, h2 {
+      color: var(--primary-color);
+      text-align: center;
+    }
+    
+    h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    
+    p {
+      margin-bottom: 16px;
+      color: #555;
+      text-align: center;
+    }
+    
+    .reference {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .reference span {
+      font-weight: 600;
+      color: var(--dark-color);
+    }
+    
+    .card {
+      background-color: var(--secondary-color);
+      border-radius: var(--radius);
+      padding: 15px;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .card-label {
+      font-weight: 600;
+    }
+    
+    .card-amount {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--primary-color);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #444;
+    }
+    
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--gray-color);
+      border-radius: var(--radius);
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(51, 102, 255, 0.1);
+    }
+    
+    input.error {
+      border-color: var(--danger-color);
+      background-color: rgba(231, 76, 60, 0.05);
+    }
+    
+    .input-row {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .input-row .form-group {
+      flex: 1;
+    }
+    
+    .error-message {
+      color: var(--danger-color);
+      font-size: 14px;
+      margin-top: 5px;
+      display: none;
+    }
+    
+    .error-message.visible {
+      display: block;
+    }
+    
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    button:hover {
+      background-color: #2952cc;
+      transform: translateY(-1px);
+    }
+    
+    button:active {
+      transform: translateY(1px);
+    }
+    
+    button:disabled {
+      background-color: #b3c6ff;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .card-icon {
+      width: 40px;
+      height: 25px;
+      margin-right: 10px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    
+    /* Icônes des cartes */
+    .card-icon.visa {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzYgMzc2Ij48cGF0aCBmaWxsPSIjMzk1Njk3IiBkPSJNMTIuNjIzIDIwMC4wNjhsMTYuNDYyLTc5LjI0MWMzLjM3My0xMy4wMzUgMTIuOTEtMjIuMDA2IDI0LjA4Ny0yMi4wMDZIMTQxLjVsLTQ0LjMxNiAxMDEuMjQ3SDE2LjY3NXMtNC4wNTIuMDAxLTQuMDUyIDAtMS42MjYgMC0xLjYyNi0xLjYyNWMwLTEuNjI1IDEuNjI2LjYyNSAxLjYyNiAxLjYyNVoiLz48cGF0aCBmaWxsPSIjZjlhNTFlIiBkPSJNMjgyLjUgOThjLTQ4LjEyMy0yMS40NDEtNjEuNTc3IDI2LjkzMy0xMDMuNzUgMjIuNjcyTDEzNSAyMjJoODBzMTYuMjUgMCAyMi41LTIyYzYuMjUtMjIgNDUtMTAyIDQ1LTEwMnoiLz48cGF0aCBmaWxsPSIjM2E1Njk2IiBkPSJNMzM5LjUgOThIMjY3YzYuODc1IDAgMTEuMjA4IDQuNzc1IDEyLjU0MyAxMS4zN0wyNjUgMjIyaDc0LjVMMzM5LjUgOTh6Ii8+PHBhdGggZmlsbD0iIzNhNTY5NiIgZD0iTTQzMS41IDk4aC03MmwyNC41IDEyNGg3MkwyOTkuNzUgOTh6Ii8+PC9zdmc+');
+    }
+    
+    .card-icon.mastercard {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDQgMzUyIj48cGF0aCBmaWxsPSIjZmY5OTAwIiBkPSJNMTgwIDIwMmE5OS42IDk5LjYgMCAwIDAgMzggMzhWMTY0YTk5LjYgOTkuNiAwIDAgMC0zOCAzOFoiLz48cGF0aCBmaWxsPSIjZmYwMDY2IiBkPSJNMjgwIDEwMmMyNi41IDAgNTIuMiAxMC41IDcxIDI5LjNzMjkuMyA0NC41IDI5LjMgNzEtMTAuNSA1Mi4yLTI5LjMgNzEtNDQuNSAyOS4zLTcxIDI5LjNhMTAwIDEwMCAwIDAgMS02Mi0yMVY3OTgwMCAwMDBhMTAwIDEwMCAwIDAgMSA2Mi0yMVoiLz48cGF0aCBmaWxsPSIjZWIwMDFiIiBkPSJNMjgwIDMwMmMtNTUuMiAwLTEwMC00NC44LTEwMC0xMDBzNDQuOC0xMDAgMTAwLTEwMGMxNS4zIDAgMzAuMyAzLjUgNDQgMTAuMy0zOS4yLTMwLjEtOTUuNC0yMi43LTEyNS41IDE2LjVzLTIyLjcgOTUuNCAxNi41IDEyNS41YTkwLjkgOTAuOSAwIDAgMCA2NSAyNi43YzE1LjMgMCAzMC4zLTMuNSA0NC0xMC4zLTguMSA2LjMtMTcuMiAxMS0yNyAxNC0xMS4yIDMtMjIuNyA0LjMtMzQuMiA0LjJaIi8+PC9zdmc+');
+    }
+    
+    .card-icon.amex {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgMzUyIj48cGF0aCBmaWxsPSIjMmQ4ZWM5IiBkPSJNMjU2IDBINzhjLTQzLjEgMC03OCAzNC45LTc4IDc4djE5NmMwIDQzLjEgMzQuOSA3OCA3OCA3OGgxNzhjOTcuMiAwIDE3Ni04OC44IDE3Ni0xNzZTMzUzLjIgMCAyNTYgMFoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjgzIDk3LjcgMjczIDEwMmwtMzAgOTdoNDVsMy4yLTEwLjloMjBzMy4yIDEwLjkgMy40IDExLjFoNDQuNWwtMjktNTMuNCAyOC41LTQ4LjhIMzMxbC0yNCAxMUwyNzkuNSA5NkgyMzRsMjguNSA1MS44TDIzNCAxOTloNDQuNWwuMjcgMCAzLjIzLTEwLjloMTlsMy4xIDEwLjloMjNsMS4xLTMuN0wyNzMgMTAyem01LjYgNjcuNyA2LjMtMjEuM3MzLjkgMTUuOCA1IDE5LjNjMSAzLjUuNCAyLS41IDJoLTEwLjh6Ii8+PC9zdmc+');
+    }
+    
+    .card-icon.discover {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgMzUyIj48cGF0aCBmaWxsPSIjZjI4ZTAwIiBkPSJNMzAyIDExNmM0Ny4xIDAgODYuMiAzNC4zIDkzLjQgNzkuM2g0MC4zQzQyOC4xIDE0MS4zIDM3MS4yIDk2IDMwMiA5NmMtNjkuMiAwLTEyNi4xIDQ1LjMtMTMzLjcgOTkuM2g0MC4zYzcuMi00NSA0Ni4zLTc5LjMgOTMuNC03OS4zWiIvPjxwYXRoIGZpbGw9IiNmMjhlMDAiIGQ9Ik0xODYuMyAxNTUgMCAxOTVoNDA0YzAgNDYuNy0zOC40IDg1LTg2IDg1LTQ3LjYgMC04Ni0zOC4zLTg2LTg1YzAtMTcuMyA1LjMtMzMuMyAxNC4zLTQ2LjcgOS00IDUwLTcuMyA2MC02LjN6Ii8+PHBhdGggZmlsbD0iI2YyOGUwMCIgZD0iTTQzNS43IDIwMWMtMy4xIDE4LjUtMTAuMyAzNS41LTIwLjcgNTAuM0g0MEMzMC4xIDIzNiAyMyAyMTkgMjAgMjAxaDQxNS43WiIvPjwvc3ZnPg==');
+    }
+    
+    .card-icon.unknown {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgMzUyIj48cGF0aCBmaWxsPSIjZGRkIiBkPSJNNDc3LjljMCAxOS4zLTE1LjcgMzUtMzUgMzVIMzVjLTE5LjMgMC0zNS0xNS43LTM1LTM1VjQwLjdjMC0xOS4zIDE1LjctMzUgMzUtMzVoNDA3LjljMTkuMyAwIDM1IDE1LjcgMzUgMzV2MzExLjJ6Ii8+PHBhdGggZmlsbD0iIzk5OSIgZD0iTTI1NiAyMTJjLTI0LjkgMC00NS0yMC4xLTQ1LTQ1czIwLjEtNDUgNDUtNDUgNDUgMjAuMSA0NSA0NS0yMC4xIDQ1LTQ1IDQ1em0tMjUgMzBoNTB2MjVoLTUwdi0yNXptLTIwLTEyMGgyMHYxMGgtMjB2LTEwem05MCAwaDIwdjEwaC0yMHYtMTB6Ii8+PC9zdmc+');
+    }
+    
+    #card-element {
+      background-color: white;
+      padding: 12px;
+      border: 1px solid var(--gray-color);
+      border-radius: var(--radius);
+    }
+    
+    .card-details {
+      margin-top: 10px;
+      display: none;
+    }
+    
+    .card-details.visible {
+      display: flex;
+      align-items: center;
+    }
+    
+    .success-message {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+    
+    .success-message.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .success-content {
+      background-color: white;
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      animation: popIn 0.5s forwards;
+    }
+    
+    @keyframes popIn {
+      0% {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background-color: var(--success-color);
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      position: relative;
+    }
+    
+    .success-icon:after {
+      content: '';
+      width: 40px;
+      height: 20px;
+      border-left: 5px solid white;
+      border-bottom: 5px solid white;
+      position: absolute;
+      top: 26px;
+      left: 20px;
+      transform: rotate(-45deg);
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .error-alert {
+      background-color: #ffebee;
+      color: var(--danger-color);
+      padding: 12px;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      display: none;
+      border-left: 4px solid var(--danger-color);
+    }
+    
+    .error-alert.visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+      <h1>Raccordement Électrique</h1>
+      <p>Paiement sécurisé pour votre demande de raccordement</p>
+    </div>
+    
+    <h2>Paiement de votre demande</h2>
+    
+    <div class="reference">
+      Référence : <span id="reference-id">REF-7857-902123</span>
+    </div>
+    
+    <div class="card">
+      <div class="card-label">
+        Frais d'étude de votre dossier<br>
+        <small>Traitement et accompagnement</small>
+      </div>
+      <div class="card-amount" id="amount-display">129.80 € TTC</div>
+    </div>
+    
+    <div class="error-alert" id="error-alert"></div>
+    
+    <form id="payment-form">
+      <div class="form-group">
+        <label for="cardholder-name">Titulaire de la carte</label>
+        <input type="text" id="cardholder-name" required autocomplete="cc-name">
+        <div class="error-message" id="name-error"></div>
+      </div>
+      
+      <div class="form-group">
+        <label for="card-element">Informations de paiement</label>
+        <div id="card-element"></div>
+        <div class="error-message" id="card-errors"></div>
+        <div class="card-details" id="card-details">
+          <span id="card-icon" class="card-icon unknown"></span>
+          <span id="card-brand">Saisissez les informations de votre carte</span>
+        </div>
+      </div>
+      
+      <button type="submit" id="submit-button">
+        <span id="button-text">Finaliser le paiement de 129.80 € TTC</span>
+      </button>
+    </form>
+  </div>
+  
+  <div class="success-message" id="success-message">
+    <div class="success-content">
+      <div class="success-icon"></div>
+      <h2>Paiement réussi !</h2>
+      <p>Votre paiement a été traité avec succès.</p>
+      <p>Un e-mail de confirmation a été envoyé à l'adresse associée à votre dossier.</p>
+      <p>Référence de transaction : <strong id="transaction-id">---</strong></p>
+      <div style="margin-top: 30px;">
+        <button type="button" id="continue-button" style="background-color: var(--success-color);">
+          Continuer
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Configuration de base
+      const formAmount = 129.80;
+      const formReference = document.getElementById('reference-id').textContent;
+      
+      // Initialisation de Stripe
+      const stripe = Stripe('pk_test_votreclépublique'); // Remplacez par votre clé publique Stripe
+      const elements = stripe.elements({
+        locale: 'fr',
+        fonts: [
+          {
+            cssSrc: 'https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap',
+          }
+        ]
+      });
+      
+      // Création de l'élément carte
+      const cardElement = elements.create('card', {
+        style: {
+          base: {
+            color: '#333',
+            fontFamily: '"Segoe UI", sans-serif',
+            fontSmoothing: 'antialiased',
+            fontSize: '16px',
+            '::placeholder': {
+              color: '#aab7c4'
+            }
+          },
+          invalid: {
+            color: '#e74c3c',
+            iconColor: '#e74c3c'
+          }
+        },
+        hidePostalCode: true
+      });
+      
+      // Montage de l'élément carte dans le DOM
+      cardElement.mount('#card-element');
+      
+      // Variables globales du formulaire
+      const form = document.getElementById('payment-form');
+      const cardHolderName = document.getElementById('cardholder-name');
+      const submitButton = document.getElementById('submit-button');
+      const buttonText = document.getElementById('button-text');
+      const cardErrors = document.getElementById('card-errors');
+      const cardDetails = document.getElementById('card-details');
+      const cardIcon = document.getElementById('card-icon');
+      const cardBrand = document.getElementById('card-brand');
+      const errorAlert = document.getElementById('error-alert');
+      const successMessage = document.getElementById('success-message');
+      const transactionId = document.getElementById('transaction-id');
+      
+      // Détection du type de carte
+      cardElement.on('change', function(event) {
+        // Afficher les erreurs de validation
+        if (event.error) {
+          showError(cardErrors, event.error.message);
+        } else {
+          clearError(cardErrors);
+        }
+        
+        // Activer/désactiver le bouton en fonction de la validité
+        submitButton.disabled = event.empty || !!event.error;
+        
+        // Afficher le type de carte si disponible
+        if (event.brand) {
+          cardDetails.classList.add('visible');
+          
+          // Définir l'icône et le texte en fonction du type de carte
+          const brand = event.brand.toLowerCase();
+          switch (brand) {
+            case 'visa':
+              cardIcon.className = 'card-icon visa';
+              cardBrand.textContent = 'Visa';
+              break;
+            case 'mastercard':
+              cardIcon.className = 'card-icon mastercard';
+              cardBrand.textContent = 'Mastercard';
+              break;
+            case 'amex':
+              cardIcon.className = 'card-icon amex';
+              cardBrand.textContent = 'American Express';
+              break;
+            case 'discover':
+              cardIcon.className = 'card-icon discover';
+              cardBrand.textContent = 'Discover';
+              break;
+            default:
+              cardIcon.className = 'card-icon unknown';
+              cardBrand.textContent = 'Carte bancaire';
+          }
+        } else {
+          cardDetails.classList.remove('visible');
+        }
+      });
+      
+      // Validation du nom du titulaire
+      cardHolderName.addEventListener('input', function() {
+        if (this.value.trim() === '') {
+          showError(document.getElementById('name-error'), 'Veuillez indiquer le nom du titulaire de la carte');
+        } else if (this.value.length < 3) {
+          showError(document.getElementById('name-error'), 'Le nom doit comporter au moins 3 caractères');
+        } else {
+          clearError(document.getElementById('name-error'));
+        }
+      });
+      
+      // Soumission du formulaire
+      form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        
+        // Vérifier le nom du titulaire
+        if (cardHolderName.value.trim() === '') {
+          showError(document.getElementById('name-error'), 'Veuillez indiquer le nom du titulaire de la carte');
+          return;
+        }
+        
+        // Désactiver le bouton et afficher l'indicateur de chargement
+        setLoading(true);
+        
+        try {
+          // Créer un token de carte
+          const { paymentMethod, error } = await stripe.createPaymentMethod({
+            type: 'card',
+            card: cardElement,
+            billing_details: {
+              name: cardHolderName.value.trim()
+            }
+          });
+          
+          if (error) {
+            // Afficher l'erreur et réactiver le bouton
+            showAlert(error.message);
+            setLoading(false);
+            return;
+          }
+          
+          // Envoyer le token au serveur
+          const response = await processPayment(paymentMethod.id);
+          
+          // Traiter la réponse
+          if (response.success) {
+            if (response.requiresAction) {
+              // L'authentification 3D Secure est requise
+              await handleCardAction(response.clientSecret);
+            } else {
+              // Le paiement a réussi directement
+              showSuccessMessage(response.paymentIntentId || 'TR-' + Date.now());
+            }
+          } else {
+            // Afficher l'erreur et réactiver le bouton
+            showAlert(response.message || 'Une erreur est survenue lors du traitement du paiement');
+            setLoading(false);
+          }
+        } catch (error) {
+          console.error('Erreur de paiement:', error);
+          showAlert('Une erreur de connexion est survenue. Veuillez réessayer.');
+          setLoading(false);
+        }
+      });
+      
+      // Fonction pour envoyer le paiement au serveur
+      async function processPayment(paymentMethodId) {
+        try {
+          // Remplacez l'URL par celle de votre serveur
+          const response = await fetch('/api/process-payment', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              paymentMethodId: paymentMethodId,
+              amount: formAmount,
+              currency: 'eur',
+              description: `Raccordement Électrique - ${formReference}`,
+              metadata: {
+                reference: formReference
+              }
+            })
+          });
+          
+          return await response.json();
+        } catch (error) {
+          console.error('Erreur de requête:', error);
+          throw new Error('Erreur de connexion au serveur');
+        }
+      }
+      
+      // Fonction pour gérer l'authentification 3D Secure
+      async function handleCardAction(clientSecret) {
+        try {
+          const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret);
+          
+          if (error) {
+            // L'authentification a échoué
+            showAlert(error.message || 'L\'authentification 3D Secure a échoué');
+            setLoading(false);
+          } else if (paymentIntent.status === 'succeeded') {
+            // Le paiement est réussi après 3D Secure
+            showSuccessMessage(paymentIntent.id);
+          } else {
+            // Autre statut
+            showAlert(`Le paiement n'a pas pu être complété (statut: ${paymentIntent.status})`);
+            setLoading(false);
+          }
+        } catch (error) {
+          console.error('Erreur 3D Secure:', error);
+          showAlert('Une erreur est survenue lors de l\'authentification. Veuillez réessayer.');
+          setLoading(false);
+        }
+      }
+      
+      // Fonction pour afficher le message de succès
+      function showSuccessMessage(paymentId) {
+        // Afficher l'identifiant de transaction
+        transactionId.textContent = paymentId;
+        
+        // Afficher le message de succès
+        successMessage.classList.add('visible');
+        
+        // Configurer le bouton de continuation
+        document.getElementById('continue-button').addEventListener('click', function() {
+          // Rediriger vers la page de confirmation
+          window.location.href = `/confirmation?ref=${formReference}&transaction=${paymentId}`;
+        });
+      }
+      
+      // Fonction pour afficher une alerte d'erreur
+      function showAlert(message) {
+        errorAlert.textContent = message;
+        errorAlert.classList.add('visible');
+        errorAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      
+      // Fonction pour afficher une erreur sur un champ spécifique
+      function showError(element, message) {
+        element.textContent = message;
+        element.classList.add('visible');
+        
+        // Si c'est un élément parent (comme cardErrors), ajouter la classe d'erreur à l'élément lui-même
+        if (element === cardErrors) {
+          document.getElementById('card-element').classList.add('error');
+        } else {
+          // Sinon, ajouter la classe d'erreur à l'élément d'entrée parent
+          element.previousElementSibling.classList.add('error');
+        }
+      }
+      
+      // Fonction pour effacer une erreur
+      function clearError(element) {
+        element.textContent = '';
+        element.classList.remove('visible');
+        
+        // Si c'est un élément parent (comme cardErrors), supprimer la classe d'erreur de l'élément lui-même
+        if (element === cardErrors) {
+          document.getElementById('card-element').classList.remove('error');
+        } else {
+          // Sinon, supprimer la classe d'erreur de l'élément d'entrée parent
+          element.previousElementSibling.classList.remove('error');
+        }
+      }
+      
+      // Fonction pour définir l'état de chargement
+      function setLoading(isLoading) {
+        if (isLoading) {
+          // Désactiver le bouton et afficher l'indicateur de chargement
+          submitButton.disabled = true;
+          buttonText.innerHTML = '<span class="loading"></span> Traitement en cours...';
+        } else {
+          // Réactiver le bouton et restaurer le texte
+          submitButton.disabled = false;
+          buttonText.textContent = `Finaliser le paiement de ${formAmount.toFixed(2)} € TTC`;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

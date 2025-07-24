@@ -1,0 +1,123 @@
+/* Optimisations tactiles mobiles pour éviter le zoom */
+
+/* Taille minimale des zones tactiles (44px recommandé par Apple) */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Éviter le zoom automatique sur les inputs */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+textarea,
+select,
+.mobile-input {
+  font-size: 16px !important; /* Évite le zoom sur iOS */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Forcer la taille de police sur tous les inputs du formulaire */
+.form-container input,
+.form-container textarea,
+.form-container select,
+[data-testid] input,
+[role="combobox"],
+[data-testid="raccordement-form"] input,
+[data-testid="raccordement-form"] textarea,
+[data-testid="raccordement-form"] select {
+  font-size: 16px !important;
+}
+
+/* Optimisations spécifiques pour éviter le zoom sur les sélecteurs */
+[data-radix-select-trigger],
+[data-radix-combobox-input],
+.select-trigger,
+.select-content,
+button[role="combobox"] {
+  font-size: 16px !important;
+}
+
+/* Zones tactiles optimisées pour mobile */
+@media (max-width: 768px) {
+  /* Boutons et éléments cliquables plus grands */
+  button,
+  .cursor-pointer,
+  [role="button"] {
+    min-height: 48px;
+    padding: 12px 16px;
+  }
+  
+  /* Inputs avec zones tactiles améliorées */
+  input,
+  textarea,
+  select,
+  [role="combobox"] {
+    min-height: 48px;
+    padding: 12px 16px;
+    font-size: 16px !important;
+  }
+  
+  /* Toggle switch optimisé */
+  .toggle-container {
+    min-height: 60px;
+    padding: 16px;
+  }
+}
+
+/* Améliorer l'expérience tactile */
+button,
+[role="button"],
+.cursor-pointer {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Optimisation pour les sélecteurs */
+[role="combobox"],
+[data-state] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Espacement tactile amélioré */
+@media (max-width: 768px) {
+  .form-field-mobile {
+    margin-bottom: 1.5rem;
+    padding: 0.75rem;
+  }
+  
+  .button-mobile {
+    padding: 1rem 1.5rem;
+    margin: 0.5rem 0;
+  }
+  
+  /* Améliorer la zone tactile des toggles */
+  .toggle-container {
+    padding: 1rem;
+    margin: 0.75rem 0;
+  }
+}
+
+/* Optimisations pour les interactions tactiles */
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
+/* Feedback visuel amélioré pour mobile */
+@media (hover: none) and (pointer: coarse) {
+  .hover\:shadow-lg:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .hover\:bg-blue-50:hover {
+    background-color: rgb(239 246 255);
+  }
+}

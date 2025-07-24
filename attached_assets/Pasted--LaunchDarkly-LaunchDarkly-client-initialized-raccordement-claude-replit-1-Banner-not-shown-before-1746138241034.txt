@@ -1,0 +1,206 @@
+[LaunchDarkly] LaunchDarkly client initialized
+raccordement-claude-replit:1 Banner not shown: beforeinstallpromptevent.preventDefault() called. The page must call beforeinstallpromptevent.prompt() to show the banner.
+stallwart.build.js:1 stallwart: failed ping 1
+8Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.Understand this error
+framework-19fab1194657a6d2.js:1 Unrecognized feature: 'ambient-light-sensor'.
+_ @ framework-19fab1194657a6d2.js:1Understand this warning
+framework-19fab1194657a6d2.js:1 Unrecognized feature: 'battery'.
+_ @ framework-19fab1194657a6d2.js:1Understand this warning
+framework-19fab1194657a6d2.js:1 Unrecognized feature: 'execution-while-not-rendered'.
+_ @ framework-19fab1194657a6d2.js:1Understand this warning
+framework-19fab1194657a6d2.js:1 Unrecognized feature: 'execution-while-out-of-viewport'.
+_ @ framework-19fab1194657a6d2.js:1Understand this warning
+framework-19fab1194657a6d2.js:1 Unrecognized feature: 'layout-animations'.
+_ @ framework-19fab1194657a6d2.js:1Understand this warning
+framework-19fab1194657a6d2.js:1 Unrecognized feature: 'legacy-image-formats'.
+_ @ framework-19fab1194657a6d2.js:1Understand this warning
+framework-19fab1194657a6d2.js:1 Unrecognized feature: 'navigation-override'.
+_ @ framework-19fab1194657a6d2.js:1Understand this warning
+framework-19fab1194657a6d2.js:1 Unrecognized feature: 'oversized-images'.
+_ @ framework-19fab1194657a6d2.js:1Understand this warning
+framework-19fab1194657a6d2.js:1 Unrecognized feature: 'publickey-credentials'.
+_ @ framework-19fab1194657a6d2.js:1Understand this warning
+framework-19fab1194657a6d2.js:1 Unrecognized feature: 'speaker-selection'.
+_ @ framework-19fab1194657a6d2.js:1Understand this warning
+framework-19fab1194657a6d2.js:1 Unrecognized feature: 'unoptimized-images'.
+_ @ framework-19fab1194657a6d2.js:1Understand this warning
+framework-19fab1194657a6d2.js:1 Unrecognized feature: 'unsized-media'.
+_ @ framework-19fab1194657a6d2.js:1Understand this warning
+framework-19fab1194657a6d2.js:1 Unrecognized feature: 'pointer-lock'.
+_ @ framework-19fab1194657a6d2.js:1Understand this warning
+framework-19fab1194657a6d2.js:1 Allow attribute will take precedence over 'allowfullscreen'.
+_ @ framework-19fab1194657a6d2.js:1Understand this warning
+framework-19fab1194657a6d2.js:1 Allow attribute will take precedence over 'allowpaymentrequest'.
+_ @ framework-19fab1194657a6d2.js:1Understand this warning
+stallwart.build.js:1 stallwart: failed ping 1
+8941-cde0bcbb922cc124.js:1 WebSocket connection to 'wss://eval2.spock.platform.replit.com/wsv2/v2.public.Q2dZSS9xck53QVlTQmdpZHg4M0FCaUlGYzNCdlkyc3dBRHFQQWdva05EUmpaRGRtT1RJdFpEaGhZUzAwTjJSaUxXSTBPVGN0WTJZMU1qQXlNekJpWTJOaUVnTnVhWGdhRjNKbGNHeHBkQzF5WlhCc0xXWnBiR1Z6TFhOd2IyTnJJaHB5WVdOamIzSmtaVzFsYm5RdFkyeGhkV1JsTFhKbGNHeHBkQ29LY25saGJtRnZkV1poYkVKUkNoaHlaWEJzYVhRdGNtVndiQzFpYkc5amEzTXRjM0J2WTJzU0ZuSmxjR3hwZEMxeVpYQnNMVzFsZEdFdGMzQnZZMnNhSFhKbGNHeHBkQzF0WVhKbllYSnBibVV0WW14dlkydHpMWE53YjJOclNnY0krOFAxRXhBQlVBQmFEMmx1ZEdWdWRGOWlkWE5wYm1WemMxb1hiMjVpYjJGeVpHbH...eVJqRlFaM0ppZERsQmQwbDJhbTBsTWtaRldUbExOakU0UjBVMk9EZEtURnBHTTI5R01IaGxSblZsUkdvek5XZHFPWFpRYVZvNFNXZ3lVbmh2YkRaM2FXVnpkREIyYm5CVlQxWnNUbTgzU1U5dVdrdDNhblZQUXpsU1dERTVkemRvVmtwVU5sZDJRazR6UWt0a2NWWnpOblJ2U2poRFF6WjNVbWRKWkZGNlYxQm5SRkJCVWtoTVF6bFJXakZ4UkV0SVNVVkliMDAzTW5JMU16WkVSRXhSSlRKR05VUkphVEozYmtKUGVtcHBlWGx6U0dVeFJuRjNXbmxGU1hseFltNXpVVEJGYzFOSlJtTmFhRkpSSlRKR2VqSm5KVE5FSlRORRZ0pIzhq5SwsUAucrHD-GC6EQc4WxIviUrv-cm18mR_DOnfSn8U1A8SjopggXY2TU3hKNuDamQiJccmpiHfQQo.Q2dad2NtOWtPak1pQ25KbGNHeHBkQzVqYjIwPQ' failed: 
+connect @ 8941-cde0bcbb922cc124.js:1Understand this error
+8941-cde0bcbb922cc124.js:1 WebSocket connection to 'wss://eval2.spock.platform.replit.com/wsv2/v2.public.Q2dZSS9xck53QVlTQmdpZHg4M0FCaUlGYzNCdlkyc3dBRHFQQWdva05EUmpaRGRtT1RJdFpEaGhZUzAwTjJSaUxXSTBPVGN0WTJZMU1qQXlNekJpWTJOaUVnTnVhWGdhRjNKbGNHeHBkQzF5WlhCc0xXWnBiR1Z6TFhOd2IyTnJJaHB5WVdOamIzSmtaVzFsYm5RdFkyeGhkV1JsTFhKbGNHeHBkQ29LY25saGJtRnZkV1poYkVKUkNoaHlaWEJzYVhRdGNtVndiQzFpYkc5amEzTXRjM0J2WTJzU0ZuSmxjR3hwZEMxeVpYQnNMVzFsZEdFdGMzQnZZMnNhSFhKbGNHeHBkQzF0WVhKbllYSnBibVV0WW14dlkydHpMWE53YjJOclNnY0krOFAxRXhBQlVBQmFEMmx1ZEdWdWRGOWlkWE5wYm1WemMxb1hiMjVpYjJGeVpHbH...eVJqRlFaM0ppZERsQmQwbDJhbTBsTWtaRldUbExOakU0UjBVMk9EZEtURnBHTTI5R01IaGxSblZsUkdvek5XZHFPWFpRYVZvNFNXZ3lVbmh2YkRaM2FXVnpkREIyYm5CVlQxWnNUbTgzU1U5dVdrdDNhblZQUXpsU1dERTVkemRvVmtwVU5sZDJRazR6UWt0a2NWWnpOblJ2U2poRFF6WjNVbWRKWkZGNlYxQm5SRkJCVWtoTVF6bFJXakZ4UkV0SVNVVkliMDAzTW5JMU16WkVSRXhSSlRKR05VUkphVEozYmtKUGVtcHBlWGx6U0dVeFJuRjNXbmxGU1hseFltNXpVVEJGYzFOSlJtTmFhRkpSSlRKR2VqSm5KVE5FSlRORRZ0pIzhq5SwsUAucrHD-GC6EQc4WxIviUrv-cm18mR_DOnfSn8U1A8SjopggXY2TU3hKNuDamQiJccmpiHfQQo.Q2dad2NtOWtPak1pQ25KbGNHeHBkQzVqYjIwPQ' failed: 
+connect @ 8941-cde0bcbb922cc124.js:1Understand this error
+_app-0a43d96e5d409137.js:15 WebSocket connection to 'wss://replit.com/graphql_subscriptions' failed: 
+(anonymous) @ _app-0a43d96e5d409137.js:15Understand this error
+8941-cde0bcbb922cc124.js:1 WebSocket connection to 'wss://eval2.spock.platform.replit.com/wsv2/v2.public.Q2dZSS9xck53QVlTQmdpZHg4M0FCaUlGYzNCdlkyc3dBRHFQQWdva05EUmpaRGRtT1RJdFpEaGhZUzAwTjJSaUxXSTBPVGN0WTJZMU1qQXlNekJpWTJOaUVnTnVhWGdhRjNKbGNHeHBkQzF5WlhCc0xXWnBiR1Z6TFhOd2IyTnJJaHB5WVdOamIzSmtaVzFsYm5RdFkyeGhkV1JsTFhKbGNHeHBkQ29LY25saGJtRnZkV1poYkVKUkNoaHlaWEJzYVhRdGNtVndiQzFpYkc5amEzTXRjM0J2WTJzU0ZuSmxjR3hwZEMxeVpYQnNMVzFsZEdFdGMzQnZZMnNhSFhKbGNHeHBkQzF0WVhKbllYSnBibVV0WW14dlkydHpMWE53YjJOclNnY0krOFAxRXhBQlVBQmFEMmx1ZEdWdWRGOWlkWE5wYm1WemMxb1hiMjVpYjJGeVpHbH...eVJqRlFaM0ppZERsQmQwbDJhbTBsTWtaRldUbExOakU0UjBVMk9EZEtURnBHTTI5R01IaGxSblZsUkdvek5XZHFPWFpRYVZvNFNXZ3lVbmh2YkRaM2FXVnpkREIyYm5CVlQxWnNUbTgzU1U5dVdrdDNhblZQUXpsU1dERTVkemRvVmtwVU5sZDJRazR6UWt0a2NWWnpOblJ2U2poRFF6WjNVbWRKWkZGNlYxQm5SRkJCVWtoTVF6bFJXakZ4UkV0SVNVVkliMDAzTW5JMU16WkVSRXhSSlRKR05VUkphVEozYmtKUGVtcHBlWGx6U0dVeFJuRjNXbmxGU1hseFltNXpVVEJGYzFOSlJtTmFhRkpSSlRKR2VqSm5KVE5FSlRORRZ0pIzhq5SwsUAucrHD-GC6EQc4WxIviUrv-cm18mR_DOnfSn8U1A8SjopggXY2TU3hKNuDamQiJccmpiHfQQo.Q2dad2NtOWtPak1pQ25KbGNHeHBkQzVqYjIwPQ' failed: WebSocket is closed before the connection is established.
+cleanupSocket @ 8941-cde0bcbb922cc124.js:1Understand this warning
+8941-cde0bcbb922cc124.js:1 WebSocket connection to 'wss://eval2.spock.platform.replit.com/wsv2/v2.public.Q2dZSXpvL1B3QVlTQmdqdHE4L0FCaUlGYzNCdlkyc3dBRHFQQWdva05EUmpaRGRtT1RJdFpEaGhZUzAwTjJSaUxXSTBPVGN0WTJZMU1qQXlNekJpWTJOaUVnTnVhWGdhRjNKbGNHeHBkQzF5WlhCc0xXWnBiR1Z6TFhOd2IyTnJJaHB5WVdOamIzSmtaVzFsYm5RdFkyeGhkV1JsTFhKbGNHeHBkQ29LY25saGJtRnZkV1poYkVKUkNoaHlaWEJzYVhRdGNtVndiQzFpYkc5amEzTXRjM0J2WTJzU0ZuSmxjR3hwZEMxeVpYQnNMVzFsZEdFdGMzQnZZMnNhSFhKbGNHeHBkQzF0WVhKbllYSnBibVV0WW14dlkydHpMWE53YjJOclNnY0krOFAxRXhBQlVBQmFEMmx1ZEdWdWRGOWlkWE5wYm1WemMxb1hiMjVpYjJGeVpHbH...bVFWUnRlWGh2WW1wYWFqSTJkbkpaV0U1dFFWUXpVa1I2V1dab1FXRXdaa1ZGTVhKdGR6SXdlRFpZYjNGSFZuUjFOV2w1VW5sd05uUnZKVEpHU2tkdGJYRTJKVEpDTVZKQ2VWTXdNbGRXWjBOWlVDVXlRazFNY0dKMGNXczNTbXhUZWpOeU1qQnVhR2xHYnlVeVJqVndVMEZyWWpRNFZIZE9OR1ZHU1RSWk1tSWxNa1ozZDFOVVpIUmtRbFJNWVRNbE1rSTRNa05wTlRVMlJXVm1ZVVIzZDJGaFZWQXlaV2ROU1hGNFQwNTZSMXBCY2psbFoxSnJRa2h0YmlVeVFtUlhaMVpQUlU1T2VUZE5SWG94UkRFNGJsRWxNMFFsTTBRPbbX6Rftde-OJijkFz5StAZkxUsRhXtBLDaK9lXd0hV0_qey7vpegYpNg9Q0iJBPbJhznYUmYaORQ6YqaFQkJwo.Q2dad2NtOWtPak1pQ25KbGNHeHBkQzVqYjIwPQ' failed: 
+connect @ 8941-cde0bcbb922cc124.js:1Understand this error
+stallwart.build.js:1 stallwart: failed ping 1
+8941-cde0bcbb922cc124.js:1 WebSocket connection to 'wss://eval2.spock.platform.replit.com/wsv2/v2.public.Q2dZSXd0UFB3QVlTQmdqaDc4L0FCaUlGYzNCdlkyc3dBRHFQQWdva05EUmpaRGRtT1RJdFpEaGhZUzAwTjJSaUxXSTBPVGN0WTJZMU1qQXlNekJpWTJOaUVnTnVhWGdhRjNKbGNHeHBkQzF5WlhCc0xXWnBiR1Z6TFhOd2IyTnJJaHB5WVdOamIzSmtaVzFsYm5RdFkyeGhkV1JsTFhKbGNHeHBkQ29LY25saGJtRnZkV1poYkVKUkNoaHlaWEJzYVhRdGNtVndiQzFpYkc5amEzTXRjM0J2WTJzU0ZuSmxjR3hwZEMxeVpYQnNMVzFsZEdFdGMzQnZZMnNhSFhKbGNHeHBkQzF0WVhKbllYSnBibVV0WW14dlkydHpMWE53YjJOclNnY0krOFAxRXhBQlVBQmFEMmx1ZEdWdWRGOWlkWE5wYm1WemMxb1hiMjVpYjJGeVpHbH...sTWtZbE1rSmlSVUk1ZUc1WVZXRlljVUowV0c4MlEzTlVUMU5DTlhCVk1GZDFVMmxRV25GQmFuTnVSalZ5WkZwRmRrRm9aVWhJZURkMVZFZElWMDFpVVRJMWJWZEtiRFpyTWtkWFVucGhlVzFQZDFGb056RXhaemRZT1ZRM2EwVkNiV00wYW1OVFJGUjFiV1J5VlhSME4weHFUalYxZUU1SVFuWlliek0yYzFnelVYUXlKVEpHYVc5cFdpVXlRa3RaUm1WaGJXcElaMFZDUTNKYVdEZ2xNa1pKWmxrbE1rWTJNbmt3YkRKclFWWklRaVV5UWxSV2JWQkNjaVV5Um5jNGFrbEhSR0ZRUTNKblJETnVOV016TkZFbE0wUWxNMFE9DGzK1eBEyFSNEOikhAYEdFGkL-mWKTEOKBZtURhUhhOB_A9AqWm3WPQm2fax_vjK7kPfGX79hwP6XSn0wxDJBA.Q2dad2NtOWtPak1pQ25KbGNHeHBkQzVqYjIwPQ' failed: 
+connect @ 8941-cde0bcbb922cc124.js:1Understand this error
+8941-cde0bcbb922cc124.js:1 WebSocket connection to 'wss://eval2.spock.platform.replit.com/wsv2/v2.public.Q2dZSXd0UFB3QVlTQmdqaDc4L0FCaUlGYzNCdlkyc3dBRHFQQWdva05EUmpaRGRtT1RJdFpEaGhZUzAwTjJSaUxXSTBPVGN0WTJZMU1qQXlNekJpWTJOaUVnTnVhWGdhRjNKbGNHeHBkQzF5WlhCc0xXWnBiR1Z6TFhOd2IyTnJJaHB5WVdOamIzSmtaVzFsYm5RdFkyeGhkV1JsTFhKbGNHeHBkQ29LY25saGJtRnZkV1poYkVKUkNoaHlaWEJzYVhRdGNtVndiQzFpYkc5amEzTXRjM0J2WTJzU0ZuSmxjR3hwZEMxeVpYQnNMVzFsZEdFdGMzQnZZMnNhSFhKbGNHeHBkQzF0WVhKbllYSnBibVV0WW14dlkydHpMWE53YjJOclNnY0krOFAxRXhBQlVBQmFEMmx1ZEdWdWRGOWlkWE5wYm1WemMxb1hiMjVpYjJGeVpHbH...sTWtZbE1rSmlSVUk1ZUc1WVZXRlljVUowV0c4MlEzTlVUMU5DTlhCVk1GZDFVMmxRV25GQmFuTnVSalZ5WkZwRmRrRm9aVWhJZURkMVZFZElWMDFpVVRJMWJWZEtiRFpyTWtkWFVucGhlVzFQZDFGb056RXhaemRZT1ZRM2EwVkNiV00wYW1OVFJGUjFiV1J5VlhSME4weHFUalYxZUU1SVFuWlliek0yYzFnelVYUXlKVEpHYVc5cFdpVXlRa3RaUm1WaGJXcElaMFZDUTNKYVdEZ2xNa1pKWmxrbE1rWTJNbmt3YkRKclFWWklRaVV5UWxSV2JWQkNjaVV5Um5jNGFrbEhSR0ZRUTNKblJETnVOV016TkZFbE0wUWxNMFE9DGzK1eBEyFSNEOikhAYEdFGkL-mWKTEOKBZtURhUhhOB_A9AqWm3WPQm2fax_vjK7kPfGX79hwP6XSn0wxDJBA.Q2dad2NtOWtPak1pQ25KbGNHeHBkQzVqYjIwPQ' failed: 
+connect @ 8941-cde0bcbb922cc124.js:1Understand this error
+_app-0a43d96e5d409137.js:15 WebSocket connection to 'wss://replit.com/graphql_subscriptions' failed: 
+(anonymous) @ _app-0a43d96e5d409137.js:15Understand this error
+62b35a865152ab14c5942820:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+graphql:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+_app-0a43d96e5d409137.js:13 WARN: A component changed from uncontrolled to controlled.
+(anonymous) @ _app-0a43d96e5d409137.js:13Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'ambient-light-sensor'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'battery'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'execution-while-not-rendered'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'execution-while-out-of-viewport'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'layout-animations'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'legacy-image-formats'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'navigation-override'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'oversized-images'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'publickey-credentials'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'speaker-selection'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'unoptimized-images'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'unsized-media'.Understand this warning
+workspace_iframe.html:32 Allow attribute will take precedence over 'allowfullscreen'.Understand this warning
+workspace_iframe.html:32 Allow attribute will take precedence over 'allowpaymentrequest'.Understand this warning
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=LXIqtDRCoI-o' failed: 
+t @ Network.js:227Understand this error
+Network.js:227 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=LXIqtDRCoI-o' is invalid.Understand this error
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=LXIqtDRCoI-o' failed: 
+t @ Network.js:227Understand this error
+Network.js:227 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=LXIqtDRCoI-o' is invalid.Understand this error
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=LXIqtDRCoI-o' failed: 
+t @ Network.js:227Understand this error
+Network.js:227 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=LXIqtDRCoI-o' is invalid.
+    at new t (Network.js:227:18)
+    at setupWebSocket (client:536:19)
+    at fallback (client:509:16)
+    at WebSocket.<anonymous> (client:555:7)Understand this error
+Console.js:61 Référence dans les params: null
+Console.js:61 Référence sauvegardée: REF-1270-607305
+Console.js:61 Référence à utiliser: REF-1270-607305
+Console.js:61 Statut redirection Stripe: null
+Console.js:61 ID paiement Stripe: null
+Console.js:61 Statut de redirection Stripe: null
+Console.js:61 ID de PaymentIntent Stripe: null
+Console.js:61 Pas de statut Stripe clair, vérification via API pour la référence: REF-1270-607305
+Console.js:61 Vérification pour REF-1270-607305 sans PaymentIntent
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du statut du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Vérification pour REF-1270-607305 sans PaymentIntent
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/service-requests/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification initiale de la référence: Error: 404: {"success":false,"message":"Demande non trouvée"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:177:28)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+4Console.js:61 Vérification pour REF-1270-607305 sans PaymentIntent
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/service-requests/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:199:19)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/service-requests/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification initiale de la référence: Error: 404: {"success":false,"message":"Demande non trouvée"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:177:28)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:199:19)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:199:19)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:199:19)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:199:19)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/payment-status/REF-1270-607305:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 (Not Found)Understand this error
+Console.js:61 Erreur lors de la vérification du paiement: Error: 404: {"success":false,"message":"Demande non trouvée avec cette référence"}
+    at throwIfResNotOk (queryClient.ts:6:11)
+    at async apiRequest (queryClient.ts:35:3)
+    at async checkPaymentStatus (payment-confirmation.tsx:199:19)
+    at async runCheck (payment-confirmation.tsx:274:22)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+
+                
+          
+          
+          
+         Chrome is moving towards a new experience that allows users to choose to browse without third-party cookies.Understand this warning
+stallwart.build.js:1 stallwart: failed ping 1
+stallwart.build.js:1 stallwart: failed ping 2
+
+                
+          
+          
+          
+         Chrome is moving towards a new experience that allows users to choose to browse without third-party cookies.Understand this warning

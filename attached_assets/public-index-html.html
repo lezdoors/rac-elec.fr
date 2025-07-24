@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commander notre service</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f7fa;
+    }
+    
+    .container {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    }
+    
+    h1 {
+      color: #2d2d2d;
+      margin-bottom: 30px;
+      text-align: center;
+      font-weight: 600;
+    }
+    
+    .form-row {
+      margin-bottom: 25px;
+    }
+    
+    .form-row label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: #4a4a4a;
+    }
+    
+    .form-row input[type="text"],
+    .form-row input[type="email"],
+    .form-row input[type="tel"],
+    .form-row select,
+    .form-row textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border 0.3s ease;
+    }
+    
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+      border-color: #6772e5;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(103, 114, 229, 0.1);
+    }
+    
+    .submit-button {
+      background-color: #6772e5;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      margin-top: 25px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(103, 114, 229, 0.2);
+    }
+    
+    .submit-button:hover {
+      background-color: #5469d4;
+      transform: translateY(-1px);
+      box-shadow: 0 7px 14px rgba(103, 114, 229, 0.25);
+    }
+    
+    .submit-button:active {
+      transform: translateY(1px);
+      box-shadow: 0 3px 8px rgba(103, 114, 229, 0.2);
+    }
+    
+    .submit-button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .error-message {
+      display: none;
+      background-color: #fff0f0;
+      border-left: 4px solid #e74c3c;
+      color: #e74c3c;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    
+    .service-option {
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 15px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .service-option:hover {
+      background-color: #f9f9f9;
+      border-color: #d0d0d0;
+    }
+    
+    .service-option.selected {
+      background-color: #f0f4ff;
+      border-color: #6772e5;
+    }
+    
+    .service-option input[type="radio"] {
+      margin-right: 10px;
+    }
+    
+    .service-price {
+      float: right;
+      font-weight: bold;
+      color: #6772e5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Commander notre service</h1>
+    
+    <div id="error-message" class="error-message"></div>
+    
+    <form id="service-form">
+      <div class="form-row">
+        <label for="name">Nom complet</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      
+      <div class="form-row">
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      
+      <div class="form-row">
+        <label for="phone">Téléphone</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+      
+      <div class="form-row">
+        <label>Choisissez votre formule</label>
+        
+        <div class="service-option" data-price="49.99">
+          <input type="radio" name="service" value="basic" id="service-basic" required>
+          <label for="service-basic">Formule Basique</label>
+          <span class="service-price">49,99 €</span>
+          <p>Notre offre d'entrée de gamme pour les besoins essentiels.</p>
+        </div>
+        
+        <div class="service-option" data-price="99.99">
+          <input type="radio" name="service" value="standard" id="service-standard" checked>
+          <label for="service-standard">Formule Standard</label>
+          <span class="service-price">99,99 €</span>
+          <p>Notre offre la plus populaire avec un excellent rapport qualité-prix.</p>
+        </div>
+        
+        <div class="service-option" data-price="149.99">
+          <input type="radio" name="service" value="premium" id="service-premium">
+          <label for="service-premium">Formule Premium</label>
+          <span class="service-price">149,99 €</span>
+          <p>Notre offre la plus complète pour des résultats exceptionnels.</p>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <label for="comments">Commentaires supplémentaires (optionnel)</label>
+        <textarea id="comments" name="comments" rows="4"></textarea>
+      </div>
+      
+      <button type="submit" id="submit-button" class="submit-button">
+        Commander et payer
+      </button>
+    </form>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Gérer les options de service
+      const serviceOptions = document.querySelectorAll('.service-option');
+      
+      serviceOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // Sélectionner le bouton radio à l'intérieur
+          const radio = this.querySelector('input[type="radio"]');
+          radio.checked = true;
+          
+          // Mettre à jour les classes
+          serviceOptions.forEach(opt => opt.classList.remove('selected'));
+          this.classList.add('selected');
+        });
+      });
+      
+      // Définir la première option comme sélectionnée
+      document.querySelector('#service-standard').closest('.service-option').classList.add('selected');
+      
+      // Gérer la soumission du formulaire
+      const form = document.getElementById('service-form');
+      const submitButton = document.getElementById('submit-button');
+      
+      form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        
+        // Désactiver le bouton pour éviter les soumissions multiples
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<div class="spinner"></div> Traitement en cours...';
+        
+        // Récupérer les données du formulaire
+        const formData = new FormData(form);
+        const selectedService = document.querySelector('input[name="service"]:checked');
+        const serviceOption = selectedService.closest('.service-option');
+        const price = parseFloat(serviceOption.dataset.price);
+        
+        // Préparer l'objet de données
+        const data = {
+          name: formData.get('name'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          serviceType: selectedService.value,
+          amount: price,
+          currency: 'EUR',
+          items: [
+            {
+              name: `Formule ${selectedService.value.charAt(0).toUpperCase() + selectedService.value.slice(1)}`,
+              price: price,
+              quantity: 1
+            }
+          ],
+          comments: formData.get('comments')
+        };
+        
+        try {
+          // Envoyer la demande de service
+          const response = await fetch('/api/create-service-request', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+          
+          const result = await response.json();
+          
+          if (result.success) {
+            // Stocker les détails dans le localStorage
+            localStorage.setItem('currentOrder', JSON.stringify({
+              ...data,
+              reference: result.reference,
+            }));
+            
+            // Rediriger vers la page de paiement
+            window.location.href = `/payment/${result.reference}`;
+          } else {
+            showError(result.message || 'Une erreur s\'est produite. Veuillez réessayer.');
+          }
+        } catch (err) {
+          console.error('Erreur:', err);
+          showError('Une erreur de connexion s\'est produite. Veuillez vérifier votre connexion internet et réessayer.');
+        }
+      });
+      
+      // Afficher les messages d'erreur
+      function showError(message) {
+        const errorElement = document.getElementById('error-message');
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+        
+        // Réactiver le bouton
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Commander et payer';
+        
+        // Faire défiler jusqu'à l'erreur
+        errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  </script>
+</body>
+</html>

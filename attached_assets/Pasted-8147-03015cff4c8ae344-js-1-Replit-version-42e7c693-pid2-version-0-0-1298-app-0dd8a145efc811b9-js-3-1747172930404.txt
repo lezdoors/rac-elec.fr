@@ -1,0 +1,108 @@
+8147-03015cff4c8ae344.js:1 Replit version 42e7c693, pid2 version 0.0.1298
+_app-0dd8a145efc811b9.js:38 
+      /////////////////////
+   ///////////////////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////        Curious and driven?
+  ///////////////@@@@@@@///////        Work with us!
+  ///////////////@@@@@@@///////
+  ///////////////@@@@@@@///////        https://join.replit.com/hack.with.us
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@#//////////////
+   ///////////////////////////
+      /////////////////////
+      
+_app-0dd8a145efc811b9.js:38 [LaunchDarkly] LaunchDarkly client initialized
+5Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.Understand this error
+framework-3d192b90ae3265bd.js:1 Unrecognized feature: 'ambient-light-sensor'.
+_ @ framework-3d192b90ae3265bd.js:1Understand this warning
+framework-3d192b90ae3265bd.js:1 Unrecognized feature: 'battery'.
+_ @ framework-3d192b90ae3265bd.js:1Understand this warning
+framework-3d192b90ae3265bd.js:1 Unrecognized feature: 'execution-while-not-rendered'.
+_ @ framework-3d192b90ae3265bd.js:1Understand this warning
+framework-3d192b90ae3265bd.js:1 Unrecognized feature: 'execution-while-out-of-viewport'.
+_ @ framework-3d192b90ae3265bd.js:1Understand this warning
+framework-3d192b90ae3265bd.js:1 Unrecognized feature: 'layout-animations'.
+_ @ framework-3d192b90ae3265bd.js:1Understand this warning
+framework-3d192b90ae3265bd.js:1 Unrecognized feature: 'legacy-image-formats'.
+_ @ framework-3d192b90ae3265bd.js:1Understand this warning
+framework-3d192b90ae3265bd.js:1 Unrecognized feature: 'navigation-override'.
+_ @ framework-3d192b90ae3265bd.js:1Understand this warning
+framework-3d192b90ae3265bd.js:1 Unrecognized feature: 'oversized-images'.
+_ @ framework-3d192b90ae3265bd.js:1Understand this warning
+framework-3d192b90ae3265bd.js:1 Unrecognized feature: 'publickey-credentials'.
+_ @ framework-3d192b90ae3265bd.js:1Understand this warning
+framework-3d192b90ae3265bd.js:1 Unrecognized feature: 'speaker-selection'.
+_ @ framework-3d192b90ae3265bd.js:1Understand this warning
+framework-3d192b90ae3265bd.js:1 Unrecognized feature: 'unoptimized-images'.
+_ @ framework-3d192b90ae3265bd.js:1Understand this warning
+framework-3d192b90ae3265bd.js:1 Unrecognized feature: 'unsized-media'.
+_ @ framework-3d192b90ae3265bd.js:1Understand this warning
+framework-3d192b90ae3265bd.js:1 Unrecognized feature: 'pointer-lock'.
+_ @ framework-3d192b90ae3265bd.js:1Understand this warning
+framework-3d192b90ae3265bd.js:1 Allow attribute will take precedence over 'allowfullscreen'.
+_ @ framework-3d192b90ae3265bd.js:1Understand this warning
+framework-3d192b90ae3265bd.js:1 Allow attribute will take precedence over 'allowpaymentrequest'.
+_ @ framework-3d192b90ae3265bd.js:1Understand this warning
+raccordement-claude-replit:1 Banner not shown: beforeinstallpromptevent.preventDefault() called. The page must call beforeinstallpromptevent.prompt() to show the banner.
+3stallwart.build.js:1 stallwart: failed ping 1
+workspace_iframe.html:32 Unrecognized feature: 'ambient-light-sensor'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'battery'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'execution-while-not-rendered'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'execution-while-out-of-viewport'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'layout-animations'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'legacy-image-formats'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'navigation-override'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'oversized-images'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'publickey-credentials'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'speaker-selection'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'unoptimized-images'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'unsized-media'.Understand this warning
+workspace_iframe.html:32 Allow attribute will take precedence over 'allowfullscreen'.Understand this warning
+workspace_iframe.html:32 Allow attribute will take precedence over 'allowpaymentrequest'.Understand this warning
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=KV6G1NO9dxwN' failed: 
+t @ Network.js:227Understand this error
+Network.js:227 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=KV6G1NO9dxwN' is invalid.
+    at new t (Network.js:227:18)
+    at setupWebSocket (client:536:19)
+    at fallback (client:509:16)
+    at WebSocket.<anonymous> (client:555:7)Understand this error
+Console.js:61 Warning: validateDOMNesting(...): <div> cannot appear as a descendant of <p>.
+    at div
+    at p
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/ui/form.tsx:165:6
+    at div
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/ui/form.tsx:72:6
+    at Controller (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-4BFJKWC4.js?v=d5dce8f4:298:35)
+    at FormField (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/ui/form.tsx:33:6)
+    at div
+    at div
+    at div
+    at form
+    at FormProvider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-4BFJKWC4.js?v=d5dce8f4:102:11)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at div
+    at RaccordementEnedisPage (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/pages/raccordement-enedis-new.tsx?t=1747172847063:139:18)
+    at main
+    at div
+    at Layout (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/layout.tsx:65:34)
+    at component
+    at Route (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d5dce8f4:323:16)
+    at Switch (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d5dce8f4:379:17)
+    at Router
+    at div
+    at PresenceChild (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/framer-motion.js?v=d5dce8f4:121:24)
+    at AnimatePresence (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/framer-motion.js?v=d5dce8f4:210:26)
+    at AnimationProvider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/providers/animation-provider.tsx:20:37)
+    at Provider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=d5dce8f4:38:15)
+    at TooltipProvider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=d5dce8f4:861:5)
+    at QueryClientProvider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=d5dce8f4:2805:3)
+    at App (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/App.tsx?t=1747172847063&v=oFNOc_n3jC5CqvPzuDxlU:444:59)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Lead créé avec succès, token: 8a778905-5b26-41df-ac63-7ab608db5473

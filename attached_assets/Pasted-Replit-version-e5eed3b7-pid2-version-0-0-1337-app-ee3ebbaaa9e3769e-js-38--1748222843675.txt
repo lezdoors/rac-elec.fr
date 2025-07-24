@@ -1,0 +1,168 @@
+Replit version e5eed3b7, pid2 version 0.0.1337
+_app-ee3ebbaaa9e3769e.js:38 
+      /////////////////////
+   ///////////////////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////        Curious and driven?
+  ///////////////@@@@@@@///////        Work with us!
+  ///////////////@@@@@@@///////
+  ///////////////@@@@@@@///////        https://join.replit.com/hack.with.us
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@#//////////////
+   ///////////////////////////
+      /////////////////////
+      
+_app-ee3ebbaaa9e3769e.js:38 [LaunchDarkly] LaunchDarkly client initialized
+_app-ee3ebbaaa9e3769e.js:38 [LaunchDarkly] Opening stream connection to https://clientstream.launchdarkly.com/eval/62b35a865152ab14c5942820/eyJrZXkiOiI0MTc3MTUxNSIsImtpbmQiOiJ1c2VyIiwiYW5vbnltb3VzIjpmYWxzZX0
+_app-ee3ebbaaa9e3769e.js:38 [LaunchDarkly] Closing stream connection
+_app-ee3ebbaaa9e3769e.js:38 [LaunchDarkly] Opening stream connection to https://clientstream.launchdarkly.com/eval/62b35a865152ab14c5942820/eyJrZXkiOiI0MTc3MTUxNSIsImtpbmQiOiJ1c2VyIiwibmFtZSI6InJ5YW5hb3VmYWwiLCJyb2xlcyI6WyJpbnRlbnRfYnVzaW5lc3MiLCJvbmJvYXJkaW5nX3JvbGVfbWFuYWdlciIsIm9uYm9hcmRpbmdfam9iX2NvbnN1bHRhbnQiXSwiZW1haWwiOiJyeWFuYW91ZmFsQGdtYWlsLmNvbSIsInRpbWVfY3JlYXRlZCI6MTc0NTI0NDA2Mzg0MywiX21ldGEiOnsicHJpdmF0ZUF0dHJpYnV0ZXMiOlsiZW1haWwiXX19
+_app-ee3ebbaaa9e3769e.js:38 [LaunchDarkly] Closing stream connection
+rac-elecFR:1 Banner not shown: beforeinstallpromptevent.preventDefault() called. The page must call beforeinstallpromptevent.prompt() to show the banner.
+_app-ee3ebbaaa9e3769e.js:38 [LaunchDarkly] Opening stream connection to https://clientstream.launchdarkly.com/eval/62b35a865152ab14c5942820/eyJrZXkiOiI0MTc3MTUxNSIsImtpbmQiOiJ1c2VyIiwibmFtZSI6InJ5YW5hb3VmYWwiLCJyb2xlcyI6WyJpbnRlbnRfYnVzaW5lc3MiLCJvbmJvYXJkaW5nX3JvbGVfbWFuYWdlciIsIm9uYm9hcmRpbmdfam9iX2NvbnN1bHRhbnQiXSwiZW1haWwiOiJyeWFuYW91ZmFsQGdtYWlsLmNvbSIsInRpbWVfY3JlYXRlZCI6MTc0NTI0NDA2Mzg0MywiX21ldGEiOnsicHJpdmF0ZUF0dHJpYnV0ZXMiOlsiZW1haWwiXX19
+5Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.Understand this error
+framework-496a8d79c405631b.js:1 Unrecognized feature: 'ambient-light-sensor'.
+_ @ framework-496a8d79c405631b.js:1Understand this warning
+framework-496a8d79c405631b.js:1 Unrecognized feature: 'battery'.
+_ @ framework-496a8d79c405631b.js:1Understand this warning
+framework-496a8d79c405631b.js:1 Unrecognized feature: 'execution-while-not-rendered'.
+_ @ framework-496a8d79c405631b.js:1Understand this warning
+framework-496a8d79c405631b.js:1 Unrecognized feature: 'execution-while-out-of-viewport'.
+_ @ framework-496a8d79c405631b.js:1Understand this warning
+framework-496a8d79c405631b.js:1 Unrecognized feature: 'layout-animations'.
+_ @ framework-496a8d79c405631b.js:1Understand this warning
+framework-496a8d79c405631b.js:1 Unrecognized feature: 'legacy-image-formats'.
+_ @ framework-496a8d79c405631b.js:1Understand this warning
+framework-496a8d79c405631b.js:1 Unrecognized feature: 'navigation-override'.
+_ @ framework-496a8d79c405631b.js:1Understand this warning
+framework-496a8d79c405631b.js:1 Unrecognized feature: 'oversized-images'.
+_ @ framework-496a8d79c405631b.js:1Understand this warning
+framework-496a8d79c405631b.js:1 Unrecognized feature: 'publickey-credentials'.
+_ @ framework-496a8d79c405631b.js:1Understand this warning
+framework-496a8d79c405631b.js:1 Unrecognized feature: 'speaker-selection'.
+_ @ framework-496a8d79c405631b.js:1Understand this warning
+framework-496a8d79c405631b.js:1 Unrecognized feature: 'unoptimized-images'.
+_ @ framework-496a8d79c405631b.js:1Understand this warning
+framework-496a8d79c405631b.js:1 Unrecognized feature: 'unsized-media'.
+_ @ framework-496a8d79c405631b.js:1Understand this warning
+framework-496a8d79c405631b.js:1 Unrecognized feature: 'pointer-lock'.
+_ @ framework-496a8d79c405631b.js:1Understand this warning
+framework-496a8d79c405631b.js:1 Allow attribute will take precedence over 'allowfullscreen'.
+_ @ framework-496a8d79c405631b.js:1Understand this warning
+framework-496a8d79c405631b.js:1 Allow attribute will take precedence over 'allowpaymentrequest'.
+_ @ framework-496a8d79c405631b.js:1Understand this warning
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_CONNECTION_RESETUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_CONNECTION_RESETUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_CONNECTION_RESETUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_CONNECTION_RESETUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_CONNECTION_RESETUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_CONNECTION_RESETUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_CONNECTION_RESETUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_CONNECTION_RESETUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_CONNECTION_RESETUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_CONNECTION_RESETUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_CONNECTION_RESETUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_CONNECTION_RESETUnderstand this error
+sp.replit.com/v1/t:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 ()Understand this error
+stallwart.build.js:1 stallwart: failed ping 1
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2kd%3A:32 Unrecognized feature: 'ambient-light-sensor'.Understand this warning
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2kd%3A:32 Unrecognized feature: 'battery'.Understand this warning
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2kd%3A:32 Unrecognized feature: 'execution-while-not-rendered'.Understand this warning
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2kd%3A:32 Unrecognized feature: 'execution-while-out-of-viewport'.Understand this warning
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2kd%3A:32 Unrecognized feature: 'layout-animations'.Understand this warning
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2kd%3A:32 Unrecognized feature: 'legacy-image-formats'.Understand this warning
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2kd%3A:32 Unrecognized feature: 'navigation-override'.Understand this warning
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2kd%3A:32 Unrecognized feature: 'oversized-images'.Understand this warning
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2kd%3A:32 Unrecognized feature: 'publickey-credentials'.Understand this warning
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2kd%3A:32 Unrecognized feature: 'speaker-selection'.Understand this warning
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2kd%3A:32 Unrecognized feature: 'unoptimized-images'.Understand this warning
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2kd%3A:32 Unrecognized feature: 'unsized-media'.Understand this warning
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2kd%3A:32 Allow attribute will take precedence over 'allowfullscreen'.Understand this warning
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar2kd%3A:32 Allow attribute will take precedence over 'allowpaymentrequest'.Understand this warning
+Network.js:227 WebSocket connection to 'wss://12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/?token=y5RaMWOWVW7t' failed: 
+t @ Network.js:227Understand this error
+Network.js:227 WebSocket connection to 'wss://12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/?token=y5RaMWOWVW7t' failed: 
+t @ Network.js:227Understand this error
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/api/login:1 
+            
+            
+           Failed to load resource: the server responded with a status of 500 (Internal Server Error)Understand this error
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/api/login:1 
+            
+            
+           Failed to load resource: the server responded with a status of 500 (Internal Server Error)Understand this error
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/api/login:1 
+            
+            
+           Failed to load resource: the server responded with a status of 500 (Internal Server Error)Understand this error
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/api/login:1 
+            
+            
+           Failed to load resource: the server responded with a status of 500 (Internal Server Error)Understand this error
+Console.js:61 ✅ Ressources statiques mises en cache
+Network.js:227 WebSocket connection to 'wss://12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/?token=y5RaMWOWVW7t' failed: 
+t @ Network.js:227Understand this error
+Network.js:227 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=y5RaMWOWVW7t' is invalid.
+    at new t (Network.js:227:18)
+    at setupWebSocket (client:536:19)
+    at fallback (client:509:16)
+    at WebSocket.<anonymous> (client:555:7)Understand this error
+Console.js:61 ✅ Améliorations d'accessibilité appliquées
+Console.js:61 ✅ Google Analytics est correctement chargé et disponible.
+Console.js:61 ✅ Événement de test envoyé à Google Analytics.
+Console.js:61 ✅ Ressources statiques mises en cache
+Console.js:61 Vérification de l'authentification: Object
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/api/login:1 
+            
+            
+           Failed to load resource: the server responded with a status of 500 (Internal Server Error)Understand this error
+12ca2dc5-b43b-4023-8a45-fcdfcf999886-00-pyvuqf2b78q2.worf.replit.dev/api/login:1 
+            
+            
+           Failed to load resource: the server responded with a status of 500 (Internal Server Error)Understand this error
+
+                
+          
+          
+          
+         Chrome is moving towards a new experience that allows users to choose to browse without third-party cookies.

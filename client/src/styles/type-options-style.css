@@ -1,0 +1,53 @@
+/**
+ * Styles simplifiés pour les options de type de raccordement
+ * Utilise des sélecteurs moins spécifiques pour éviter les conflits
+ */
+
+/* Style de base pour les options */
+.type-option-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  transition: all 0.15s ease;
+}
+
+/* Option sélectionnée */
+.type-option-item.border-blue-500,
+.type-option-item.bg-blue-50 {
+  background-color: #ebf5ff !important;
+  border-color: #3b82f6 !important;
+}
+
+/* Sur mobile, réduire les marges */
+@media (max-width: 640px) {
+  .type-option-item {
+    margin-bottom: 0.25rem;
+  }
+  
+  /* Pour la vue en liste */
+  .sm\:hidden .flex-col .type-option-item {
+    border-radius: 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid #e5e7eb;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .sm\:hidden .flex-col .type-option-item:first-child {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border-top: 1px solid #e5e7eb;
+  }
+  
+  .sm\:hidden .flex-col .type-option-item:last-child {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  /* Mise en évidence sur mobile */
+  .sm\:hidden .flex-col .type-option-item.border-blue-500,
+  .sm\:hidden .flex-col .type-option-item.bg-blue-50 {
+    border-left: 3px solid #3b82f6;
+  }
+}

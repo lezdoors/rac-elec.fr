@@ -1,0 +1,157 @@
+/**
+ * Optimisations CSS critiques pour performances maximales
+ * Compatible avec tous les navigateurs modernes
+ * Focalisé sur l'accélération GPU et la réduction des reflows/repaints
+ */
+
+/* Variables CSS pour cohérence et maintenabilité */
+:root {
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 200ms ease-in-out;
+  --transition-slow: 300ms ease-in-out;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --border-radius-sm: 0.375rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 0.75rem;
+}
+
+/* Support pour prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Optimisations générales pour l'accélération GPU */
+.gpu-accelerated {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimisations pour les animations et transitions */
+.performance-optimized {
+  contain: layout style paint;
+  will-change: transform, opacity;
+}
+
+/* Optimisations spécifiques pour les éléments critiques */
+.hero-section {
+  contain: layout style;
+  transform: translateZ(0);
+}
+
+.grid-optimized {
+  contain: layout;
+  will-change: transform;
+}
+
+/* Optimisations pour les images et médias */
+.image-optimized {
+  contain: layout;
+  will-change: transform;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Optimisations pour le texte et typographie */
+.text-optimized {
+  text-rendering: optimizeSpeed;
+  font-display: swap;
+}
+
+/* Classes d'utilitaire pour performance optimisée */
+.btn-optimized {
+  transition: var(--transition-fast);
+  will-change: transform, background-color, border-color;
+  transform: translateZ(0);
+}
+
+.btn-optimized:hover {
+  transform: translateY(-1px) translateZ(0);
+}
+
+.btn-optimized:active {
+  transform: translateY(0) translateZ(0);
+}
+
+.card-optimized {
+  contain: layout style;
+  transition: var(--transition-normal);
+  will-change: transform, box-shadow;
+}
+
+.card-optimized:hover {
+  transform: translateY(-2px) translateZ(0);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Optimisations pour les grilles CSS */
+.grid-container {
+  display: grid;
+  contain: layout;
+  gap: 1rem;
+}
+
+@supports (display: subgrid) {
+  .grid-subgrid {
+    display: subgrid;
+  }
+}
+
+/* Optimisations pour les transitions mobiles */
+@media (max-width: 768px) {
+  .mobile-optimized {
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  /* Réduction des animations sur mobile pour économiser la batterie */
+  .reduced-motion {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.3s !important;
+  }
+}
+
+/* Optimisations pour les scroll handlers */
+.scroll-optimized {
+  overflow-anchor: none;
+  contain: layout style paint;
+}
+
+/* Optimisations pour les grilles et flexbox */
+.layout-optimized {
+  contain: layout;
+  isolation: isolate;
+}
+
+/* Optimisations pour les éléments hors viewport */
+.offscreen {
+  content-visibility: auto;
+  contain-intrinsic-size: 200px;
+}
+
+/* Optimisations critiques pour le rendu initial */
+.critical-above-fold {
+  contain: layout style;
+  will-change: auto;
+}
+
+/* Optimisations pour les éléments d'interaction */
+.interactive-optimized {
+  touch-action: manipulation;
+  will-change: transform;
+  contain: layout style;
+}
+
+/* Préchargement optimisé pour les ressources critiques */
+.preload-hint {
+  content-visibility: auto;
+  contain-intrinsic-size: 100px 50px;
+}

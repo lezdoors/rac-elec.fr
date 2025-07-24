@@ -1,0 +1,153 @@
+Create a complete multi-step web application for Enedis electrical connection requests with the following specifications:
+
+Application Structure
+
+Build a responsive single-page application using HTML, CSS, and JavaScript with a 3-step wizard interface:
+
+Step 1: Personal Information (Informations personnelles)
+Step 2: Project Details (Détails du projet)
+Step 3: Validation and Finalization (Validation et finalisation)
+Step 1: Personal Information
+
+Client Type Selection (Required)
+Create three card-style options with icons:
+
+Particulier - Individual residential connection
+Professionnel - Business/Professional connection
+Collectivité - Local authority/Administration
+Base Fields (All Users)
+Nom* (Last name) - Text input
+Prénom* (First name) - Text input
+Email* - Email input with validation
+Téléphone* - Phone input with French format
+Conditional Fields - When "Professionnel" Selected
+Show blue info box: "Informations professionnelles - Ces informations nous permettront d'identifier votre entreprise et d'adapter notre service à vos besoins professionnels."
+
+Add fields:
+
+Raison sociale* - Company name (text input)
+SIREN* - 9-digit number input with format validation and helper text: "Le SIREN est composé de 9 chiffres (les 9 premiers chiffres du SIRET)"
+Conditional Fields - When "Collectivité" Selected
+Show blue info box: "Informations de la collectivité - Ces informations nous permettront d'identifier votre collectivité locale et d'adapter notre service aux besoins spécifiques des établissements publics."
+
+Add fields:
+
+Nom de la collectivité* - Authority name (text input)
+SIREN de la collectivité* - 9-digit number input with same validation as professional
+Step 2: Project Details
+
+Project Address Section
+Adresse* - Full address input with placeholder "Saisissez une adresse..."
+Complément d'adresse - Additional address info (Étage, bâtiment, etc.)
+Code postal* - 5-digit postal code with example "75001"
+Ville* - City input that auto-populates based on postal code
+Technical Details Section
+Type de raccordement* (Connection type) - Card selection:
+
+Nouveau raccordement - New connection (default selected)
+Icon: House
+Description: "Raccordement définitif pour une nouvelle construction ou un terrain vierge"
+Augmentation de puissance - Power increase
+Icon: Arrow up
+Description: "Augmenter la puissance de votre installation électrique existante"
+Raccordement provisoire - Temporary connection
+Icon: Construction
+Description: "Raccordement temporaire pour chantier ou événement ponctuel"
+Déplacement de compteur - Meter relocation
+Icon: Move
+Description: "Déplacer votre compteur Linky ou installation électrique existante"
+Autre demande - Other request
+Icon: Info
+Description: "Modification d'installation, mise en service ou autre demande spécifique"
+Type de projet* (Project type) - Card selection:
+
+Maison individuelle - Individual house (default)
+Immeuble collectif - Collective building
+Local commercial - Commercial premises
+Bâtiment industriel - Industrial building
+Terrain nu - Bare land
+Type d'alimentation* (Power supply type):
+
+Monophasé - Single phase (3-9 kVA)
+Triphasé - Three phase (12-36 kVA)
+Je ne sais pas - I don't know (orange button with expert consultation offer)
+Conditional Logic for Temporary Connection
+When "Raccordement provisoire" is selected, add:
+
+Numéro PDL actuel - Current delivery point number (14 digits)
+Checkbox: "Je ne connais pas mon numéro PDL"
+Date de début souhaitée* - Start date
+Date de fin souhaitée* - End date
+Step 3: Validation and Finalization
+
+Request Summary Section
+Display a blue summary card showing:
+
+Personal coordinates (A. Vos coordonnées)
+Project details (Détails du projet)
+Editable via "Modifier mes informations" link
+Additional Information Section
+État du projet* (Project status) - Dropdown:
+
+"En phase de planification" (default)
+"Permis déposé"
+"Permis obtenu"
+"Travaux en cours"
+"Travaux terminés"
+Délai de raccordement souhaité* (Desired connection timeframe) - Dropdown:
+
+"Entre 1 et 3 mois" (default)
+"Entre 3 et 6 mois"
+"Plus de 6 mois"
+"Dès que possible"
+Optional Sections (Toggleable)
+J'ai un architecte pour ce projet - Architect details checkbox
+Utiliser une adresse de facturation différente - Different billing address checkbox
+Additional Comments
+Large text area with placeholder: "Précisez ici toute information complémentaire utile à votre demande (ex: contraintes du terrain, détails techniques spécifiques, etc.)"
+
+Terms and Conditions
+Checkbox (required): "J'accepte les conditions générales de vente*" Helper text: "Je souhaite que la prestation débute avant l'expiration du délai de rétractation légale. Si celle-ci était totalement exécutée avant l'expiration de ce délai, je ne pourrai plus me rétracter."
+
+Payment Confirmation Page
+
+After form submission, show:
+
+Reference number: REF-8105-326762
+Payment amount: 129,8 € TTC
+Payment form with:
+Cardholder name field
+Card number (16 digits with spacing)
+Expiry date (MM/YY)
+CVV code
+Request summary sidebar with all details
+Security badges: SSL encryption, PCI DSS compliance
+Technical Requirements
+
+Validation Rules
+SIREN: Exactly 9 digits
+Email: Valid email format
+Phone: French phone number format
+Postal code: 5 digits
+Required field indicators with red asterisks
+Progressive Enhancement
+Step completion indicators with checkmarks
+Progress bar showing completion percentage
+Smooth transitions between steps
+Auto-save functionality (localStorage)
+Responsive Design
+Mobile-first approach
+Card-based layout for options
+Touch-friendly interfaces
+Proper spacing and typography
+Color Scheme
+Primary blue: #4285f4 (Google Blue)
+Success green: #34a853
+Warning orange: #fbbc04
+Error red: #ea4335
+Light backgrounds: #f8f9fa
+Form Behavior
+Dynamic field showing/hiding based on selections
+Real-time validation feedback
+Auto-completion for address fields
+Progress persistence across page refreshes

@@ -1,0 +1,133 @@
+/* 🎯 CSS MOBILE ULTRA-COMPACT - FORMULAIRE PARFAIT */
+
+@media (max-width: 768px) {
+  /* ÉTAPE 1 - Champs professionnels */
+  [data-form-section="professionnel"] > [data-field] + [data-field] {
+    margin-top: -0.5rem !important;
+  }
+  
+  [data-form-section="collectivite"] > [data-field] + [data-field] {
+    margin-top: -0.5rem !important;
+  }
+  
+  [data-field="raisonSociale"] + [data-field="siren"] {
+    margin-top: -0.75rem !important;
+  }
+  
+  [data-field="nomCollectivite"] + [data-field="siren"] {
+    margin-top: -0.75rem !important;
+  }
+  
+  /* 🔥 ÉTAPE 2 - SUPPRESSION TOTALE DES ESPACES */
+  
+  /* CIBLAGE SPÉCIFIQUE - Conteneur principal étape 2 */
+  div.space-y-0.md\\:space-y-3 > div + div {
+    margin-top: 0 !important;
+  }
+  
+  /* TOUTES les variantes d'espacement supprimées */
+  .space-y-1 > * + *,
+  .space-y-2 > * + *,
+  .space-y-3 > * + *,
+  .space-y-4 > * + *,
+  .space-y-6 > * + * {
+    margin-top: 0 !important;
+  }
+  
+  /* Conteneurs de formulaire sans espace */
+  .bg-white.rounded-lg .space-y-1 > *,
+  .bg-white.rounded-lg .space-y-2 > *,
+  .bg-white.rounded-lg .space-y-3 > * {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Grilles sans espace */
+  .grid.grid-cols-1 > * + *,
+  .md\\:grid > * + * {
+    margin-top: 0 !important;
+  }
+  
+  /* FormItems ultra-compacts */
+  [data-radix-form-item],
+  .space-y-1,
+  .space-y-2,
+  .space-y-3 {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  /* Labels minimalistes */
+  .mb-1,
+  .mb-1\\.5,
+  .mb-2 {
+    margin-bottom: 0.125rem !important;
+  }
+  
+  /* Messages d'erreur collés */
+  .text-xs.text-red-600 {
+    margin-top: 0.125rem !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Titres sections ultra-compacts */
+  h3.text-sm.font-medium,
+  h3.text-base.font-medium {
+    margin-bottom: 0.125rem !important;
+    margin-top: 0.25rem !important;
+  }
+  
+  h3:first-child {
+    margin-top: 0 !important;
+  }
+  
+  /* Conteneur principal compact */
+  .p-4.md\\:p-8 {
+    padding: 0.75rem !important;
+  }
+  
+  /* Tous les champs même hauteur */
+  .h-11,
+  .h-12,
+  input,
+  .SelectTrigger {
+    height: 3rem !important;
+  }
+  
+  /* Boutons radio/checkbox compacts */
+  .cursor-pointer.rounded-lg {
+    margin-bottom: 0 !important;
+  }
+  
+  /* 💥 FORCE OVERRIDE - Supprime TOUT espacement */
+  * + * {
+    margin-top: 0 !important;
+  }
+  
+  /* 🎯 CORRECTION GLOBALE DES ESPACES INDÉSIRABLES */
+  
+  /* Suppression espace après ville du projet */
+  .space-y-1.md\\:grid.md\\:grid-cols-2 + [data-testid="facturation-toggle"] {
+    margin-top: -0.5rem !important;
+  }
+  
+  /* Suppression espace entre type projet et type alimentation */
+  .md\\:grid.md\\:grid-cols-2.md\\:gap-8 > * + * {
+    margin-top: 0 !important;
+  }
+  
+  /* Toggle facturation collé */
+  [data-testid="facturation-toggle"] {
+    margin-top: -0.5rem !important;
+  }
+  
+  /* Sections techniques sans espace */
+  .space-y-1.md\\:grid {
+    margin-top: 0 !important;
+  }
+  
+  /* Exceptions pour la lisibilité */
+  h2 + p {
+    margin-top: 0.25rem !important;
+  }
+}

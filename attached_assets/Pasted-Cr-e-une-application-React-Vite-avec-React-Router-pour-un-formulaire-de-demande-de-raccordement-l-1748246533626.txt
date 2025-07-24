@@ -1,0 +1,65 @@
+Crée une application React (Vite) avec React Router pour un formulaire de demande de raccordement électrique, multi-étapes, responsive, avec logique dynamique, vérification des champs, paiement Stripe, et une page de confirmation.
+
+🔵 Structure du formulaire (5 étapes/pages) :
+
+1. **Étape 1 – Informations personnelles**
+   - Type de client (radio bouton) : Particulier / Professionnel / Collectivité
+     - Si Professionnel : afficher "Raison sociale" + "SIREN (9 chiffres)"
+     - Si Collectivité : afficher "Nom de la collectivité" + "SIREN collectivité"
+   - Nom, Prénom, Email
+   - Téléphone :
+     - Doit commencer par 0 ou +33
+     - Format FR uniquement
+     - Chiffres uniquement (empêche lettres)
+     - Champ `input type="tel"` avec validation `pattern="^(\+33|0)[1-9](\d{8})$"`
+
+2. **Étape 2 – Détails du raccordement**
+   - Adresse du projet :
+     - Adresse complète
+     - Code postal : validation à 5 chiffres
+     - Ville : auto-remplie à partir du code postal via une base de données française (API CP -> ville)
+   - Type de raccordement (sélection) :
+     - Nouveau raccordement
+     - Raccordement provisoire
+     - Augmentation de puissance
+     - Déplacement de compteur
+     - Autre demande → champ "description"
+   - Type de projet :
+     - Maison individuelle, Immeuble collectif, Local commercial, Bâtiment industriel, Terrain nu
+     - Si "Terrain nu" → afficher "Terrain viabilisé ? Oui / Non"
+   - Type d’alimentation :
+     - Monophasé : options 3, 6, 9, 12 kVA
+     - Triphasé : options 12, 18, 24, 36 kVA (36 avec mention "Tarif Jaune PRO")
+     - Je ne sais pas
+
+3. **Étape 3 – Récapitulatif / finalisation du dossier**
+   - Résumé de toutes les informations (coordonnées + projet)
+   - Sélection : État du projet + Délai souhaité
+   - Toggles :
+     - Architecte (affiche coordonnées)
+     - Adresse de facturation différente (si coché → afficher formulaire, sinon copier adresse projet)
+   - Zone commentaire
+   - Case à cocher obligatoire : CGV
+
+4. **Page Stripe `/confirmation/:ref`**
+   - Création d'une référence unique (ex : `ref-39j5-FRD8`)
+   - Utilisation des données `formData` pour créer session Stripe (montant fixe)
+   - Redirection automatique vers `/merci` après paiement
+
+5. **Page Merci `/merci`**
+   - Message : "Merci pour votre demande"
+   - Affiche la référence de commande
+   - Bouton retour ou nouvelle demande
+
+⚙️ Contraintes techniques :
+- React + React Router v6
+- Formulaire multi-étapes avec `useState` ou `useReducer`
+- Utilise TailwindCSS pour le style
+- Valide tous les champs requis + formats (email, tel, code postal)
+- Ville est automatiquement complétée via une API française des codes postaux
+- Référence générée aléatoirement (stockée dans `formData.reference`)
+- Tout est stocké dans `formData` global (via `useContext` ou lifting state up)
+- Le paiement Stripe est redirigé uniquement après la validation de toutes les étapes
+
+📦 Composants :
+- `StepFormWrapper`, `InputField`, `PhoneInput`, `AddressBlock`, `ToggleSwitch`, `SummaryBox`, `StripeButton`

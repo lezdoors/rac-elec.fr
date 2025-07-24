@@ -1,0 +1,479 @@
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3A0f781bd6&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=d648ef1e-859a-43d4-805c-953be27d829c:1 
+            
+            
+           Failed to load resource: net::ERR_NETWORK_CHANGEDUnderstand this error
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3A0f781bd6&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=0bdfc470-e7c5-4f13-a3a2-69441a36e619:1 
+            
+            
+           Failed to load resource: net::ERR_QUIC_PROTOCOL_ERROR.QUIC_PACKET_WRITE_ERRORUnderstand this error
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3A0f781bd6%2Cretry_count%3A1%2Cretry_after%3A0&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=d7825688-b8ce-4b5e-b524-13b9fb4bb7be:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3A0f781bd6%2Cretry_count%3A1%2Cretry_after%3A0&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=75330017-c56e-40cd-aaf9-8b61a8c71d12:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3A0f781bd6%2Cretry_count%3A2%2Cretry_after%3A0&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=28924c2c-49b6-4482-90fa-79060c293256:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+sp.replit.com/v1/m:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+_app-d2c841a1cffa25e5.js:13 Error sending segment performance metrics TypeError: Failed to fetch
+    at _app-d2c841a1cffa25e5.js:13:9046
+    at o (sdk.min.js:1:23763)
+    at t.<anonymous> (remote-metrics.ts:138:12)
+    at tslib.es6.js:103:23
+    at Object.next (tslib.es6.js:108:37)
+    at tslib.es6.js:80:8
+    at new Promise (<anonymous>)
+    at u (tslib.es6.js:72:27)
+    at t.send (sdk.min.js:1:22021)
+    at t.<anonymous> (remote-metrics.ts:125:16)
+    at tslib.es6.js:103:23
+    at Object.next (tslib.es6.js:108:37)
+    at tslib.es6.js:80:8
+    at new Promise (<anonymous>)
+    at u (tslib.es6.js:72:27)
+    at t.flush (sdk.min.js:1:21754)
+    at l (remote-metrics.ts:83:14)
+    at r (_app-d2c841a1cffa25e5.js:13:2959)
+(anonymous) @ _app-d2c841a1cffa25e5.js:13Understand this error
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3A0f781bd6%2Cretry_count%3A2%2Cretry_after%3A0&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=66b63f97-ec67-47dc-b1c5-91f8984e5422:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3A0f781bd6%2Cretry_count%3A3%2Cretry_after%3A0&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=e0b91eb4-28f6-4250-9841-f4cde9bfc96a:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3A0f781bd6%2Cretry_count%3A3%2Cretry_after%3A0&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=57c0b1eb-a713-4bb9-a569-df3e88e80359:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3A0f781bd6%2Cretry_count%3A4%2Cretry_after%3A0&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=6e77d764-276e-44f9-a1ff-91a2f87f5e7a:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3A0f781bd6%2Cretry_count%3A4%2Cretry_after%3A0&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=6109f078-214e-4e5c-b49a-be7a3ad8d954:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+_app-d2c841a1cffa25e5.js:15 WebSocket connection to 'wss://replit.com/graphql_subscriptions' failed: 
+(anonymous) @ _app-d2c841a1cffa25e5.js:15Understand this error
+_app-d2c841a1cffa25e5.js:15 WebSocket connection to 'wss://replit.com/graphql_subscriptions' failed: 
+(anonymous) @ _app-d2c841a1cffa25e5.js:15Understand this error
+_app-d2c841a1cffa25e5.js:15 WebSocket connection to 'wss://replit.com/graphql_subscriptions' failed: 
+(anonymous) @ _app-d2c841a1cffa25e5.js:15Understand this error
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3A0f781bd6%2Cretry_count%3A5%2Cretry_after%3A0&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=addedd2f-738c-4d35-af0e-674246612b74:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3A0f781bd6%2Cretry_count%3A5%2Cretry_after%3A0&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=660ff0c4-bc09-4a53-b332-49abf5c4383f:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+_app-d2c841a1cffa25e5.js:15 WebSocket connection to 'wss://replit.com/graphql_subscriptions' failed: 
+(anonymous) @ _app-d2c841a1cffa25e5.js:15Understand this error
+_app-d2c841a1cffa25e5.js:13 task queue exceeded allotted deadline by 63ms
+(anonymous) @ _app-d2c841a1cffa25e5.js:13Understand this warning
+_app-d2c841a1cffa25e5.js:13 task queue exceeded allotted deadline by 57ms
+(anonymous) @ _app-d2c841a1cffa25e5.js:13Understand this warning
+_app-d2c841a1cffa25e5.js:13 onClick is deprecated, please use onPress
+(anonymous) @ _app-d2c841a1cffa25e5.js:13Understand this warning
+_app-d2c841a1cffa25e5.js:13 WARN: A component changed from uncontrolled to controlled.
+(anonymous) @ _app-d2c841a1cffa25e5.js:13Understand this warning
+_app-d2c841a1cffa25e5.js:13 WARN: A component changed from controlled to uncontrolled.
+(anonymous) @ _app-d2c841a1cffa25e5.js:13Understand this warning
+_app-d2c841a1cffa25e5.js:13 WARN: A component changed from uncontrolled to controlled.
+(anonymous) @ _app-d2c841a1cffa25e5.js:13Understand this warning
+sp.replit.com/v1/t:1 
+            
+            
+           Failed to load resource: net::ERR_NETWORK_IO_SUSPENDEDUnderstand this error
+api.sorryapp.com/v1/pages/27c7b5fc:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+api.sorryapp.com/v1/pages/27c7b5fc:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+_app-d2c841a1cffa25e5.js:15 WebSocket connection to 'wss://replit.com/graphql_subscriptions' failed: 
+(anonymous) @ _app-d2c841a1cffa25e5.js:15Understand this error
+_app-d2c841a1cffa25e5.js:15 WebSocket connection to 'wss://replit.com/graphql_subscriptions' failed: 
+(anonymous) @ _app-d2c841a1cffa25e5.js:15Understand this error
+_app-d2c841a1cffa25e5.js:15 WebSocket connection to 'wss://replit.com/graphql_subscriptions' failed: 
+(anonymous) @ _app-d2c841a1cffa25e5.js:15Understand this error
+_app-d2c841a1cffa25e5.js:15 WebSocket connection to 'wss://replit.com/graphql_subscriptions' failed: 
+(anonymous) @ _app-d2c841a1cffa25e5.js:15Understand this error
+api.sorryapp.com/v1/pages/27c7b5fc:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+api.sorryapp.com/v1/pages/27c7b5fc:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+/data/repls/44cd7f92-d8aa-47db-b497-cf520230bccb/get_connection_metadata:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+graphql:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+/data/repls/44cd7f92-d8aa-47db-b497-cf520230bccb/get_connection_metadata:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+graphql:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+shared-27ee00315533d…d43bb57e237775.js:1 Uncaught (in promise) FetchError: Error fetching https://r.stripe.com/b: Failed to fetch
+    at shared-27ee00315533d62ae7d43bb57e237775.js:1:207861Understand this error
+/data/repls/44cd7f92-d8aa-47db-b497-cf520230bccb/get_connection_metadata:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+graphql:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+/data/repls/44cd7f92-d8aa-47db-b497-cf520230bccb/get_connection_metadata:1 
+            
+            
+           Failed to load resource: net::ERR_INTERNET_DISCONNECTEDUnderstand this error
+/data/repls/44cd7f92-d8aa-47db-b497-cf520230bccb/get_connection_metadata:1 
+            
+            
+           Failed to load resource: net::ERR_CONNECTION_CLOSEDUnderstand this error
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3A0f781bd6&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=ad7fd79e-23e9-4d1c-b85b-921d8a4bdd17:1 
+            
+            
+           Failed to load resource: net::ERR_CONNECTION_CLOSEDUnderstand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cc%3A:32 Unrecognized feature: 'ambient-light-sensor'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cc%3A:32 Unrecognized feature: 'battery'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cc%3A:32 Unrecognized feature: 'execution-while-not-rendered'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cc%3A:32 Unrecognized feature: 'execution-while-out-of-viewport'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cc%3A:32 Unrecognized feature: 'layout-animations'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cc%3A:32 Unrecognized feature: 'legacy-image-formats'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cc%3A:32 Unrecognized feature: 'navigation-override'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cc%3A:32 Unrecognized feature: 'oversized-images'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cc%3A:32 Unrecognized feature: 'publickey-credentials'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cc%3A:32 Unrecognized feature: 'speaker-selection'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cc%3A:32 Unrecognized feature: 'unoptimized-images'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cc%3A:32 Unrecognized feature: 'unsized-media'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cc%3A:32 Allow attribute will take precedence over 'allowfullscreen'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cc%3A:32 Allow attribute will take precedence over 'allowpaymentrequest'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)Understand this error
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=JYIPs5Dm0cZI' failed: 
+t @ Network.js:227Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=JYIPs5Dm0cZI' failed: 
+t @ Network.js:227Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=JYIPs5Dm0cZI' failed: 
+t @ Network.js:227Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=JYIPs5Dm0cZI' failed: 
+t @ Network.js:227Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+use-websocket.tsx:53 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/ws' failed: WebSocket is closed before the connection is established.
+(anonymous) @ use-websocket.tsx:53Understand this warning
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=WDxEJi2MfD30' failed: 
+t @ Network.js:227Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=WDxEJi2MfD30' failed: 
+t @ Network.js:227Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+use-websocket.tsx:53 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/ws' failed: WebSocket is closed before the connection is established.
+(anonymous) @ use-websocket.tsx:53Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=0adq25ZyhQov' failed: 
+t @ Network.js:227Understand this error
+Network.js:227 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=0adq25ZyhQov' is invalid.
+    at new t (Network.js:227:18)
+    at setupWebSocket (client:536:19)
+    at fallback (client:509:16)
+    at WebSocket.<anonymous> (client:555:7)Understand this error
+Console.js:61 Connecting to WebSocket at wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/ws
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+Console.js:61 WebSocket connected
+Console.js:61 Connecting to WebSocket at wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/ws
+Console.js:61 WebSocket disconnected
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+Console.js:61 WebSocket connected
+Console.js:61 Connecting to WebSocket at wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/ws
+Console.js:61 WebSocket disconnected
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+2@radix-ui_react-select.js?v=256123bb:877 Uncaught Error: A <Select.Item /> must have a value prop that is not an empty string. This is because the Select value can be set to an empty string to clear the selection and show the placeholder.
+    at @radix-ui_react-select.js?v=256123bb:877:13
+    at renderWithHooks (chunk-RPCDYKBN.js?v=256123bb:11548:26)
+    at updateForwardRef (chunk-RPCDYKBN.js?v=256123bb:14325:28)
+    at beginWork (chunk-RPCDYKBN.js?v=256123bb:15946:22)
+    at HTMLUnknownElement.callCallback2 (chunk-RPCDYKBN.js?v=256123bb:3674:22)
+    at Object.invokeGuardedCallbackDev (chunk-RPCDYKBN.js?v=256123bb:3699:24)
+    at invokeGuardedCallback (chunk-RPCDYKBN.js?v=256123bb:3733:39)
+    at beginWork$1 (chunk-RPCDYKBN.js?v=256123bb:19765:15)
+    at performUnitOfWork (chunk-RPCDYKBN.js?v=256123bb:19198:20)
+    at workLoopSync (chunk-RPCDYKBN.js?v=256123bb:19137:13)Understand this error
+Console.js:61 The above error occurred in the <SelectItem> component:
+
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-select.js?v=256123bb:850:7
+    at _c11 (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/ui/select.tsx:207:13)
+    at div
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-AXMZZQ2X.js?v=256123bb:42:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=256123bb:79:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=256123bb:56:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-TPYHSINA.js?v=256123bb:39:15
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-select.js?v=256123bb:761:13
+    at div
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=256123bb:79:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=256123bb:56:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-TPYHSINA.js?v=256123bb:39:15
+    at Provider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=256123bb:38:15)
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-select.js?v=256123bb:304:58
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=256123bb:79:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=256123bb:56:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-AXMZZQ2X.js?v=256123bb:42:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-FD5FODZO.js?v=256123bb:248:22
+    at SelectPortal
+    at _c7 (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/ui/select.tsx:122:12)
+    at Provider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=256123bb:38:15)
+    at Provider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=256123bb:38:15)
+    at CollectionProvider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-TPYHSINA.js?v=256123bb:29:13)
+    at Provider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=256123bb:38:15)
+    at Provider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=256123bb:38:15)
+    at Popper (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-IDWCJCZJ.js?v=256123bb:71:11)
+    at Select (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-select.js?v=256123bb:92:5)
+    at div
+    at div
+    at div
+    at div
+    at div
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-AXMZZQ2X.js?v=256123bb:42:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-FD5FODZO.js?v=256123bb:49:7
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=256123bb:79:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=256123bb:56:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-AXMZZQ2X.js?v=256123bb:42:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-MERT2IGA.js?v=256123bb:29:5
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-dialog.js?v=256123bb:240:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-dialog.js?v=256123bb:163:58
+    at Presence (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-DI3MHBAI.js?v=256123bb:24:11)
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-dialog.js?v=256123bb:154:64
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=256123bb:79:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=256123bb:56:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-AXMZZQ2X.js?v=256123bb:42:13
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-FD5FODZO.js?v=256123bb:248:22
+    at Presence (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-DI3MHBAI.js?v=256123bb:24:11)
+    at Provider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=256123bb:38:15)
+    at DialogPortal (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-dialog.js?v=256123bb:116:11)
+    at _c3 (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/ui/dialog.tsx:52:12)
+    at Provider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=256123bb:38:15)
+    at Dialog (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-dialog.js?v=256123bb:57:5)
+    at div
+    at main
+    at div
+    at div
+    at AdminLayout (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/admin/admin-layout.tsx:26:3)
+    at EmailPage (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/pages/admin/emails.tsx:217:21)
+    at Route (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=256123bb:323:16)
+    at Switch (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=256123bb:379:17)
+    at Router
+    at Provider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=256123bb:38:15)
+    at TooltipProvider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=256123bb:861:5)
+    at QueryClientProvider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=256123bb:2805:3)
+    at App (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/App.tsx?v=b5JxOcHiGCQ_aKC3FLXUC:233:59)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+chunk-RPCDYKBN.js?v=256123bb:9129 Uncaught Error: A <Select.Item /> must have a value prop that is not an empty string. This is because the Select value can be set to an empty string to clear the selection and show the placeholder.
+    at @radix-ui_react-select.js?v=256123bb:877:13
+    at renderWithHooks (chunk-RPCDYKBN.js?v=256123bb:11548:26)
+    at updateForwardRef (chunk-RPCDYKBN.js?v=256123bb:14325:28)
+    at beginWork (chunk-RPCDYKBN.js?v=256123bb:15946:22)
+    at beginWork$1 (chunk-RPCDYKBN.js?v=256123bb:19753:22)
+    at performUnitOfWork (chunk-RPCDYKBN.js?v=256123bb:19198:20)
+    at workLoopSync (chunk-RPCDYKBN.js?v=256123bb:19137:13)
+    at renderRootSync (chunk-RPCDYKBN.js?v=256123bb:19116:15)
+    at recoverFromConcurrentError (chunk-RPCDYKBN.js?v=256123bb:18736:28)
+    at performSyncWorkOnRoot (chunk-RPCDYKBN.js?v=256123bb:18879:28)

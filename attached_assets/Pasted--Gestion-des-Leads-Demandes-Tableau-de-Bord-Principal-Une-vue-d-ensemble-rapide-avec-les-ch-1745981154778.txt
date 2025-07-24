@@ -1,0 +1,49 @@
+. Gestion des Leads / Demandes :
+* Tableau de Bord Principal : Une vue d'ensemble rapide avec les chiffres clés (Nouveaux leads aujourd'hui/semaine/mois, Montant total encaissé, Statuts principaux des demandes).
+* Liste des Demandes : Un tableau affichant toutes les demandes reçues, triable et filtrable par :
+* Date de soumission
+* Nom du client
+* Type de service demandé (raccordement, viabilisation, etc.)
+* Statut de la demande (Nouveau, En cours, Planifié, Terminé, Annulé, etc.)
+* Statut du paiement (Payé, En attente, Échoué, Remboursé)
+* Détail d'une Demande : En cliquant sur une demande dans la liste, vous devriez voir :
+* Toutes les informations saisies par le client dans le formulaire.
+* Les détails du service demandé.
+* Les informations de paiement (montant, date, ID de transaction, statut).
+* Un historique des actions et changements de statut sur cette demande.
+* Un espace pour ajouter des notes internes (non visibles par le client).
+* Modification du Statut : La possibilité de changer manuellement le statut d'une demande au fur et à mesure de son traitement.
+* Ajout Manuel : Optionnellement, un bouton pour ajouter manuellement une demande si elle a été reçue par un autre canal (téléphone, email).
+
+2. Gestion des Paiements :
+* Vue des Transactions : Une liste de toutes les transactions enregistrées via le site.
+* Lien avec la Demande : Chaque transaction doit être clairement liée à la demande correspondante.
+* Détails de Paiement : Informations fournies par la passerelle de paiement (Stripe, PayPal, etc.), incluant l'ID de transaction, le statut détaillé, etc.
+* Remboursements : Idéalement, une fonction pour initier un remboursement directement depuis l'admin (si votre passerelle de paiement le permet via API).
+
+3. Gestion des Services :
+* Liste des Services : Si les services proposés ou leurs tarifs peuvent changer, une section pour gérer la liste des services (raccordement, viabilisation...), leurs descriptions et surtout leurs tarifs qui sont présentés au client et utilisés pour le paiement.
+
+4. Gestion des Utilisateurs Administrateurs :
+* Conformément à votre demande précédente : une section où seul un administrateur peut :
+* Créer de nouveaux comptes utilisateurs pour l'admin.
+* Attribuer des rôles à ces utilisateurs (par exemple : "Admin complet", "Gestionnaire de leads", "Comptabilité/Paiements" - si vous avez besoin de limiter l'accès).
+* Modifier ou supprimer des comptes utilisateurs de l'admin.
+
+5. Paramètres / Configuration :
+* Paramètres Généraux : Configuration des textes de base, emails automatiques envoyés aux clients (confirmation de demande, confirmation de paiement).
+* Configuration Paiement : Gestion des clés API pour la connexion à votre passerelle de paiement.
+* Notifications : Paramétrer les notifications internes (par exemple, recevoir un email quand un nouveau lead payé arrive).
+
+6. Rapports / Exports (Optionnel mais utile) :
+* Export de Données : Possibilité d'exporter la liste des demandes/leads (par exemple en CSV ou Excel) pour analyse externe ou archivage.
+* Rapports Simples : Générer des rapports basiques (nombre de demandes par type de service sur une période, revenus par service, etc.).
+
+En résumé, l'admin doit vous permettre de :
+
+Voir et comprendre chaque nouvelle demande et son paiement.
+Suivre et mettre à jour l'état d'avancement de chaque demande.
+Gérer les informations financières liées aux paiements.
+Administrer les accès à l'interface d'admin elle-même.
+Configurer les services, les tarifs et les communications de base.
+La priorité est la gestion fluide des leads entrants et de leur statut tout au long du processus après paiement.

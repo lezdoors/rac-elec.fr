@@ -1,0 +1,250 @@
+/* 
+ * Correctifs directs pour l'affichage mobile du formulaire
+ * Ces styles s'appliquent uniquement sur les écrans de petite taille
+ */
+
+@media (max-width: 768px) {
+  /* Réduction des marges et paddings généraux */
+  .container.mx-auto {
+    padding: 0.75rem !important;
+  }
+  
+  /* Réduction de la taille des titres */
+  h1.text-3xl {
+    font-size: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  p.text-gray-600.text-center.mb-12 {
+    margin-bottom: 1rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* Optimisation des boutons radio */
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 > div {
+    padding: 0.5rem !important;
+    margin-bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 0.375rem !important;
+  }
+  
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 > div > div {
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 h4 {
+    font-size: 0.875rem !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 p {
+    display: none !important; /* Masquer les descriptions sur mobile */
+  }
+  
+  /* Ajouter un style radio visuel */
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 > div:before {
+    content: "";
+    display: inline-block !important;
+    width: 1rem !important;
+    height: 1rem !important;
+    border-radius: 50% !important;
+    border: 2px solid #e5e7eb !important;
+    margin-right: 0.5rem !important;
+    flex-shrink: 0 !important;
+  }
+  
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 > div[class*="border-primary"]:before {
+    border-color: #1d4ed8 !important;
+    background-color: #1d4ed8 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3E%3Cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3E%3C/svg%3E") !important;
+    background-size: 75% !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+  }
+  
+  /* Barre de progression */
+  .mb-12 {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .flex.items-center.gap-1.mb-4 {
+    gap: 0.25rem !important;
+  }
+  
+  .flex.items-center.gap-1.mb-4 > div > div:first-child {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+    font-size: 0.7rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 1.25rem !important;
+  }
+  
+  .flex.items-center.gap-1.mb-4 > div > div:first-child svg {
+    width: 0.8rem !important;
+    height: 0.8rem !important;
+  }
+  
+  .flex.items-center.gap-1.mb-4 > div > div:nth-child(2) {
+    height: 0.125rem !important;
+  }
+  
+  .flex.items-center.gap-1.mb-4 .whitespace-nowrap {
+    font-size: 0.625rem !important;
+    max-width: 60px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    line-height: 1.1 !important;
+  }
+  
+  /* Réduction de la hauteur de la barre de progression */
+  .overflow-hidden.h-2.mb-4.text-xs.flex.rounded.bg-blue-50 {
+    height: 0.375rem !important;
+  }
+  
+  /* Optimisation de l'indicateur de pourcentage */
+  .text-xs.font-semibold.inline-block.py-1.px-2 {
+    font-size: 0.625rem !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+  
+  /* Forcer le calcul correct de la largeur pour l'affichage du pourcentage */
+  .shadow-none.flex.flex-col.text-center.whitespace-nowrap.text-white.justify-center.bg-primary {
+    transition: width 0.3s ease-in-out !important;
+  }
+  
+  /* Optimisation des boutons de navigation */
+  .flex.justify-between.mt-6 {
+    margin-top: 1rem !important;
+    position: sticky !important;
+    bottom: 0 !important;
+    background-color: white !important;
+    padding: 0.75rem 0 !important;
+    border-top: 1px solid #f3f4f6 !important;
+    z-index: 10 !important;
+  }
+  
+  .flex.justify-between.mt-6 button {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.875rem !important;
+    height: auto !important;
+    min-height: 2.25rem !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  .flex.justify-between.mt-6 button svg {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+  
+  /* Réduction de la taille des labels et des champs */
+  .space-y-8 .font-medium {
+    font-size: 0.875rem !important;
+  }
+  
+  .text-sm {
+    font-size: 0.75rem !important;
+  }
+  
+  input, select, textarea {
+    font-size: 0.875rem !important;
+    padding: 0.375rem 0.5rem !important;
+  }
+  
+  /* Amélioration des espaces dans les formulaires */
+  .space-y-6 {
+    margin-top: 0.5rem !important;
+  }
+  
+  /* Optimisation de l'affichage des checkbox */
+  .flex.flex-row.items-start.space-x-3.space-y-0 .leading-none {
+    font-size: 0.8125rem !important;
+  }
+  
+  /* Amélioration des cartes sélectionnables */
+  [class*="border p-4 rounded-md cursor-pointer"] {
+    padding: 0.5rem !important;
+  }
+  
+  /* Réduction de l'espace entre les éléments de radiogroup */
+  .flex.flex-col.space-y-2.md\\:flex-row {
+    gap: 0.25rem !important;
+  }
+  
+  /* Adaptation du layout des groupes de boutons radio */
+  .grid.grid-cols-2.md\\:grid-cols-4.gap-3 {
+    gap: 0.375rem !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+  }
+  
+  .grid.grid-cols-2.md\\:grid-cols-4.gap-3 > div {
+    padding: 0.375rem 0.5rem !important;
+  }
+  
+  .flex.flex-col.space-y-2.md\\:flex-row {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+    margin-top: 0.5rem !important;
+    space-y: 0 !important;
+  }
+  
+  .flex.flex-col.space-y-2.md\\:flex-row > div {
+    flex: 1 1 auto !important;
+    min-width: 100px !important;
+    max-width: calc(50% - 0.25rem) !important;
+  }
+  
+  .flex.items-center.space-x-2.bg-white.border {
+    padding: 0.375rem 0.5rem !important;
+  }
+  
+  /* Adaptation pour le champ puissance */
+  .flex.flex-row.items-center input.w-24 {
+    width: 4rem !important;
+  }
+  
+  /* Optimisation des composants */
+  .text-lg, .text-xl {
+    font-size: 1rem !important;
+  }
+  
+  /* Réduire les espaces */
+  .mb-2, .my-2 {
+    margin-bottom: 0.25rem !important;
+  }
+  
+  .my-2 {
+    margin-top: 0.25rem !important;
+  }
+  
+  .space-y-4 {
+    margin-bottom: 0.75rem !important;
+  }
+  
+  /* Réduire les marges verticales */
+  .bg-white.rounded-lg {
+    margin-bottom: 4rem !important; /* Espace pour les boutons fixes en bas */
+  }
+  
+  /* Adaptation pour les listes à puces */
+  .space-y-3 {
+    margin-top: 0.5rem !important;
+  }
+}

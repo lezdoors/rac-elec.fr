@@ -1,0 +1,422 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rapport d'analyse des performances Web</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+    }
+    h2 {
+      color: #2980b9;
+      margin-top: 30px;
+    }
+    h3 {
+      color: #3498db;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .metrics-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .metrics-column {
+      flex: 1;
+      min-width: 300px;
+    }
+    .site-details {
+      margin-bottom: 40px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    .recommendations {
+      background-color: #e8f4fc;
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 30px;
+    }
+    .recommendations ul {
+      padding-left: 20px;
+    }
+    .recommendations li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rapport d'analyse des performances Web</h1>
+  <p>Date de l'analyse: 5/21/2025 8:10:24 PM</p>
+  
+  <h2>Tableau comparatif</h2>
+  <table>
+    <tr>
+      <th>Site</th>
+      <th>Temps total</th>
+      <th>TTFB</th>
+      <th>Taille HTML</th>
+      <th>CSS</th>
+      <th>JS</th>
+      <th>Images</th>
+      <th>H1</th>
+      <th>Meta Description</th>
+    </tr>
+    
+      <tr>
+        <td>Raccordement.net</td>
+        <td>159 ms</td>
+        <td>158 ms</td>
+        <td>7.66 KB</td>
+        <td>3</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td>Oui</td>
+      </tr>
+    
+      <tr>
+        <td>Mon-Raccordement-Electricite</td>
+        <td>753 ms</td>
+        <td>481 ms</td>
+        <td>53.09 KB</td>
+        <td>3</td>
+        <td>8</td>
+        <td>19</td>
+        <td>1</td>
+        <td>Oui</td>
+      </tr>
+    
+      <tr>
+        <td>Raccordement-Connect</td>
+        <td>985 ms</td>
+        <td>824 ms</td>
+        <td>437.96 KB</td>
+        <td>3</td>
+        <td>59</td>
+        <td>12</td>
+        <td>1</td>
+        <td>Oui</td>
+      </tr>
+    
+  </table>
+  
+  
+    <section class="recommendations">
+      <h2>Recommandations pour Raccordement.net</h2>
+      
+      <h3>Performance</h3>
+      <ul>
+        
+        
+        
+        
+        <li>✅ Minifiez et compressez davantage les ressources JavaScript et CSS.</li>
+        <li>✅ Utilisez un service de CDN pour les ressources statiques.</li>
+        <li>✅ Implémentez un système de mise en cache efficace.</li>
+      </ul>
+      
+      <h3>SEO</h3>
+      <ul>
+        
+        <li>⚠️ Problème avec le nombre de H1 (0). Assurez-vous d'avoir exactement un H1 par page.</li>
+        <li>✅ Structurez votre contenu avec des balises d'en-tête hiérarchiques (H1, H2, H3...).</li>
+        <li>✅ Ajoutez des données structurées (Schema.org) pour améliorer les résultats de recherche.</li>
+        <li>✅ Optimisez les URLs pour qu'elles soient descriptives et contiennent des mots-clés.</li>
+      </ul>
+      
+      <h3>Accessibilité</h3>
+      <ul>
+        
+        <li>✅ Assurez-vous que tous les éléments interactifs sont accessibles au clavier.</li>
+        <li>✅ Maintenez un contraste suffisant entre le texte et l'arrière-plan.</li>
+        <li>✅ Utilisez des étiquettes appropriées pour tous les champs de formulaire.</li>
+      </ul>
+    </section>
+  
+  
+  <h2>Détails par site</h2>
+  
+      <section class="site-details">
+        <h2>Raccordement.net</h2>
+        <p>URL: <a href="https://raccordement.net/" target="_blank">https://raccordement.net/</a></p>
+        
+        <div class="metrics-container">
+          <div class="metrics-column">
+            <h3>Métriques de performance</h3>
+            <table>
+              <tr>
+                <th>Métrique</th>
+                <th>Valeur</th>
+              </tr>
+              <tr>
+                <td>Temps de résolution DNS</td>
+                <td>41 ms</td>
+              </tr>
+              <tr>
+                <td>Temps de connexion</td>
+                <td>42 ms</td>
+              </tr>
+              <tr>
+                <td>Temps avant premier octet</td>
+                <td>158 ms</td>
+              </tr>
+              <tr>
+                <td>Temps de chargement total</td>
+                <td>159 ms</td>
+              </tr>
+              <tr>
+                <td>Vitesse de téléchargement</td>
+                <td>48.22 KB/s</td>
+              </tr>
+              <tr>
+                <td>Taille de la page HTML</td>
+                <td>7.66 KB</td>
+              </tr>
+            </table>
+          </div>
+          
+          <div class="metrics-column">
+            <h3>Contenu de la page</h3>
+            <table>
+              <tr>
+                <th>Élément</th>
+                <th>Valeur</th>
+              </tr>
+              <tr>
+                <td>Titre</td>
+                <td>Raccordement Enedis Officiel : Branchement Électrique Rapide et Simplifié</td>
+              </tr>
+              <tr>
+                <td>Meta Description</td>
+                <td>Service expert pour votre raccordement Enedis électrique. Obtenez une prise en charge prioritaire pour vos démarches de branchement, augmentation de puissance et déplacement de compteur Linky. Délais optimisés pour particuliers et professionnels.</td>
+              </tr>
+              <tr>
+                <td>Nombre de H1</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>Nombre de liens</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>Nombre d'images</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>Images sans attribut alt</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>Fichiers CSS externes</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>Fichiers JavaScript externes</td>
+                <td>2</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </section>
+    
+      <section class="site-details">
+        <h2>Mon-Raccordement-Electricite</h2>
+        <p>URL: <a href="https://mon-raccordement-electricite.fr/" target="_blank">https://mon-raccordement-electricite.fr/</a></p>
+        
+        <div class="metrics-container">
+          <div class="metrics-column">
+            <h3>Métriques de performance</h3>
+            <table>
+              <tr>
+                <th>Métrique</th>
+                <th>Valeur</th>
+              </tr>
+              <tr>
+                <td>Temps de résolution DNS</td>
+                <td>18 ms</td>
+              </tr>
+              <tr>
+                <td>Temps de connexion</td>
+                <td>165 ms</td>
+              </tr>
+              <tr>
+                <td>Temps avant premier octet</td>
+                <td>481 ms</td>
+              </tr>
+              <tr>
+                <td>Temps de chargement total</td>
+                <td>753 ms</td>
+              </tr>
+              <tr>
+                <td>Vitesse de téléchargement</td>
+                <td>70.48 KB/s</td>
+              </tr>
+              <tr>
+                <td>Taille de la page HTML</td>
+                <td>53.09 KB</td>
+              </tr>
+            </table>
+          </div>
+          
+          <div class="metrics-column">
+            <h3>Contenu de la page</h3>
+            <table>
+              <tr>
+                <th>Élément</th>
+                <th>Valeur</th>
+              </tr>
+              <tr>
+                <td>Titre</td>
+                <td>Service en ligne de demande de raccordement Enedis</td>
+              </tr>
+              <tr>
+                <td>Meta Description</td>
+                <td>Faites votre demande de raccordement Enedis avec Mon Raccordement Electricité. Simple, rapide et efficace. Nos experts vous accompagnent de A à Z.</td>
+              </tr>
+              <tr>
+                <td>Nombre de H1</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>Nombre de liens</td>
+                <td>47</td>
+              </tr>
+              <tr>
+                <td>Nombre d'images</td>
+                <td>19</td>
+              </tr>
+              <tr>
+                <td>Images sans attribut alt</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>Fichiers CSS externes</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>Fichiers JavaScript externes</td>
+                <td>8</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </section>
+    
+      <section class="site-details">
+        <h2>Raccordement-Connect</h2>
+        <p>URL: <a href="https://raccordement-connect.com/" target="_blank">https://raccordement-connect.com/</a></p>
+        
+        <div class="metrics-container">
+          <div class="metrics-column">
+            <h3>Métriques de performance</h3>
+            <table>
+              <tr>
+                <th>Métrique</th>
+                <th>Valeur</th>
+              </tr>
+              <tr>
+                <td>Temps de résolution DNS</td>
+                <td>72 ms</td>
+              </tr>
+              <tr>
+                <td>Temps de connexion</td>
+                <td>79 ms</td>
+              </tr>
+              <tr>
+                <td>Temps avant premier octet</td>
+                <td>824 ms</td>
+              </tr>
+              <tr>
+                <td>Temps de chargement total</td>
+                <td>985 ms</td>
+              </tr>
+              <tr>
+                <td>Vitesse de téléchargement</td>
+                <td>444.82 KB/s</td>
+              </tr>
+              <tr>
+                <td>Taille de la page HTML</td>
+                <td>437.96 KB</td>
+              </tr>
+            </table>
+          </div>
+          
+          <div class="metrics-column">
+            <h3>Contenu de la page</h3>
+            <table>
+              <tr>
+                <th>Élément</th>
+                <th>Valeur</th>
+              </tr>
+              <tr>
+                <td>Titre</td>
+                <td>Home - raccordement-connect</td>
+              </tr>
+              <tr>
+                <td>Meta Description</td>
+                <td>Le Consuel (Comité national pour la sécurité des usagers de l’électricité) est un organisme chargé de vérifier la conformité des installations électriques des</td>
+              </tr>
+              <tr>
+                <td>Nombre de H1</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>Nombre de liens</td>
+                <td>56</td>
+              </tr>
+              <tr>
+                <td>Nombre d'images</td>
+                <td>12</td>
+              </tr>
+              <tr>
+                <td>Images sans attribut alt</td>
+                <td>8</td>
+              </tr>
+              <tr>
+                <td>Fichiers CSS externes</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>Fichiers JavaScript externes</td>
+                <td>59</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </section>
+    
+  
+  <footer>
+    <p>Rapport généré automatiquement. Pour plus d'informations, contactez l'équipe de développement.</p>
+  </footer>
+</body>
+</html>
+  

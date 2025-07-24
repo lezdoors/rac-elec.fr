@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Allow: /raccordement-enedis
+Allow: /faq
+Allow: /contact
+Allow: /admin
+Allow: /admin/demandes
+Allow: /admin/utilisateurs
+Allow: /admin/statistiques
+
+Disallow: /mentions-legales
+Disallow: /confidentialite
+Disallow: /confirmation
+Disallow: /paiement-confirmation
+Disallow: /paiement-multiple
+
+Sitemap: https://raccordement.net/sitemap.xml

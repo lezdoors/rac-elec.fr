@@ -1,0 +1,46 @@
+/* Fix critiques pour l'espacement des formulaires entreprise et collectivité */
+
+/* Force l'espacement à zéro pour les sections entreprise et collectivité */
+[data-form-section="professionnel"] .space-y-0 > * + *,
+[data-form-section="collectivite"] .space-y-0 > * + * {
+  margin-top: 0px !important;
+}
+
+/* Force l'espacement FormItem à zéro */
+[data-form-section="professionnel"] [data-field="raisonSociale"],
+[data-form-section="professionnel"] [data-field="siren"],
+[data-form-section="collectivite"] [data-field="nomCollectivite"],
+[data-form-section="collectivite"] [data-field="sirenCollectivite"] {
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+}
+
+/* Force l'espacement des labels à minimal */
+[data-form-section="professionnel"] [data-field="raisonSociale"] label,
+[data-form-section="professionnel"] [data-field="siren"] label,
+[data-form-section="collectivite"] [data-field="nomCollectivite"] label,
+[data-form-section="collectivite"] [data-field="sirenCollectivite"] label {
+  margin-bottom: 4px !important;
+}
+
+/* Suppression de tous les espacements dans les conteneurs */
+.bg-blue-50\/80,
+.bg-emerald-50\/80 {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+/* Mobile : espacement ultra-compact */
+@media (max-width: 768px) {
+  .bg-blue-50\/80,
+  .bg-emerald-50\/80 {
+    padding: 8px !important;
+  }
+  
+  /* Force les FormItem à être collés */
+  [data-form-section="professionnel"] > div,
+  [data-form-section="collectivite"] > div {
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+  }
+}

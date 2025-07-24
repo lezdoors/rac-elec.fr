@@ -1,0 +1,116 @@
+Erreur WebSocket pour demandes: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour demandes (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour demandes
+Console.js:61 Erreur WebSocket pour paiements: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour paiements (code: 1006)
+Console.js:61 Tentative de reconnexion pour paiements dans 2.757208584458057 secondes (1/5)
+Console.js:61 Erreur WebSocket pour emails: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour emails (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour emails
+Console.js:61 Erreur WebSocket pour dashboard: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour dashboard (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour dashboard
+Console.js:61 Erreur WebSocket pour performance: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour performance (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour performance
+Console.js:61 Erreur WebSocket pour notifications: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour notifications (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour notifications
+Console.js:61 Connexion WebSocket fermée pour paiements (code: 1005)
+Console.js:61 Tentative de reconnexion pour paiements dans 3.4220741240308095 secondes (2/5)
+Console.js:61 Connexion WebSocket établie pour performance
+Console.js:61 SideNav - Données utilisateur: {id: 1, username: 'admin', role: 'admin', isAdmin: true, isManager: false, …}
+Console.js:61 UserWelcome - Données utilisateur du hook: {id: 1, username: 'admin', fullName: 'Hossam', email: 'h.haddaoui@outlook.fr', role: 'admin', …}
+Console.js:61 UserWelcome - Nom récupéré directement: Hossam
+Console.js:61 Erreur WebSocket pour leads: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour leads (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour leads
+Console.js:61 Erreur WebSocket pour demandes: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour demandes (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour demandes
+Console.js:61 Erreur WebSocket pour paiements: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour paiements (code: 1006)
+Console.js:61 Tentative de reconnexion pour paiements dans 5.086183218178432 secondes (3/5)
+Console.js:61 Erreur WebSocket pour emails: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour emails (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour emails
+Console.js:61 Erreur WebSocket pour dashboard: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour dashboard (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour dashboard
+Console.js:61 Erreur WebSocket pour notifications: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour notifications (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour notifications
+Console.js:61 SideNav - Données utilisateur: {id: 1, username: 'admin', role: 'admin', isAdmin: true, isManager: false, …}
+Console.js:61 UserWelcome - Données utilisateur du hook: {id: 1, username: 'admin', fullName: 'Hossam', email: 'h.haddaoui@outlook.fr', role: 'admin', …}
+Console.js:61 UserWelcome - Nom récupéré directement: Hossam
+Console.js:61 Erreur WebSocket pour leads: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour leads (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour leads
+Console.js:61 Erreur WebSocket pour demandes: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour demandes (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour demandes
+Console.js:61 Erreur WebSocket pour paiements: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour paiements (code: 1006)
+Console.js:61 Tentative de reconnexion pour paiements dans 7.35614614244161 secondes (4/5)
+Console.js:61 Erreur WebSocket pour emails: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour emails (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour emails
+Console.js:61 Erreur WebSocket pour dashboard: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour dashboard (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour dashboard
+Console.js:61 Erreur WebSocket pour performance: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour performance (code: 1006)
+Console.js:61 Tentative de reconnexion pour performance dans 2.58258933951023 secondes (1/5)
+Console.js:61 Erreur WebSocket pour notifications: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour notifications (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour notifications
+Console.js:61 Connexion WebSocket fermée pour performance (code: 1005)
+Console.js:61 Tentative de reconnexion pour performance dans 3.2130157018559844 secondes (2/5)
+Console.js:61 Connexion WebSocket établie pour dashboard
+Console.js:61 SideNav - Données utilisateur: {id: 1, username: 'admin', role: 'admin', isAdmin: true, isManager: false, …}
+Console.js:61 UserWelcome - Données utilisateur du hook: {id: 1, username: 'admin', fullName: 'Hossam', email: 'h.haddaoui@outlook.fr', role: 'admin', …}
+Console.js:61 UserWelcome - Nom récupéré directement: Hossam
+Console.js:61 Erreur WebSocket pour leads: Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+Mt.forEach.n.<computed> @ Console.js:61
+ws.current.onerror @ use-realtime-data.ts:161Understand this error
+Console.js:61 Connexion WebSocket fermée pour leads (code: 1006)
+Console.js:61 Fin des tentatives de reconnexion pour leads
+Console.js:61 Erreur WebSocket pour demandes: 

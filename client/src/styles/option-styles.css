@@ -1,0 +1,78 @@
+/**
+ * Styles unifiés pour les options de raccordement et autres éléments de sélection
+ * Ces styles s'appliquent via des sélecteurs CSS ciblés qui ne modifient pas la structure HTML
+ */
+
+/* Style pour les conteneurs d'options */
+div[class*="flex flex-col space-y-"] {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  gap: 0 !important;
+  margin-top: 0.5rem;
+}
+
+/* Suppression des espaces entre les options */
+div[class*="flex flex-col space-y-"] > div {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  border-radius: 0 !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+div[class*="flex flex-col space-y-"] > div:last-child {
+  border-bottom: none !important;
+}
+
+/* Mise en évidence bleu clair pour les options sélectionnées */
+div[class*="flex flex-col space-y-"] > div[class*="border-blue-500"] {
+  background-color: #ebf5ff !important;
+  border-left: 3px solid #3b82f6 !important;
+}
+
+/* Meilleur alignement des contenus d'option */
+div[class*="flex flex-col space-y-"] > div {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  padding: 0.75rem 1rem !important;
+}
+
+/* Icône à gauche */
+div[class*="flex flex-col space-y-"] > div svg,
+div[class*="flex flex-col space-y-"] > div img {
+  margin-right: 0.75rem !important;
+}
+
+/* Pour les options avec disposition verticale, les réaligner */
+div[class*="flex flex-col space-y-"] > div[class*="flex-col"] {
+  flex-direction: row !important;
+}
+
+div[class*="flex flex-col space-y-"] > div[class*="flex-col"] > div:first-child {
+  margin-right: 0.75rem !important;
+}
+
+div[class*="flex flex-col space-y-"] > div[class*="flex-col"] > div:nth-child(2) {
+  flex-grow: 1;
+  text-align: left !important;
+}
+
+/* Autres styles spécifiques */
+.type-option-item {
+  position: relative;
+}
+
+.type-option-item[class*="border-blue-500"]:after {
+  content: "";
+  position: absolute;
+  right: 1rem;
+  width: 18px;
+  height: 18px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'%3E%3C/path%3E%3Cpolyline points='22 4 12 14.01 9 11.01'%3E%3C/polyline%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}

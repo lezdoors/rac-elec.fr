@@ -1,0 +1,86 @@
+2chunk-RPCDYKBN.js?v=4f968abd:11678 Uncaught Error: Rendered more hooks than during the previous render.
+    at updateWorkInProgressHook (chunk-RPCDYKBN.js?v=4f968abd:11678:21)
+    at updateReducer (chunk-RPCDYKBN.js?v=4f968abd:11727:22)
+    at updateState (chunk-RPCDYKBN.js?v=4f968abd:12021:18)
+    at Object.useState (chunk-RPCDYKBN.js?v=4f968abd:12753:24)
+    at Object.useState (chunk-QCHXOAYK.js?v=4f968abd:1066:29)
+    at useToast (use-toast.ts:172:35)
+    at useAuth (use-auth.ts:149:21)
+    at AgentTasks (agent-tasks.tsx:222:21)
+    at renderWithHooks (chunk-RPCDYKBN.js?v=4f968abd:11548:26)
+    at updateFunctionComponent (chunk-RPCDYKBN.js?v=4f968abd:14582:28)Understand this error
+Console.js:61 The above error occurred in the <AgentTasks> component:
+
+    at AgentTasks (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/admin/agent-dashboard/agent-tasks.tsx?t=1746668522758:51:38)
+    at div
+    at div
+    at div
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-AXMZZQ2X.js?v=4f968abd:42:13
+    at Presence (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-E4UC4BFD.js?v=4f968abd:24:11)
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tabs.js?v=4f968abd:176:13
+    at _c5 (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/ui/tabs.tsx:72:12)
+    at div
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-AXMZZQ2X.js?v=4f968abd:42:13
+    at Provider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=4f968abd:38:15)
+    at https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tabs.js?v=4f968abd:54:7
+    at div
+    at AgentDashboard (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/admin/agent-dashboard/index.tsx?t=1746668522758:28:20)
+    at main
+    at div
+    at div
+    at WebSocketProvider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/providers/websocket-provider.tsx:22:37)
+    at AdminLayout (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/admin/admin-layout.tsx:95:3)
+    at AdminDashboard (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/pages/admin/dashboard.tsx?t=1746668522758:59:31)
+    at AdminProtectedRoute (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/admin/admin-protected-route.tsx:25:3)
+    at component
+    at Route (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=4f968abd:323:16)
+    at Switch (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=4f968abd:379:17)
+    at Router
+    at Provider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=4f968abd:38:15)
+    at TooltipProvider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=4f968abd:859:5)
+    at QueryClientProvider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=4f968abd:2805:3)
+    at App (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/App.tsx?t=1746668522758&v=Gm8NUs5gASDzopr4L9EsC:387:59)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+chunk-RPCDYKBN.js?v=4f968abd:9129 Uncaught Error: Rendered more hooks than during the previous render.
+    at updateWorkInProgressHook (chunk-RPCDYKBN.js?v=4f968abd:11678:21)
+    at updateReducer (chunk-RPCDYKBN.js?v=4f968abd:11727:22)
+    at updateState (chunk-RPCDYKBN.js?v=4f968abd:12021:18)
+    at Object.useState (chunk-RPCDYKBN.js?v=4f968abd:12753:24)
+    at Object.useState (chunk-QCHXOAYK.js?v=4f968abd:1066:29)
+    at useToast (use-toast.ts:172:35)
+    at useAuth (use-auth.ts:149:21)
+    at AgentTasks (agent-tasks.tsx:222:21)
+    at renderWithHooks (chunk-RPCDYKBN.js?v=4f968abd:11548:26)
+    at updateFunctionComponent (chunk-RPCDYKBN.js?v=4f968abd:14582:28)Understand this error
+Console.js:61 WebSocket Provider: Erreur de connexion Event
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 WebSocket Provider: Connexion fermée (code: 1006)
+Console.js:61 Connexion WebSocket fermée
+Console.js:61 Erreur lors du rafraîchissement du compteur d'emails: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Détails de l'erreur: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Erreur lors du rafraîchissement du compteur de notifications: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Détails de l'erreur: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Erreur lors du chargement des notifications: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Erreur lors du rafraîchissement du compteur de notifications: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Détails de l'erreur: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Erreur lors du chargement des notifications: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 WebSocket Provider: Timeout de connexion, fermeture forcée
+Console.js:61 Connexion WebSocket établie
+
+                
+          
+          
+          
+         Chrome is moving towards a new experience that allows users to choose to browse without third-party cookies.Understand this warning
+stallwart.build.js:1 stallwart: failed ping 1

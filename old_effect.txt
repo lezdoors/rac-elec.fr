@@ -1,0 +1,19 @@
+  // Effet pour vérifier périodiquement le statut du paiement
+  useEffect(() => {
+    if (!referenceNumber || status === 'success') return;
+    
+    // Première vérification immédiate
+    checkPaymentStatus(referenceNumber);
+    
+    // Puis vérifier toutes les 3 secondes si toujours en attente
+    const intervalId = setInterval(() => {
+      if (status !== 'pending') {
+        clearInterval(intervalId);
+        return;
+      }
+      
+      checkPaymentStatus(referenceNumber);
+    }, 3000);
+    
+    // Nettoyer l'intervalle lorsque le composant est démonté
+    return () => clearInterval(intervalId);

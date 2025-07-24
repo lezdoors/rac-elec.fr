@@ -1,0 +1,237 @@
+/* 
+ * Correctifs spécifiques pour l'affichage mobile basés sur la capture d'écran
+ */
+
+@media (max-width: 768px) {
+  /* Style adapté pour ressembler exactement au visuel fourni */
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    margin-top: 8px !important;
+  }
+  
+  /* Style des cartes de type client selon la maquette */
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 > div {
+    margin-bottom: 0 !important;
+    border-radius: 8px !important;
+    height: auto !important;
+    padding: 16px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    background-color: #f5f9ff !important;
+    border: 1px solid #e1e9ff !important;
+    position: relative !important;
+  }
+  
+  /* Style pour la carte sélectionnée */
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 > div[class*="border-primary"] {
+    border-color: #3b82f6 !important;
+    background-color: #f0f7ff !important;
+  }
+  
+  /* Style pour les icônes de type client */
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 svg {
+    width: 20px !important;
+    height: 20px !important;
+    color: #3b82f6 !important;
+    margin-right: 10px !important;
+    margin-top: 2px !important;
+  }
+  
+  /* Style pour le titre de type client */
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 h4 {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #1d4ed8 !important;
+    margin-bottom: 4px !important;
+  }
+  
+  /* Style pour la description de type client */
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 p {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    color: #6b7280 !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+  
+  /* Style pour le titre "Veuillez sélectionner votre profil" */
+  [data-name="clientType"] .col-span-3 {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+  }
+  
+  /* Réduire l'espacement entre les options */
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 {
+    gap: 8px !important;
+  }
+  
+  /* Réduire la taille des icônes dans les cartes */
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 svg {
+    width: 24px !important;
+    height: 24px !important;
+    margin-bottom: 4px !important;
+  }
+  
+  /* Ajuster la taille du texte dans les cartes */
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 h4 {
+    font-size: 14px !important;
+    margin-bottom: 2px !important;
+    font-weight: 500 !important;
+  }
+  
+  /* Ajuster la description dans les cartes */
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 p {
+    font-size: 12px !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    color: #6b7280 !important;
+    display: block !important; /* Afficher la description */
+  }
+  
+  /* Style pour les cartes sélectionnées */
+  .border-primary.border-2 {
+    border-width: 2px !important;
+    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3) !important;
+  }
+  
+  /* Indicateur de sélection dans les cartes */
+  .border-primary.border-2::after {
+    content: "";
+    display: block !important;
+    width: 16px !important;
+    height: 16px !important;
+    background-color: #1d4ed8 !important;
+    border-radius: 50% !important;
+    position: absolute !important;
+    top: 8px !important;
+    right: 8px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3E%3Cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3E%3C/svg%3E") !important;
+    background-size: 12px !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+  }
+  
+  /* Correction complète pour les champs de formulaire avec icônes */
+  form [data-name] svg {
+    display: none !important;
+  }
+  
+  /* Supprime les icônes qui causent des problèmes */
+  form [data-name="fullName"] label::before,
+  form [data-name="email"] label::before,
+  form [data-name="phone"] label::before {
+    display: none !important;
+  }
+  
+  /* Assurez-vous que les entrées ont un padding normal */
+  form [data-name] input {
+    padding: 10px 12px !important;
+    height: 42px !important;
+    font-size: 14px !important;
+  }
+  
+  /* Format des placeholders */
+  form [data-name] input::placeholder {
+    color: #9ca3af !important;
+    font-size: 14px !important;
+  }
+  
+  /* Styles spécifiques pour éviter les chevauchements */
+  form [data-name] label {
+    margin-bottom: 6px !important;
+    display: block !important;
+  }
+  
+  /* Styles des astérisques obligatoires */
+  form [data-name] label .text-red-500 {
+    margin-left: 2px !important;
+  }
+  
+  /* Optimisation des labels */
+  label.text-sm {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    margin-bottom: 4px !important;
+    display: block !important;
+  }
+  
+  /* Réduction de la taille des astérisques */
+  .text-red-500 {
+    font-size: 12px !important;
+  }
+  
+  /* Réduction des espaces */
+  .space-y-6 {
+    margin-top: 12px !important;
+    margin-bottom: 16px !important;
+  }
+  
+  /* Ajustement des titres d'étape */
+  h2.text-xl {
+    font-size: 18px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  /* Les boutons de navigation */
+  .flex.justify-between button {
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+  }
+  
+  .flex.justify-between button svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+  
+  /* Fix pour le type de client sélectionné */
+  .grid.grid-cols-1.md\\:grid-cols-3.gap-4 > div[class*="border-primary"] {
+    border-color: #1d4ed8 !important;
+    background-color: rgba(219, 234, 254, 0.5) !important;
+  }
+  
+  /* Optimisations du footer pour mobile */
+  .mt-16.bg-blue-50.rounded-xl {
+    padding: 12px !important;
+    margin-top: 20px !important;
+  }
+  
+  /* Réduire le titre du footer */
+  .mt-16.bg-blue-50.rounded-xl h2 {
+    font-size: 15px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  /* Réduire l'espace entre les éléments du footer */
+  .mt-16.bg-blue-50.rounded-xl .space-y-3 {
+    margin-top: 0 !important;
+    gap: 6px !important;
+  }
+  
+  /* Optimiser les puces du footer */
+  .mt-16.bg-blue-50.rounded-xl li {
+    font-size: 13px !important;
+    margin-bottom: 6px !important;
+    line-height: 1.3 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+  }
+  
+  /* Réduire la taille des icônes de puces */
+  .mt-16.bg-blue-50.rounded-xl svg {
+    width: 14px !important;
+    height: 14px !important;
+    min-width: 14px !important;
+    margin-top: 2px !important;
+  }
+  
+  /* Afficher uniquement les deux premières puces sur mobile */
+  .mt-16.bg-blue-50.rounded-xl li:nth-child(n+3) {
+    display: none !important;
+  }
+}

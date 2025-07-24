@@ -1,0 +1,77 @@
+/* Styles pour le récapitulatif en version mobile et tablette */
+
+/* Base styles pour la sidebar de progression */
+.progress-sidebar .font-medium.truncate,
+.progress-sidebar .font-medium.max-w-\[110px\] {
+  max-width: 150px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Styles pour les tablettes */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .progress-sidebar .font-medium.truncate,
+  .progress-sidebar .font-medium.max-w-\[110px\] {
+    max-width: 120px !important;
+  }
+}
+
+/* Styles pour les mobiles */
+@media (max-width: 768px) {
+  /* Rendre le récapitulatif de la barre latérale plus lisible */
+  .progress-sidebar .font-medium.truncate,
+  .progress-sidebar .font-medium.max-w-\[110px\] {
+    max-width: 120px !important;
+  }
+  
+  .progress-sidebar .bg-blue-50 {
+    margin-left: -10px;
+    margin-right: -5px;
+    width: calc(100% + 15px);
+  }
+  
+  /* Améliorer l'espacement entre les elements */
+  .progress-sidebar .flex.items-center.justify-between {
+    margin-bottom: 4px;
+  }
+  
+  .progress-sidebar .bg-blue-50 {
+    padding: 10px !important;
+  }
+}
+
+/* Optimiser le contenu pour les écrans très petits */
+@media (max-width: 375px) {
+  .progress-sidebar .opacity-80 {
+    font-size: 10px;
+  }
+  
+  .progress-sidebar .font-medium {
+    font-size: 11px;
+  }
+  
+  .progress-sidebar .px-1\.5 {
+    padding: 0.1rem 0.25rem !important;
+  }
+  
+  .progress-sidebar .font-medium.text-sm {
+    font-size: 10px;
+  }
+}
+
+/* Animation pour le récapitulatif */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeSlideIn 0.5s ease-out forwards;
+}

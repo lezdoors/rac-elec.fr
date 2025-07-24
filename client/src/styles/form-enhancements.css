@@ -1,0 +1,65 @@
+/* Améliorations CSS pour les options de raccordement 
+   Ces styles seront appliqués sans modifier la structure JSX */
+
+/* Style compact pour les conteneurs d'options */
+.type-options-container > div > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* Suppression des espaces excessifs entre options */
+.type-option-item {
+  margin-bottom: 0 !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  border-radius: 0 !important;
+}
+
+.type-option-item:last-child {
+  border-bottom: none !important;
+}
+
+/* Mise en évidence bleu clair pour les options sélectionnées */
+.type-option-item.selected,
+.type-option-item[class*="border-blue-500"] {
+  background-color: #ebf5ff !important;
+  border-color: #3b82f6 !important;
+}
+
+/* Position des icônes et checkmarks */
+.type-option-item {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  padding: 0.75rem 1rem !important;
+}
+
+.type-option-item .option-icon {
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.type-option-item .option-content {
+  flex-grow: 1;
+}
+
+.type-option-item .option-checkmark {
+  margin-left: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.type-option-item.selected .option-checkmark,
+.type-option-item[class*="border-blue-500"] .option-checkmark {
+  opacity: 1;
+}
+
+/* Responsive : styles légèrement plus compacts sur mobile */
+@media (max-width: 640px) {
+  .type-option-item {
+    padding: 0.625rem 0.75rem !important;
+  }
+}

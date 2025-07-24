@@ -1,0 +1,61 @@
+WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=87FABhMaPz6g' failed: 
+t @ Network.js:227Understand this error
+Network.js:227 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=87FABhMaPz6g' is invalid.
+    at new t (Network.js:227:18)
+    at setupWebSocket (client:536:19)
+    at fallback (client:509:16)
+    at WebSocket.<anonymous> (client:555:7)Understand this error
+Console.js:61 ✅ Google Analytics est correctement chargé et disponible.
+Console.js:61 ✅ Événement de test envoyé à Google Analytics.
+2Console.js:61 Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+chunk-QCHXOAYK.js?v=92f82a57:1066 Uncaught TypeError: Cannot read properties of null (reading 'useState')
+    at useState (chunk-QCHXOAYK.js?v=92f82a57:1066:29)
+    at ErrorSafetyWrapper (error-safety-wrapper.tsx:19:33)
+    at renderWithHooks (chunk-RPCDYKBN.js?v=ed18a20a:11548:26)
+    at mountIndeterminateComponent (chunk-RPCDYKBN.js?v=ed18a20a:14926:21)
+    at beginWork (chunk-RPCDYKBN.js?v=ed18a20a:15914:22)
+    at HTMLUnknownElement.callCallback2 (chunk-RPCDYKBN.js?v=ed18a20a:3674:22)
+    at Object.invokeGuardedCallbackDev (chunk-RPCDYKBN.js?v=ed18a20a:3699:24)
+    at invokeGuardedCallback (chunk-RPCDYKBN.js?v=ed18a20a:3733:39)
+    at beginWork$1 (chunk-RPCDYKBN.js?v=ed18a20a:19765:15)
+    at performUnitOfWork (chunk-RPCDYKBN.js?v=ed18a20a:19198:20)Understand this error
+2Console.js:61 Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+chunk-QCHXOAYK.js?v=92f82a57:1066 Uncaught TypeError: Cannot read properties of null (reading 'useState')
+    at useState (chunk-QCHXOAYK.js?v=92f82a57:1066:29)
+    at ErrorSafetyWrapper (error-safety-wrapper.tsx:19:33)
+    at renderWithHooks (chunk-RPCDYKBN.js?v=ed18a20a:11548:26)
+    at mountIndeterminateComponent (chunk-RPCDYKBN.js?v=ed18a20a:14926:21)
+    at beginWork (chunk-RPCDYKBN.js?v=ed18a20a:15914:22)
+    at HTMLUnknownElement.callCallback2 (chunk-RPCDYKBN.js?v=ed18a20a:3674:22)
+    at Object.invokeGuardedCallbackDev (chunk-RPCDYKBN.js?v=ed18a20a:3699:24)
+    at invokeGuardedCallback (chunk-RPCDYKBN.js?v=ed18a20a:3733:39)
+    at beginWork$1 (chunk-RPCDYKBN.js?v=ed18a20a:19765:15)
+    at performUnitOfWork (chunk-RPCDYKBN.js?v=ed18a20a:19198:20)Understand this error
+Console.js:61 The above error occurred in the <ErrorSafetyWrapper> component:
+
+    at ErrorSafetyWrapper (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/components/error-safety-wrapper.tsx:20:38)
+    at ErrorBoundary (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/lib/error-boundaries.tsx:7:5)
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary.
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 ErrorBoundary a intercepté une erreur: TypeError: Cannot read properties of null (reading 'useState')
+    at useState (chunk-QCHXOAYK.js?v=92f82a57:1066:29)
+    at ErrorSafetyWrapper (error-safety-wrapper.tsx:19:33)
+    at renderWithHooks (chunk-RPCDYKBN.js?v=ed18a20a:11548:26)
+    at mountIndeterminateComponent (chunk-RPCDYKBN.js?v=ed18a20a:14926:21)
+    at beginWork (chunk-RPCDYKBN.js?v=ed18a20a:15914:22)
+    at beginWork$1 (chunk-RPCDYKBN.js?v=ed18a20a:19753:22)
+    at performUnitOfWork (chunk-RPCDYKBN.js?v=ed18a20a:19198:20)
+    at workLoopSync (chunk-RPCDYKBN.js?v=ed18a20a:19137:13)
+    at renderRootSync (chunk-RPCDYKBN.js?v=ed18a20a:19116:15)
+    at recoverFromConcurrentError (chunk-RPCDYKBN.js?v=ed18a20a:18736:28) Object

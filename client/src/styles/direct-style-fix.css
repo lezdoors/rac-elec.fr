@@ -1,0 +1,89 @@
+/**
+ * Application directe de styles pour forcer la mise en page
+ */
+
+/* Styles spécifiques pour les cartes de type client */
+.client-type-card {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  padding: 16px !important;
+  background-color: #f5f9ff !important;
+  border: 1px solid #e1e9ff !important;
+  border-radius: 8px !important;
+  margin-bottom: 8px !important;
+  cursor: pointer !important;
+}
+
+.client-type-card.selected {
+  border-color: #3b82f6 !important;
+  background-color: #f0f7ff !important;
+}
+
+.client-card-icon {
+  margin-right: 16px !important;
+  color: #3b82f6 !important;
+}
+
+.client-card-title {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: #1e40af !important;
+  margin-bottom: 4px !important;
+}
+
+.client-card-description {
+  font-size: 13px !important;
+  color: #6b7280 !important;
+  line-height: 1.3 !important;
+}
+
+/* Styles pour les boutons */
+@media (max-width: 768px) {
+  button,
+  .btn,
+  input[type="submit"],
+  a[role="button"] {
+    font-size: 14px !important;
+    height: 36px !important;
+    padding: 0 12px !important;
+    border-radius: 6px !important;
+  }
+
+  button.flex {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  button svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  /* Footer compact */
+  .mt-16.bg-blue-50 {
+    padding: 12px !important;
+    margin-top: 16px !important;
+  }
+
+  .mt-16.bg-blue-50 h2 {
+    font-size: 14px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .mt-16.bg-blue-50 li {
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 6px !important;
+  }
+
+  .mt-16.bg-blue-50 svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .mt-16.bg-blue-50 li:nth-child(n+3) {
+    display: none !important;
+  }
+}

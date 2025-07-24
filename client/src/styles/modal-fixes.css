@@ -1,0 +1,22 @@
+/* Masquer le bouton X des modales de contact */
+.contact-modal-content > button[type="button"]:last-child {
+  display: none !important;
+}
+
+/* Styles pour toutes les modales du site */
+div[role="dialog"] button[type="button"].fixed.top-4.right-4 {
+  display: none !important;
+}
+
+/* Masquage généralisé */
+.dialog-content-custom [data-radix-collection-item],
+.dialog-content-custom button[aria-label="Close"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Masquage via attributs */
+[data-dialog-close="hidden"] button[aria-label="Close"] {
+  display: none !important;
+}

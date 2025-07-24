@@ -1,0 +1,199 @@
+// server.js
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const stripe = require('stripe')('sk_test_votrecléprivée'); // Remplacez par votre clé privée Stripe
+
+const app = express();
+
+// Middleware
+app.use(express.static('public')); // Pour servir les fichiers statiques (HTML, CSS, JS)
+app.use(bodyParser.json());
+
+// Base de données en mémoire pour stocker les transactions
+// (à remplacer par une vraie base de données en production)
+const transactions = {};
+
+// Route principale - servir la page de paiement
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Route pour traiter les paiements
+app.post('/api/process-payment', async (req, res) => {
+  try {
+    const { paymentMethodId, amount, currency, description, metadata } = req.body;
+    
+    console.log('Demande de paiement reçue:', req.body);
+    
+    if (!paymentMethodId || !amount) {
+      return res.status(400).json({
+        success: false,
+        message: 'Informations de paiement incomplètes'
+      });
+    }
+    
+    // Création de l'intention de paiement Stripe
+    // La validation de la carte se fait automatiquement à cette étape
+    try {
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: Math.round(amount * 100), // Stripe utilise les centimes
+        currency: currency || 'eur',
+        payment_method: paymentMethodId,
+        description: description || 'Raccordement Électrique',
+        metadata: metadata || {},
+        confirm: true, // Confirmer immédiatement le paiement
+        return_url: `${req.protocol}://${req.get('host')}/confirmation`, // Pour 3D Secure
+      });
+      
+      console.log('Intention de paiement créée:', paymentIntent.id, paymentIntent.status);
+      
+      // Enregistrer la transaction
+      const reference = metadata?.reference || `REF-${Date.now()}`;
+      transactions[paymentIntent.id] = {
+        id: paymentIntent.id,
+        reference: reference,
+        amount: amount,
+        currency: currency || 'eur',
+        status: paymentIntent.status,
+        created: new Date().toISOString()
+      };
+      
+      // Répondre en fonction du statut du paiement
+      if (paymentIntent.status === 'succeeded') {
+        // Paiement réussi immédiatement
+        return res.json({
+          success: true,
+          paymentIntentId: paymentIntent.id,
+          status: paymentIntent.status
+        });
+      } else if (paymentIntent.status === 'requires_action') {
+        // 3D Secure requis
+        return res.json({
+          success: true,
+          requiresAction: true,
+          clientSecret: paymentIntent.client_secret,
+          paymentIntentId: paymentIntent.id
+        });
+      } else {
+        // Autre statut
+        return res.json({
+          success: true,
+          status: paymentIntent.status,
+          paymentIntentId: paymentIntent.id
+        });
+      }
+    } catch (stripeError) {
+      console.error('Erreur Stripe:', stripeError);
+      
+      // Formatter le message d'erreur pour l'utilisateur
+      let errorMessage = 'Une erreur est survenue lors du traitement du paiement.';
+      
+      if (stripeError.type === 'StripeCardError') {
+        // Erreurs liées à la carte
+        switch(stripeError.code) {
+          case 'card_declined':
+            errorMessage = 'Votre carte a été refusée.';
+            break;
+          case 'expired_card':
+            errorMessage = 'Votre carte est expirée.';
+            break;
+          case 'incorrect_cvc':
+            errorMessage = 'Le code de sécurité est incorrect.';
+            break;
+          case 'incorrect_number':
+            errorMessage = 'Le numéro de carte est invalide.';
+            break;
+          case 'insufficient_funds':
+            errorMessage = 'Fonds insuffisants sur cette carte.';
+            break;
+          case 'invalid_expiry_month':
+            errorMessage = 'Le mois d\'expiration est invalide.';
+            break;
+          case 'invalid_expiry_year':
+            errorMessage = 'L\'année d\'expiration est invalide.';
+            break;
+          case 'processing_error':
+            errorMessage = 'Une erreur est survenue lors du traitement de votre carte. Veuillez réessayer.';
+            break;
+          default:
+            errorMessage = stripeError.message || errorMessage;
+        }
+      }
+      
+      return res.status(400).json({
+        success: false,
+        message: errorMessage
+      });
+    }
+  } catch (error) {
+    console.error('Erreur serveur:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Erreur serveur lors du traitement de la demande de paiement'
+    });
+  }
+});
+
+// Route pour vérifier le statut d'un paiement
+app.get('/api/payment-status/:paymentIntentId', async (req, res) => {
+  try {
+    const { paymentIntentId } = req.params;
+    
+    // Vérifier si la transaction existe dans notre base de données
+    if (transactions[paymentIntentId]) {
+      return res.json({
+        success: true,
+        transaction: transactions[paymentIntentId]
+      });
+    }
+    
+    // Si non, vérifier avec Stripe
+    try {
+      const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+      
+      // Ajouter à notre base de données
+      transactions[paymentIntentId] = {
+        id: paymentIntent.id,
+        reference: paymentIntent.metadata.reference || `REF-${Date.now()}`,
+        amount: paymentIntent.amount / 100,
+        currency: paymentIntent.currency,
+        status: paymentIntent.status,
+        created: new Date(paymentIntent.created * 1000).toISOString()
+      };
+      
+      return res.json({
+        success: true,
+        transaction: transactions[paymentIntentId]
+      });
+    } catch (stripeError) {
+      console.error('Erreur Stripe:', stripeError);
+      return res.status(404).json({
+        success: false,
+        message: 'Paiement non trouvé'
+      });
+    }
+  } catch (error) {
+    console.error('Erreur serveur:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Erreur serveur lors de la vérification du paiement'
+    });
+  }
+});
+
+// Page de confirmation
+app.get('/confirmation', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'confirmation.html'));
+});
+
+// Route de débogage (à supprimer en production)
+app.get('/debug/transactions', (req, res) => {
+  res.json(transactions);
+});
+
+// Démarrer le serveur
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Serveur démarré sur le port ${PORT}`);
+});

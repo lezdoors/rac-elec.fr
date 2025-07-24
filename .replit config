@@ -1,0 +1,6 @@
+run = "npx serve ."
+language = "nodejs"
+entrypoint = "index.js"
+
+[env]
+NODE_VERSION = "20.19.3"

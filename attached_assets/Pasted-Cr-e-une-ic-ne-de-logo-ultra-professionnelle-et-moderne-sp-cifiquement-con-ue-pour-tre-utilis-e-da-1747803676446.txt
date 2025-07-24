@@ -1,0 +1,34 @@
+Crée une icône de logo ultra-professionnelle et moderne, spécifiquement conçue pour être utilisée dans l'en-tête (header) et le pied de page (footer) d'un site web. Cette icône doit incarner l'identité d'Enedis, le gestionnaire du réseau de distribution d'électricité en France.
+
+Objectif principal de l'icône :
+
+Représenter Enedis de manière instantanément reconnaissable et professionnelle.
+Être parfaitement lisible et esthétique même en petite taille (type favicon).
+Refléter la modernité, la fiabilité, la connectivité et le rôle d'Enedis dans la transition énergétique.
+Directives de style et éléments visuels :
+
+Style Général : Minimaliste, épuré, design plat (flat design) ou légèrement néomorphique si cela renforce la modernité sans complexifier. Lignes nettes et précises, vectoriel.
+Thèmes à intégrer subtilement :
+Connectivité / Réseau : Suggérer des lignes interconnectées, un maillage, un flux, ou un nœud de connexion.
+Électricité / Énergie : Évoquer l'énergie de manière abstraite (pas d'éclairs littéraux sauf si extrêmement stylisés et minimalistes), peut-être un flux lumineux discret ou une impulsion.
+Modernité / Technologie : L'aspect doit être contemporain, tourné vers l'avenir (smart grid, innovation).
+Possibilité d'abstraction de la lettre 'E' : Envisager une stylisation très abstraite et élégante de la lettre 'E' (initiale d'Enedis) si cela peut être intégré de manière fluide et non-obvie dans le design global de l'icône. Cela ne doit pas être l'élément central si cela compromet la simplicité.
+Palette de couleurs (impératif) :
+Couleur principale dominante : Le vert Enedis. Utiliser une nuance de vert vif, énergique et moderne, très proche du Hex #009E4D ou du Pantone 355 C. Cette couleur doit être l'élément le plus reconnaissable de la marque.
+Couleur secondaire : Blanc pur (Hex #FFFFFF) pour les contrastes, les lignes fines, ou en tant qu'espace négatif.
+Accent (optionnel et très discret) : Une touche d'un vert légèrement plus foncé pour un effet de profondeur subtil, ou un gris très clair (Hex #F0F0F0) si absolument nécessaire. L'icône doit rester majoritairement bicolore (vert Enedis et blanc) pour un impact maximal.
+Forme et Composition :
+L'icône doit s'inscrire harmonieusement dans un format carré ou légèrement arrondi (squircle).
+Viser une composition équilibrée, potentiellement symétrique ou avec un équilibre dynamique clair.
+Assurer une excellente lisibilité à très petite taille (par exemple 16x16 pixels ou 32x32 pixels), tout en étant impeccable en plus grande taille (par exemple 128x128 pixels).
+Pas de texte, de chiffres ou de lettres autres que l'éventuelle abstraction de la lettre 'E' mentionnée plus haut. L'icône doit être purement graphique.
+Arrière-plan : L'icône doit être générée avec un fond transparent (format PNG idéalement) ou sur un fond uni facilement détachable.
+À éviter absolument :
+
+Designs complexes, surchargés ou désuets.
+Représentations littérales (ampoules, pylônes électriques sauf si transformés en un design abstrait méconnaissable).
+Ombres portées excessives ou effets 3D trop prononcés qui nuiraient à la clarté en petite taille.
+Couleurs ne respectant pas la charte Enedis (surtout le vert).
+Aspect amateur ou cartoonesque.
+Sentiment recherché :
+L'icône doit inspirer la confiance, la technologie, l'efficacité, l'innovation et le service public essentiel. Elle doit être perçue comme un symbole stable et pérenne d'un grand opérateur de réseau.

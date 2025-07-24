@@ -1,0 +1,111 @@
+/* Google PageSpeed Core Web Vitals Optimizations */
+
+/* Above-the-fold critical content prioritization */
+.above-fold {
+  contain: layout;
+  will-change: auto;
+}
+
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
+}
+
+/* GPU acceleration for animations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimized gradient backgrounds for performance */
+.bg-gradient-optimized {
+  background: linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%);
+  background-attachment: fixed;
+}
+
+/* Lazy loading placeholder styles */
+.lazy-placeholder {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Optimized image loading */
+img[loading="lazy"] {
+  transition: opacity 0.3s ease-in-out;
+}
+
+img[loading="lazy"]:not([src]) {
+  opacity: 0;
+}
+
+/* Performance-optimized hover effects */
+.hover-optimized {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  will-change: transform;
+}
+
+.hover-optimized:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Reduce layout shift for dynamic content */
+.layout-stable {
+  min-height: 200px;
+  contain: layout;
+}
+
+/* Critical CSS inlined - additional non-critical styles */
+@media (min-width: 768px) {
+  .md\:performance-optimized {
+    contain: layout style paint;
+  }
+}
+
+/* Optimize animations for 60fps */
+@media (prefers-reduced-motion: no-preference) {
+  .smooth-animation {
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Defer non-critical visual effects */
+.visual-enhancement {
+  contain: paint;
+  will-change: auto;
+}
+
+/* Optimized focus states for accessibility */
+.focus-optimized:focus {
+  outline: 2px solid #0072CE;
+  outline-offset: 2px;
+}
+
+/* Resource hints for preloading */
+.preload-hint::before {
+  content: '';
+  display: none;
+}
+
+/* Critical path optimization */
+.critical-content {
+  contain: none;
+  will-change: auto;
+}
+
+/* Non-critical content optimization */
+.deferred-content {
+  contain: layout style paint;
+  content-visibility: auto;
+}

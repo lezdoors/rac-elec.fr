@@ -1,0 +1,223 @@
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.Understand this error
+framework-f386dea716637963.js:1 Unrecognized feature: 'ambient-light-sensor'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'battery'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'execution-while-not-rendered'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'execution-while-out-of-viewport'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'layout-animations'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'legacy-image-formats'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'navigation-override'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'oversized-images'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'publickey-credentials'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'speaker-selection'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'unoptimized-images'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'unsized-media'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Unrecognized feature: 'pointer-lock'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Allow attribute will take precedence over 'allowfullscreen'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+framework-f386dea716637963.js:1 Allow attribute will take precedence over 'allowpaymentrequest'.
+_ @ framework-f386dea716637963.js:1Understand this warning
+4stallwart.build.js:1 stallwart: failed ping 1
+stallwart.build.js:1 stallwart: failed ping 2
+stallwart.build.js:1 stallwart: failed ping 3
+stallwart.build.js:1 stallwart: failed ping 4
+stallwart.build.js:1 stallwart: failed ping 5
+stallwart.build.js:1 stallwart: session stalled
+8941-f711413822a27423.js:1 WebSocket connection to 'wss://eval2.spock.platform.replit.com/wsv2/v2.public.Q2dZSXZkZlp3QVlTQmdqYzg5bkFCaUlGYzNCdlkyc3dBRHFQQWdva05EUmpaRGRtT1RJdFpEaGhZUzAwTjJSaUxXSTBPVGN0WTJZMU1qQXlNekJpWTJOaUVnTnVhWGdhRjNKbGNHeHBkQzF5WlhCc0xXWnBiR1Z6TFhOd2IyTnJJaHB5WVdOamIzSmtaVzFsYm5RdFkyeGhkV1JsTFhKbGNHeHBkQ29LY25saGJtRnZkV1poYkVKUkNoaHlaWEJzYVhRdGNtVndiQzFpYkc5amEzTXRjM0J2WTJzU0ZuSmxjR3hwZEMxeVpYQnNMVzFsZEdFdGMzQnZZMnNhSFhKbGNHeHBkQzF0WVhKbllYSnBibVV0WW14dlkydHpMWE53YjJOclNnY0krOFAxRXhBQlVBQmFEMmx1ZEdWdWRGOWlkWE5wYm1WemMxb1hiMjVpYjJGeVpHbH...MlZXeG5TM2w1UTNNMmJFOW5OR1JEVURscGMzWlhPVUV6VWxCdVJqUkpNRnBwT0VrM0pUSkdXSGgwYkhKd0pUSkNlakU0SlRKQ2MxQm9NMncyTVhsa04zaFJTakpEVG1neFVXMURSMUJuYUdwalZIUnFKVEpHYjI1aFNpVXlSbFZQVUdkWWMxRkhiRnBYZEhCc1V6QldXRXMyTTNNNFduaFVSRVJEV21KbmRtNDBUMFZpUjBjeGJVd3pSelpJU1dWRlZXYzBUMU56VkVKMFdXbE9VbXRwZFdzM1lVbEJPRlV6YVVsQk1rNTZUamswVlVKblZVbFNZblk0YkcxdFp6ZGlabGRoUkZSWVZtUmFZVmQyTm14YU4xcDNKVE5FSlRORSQ0H1-qp2bUtfpObNQ3SamezvyRE56LWEwsIanxKiUcEcgqBNrZ5qNqV7RctNWTVFfTEWwhoUPzH0Uh0XmVpQs.Q2dad2NtOWtPak1pQ25KbGNHeHBkQzVqYjIwPQ' failed: 
+connect @ 8941-f711413822a27423.js:1Understand this error
+/graphql:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+8941-f711413822a27423.js:1 WebSocket connection to 'wss://eval2.spock.platform.replit.com/wsv2/v2.public.Q2dZSXZkZlp3QVlTQmdqYzg5bkFCaUlGYzNCdlkyc3dBRHFQQWdva05EUmpaRGRtT1RJdFpEaGhZUzAwTjJSaUxXSTBPVGN0WTJZMU1qQXlNekJpWTJOaUVnTnVhWGdhRjNKbGNHeHBkQzF5WlhCc0xXWnBiR1Z6TFhOd2IyTnJJaHB5WVdOamIzSmtaVzFsYm5RdFkyeGhkV1JsTFhKbGNHeHBkQ29LY25saGJtRnZkV1poYkVKUkNoaHlaWEJzYVhRdGNtVndiQzFpYkc5amEzTXRjM0J2WTJzU0ZuSmxjR3hwZEMxeVpYQnNMVzFsZEdFdGMzQnZZMnNhSFhKbGNHeHBkQzF0WVhKbllYSnBibVV0WW14dlkydHpMWE53YjJOclNnY0krOFAxRXhBQlVBQmFEMmx1ZEdWdWRGOWlkWE5wYm1WemMxb1hiMjVpYjJGeVpHbH...MlZXeG5TM2w1UTNNMmJFOW5OR1JEVURscGMzWlhPVUV6VWxCdVJqUkpNRnBwT0VrM0pUSkdXSGgwYkhKd0pUSkNlakU0SlRKQ2MxQm9NMncyTVhsa04zaFJTakpEVG1neFVXMURSMUJuYUdwalZIUnFKVEpHYjI1aFNpVXlSbFZQVUdkWWMxRkhiRnBYZEhCc1V6QldXRXMyTTNNNFduaFVSRVJEV21KbmRtNDBUMFZpUjBjeGJVd3pSelpJU1dWRlZXYzBUMU56VkVKMFdXbE9VbXRwZFdzM1lVbEJPRlV6YVVsQk1rNTZUamswVlVKblZVbFNZblk0YkcxdFp6ZGlabGRoUkZSWVZtUmFZVmQyTm14YU4xcDNKVE5FSlRORSQ0H1-qp2bUtfpObNQ3SamezvyRE56LWEwsIanxKiUcEcgqBNrZ5qNqV7RctNWTVFfTEWwhoUPzH0Uh0XmVpQs.Q2dad2NtOWtPak1pQ25KbGNHeHBkQzVqYjIwPQ' failed: 
+connect @ 8941-f711413822a27423.js:1Understand this error
+/data/repls/44cd7f92-d8aa-47db-b497-cf520230bccb/get_connection_metadata:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+_app-21ea86fa8518c8f7.js:15 WebSocket connection to 'wss://replit.com/graphql_subscriptions' failed: 
+(anonymous) @ _app-21ea86fa8518c8f7.js:15Understand this error
+events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+api.sorryapp.com/v1/pages/27c7b5fc:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+api.sorryapp.com/v1/pages/27c7b5fc:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+/graphql:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+8941-f711413822a27423.js:1 WebSocket connection to 'wss://eval2.spock.platform.replit.com/wsv2/v2.public.Q2dZSXZkZlp3QVlTQmdqYzg5bkFCaUlGYzNCdlkyc3dBRHFQQWdva05EUmpaRGRtT1RJdFpEaGhZUzAwTjJSaUxXSTBPVGN0WTJZMU1qQXlNekJpWTJOaUVnTnVhWGdhRjNKbGNHeHBkQzF5WlhCc0xXWnBiR1Z6TFhOd2IyTnJJaHB5WVdOamIzSmtaVzFsYm5RdFkyeGhkV1JsTFhKbGNHeHBkQ29LY25saGJtRnZkV1poYkVKUkNoaHlaWEJzYVhRdGNtVndiQzFpYkc5amEzTXRjM0J2WTJzU0ZuSmxjR3hwZEMxeVpYQnNMVzFsZEdFdGMzQnZZMnNhSFhKbGNHeHBkQzF0WVhKbllYSnBibVV0WW14dlkydHpMWE53YjJOclNnY0krOFAxRXhBQlVBQmFEMmx1ZEdWdWRGOWlkWE5wYm1WemMxb1hiMjVpYjJGeVpHbH...MlZXeG5TM2w1UTNNMmJFOW5OR1JEVURscGMzWlhPVUV6VWxCdVJqUkpNRnBwT0VrM0pUSkdXSGgwYkhKd0pUSkNlakU0SlRKQ2MxQm9NMncyTVhsa04zaFJTakpEVG1neFVXMURSMUJuYUdwalZIUnFKVEpHYjI1aFNpVXlSbFZQVUdkWWMxRkhiRnBYZEhCc1V6QldXRXMyTTNNNFduaFVSRVJEV21KbmRtNDBUMFZpUjBjeGJVd3pSelpJU1dWRlZXYzBUMU56VkVKMFdXbE9VbXRwZFdzM1lVbEJPRlV6YVVsQk1rNTZUamswVlVKblZVbFNZblk0YkcxdFp6ZGlabGRoUkZSWVZtUmFZVmQyTm14YU4xcDNKVE5FSlRORSQ0H1-qp2bUtfpObNQ3SamezvyRE56LWEwsIanxKiUcEcgqBNrZ5qNqV7RctNWTVFfTEWwhoUPzH0Uh0XmVpQs.Q2dad2NtOWtPak1pQ25KbGNHeHBkQzVqYjIwPQ' failed: 
+connect @ 8941-f711413822a27423.js:1Understand this error
+_app-21ea86fa8518c8f7.js:15 WebSocket connection to 'wss://replit.com/graphql_subscriptions' failed: 
+(anonymous) @ _app-21ea86fa8518c8f7.js:15Understand this error
+/data/repls/44cd7f92-d8aa-47db-b497-cf520230bccb/get_connection_metadata:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+r.stripe.com/b:1 
+            
+            
+           Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+shared-27ee00315533d…d43bb57e237775.js:1 Uncaught (in promise) FetchError: Error fetching https://r.stripe.com/b: Failed to fetch
+    at shared-27ee00315533d62ae7d43bb57e237775.js:1:207861Understand this error
+workspace_iframe.html:32 Unrecognized feature: 'ambient-light-sensor'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'battery'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'execution-while-not-rendered'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'execution-while-out-of-viewport'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'layout-animations'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'legacy-image-formats'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'navigation-override'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'oversized-images'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'publickey-credentials'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'speaker-selection'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'unoptimized-images'.Understand this warning
+workspace_iframe.html:32 Unrecognized feature: 'unsized-media'.Understand this warning
+workspace_iframe.html:32 Allow attribute will take precedence over 'allowfullscreen'.Understand this warning
+workspace_iframe.html:32 Allow attribute will take precedence over 'allowpaymentrequest'.Understand this warning
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)Understand this error
+ WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=mhovFOwQCtHP' failed: 
+t @ eruda.js:2Understand this error
+ WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=WoTIsfqvhc6M' failed: 
+t @ eruda.js:2Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+ WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=WoTIsfqvhc6M' failed: 
+t @ eruda.js:2Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+ WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=0D02gBUBdSIz' failed: 
+t @ eruda.js:2Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/send-email:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/send-email:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+ WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=xWv0R92GrAki' failed: 
+t @ eruda.js:2
+setupWebSocket @ client:536
+(anonymous) @ client:531Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/user-emails:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)Understand this error
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=TakDrqradtp0' failed: 
+t @ Network.js:227Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=EldpN1-YD38G' failed: 
+t @ Network.js:227Understand this error
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=yjTIQiFiumCH' failed: 
+t @ Network.js:227Understand this error
+Network.js:227 WebSocket connection to 'wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/?token=yjTIQiFiumCH' failed: 
+t @ Network.js:227Understand this error
+Network.js:227 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=yjTIQiFiumCH' is invalid.
+    at new t (Network.js:227:18)
+    at setupWebSocket (client:536:19)
+    at fallback (client:509:16)
+    at WebSocket.<anonymous> (client:555:7)Understand this error
+Console.js:61 Warning: Cannot update a component (`ForwardRef`) while rendering a different component (`AuthPage`). To locate the bad setState() call inside `AuthPage`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render
+    at AuthPage (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/pages/auth-page.tsx:50:24)
+    at Route (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=8eac4b68:323:16)
+    at Switch (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=8eac4b68:379:17)
+    at Router
+    at Provider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=8eac4b68:38:15)
+    at TooltipProvider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=8eac4b68:861:5)
+    at QueryClientProvider (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=8eac4b68:2805:3)
+    at App (https://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/src/App.tsx?t=1746312080279&v=DMplwjxt89JbbCrz4zi2T:233:59)
+Mt.forEach.n.<computed> @ Console.js:61Understand this error
+Console.js:61 Connecting to WebSocket at wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/ws
+Console.js:61 WebSocket connected
+Console.js:61 Connecting to WebSocket at wss://44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/ws
+Console.js:61 WebSocket disconnected
+44cd7f92-d8aa-47db-b497-cf520230bccb-00-2ovg0co967w4v.spock.replit.dev/api/mailboxes:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+Console.js:61 WebSocket connected

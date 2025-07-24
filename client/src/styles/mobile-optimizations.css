@@ -1,0 +1,113 @@
+/* Mobile-First Optimizations for Better Conversions */
+/* These styles enhance mobile experience without affecting desktop */
+
+/* Mobile Form Optimizations */
+@media (max-width: 640px) {
+  /* Larger touch targets for better usability */
+  .mobile-touch-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  /* Enhanced button visibility */
+  .mobile-cta-button {
+    padding: 16px 24px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+  }
+  
+  /* Better form field spacing */
+  .mobile-form-spacing {
+    margin-bottom: 20px;
+  }
+  
+  /* Enhanced text contrast for better readability */
+  .mobile-text-enhanced {
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  
+  /* Improved input field sizing */
+  .mobile-input-enhanced {
+    padding: 16px 14px;
+    font-size: 16px; /* Prevents zoom on iOS */
+    border-width: 2px;
+  }
+  
+  /* Better card layouts for mobile */
+  .mobile-card-enhanced {
+    padding: 20px 16px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Enhanced selection cards */
+  .mobile-selection-card {
+    padding: 20px;
+    border-width: 3px;
+    border-radius: 16px;
+    transition: all 0.2s ease;
+  }
+  
+  .mobile-selection-card:active {
+    transform: scale(0.98);
+  }
+  
+  /* Better progress indicator */
+  .mobile-progress-enhanced {
+    height: 8px;
+    border-radius: 4px;
+  }
+  
+  /* Enhanced step navigation */
+  .mobile-step-nav {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding: 16px;
+    border-top: 1px solid #e5e7eb;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .tablet-grid-enhanced {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+/* Desktop preserves original styling */
+@media (min-width: 1025px) {
+  .desktop-preserve {
+    /* Original styles maintained */
+  }
+}
+
+/* Performance optimizations */
+.mobile-performance-hint {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Touch feedback improvements */
+.mobile-touch-feedback:active {
+  background-color: rgba(59, 130, 246, 0.1);
+  transform: scale(0.98);
+}
+
+/* Better loading states for mobile */
+.mobile-loading-enhanced {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: mobile-shimmer 1.5s infinite;
+}
+
+@keyframes mobile-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

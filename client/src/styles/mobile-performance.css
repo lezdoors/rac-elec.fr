@@ -1,0 +1,124 @@
+/* Optimisations CSS spécifiques pour les performances mobiles */
+/* Compatible avec tous les navigateurs modernes */
+
+/* Optimisations générales pour les appareils mobiles */
+@media screen and (max-width: 768px) {
+  /* Force l'accélération matérielle pour les éléments critiques - Ciblage spécifique */
+  .main-form-container,
+  .form-step,
+  .support-widget {
+    will-change: auto;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* Optimisation des images pour mobile */
+  img {
+    content-visibility: auto;
+    contain-intrinsic-size: 300px 200px;
+  }
+
+  /* Optimisation des dégradés pour mobile - Uniquement pour le conteneur de formulaire */
+  .main-form-container.bg-slate-50 {
+    background-image: none !important;
+    background-color: #f8fafc !important;
+  }
+
+  /* Optimisation des bordures arrondies - Éléments non-critiques uniquement */
+  .main-form-container .rounded-2xl:not(header *) {
+    border-radius: 8px !important;
+  }
+  
+  .main-form-container .rounded-xl:not(header *) {
+    border-radius: 6px !important;
+  }
+
+  /* Optimisations spécifiques pour la page FAQ sur mobile */
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Amélioration de l'alignement des boutons de catégorie sur mobile */
+  .grid.grid-cols-2 button {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Optimisation des tabs sur mobile - masquer les icônes */
+  [data-radix-tabs-trigger] {
+    min-height: 40px;
+    padding: 8px 12px;
+    text-align: center;
+  }
+
+  [data-radix-tabs-trigger] span:first-child {
+    display: none !important;
+  }
+
+  /* Optimisation des accordéons sur mobile */
+  [data-radix-accordion-trigger] {
+    min-height: 48px;
+    padding: 12px 16px;
+  }
+}
+
+/* Préchargement des ressources critiques */
+.critical-content {
+  content-visibility: visible;
+  contain: none;
+}
+
+/* Lazy loading pour le contenu non-critique */
+.non-critical-content {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 500px;
+}
+
+/* Optimisation spécifique pour les formulaires mobiles */
+@media screen and (max-width: 768px) {
+  input, textarea, select {
+    font-size: 16px; /* Évite le zoom automatique sur iOS */
+    transform: translateZ(0); /* Accélération matérielle */
+  }
+
+  /* Optimisation des transitions sur les éléments interactifs */
+  button {
+    transition: background-color 0.1s ease;
+    transform: translateZ(0);
+  }
+
+  /* Réduction de la complexité visuelle des cartes */
+  .card-shadow {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+/* Optimisations pour les connexions lentes */
+@media (prefers-reduced-data: reduce) {
+  .bg-gradient-to-r,
+  .bg-gradient-to-b {
+    background-image: none !important;
+  }
+  
+  .shadow-2xl,
+  .shadow-xl {
+    box-shadow: none !important;
+  }
+  
+  .backdrop-blur-sm {
+    backdrop-filter: none !important;
+  }
+}
+
+/* Optimisations pour économiser la batterie */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

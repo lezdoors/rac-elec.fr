@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversion Testing</title>
+</head>
+<body>
+    <h1>Testing Conversion Execution</h1>
+    <div id="results"></div>
+    
+    <script>
+        // Load the main application's conversion tracking
+        const script = document.createElement('script');
+        script.src = 'http://localhost:5000/';
+        script.onload = function() {
+            testConversions();
+        };
+        document.head.appendChild(script);
+        
+        function log(message) {
+            const div = document.createElement('div');
+            div.textContent = message;
+            document.getElementById('results').appendChild(div);
+            console.log(message);
+        }
+        
+        function testConversions() {
+            log('Starting conversion tests...');
+            
+            // Test Google Tag
+            if (typeof gtag !== 'undefined') {
+                log('✅ gtag function is available');
+                
+                // Test Form Start Conversion
+                try {
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-16698052873/5o3ICMLjpMUaEtmioJo-'
+                    });
+                    log('✅ Form Start conversion fired successfully');
+                } catch (e) {
+                    log('❌ Form Start conversion failed: ' + e.message);
+                }
+                
+                // Test Form Submit Conversion
+                try {
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-16698052873/PqZMCJW-tMUaEtmioJo-'
+                    });
+                    log('✅ Form Submit conversion fired successfully');
+                } catch (e) {
+                    log('❌ Form Submit conversion failed: ' + e.message);
+                }
+                
+                // Test Purchase Conversion
+                try {
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-16698052873/IFUxCJLHtMUaEtmioJo-',
+                        'transaction_id': 'TEST-12345'
+                    });
+                    log('✅ Purchase conversion fired successfully');
+                } catch (e) {
+                    log('❌ Purchase conversion failed: ' + e.message);
+                }
+                
+            } else {
+                log('❌ gtag function not available');
+            }
+        }
+    </script>
+</body>
+</html>
