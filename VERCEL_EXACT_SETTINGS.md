@@ -1,71 +1,73 @@
-# 🎯 VERCEL DEPLOYMENT - EXACT SETTINGS
+# 🎯 EXACT VERCEL SETUP CONFIGURATION
 
-Based on your screenshots, you're in the correct Vercel deployment interface. Here are the EXACT settings to use:
+## Vercel Dashboard Settings
 
-## ⚙️ Build & Development Settings
-
+### Framework Settings (Build and Deployment)
 ```
-Framework Preset: Other
+Framework Preset: Vite
 Build Command: npm run build
 Output Directory: dist/public
 Install Command: npm install
 Development Command: npm run dev
-Root Directory: . (leave blank or use single dot)
+Root Directory: (leave empty)
 ```
 
-## 🔑 Environment Variables (CRITICAL)
-
-Click "Environment Variables" and add these EXACT variables:
-
-### Database
+### Project Settings
 ```
-DATABASE_URL = postgresql://your_database_url_here
+Node.js Version: 20.x
+Build & Development Settings: Override enabled for all commands
 ```
 
-### Stripe Payment
-```
-STRIPE_SECRET_KEY = sk_live_... (or sk_test_ for testing)
-VITE_STRIPE_PUBLIC_KEY = pk_live_... (or pk_test_ for testing)
-```
+## GitHub Repository Structure Required
 
-### Email SMTP
-```
-SMTP_HOST = premium234.web-hosting.com
-SMTP_PORT = 587
-SMTP_USER = notification@raccordement-elec.fr
-SMTP_PASS = your_smtp_password_here
-SMTP_FROM = notification@raccordement-elec.fr
-SMTP_TO = bonjour@raccordement-elec.fr
-```
+Your repository must contain these exact folders and files:
 
-### Analytics
+### Essential Source Code
 ```
-VITE_GA_MEASUREMENT_ID = GT-MJKTJGCK
+client/
+├── index.html                 (React entry point - 14KB)
+├── src/                      (React components)
+│   ├── App.tsx
+│   ├── main.tsx
+│   ├── components/
+│   ├── pages/
+│   └── lib/
+└── public/                   (Static assets)
 ```
 
-### System
+### Production Build Files
 ```
-NODE_ENV = production
+dist/public/                  (Generated build - 3MB total)
+├── index.html               (Built HTML - 16KB)
+├── assets/                  (JS/CSS bundles)
+│   ├── index-[hash].css
+│   ├── index-[hash].js
+│   └── [other bundle files]
+├── amex.svg                 (Payment icons)
+├── cb.svg
+├── mastercard.svg
+└── visa.svg
 ```
 
-## 🚀 Deployment Steps
+### Configuration Files
+```
+package.json                 (Contains build script)
+vite.config.ts              (Vite configuration)
+.vercelignore               (Updated ignore rules)
+```
 
-1. **Verify Build Settings** (see above)
-2. **Add Environment Variables** (all of them - critical!)
-3. **Click "Deploy"**
-4. **Wait 2-3 minutes** for build to complete
-5. **Your site will be live** at yourproject.vercel.app
+## Environment Variables (if needed)
+Set in Vercel dashboard under Settings > Environment Variables:
+```
+DATABASE_URL=your_database_url
+STRIPE_PUBLISHABLE_KEY=your_stripe_key
+STRIPE_SECRET_KEY=your_stripe_secret
+SMTP_HOST=premium234.web-hosting.com
+SMTP_USER=your_smtp_user
+SMTP_PASS=your_smtp_password
+```
 
-## 🔍 Expected Build Output
+## Critical Fix Required
+**Output Directory MUST be "dist/public" not just "dist"**
 
-- Frontend build: ~652KB optimized bundle
-- Build time: ~30 seconds to 2 minutes
-- Success: Site serves from dist/public/index.html
-
-## ⚠️ Critical Notes
-
-- **Don't skip environment variables** - the app needs DATABASE_URL and STRIPE keys to function
-- **Output directory MUST be** `dist/public` (not just `dist`)
-- **Build command MUST be** `npm run build` (this creates the dist/public folder)
-
-Your repository is correctly connected. Just configure these settings and deploy!
+This is the key difference that will resolve your 404 error.
