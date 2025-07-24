@@ -6,10 +6,10 @@ export default function CookiesPage() {
       <div id="top" className="min-h-screen bg-gray-50 py-12">
         <div className="container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-lg shadow-lg p-8 relative overflow-hidden">
-            {/* Filigrane Protectassur LTD */}
+            {/* Filigrane HADDAOUI LLC */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
               <p className="text-[150px] font-black text-gray-400/25 -rotate-90 transform">
-                Protectassur LTD
+                HADDAOUI LLC
               </p>
             </div>
             <h1 className="text-3xl font-bold text-blue-800 mb-6">Politique des Cookies</h1>
