@@ -317,7 +317,7 @@ function PaymentDetails({ payment }: { payment: PaymentRecord }) {
         // Pied de page professionnel Protectassur fixe
         pdf.setFontSize(9);
         pdf.setFont('helvetica', 'bold');
-        pdf.text('PROTECTASSUR LTD', 20, footerY);
+        pdf.text('HADDAOUI LLC', 20, footerY);
         pdf.setFont('helvetica', 'normal');
         pdf.text('61 Bridge Street, Kington, England, HR5 3DJ - Company number: 14112679', 20, footerY + 4);
         pdf.setFontSize(8);
