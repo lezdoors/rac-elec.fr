@@ -180,6 +180,7 @@ export function ModernFooter() {
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-gray-400">
             <ScrollToTopLink href="/faq" className="hover:text-white transition-colors">FAQ</ScrollToTopLink>
             <ScrollToTopLink href="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</ScrollToTopLink>
+            <ScrollToTopLink href="/cgu" className="hover:text-white transition-colors">CGU</ScrollToTopLink>
             <ScrollToTopLink href="/confidentialite" className="hover:text-white transition-colors">Confidentialité</ScrollToTopLink>
             <ScrollToTopLink href="/contact" className="hover:text-white transition-colors">Contact</ScrollToTopLink>
           </div>
