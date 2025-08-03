@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { apiRequest } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { NewLogo } from "@/components/ui/new-logo";
+import EnedisAuthenticMasterpiece from "@/components/ui/enedis-authentic-logo";
 import { 
   Bolt, 
   LayoutDashboard, 
@@ -118,11 +118,15 @@ export default function Layout({ children }: LayoutProps) {
               <Link href="/" className="flex items-center group transition-transform duration-200 hover:scale-105">
                 {/* Logo mobile - agrandi pour meilleure visibilité */}
                 <div className="block lg:hidden">
-                  <NewLogo size="lg" />
+                  <div className="w-[180px] sm:w-[200px] md:w-[220px] h-auto">
+                    <EnedisAuthenticMasterpiece size="lg" variant="light" />
+                  </div>
                 </div>
                 {/* Logo desktop */}
                 <div className="hidden lg:block">
-                  <NewLogo size="xl" />
+                  <div className="w-[260px] xl:w-[300px] h-auto">
+                    <EnedisAuthenticMasterpiece size="xl" variant="light" />
+                  </div>
                 </div>
               </Link>
             </div>
