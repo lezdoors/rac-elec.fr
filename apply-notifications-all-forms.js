@@ -198,7 +198,7 @@ async function applyNotificationsToAllForms() {
   console.log('  • Création de lead à la première étape');
   console.log('  • Notification email "nouveau lead"');
   console.log('  • Notification email "demande complète" à la soumission');
-  console.log('  • Destinataire: bonjour@raccordement-elec.fr');
+  console.log('  • Destinataire: bonjour@portail-electricite.com');
   
   if (successCount === totalCount) {
     console.log('\n🎉 TOUS LES FORMULAIRES SONT MAINTENANT CONFIGURÉS !');

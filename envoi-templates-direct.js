@@ -4,7 +4,7 @@
 
 async function envoyerTemplatesViaDirect() {
   console.log('🎯 ENVOI DES 3 TEMPLATES PERFECTIONNÉS');
-  console.log('📧 Vers: bonjour@raccordement-elec.fr\n');
+  console.log('📧 Vers: bonjour@portail-electricite.com\n');
 
   const donnees = {
     nom: 'Moreau',
@@ -77,7 +77,7 @@ async function envoyerTemplatesViaDirect() {
     console.log('✅ Template Premium envoyé');
 
     console.log('\n🎯 TOUS LES TEMPLATES ENVOYÉS !');
-    console.log('📧 Vérifiez votre boîte mail bonjour@raccordement-elec.fr');
+    console.log('📧 Vérifiez votre boîte mail bonjour@portail-electricite.com');
     console.log('\n📋 Vous recevrez 3 emails avec des designs distincts :');
     console.log('   1. 🔷 Design Simple et Clean (Isabelle Moreau - Particulier)');
     console.log('   2. 🌈 Design Professionnel avec Gradient (Vincent Durand - Entreprise)');

@@ -321,7 +321,7 @@ function PaymentDetails({ payment }: { payment: PaymentRecord }) {
         pdf.setFont('helvetica', 'normal');
         pdf.text('61 Bridge Street, Kington, England, HR5 3DJ - Company number: 14112679', 20, footerY + 4);
         pdf.setFontSize(8);
-        pdf.text('Pour toute reclamation ou assistance: contact@raccordement-elec.fr', 20, footerY + 8);
+        pdf.text('Pour toute reclamation ou assistance: contact@portail-electricite.com', 20, footerY + 8);
         pdf.text('Copyright 2025 - Tous droits reserves', 20, footerY + 11);
         
         // Télécharger le PDF

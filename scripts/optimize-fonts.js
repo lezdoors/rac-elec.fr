@@ -29,7 +29,7 @@ const GOOGLE_FONTS = [
 
 function generateFontCSS() {
   return `
-/* Google Fonts optimisées localement pour raccordement-elec.fr */
+/* Google Fonts optimisées localement pour portail-electricite.com */
 @font-face {
   font-family: 'Inter';
   font-style: normal;

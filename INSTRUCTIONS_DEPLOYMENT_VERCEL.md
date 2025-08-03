@@ -32,10 +32,10 @@ Dans l'onglet **"Environment Variables"** :
 **📧 Email SMTP**
 - `SMTP_HOST` = `premium234.web-hosting.com`
 - `SMTP_PORT` = `587`
-- `SMTP_USER` = `notification@raccordement-elec.fr`
+- `SMTP_USER` = `notification@portail-electricite.com`
 - `SMTP_PASS` = `[votre_mot_de_passe_smtp]`
-- `SMTP_FROM` = `notification@raccordement-elec.fr`
-- `SMTP_TO` = `bonjour@raccordement-elec.fr`
+- `SMTP_FROM` = `notification@portail-electricite.com`
+- `SMTP_TO` = `bonjour@portail-electricite.com`
 
 **📊 Google Analytics**
 - `VITE_GA_MEASUREMENT_ID` = `GT-MJKTJGCK`
@@ -114,7 +114,7 @@ Si le déploiement échoue :
 
 Après déploiement réussi :
 - **URL Vercel** : `https://raccordement-elec.vercel.app`
-- **Domaine personnalisé** : configurez `raccordement-elec.fr`
+- **Domaine personnalisé** : configurez `portail-electricite.com`
 - **SSL automatique** activé
 - **Performance optimale** sur mobile et desktop
 

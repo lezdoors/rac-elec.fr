@@ -28,10 +28,10 @@ Dans l'onglet "Environment Variables" de votre projet Vercel, ajoutez :
 **Email SMTP :**
 - `SMTP_HOST` = premium234.web-hosting.com
 - `SMTP_PORT` = 587
-- `SMTP_USER` = notification@raccordement-elec.fr
+- `SMTP_USER` = notification@portail-electricite.com
 - `SMTP_PASS` = votre_mot_de_passe_smtp
-- `SMTP_FROM` = notification@raccordement-elec.fr
-- `SMTP_TO` = bonjour@raccordement-elec.fr
+- `SMTP_FROM` = notification@portail-electricite.com
+- `SMTP_TO` = bonjour@portail-electricite.com
 
 **Google Analytics :**
 - `VITE_GA_MEASUREMENT_ID` = GT-MJKTJGCK
@@ -83,7 +83,7 @@ Le processus de build Vercel exécute :
 
 Après déploiement, configurez votre domaine :
 1. Dans Vercel Dashboard → Settings → Domains
-2. Ajoutez `raccordement-elec.fr`
+2. Ajoutez `portail-electricite.com`
 3. Configurez les DNS selon les instructions Vercel
 
 ## 🔍 Debugging

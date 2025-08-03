@@ -268,11 +268,11 @@ export default function ThankYouPage({}: ThankYouPageProps) {
                         09 70 70 95 70
                       </a>
                       <a 
-                        href="mailto:support@raccordement-elec.fr"
+                        href="mailto:support@portail-electricite.com"
                         className="flex items-center text-green-600 hover:text-green-700 font-medium"
                       >
                         <Mail className="w-4 h-4 mr-2" />
-                        support@raccordement-elec.fr
+                        support@portail-electricite.com
                       </a>
                     </div>
                   </div>

@@ -16,7 +16,7 @@ export default function SolairePage() {
         <title>Raccordement Photovoltaïques Enedis | Installation Panneaux Solaires</title>
         <meta name="description" content="Raccordement de vos installations photovoltaïques au réseau Enedis. Panneaux solaires, autoconsommation et revente d'électricité. Démarches simplifiées." />
         <meta name="keywords" content="raccordement photovoltaïques, installation photovoltaïque, Enedis solaire, panneaux solaires, autoconsommation électrique" />
-        <link rel="canonical" href="https://raccordement-elec.fr/raccordement-panneau-solaire" />
+        <link rel="canonical" href="https://portail-electricite.com/raccordement-panneau-solaire" />
       </Helmet>
 
       {/* Fil d'Ariane */}

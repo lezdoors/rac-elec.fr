@@ -93,8 +93,8 @@ export default function ContactPage() {
                     </div>
                     <div className="ml-4">
                       <h3 className="text-lg font-semibold text-gray-900">Email</h3>
-                      <a href="mailto:contact@raccordement-elec.fr" className="text-blue-600 hover:text-blue-800 font-medium">
-                        contact@raccordement-elec.fr
+                      <a href="mailto:contact@portail-electricite.com" className="text-blue-600 hover:text-blue-800 font-medium">
+                        contact@portail-electricite.com
                       </a>
                       <p className="text-sm text-gray-600 mt-1">
                         Réponse sous 24h ouvrées

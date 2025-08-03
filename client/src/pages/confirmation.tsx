@@ -509,7 +509,7 @@ function FormulaireCarteBancaire({ referenceNumber, clientName, serviceRequest, 
   
                   <h3 className="text-lg font-semibold text-blue-700 mt-6 mb-3">7. Contact</h3>
                   <p>
-                    Pour toute question concernant ces Conditions Générales d'Utilisation, veuillez nous contacter à l'adresse suivante : contact@raccordement-elec.fr ou par téléphone au 09 70 70 16 43.
+                    Pour toute question concernant ces Conditions Générales d'Utilisation, veuillez nous contacter à l'adresse suivante : contact@portail-electricite.com ou par téléphone au 09 70 70 16 43.
                   </p>
                 </div>
               </DialogContent>

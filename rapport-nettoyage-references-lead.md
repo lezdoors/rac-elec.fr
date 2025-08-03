@@ -139,7 +139,7 @@ if (term.startsWith('LEAD-') || term.toUpperCase().startsWith('LEAD-')) {
 
 #### Emails automatiques envoyés à :
 - marina.alves@raccordement.net
-- Bonjour@raccordement-elec.fr (x2)
+- Bonjour@portail-electricite.com (x2)
 
 ### 8. PROCHAINES ÉTAPES
 

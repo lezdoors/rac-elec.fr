@@ -55,10 +55,10 @@ Add these in Vercel dashboard:
 - `VITE_STRIPE_PUBLIC_KEY`
 - `SMTP_HOST=premium234.web-hosting.com`
 - `SMTP_PORT=587`
-- `SMTP_USER=notification@raccordement-elec.fr`
+- `SMTP_USER=notification@portail-electricite.com`
 - `SMTP_PASS=your_password`
-- `SMTP_FROM=notification@raccordement-elec.fr`
-- `SMTP_TO=bonjour@raccordement-elec.fr`
+- `SMTP_FROM=notification@portail-electricite.com`
+- `SMTP_TO=bonjour@portail-electricite.com`
 - `VITE_GA_MEASUREMENT_ID=GT-MJKTJGCK`
 - `NODE_ENV=production`
 

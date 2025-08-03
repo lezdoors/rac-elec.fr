@@ -332,7 +332,7 @@ export default function GuidePage() {
                 </div>
                 <div className="text-left">
                   <div className="font-medium text-gray-900">Email</div>
-                  <div className="text-red-600 font-medium">contact@raccordement-elec.fr</div>
+                  <div className="text-red-600 font-medium">contact@portail-electricite.com</div>
                 </div>
               </div>
             </div>

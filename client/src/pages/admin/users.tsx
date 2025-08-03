@@ -1280,8 +1280,8 @@ export default function UsersManagement() {
                               <Button className="bg-blue-600 hover:bg-blue-700">Accéder au CRM</Button>
                               <p className="mt-4 text-xs text-gray-500">
                                 En cas de problème, contactez l'administrateur du système à&nbsp;
-                                <a href="mailto:admin@raccordement-elec.fr" className="text-blue-600 underline">
-                                  admin@raccordement-elec.fr
+                                <a href="mailto:admin@portail-electricite.com" className="text-blue-600 underline">
+                                  admin@portail-electricite.com
                                 </a>
                               </p>
                             </div>

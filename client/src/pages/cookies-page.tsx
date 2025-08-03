@@ -81,7 +81,7 @@ export default function CookiesPage() {
               
               <h2 className="text-xl font-semibold text-blue-700 mt-8 mb-4">4. Notre hébergeur</h2>
               <p>
-                Le site raccordement-elec.fr est hébergé par MochaHost (MochaHost LLC, 7365 Carnelian St. Suite 203, Rancho Cucamonga, CA 91730, États-Unis).
+                Le site portail-electricite.com est hébergé par MochaHost (MochaHost LLC, 7365 Carnelian St. Suite 203, Rancho Cucamonga, CA 91730, États-Unis).
               </p>
               
               <h2 className="text-xl font-semibold text-blue-700 mt-8 mb-4">5. Comment gérer les cookies ?</h2>
@@ -103,7 +103,7 @@ export default function CookiesPage() {
               
               <h2 className="text-xl font-semibold text-blue-700 mt-8 mb-4">6. Nous contacter</h2>
               <p>
-                Si vous avez des questions concernant notre politique de cookies, veuillez nous contacter à l'adresse suivante : contact@raccordement-elec.fr ou par téléphone au +33 (0) 9 70 70 95 70.
+                Si vous avez des questions concernant notre politique de cookies, veuillez nous contacter à l'adresse suivante : contact@portail-electricite.com ou par téléphone au +33 (0) 9 70 70 95 70.
               </p>
             </div>
           </div>

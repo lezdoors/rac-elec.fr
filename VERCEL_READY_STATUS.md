@@ -62,7 +62,7 @@ DATABASE_URL=your_database_url
 STRIPE_PUBLISHABLE_KEY=pk_live_...
 STRIPE_SECRET_KEY=sk_live_...
 SMTP_HOST=premium234.web-hosting.com
-SMTP_USER=notification@raccordement-elec.fr
+SMTP_USER=notification@portail-electricite.com
 SMTP_PASS=your_smtp_password
 ```
 

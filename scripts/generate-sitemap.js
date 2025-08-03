@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Générateur de sitemap automatique pour raccordement-elec.fr
+ * Générateur de sitemap automatique pour portail-electricite.com
  * Améliore le référencement Google et l'indexation
  */
 
@@ -14,7 +14,7 @@ const projectRoot = path.resolve(__dirname, '..');
 
 // Configuration du site
 const SITE_CONFIG = {
-  baseUrl: 'https://raccordement-elec.fr',
+  baseUrl: 'https://portail-electricite.com',
   defaultChangefreq: 'weekly',
   defaultPriority: '0.8'
 };
