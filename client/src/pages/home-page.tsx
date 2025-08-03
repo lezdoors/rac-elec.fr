@@ -12,6 +12,7 @@ import { BreadcrumbNavigation } from "@/components/breadcrumb-navigation";
 // Direct imports for critical content
 import { SeoRichContent } from "@/components/seo-rich-content";
 import EnedisAuthenticMasterpiece from "../components/ui/enedis-authentic-logo";
+import { PerformanceOptimizer } from "@/components/performance-optimizer";
 
 // Performance optimization - lazy loading will be implemented inline
 
@@ -25,6 +26,7 @@ export default function HomePage() {
   const [activeRequestType, setActiveRequestType] = useState("définitif");
   const [isHeroAnimated, setIsHeroAnimated] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   
   // Valeurs spécifiques pour le compteur de demandes - liste améliorée
   const specificCounts = [311, 256, 148, 382, 99, 114, 214, 74, 277, 128, 312, 298, 214, 318, 266, 270, 261, 265];
@@ -63,6 +65,30 @@ export default function HomePage() {
     });
   };
   
+  // Image lazy loading optimization
+  useEffect(() => {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target as HTMLImageElement;
+            img.classList.add('loaded');
+            imageObserver.unobserve(img);
+          }
+        });
+      });
+
+      images.forEach(img => imageObserver.observe(img));
+      
+      return () => imageObserver.disconnect();
+    } else {
+      // Fallback for older browsers
+      setImagesLoaded(true);
+    }
+  }, []);
+
   // Effet de défilement ultra-optimisé avec throttling avancé pour performances maximales
   useEffect(() => {
     let ticking = false;
@@ -163,6 +189,11 @@ export default function HomePage() {
   
   return (
     <>
+      {/* Skip links for accessibility */}
+      <a href="#main-content" className="skip-link">Aller au contenu principal</a>
+      <a href="#navigation" className="skip-link">Aller à la navigation</a>
+      <a href="#services" className="skip-link">Aller aux services</a>
+      
       <Helmet>
         <title>Raccordement Électrique Enedis en Ligne | Service Rapide pour Particuliers et Professionnels</title>
         <meta name="description" content="Service expert pour votre raccordement Enedis : branchement électrique, déplacement de compteur Linky, augmentation de puissance. Accompagnement complet pour particuliers et professionnels. Délais optimisés et suivi en temps réel." />
@@ -207,7 +238,7 @@ export default function HomePage() {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "Services de Raccordement Enedis",
-            "image": "https://raccordement.net/og-image.jpg",
+            "image": "https://portail-electricite.com/og-image.jpg",
             "description": "Services professionnels pour tous vos besoins de raccordement électrique, branchement Enedis, compteur Linky et modifications de puissance.",
             "priceRange": "€€",
             "address": {
@@ -232,6 +263,7 @@ export default function HomePage() {
 
       </Helmet>
       {/* Hero Section - Optimized for Performance */}
+      <main id="main-content">
       <section className="bg-[#0046a2] text-white py-16 md:py-20" id="hero">
         <div className="container mx-auto px-4 max-w-6xl text-center">
           {/* Badge */}
@@ -1434,6 +1466,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </main>
+      
+      {/* Performance optimization component */}
+      <PerformanceOptimizer />
 
     </>
   );
