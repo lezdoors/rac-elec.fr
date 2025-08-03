@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { Phone, Mail, Clock, ArrowRight, ShieldCheck, Check, Globe, Building, User, MapPin } from "lucide-react";
-import { EnedisAuthenticMasterpiece } from '@/components/ui/enedis-authentic-logo';
+import { NewLogo } from '@/components/ui/new-logo';
 
 interface ScrollToTopLinkProps {
   href: string;
@@ -47,7 +47,7 @@ export function ModernFooter() {
             {/* Logo authentique - Taille augmentée */}
             <div className="mb-6 flex justify-center md:justify-start">
               <div className="transform scale-110">
-                <EnedisAuthenticMasterpiece size="lg" variant="dark" />
+                <NewLogo size="lg" className="filter brightness-0 invert" />
               </div>
             </div>
             
