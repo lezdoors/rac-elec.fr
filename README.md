@@ -48,9 +48,9 @@ STRIPE_SECRET=sk_live_xxx
 STRIPE_PUBLIC=pk_live_xxx
 
 # SMTP
-SMTP_HOST=mail.raccordement-elec.fr
+SMTP_HOST=mail.portail-electricite.com
 SMTP_PORT=587
-SMTP_USER=Bonjour@raccordement-elec.fr
+SMTP_USER=Bonjour@portail-electricite.com
 SMTP_PASS=motdepasse
 
 # Divers

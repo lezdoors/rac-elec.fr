@@ -396,7 +396,7 @@ export const initializeAdminUser = async () => {
       
       await db.insert(users).values({
         username: 'admin',
-        email: 'admin@raccordement-elec.fr',
+        email: 'admin@portail-electricite.com',
         fullName: 'Administrateur',
         password: hashedPassword,
         role: USER_ROLES.ADMIN,

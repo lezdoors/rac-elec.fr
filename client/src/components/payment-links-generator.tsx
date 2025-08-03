@@ -10,15 +10,15 @@ interface PaymentLinksGeneratorProps {
 
 /**
  * Composant pour générer et afficher les liens de paiement multiple
- * pour une référence donnée avec le domaine raccordement-elec.fr
+ * pour une référence donnée avec le domaine portail-electricite.com
  */
 export function PaymentLinksGenerator({ referenceNumber }: PaymentLinksGeneratorProps) {
   // Base de prix pour calculer les montants
   const baseAmount = 129.80;
   
-  // Générer l'URL complète avec le domaine raccordement-elec.fr
+  // Générer l'URL complète avec le domaine portail-electricite.com
   const generateUrl = (multiplier: number) => {
-    return `https://raccordement-elec.fr/paiement-multiple/${referenceNumber}/${multiplier}`;
+    return `https://portail-electricite.com/paiement-multiple/${referenceNumber}/${multiplier}`;
   };
   
   // Fonction pour copier un lien dans le presse-papier

@@ -91,14 +91,14 @@ import * as emailService from './email-service';
 // Créer une configuration IMAP à partir des paramètres utilisateur
 export async function createImapConfigFromUser(userId: number): Promise<ImapConfig | null> {
   try {
-    // Pour l'utilisateur admin (ID=1), on utilise toujours prioritairement contact@raccordement-elec.fr
+    // Pour l'utilisateur admin (ID=1), on utilise toujours prioritairement contact@portail-electricite.com
     if (userId === 1) {
-      // Configuration spécifique pour admin avec contact@raccordement-elec.fr
+      // Configuration spécifique pour admin avec contact@portail-electricite.com
       const adminPassword = process.env.IMAP_PASSWORD || '';
-      console.log(`Utilisation de la configuration IMAP contact@raccordement-elec.fr pour l'administrateur`);
+      console.log(`Utilisation de la configuration IMAP contact@portail-electricite.com pour l'administrateur`);
       
       return {
-        user: 'contact@raccordement-elec.fr',
+        user: 'contact@portail-electricite.com',
         password: adminPassword,
         host: 's4015.fra1.stableserver.net',
         port: 993,
@@ -122,9 +122,9 @@ export async function createImapConfigFromUser(userId: number): Promise<ImapConf
       // et des serveurs spécifiques connus
       const emailDomain = user.smtpUser.split('@')[1] || '';
       
-      // Configuration spécifique pour raccordement-elec.fr
+      // Configuration spécifique pour portail-electricite.com
       if (user.smtpHost === 's4015.fra1.stableserver.net' || 
-          emailDomain === 'raccordement-elec.fr') {
+          emailDomain === 'portail-electricite.com') {
         imapHost = 's4015.fra1.stableserver.net';
         imapPort = 993;
       }
@@ -166,9 +166,9 @@ export async function createImapConfigFromUser(userId: number): Promise<ImapConf
     
     // Utilisez le mot de passe IMAP de l'environnement si disponible
     if (process.env.IMAP_PASSWORD) {
-      console.log(`Utilisation des identifiants IMAP globaux pour l'utilisateur ${userId} avec compte contact@raccordement-elec.fr`);
+      console.log(`Utilisation des identifiants IMAP globaux pour l'utilisateur ${userId} avec compte contact@portail-electricite.com`);
       return {
-        user: "contact@raccordement-elec.fr",
+        user: "contact@portail-electricite.com",
         password: process.env.IMAP_PASSWORD, // Utiliser le mot de passe fourni
         host: "s4015.fra1.stableserver.net",
         port: 993,
@@ -182,7 +182,7 @@ export async function createImapConfigFromUser(userId: number): Promise<ImapConf
     // Fallback vers le mode réel avec mot de passe spécifié
     console.log(`Pas de configuration d'environnement pour l'utilisateur ${userId}, utilisation du mot de passe spécifié manuellement`);
     return {
-      user: "contact@raccordement-elec.fr",
+      user: "contact@portail-electricite.com",
       password: "Kamaka00.", // Mot de passe fourni  
       host: "s4015.fra1.stableserver.net",
       port: 993,
@@ -232,7 +232,7 @@ function generateDemoEmails(mailbox: string): EmailMessage[] {
           uid: 1,
           date: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago
           from: [{ name: 'Support Technique', address: 'support@enedis.fr' }],
-          to: [{ name: 'Contact', address: 'contact@raccordement-elec.fr' }],
+          to: [{ name: 'Contact', address: 'contact@portail-electricite.com' }],
           subject: 'Confirmation de votre demande de raccordement',
           text: 'Bonjour,\n\nNous avons bien reçu votre demande de raccordement. Un technicien prendra contact avec vous dans les plus brefs délais.\n\nCordialement,\nLe service technique',
           html: '<p>Bonjour,</p><p>Nous avons bien reçu votre demande de raccordement. Un technicien prendra contact avec vous dans les plus brefs délais.</p><p>Cordialement,<br>Le service technique</p>',
@@ -247,7 +247,7 @@ function generateDemoEmails(mailbox: string): EmailMessage[] {
           uid: 2,
           date: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
           from: [{ name: 'Jean Dupont', address: 'jean.dupont@gmail.com' }],
-          to: [{ name: 'Contact', address: 'contact@raccordement-elec.fr' }],
+          to: [{ name: 'Contact', address: 'contact@portail-electricite.com' }],
           subject: 'Question sur ma demande REF-1234-567890',
           text: 'Bonjour,\n\nJ\'aurais besoin d\'informations supplémentaires concernant ma demande de raccordement référence REF-1234-567890.\n\nPouvez-vous me préciser le délai d\'intervention ?\n\nMerci d\'avance,\nJean Dupont',
           html: '<p>Bonjour,</p><p>J\'aurais besoin d\'informations supplémentaires concernant ma demande de raccordement référence REF-1234-567890.</p><p>Pouvez-vous me préciser le délai d\'intervention ?</p><p>Merci d\'avance,<br>Jean Dupont</p>',
@@ -262,7 +262,7 @@ function generateDemoEmails(mailbox: string): EmailMessage[] {
           uid: 3,
           date: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago
           from: [{ name: 'Notification Paiement', address: 'paiement@stripe.com' }],
-          to: [{ name: 'Contact', address: 'contact@raccordement-elec.fr' }],
+          to: [{ name: 'Contact', address: 'contact@portail-electricite.com' }],
           subject: 'Confirmation de paiement pour REF-5678-123456',
           text: 'Bonjour,\n\nNous vous confirmons le paiement de 129,80€ pour la demande REF-5678-123456.\n\nLe paiement a été traité avec succès.\n\nCordialement,\nService des paiements',
           html: '<p>Bonjour,</p><p>Nous vous confirmons le paiement de <strong>129,80€</strong> pour la demande REF-5678-123456.</p><p>Le paiement a été traité avec succès.</p><p>Cordialement,<br>Service des paiements</p>',
@@ -285,7 +285,7 @@ function generateDemoEmails(mailbox: string): EmailMessage[] {
           id: '101',
           uid: 101,
           date: new Date(Date.now() - 1000 * 60 * 15), // 15 minutes ago
-          from: [{ name: 'Contact', address: 'contact@raccordement-elec.fr' }],
+          from: [{ name: 'Contact', address: 'contact@portail-electricite.com' }],
           to: [{ name: 'Jean Dupont', address: 'jean.dupont@gmail.com' }],
           subject: 'Re: Question sur ma demande REF-1234-567890',
           text: 'Bonjour Jean,\n\nNous avons bien reçu votre demande. Le délai d\'intervention est estimé à environ 2 semaines.\n\nN\'hésitez pas si vous avez d\'autres questions.\n\nCordialement,\nL\'administrateur',
@@ -301,9 +301,9 @@ function generateDemoEmails(mailbox: string): EmailMessage[] {
           id: '102',
           uid: 102,
           date: new Date(Date.now() - 1000 * 60 * 60 * 8), // 8 hours ago
-          from: [{ name: 'Contact', address: 'contact@raccordement-elec.fr' }],
+          from: [{ name: 'Contact', address: 'contact@portail-electricite.com' }],
           to: [{ name: 'Marie Martin', address: 'marie.martin@outlook.fr' }],
-          cc: [{ name: 'Service client', address: 'service@raccordement-elec.fr' }],
+          cc: [{ name: 'Service client', address: 'service@portail-electricite.com' }],
           subject: 'Instructions pour votre raccordement électrique',
           text: 'Bonjour Marie,\n\nSuite à notre conversation téléphonique, voici les instructions pour préparer votre raccordement.\n\n1. Vérifiez que l\'emplacement du compteur est accessible\n2. Assurez-vous que le tableau électrique est aux normes\n3. Prévoyez un espace de 3m² pour l\'installation\n\nCordialement,\nL\'administrateur',
           html: '<p>Bonjour Marie,</p><p>Suite à notre conversation téléphonique, voici les instructions pour préparer votre raccordement.</p><ol><li>Vérifiez que l\'emplacement du compteur est accessible</li><li>Assurez-vous que le tableau électrique est aux normes</li><li>Prévoyez un espace de 3m² pour l\'installation</li></ol><p>Cordialement,<br>L\'administrateur</p>',
@@ -327,7 +327,7 @@ function generateDemoEmails(mailbox: string): EmailMessage[] {
         uid: 200 + i,
         date: new Date(Date.now() - 1000 * 60 * 60 * (Math.random() * 24 * 7)), // 0-7 jours passés
         from: [{ name: `Spammer ${i+1}`, address: `spam${i+1}@spammer.com` }],
-        to: [{ name: 'Contact', address: 'contact@raccordement-elec.fr' }],
+        to: [{ name: 'Contact', address: 'contact@portail-electricite.com' }],
         subject: `SPAM: Offre commerciale n°${i+1}`,
         text: `Ceci est un message de spam #${i+1}\n\nCe message a été marqué comme spam.\n\nSi ce message n'est pas un spam, déplacez-le vers votre boîte de réception.`,
         html: `<p>Ceci est un message de spam #${i+1}</p><p><strong>Ce message a été marqué comme spam.</strong></p><p>Si ce message n'est pas un spam, déplacez-le vers votre boîte de réception.</p>`,
@@ -350,7 +350,7 @@ function generateDemoEmails(mailbox: string): EmailMessage[] {
           uid: 301,
           date: new Date(Date.now() - 1000 * 60 * 60 * 12), // 12 hours ago
           from: [{ name: 'Newsletter', address: 'news@electricite-info.fr' }],
-          to: [{ name: 'Contact', address: 'contact@raccordement-elec.fr' }],
+          to: [{ name: 'Contact', address: 'contact@portail-electricite.com' }],
           subject: 'Newsletter du mois de mai',
           text: 'Voici les dernières actualités du secteur de l\'installation électrique pour le mois de mai.\n\n- Nouvelles normes en vigueur\n- Astuces pour les raccordements complexes\n- Interview du chef des techniciens\n\nBonne lecture !',
           html: '<p>Voici les dernières actualités du secteur de l\'installation électrique pour le mois de mai.</p><ul><li>Nouvelles normes en vigueur</li><li>Astuces pour les raccordements complexes</li><li>Interview du chef des techniciens</li></ul><p>Bonne lecture !</p>',
@@ -501,7 +501,7 @@ export async function getUserEmails(userId: number, options: MailboxOptions = {}
           // Reconstruire l'objet avec une structure appropriée
           
           // Définir une adresse email par défaut
-          let emailAddress = 'contact@raccordement-elec.fr';
+          let emailAddress = 'contact@portail-electricite.com';
           
           // Extraire l'adresse email de la façon la plus sûre possible
           if (typeof parsed.from.address === 'string') {
@@ -531,7 +531,7 @@ export async function getUserEmails(userId: number, options: MailboxOptions = {}
         else {
           normalizedFrom = [{
             name: 'Expéditeur',
-            address: 'no-reply@raccordement-elec.fr'
+            address: 'no-reply@portail-electricite.com'
           }];
         }
         
@@ -660,7 +660,7 @@ export async function getUserEmails(userId: number, options: MailboxOptions = {}
       console.error(`Erreur IMAP pour l'utilisateur ${userId}:`, imapError);
       const mailbox = options.mailbox || INBOX_FOLDER;
       
-      // Si l'utilisateur est l'admin (contact@raccordement-elec.fr), tenter une approche alternative
+      // Si l'utilisateur est l'admin (contact@portail-electricite.com), tenter une approche alternative
       // avant de revenir aux emails simulés
       if (userId === 1) {
         try {
@@ -692,11 +692,11 @@ export async function getUserEmails(userId: number, options: MailboxOptions = {}
               date: message.attributes.date || new Date(),
               from: [{
                 name: fromName,
-                address: from || 'no-reply@raccordement-elec.fr'
+                address: from || 'no-reply@portail-electricite.com'
               }],
               to: [{
                 name: 'Contact',
-                address: 'contact@raccordement-elec.fr'
+                address: 'contact@portail-electricite.com'
               }],
               subject: header.subject ? header.subject[0] : '(Sans objet)',
               text: 'Pour voir le contenu complet, ouvrez cet email.',
@@ -792,7 +792,7 @@ export async function getRecentUserEmails(userId: number, mailbox: string = INBO
         }
         
         // Extraire l'expéditeur
-        let from = [{ name: 'Expéditeur inconnu', address: 'unknown@raccordement-elec.fr' }];
+        let from = [{ name: 'Expéditeur inconnu', address: 'unknown@portail-electricite.com' }];
         if (header.from && header.from[0]) {
           const fromText = header.from[0];
           const match = fromText.match(/(.*)<(.*)>/);
@@ -902,7 +902,7 @@ function getOrInitializeEmailCache(userId: number, mailbox: string): EmailMessag
         uid: 200 + i,
         date: new Date(Date.now() - 1000 * 60 * 60 * (Math.random() * 24 * 7)), // 0-7 jours passés
         from: [{ name: `Spammer ${i+1}`, address: `spam${i+1}@spammer.com` }],
-        to: [{ name: 'Contact', address: 'contact@raccordement-elec.fr' }],
+        to: [{ name: 'Contact', address: 'contact@portail-electricite.com' }],
         subject: `SPAM: Offre commerciale n°${i+1}`,
         text: `Ceci est un message de spam #${i+1}\n\nCe message a été marqué comme spam.\n\nSi ce message n'est pas un spam, déplacez-le vers votre boîte de réception.`,
         html: `<p>Ceci est un message de spam #${i+1}</p><p><strong>Ce message a été marqué comme spam.</strong></p><p>Si ce message n'est pas un spam, déplacez-le vers votre boîte de réception.</p>`,

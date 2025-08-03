@@ -12,14 +12,14 @@ import { eq } from 'drizzle-orm';
 
 // Configuration SMTP pour Replit (utilisant le port 587 TLS)
 const replitSmtpConfig: SmtpConfig = {
-  host: 'mail.raccordement-elec.fr',
+  host: 'mail.portail-electricite.com',
   port: 587,
   secure: false, // false pour TLS
   auth: {
-    user: 'notification@raccordement-elec.fr',
+    user: 'notification@portail-electricite.com',
     pass: 'Kamaka00'
   },
-  defaultFrom: 'notification@raccordement-elec.fr',
+  defaultFrom: 'notification@portail-electricite.com',
   enabled: true
 };
 
@@ -62,7 +62,7 @@ export async function sendEmailWithReplit(options: {
     const transporter = createReplitTransporter();
 
     // Récupérer les emails de notification depuis la base de données
-    let notificationEmails: string[] = ['marina.alves@raccordement-elec.fr', 'contact@raccordement-elec.fr'];
+    let notificationEmails: string[] = ['marina.alves@portail-electricite.com', 'contact@portail-electricite.com'];
     
     try {
       const notificationEmailRows = await db.select()
@@ -117,7 +117,7 @@ export async function sendNewSubmissionNotificationReplit(data: NewSubmissionEma
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px;">
         <div style="text-align: center; margin-bottom: 20px;">
-          <img src="https://raccordement-elec.fr/logo-dark.png" alt="Raccordement.net" style="max-width: 200px;">
+          <img src="https://portail-electricite.com/logo-dark.png" alt="Raccordement.net" style="max-width: 200px;">
         </div>
         <h2 style="color: #0047AB; border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;">Nouvelle demande de raccordement</h2>
         <p>Une nouvelle demande de raccordement Enedis a été soumise sur le site.</p>
@@ -135,7 +135,7 @@ export async function sendNewSubmissionNotificationReplit(data: NewSubmissionEma
         
         <p>Connectez-vous à votre espace administrateur pour consulter les détails complets de la demande.</p>
         <div style="text-align: center; margin: 25px 0;">
-          <a href="https://raccordement-elec.fr/admin/demandes" style="background-color: #0047AB; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+          <a href="https://portail-electricite.com/admin/demandes" style="background-color: #0047AB; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
             Voir la demande
           </a>
         </div>
@@ -148,7 +148,7 @@ export async function sendNewSubmissionNotificationReplit(data: NewSubmissionEma
     
     // Envoi de l'email
     return await sendEmailWithReplit({
-      to: ['marina.alves@raccordement-elec.fr', 'contact@raccordement-elec.fr'],
+      to: ['marina.alves@portail-electricite.com', 'contact@portail-electricite.com'],
       subject: `Nouvelle demande - Ref: ${data.referenceNumber}`,
       html: emailHtml,
       text: `Nouvelle demande de raccordement - Référence: ${data.referenceNumber}\n
@@ -173,7 +173,7 @@ export async function sendPaymentConfirmationReplit(data: PaymentConfirmationEma
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px;">
         <div style="text-align: center; margin-bottom: 20px;">
-          <img src="https://raccordement-elec.fr/logo-dark.png" alt="Raccordement.net" style="max-width: 200px;">
+          <img src="https://portail-electricite.com/logo-dark.png" alt="Raccordement.net" style="max-width: 200px;">
         </div>
         <h2 style="color: #0047AB; border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;">Confirmation de paiement</h2>
         <p>Cher(e) ${data.clientName},</p>

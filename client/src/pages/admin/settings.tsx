@@ -200,7 +200,7 @@ export default function SettingsPage() {
                         ...config,
                         general: { ...config.general, siteUrl: e.target.value }
                       })}
-                      placeholder="https://raccordement-elec.fr"
+                      placeholder="https://portail-electricite.com"
                     />
                   </div>
                 </div>
@@ -394,7 +394,7 @@ export default function SettingsPage() {
                         ...config,
                         email: { ...config.email, senderEmail: e.target.value }
                       })}
-                      placeholder="contact@raccordement-elec.fr"
+                      placeholder="contact@portail-electricite.com"
                     />
                   </div>
                 </div>

@@ -63,7 +63,7 @@ export async function sendEmailViaMailjet(options: {
     // Préparer le message
     const message: MailjetMessage = {
       From: options.from || {
-        Email: 'notification@raccordement-elec.fr',
+        Email: 'notification@portail-electricite.com',
         Name: 'Raccordement.net'
       },
       To: recipients,
@@ -94,7 +94,7 @@ export async function sendEmailViaMailjet(options: {
 export async function sendNewSubmissionNotificationViaMailjet(data: NewSubmissionEmailData): Promise<boolean> {
   try {
     // Préparer les destinataires
-    const recipients = ['marina.alves@raccordement-elec.fr', 'contact@raccordement-elec.fr'];
+    const recipients = ['marina.alves@portail-electricite.com', 'contact@portail-electricite.com'];
     
     // Créer le sujet
     const subject = `Nouvelle demande de raccordement: ${data.referenceNumber}`;
@@ -149,7 +149,7 @@ export async function sendNewSubmissionNotificationViaMailjet(data: NewSubmissio
       html,
       text,
       from: {
-        email: 'notification@raccordement-elec.fr',
+        email: 'notification@portail-electricite.com',
         name: 'Raccordement.net'
       },
       customId: `new-submission-${data.referenceNumber}`
@@ -219,7 +219,7 @@ export async function sendPaymentConfirmationViaMailjet(data: PaymentConfirmatio
       html,
       text,
       from: {
-        email: 'notification@raccordement-elec.fr',
+        email: 'notification@portail-electricite.com',
         name: 'Raccordement.net'
       },
       customId: `payment-confirmation-${data.referenceNumber}`
@@ -294,12 +294,12 @@ export async function sendContactEmailViaMailjet(data: ContactEmailData): Promis
     
     // Envoyer l'email aux administrateurs
     const result = await sendEmailViaMailjet({
-      to: ['marina.alves@raccordement-elec.fr', 'contact@raccordement-elec.fr'],
+      to: ['marina.alves@portail-electricite.com', 'contact@portail-electricite.com'],
       subject,
       html,
       text,
       from: {
-        email: 'notification@raccordement-elec.fr',
+        email: 'notification@portail-electricite.com',
         name: 'Raccordement.net'
       },
       customId: `contact-notification-${Date.now()}`
@@ -331,7 +331,7 @@ export async function sendContactEmailViaMailjet(data: ContactEmailData): Promis
         L'équipe Raccordement.net
       `,
       from: {
-        email: 'notification@raccordement-elec.fr',
+        email: 'notification@portail-electricite.com',
         name: 'Raccordement.net'
       },
       customId: `contact-confirmation-${Date.now()}`

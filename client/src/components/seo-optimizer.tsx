@@ -128,7 +128,7 @@ export const LocalBusinessSchema = () => {
     "@type": "LocalBusiness",
     "name": "Raccordement-Elec.fr",
     "description": "Service professionnel de raccordement électrique Enedis en France",
-    "url": "https://raccordement-elec.fr",
+    "url": "https://portail-electricite.com",
     "telephone": "09 70 70 95 70",
     "priceRange": "€€",
     "areaServed": {
@@ -242,7 +242,7 @@ export const SEOBreadcrumb = ({
       "@type": "ListItem",
       "position": index + 1,
       "name": item.name,
-      "item": item.url ? `https://raccordement-elec.fr${item.url}` : undefined
+      "item": item.url ? `https://portail-electricite.com${item.url}` : undefined
     }))
   };
 

@@ -169,7 +169,13 @@ export default function HomePage() {
         <meta name="keywords" content="raccordement Enedis, branchement électrique, compteur Linky, déplacement compteur, augmentation puissance électrique, raccordement professionnel, mise en service électricité, demande raccordement en ligne, coût raccordement Enedis, délai raccordement électrique, raccordement ERDF, branchement EDF, raccordement électrique maison neuve, raccordement électricité prix, tarif raccordement Enedis 2025, raccordement provisoire chantier, raccordement triphasé, modification branchement électrique, extension électrique, raccordement photovoltaïque, compteur électrique installation, devis raccordement électrique" />
         <meta property="og:title" content="Raccordement Électrique Enedis en Ligne | Service Rapide et Professionnel" />
         <meta property="og:description" content="Service expert pour votre raccordement Enedis : branchement électrique, déplacement de compteur Linky, augmentation de puissance. Accompagnement complet pour particuliers et professionnels." />
-        <link rel="canonical" href="https://raccordement-elec.fr/" />
+        <meta property="og:url" content="https://portail-electricite.com/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Portail-Electricite.com" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Raccordement Électrique Enedis en Ligne | Service Rapide et Professionnel" />
+        <meta name="twitter:description" content="Service expert pour votre raccordement Enedis : branchement électrique, déplacement de compteur Linky, augmentation de puissance." />
+        <link rel="canonical" href="https://portail-electricite.com/" />
         
         {/* Google tag loaded once in index.html */}
         
@@ -178,9 +184,9 @@ export default function HomePage() {
           {
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "Raccordement-elec.fr",
-            "url": "https://raccordement-elec.fr/",
-            "logo": "https://raccordement-elec.fr/favicon-new.svg",
+            "name": "Portail-Electricite.com",
+            "url": "https://portail-electricite.com/",
+            "logo": "https://portail-electricite.com/favicon-new.svg",
             "description": "Services professionnels de raccordement électrique Enedis pour particuliers et professionnels en France.",
             "address": {
               "@type": "PostalAddress",
@@ -209,8 +215,7 @@ export default function HomePage() {
               "addressCountry": "FR"
             },
             "telephone": "+33 9 70 70 95 70",
-            "url": "https://raccordement-elec.fr/",
-            "sameAs": "https://www.raccordement-connect.com",
+            "url": "https://portail-electricite.com/",
             "serviceArea": {
               "@type": "Country",
               "name": "France"

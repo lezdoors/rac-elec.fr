@@ -1,0 +1,71 @@
+You are tasked with improving a website that has migrated from raccordement-elec.fr to portail-electricite.com. The website is for electrical connection services with Enedis in France. DO NOT change the visual design or layout - only improve technical aspects, performance, and functionality.
+
+CRITICAL PRIORITY TASKS:
+
+1. DOMAIN MIGRATION:
+- Search and replace ALL instances of "raccordement-elec.fr" with "portail-electricite.com" across all files
+- Update any hardcoded URLs in HTML, CSS, JavaScript, configuration files
+- Update sitemap.xml with new domain
+- Update robots.txt sitemap reference
+- Ensure canonical URLs point to new domain
+
+2. SSL & SECURITY:
+- Fix SSL certificate configuration for portail-electricite.com
+- Ensure HTTPS redirects are working
+- Add security headers if missing
+
+3. SEO IMPROVEMENTS (No visual changes):
+- Add comprehensive meta tags to all pages:
+  * Meta description about electrical connection services
+  * Open Graph tags for social sharing
+  * Proper title tags with keywords
+  * Canonical URLs
+- Implement JSON-LD structured data for LocalBusiness
+- Add proper heading hierarchy (H1, H2, H3)
+- Optimize existing content for keywords: "raccordement enedis", "électricité", "raccordement électrique"
+
+4. MOBILE RESPONSIVENESS:
+- Add responsive CSS media queries without changing desktop appearance
+- Ensure forms work properly on mobile
+- Make navigation touch-friendly
+- Optimize spacing and font sizes for mobile screens
+
+5. PERFORMANCE OPTIMIZATION:
+- Add lazy loading to images: loading="lazy"
+- Minify CSS and JavaScript
+- Add proper caching headers
+- Optimize images (compress without quality loss)
+- Remove unused CSS/JS
+
+6. FORM ENHANCEMENTS:
+- Add client-side form validation
+- Improve user feedback on form submission
+- Add loading states for better UX
+- Ensure forms are accessible
+
+7. 301 REDIRECTS:
+- Set up server-side redirects from old domain to new domain
+- Maintain URL structure during redirect
+
+8. TECHNICAL FIXES:
+- Fix any broken internal links
+- Ensure all assets load from new domain
+- Update any API endpoints or service URLs
+- Test all functionality after domain change
+
+CONSTRAINTS:
+- Keep existing visual design exactly the same
+- Maintain current color scheme and layout
+- Don't change text content unless fixing obvious errors
+- Preserve existing functionality
+- Only improve technical aspects and performance
+
+DELIVERABLES:
+- Updated HTML files with improved meta tags and structure
+- Enhanced CSS with responsive design
+- Improved JavaScript with form validation
+- Updated configuration files
+- Performance optimizations
+- Complete domain migration
+
+Focus on technical excellence while preserving the current user interface and user experience.

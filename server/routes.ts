@@ -85,7 +85,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   registerPaymentDebugRoutes(app);
   
   // Configuration SMTP simplifiée - Une seule configuration
-  console.log("Service SMTP configuré - notification@raccordement-elec.fr → bonjour@raccordement-elec.fr");
+  console.log("Service SMTP configuré - notification@portail-electricite.com → bonjour@portail-electricite.com");
   
   // Route pour récupérer la configuration SMTP (admin uniquement)
   app.get("/api/admin/smtp-config", requireAuth, requireAdmin, async (req, res) => {
@@ -205,7 +205,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       // S'assurer que les emails standards sont toujours inclus
-      const standardEmails = ["marina.alves@raccordement-elec.fr", "Bonjour@raccordement-elec.fr"];
+      const standardEmails = ["marina.alves@portail-electricite.com", "Bonjour@portail-electricite.com"];
       standardEmails.forEach(email => {
         if (!notificationEmails.includes(email)) {
           notificationEmails.push(email);
@@ -214,7 +214,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Si le tableau est toujours vide après tout cela, utiliser l'adresse par défaut
       if (notificationEmails.length === 0) {
-        notificationEmails = ["notification@raccordement-elec.fr"];
+        notificationEmails = ["notification@portail-electricite.com"];
       }
       
       // Pour compatibilité avec le code existant, renvoyer aussi le premier email comme propriété 'email'
@@ -263,7 +263,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         : [validationResult.data];
       
       // S'assurer que les emails standards sont toujours inclus
-      const standardEmails = ["marina.alves@raccordement-elec.fr", "contact@raccordement-elec.fr"];
+      const standardEmails = ["marina.alves@portail-electricite.com", "contact@portail-electricite.com"];
       standardEmails.forEach(email => {
         if (!emails.includes(email)) {
           emails.push(email);
@@ -1114,13 +1114,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
           .where(eq(systemConfigs.configKey, 'notification_email'));
         
         // Liste des emails à qui envoyer les notifications
-        const notificationEmail = notificationEmailConfig?.configValue || 'marina.alves@raccordement-elec.fr';
+        const notificationEmail = notificationEmailConfig?.configValue || 'marina.alves@portail-electricite.com';
         
         // Liste d'emails spécifiés par l'utilisateur
         const emailRecipients = [
           notificationEmail,
-          'Bonjour@raccordement-elec.fr',
-          'Bonjour@raccordement-elec.fr'
+          'Bonjour@portail-electricite.com',
+          'Bonjour@portail-electricite.com'
         ];
         
         // Préparer UNIQUEMENT les données de l'étape 1 du formulaire
@@ -2107,7 +2107,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         };
         
         console.log('📧 ENVOI EMAIL COMPLET - FORMULAIRE FINALISÉ');
-        console.log('📬 Destinataire principal: bonjour@raccordement-elec.fr');
+        console.log('📬 Destinataire principal: bonjour@portail-electricite.com');
         console.log('📋 Référence générée:', serviceRequest.referenceNumber);
         
         // Email envoyé via la route /api/notifications/request-completed uniquement
@@ -2205,7 +2205,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         // que toutes les adresses par défaut sont bien incluses)
         
         // Envoyer la notification - La fonction sendNewSubmissionNotification utilisera la liste complète
-        // des destinataires incluant marina.alves@raccordement-elec.fr et contact@raccordement-elec.fr
+        // des destinataires incluant marina.alves@portail-electricite.com et contact@portail-electricite.com
         sendNewSubmissionNotification(notificationData)
           .then(success => {
             if (success) {
@@ -3361,8 +3361,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
                   // SÉCURITÉ RENFORCÉE: Vérifier domaine + référence + données client
                   const hostHeader = req.get('host') || req.get('x-forwarded-host') || '';
                   const refererHeader = req.get('referer') || '';
-                  const isRaccordementElecDomain = hostHeader.includes('raccordement-elec.fr') || 
-                                                   refererHeader.includes('raccordement-elec.fr') ||
+                  const isRaccordementElecDomain = hostHeader.includes('portail-electricite.com') || 
+                                                   refererHeader.includes('portail-electricite.com') ||
                                                    hostHeader.includes('replit.dev'); // Pour dev
                   
                   if (serviceRequest.referenceNumber && 
@@ -3386,7 +3386,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
                     console.log('🔒 Paiement externe ignoré - Domaine:', hostHeader, 'Ref:', serviceRequest.referenceNumber);
                   }
                 } catch (emailError) {
-                  console.error('❌ Erreur notification paiement raccordement-elec.fr:', emailError);
+                  console.error('❌ Erreur notification paiement portail-electricite.com:', emailError);
                   // Ne pas bloquer le processus si l'email échoue
                 }
                 
@@ -3462,8 +3462,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
                   // SÉCURITÉ RENFORCÉE: Vérifier domaine + référence + données client
                   const hostHeader = req.get('host') || req.get('x-forwarded-host') || '';
                   const refererHeader = req.get('referer') || '';
-                  const isRaccordementElecDomain = hostHeader.includes('raccordement-elec.fr') || 
-                                                   refererHeader.includes('raccordement-elec.fr') ||
+                  const isRaccordementElecDomain = hostHeader.includes('portail-electricite.com') || 
+                                                   refererHeader.includes('portail-electricite.com') ||
                                                    hostHeader.includes('replit.dev'); // Pour dev
                   
                   if (serviceRequest.referenceNumber && 
@@ -3485,7 +3485,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
                     console.log('🔒 Paiement échoué externe ignoré - Domaine:', hostHeader, 'Ref:', serviceRequest.referenceNumber);
                   }
                 } catch (emailError) {
-                  console.error('❌ Erreur lors de l\'envoi de la notification de paiement échoué raccordement-elec.fr:', emailError);
+                  console.error('❌ Erreur lors de l\'envoi de la notification de paiement échoué portail-electricite.com:', emailError);
                   // Ne pas bloquer le processus si l'email échoue
                 }
               }
@@ -7500,8 +7500,8 @@ app.patch("/api/contacts/:id/status", requireAuth, requireAdminOrManager, async 
                 // SÉCURITÉ RENFORCÉE: Vérifier domaine + référence + données client
                 const hostHeader = req.get('host') || req.get('x-forwarded-host') || '';
                 const refererHeader = req.get('referer') || '';
-                const isRaccordementElecDomain = hostHeader.includes('raccordement-elec.fr') || 
-                                                 refererHeader.includes('raccordement-elec.fr') ||
+                const isRaccordementElecDomain = hostHeader.includes('portail-electricite.com') || 
+                                                 refererHeader.includes('portail-electricite.com') ||
                                                  hostHeader.includes('replit.dev'); // Pour dev
                 
                 if (serviceRequest.referenceNumber && 
@@ -7523,7 +7523,7 @@ app.patch("/api/contacts/:id/status", requireAuth, requireAdminOrManager, async 
                   console.log('🔒 Paiement externe ignoré - Domaine:', hostHeader, 'Ref:', serviceRequest.referenceNumber);
                 }
               } catch (emailError) {
-                console.error('❌ Erreur notification paiement raccordement-elec.fr:', emailError);
+                console.error('❌ Erreur notification paiement portail-electricite.com:', emailError);
               }
               
               // Mettre à jour le statut de la demande si nécessaire
@@ -7938,7 +7938,7 @@ app.patch("/api/contacts/:id/status", requireAuth, requireAdminOrManager, async 
         },
         email: {
           provider: 'sendgrid',
-          senderEmail: 'contact@raccordement-elec.fr',
+          senderEmail: 'contact@portail-electricite.com',
           senderName: 'Service Raccordement Électrique',
         },
         general: {
@@ -8131,7 +8131,7 @@ app.patch("/api/contacts/:id/status", requireAuth, requireAdminOrManager, async 
           
           <div class="footer">
             <p>Ce reçu a été généré automatiquement et ne nécessite pas de signature.</p>
-            <p>Pour toute question, veuillez nous contacter à contact@raccordement-elec.fr</p>
+            <p>Pour toute question, veuillez nous contacter à contact@portail-electricite.com</p>
             <p>© 2025 Raccordement Électrique en Ligne - SIRET: 12345678900013</p>
           </div>
         </div>
@@ -9124,12 +9124,12 @@ app.patch("/api/contacts/:id/status", requireAuth, requireAdminOrManager, async 
           .from(systemConfigs)
           .where(eq(systemConfigs.configKey, 'notification_email'));
         
-        const recipients = notificationEmailRow ? notificationEmailRow.configValue.split(',') : ["contact@raccordement-elec.fr"];
+        const recipients = notificationEmailRow ? notificationEmailRow.configValue.split(',') : ["contact@portail-electricite.com"];
         const referenceNumber = `REF-${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(100000 + Math.random() * 900000)}`;
         
         // Envoyer l'email
         const info = await transporter.sendMail({
-          from: `"Service Raccordement" <${process.env.SMTP_USER || 'notification@raccordement-elec.fr'}>`,
+          from: `"Service Raccordement" <${process.env.SMTP_USER || 'notification@portail-electricite.com'}>`,
           to: recipients.join(', '),
           subject: `🔔 Test de notification email - ${referenceNumber}`,
           html: `

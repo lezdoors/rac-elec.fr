@@ -126,7 +126,7 @@ const EMAIL_TEMPLATES = {
             <!-- Footer -->
             <div style="background: #f1f5f9; padding: 20px; text-align: center; border-top: 1px solid #e2e8f0;">
               <p style="color: #64748b; margin: 0; font-size: 12px;">
-                📧 Notification automatique raccordement-elec.fr<br>
+                📧 Notification automatique portail-electricite.com<br>
                 ✅ Paiement sécurisé • ⏰ ${new Date().toLocaleString('fr-FR')}
               </p>
             </div>
@@ -204,7 +204,7 @@ const EMAIL_TEMPLATES = {
             <!-- Footer -->
             <div style="background: #f1f5f9; padding: 20px; text-align: center; border-top: 1px solid #e2e8f0;">
               <p style="color: #64748b; margin: 0; font-size: 12px;">
-                📧 Alerte automatique raccordement-elec.fr<br>
+                📧 Alerte automatique portail-electricite.com<br>
                 🚨 Priorité CRITIQUE • ⏰ ${new Date().toLocaleString('fr-FR')}
               </p>
             </div>
@@ -241,10 +241,10 @@ export function setupSmtpService(config?: SmtpConfig) {
       port: 465,
       secure: true, // SSL
       auth: {
-        user: 'notification@raccordement-elec.fr',
+        user: 'notification@portail-electricite.com',
         pass: 'K@maka00@'
       },
-      defaultFrom: 'notification@raccordement-elec.fr',
+      defaultFrom: 'notification@portail-electricite.com',
       enabled: true
     };
 
@@ -364,7 +364,7 @@ export async function sendLeadNotification(leadData: any) {
             <!-- Footer -->
             <div style="background: #f1f5f9; padding: 20px; text-align: center; border-top: 1px solid #e2e8f0;">
               <p style="color: #64748b; margin: 0; font-size: 12px;">
-                📧 Notification automatique raccordement-elec.fr<br>
+                📧 Notification automatique portail-electricite.com<br>
                 ⏰ ${new Date().toLocaleString('fr-FR')}
               </p>
             </div>
@@ -375,8 +375,8 @@ export async function sendLeadNotification(leadData: any) {
     `;
     
     const mailOptions = {
-      from: 'notification@raccordement-elec.fr',
-      to: 'bonjour@raccordement-elec.fr',
+      from: 'notification@portail-electricite.com',
+      to: 'bonjour@portail-electricite.com',
       subject: `🎯 NOUVEAU LEAD - ${leadData.prenom || ''} ${leadData.nom || ''} (${leadData.referenceNumber || 'N/A'})`,
       html: htmlContent,
       text: `🎯 NOUVEAU LEAD GÉNÉRÉ
@@ -492,7 +492,7 @@ export async function sendRequestCompletedNotificationBackup(requestData: any) {
               <!-- Footer -->
               <div style="background: #f1f5f9; padding: 20px; text-align: center; border-top: 1px solid #e2e8f0;">
                 <p style="color: #64748b; margin: 0; font-size: 12px;">
-                  📧 Notification automatique raccordement-elec.fr<br>
+                  📧 Notification automatique portail-electricite.com<br>
                   ⏰ ${new Date().toLocaleString('fr-FR')}
                 </p>
               </div>
@@ -504,8 +504,8 @@ export async function sendRequestCompletedNotificationBackup(requestData: any) {
     `;
     
     const mailOptions = {
-      from: 'notification@raccordement-elec.fr',
-      to: 'bonjour@raccordement-elec.fr',
+      from: 'notification@portail-electricite.com',
+      to: 'bonjour@portail-electricite.com',
       subject: `📋 Demande complète - ${requestData.referenceNumber}`,
       html: htmlContent,
       text: `📋 DEMANDE COMPLÈTE
@@ -547,8 +547,8 @@ export async function sendPaiementReussiNotification(paiementData: any) {
     const template = EMAIL_TEMPLATES.paiementReussi;
     
     const mailOptions = {
-      from: 'notification@raccordement-elec.fr',
-      to: 'bonjour@raccordement-elec.fr',
+      from: 'notification@portail-electricite.com',
+      to: 'bonjour@portail-electricite.com',
       subject: template.subject.replace('{reference}', paiementData.referenceNumber || 'N/A'),
       html: template.getHtml(paiementData),
       text: `Paiement confirmé - Référence: ${paiementData.referenceNumber} - Montant: ${paiementData.amount ? (parseFloat(paiementData.amount) / 100).toFixed(2) + ' €' : 'N/A'}`
@@ -579,8 +579,8 @@ export async function sendPaiementEchoueNotification(paiementData: any) {
     const template = EMAIL_TEMPLATES.paiementEchoue;
     
     const mailOptions = {
-      from: 'notification@raccordement-elec.fr',
-      to: 'bonjour@raccordement-elec.fr',
+      from: 'notification@portail-electricite.com',
+      to: 'bonjour@portail-electricite.com',
       subject: template.subject.replace('{reference}', paiementData.referenceNumber || 'N/A'),
       html: template.getHtml(paiementData),
       text: `URGENT - Paiement échoué - Référence: ${paiementData.referenceNumber} - Contact: ${paiementData.clientEmail}`

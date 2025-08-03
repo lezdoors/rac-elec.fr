@@ -210,6 +210,15 @@ Changelog:
   - Generated comprehensive deployment guide with exact Vercel dashboard settings
   - Tested build process successfully (652KB bundle, 3MB total, <30s build time)
   - Ready for GitHub push and Vercel deployment with all environment variables documented
+- August 3, 2025: Complete domain migration from raccordement-elec.fr to portail-electricite.com
+  - Updated company branding from "HADDAOUI LLC" to "Protectassur Ltd" across all legal pages
+  - Added Protectassur Ltd company details (61 Bridge Street, Kington, HR5 3DJ, UK, Registration 14112679)
+  - Migrated all domain references in legal pages (mentions légales, CGU, confidentialité, cookies)
+  - Updated server configuration files, email settings, and SMTP configurations with new domain
+  - Enhanced SEO metadata with Open Graph, Twitter Cards, and JSON-LD structured data for new domain
+  - Updated all email service configurations and IMAP settings to portail-electricite.com
+  - Maintained visual design and functionality throughout migration process
+  - Application successfully running with new domain configuration
 
 ## User Preferences
 
