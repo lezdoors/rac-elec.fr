@@ -232,7 +232,7 @@ export default function Home() {
         
         {/* Footer */}
         <div className="mt-6 text-center text-gray-500 text-sm py-4">
-          <p>&copy; {new Date().getFullYear()} Service de Raccordement. Tous droits réservés.</p>
+          <p>&copy; {new Date().getFullYear()} Portail-Electricite.com. Tous droits réservés.</p>
         </div>
       </div>
       </div>

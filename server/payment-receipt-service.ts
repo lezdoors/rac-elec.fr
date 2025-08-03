@@ -598,7 +598,7 @@ function generateReceiptHtml(payment: Payment, serviceRequest: ServiceRequest | 
     
     <div class="footer">
       <p>Pour toute question concernant ce reçu, veuillez contacter notre service client en précisant votre numéro de référence.</p>
-      <p>&copy; ${new Date().getFullYear()} Raccordement.net - Tous droits réservés</p>
+      <p>&copy; ${new Date().getFullYear()} Portail-Electricite.com - Tous droits réservés</p>
     </div>
   </div>
 </body>

@@ -159,7 +159,7 @@ export function ModernFooter() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap items-center justify-center md:justify-start text-xs text-gray-400 gap-x-4 gap-y-1">
             <div className="flex items-center">
-              <span className="text-[#5BC248] mr-1">©</span> {year} <span className="text-white/80 mx-1">Raccordement-Elec.fr</span> - Tous droits réservés
+              <span className="text-[#5BC248] mr-1">©</span> {year} <span className="text-white/80 mx-1">Portail-Electricite.com</span> - Tous droits réservés
               <ScrollToTopLink 
                 href="/admin" 
                 className="text-gray-400 hover:text-white transition-all duration-300 cursor-pointer ml-1 inline-flex items-center"

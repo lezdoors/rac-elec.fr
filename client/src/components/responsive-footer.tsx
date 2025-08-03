@@ -352,7 +352,7 @@ export function ResponsiveFooter() {
         {/* Mentions de copyright */}
         <div className="flex flex-wrap justify-between items-center mt-6 pt-4 border-t border-blue-900/40 text-xs text-gray-400">
           <div className="flex items-center">
-            <span className="text-blue-300 font-medium mr-1">©</span> {year} <span className="text-blue-200 font-medium mx-1">Portail Enedis</span> Tous droits réservés.
+            <span className="text-blue-300 font-medium mr-1">©</span> {year} <span className="text-blue-200 font-medium mx-1">Portail-Electricite.com</span> - Tous droits réservés
           </div>
           <div className="flex space-x-4">
             <ScrollToTopLink href="/mentions-legales" className="hover:text-white">Mentions légales</ScrollToTopLink>
