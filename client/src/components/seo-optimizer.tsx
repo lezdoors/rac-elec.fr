@@ -28,9 +28,9 @@ export const SEOOptimizer = ({
   noindex = false,
   nofollow = false
 }: SEOData) => {
-  const fullTitle = title.includes("Raccordement-Elec.fr") 
+  const fullTitle = title.includes("Portail-Electricite.com") 
     ? title 
-    : `${title} | Raccordement-Elec.fr`;
+    : `${title} | Portail-Electricite.com`;
 
   const defaultKeywords = "raccordement électrique, Enedis, branchement électrique, compteur Linky, raccordement maison, électricité, France";
   const metaKeywords = keywords ? `${keywords}, ${defaultKeywords}` : defaultKeywords;
@@ -53,7 +53,7 @@ export const SEOOptimizer = ({
       <meta property="og:description" content={description} />
       <meta property="og:type" content={ogType} />
       <meta property="og:image" content={ogImage} />
-      <meta property="og:site_name" content="Raccordement-Elec.fr" />
+      <meta property="og:site_name" content="Portail-Electricite.com" />
       
       {/* Twitter Card */}
       <meta name="twitter:card" content={twitterCard} />

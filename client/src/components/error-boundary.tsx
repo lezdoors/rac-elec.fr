@@ -84,7 +84,7 @@ export class ErrorBoundary extends Component<Props, State> {
     const body = encodeURIComponent(`
 Bonjour,
 
-Une erreur s'est produite sur le site Raccordement-Elec.fr.
+Une erreur s'est produite sur le site Portail-Electricite.com.
 
 ID de l'erreur: ${this.state.errorId}
 URL: ${window.location.href}

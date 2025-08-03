@@ -21,7 +21,7 @@ export default function ConfidentialitePage() {
               
               <h2 className="text-xl font-semibold text-blue-700 mt-8 mb-4">1. Introduction</h2>
               <p>
-                Raccordement-Elec.fr s'engage à protéger votre vie privée. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations personnelles lorsque vous utilisez notre site web et nos services.
+                Portail-Electricite.com s'engage à protéger votre vie privée. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations personnelles lorsque vous utilisez notre site web et nos services.
               </p>
               
               <h2 className="text-xl font-semibold text-blue-700 mt-8 mb-4">2. Informations que nous collectons</h2>
