@@ -118,11 +118,11 @@ export default function Layout({ children }: LayoutProps) {
               <Link href="/" className="flex items-center group transition-transform duration-200 hover:scale-105">
                 {/* Logo mobile - agrandi pour meilleure visibilité */}
                 <div className="block lg:hidden">
-                  <NewLogo size="md" className="w-[180px] sm:w-[200px] md:w-[220px]" />
+                  <NewLogo size="lg" />
                 </div>
                 {/* Logo desktop */}
                 <div className="hidden lg:block">
-                  <NewLogo size="xl" className="w-[260px] xl:w-[300px]" />
+                  <NewLogo size="xl" />
                 </div>
               </Link>
             </div>

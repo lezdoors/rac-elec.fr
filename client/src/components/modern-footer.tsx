@@ -47,7 +47,7 @@ export function ModernFooter() {
             {/* Logo authentique - Taille augmentée */}
             <div className="mb-6 flex justify-center md:justify-start">
               <div className="transform scale-110">
-                <NewLogo size="lg" className="filter brightness-0 invert" />
+                <NewLogo size="lg" />
               </div>
             </div>
             
