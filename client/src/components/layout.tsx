@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { apiRequest } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-// Removed EnedisAuthenticMasterpiece import - replaced with new logo
+import PortailRaccordementLogo from "@/components/ui/portail-raccordement-logo";
 import { 
   Bolt, 
   LayoutDashboard, 
@@ -116,7 +116,18 @@ export default function Layout({ children }: LayoutProps) {
             {/* LOGO - Parfaitement aligné à gauche et agrandi pour mobile */}
             <div className="flex items-center flex-shrink-0">
               <Link href="/" className="flex items-center group transition-transform duration-200 hover:scale-105" aria-label="Retour à l'accueil">
-                <img src="/logo-portail-raccordement.svg" alt="Portail Raccordement" className="h-10 w-auto sm:h-12" />
+                {/* Logo mobile - agrandi pour meilleure visibilité */}
+                <div className="block lg:hidden">
+                  <div className="w-[180px] sm:w-[200px] md:w-[220px] h-auto">
+                    <PortailRaccordementLogo size="lg" variant="light" />
+                  </div>
+                </div>
+                {/* Logo desktop */}
+                <div className="hidden lg:block">
+                  <div className="w-[260px] xl:w-[300px] h-auto">
+                    <PortailRaccordementLogo size="xl" variant="light" />
+                  </div>
+                </div>
               </Link>
             </div>
             

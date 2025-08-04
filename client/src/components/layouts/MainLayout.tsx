@@ -3,7 +3,7 @@ import { Link } from "wouter";
 
 import { Helmet } from "react-helmet";
 import { Phone, Mail, Facebook, Instagram, Twitter, ChevronRight, ArrowRight } from "lucide-react";
-// Removed EnedisAuthenticMasterpiece import - replaced with new logo
+import PortailRaccordementLogo from "../ui/portail-raccordement-logo";
 import { ModernFooter } from "../modern-footer";
 
 interface MainLayoutProps {
@@ -67,7 +67,9 @@ export default function MainLayout({
             <div className="flex items-center justify-between h-12">
               {/* Mobile Logo - Professional sizing */}
               <Link href="/" className="flex items-center flex-shrink-0" aria-label="Retour à l'accueil">
-                <img src="/logo-portail-raccordement.svg" alt="Portail Raccordement" className="h-10 w-auto sm:h-12" />
+                <div className="transform scale-90 origin-left">
+                  <PortailRaccordementLogo size="sm" variant="light" />
+                </div>
               </Link>
               
               {/* Mobile Action Zone - Clean administrative design */}
@@ -118,7 +120,13 @@ export default function MainLayout({
               
               {/* Logo Desktop - Taille adaptative */}
               <Link href="/" className="flex items-center flex-shrink-0 min-w-0" aria-label="Retour à l'accueil">
-                <img src="/logo-portail-raccordement.svg" alt="Portail Raccordement" className="h-10 w-auto sm:h-12" />
+                <div className="transition-transform duration-200 hover:scale-105">
+                  <PortailRaccordementLogo 
+                    size="lg" 
+                    variant="light" 
+                    className="w-auto h-8 md:h-9 lg:h-10 xl:h-11"
+                  />
+                </div>
               </Link>
               
               {/* Navigation Desktop - Espacement responsive */}

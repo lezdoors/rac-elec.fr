@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { Phone, Mail, Clock, ArrowRight, ShieldCheck, Check, Globe, Building, User, MapPin } from "lucide-react";
-import { EnedisAuthenticMasterpiece } from '@/components/ui/enedis-authentic-logo';
 import PortailRaccordementLogo from '@/components/ui/portail-raccordement-logo';
 
 interface ScrollToTopLinkProps {
@@ -48,7 +47,7 @@ export function ModernFooter() {
             {/* Logo Portail Raccordement - Nouveau design moderne */}
             <div className="mb-6 flex justify-center md:justify-start">
               <div className="transform scale-110">
-                <img src="/logo-portail-raccordement.svg" alt="Portail Raccordement" className="h-8 w-auto" />
+                <PortailRaccordementLogo size="lg" variant="dark" />
               </div>
             </div>
             
