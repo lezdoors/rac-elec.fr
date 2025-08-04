@@ -13,6 +13,7 @@ import { BreadcrumbNavigation } from "@/components/breadcrumb-navigation";
 import { SeoRichContent } from "@/components/seo-rich-content";
 import EnedisAuthenticMasterpiece from "../components/ui/enedis-authentic-logo";
 import { PerformanceOptimizer } from "@/components/performance-optimizer";
+import { FloatingCtaButton } from "@/components/floating-cta-button";
 
 // Performance optimization - lazy loading will be implemented inline
 
@@ -1470,6 +1471,9 @@ export default function HomePage() {
       
       {/* Performance optimization component */}
       <PerformanceOptimizer />
+      
+      {/* Mobile floating CTA button */}
+      <FloatingCtaButton />
 
     </>
   );
