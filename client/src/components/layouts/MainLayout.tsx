@@ -3,7 +3,7 @@ import { Link } from "wouter";
 
 import { Helmet } from "react-helmet";
 import { Phone, Mail, Facebook, Instagram, Twitter, ChevronRight, ArrowRight } from "lucide-react";
-import EnedisAuthenticMasterpiece from "../ui/enedis-authentic-logo";
+// Removed EnedisAuthenticMasterpiece import - replaced with new logo
 import { ModernFooter } from "../modern-footer";
 
 interface MainLayoutProps {
@@ -66,10 +66,8 @@ export default function MainLayout({
           <div className="px-4 py-3">
             <div className="flex items-center justify-between h-12">
               {/* Mobile Logo - Professional sizing */}
-              <Link href="/" className="flex items-center flex-shrink-0">
-                <div className="transform scale-90 origin-left">
-                  <EnedisAuthenticMasterpiece size="sm" variant="light" />
-                </div>
+              <Link href="/" className="flex items-center flex-shrink-0" aria-label="Retour à l'accueil">
+                <img src="/logo-portail-raccordement.svg" alt="Portail Raccordement" className="h-10 w-auto sm:h-12" />
               </Link>
               
               {/* Mobile Action Zone - Clean administrative design */}
@@ -119,14 +117,8 @@ export default function MainLayout({
             <div className="flex items-center justify-between h-14 md:h-16 lg:h-18 xl:h-20">
               
               {/* Logo Desktop - Taille adaptative */}
-              <Link href="/" className="flex items-center flex-shrink-0 min-w-0">
-                <div className="transition-transform duration-200 hover:scale-105">
-                  <EnedisAuthenticMasterpiece 
-                    size="lg" 
-                    variant="light" 
-                    className="w-auto h-8 md:h-9 lg:h-10 xl:h-11"
-                  />
-                </div>
+              <Link href="/" className="flex items-center flex-shrink-0 min-w-0" aria-label="Retour à l'accueil">
+                <img src="/logo-portail-raccordement.svg" alt="Portail Raccordement" className="h-10 w-auto sm:h-12" />
               </Link>
               
               {/* Navigation Desktop - Espacement responsive */}

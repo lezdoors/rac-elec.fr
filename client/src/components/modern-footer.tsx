@@ -48,7 +48,7 @@ export function ModernFooter() {
             {/* Logo Portail Raccordement - Nouveau design moderne */}
             <div className="mb-6 flex justify-center md:justify-start">
               <div className="transform scale-110">
-                <PortailRaccordementLogo size="lg" variant="dark" />
+                <img src="/logo-portail-raccordement.svg" alt="Portail Raccordement" className="h-8 w-auto" />
               </div>
             </div>
             
