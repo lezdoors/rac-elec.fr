@@ -38,6 +38,7 @@ Preferred communication style: Simple, everyday language.
 - **Form Optimization**: Added mobile-specific form validation, proper input types (email, tel, numeric), autocomplete attributes, and enhanced touch targets (minimum 44px).
 - **Performance Improvements**: Integrated lazy loading for images, mobile image optimization, network-aware loading strategies, and reduced motion support.
 - **Content Updates**: Removed outdated "plateforme digitale enedis" text and updated footer description for better brand consistency.
+- **Logo Update**: Replaced SVG logo with new "PORTAIL RACCORDEMENT" brand image across all components (header, footer, layouts) while maintaining responsive behavior and performance.
 
 ## External Dependencies
 
