@@ -25,9 +25,10 @@ export function PortailRaccordementLogo({
   showText = false
 }: PortailRaccordementLogoProps) {
   
+  // Import the logo images properly for Vite
   const logoSrc = variant === 'dark' 
-    ? '/portail-raccordement-logo-alt.png' 
-    : '/portail-raccordement-logo.png';
+    ? 'https://page.gensparksite.com/v1/base64_upload/fe7b58ed748706e923cfdf6372acd4fa'
+    : 'https://page.gensparksite.com/v1/base64_upload/ab9eec9b7f5d761adbf4d7e047d11b8d';
 
   const LogoComponent = () => (
     <div className={cn("flex items-center gap-3", className)}>
