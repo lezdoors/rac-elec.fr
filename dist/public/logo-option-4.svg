@@ -1,0 +1,25 @@
+<svg width="220" height="55" viewBox="0 0 220 55" xmlns="http://www.w3.org/2000/svg">
+  <!-- Compact modern design -->
+  
+  <!-- Stylized lightning bolt -->
+  <g transform="translate(8, 12)">
+    <path d="M6 2 L16 15 L11 15 L15 28 L5 15 L10 15 L6 2 Z" fill="#0033A0"/>
+    <circle cx="10.5" cy="15" r="18" fill="none" stroke="#0033A0" stroke-width="1.5" opacity="0.2"/>
+  </g>
+  
+  <!-- Bold main title -->
+  <text x="45" y="22" fill="#0033A0" font-family="Arial Black, sans-serif" font-size="15" font-weight="900" letter-spacing="0.6">
+    PORTAIL RACCORDEMENT
+  </text>
+  
+  <!-- Clean subtitle -->
+  <text x="45" y="35" fill="#4A5568" font-family="Arial, sans-serif" font-size="7.5" font-weight="600" letter-spacing="0.3">
+    RACCORDEMENT RÉSEAU ÉLECTRIQUE
+  </text>
+  
+  <!-- ENEDIS badge -->
+  <rect x="45" y="42" width="35" height="8" rx="4" fill="#68A843" opacity="0.9"/>
+  <text x="62.5" y="48" fill="white" font-family="Arial, sans-serif" font-size="6" font-weight="700" text-anchor="middle" letter-spacing="0.5">
+    ENEDIS
+  </text>
+</svg>
