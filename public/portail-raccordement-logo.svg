@@ -1,0 +1,24 @@
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with rounded corners -->
+  <rect x="2" y="2" width="196" height="56" rx="6" ry="6" fill="#E8F2FF" stroke="#0033A0" stroke-width="0.5" opacity="0.1"/>
+  
+  <!-- Main title "PORTAIL RACCORDEMENT" -->
+  <text x="100" y="22" text-anchor="middle" fill="#0033A0" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="0.5">
+    PORTAIL RACCORDEMENT
+  </text>
+  
+  <!-- Subtitle line -->
+  <text x="20" y="38" fill="#333333" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="8" font-weight="400" letter-spacing="0.3">
+    RACCORDEMENT AU RÉSEAU PUBLIC D'ÉLECTRICITÉ
+  </text>
+  
+  <!-- ENEDIS highlighted -->
+  <text x="180" y="38" text-anchor="end" fill="#92C83E" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="8" font-weight="600" letter-spacing="0.3">
+    ENEDIS
+  </text>
+  
+  <!-- Small electric symbol -->
+  <g transform="translate(8, 8)">
+    <path d="M6 2 L2 8 L5 8 L4 14 L8 8 L5 8 Z" fill="#0033A0" opacity="0.7"/>
+  </g>
+</svg>
