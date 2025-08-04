@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { apiRequest } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { PortailRaccordementLogo } from "@/components/ui/portail-raccordement-logo";
+import EnedisAuthenticMasterpiece from "@/components/ui/enedis-authentic-logo";
 import { 
   Bolt, 
   LayoutDashboard, 
@@ -119,13 +119,13 @@ export default function Layout({ children }: LayoutProps) {
                 {/* Logo mobile - agrandi pour meilleure visibilité */}
                 <div className="block lg:hidden">
                   <div className="w-[180px] sm:w-[200px] md:w-[220px] h-auto">
-                    <PortailRaccordementLogo size="lg" variant="light" />
+                    <EnedisAuthenticMasterpiece size="lg" variant="light" />
                   </div>
                 </div>
                 {/* Logo desktop */}
                 <div className="hidden lg:block">
                   <div className="w-[260px] xl:w-[300px] h-auto">
-                    <PortailRaccordementLogo size="xl" variant="light" />
+                    <EnedisAuthenticMasterpiece size="xl" variant="light" />
                   </div>
                 </div>
               </Link>
