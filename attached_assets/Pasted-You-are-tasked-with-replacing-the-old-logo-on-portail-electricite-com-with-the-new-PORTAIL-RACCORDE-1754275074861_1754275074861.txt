@@ -1,0 +1,125 @@
+You are tasked with replacing the old logo on portail-electricite.com with the new "PORTAIL RACCORDEMENT" logo design.
+
+LOGO REPLACEMENT TASK:
+
+1. LOGO UPDATE IMPLEMENTATION:
+- Replace the current logo/brand identity with the new "PORTAIL RACCORDEMENT" logo
+- Use the new logo image provided: https://page.gensparksite.com/v1/base64_upload/ab9eec9b7f5d761adbf4d7e047d11b8d
+- Alternative logo version: https://page.gensparksite.com/v1/base64_upload/fe7b58ed748706e923cfdf6372acd4fa
+- Ensure logo is properly sized and positioned in the header
+- Maintain responsive behavior across all device sizes
+- Update favicon if needed to match new branding
+
+2. LOGO IMPLEMENTATION DETAILS:
+- Replace logo in header navigation
+- Ensure logo links to homepage (/)
+- Optimize logo size for fast loading
+- Add proper alt text: "Portail Raccordement - Service Enedis"
+- Ensure logo works well on both light and dark backgrounds if applicable
+
+HTML Implementation:
+```html
+<!-- Update header logo -->
+<div class="logo-container">
+  <a href="/" class="logo-link">
+    <img src="https://page.gensparksite.com/v1/base64_upload/ab9eec9b7f5d761adbf4d7e047d11b8d" 
+         alt="Portail Raccordement - Service Enedis" 
+         class="main-logo"
+         loading="eager">
+  </a>
+</div>
+CSS Styling:
+
+Copy.logo-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.logo-link {
+  display: block;
+  text-decoration: none;
+}
+
+.main-logo {
+  height: auto;
+  max-height: 50px;
+  width: auto;
+  max-width: 250px;
+  object-fit: contain;
+}
+
+/* Mobile responsive logo */
+@media (max-width: 768px) {
+  .main-logo {
+    max-height: 40px;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-logo {
+    max-height: 35px;
+    max-width: 180px;
+  }
+}
+BRANDING CONSISTENCY:
+Update any references to old brand name throughout the site
+Ensure the new "PORTAIL RACCORDEMENT" branding is consistent
+Keep the existing blue color scheme which matches the new logo
+Update page title if needed to reflect new branding
+Maintain the "Service Enedis" association shown in logo
+HEADER LAYOUT OPTIMIZATION:
+Ensure logo fits properly in existing header layout
+Maintain proper spacing with navigation menu
+Ensure logo doesn't interfere with mobile hamburger menu
+Test logo visibility on different background colors
+PERFORMANCE CONSIDERATIONS:
+Optimize logo image for web (compress if needed)
+Add proper caching headers for logo image
+Consider creating WebP version for better performance
+Ensure logo loads quickly on mobile connections
+ACCESSIBILITY IMPROVEMENTS:
+Add descriptive alt text for screen readers
+Ensure logo has proper contrast ratios
+Make sure logo link is keyboard accessible
+Add appropriate ARIA labels if needed
+FAVICON UPDATE (if applicable):
+Create favicon versions of new logo
+Update favicon.ico in root directory
+Add various icon sizes for different devices
+Update manifest.json with new icon references
+IMPLEMENTATION REQUIREMENTS:
+
+Replace all instances of old logo with new "PORTAIL RACCORDEMENT" logo
+Ensure logo is responsive across all screen sizes
+Maintain fast loading performance
+Keep existing header functionality (navigation, mobile menu)
+Update any text references to match new branding
+Test logo appearance on all pages
+Ensure logo works well with existing color scheme
+TESTING CHECKLIST:
+
+ Logo displays correctly on desktop
+ Logo is properly sized on mobile devices
+ Logo links to homepage correctly
+ Logo doesn't break header layout
+ Logo loads quickly
+ Logo is accessible to screen readers
+ Logo works with existing navigation
+ No broken images or missing assets
+BRAND CONSISTENCY:
+
+Keep the professional blue gradient theme
+Maintain the "Service Enedis" association
+Ensure "PORTAIL RACCORDEMENT" name is used consistently
+Update meta tags if they reference old brand name
+Consider updating any email signatures or contact forms
+DELIVERABLES:
+
+Updated header with new "PORTAIL RACCORDEMENT" logo
+Responsive logo implementation across all devices
+Optimized logo performance and accessibility
+Consistent branding throughout the website
+Updated favicon and icons (if applicable)
+Focus on seamless integration of the new logo while maintaining all existing functionality and performance standards.

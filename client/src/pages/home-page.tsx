@@ -11,7 +11,7 @@ import { BreadcrumbNavigation } from "@/components/breadcrumb-navigation";
 
 // Direct imports for critical content
 import { SeoRichContent } from "@/components/seo-rich-content";
-import PortalBadgeLogo from "../components/ui/portal-badge-logo";
+import { PortailRaccordementLogo } from "../components/ui/portail-raccordement-logo";
 import { PerformanceOptimizer } from "@/components/performance-optimizer";
 import { FloatingCtaButton } from "@/components/floating-cta-button";
 import { MobileFormOptimizer } from "@/components/mobile-form-optimizer";

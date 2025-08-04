@@ -3,7 +3,7 @@ import { Link } from "wouter";
 
 import { Helmet } from "react-helmet";
 import { Phone, Mail, Facebook, Instagram, Twitter, ChevronRight, ArrowRight } from "lucide-react";
-import EnedisAuthenticMasterpiece from "../ui/enedis-authentic-logo";
+import { PortailRaccordementLogo } from "../ui/portail-raccordement-logo";
 import { ModernFooter } from "../modern-footer";
 
 interface MainLayoutProps {
@@ -68,7 +68,7 @@ export default function MainLayout({
               {/* Mobile Logo - Professional sizing */}
               <Link href="/" className="flex items-center flex-shrink-0">
                 <div className="transform scale-90 origin-left">
-                  <EnedisAuthenticMasterpiece size="sm" variant="light" />
+                  <PortailRaccordementLogo size="sm" variant="light" />
                 </div>
               </Link>
               
@@ -121,7 +121,7 @@ export default function MainLayout({
               {/* Logo Desktop - Taille adaptative */}
               <Link href="/" className="flex items-center flex-shrink-0 min-w-0">
                 <div className="transition-transform duration-200 hover:scale-105">
-                  <EnedisAuthenticMasterpiece 
+                  <PortailRaccordementLogo 
                     size="lg" 
                     variant="light" 
                     className="w-auto h-8 md:h-9 lg:h-10 xl:h-11"
