@@ -21,16 +21,16 @@ function getOptimalCallTime(): string {
   }
 }
 
-// Configuration SSL premium234.web-hosting.com - LA SEULE CONFIGURATION
+// Configuration SMTP stableserver.net - NOUVELLE CONFIGURATION OFFICIELLE
 export function setupSmtpService() {
   try {
     const smtpConfig = {
-      host: 'premium234.web-hosting.com',
+      host: 's4015.fra1.stableserver.net',
       port: 465,
       secure: true, // SSL
       auth: {
-        user: process.env.SMTP_USER!,
-        pass: process.env.SMTP_PASS!
+        user: 'notification@portail-electricite.com',
+        pass: 'xecmug-wakDed-xunje5'
       },
       tls: {
         rejectUnauthorized: false
@@ -38,7 +38,7 @@ export function setupSmtpService() {
     };
 
     globalTransporter = nodemailer.createTransport(smtpConfig);
-    console.log('✅ SMTP UNIQUE - notification@portail-electricite.com → bonjour@portail-electricite.com');
+    console.log('✅ SMTP STABLESERVER - notification@portail-electricite.com → bonjour@portail-electricite.com');
   } catch (error) {
     console.error('❌ Erreur configuration SMTP:', error);
   }

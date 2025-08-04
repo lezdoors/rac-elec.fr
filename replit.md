@@ -38,6 +38,7 @@ Preferred communication style: Simple, everyday language.
 - **Form Optimization**: Added mobile-specific form validation, proper input types (email, tel, numeric), autocomplete attributes, and enhanced touch targets (minimum 44px).
 - **Performance Improvements**: Integrated lazy loading for images, mobile image optimization, network-aware loading strategies, and reduced motion support.
 - **Content Updates**: Removed outdated "plateforme digitale enedis" text and updated footer description for better brand consistency.
+- **SMTP Migration Complete**: Successfully migrated from premium234.web-hosting.com (Namecheap) to s4015.fra1.stableserver.net with notification@portail-electricite.com sender. All payment and lead notifications now use the new configuration and deliver to bonjour@portail-electricite.com in real-time.
 
 ## External Dependencies
 
@@ -45,8 +46,9 @@ Preferred communication style: Simple, everyday language.
 - **Stripe**: Payment gateway for secure transactions.
 
 ### Email Services
-- **SMTP Server**: premium234.web-hosting.com (Namecheap) for email delivery.
-- **Nodemailer**: Email sending library.
+- **SMTP Server**: s4015.fra1.stableserver.net (Stableserver) for reliable email delivery.
+- **Email Account**: notification@portail-electricite.com (sender) → bonjour@portail-electricite.com (recipient).
+- **Nodemailer**: Email sending library with SSL/TLS encryption on port 465.
 
 ### Analytics & Marketing
 - **Google Analytics**: Conversion tracking.
