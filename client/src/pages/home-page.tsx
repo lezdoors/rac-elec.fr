@@ -14,6 +14,8 @@ import { SeoRichContent } from "@/components/seo-rich-content";
 import EnedisAuthenticMasterpiece from "../components/ui/enedis-authentic-logo";
 import { PerformanceOptimizer } from "@/components/performance-optimizer";
 import { FloatingCtaButton } from "@/components/floating-cta-button";
+import { MobileFormOptimizer } from "@/components/mobile-form-optimizer";
+import { MobileImageOptimizer } from "@/components/mobile-image-optimizer";
 
 // Performance optimization - lazy loading will be implemented inline
 
@@ -1471,6 +1473,10 @@ export default function HomePage() {
       
       {/* Performance optimization component */}
       <PerformanceOptimizer />
+      
+      {/* Mobile optimizations */}
+      <MobileFormOptimizer />
+      <MobileImageOptimizer />
       
       {/* Mobile floating CTA button */}
       <FloatingCtaButton />

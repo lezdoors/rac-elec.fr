@@ -53,7 +53,7 @@ export function ModernFooter() {
             
             {/* Description courte */}
             <p className="text-gray-300 text-sm mb-6 max-w-xs mx-auto md:mx-0">
-              Plateforme digitale Enedis pour vos demandes de raccordement électrique en France.
+              Votre partenaire expert pour tous vos projets de raccordement électrique en France.
             </p>
             
             {/* Contact téléphone - Ultra visible */}

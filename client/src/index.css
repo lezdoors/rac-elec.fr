@@ -2239,3 +2239,90 @@ html {
     transition: transform 0.1s ease !important;
   }
 }
+
+/* Mobile Image Optimization */
+.lazy-image {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  background-color: #f9fafb;
+}
+
+.lazy-image.lazy-loaded {
+  opacity: 1;
+}
+
+/* Mobile Form Optimization */
+.mobile-error {
+  font-size: 14px;
+  margin-top: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #fef2f2;
+  border-left: 3px solid #ef4444;
+}
+
+/* Enhanced mobile form styles */
+@media (max-width: 768px) {
+  /* Input optimization for mobile */
+  input, textarea, select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 12px 16px !important;
+    border-radius: 8px !important;
+    border: 2px solid #e5e7eb !important;
+    background-color: #ffffff !important;
+    transition: all 0.2s ease !important;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+    outline: none !important;
+  }
+  
+  /* Success state */
+  input.border-green-500, textarea.border-green-500 {
+    border-color: #10b981 !important;
+    background-color: #f0fdf4 !important;
+  }
+  
+  /* Error state */
+  input.border-red-500, textarea.border-red-500 {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2 !important;
+  }
+  
+  /* Form spacing optimization */
+  .form-group, .form-field {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  /* Button optimization for mobile */
+  button, .btn {
+    font-size: 16px !important;
+    padding: 14px 20px !important;
+    border-radius: 8px !important;
+    min-height: 48px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+  }
+  
+  /* Touch feedback */
+  button:active, .btn:active {
+    transform: scale(0.98) !important;
+  }
+}
+
+/* Network-aware image loading */
+@media (prefers-reduced-data: reduce) {
+  img {
+    filter: grayscale(1);
+  }
+}
+
+/* Reduced motion support for mobile */
+@media (prefers-reduced-motion: reduce) {
+  .lazy-image, .floating-cta {
+    transition: none !important;
+    animation: none !important;
+  }
+}
