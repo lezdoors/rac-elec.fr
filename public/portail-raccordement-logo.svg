@@ -1,24 +1,28 @@
 <svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background with rounded corners -->
-  <rect x="2" y="2" width="196" height="56" rx="6" ry="6" fill="#E8F2FF" stroke="#0033A0" stroke-width="0.5" opacity="0.1"/>
+  <!-- Subtle background container with rounded corners -->
+  <rect x="1" y="1" width="198" height="58" rx="8" ry="8" fill="rgba(0, 51, 160, 0.02)" stroke="rgba(0, 51, 160, 0.1)" stroke-width="0.5"/>
   
-  <!-- Main title "PORTAIL RACCORDEMENT" -->
-  <text x="100" y="22" text-anchor="middle" fill="#0033A0" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="0.5">
+  <!-- Main title "PORTAIL RACCORDEMENT" - Professional styling -->
+  <text x="100" y="24" text-anchor="middle" fill="#0033A0" font-family="Segoe UI, Helvetica Neue, Montserrat, sans-serif" font-size="15" font-weight="700" letter-spacing="0.8">
     PORTAIL RACCORDEMENT
   </text>
   
-  <!-- Subtitle line -->
-  <text x="20" y="38" fill="#333333" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="8" font-weight="400" letter-spacing="0.3">
-    RACCORDEMENT AU RÉSEAU PUBLIC D'ÉLECTRICITÉ
+  <!-- Subtitle with proper spacing -->
+  <text x="100" y="42" text-anchor="middle" fill="#2D3748" font-family="Segoe UI, Helvetica Neue, Montserrat, sans-serif" font-size="7.5" font-weight="500" letter-spacing="0.4">
+    RACCORDEMENT AU RÉSEAU PUBLIC D'ÉLECTRICITÉ 
   </text>
   
-  <!-- ENEDIS highlighted -->
-  <text x="180" y="38" text-anchor="end" fill="#92C83E" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="8" font-weight="600" letter-spacing="0.3">
+  <!-- ENEDIS highlighted in brand green -->
+  <text x="100" y="52" text-anchor="middle" fill="#92C83E" font-family="Segoe UI, Helvetica Neue, Montserrat, sans-serif" font-size="8" font-weight="700" letter-spacing="0.5">
     ENEDIS
   </text>
   
-  <!-- Small electric symbol -->
-  <g transform="translate(8, 8)">
-    <path d="M6 2 L2 8 L5 8 L4 14 L8 8 L5 8 Z" fill="#0033A0" opacity="0.7"/>
+  <!-- Professional electric icon -->
+  <g transform="translate(10, 12)">
+    <circle cx="4" cy="4" r="3" fill="none" stroke="#0033A0" stroke-width="1.2" opacity="0.8"/>
+    <path d="M2.5 2.5 L5.5 5.5 M5.5 2.5 L2.5 5.5" stroke="#0033A0" stroke-width="1" stroke-linecap="round" opacity="0.8"/>
   </g>
+  
+  <!-- Small decorative line -->
+  <line x1="40" y1="30" x2="160" y2="30" stroke="rgba(0, 51, 160, 0.15)" stroke-width="0.5"/>
 </svg>

@@ -43,26 +43,30 @@ export function PortailRaccordementLogo({ className, size = 'header', variant = 
       <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
         <title>Portail Raccordement - Raccordement au réseau public d'électricité Enedis</title>
         
-        {/* Background with rounded corners */}
-        <rect x="2" y="2" width="196" height="56" rx="6" ry="6" fill={color.background} stroke={color.border} strokeWidth="0.5" opacity="0.1"/>
+        {/* Subtle background container with rounded corners */}
+        <rect x="1" y="1" width="198" height="58" rx="8" ry="8" fill={`${color.primary}03`} stroke={`${color.primary}1A`} strokeWidth="0.5"/>
         
-        {/* Small electric symbol */}
-        <g transform="translate(8, 8)">
-          <path d="M6 2 L2 8 L5 8 L4 14 L8 8 L5 8 Z" fill={color.primary} opacity="0.7"/>
+        {/* Professional electric icon */}
+        <g transform="translate(10, 12)">
+          <circle cx="4" cy="4" r="3" fill="none" stroke={color.primary} strokeWidth="1.2" opacity="0.8"/>
+          <path d="M2.5 2.5 L5.5 5.5 M5.5 2.5 L2.5 5.5" stroke={color.primary} strokeWidth="1" strokeLinecap="round" opacity="0.8"/>
         </g>
         
-        {/* Main title "PORTAIL RACCORDEMENT" */}
-        <text x="100" y="22" textAnchor="middle" fill={color.primary} fontFamily="system-ui, -apple-system, Segoe UI, Helvetica Neue, Arial, sans-serif" fontSize="16" fontWeight="700" letterSpacing="0.5">
+        {/* Main title "PORTAIL RACCORDEMENT" - Professional styling */}
+        <text x="100" y="24" textAnchor="middle" fill={color.primary} fontFamily="system-ui, -apple-system, Segoe UI, Helvetica Neue, Montserrat, sans-serif" fontSize="15" fontWeight="700" letterSpacing="0.8">
           PORTAIL RACCORDEMENT
         </text>
         
-        {/* Subtitle line */}
-        <text x="20" y="38" fill={color.secondary} fontFamily="system-ui, -apple-system, Segoe UI, Helvetica Neue, Arial, sans-serif" fontSize="8" fontWeight="400" letterSpacing="0.3">
+        {/* Small decorative line */}
+        <line x1="40" y1="30" x2="160" y2="30" stroke={`${color.primary}26`} strokeWidth="0.5"/>
+        
+        {/* Subtitle with proper spacing */}
+        <text x="100" y="42" textAnchor="middle" fill={color.secondary} fontFamily="system-ui, -apple-system, Segoe UI, Helvetica Neue, Montserrat, sans-serif" fontSize="7.5" fontWeight="500" letterSpacing="0.4">
           RACCORDEMENT AU RÉSEAU PUBLIC D'ÉLECTRICITÉ
         </text>
         
-        {/* ENEDIS highlighted */}
-        <text x="180" y="38" textAnchor="end" fill={color.accent} fontFamily="system-ui, -apple-system, Segoe UI, Helvetica Neue, Arial, sans-serif" fontSize="8" fontWeight="600" letterSpacing="0.3">
+        {/* ENEDIS highlighted in brand green */}
+        <text x="100" y="52" textAnchor="middle" fill={color.accent} fontFamily="system-ui, -apple-system, Segoe UI, Helvetica Neue, Montserrat, sans-serif" fontSize="8" fontWeight="700" letterSpacing="0.5">
           ENEDIS
         </text>
       </svg>
