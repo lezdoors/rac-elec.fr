@@ -1,17 +1,32 @@
 User-agent: *
 Allow: /
-Allow: /raccordement-enedis
-Allow: /faq
-Allow: /contact
-Allow: /admin
-Allow: /admin/demandes
-Allow: /admin/utilisateurs
-Allow: /admin/statistiques
 
-Disallow: /mentions-legales
-Disallow: /confidentialite
-Disallow: /confirmation
-Disallow: /paiement-confirmation
-Disallow: /paiement-multiple
+# Pages importantes pour le SEO
+Allow: /raccordement-definitif
+Allow: /raccordement-provisoire  
+Allow: /viabilisation
+Allow: /raccordement-collectif
+Allow: /production-electrique
+Allow: /modification-installation
 
-Sitemap: https://raccordement.net/sitemap.xml
+# Fichiers et dossiers à exclure
+Disallow: /api/
+Disallow: /admin/
+Disallow: /server/
+Disallow: /dist/
+Disallow: /node_modules/
+Disallow: /*.json$
+Disallow: /*.log$
+Disallow: /temp/
+Disallow: /migrations/
+
+# Fichiers autorisés
+Allow: /favicon.ico
+Allow: /og-image.jpg
+Allow: /sitemap.xml
+
+# Sitemap
+Sitemap: https://portail-electricite.com/sitemap.xml
+
+# Crawl-delay pour éviter la surcharge
+Crawl-delay: 1
