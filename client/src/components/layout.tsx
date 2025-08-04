@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { apiRequest } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import PortailRaccordementLogo from "@/components/ui/portail-raccordement-logo";
+// Removed PortailRaccordementLogo import - using direct SVG now
 import { 
   Bolt, 
   LayoutDashboard, 
@@ -113,22 +113,15 @@ export default function Layout({ children }: LayoutProps) {
         <div className="w-full mx-auto pl-3 pr-0 sm:px-4 lg:px-8">
           <div className="flex items-center justify-between h-[64px] sm:h-[70px] lg:h-[80px]">
             
-            {/* LOGO - Parfaitement aligné à gauche et agrandi pour mobile */}
+            {/* LOGO - Clean SVG implementation */}
             <div className="flex items-center flex-shrink-0">
-              <Link href="/" className="flex items-center group transition-transform duration-200 hover:scale-105" aria-label="Retour à l'accueil">
-                {/* Logo mobile - agrandi pour meilleure visibilité */}
-                <div className="block lg:hidden">
-                  <div className="w-[180px] sm:w-[200px] md:w-[220px] h-auto">
-                    <PortailRaccordementLogo size="lg" variant="light" />
-                  </div>
-                </div>
-                {/* Logo desktop */}
-                <div className="hidden lg:block">
-                  <div className="w-[260px] xl:w-[300px] h-auto">
-                    <PortailRaccordementLogo size="xl" variant="light" />
-                  </div>
-                </div>
-              </Link>
+              <a href="/" className="flex items-center group transition-transform duration-200 hover:scale-105" aria-label="Retour à l'accueil - Portail Raccordement">
+                <img 
+                  src="/logo-portail-raccordement.svg" 
+                  alt="Portail Raccordement - Raccordement au réseau public d'électricité ENEDIS" 
+                  className="h-10 md:h-12 w-auto object-contain"
+                />
+              </a>
             </div>
             
             {/* NAVIGATION DESKTOP - Centrée */}

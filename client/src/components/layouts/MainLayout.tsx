@@ -3,7 +3,7 @@ import { Link } from "wouter";
 
 import { Helmet } from "react-helmet";
 import { Phone, Mail, Facebook, Instagram, Twitter, ChevronRight, ArrowRight } from "lucide-react";
-import PortailRaccordementLogo from "../ui/portail-raccordement-logo";
+// Removed PortailRaccordementLogo import - using direct SVG now
 import { ModernFooter } from "../modern-footer";
 
 interface MainLayoutProps {
@@ -65,12 +65,14 @@ export default function MainLayout({
         <div className="block md:hidden">
           <div className="px-4 py-3">
             <div className="flex items-center justify-between h-12">
-              {/* Mobile Logo - Professional sizing */}
-              <Link href="/" className="flex items-center flex-shrink-0" aria-label="Retour à l'accueil">
-                <div className="transform scale-90 origin-left">
-                  <PortailRaccordementLogo size="sm" variant="light" />
-                </div>
-              </Link>
+              {/* Mobile Logo - Clean SVG */}
+              <a href="/" className="flex items-center flex-shrink-0" aria-label="Retour à l'accueil - Portail Raccordement">
+                <img 
+                  src="/logo-portail-raccordement.svg" 
+                  alt="Portail Raccordement - Raccordement au réseau public d'électricité ENEDIS" 
+                  className="h-10 w-auto object-contain"
+                />
+              </a>
               
               {/* Mobile Action Zone - Clean administrative design */}
               <div className="flex items-center space-x-3">
@@ -118,16 +120,14 @@ export default function MainLayout({
             */}
             <div className="flex items-center justify-between h-14 md:h-16 lg:h-18 xl:h-20">
               
-              {/* Logo Desktop - Taille adaptative */}
-              <Link href="/" className="flex items-center flex-shrink-0 min-w-0" aria-label="Retour à l'accueil">
-                <div className="transition-transform duration-200 hover:scale-105">
-                  <PortailRaccordementLogo 
-                    size="lg" 
-                    variant="light" 
-                    className="w-auto h-8 md:h-9 lg:h-10 xl:h-11"
-                  />
-                </div>
-              </Link>
+              {/* Logo Desktop - Clean SVG */}
+              <a href="/" className="flex items-center flex-shrink-0 min-w-0 transition-transform duration-200 hover:scale-105" aria-label="Retour à l'accueil - Portail Raccordement">
+                <img 
+                  src="/logo-portail-raccordement.svg" 
+                  alt="Portail Raccordement - Raccordement au réseau public d'électricité ENEDIS" 
+                  className="h-12 w-auto object-contain"
+                />
+              </a>
               
               {/* Navigation Desktop - Espacement responsive */}
               <nav className="hidden lg:flex items-center space-x-4 xl:space-x-8 flex-1 justify-center max-w-md">
