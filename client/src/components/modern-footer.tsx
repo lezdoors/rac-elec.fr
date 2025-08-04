@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { Phone, Mail, Clock, ArrowRight, ShieldCheck, Check, Globe, Building, User, MapPin } from "lucide-react";
-import PortailRaccordementLogo from '@/components/ui/portail-raccordement-logo';
+// Removed PortailRaccordementLogo import - using direct SVG now
 
 interface ScrollToTopLinkProps {
   href: string;
@@ -44,11 +44,15 @@ export function ModernFooter() {
           
           {/* Colonne 1: Logo et contact */}
           <div className="text-center md:text-left">
-            {/* Logo Portail Raccordement - Nouveau design moderne */}
+            {/* Logo Portail Raccordement - SVG direct */}
             <div className="mb-6 flex justify-center md:justify-start">
-              <div className="transform scale-110">
-                <PortailRaccordementLogo size="lg" variant="dark" />
-              </div>
+              <a href="/" className="block transition-transform duration-200 hover:scale-105" aria-label="Retour à l'accueil - Portail Raccordement">
+                <img 
+                  src="/logo-portail-raccordement.svg" 
+                  alt="Portail Raccordement - Raccordement au réseau public d'électricité ENEDIS" 
+                  className="h-8 w-auto object-contain filter brightness-0 invert"
+                />
+              </a>
             </div>
             
             {/* Description courte */}
