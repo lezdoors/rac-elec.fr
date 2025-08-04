@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { Phone, Mail, Clock, ArrowRight, ShieldCheck, Check, Globe, Building, User, MapPin } from "lucide-react";
-// Removed PortailRaccordementLogo import - using direct SVG now
+import { EnedisAuthenticMasterpiece } from '@/components/ui/enedis-authentic-logo';
 
 interface ScrollToTopLinkProps {
   href: string;
@@ -44,15 +44,11 @@ export function ModernFooter() {
           
           {/* Colonne 1: Logo et contact */}
           <div className="text-center md:text-left">
-            {/* Logo Portail Raccordement - SVG direct */}
+            {/* Logo authentique - Taille augmentée */}
             <div className="mb-6 flex justify-center md:justify-start">
-              <a href="/" className="block transition-transform duration-200 hover:scale-105" aria-label="Retour à l'accueil - Portail Raccordement">
-                <img 
-                  src="/logo-portail-raccordement.svg" 
-                  alt="Portail Raccordement - Raccordement au réseau public d'électricité ENEDIS" 
-                  className="h-8 w-auto object-contain filter brightness-0 invert"
-                />
-              </a>
+              <div className="transform scale-110">
+                <EnedisAuthenticMasterpiece size="lg" variant="dark" />
+              </div>
             </div>
             
             {/* Description courte */}

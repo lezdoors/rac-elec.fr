@@ -38,7 +38,6 @@ Preferred communication style: Simple, everyday language.
 - **Form Optimization**: Added mobile-specific form validation, proper input types (email, tel, numeric), autocomplete attributes, and enhanced touch targets (minimum 44px).
 - **Performance Improvements**: Integrated lazy loading for images, mobile image optimization, network-aware loading strategies, and reduced motion support.
 - **Content Updates**: Removed outdated "plateforme digitale enedis" text and updated footer description for better brand consistency.
-- **New Professional Logo**: Created and integrated "Portail Raccordement" logo with Enedis-inspired branding (deep blue #0033A0, green #92C83E, 200px × 60px) matching design standards from raccordement.net project.
 
 ## External Dependencies
 
