@@ -130,11 +130,11 @@ export default function ThankYouPage({}: ThankYouPageProps) {
         
         {/* Google tag loaded once in index.html */}
         
-        {/* Purchase conversion tracking */}
+        {/* Purchase conversion tracking - FIXED CONVERSION ID */}
         <script>{`
           if (typeof window !== 'undefined' && window.gtag) {
             gtag('event', 'conversion', {
-              'send_to': 'AW-16698052873/IFUxCJLHtMUaEtmioJo-',
+              'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
               'transaction_id': '${referenceNumber || ''}'
             });
           }

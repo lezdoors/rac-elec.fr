@@ -67,7 +67,7 @@ export default function PaiementConfirmationPage() {
           // Tag de conversion spécifique pour les achats réussis
           if (typeof window !== 'undefined' && window.gtag) {
             window.gtag('event', 'conversion', {
-              'send_to': 'AW-16698052873/IFUxCJLHtMUaEtmioJo-',
+              'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
               'transaction_id': referenceNumber
             });
             console.log('✅ Google Ads conversion tracking sent for transaction:', referenceNumber);
