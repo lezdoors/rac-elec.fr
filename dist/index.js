@@ -1911,20 +1911,20 @@ import nodemailer from "nodemailer";
 function setupSmtpService() {
   try {
     const smtpConfig = {
-      host: "premium234.web-hosting.com",
+      host: "s4015.fra1.stableserver.net",
       port: 465,
       secure: true,
       // SSL
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
+        user: "notification@portail-electricite.com",
+        pass: "xecmug-wakDed-xunje5"
       },
       tls: {
         rejectUnauthorized: false
       }
     };
     globalTransporter = nodemailer.createTransport(smtpConfig);
-    console.log("\u2705 SMTP UNIQUE - notification@portail-electricite.com \u2192 bonjour@portail-electricite.com");
+    console.log("\u2705 SMTP STABLESERVER - notification@portail-electricite.com \u2192 bonjour@portail-electricite.com");
   } catch (error) {
     console.error("\u274C Erreur configuration SMTP:", error);
   }
