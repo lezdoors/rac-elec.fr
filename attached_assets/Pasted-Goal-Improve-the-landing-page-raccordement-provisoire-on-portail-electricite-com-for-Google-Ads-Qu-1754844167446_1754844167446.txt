@@ -1,0 +1,98 @@
+Goal: Improve the landing page /raccordement-provisoire on portail-electricite.com for Google Ads Quality Score and conversions. Keep French copy. No changes to backend logic — only page UI/UX, SEO, and conversion tracking.
+
+⸻
+
+Scope
+	1.	Overhaul the /raccordement-provisoire page component. Likely file: src/pages/RaccordementProvisoire.tsx (or existing route file).
+	2.	Update SEO meta tags and structured data for this route.
+	3.	Present information in a clear, administrative, and professional format.
+	4.	Make the hero compact, with a prominent CTA, and optimized for mobile.
+	5.	Ensure existing Google Ads tracking events (form_start, form_submit) remain intact.
+
+⸻
+
+Design & Content (French)
+	•	H1: Raccordement Provisoire Enedis – Démarches et Demande en Ligne
+	•	Subheading: Solution temporaire pour l’alimentation électrique de vos chantiers. Dossier conforme aux exigences Enedis, avec accompagnement administratif complet.
+	•	Primary CTA (orange): “Faire ma demande” → links to existing form route. On click, fire existing form_start conversion event.
+	•	Secondary CTA (text link): Numéro de téléphone 09 70 70 95 70 (click-to-call tel:+33970709570) under the main button on mobile.
+
+⸻
+
+Above the Fold Layout
+	•	One-column on mobile, two-column on desktop.
+	•	Left column: H1, subheading, CTA(s), and bullet list of core points (no emojis/icons):
+	•	Installation rapide après validation Enedis
+	•	Durée limitée (jusqu’à 12 mois)
+	•	Puissance adaptée aux besoins du chantier
+	•	Gestion complète du dossier administratif
+	•	Right column: “Demandez votre raccordement provisoire” card with:
+	•	Primary CTA (orange)
+	•	Phone number link
+	•	Contact link
+	•	Small trust points (plain text, no icons):
+	•	Service certifié professionnel
+	•	Paiement 100 % sécurisé
+	•	Dossier conforme Enedis
+
+⸻
+
+Below the Fold
+	•	Section: “Comment procéder” — 3 étapes administratives (text only, professional tone):
+	1.	Soumission de votre demande en ligne
+	2.	Vérification et constitution du dossier
+	3.	Transmission à Enedis et suivi administratif
+	•	Section: “Documents nécessaires” — liste formelle (pièce d’identité, plan de situation, puissance demandée, etc.).
+	•	FAQ (accordion) — 6 questions ciblées Google Ads (no icons, professional phrasing):
+	1.	Qu’est-ce qu’un raccordement provisoire ?
+	2.	Quels documents fournir ?
+	3.	Quelle durée maximale pour un raccordement provisoire ?
+	4.	Quelle puissance est disponible ?
+	5.	Quelle différence avec un raccordement définitif ?
+	6.	Peut-on modifier la puissance en cours d’utilisation ?
+
+⸻
+
+SEO
+	•	<title>: Raccordement Provisoire Enedis – Démarches et Demande en Ligne | Portail Électricité
+	•	<meta name="description">: Effectuez votre demande de raccordement provisoire Enedis pour chantier. Dossier complet et conforme, avec accompagnement administratif et paiement sécurisé.
+	•	Add canonical tag to this URL.
+	•	Use the exact phrase “raccordement provisoire Enedis” in the H1, first paragraph, and at least one subheading.
+	•	Add internal links to Raccordement définitif et Viabilisation de terrain.
+
+⸻
+
+Schema / JSON-LD
+	•	FAQPage for the 6 questions above.
+	•	BreadcrumbList: Home > Nos Services > Raccordement Provisoire.
+
+⸻
+
+Accessibility & Mobile
+	•	Buttons min-h-12, text-lg, aria-label attributes.
+	•	Phone number clickable on all devices.
+	•	Hero fits above the fold on iPhone 13/14 (max height ~65vh).
+	•	Maintain a formal, administrative visual style (no playful colors or icons).
+
+⸻
+
+Tracking
+	•	Primary CTA triggers form_start on click.
+	•	Navigation to the form page must preserve the tracking chain.
+	•	Phone click tracking optional if it does not conflict with Ads events.
+
+⸻
+
+Performance
+	•	Optimize hero image size.
+	•	Lazy-load below-the-fold media.
+	•	Avoid layout shift (set fixed image dimensions).
+
+⸻
+
+Acceptance Criteria
+	•	Updated H1, subheading, and CTA visible above the fold on mobile and desktop.
+	•	Professional, administrative style with no emojis or decorative icons.
+	•	Content aligned with top Google Ads keywords for this service.
+	•	FAQ and JSON-LD validate without errors.
+	•	Lighthouse mobile LCP ≤ 2.5s for this route.
