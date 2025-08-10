@@ -24,13 +24,11 @@ export function ProfessionalHeader() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <img 
-              src="/favicon-new.svg" 
-              alt="Portail Électricité" 
-              className="h-8 w-auto"
-              width="32"
-              height="32"
-            />
+            <div className="flex items-center">
+              <div className="text-xl font-bold text-blue-600 leading-tight tracking-tight">
+                Portail-Electricite.com
+              </div>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
