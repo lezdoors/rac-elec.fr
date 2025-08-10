@@ -1,0 +1,138 @@
+Target: Improve /raccordement-provisoire on portail-electricite.com for Google Ads + conversions.
+Do UI/UX + SEO only. Keep existing backend, routes, and tracking IDs intact.
+
+0) General rules
+	•	Tone: administrative, professional. No emojis, no decorative icons.
+	•	Colors: use current brand palette; ensure AA contrast.
+	•	Mobile-first. Avoid CLS. Buttons min height 44px.
+	•	Keep/trigger existing Ads events: form_start on primary CTA click; form_submit unchanged on the form page.
+
+⸻
+
+1) HEADER (global component if shared; otherwise route-local)
+	•	Make header slim and sticky (position: sticky; top:0; z-50; backdrop-blur if available).
+	•	Left: site logo → link to /. Add alt="Portail Électricité", height ~28–32px.
+	•	Center (desktop): nav links:
+	•	Accueil → /
+	•	Nos services → /nos-services
+	•	Contact → /contact
+	•	Right:
+	•	Click‑to‑call text link: 09 70 70 95 70 → tel:+33970709570
+	•	Primary button “Faire ma demande” → existing form route. On click, fire form_start (use existing helper or gtag('event','form_start')).
+	•	Mobile:
+	•	Keep logo + a simple “Faire ma demande” button visible.
+	•	Phone appears inside the menu and as a small text link under the hero.
+	•	Remove any extra top padding so the hero starts immediately below the header.
+
+⸻
+
+2) HERO (this route only)
+
+Replace current hero with compact, keyword‑aligned block.
+
+H1
+Raccordement Provisoire Enedis – Démarches et Demande en Ligne
+
+Subheading (one sentence)
+Solution temporaire pour l’alimentation électrique de vos chantiers. Dossier conforme aux exigences Enedis, avec accompagnement administratif complet.
+
+Primary CTA
+Button: “Faire ma demande” → form route, fires form_start.
+
+Secondary
+Text link (under button on mobile): 09 70 70 95 70 (click‑to‑call).
+
+Key points (plain text list, no icons):
+	•	Installation mise en œuvre après validation Enedis
+	•	Durée limitée (jusqu’à 12 mois)
+	•	Puissance adaptée aux besoins du chantier
+	•	Gestion complète du dossier administratif
+
+Layout:
+	•	Mobile: single column; ensure H1 + subheading + button are fully above the fold on iPhone 13/14 (~65vh max).
+	•	Desktop: two columns; right side keeps the “Demandez votre raccordement provisoire” card with the same CTA + phone + contact link + small trust notes (plain text):
+	•	Service certifié professionnel
+	•	Paiement 100 % sécurisé
+	•	Dossier conforme Enedis
+
+Performance:
+	•	No heavy hero images. If a background is used, compress and set width/height attributes.
+
+SEO for this route:
+	•	<title>: Raccordement Provisoire Enedis – Démarches et Demande en Ligne | Portail Électricité
+	•	<meta name="description">: Demande de raccordement provisoire Enedis pour chantier. Dossier complet et conforme, accompagnement administratif et paiement sécurisé.
+	•	Add canonical tag for this URL.
+	•	Ensure the exact phrase “raccordement provisoire Enedis” appears in H1 and within the first paragraph.
+
+⸻
+
+3) FAQ (populate + schema)
+
+Populate the 6 FAQ answers exactly with the text below and mirror them in JSON‑LD FAQPage. (Use existing accordion styles.)
+	1.	Qu’est-ce qu’un raccordement provisoire ?
+Un raccordement provisoire est une installation électrique temporaire permettant d’alimenter un chantier, un événement ou toute autre activité nécessitant une alimentation limitée dans le temps. Il est mis en place pour une durée définie, généralement pendant la phase de travaux, avant un raccordement définitif.
+	2.	Quels documents fournir ?
+Pour constituer le dossier, les pièces suivantes sont généralement nécessaires :
+
+	•	Pièce d’identité du demandeur
+	•	Justificatif de propriété ou d’autorisation d’occupation du terrain
+	•	Plan de situation et plan de masse
+	•	Puissance souhaitée et nature de l’installation
+D’autres documents peuvent être demandés par Enedis en fonction de la configuration.
+
+	3.	Quelle durée maximale pour un raccordement provisoire ?
+La durée d’un raccordement provisoire est limitée à 12 mois. Une prolongation peut être demandée, sous réserve de validation par Enedis et de la justification du maintien de l’activité temporaire.
+	4.	Quelle puissance est disponible ?
+La puissance disponible dépend des besoins déclarés et de la faisabilité technique sur le site. Les puissances les plus courantes pour les chantiers vont de 3 kVA à 36 kVA, en monophasé ou triphasé. Une étude de faisabilité peut être nécessaire pour des puissances supérieures.
+	5.	Quelle différence avec un raccordement définitif ?
+Le raccordement provisoire est limité dans le temps et destiné à un usage temporaire. Il utilise des installations adaptées aux besoins ponctuels et peut être démonté à la fin de l’utilisation. Le raccordement définitif est permanent et conçu pour une utilisation continue de l’électricité.
+	6.	Peut-on modifier la puissance en cours d’utilisation ?
+Oui, il est possible de demander une modification de puissance pendant la période de raccordement provisoire. Cette modification doit être validée par Enedis et peut entraîner un délai de traitement ainsi que des frais supplémentaires.
+
+Also include a BreadcrumbList JSON‑LD: Home > Nos services > Raccordement provisoire.
+
+⸻
+
+4) FOOTER (global component)
+
+Professional, three-column layout + bottom legal bar. No emojis/icons.
+
+Columns:
+	•	Services
+	•	Raccordement provisoire
+	•	Raccordement définitif
+	•	Viabilisation de terrain
+	•	Support
+	•	FAQ
+	•	Contact
+	•	Suivi de dossier (link path already used on site; if none, keep Contact)
+	•	Légal
+	•	Mentions légales
+	•	CGU
+	•	Confidentialité
+
+Right/top block (or first column on mobile):
+	•	Téléphone : 09 70 70 95 70 (click‑to‑call)
+	•	Horaires : 8h–18h
+	•	E‑mail : use the site’s existing contact email variable if available; otherwise link to /contact.
+
+Bottom bar:
+	•	© {currentYear} Portail‑Electricite.com — Tous droits réservés.
+
+Accessibility:
+	•	Make links accessible, clear focus states, and proper contrast.
+
+⸻
+
+5) Acceptance criteria
+	•	Sticky header with logo (clickable), nav, phone link, and “Faire ma demande” button working + form_start event firing.
+	•	Hero compact; H1, subheading, CTA visible above the fold on common mobiles.
+	•	FAQ answers render correctly and JSON‑LD validates (no console errors).
+	•	Footer shows the three columns + phone/hours + legal bar; year updates automatically.
+	•	No emojis/icons; formal wording; no installation timelines.
+	•	Lighthouse mobile LCP for this route ≤ 2.5s (best effort).
+
+Please implement and provide:
+	1.	Diffs for header, route component, footer, and head/meta.
+	2.	Mobile screenshots (hero + footer).
+	3.	Console confirmation that form_start fires on CTA click.

@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Helmet } from "react-helmet";
 import { BreadcrumbNavigation } from "@/components/breadcrumb-navigation";
+import { ProfessionalHeader } from "@/components/professional-header";
+import { ProfessionalFooter } from "@/components/professional-footer";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
@@ -33,32 +35,32 @@ export default function RaccordementProvisoirePage() {
     {
       id: 1,
       question: "Qu'est-ce qu'un raccordement provisoire ?",
-      answer: "Un raccordement provisoire est une solution temporaire d'alimentation électrique mise en place par Enedis pour répondre aux besoins spécifiques d'un chantier ou d'une installation temporaire. Il permet de disposer d'une alimentation électrique avant la réalisation du raccordement définitif."
+      answer: "Un raccordement provisoire est une installation électrique temporaire permettant d'alimenter un chantier, un événement ou toute autre activité nécessitant une alimentation limitée dans le temps. Il est mis en place pour une durée définie, généralement pendant la phase de travaux, avant un raccordement définitif."
     },
     {
       id: 2,
       question: "Quels documents fournir ?",
-      answer: "Pour votre demande de raccordement provisoire Enedis, vous devez fournir : une pièce d'identité, un plan de situation du terrain, la puissance électrique demandée, l'autorisation du propriétaire du terrain si nécessaire, et une déclaration sur l'honneur de l'usage temporaire."
+      answer: "Pour constituer le dossier, les pièces suivantes sont généralement nécessaires :\n\n• Pièce d'identité du demandeur\n• Justificatif de propriété ou d'autorisation d'occupation du terrain\n• Plan de situation et plan de masse\n• Puissance souhaitée et nature de l'installation\n\nD'autres documents peuvent être demandés par Enedis en fonction de la configuration."
     },
     {
       id: 3,
       question: "Quelle durée maximale pour un raccordement provisoire ?",
-      answer: "La durée maximale d'un raccordement provisoire est de 12 mois selon la réglementation Enedis. Cette période peut être renouvelée une fois sur demande motivée et sous réserve d'acceptation par Enedis."
+      answer: "La durée d'un raccordement provisoire est limitée à 12 mois. Une prolongation peut être demandée, sous réserve de validation par Enedis et de la justification du maintien de l'activité temporaire."
     },
     {
       id: 4,
       question: "Quelle puissance est disponible ?",
-      answer: "La puissance disponible pour un raccordement provisoire Enedis varie selon les besoins de votre chantier et les capacités du réseau local. Elle peut aller de 6 kVA à 36 kVA pour les installations monophasées et triphasées."
+      answer: "La puissance disponible dépend des besoins déclarés et de la faisabilité technique sur le site. Les puissances les plus courantes pour les chantiers vont de 3 kVA à 36 kVA, en monophasé ou triphasé. Une étude de faisabilité peut être nécessaire pour des puissances supérieures."
     },
     {
       id: 5,
       question: "Quelle différence avec un raccordement définitif ?",
-      answer: "Le raccordement provisoire est une solution temporaire (maximum 12 mois) avec une installation simplifiée, tandis que le raccordement définitif est permanent avec une installation complète et définitive intégrée au réseau Enedis."
+      answer: "Le raccordement provisoire est limité dans le temps et destiné à un usage temporaire. Il utilise des installations adaptées aux besoins ponctuels et peut être démonté à la fin de l'utilisation. Le raccordement définitif est permanent et conçu pour une utilisation continue de l'électricité."
     },
     {
       id: 6,
       question: "Peut-on modifier la puissance en cours d'utilisation ?",
-      answer: "Il est possible de modifier la puissance d'un raccordement provisoire en cours d'utilisation moyennant une nouvelle demande auprès d'Enedis et le paiement des frais correspondants. La modification dépend des capacités techniques du réseau local."
+      answer: "Oui, il est possible de demander une modification de puissance pendant la période de raccordement provisoire. Cette modification doit être validée par Enedis et peut entraîner un délai de traitement ainsi que des frais supplémentaires."
     }
   ];
 
@@ -68,17 +70,17 @@ export default function RaccordementProvisoirePage() {
         <title>Raccordement Provisoire Enedis – Démarches et Demande en Ligne | Portail Électricité</title>
         <meta 
           name="description" 
-          content="Effectuez votre demande de raccordement provisoire Enedis pour chantier. Dossier complet et conforme, avec accompagnement administratif et paiement sécurisé." 
+          content="Demande de raccordement provisoire Enedis pour chantier. Dossier complet et conforme, accompagnement administratif et paiement sécurisé." 
         />
         <link rel="canonical" href="https://portail-electricite.com/raccordement-provisoire" />
         <meta name="robots" content="index, follow" />
         <meta property="og:title" content="Raccordement Provisoire Enedis – Démarches et Demande en Ligne" />
-        <meta property="og:description" content="Effectuez votre demande de raccordement provisoire Enedis pour chantier. Dossier complet et conforme, avec accompagnement administratif et paiement sécurisé." />
+        <meta property="og:description" content="Demande de raccordement provisoire Enedis pour chantier. Dossier complet et conforme, accompagnement administratif et paiement sécurisé." />
         <meta property="og:url" content="https://portail-electricite.com/raccordement-provisoire" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Raccordement Provisoire Enedis – Démarches et Demande en Ligne" />
-        <meta name="twitter:description" content="Effectuez votre demande de raccordement provisoire Enedis pour chantier. Dossier complet et conforme, avec accompagnement administratif et paiement sécurisé." />
+        <meta name="twitter:description" content="Demande de raccordement provisoire Enedis pour chantier. Dossier complet et conforme, accompagnement administratif et paiement sécurisé." />
 
         {/* Schema.org JSON-LD */}
         <script type="application/ld+json">
@@ -110,13 +112,13 @@ export default function RaccordementProvisoirePage() {
               {
                 "@type": "ListItem",
                 "position": 2,
-                "name": "Nos Services",
+                "name": "Nos services",
                 "item": "https://portail-electricite.com/nos-services"
               },
               {
                 "@type": "ListItem",
                 "position": 3,
-                "name": "Raccordement Provisoire",
+                "name": "Raccordement provisoire",
                 "item": "https://portail-electricite.com/raccordement-provisoire"
               }
             ]
@@ -125,14 +127,17 @@ export default function RaccordementProvisoirePage() {
       </Helmet>
 
       <div className="min-h-screen bg-gray-50">
+        {/* Professional Header */}
+        <ProfessionalHeader />
+
         {/* Breadcrumb Navigation */}
         <div className="bg-white border-b">
           <div className="container mx-auto px-4 py-3">
             <BreadcrumbNavigation 
               items={[
                 { label: "Accueil", href: "/" },
-                { label: "Nos Services", href: "/nos-services" },
-                { label: "Raccordement Provisoire", href: "/raccordement-provisoire" }
+                { label: "Nos services", href: "/nos-services" },
+                { label: "Raccordement provisoire", href: "/raccordement-provisoire" }
               ]}
             />
           </div>
@@ -155,7 +160,7 @@ export default function RaccordementProvisoirePage() {
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start">
                     <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    Installation rapide après validation Enedis
+                    Installation mise en œuvre après validation Enedis
                   </li>
                   <li className="flex items-start">
                     <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
@@ -383,9 +388,9 @@ export default function RaccordementProvisoirePage() {
                     </button>
                     {openFaqItems.includes(item.id) && (
                       <div className="px-6 pb-4">
-                        <p className="text-gray-700 leading-relaxed">
+                        <div className="text-gray-700 leading-relaxed whitespace-pre-line">
                           {item.answer}
-                        </p>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -455,6 +460,9 @@ export default function RaccordementProvisoirePage() {
             </div>
           </div>
         </section>
+
+        {/* Professional Footer */}
+        <ProfessionalFooter />
       </div>
     </>
   );
