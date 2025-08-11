@@ -24,13 +24,14 @@ export function ProfessionalHeader() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <img 
-              src="/logo-header.svg" 
-              alt="Portail Électricité" 
-              className="h-8 w-auto"
-              width="120"
-              height="32"
-            />
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                <div className="w-4 h-4 bg-white" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}></div>
+              </div>
+              <div className="text-lg font-bold text-blue-600 hidden sm:block">
+                Portail-Electricite.com
+              </div>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
