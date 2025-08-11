@@ -3,8 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Helmet } from "react-helmet";
 import { BreadcrumbNavigation } from "@/components/breadcrumb-navigation";
-import { ProfessionalHeader } from "@/components/professional-header";
-import { ProfessionalFooter } from "@/components/professional-footer";
+import Layout from "@/components/layout";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
@@ -126,10 +125,7 @@ export default function RaccordementProvisoirePage() {
         </script>
       </Helmet>
 
-      <div className="min-h-screen bg-gray-50">
-        {/* Professional Header */}
-        <ProfessionalHeader />
-
+      <Layout>
         {/* Breadcrumb Navigation */}
         <div className="bg-white border-b">
           <div className="container mx-auto px-4 py-3">
@@ -145,7 +141,7 @@ export default function RaccordementProvisoirePage() {
 
         {/* Hero Section - Above the Fold */}
         <section className="bg-white py-8 md:py-12" style={{ maxHeight: "65vh" }}>
-          <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
               {/* Left Column */}
               <div className="space-y-6">
@@ -254,8 +250,8 @@ export default function RaccordementProvisoirePage() {
         </section>
 
         {/* Comment procéder Section */}
-        <section className="py-12 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="pt-10 pb-12 bg-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
                 Comment procéder pour votre raccordement provisoire Enedis
@@ -303,8 +299,8 @@ export default function RaccordementProvisoirePage() {
         </section>
 
         {/* Documents nécessaires Section */}
-        <section className="py-12 bg-gray-50">
-          <div className="container mx-auto px-4">
+        <section className="pt-10 pb-12 bg-gray-50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
                 Documents nécessaires pour votre raccordement provisoire
@@ -362,8 +358,8 @@ export default function RaccordementProvisoirePage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-12 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="pt-10 pb-12 bg-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
                 Questions fréquentes sur le raccordement provisoire Enedis
@@ -401,8 +397,8 @@ export default function RaccordementProvisoirePage() {
         </section>
 
         {/* Internal Links Section */}
-        <section className="py-12 bg-gray-50">
-          <div className="container mx-auto px-4">
+        <section className="pt-10 pb-12 bg-gray-50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-2xl font-bold text-gray-900 mb-8">
                 Découvrez nos autres services
@@ -436,8 +432,8 @@ export default function RaccordementProvisoirePage() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="py-12 bg-blue-900 text-white">
-          <div className="container mx-auto px-4 text-center">
+        <section className="pt-10 pb-12 bg-blue-900 text-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
             <div className="max-w-2xl mx-auto space-y-6">
               <h2 className="text-2xl md:text-3xl font-bold">
                 Prêt à démarrer votre raccordement provisoire ?
@@ -460,10 +456,7 @@ export default function RaccordementProvisoirePage() {
             </div>
           </div>
         </section>
-
-        {/* Professional Footer */}
-        <ProfessionalFooter />
-      </div>
+      </Layout>
     </>
   );
 }

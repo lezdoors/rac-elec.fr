@@ -1,0 +1,48 @@
+Goal
+On portail-electricite.com/raccordement-provisoire, use the same Header/Footer as the rest of the site and refine the hero and spacing. Keep the administrative tone. Do not touch backend or tracking IDs.
+
+Tasks
+	1.	Use global layout
+
+	•	Search the codebase for the shared components (likely src/components/Header.tsx, src/components/Footer.tsx, and optionally src/layouts/SiteLayout.tsx or similar).
+	•	If this page currently renders its own local header/footer, remove them and wrap the page with the same global layout used on / (home).
+	•	Ensure the nav items, phone number, and “Faire ma demande” button are identical to the main site. The button must still fire the existing form_start event on click.
+
+	2.	Standardize container + grid
+
+	•	Apply the same max width and paddings as the home page (e.g., max-w-6xl mx-auto px-4 sm:px-6).
+	•	Ensure consistent vertical rhythm: section pt-10 pb-12 desktop, tighter on mobile.
+
+	3.	Hero improvements (no icons/emojis; no timelines)
+
+	•	Keep current H1 and subheading but reduce the hero height so H1 + subheading + CTA fit above the fold on iPhone 13/14.
+	•	Left column: H1, subheading, primary CTA, neutral bullet list (plain text).
+	•	Right column: keep the request card; align button size with site standard; remove any shadow/glow if it differs from main style.
+
+	4.	Typography & spacing
+
+	•	Match font sizes, weights, and button radii to the global design tokens used on home.
+	•	Unify list bullets to simple discs; align line-height with body text across the page.
+
+	5.	Breadcrumbs
+
+	•	Add a breadcrumb bar matching the main site pattern: Accueil > Nos services > Raccordement provisoire. Use the same component or replicate the style from the home layout if it exists.
+
+	6.	Footer
+
+	•	Replace any local footer with the global Footer component. Sections: Contact (phone clickable, hours 8h–18h, contact link), Services, Support, Légal, and the copyright bar with {new Date().getFullYear()}. Ensure the typography and background color exactly match the rest of the site.
+
+	7.	SEO & tracking (keep as is if already added)
+
+	•	Title: Raccordement Provisoire Enedis – Démarches et Demande en Ligne | Portail Électricité.
+	•	Meta description: administrative version already present.
+	•	Keep JSON‑LD FAQPage and BreadcrumbList for this route.
+	•	On the primary CTA, keep the existing form_start event; do not alter the form_submit logic on the form page.
+
+	8.	QA / Acceptance
+
+	•	Header and footer on /raccordement-provisoire visually identical to / (same HTML structure/classes).
+	•	Hero fits above the fold on mobile; no content jump when sticky header appears.
+	•	Container widths match home.
+	•	Lighthouse mobile: no CLS warnings from header/hero; best effort LCP ≤ 2.5s.
+	•	Provide diffs for: page component, layout usage, and any removed local header/footer. Include mobile screenshots of hero and footer.
