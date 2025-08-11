@@ -1,0 +1,92 @@
+Goal
+Refactor portail-electricite.com/raccordement-provisoire into a full landing page that mirrors the main landing page layout/components, with a centered hero (H1, H2, CTA). Keep backend and tracking intact.
+
+0) Conventions
+	•	Use the global Header/Footer and the same container widths/spacing tokens as the home page.
+	•	Professional/administrative tone. No emojis/icons. No specific installation timelines.
+	•	Primary CTA must fire existing Google Ads form_start event and then navigate to the existing form route.
+
+⸻
+
+1) Route & Layout
+	•	Ensure this route uses the same page layout as / (e.g., SiteLayout).
+	•	Remove any local header/footer; import the global ones.
+	•	Set container to match home: e.g., max-w-6xl mx-auto px-4 sm:px-6.
+
+⸻
+
+2) HERO (centered, campaign style)
+
+Create a full‑width hero block with centered content, consistent with the main landing hero.
+	•	Wrapper: pt-16 pb-14 sm:pt-20 sm:pb-16 (adjust so content is above fold on iPhone 13/14).
+	•	Inner: mx-auto max-w-3xl text-center
+	•	H1: Raccordement Provisoire Enedis
+	•	H2 (subheading):
+Démarches et demande en ligne pour l’alimentation électrique temporaire de votre chantier. Dossier conforme aux exigences Enedis, avec accompagnement administratif complet.
+	•	Primary CTA (button): Faire ma demande → existing form route.
+	•	On click: call existing helper to fire form_start; if none, use window.gtag && gtag('event','form_start').
+	•	Below CTA (small): clickable phone 09 70 70 95 70 (tel:+33970709570).
+
+Style buttons and text exactly like the main landing hero (same sizes, radius, shadow).
+
+⸻
+
+3) Landing Sections (match main landing structure)
+
+Add the same sections you use on the home landing, adapted to provisoire:
+
+A) Points clés (3–4 columns on desktop, stacked on mobile). Plain text bullets, no icons.
+	•	Dossier conforme Enedis
+	•	Gestion administrative complète
+	•	Puissance adaptée au chantier
+	•	Paiement 100 % sécurisé
+
+B) Comment ça fonctionne (3 steps, text only)
+	1.	Soumission de la demande en ligne
+	2.	Vérification et constitution du dossier
+	3.	Transmission à Enedis et suivi administratif
+
+C) Documents nécessaires
+Two lists: Documents obligatoires / Documents complémentaires (use the lists already on the page).
+
+D) FAQ
+Populate the accordion with the 6 Q/R we provided earlier. Keep same styles as home.
+Add FAQPage JSON‑LD for these entries.
+
+E) Bloc de réassurance (band style used on home, text only)
+	•	Service certifié professionnel
+	•	Support 8h–18h
+	•	Données traitées de manière confidentielle
+
+F) CTA final (centered)
+Headline: Prêt à démarrer votre raccordement provisoire ?
+Sub: Bénéficiez de notre expertise pour un dossier conforme aux exigences Enedis.
+Button: Commencer ma demande → form route (fires form_start).
+
+⸻
+
+4) SEO for this route
+	•	<title>: Raccordement Provisoire Enedis – Démarches et Demande en Ligne | Portail Électricité
+	•	<meta name="description">:
+Effectuez votre demande de raccordement provisoire Enedis pour chantier. Dossier conforme, accompagnement administratif, paiement sécurisé.
+	•	Add canonical to this URL.
+	•	Insert BreadcrumbList JSON‑LD: Accueil → Nos services → Raccordement provisoire.
+	•	Ensure the exact phrase “raccordement provisoire Enedis” appears in H1 and within the first 100 words.
+
+⸻
+
+5) Tracking & Performance
+	•	Primary CTA (hero and final CTA) → fire form_start.
+	•	Keep form_submit unchanged on the form page.
+	•	Optimize any hero background (if used) and set width/height to avoid CLS. Lazy‑load below‑the‑fold assets.
+
+⸻
+
+6) Acceptance Criteria
+	•	Header/Footer identical to the main landing (HTML structure/classes).
+	•	Centered hero with H1, H2, CTA visible above the fold on iPhone 13/14.
+	•	Sections A–F present and styled like the home landing (spacing/typography tokens).
+	•	FAQ rendered with provided answers + valid JSON‑LD.
+	•	CTA buttons navigate correctly and trigger form_start.
+	•	No emojis/icons; no timeline promises.
+	•	Provide diffs and mobile screenshots (hero + final CTA + footer).

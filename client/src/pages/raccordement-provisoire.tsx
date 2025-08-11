@@ -123,6 +123,62 @@ export default function RaccordementProvisoirePage() {
             ]
           })}
         </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Quelle est la durée maximale d'un raccordement provisoire ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Un raccordement provisoire Enedis peut être accordé pour une durée maximale de 12 mois, renouvelable une fois sous conditions particulières. Cette solution temporaire est idéale pour les chantiers de construction ou les événements éphémères."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Quelle puissance puis-je obtenir avec un raccordement provisoire ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "La puissance disponible varie selon vos besoins et la configuration du réseau local. Elle peut aller de 12 kVA à 250 kVA selon les contraintes techniques. Nos experts étudient votre demande pour déterminer la puissance optimale."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Combien de temps prend l'installation d'un raccordement provisoire ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Une fois le dossier validé par Enedis, l'installation prend généralement entre 4 et 8 semaines selon la complexité du projet et la disponibilité des équipes. Nous assurons le suivi complet de votre dossier."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Puis-je transformer un raccordement provisoire en définitif ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Oui, il est possible de faire évoluer un raccordement provisoire vers un raccordement définitif en constituant un nouveau dossier adapté. Nous vous accompagnons dans cette démarche si nécessaire."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Quels sont les coûts d'un raccordement provisoire Enedis ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Les tarifs dépendent de la puissance demandée et des travaux nécessaires. Comptez entre 800€ et 3000€ selon la configuration de votre projet. Un devis personnalisé vous sera fourni après étude de votre demande."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Quels documents sont nécessaires pour la demande ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Vous devez fournir un plan de situation, un plan de masse indiquant l'emplacement souhaité du raccordement, une pièce d'identité et l'autorisation du propriétaire du terrain si vous n'en êtes pas propriétaire."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Layout>
@@ -139,160 +195,129 @@ export default function RaccordementProvisoirePage() {
           </div>
         </div>
 
-        {/* Hero Section - Above the Fold */}
-        <section className="bg-white py-8 md:py-12" style={{ maxHeight: "65vh" }}>
+        {/* Centered Hero Section */}
+        <section className="pt-16 pb-14 sm:pt-20 sm:pb-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+          <div className="mx-auto max-w-3xl text-center px-4 sm:px-6">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+              Raccordement Provisoire Enedis
+            </h1>
+            <h2 className="mt-6 text-lg leading-8 text-gray-600">
+              Démarches et demande en ligne pour l'alimentation électrique temporaire de votre chantier. 
+              Dossier conforme aux exigences Enedis, avec accompagnement administratif complet.
+            </h2>
+            <div className="mt-10 flex items-center justify-center gap-x-6">
+              <Link 
+                href="/raccordement-enedis#formulaire-raccordement"
+                onClick={handlePrimaryCta}
+              >
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg">
+                  Faire ma demande
+                </Button>
+              </Link>
+            </div>
+            <div className="mt-6">
+              <a 
+                href="tel:+33970709570" 
+                className="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600 transition-colors"
+              >
+                09 70 70 95 70
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Points clés Section */}
+        <section className="pt-16 pb-12 bg-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-              {/* Left Column */}
-              <div className="space-y-6">
-                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
-                  Raccordement Provisoire Enedis – Démarches et Demande en Ligne
-                </h1>
-                
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  Solution temporaire pour l'alimentation électrique de vos chantiers. Dossier conforme aux exigences Enedis, avec accompagnement administratif complet.
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Points clés de notre service
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="text-center">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Dossier conforme Enedis
+                </h3>
+                <p className="text-gray-600">
+                  Constitution complète selon les exigences réglementaires
                 </p>
-
-                <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-start">
-                    <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    Installation mise en œuvre après validation Enedis
-                  </li>
-                  <li className="flex items-start">
-                    <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    Durée limitée (jusqu'à 12 mois)
-                  </li>
-                  <li className="flex items-start">
-                    <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    Puissance adaptée aux besoins du chantier
-                  </li>
-                  <li className="flex items-start">
-                    <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    Gestion complète du dossier administratif
-                  </li>
-                </ul>
-
-                <div className="space-y-4 pt-4">
-                  <Link 
-                    href="/raccordement-enedis#formulaire-raccordement"
-                    className="inline-block"
-                    onClick={handlePrimaryCta}
-                  >
-                    <Button
-                      size="lg"
-                      className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 min-h-12"
-                      aria-label="Faire ma demande de raccordement provisoire Enedis"
-                    >
-                      Faire ma demande
-                    </Button>
-                  </Link>
-
-                  <div className="md:hidden">
-                    <a 
-                      href="tel:+33970709570" 
-                      className="text-blue-600 hover:text-blue-800 font-medium underline block mt-3"
-                      aria-label="Appeler le 09 70 70 95 70"
-                    >
-                      09 70 70 95 70
-                    </a>
-                  </div>
-                </div>
               </div>
-
-              {/* Right Column - CTA Card */}
-              <div className="lg:pl-8">
-                <Card className="shadow-lg border-0 bg-gradient-to-br from-gray-50 to-white">
-                  <CardHeader className="pb-4">
-                    <CardTitle className="text-xl font-semibold text-gray-900 text-center">
-                      Demandez votre raccordement provisoire
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <Link 
-                      href="/raccordement-enedis#formulaire-raccordement"
-                      className="block"
-                      onClick={handlePrimaryCta}
-                    >
-                      <Button
-                        size="lg"
-                        className="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 text-lg font-semibold rounded-lg min-h-12"
-                        aria-label="Faire ma demande de raccordement provisoire"
-                      >
-                        Faire ma demande
-                      </Button>
-                    </Link>
-
-                    <a 
-                      href="tel:+33970709570" 
-                      className="block text-center text-blue-600 hover:text-blue-800 font-medium py-2"
-                      aria-label="Appeler le 09 70 70 95 70"
-                    >
-                      09 70 70 95 70
-                    </a>
-
-                    <Link 
-                      href="/contact" 
-                      className="block text-center text-gray-600 hover:text-gray-800 font-medium py-2"
-                    >
-                      Nous contacter
-                    </Link>
-
-                    <div className="border-t pt-4 space-y-2 text-sm text-gray-600">
-                      <p>Service certifié professionnel</p>
-                      <p>Paiement 100 % sécurisé</p>
-                      <p>Dossier conforme Enedis</p>
-                    </div>
-                  </CardContent>
-                </Card>
+              <div className="text-center">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Gestion administrative complète
+                </h3>
+                <p className="text-gray-600">
+                  Prise en charge totale des démarches et du suivi
+                </p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Puissance adaptée au chantier
+                </h3>
+                <p className="text-gray-600">
+                  Étude personnalisée selon vos besoins électriques
+                </p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Paiement 100 % sécurisé
+                </h3>
+                <p className="text-gray-600">
+                  Transactions protégées par cryptage SSL
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Comment procéder Section */}
-        <section className="pt-10 pb-12 bg-white">
+        {/* Comment ça fonctionne Section */}
+        <section className="pt-16 pb-12 bg-gray-50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
-                Comment procéder pour votre raccordement provisoire Enedis
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Comment ça fonctionne
               </h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="text-center space-y-4">
-                  <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold text-xl mx-auto">
-                    1
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    Soumission de votre demande en ligne
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    Remplissez notre formulaire sécurisé avec les informations de votre projet et vos coordonnées. Toutes les données sont traitées de manière confidentielle.
-                  </p>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Processus simplifié en 3 étapes pour votre raccordement provisoire
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-2xl mx-auto mb-4">
+                  1
                 </div>
-
-                <div className="text-center space-y-4">
-                  <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold text-xl mx-auto">
-                    2
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    Vérification et constitution du dossier
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    Nos experts vérifient votre demande et constituent un dossier complet conforme aux exigences Enedis pour votre raccordement provisoire.
-                  </p>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  Soumission de la demande en ligne
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Remplissez notre formulaire sécurisé avec les informations de votre projet. 
+                  Toutes les données sont traitées de manière confidentielle.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-2xl mx-auto mb-4">
+                  2
                 </div>
-
-                <div className="text-center space-y-4">
-                  <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold text-xl mx-auto">
-                    3
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    Transmission à Enedis et suivi administratif
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    Nous transmettons votre dossier à Enedis et assurons le suivi complet de votre demande jusqu'à la mise en service de votre installation.
-                  </p>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  Vérification et constitution du dossier
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Nos experts vérifient votre demande et constituent un dossier complet 
+                  conforme aux exigences Enedis.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-2xl mx-auto mb-4">
+                  3
                 </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  Transmission à Enedis et suivi administratif
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Nous transmettons votre dossier à Enedis et assurons le suivi complet 
+                  jusqu'à la mise en service.
+                </p>
               </div>
             </div>
           </div>
@@ -357,13 +382,18 @@ export default function RaccordementProvisoirePage() {
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="pt-10 pb-12 bg-white">
+        {/* FAQ Section with Structured Data */}
+        <section className="pt-16 pb-12 bg-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
-                Questions fréquentes sur le raccordement provisoire Enedis
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Questions fréquentes
               </h2>
+              <p className="text-lg text-gray-600">
+                Trouvez des réponses à vos questions sur le raccordement provisoire Enedis
+              </p>
+            </div>
+            <div className="max-w-4xl mx-auto">
 
               <div className="space-y-4">
                 {faqItems.map((item) => (
@@ -396,64 +426,90 @@ export default function RaccordementProvisoirePage() {
           </div>
         </section>
 
-        {/* Internal Links Section */}
-        <section className="pt-10 pb-12 bg-gray-50">
+        {/* Documents nécessaires Section */}
+        <section className="pt-16 pb-12 bg-gray-50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-2xl font-bold text-gray-900 mb-8">
-                Découvrez nos autres services
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Documents nécessaires
               </h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Link href="/raccordement-definitif" className="group">
-                  <div className="bg-white rounded-lg shadow-sm border p-6 hover:shadow-md transition-shadow">
-                    <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600">
-                      Raccordement définitif
-                    </h3>
-                    <p className="text-gray-600 mt-2">
-                      Solution permanente pour votre installation électrique
-                    </p>
-                  </div>
-                </Link>
+            </div>
+            <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                  Documents obligatoires
+                </h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li>• Plan de situation du terrain</li>
+                  <li>• Plan de masse avec emplacement du raccordement</li>
+                  <li>• Pièce d'identité du demandeur</li>
+                  <li>• Formulaire de demande complété</li>
+                </ul>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                  Documents complémentaires
+                </h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li>• Autorisation du propriétaire si locataire</li>
+                  <li>• Photos du site d'implantation</li>
+                  <li>• Plan des installations électriques prévues</li>
+                  <li>• Justificatif de l'entreprise</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                <Link href="/viabilisation-terrain" className="group">
-                  <div className="bg-white rounded-lg shadow-sm border p-6 hover:shadow-md transition-shadow">
-                    <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600">
-                      Viabilisation de terrain
-                    </h3>
-                    <p className="text-gray-600 mt-2">
-                      Raccordement électrique pour terrains constructibles
-                    </p>
-                  </div>
-                </Link>
+        {/* Bloc de réassurance */}
+        <section className="py-16 bg-blue-50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  Service certifié professionnel
+                </h3>
+                <p className="text-gray-600">
+                  Expertise reconnue dans les démarches Enedis
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  Support 8h–18h
+                </h3>
+                <p className="text-gray-600">
+                  Assistance téléphonique du lundi au vendredi
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  Données traitées de manière confidentielle
+                </h3>
+                <p className="text-gray-600">
+                  Protection complète de vos informations personnelles
+                </p>
               </div>
             </div>
           </div>
         </section>
 
         {/* Final CTA Section */}
-        <section className="pt-10 pb-12 bg-blue-900 text-white">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-            <div className="max-w-2xl mx-auto space-y-6">
-              <h2 className="text-2xl md:text-3xl font-bold">
-                Prêt à démarrer votre raccordement provisoire ?
-              </h2>
-              <p className="text-lg text-blue-100">
-                Bénéficiez de notre expertise pour un dossier conforme aux exigences Enedis
-              </p>
-              <Link 
-                href="/raccordement-enedis#formulaire-raccordement"
-                onClick={handlePrimaryCta}
-              >
-                <Button
-                  size="lg"
-                  className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 text-lg font-semibold rounded-lg min-h-12"
-                  aria-label="Commencer ma demande de raccordement provisoire"
-                >
-                  Commencer ma demande
-                </Button>
-              </Link>
-            </div>
+        <section className="pt-16 pb-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Prêt à démarrer votre raccordement provisoire ?
+            </h2>
+            <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+              Bénéficiez de notre expertise pour un dossier conforme aux exigences Enedis.
+            </p>
+            <Link 
+              href="/raccordement-enedis#formulaire-raccordement"
+              onClick={handlePrimaryCta}
+            >
+              <Button className="bg-white text-blue-600 hover:bg-gray-50 px-10 py-4 text-xl font-semibold rounded-lg shadow-lg">
+                Commencer ma demande
+              </Button>
+            </Link>
           </div>
         </section>
       </Layout>
