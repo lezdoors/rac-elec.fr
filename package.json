@@ -90,7 +90,7 @@
     "input-otp": "^1.4.2",
     "jspdf": "^3.0.1",
     "lighthouse": "^12.6.0",
-    "lucide-react": "^0.453.0",
+    "lucide-react": "^0.542.0",
     "mailparser": "^3.7.2",
     "memoizee": "^0.4.17",
     "memorystore": "^1.6.7",
