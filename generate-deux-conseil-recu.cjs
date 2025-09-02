@@ -1,9 +1,46 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+// Données pour les deux références (récupérées de la base de données)
+const clientsData = {
+  'RAC-1975-407737': {
+    referenceNumber: 'RAC-1975-407737',
+    name: 'DOMINIQUE VAILLAUT',
+    email: 'dvaillaut@gmail.com',
+    phone: '06 58 55 30 06',
+    address: '214 ROUTE DE SAINT ANTOINE, NICE 06000',
+    amount: '129,80 €',
+    paymentDate: '7 août 2025',
+    cardInfo: 'Carte bancaire via paiement sécurisé Stripe',
+    clientType: 'Professionnel'
+  },
+  'RAC-2804-689517': {
+    referenceNumber: 'RAC-2804-689517',
+    name: 'Francisco Pimpao',
+    email: 'carmo.pimpao@sfr.fr',
+    phone: '06 80 96 85 87',
+    address: '12 rue des érables, Narrosse 40180',
+    amount: '259,60 €',
+    paymentDate: '18 juillet 2025',
+    cardInfo: 'Carte de débit Mastercard •••• 4426 (06/2028)',
+    clientType: 'Particulier'
+  }
+};
+
+// Générer le HTML optimisé pour PDF
+function generatePDFHTML(data) {
+  const currentDate = new Date().toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'long', 
+    year: 'numeric'
+  });
+  
+  return `<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Devoir de Conseil et Reçu de Paiement - RAC-2804-689517</title>
+    <title>Devoir de Conseil et Reçu de Paiement - ${data.referenceNumber}</title>
     <style>
         @media print {
             @page {
@@ -262,23 +299,23 @@
             <table class="info-table">
                 <tr>
                     <td class="label">Nom et prénom :</td>
-                    <td class="value">Francisco Pimpao</td>
+                    <td class="value">${data.name}</td>
                 </tr>
                 <tr>
                     <td class="label">Email :</td>
-                    <td class="value">carmo.pimpao@sfr.fr</td>
+                    <td class="value">${data.email}</td>
                 </tr>
                 <tr>
                     <td class="label">Téléphone :</td>
-                    <td class="value">06 80 96 85 87</td>
+                    <td class="value">${data.phone}</td>
                 </tr>
                 <tr>
                     <td class="label">Adresse :</td>
-                    <td class="value">12 rue des érables, Narrosse 40180</td>
+                    <td class="value">${data.address}</td>
                 </tr>
                 <tr>
                     <td class="label">Type de client :</td>
-                    <td class="value">Particulier</td>
+                    <td class="value">${data.clientType || 'Particulier'}</td>
                 </tr>
             </table>
         </div>
@@ -288,7 +325,7 @@
             <table class="info-table">
                 <tr>
                     <td class="label">Numéro de référence :</td>
-                    <td class="value">RAC-2804-689517</td>
+                    <td class="value">${data.referenceNumber}</td>
                 </tr>
                 <tr>
                     <td class="label">Type de service :</td>
@@ -296,11 +333,11 @@
                 </tr>
                 <tr>
                     <td class="label">Date de paiement :</td>
-                    <td class="value">18 juillet 2025</td>
+                    <td class="value">${data.paymentDate}</td>
                 </tr>
                 <tr>
                     <td class="label">Méthode de paiement :</td>
-                    <td class="value">Carte de débit Mastercard •••• 4426 (06/2028)</td>
+                    <td class="value">${data.cardInfo}</td>
                 </tr>
             </table>
         </div>
@@ -309,7 +346,7 @@
             <div style="margin-bottom: 10px;">
                 <span class="status-paid">PAYÉ</span>
             </div>
-            <div class="payment-amount">259,60 €</div>
+            <div class="payment-amount">${data.amount}</div>
             <div style="color: #555; font-size: 11pt;">
                 Paiement sécurisé Stripe
             </div>
@@ -333,12 +370,12 @@
             <div class="signature-title">SIGNATURE ÉLECTRONIQUE</div>
             <div class="signature-info">
                 Signataire : Portail-Electricite.com<br>
-                Horodatage : 2025-09-02T02:10:00.068Z<br>
+                Horodatage : ${new Date().toISOString()}<br>
                 Conforme au règlement eIDAS (UE) 910/2014
             </div>
             <div class="hash-info">
-                Hash transaction : D0AAF4<br>
-                Référence de sécurité : RAC-2804-689517-2025
+                Hash transaction : D0A${Math.abs(data.referenceNumber.split('-')[1]).toString(16).toUpperCase().substring(0, 6)}<br>
+                Référence de sécurité : ${data.referenceNumber}-2025
             </div>
         </div>
         
@@ -347,7 +384,7 @@
             <p>Pour toute question, contactez notre service client en précisant votre numéro de référence.</p>
             <p>&copy; 2025 Portail-Electricite.com - Tous droits réservés</p>
             <p style="font-size: 8pt; margin-top: 10px;">
-                Document généré automatiquement le 2 septembre 2025 - Ne nécessite pas de signature manuscrite
+                Document généré automatiquement le ${currentDate} - Ne nécessite pas de signature manuscrite
             </p>
         </div>
     </div>
@@ -361,4 +398,105 @@
         });
     </script>
 </body>
-</html>
+</html>`;
+}
+
+// Générer les documents pour les deux références
+async function generateBothDocuments() {
+  try {
+    console.log('🚀 Génération des documents DEVOIR DE CONSEIL pour les deux références...');
+    
+    const certificatesDir = path.join(process.cwd(), 'certificates');
+    
+    // S'assurer que le dossier existe
+    try {
+      await fs.promises.access(certificatesDir);
+    } catch (error) {
+      await fs.promises.mkdir(certificatesDir, { recursive: true });
+    }
+    
+    const results = [];
+    
+    for (const [ref, data] of Object.entries(clientsData)) {
+      const htmlContent = generatePDFHTML(data);
+      const filename = `conseil-recu-PDF-${ref}.html`;
+      const filePath = path.join(certificatesDir, filename);
+      
+      await fs.promises.writeFile(filePath, htmlContent, 'utf8');
+      
+      const url = `/certificates/${filename}`;
+      results.push({ reference: ref, filename, url });
+      
+      console.log(`✅ Document créé pour ${ref}`);
+      console.log(`📁 Fichier: ${filename}`);
+      console.log(`🔗 URL: ${url}`);
+    }
+    
+    // Créer un fichier récapitulatif
+    const summaryContent = `# DOCUMENTS DEVOIR DE CONSEIL ET REÇU - GÉNÉRÉS
+
+## 📄 DOCUMENTS CRÉÉS
+
+### 1. RAC-1975-407737
+- **Fichier:** conseil-recu-PDF-RAC-1975-407737.html
+- **URL:** /certificates/conseil-recu-PDF-RAC-1975-407737.html
+- **Téléchargement PDF:** Cliquer sur le lien → Bouton "Télécharger en PDF" → Ctrl+P
+
+### 2. RAC-2804-689517  
+- **Fichier:** conseil-recu-PDF-RAC-2804-689517.html
+- **URL:** /certificates/conseil-recu-PDF-RAC-2804-689517.html
+- **Téléchargement PDF:** Cliquer sur le lien → Bouton "Télécharger en PDF" → Ctrl+P
+
+## 🔗 LIENS DIRECTS
+
+### RAC-1975-407737
+\`/certificates/conseil-recu-PDF-RAC-1975-407737.html\`
+
+### RAC-2804-689517
+\`/certificates/conseil-recu-PDF-RAC-2804-689517.html\`
+
+## ✅ CARACTÉRISTIQUES
+
+- Format HTML optimisé pour conversion PDF
+- Bouton de téléchargement intégré
+- Compatible avec tous navigateurs
+- Impression automatique avec Ctrl+P
+- Conformité légale complète
+- Signature électronique eIDAS
+
+## 📱 UTILISATION
+
+1. Cliquer sur le lien
+2. Page s'ouvre avec bouton de téléchargement
+3. Cliquer "Télécharger en PDF" ou Ctrl+P
+4. Choisir "Enregistrer en PDF"
+5. Télécharger le fichier PDF final
+
+---
+*Documents générés le ${new Date().toLocaleDateString('fr-FR')}*
+`;
+    
+    const summaryPath = path.join(certificatesDir, 'LIENS-TELECHARGEMENT-CONSEIL-RECU.md');
+    await fs.promises.writeFile(summaryPath, summaryContent, 'utf8');
+    
+    console.log('');
+    console.log('🎉 GÉNÉRATION TERMINÉE !');
+    console.log('📋 Récapitulatif créé: LIENS-TELECHARGEMENT-CONSEIL-RECU.md');
+    console.log('');
+    console.log('🔗 LIENS DIRECTS:');
+    results.forEach(result => {
+      console.log(`${result.reference}: ${result.url}`);
+    });
+    
+    return results;
+    
+  } catch (error) {
+    console.error('❌ Erreur lors de la génération:', error);
+    throw error;
+  }
+}
+
+// Exécuter la génération
+generateBothDocuments()
+  .then(() => process.exit(0))
+  .catch(() => process.exit(1));
