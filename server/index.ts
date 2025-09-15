@@ -9,6 +9,8 @@ import { performanceService } from "./performance-service";
 import { setupStatsResetScheduler } from "./routes-user-stats";
 import { googleSnippetsService } from "./services/google-snippets-service";
 import { setupSmtpService } from "./email-service";
+import { securityHeaders, createBusinessRateLimit, sanitizeInput, paymentEndpointSecurity } from "./security-middleware";
+import { securityMonitoringMiddleware } from "./security-monitoring";
 
 // Global error handlers to prevent deployment crashes
 process.on('unhandledRejection', (reason, promise) => {
@@ -23,6 +25,15 @@ process.on('uncaughtException', (error) => {
 
 const app = express();
 
+// Trust proxy for correct HTTPS detection behind load balancers
+app.set('trust proxy', 1);
+
+// Security headers - Essential security hardening
+app.use(securityHeaders);
+
+// Security monitoring - Track suspicious activities
+app.use(securityMonitoringMiddleware);
+
 // Activer la compression avancée pour performances mobiles optimales
 app.use(compression({
   filter: (req, res) => {
@@ -34,8 +45,27 @@ app.use(compression({
   chunkSize: 16 * 1024, // Chunks de 16KB pour mobile
 }));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// Parse body FIRST - required for input sanitization and security checks
+app.use(express.json({ limit: '10mb' })); // Increased limit for PDF generation
+app.use(express.urlencoded({ extended: false, limit: '10mb' }));
+
+// Enhanced rate limiting for business-critical endpoints
+const formRateLimit = createBusinessRateLimit(10, 60 * 1000); // 10 requests per minute for forms
+const paymentRateLimit = createBusinessRateLimit(5, 60 * 1000); // 5 requests per minute for payments
+const generalRateLimit = createBusinessRateLimit(100, 60 * 1000); // 100 requests per minute general
+
+// Apply rate limiting to specific endpoint patterns
+app.use('/api/leads', formRateLimit);
+app.use('/api/service-requests', formRateLimit);
+app.use('/api/payment', paymentRateLimit);
+app.use('/api/stripe', paymentRateLimit);
+app.use('/api/admin', generalRateLimit);
+
+// Input sanitization for all form submissions (AFTER body parsing)
+app.use(sanitizeInput);
+
+// Special security for payment endpoints (AFTER body parsing)
+app.use(paymentEndpointSecurity);
 
 
 // 📧 NOTIFICATION LEAD - Étape 1 → Étape 2

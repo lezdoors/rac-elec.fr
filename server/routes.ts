@@ -11,6 +11,7 @@ import { performanceRouter } from "./performance-router";
 import { getActiveConnectionCount } from "./active-counter-service";
 import { registerPerformanceRoutes } from "./routes-performance";
 import { registerPaymentDebugRoutes } from "./routes-payment-debug";
+import { securityMonitor } from "./security-monitoring";
 import { serviceRequestValidationSchema, userValidationSchema, USER_ROLES, REQUEST_STATUS, LEAD_STATUS, systemConfigs, leads, emailTemplates, users, serviceRequests, notifications, payments } from "@shared/schema";
 import { eq, desc, sql, and, asc, inArray, isNull, like, or, not, gt, lt, gte, lte, ilike } from "drizzle-orm";
 import { fromZodError } from "zod-validation-error";
@@ -86,6 +87,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Configuration SMTP simplifiée - Une seule configuration
   console.log("Service SMTP configuré - notification@portail-electricite.com → bonjour@portail-electricite.com");
+  
+  // Security status endpoint for admin monitoring
+  app.get("/api/admin/security-status", requireAuth, requireAdmin, async (req, res) => {
+    try {
+      const stats = securityMonitor.getSecurityStats();
+      res.json({
+        success: true,
+        data: {
+          securityStats: stats,
+          serverStatus: {
+            uptime: process.uptime(),
+            memoryUsage: process.memoryUsage(),
+            nodeVersion: process.version,
+            environment: process.env.NODE_ENV || 'development'
+          },
+          lastUpdated: new Date().toISOString()
+        }
+      });
+    } catch (error) {
+      console.error("Erreur récupération statut sécurité:", error);
+      res.status(500).json({
+        success: false,
+        message: "Erreur lors de la récupération du statut sécurité"
+      });
+    }
+  });
   
   // Route pour récupérer la configuration SMTP (admin uniquement)
   app.get("/api/admin/smtp-config", requireAuth, requireAdmin, async (req, res) => {
