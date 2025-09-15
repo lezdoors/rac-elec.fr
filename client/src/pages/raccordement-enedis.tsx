@@ -13,6 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { ChevronLeft, ChevronRight, CheckCircle, MessageCircle, X, Clock, Shield, Star, Phone, Mail, ArrowRight, Send } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getGclid } from "@/lib/clean-gclid";
+import { EnhancedMobileFormOptimizer } from "@/components/enhanced-mobile-form-optimizer";
 import "../styles/sleek-checkboxes.css";
 import "../styles/mobile-performance.css";
 
@@ -1209,6 +1210,7 @@ export default function RaccordementEnedisPage() {
                     placeholder="Votre nom de famille" 
                     autoComplete="family-name"
                     inputMode="text"
+                    data-testid="input-nom"
                     autoCapitalize="words"
                     className="
                       h-14 text-base font-medium
@@ -2483,6 +2485,7 @@ export default function RaccordementEnedisPage() {
         ? 'bg-slate-50' // Couleur solide pour mobile (performance)
         : 'bg-gradient-to-br from-slate-50 via-blue-50/30 to-red-50/20' // Dégradé pour desktop
     }`}>
+      <EnhancedMobileFormOptimizer />
       <div className="max-w-4xl mx-auto critical-content">
         
         {/* Indicateur de progression français compact - Optimisé mobile */}

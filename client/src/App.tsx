@@ -60,6 +60,18 @@ const RaccordementProvisoirePage = lazy(() => import("@/pages/raccordement-provi
 const ViabilisationTerrainPage = lazy(() => import("@/pages/viabilisation-terrain").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const ModificationCompteurPage = lazy(() => import("@/pages/modification-compteur").catch(() => ({ default: () => <div>Page non disponible</div> })));
 
+// City-specific pages for local SEO
+const RaccordementElectriqueParis = lazy(() => import("@/pages/city-pages/raccordement-electrique-paris").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const RaccordementElectriqueLyon = lazy(() => import("@/pages/city-pages/raccordement-electrique-lyon").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const RaccordementElectriqueMarseille = lazy(() => import("@/pages/city-pages/raccordement-electrique-marseille").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const RaccordementElectriqueToulouse = lazy(() => import("@/pages/city-pages/raccordement-electrique-toulouse").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const RaccordementElectriqueNice = lazy(() => import("@/pages/city-pages/raccordement-electrique-nice").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const RaccordementElectriqueNantes = lazy(() => import("@/pages/city-pages/raccordement-electrique-nantes").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const RaccordementElectriqueMontpellier = lazy(() => import("@/pages/city-pages/raccordement-electrique-montpellier").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const RaccordementElectriqueStrasbourg = lazy(() => import("@/pages/city-pages/raccordement-electrique-strasbourg").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const RaccordementElectriqueBordeaux = lazy(() => import("@/pages/city-pages/raccordement-electrique-bordeaux").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const RaccordementElectriqueLille = lazy(() => import("@/pages/city-pages/raccordement-electrique-lille").catch(() => ({ default: () => <div>Page non disponible</div> })));
+
 // Lazy loading des pages d'administration
 const AdminDashboard = lazy(() => import("@/pages/admin/dashboard").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const AdminPaiements = lazy(() => import("@/pages/admin/paiements").catch(() => ({ default: () => <div>Page non disponible</div> })));
@@ -488,6 +500,67 @@ function Router() {
         <Route path="/modification-compteur" component={() => (
           <Suspense fallback={<LoadingFallback />}>
             <ModificationCompteurPage />
+          </Suspense>
+        )} />
+
+        {/* City-specific landing pages for local SEO */}
+        <Route path="/raccordement-electrique-paris" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <RaccordementElectriqueParis />
+          </Suspense>
+        )} />
+        
+        <Route path="/raccordement-electrique-lyon" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <RaccordementElectriqueLyon />
+          </Suspense>
+        )} />
+        
+        <Route path="/raccordement-electrique-marseille" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <RaccordementElectriqueMarseille />
+          </Suspense>
+        )} />
+        
+        <Route path="/raccordement-electrique-toulouse" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <RaccordementElectriqueToulouse />
+          </Suspense>
+        )} />
+        
+        <Route path="/raccordement-electrique-nice" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <RaccordementElectriqueNice />
+          </Suspense>
+        )} />
+        
+        <Route path="/raccordement-electrique-nantes" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <RaccordementElectriqueNantes />
+          </Suspense>
+        )} />
+        
+        <Route path="/raccordement-electrique-montpellier" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <RaccordementElectriqueMontpellier />
+          </Suspense>
+        )} />
+        
+        <Route path="/raccordement-electrique-strasbourg" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <RaccordementElectriqueStrasbourg />
+          </Suspense>
+        )} />
+        
+        <Route path="/raccordement-electrique-bordeaux" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <RaccordementElectriqueBordeaux />
+          </Suspense>
+        )} />
+        
+        <Route path="/raccordement-electrique-lille" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <RaccordementElectriqueLille />
           </Suspense>
         )} />
 
