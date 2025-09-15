@@ -1,0 +1,51 @@
+I need to improve an existing French electrical connection service website (portail-electricite.com) that specializes in Enedis electrical connections. The site is currently profitable but needs technical improvements while maintaining its current design and functionality.
+
+Current Site Overview:
+
+French electrical connection service (raccordement électrique Enedis)
+Main services: new home connections, business connections, solar installations
+Key conversion elements: phone number (09 70 70 95 70), quote request forms
+Target audience: French property owners, businesses, contractors
+Current messaging works well - don't change core content or value propositions
+Required Improvements:
+
+Mobile Optimization
+Make all forms mobile-friendly with proper touch targets (minimum 44px)
+Ensure forms work perfectly on phones and tablets
+Improve mobile user experience for quote requests
+Use proper input types for mobile keyboards (tel, email, numeric)
+Performance Enhancement
+Optimize images for faster loading
+Improve page speed scores
+Implement efficient CSS and JavaScript loading
+Add lazy loading for images
+Form Optimization
+Add auto-completion attributes for faster form filling
+Include real-time validation with helpful error messages
+Add progress indicators for multi-step forms
+Improve form accessibility and user experience
+Local SEO Structure
+Create location-specific landing pages for major French cities (Paris, Lyon, Marseille, Toulouse, Nice, Nantes, Montpellier, Strasbourg, Bordeaux, Lille)
+Each city page should follow the pattern: /raccordement-electrique-[ville]
+Maintain the same service information but localize for each city
+SEO Enhancement
+Add proper schema markup for local business and services
+Implement structured data for better search visibility
+Maintain existing content while improving technical SEO
+Important Constraints:
+
+Keep the existing design aesthetic and layout
+Maintain all current content and messaging
+Don't add new features like calculators, chat widgets, or videos
+Focus purely on technical improvements and optimization
+Ensure the phone number and main CTAs remain prominent
+Keep the 4-step process visualization
+Preserve customer testimonials section
+Success Criteria:
+
+Mobile PageSpeed score above 85
+Forms work seamlessly on all devices
+Fast loading times across all pages
+Improved local search visibility for French cities
+Better user experience without changing core functionality
+Please create a modern, optimized version that improves performance and mobile experience while keeping the proven conversion elements that make this site successful.
