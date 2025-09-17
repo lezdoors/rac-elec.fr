@@ -1,10 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-// PERFORMANCE: Dynamic framer-motion import for admin pages only
-const motion = {
-  div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-  ul: ({ children, ...props }: any) => <ul {...props}>{children}</ul>,
-  li: ({ children, ...props }: any) => <li {...props}>{children}</li>
-};
+import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LightweightBarChart, LightweightPieChart } from "@/components/ui/lightweight-charts";
 import { Badge } from "@/components/ui/badge";

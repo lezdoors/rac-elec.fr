@@ -3,17 +3,7 @@ import "./polyfills";
 
 import { createRoot } from "react-dom/client";
 import App from "./App";
-// CRITICAL CSS PERFORMANCE: Defer non-critical CSS loading
-const loadStylesDeferred = () => {
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = '/src/index.css';
-  link.media = 'all';
-  document.head.appendChild(link);
-};
-
-// Load CSS after initial render to improve LCP
-setTimeout(loadStylesDeferred, 100);
+import "./index.css";
 import "./lib/gclid-tracking";
 import "./utils/gentle-performance";
 import "./utils/lcp-monitor";

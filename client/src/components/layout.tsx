@@ -5,28 +5,41 @@ import { apiRequest } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
 // REMOVED: Heavy framer-motion import from shared layout component
 import EnedisAuthenticMasterpiece from "@/components/ui/enedis-authentic-logo";
-// PERFORMANCE: Essential icons for shared layout only
 import { 
+  Bolt, 
+  LayoutDashboard, 
   Menu, 
   X, 
+  ChevronRight, 
+  Mail, 
   Phone, 
-  Mail,
-  ChevronRight,
-  Home,
+  MapPin, 
+  Users, 
+  Clock,
+  Power,
   Zap,
-  HelpCircle,
-  Send
+  HelpCircle, 
+  ArrowRight, 
+  Home, 
+  FileText,
+  Send,
+  ShieldCheck
 } from "lucide-react";
-// PERFORMANCE: Removed Dialog, Input, Label, Textarea imports 
-// These are now contained within lazy-loaded components only
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-// PERFORMANCE: Lazy-load heavy footer and modal components
-import { lazy, Suspense } from "react";
-
-const ContactModal = lazy(() => import("@/components/contact-modal").then(m => ({ default: m.ContactModal })));
-const ResponsiveFooter = lazy(() => import("@/components/responsive-footer").then(m => ({ default: m.ResponsiveFooter })));
-const ModernFooter = lazy(() => import("@/components/modern-footer").then(m => ({ default: m.ModernFooter })));
-const CadastreModal = lazy(() => import("@/components/cadastre-modal").then(m => ({ default: m.CadastreModal })));
+import { ContactModal } from "@/components/contact-modal";
+import { ResponsiveFooter } from "@/components/responsive-footer";
+import { ModernFooter } from "@/components/modern-footer";
 
 
 // Utilisation du composant LogoElectricIcon importé depuis "@/components/ui/logo-electric-icon"
@@ -256,28 +269,52 @@ export default function Layout({ children }: LayoutProps) {
       </main>
       
       {/* Footer moderne optimisé pour la performance et le SEO */}
-      <Suspense fallback={<div className="h-32 bg-gray-50" />}>
-        <ModernFooter />
-      </Suspense>
+      <ModernFooter />
       
       {/* Modale de contact email */}
-      <Suspense fallback={null}>
-        <ContactModal
-          defaultOpen={emailModalOpen}
-          onOpenChange={setEmailModalOpen}
-          source="footer"
-        />
-      </Suspense>
+      <ContactModal
+        defaultOpen={emailModalOpen}
+        onOpenChange={setEmailModalOpen}
+        source="footer"
+      />
 
       {/* La modale d'appel téléphonique a été supprimée pour remplacer par des liens directs */}
       
       {/* Modale de recherche cadastrale */}
-      <Suspense fallback={null}>
-        <CadastreModal 
-          open={cadastreModalOpen} 
-          onOpenChange={setCadastreModalOpen} 
-        />
-      </Suspense>
+      <Dialog open={cadastreModalOpen} onOpenChange={setCadastreModalOpen}>
+        <DialogContent className="sm:max-w-[500px] p-5">
+          <DialogHeader>
+            <DialogTitle>Recherchez votre parcelle cadastrale</DialogTitle>
+            <DialogDescription>
+              Trouvez facilement les informations cadastrales de votre terrain
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="address">Adresse du terrain</Label>
+              <Input
+                id="address"
+                placeholder="123 rue de la Liberté, 75001 Paris"
+              />
+            </div>
+            
+            <div className="text-sm text-gray-500">
+              <p>Vous pouvez également consulter directement le service de cadastre en ligne:</p>
+            </div>
+          </div>
+          
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setCadastreModalOpen(false)}>Annuler</Button>
+            <Button onClick={() => {
+              window.open('https://www.cadastre.gouv.fr', '_blank');
+              setCadastreModalOpen(false);
+            }}>
+              Accéder au cadastre
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
