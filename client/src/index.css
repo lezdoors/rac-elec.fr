@@ -1,5 +1,4 @@
-/* Self-hosted fonts with font-display: swap for performance */
-@import '@fontsource/inter/500.css'; /* Only import weight not preloaded */
+/* MOBILE PERFORMANCE CRITICAL: Removed blocking @import - fonts preloaded in HTML instead */
 
 /* Custom @font-face for preloaded fonts to match preload URLs */
 @font-face {
