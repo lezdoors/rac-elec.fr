@@ -71,12 +71,6 @@ export const inlineCriticalCSS = () => {
 export const preloadCriticalResources = () => {
   const resources = [
     {
-      href: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2',
-      as: 'font',
-      type: 'font/woff2',
-      crossorigin: 'anonymous'
-    },
-    {
       href: '/favicon-new.svg',
       as: 'image'
     }
@@ -96,11 +90,7 @@ export const preloadCriticalResources = () => {
 // Resource hints for faster navigation
 export const addResourceHints = () => {
   const hints = [
-    { rel: 'dns-prefetch', href: '//fonts.googleapis.com' },
-    { rel: 'dns-prefetch', href: '//fonts.gstatic.com' },
-    { rel: 'dns-prefetch', href: '//www.googletagmanager.com' },
-    { rel: 'preconnect', href: 'https://fonts.googleapis.com', crossorigin: true },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true }
+    { rel: 'dns-prefetch', href: '//www.googletagmanager.com' }
   ];
   
   hints.forEach(hint => {

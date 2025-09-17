@@ -72,7 +72,6 @@ export const inlineCriticalMobileCSS = () => {
 // Preload critical resources for mobile
 export const preloadCriticalMobileResources = () => {
   const criticalResources = [
-    { href: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2', as: 'font', type: 'font/woff2', crossorigin: true },
     { href: '/favicon-new.svg', as: 'image' },
   ];
   
@@ -167,7 +166,6 @@ export const initMobileServiceWorker = () => {
         '/src/main.tsx',
         '/src/App.tsx',
         '/favicon-new.svg',
-        'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2'
       ];
       
       self.addEventListener('install', event => {

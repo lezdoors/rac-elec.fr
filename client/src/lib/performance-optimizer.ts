@@ -1,14 +1,8 @@
 // Performance optimization utilities for Core Web Vitals improvement
 
 export const preloadCriticalResources = () => {
-  // Preload critical fonts
-  const fontLink = document.createElement('link');
-  fontLink.rel = 'preload';
-  fontLink.href = 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2';
-  fontLink.as = 'font';
-  fontLink.type = 'font/woff2';
-  fontLink.crossOrigin = 'anonymous';
-  document.head.appendChild(fontLink);
+  // Critical resources already handled by @fontsource/inter
+  // Self-hosted fonts loaded via CSS
 };
 
 export const optimizeImages = () => {

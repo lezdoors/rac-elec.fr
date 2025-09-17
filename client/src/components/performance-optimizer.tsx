@@ -31,8 +31,7 @@ export function PerformanceOptimizer() {
     // Preload critical resources
     const preloadCriticalResources = () => {
       const criticalResources = [
-        '/favicon-new.svg',
-        'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
+        '/favicon-new.svg'
       ];
 
       criticalResources.forEach(resource => {
