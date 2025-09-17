@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "engines": {
-  "node": "20.x"
-},
+    "node": "20.x"
+  },
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development tsx server/index.ts",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.37.0",
+    "@fontsource/inter": "^5.2.8",
     "@hookform/resolvers": "^3.10.0",
     "@jridgewell/trace-mapping": "^0.3.25",
     "@neondatabase/serverless": "^0.10.4",
