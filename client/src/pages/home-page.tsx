@@ -4,6 +4,24 @@ import { AdminButton } from "@/components/ui/admin-button";
 import { Zap, ArrowRight, Building, Home as HomeIcon, BarChart, Clock, Shield, User, Server, Send, Bolt, CheckCheck, Wrench, Phone, AlertCircle, ChevronDown, CheckCircle2, MapPin, Sparkles, FileCheck, Wifi, Users, Lightbulb, Settings, Power, ExternalLink, ShieldCheck, Menu, X, FileText } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
+// Mobile performance optimization hook
+const useMobileDetection = () => {
+  const [isMobile, setIsMobile] = useState(true); // Start mobile-first
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  return isMobile;
+};
+
 import { Helmet } from "react-helmet";
 import { BreadcrumbNavigation } from "@/components/breadcrumb-navigation";
 // Removed framer-motion for better LCP performance
@@ -30,6 +48,9 @@ export default function HomePage() {
   const [isHeroAnimated, setIsHeroAnimated] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  
+  // MOBILE PERFORMANCE: Conditional rendering optimization
+  const isMobile = useMobileDetection();
   
   // Valeurs spécifiques pour le compteur de demandes - liste améliorée
   const specificCounts = [311, 256, 148, 382, 99, 114, 214, 74, 277, 128, 312, 298, 214, 318, 266, 270, 261, 265];
@@ -414,7 +435,8 @@ export default function HomePage() {
           </div>
           
           {/* Mobile version - Optimisé tactile avec retour visuel parfait */}
-          <div className="block lg:hidden max-w-lg mx-auto px-4">
+          {isMobile && (
+          <div className="max-w-lg mx-auto px-4">
             <div className="space-y-3">
               {/* Ligne 1: Raccordement Définitif + Raccordement Provisoire */}
               <div className="grid grid-cols-2 gap-3">
@@ -487,9 +509,11 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+          )}
 
           {/* Desktop version - Keep full cards avec optimisations performance */}
-          <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto layout-optimized deferred-content">
+          {!isMobile && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto layout-optimized deferred-content">
             {/* Raccordement Définitif */}
             <Link href="/raccordement-enedis?type=definitif#top" className="group">
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-lg hover:border-[#0072CE]/30 transition-all duration-300 transform hover:-translate-y-1">
@@ -583,6 +607,7 @@ export default function HomePage() {
               </div>
             </Link>
           </div>
+          )}
           
           {/* Help section */}
           <div className="mt-12 text-center">
