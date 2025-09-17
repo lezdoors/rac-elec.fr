@@ -17,17 +17,8 @@ import {
   HelpCircle,
   Send
 } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+// PERFORMANCE: Removed Dialog, Input, Label, Textarea imports 
+// These are now contained within lazy-loaded components only
 import { useToast } from "@/hooks/use-toast";
 // PERFORMANCE: Lazy-load heavy footer and modal components
 import { lazy, Suspense } from "react";
@@ -35,6 +26,7 @@ import { lazy, Suspense } from "react";
 const ContactModal = lazy(() => import("@/components/contact-modal").then(m => ({ default: m.ContactModal })));
 const ResponsiveFooter = lazy(() => import("@/components/responsive-footer").then(m => ({ default: m.ResponsiveFooter })));
 const ModernFooter = lazy(() => import("@/components/modern-footer").then(m => ({ default: m.ModernFooter })));
+const CadastreModal = lazy(() => import("@/components/cadastre-modal").then(m => ({ default: m.CadastreModal })));
 
 
 // Utilisation du composant LogoElectricIcon importé depuis "@/components/ui/logo-electric-icon"
@@ -280,40 +272,12 @@ export default function Layout({ children }: LayoutProps) {
       {/* La modale d'appel téléphonique a été supprimée pour remplacer par des liens directs */}
       
       {/* Modale de recherche cadastrale */}
-      <Dialog open={cadastreModalOpen} onOpenChange={setCadastreModalOpen}>
-        <DialogContent className="sm:max-w-[500px] p-5">
-          <DialogHeader>
-            <DialogTitle>Recherchez votre parcelle cadastrale</DialogTitle>
-            <DialogDescription>
-              Trouvez facilement les informations cadastrales de votre terrain
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="space-y-4 py-4">
-            <div className="space-y-2">
-              <Label htmlFor="address">Adresse du terrain</Label>
-              <Input
-                id="address"
-                placeholder="123 rue de la Liberté, 75001 Paris"
-              />
-            </div>
-            
-            <div className="text-sm text-gray-500">
-              <p>Vous pouvez également consulter directement le service de cadastre en ligne:</p>
-            </div>
-          </div>
-          
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setCadastreModalOpen(false)}>Annuler</Button>
-            <Button onClick={() => {
-              window.open('https://www.cadastre.gouv.fr', '_blank');
-              setCadastreModalOpen(false);
-            }}>
-              Accéder au cadastre
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <Suspense fallback={null}>
+        <CadastreModal 
+          open={cadastreModalOpen} 
+          onOpenChange={setCadastreModalOpen} 
+        />
+      </Suspense>
     </div>
   );
 }
