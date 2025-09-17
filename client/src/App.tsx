@@ -109,12 +109,14 @@ function Router() {
   return (
     <Suspense fallback={<LoadingFallback />}>
       <Switch>
-        {/* Page d'accueil - chargement direct (pas de lazy loading) */}
+        {/* Page d'accueil - lazy loading with proper Suspense wrapper */}
         <Route path="/" component={() => {
           window.scrollTo(0, 0);
           return (
             <Layout>
-              <HomePage />
+              <Suspense fallback={<LoadingFallback />}>
+                <HomePage />
+              </Suspense>
             </Layout>
           );
         }} />
