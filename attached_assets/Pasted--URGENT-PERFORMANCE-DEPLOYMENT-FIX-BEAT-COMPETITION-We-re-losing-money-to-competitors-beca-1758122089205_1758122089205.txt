@@ -1,0 +1,98 @@
+🚨 URGENT PERFORMANCE & DEPLOYMENT FIX - BEAT COMPETITION 🚨
+
+We're losing money to competitors because of poor site performance. PageSpeed shows 64/100 - this is killing conversions. Fix ALL issues:
+
+IMMEDIATE CRITICAL FIXES:
+
+1. VERCEL DEPLOYMENT FIX:
+- Add vercel.json with SPA routing:
+{
+  "rewrites": [{"source": "/(.*)", "destination": "/index.html"}],
+  "headers": [{
+    "source": "/(.*)",
+    "headers": [
+      {"key": "Cache-Control", "value": "public, max-age=31536000, immutable"},
+      {"key": "X-Content-Type-Options", "value": "nosniff"}
+    ]
+  }]
+}
+
+2. FIX /enedis-raccordement ROUTE:
+- Ensure React Router route exists
+- Test route works locally before deploy
+- Fix CTA buttons to redirect (not scroll)
+
+3. PERFORMANCE OPTIMIZATION (CRITICAL):
+
+LAZY LOAD EVERYTHING:
+- Lazy load Stripe (only load on payment page)
+- Lazy load Google Fonts with font-display: swap
+- Defer non-critical JavaScript
+- Use React.lazy() for heavy components
+
+CODE SPLITTING:
+- Split JavaScript bundles
+- Remove unused dependencies
+- Tree-shake all imports
+- Use dynamic imports for heavy libraries
+
+RESOURCE OPTIMIZATION:
+- Preload critical resources only
+- Add resource hints (preconnect, dns-prefetch)
+- Compress images to WebP
+- Minify CSS/JS aggressively
+
+4. REMOVE ALL BRANDING:
+- No "Made with Lovable"
+- No demo content
+- 100% professional appearance
+
+5. ADD PROFESSIONAL TRUST ELEMENTS:
+- Add LogoLoop component: npx shadcn@latest add https://reactbits.dev/r/LogoLoop-JS-CSS
+- Professional badges (avoid "Partenaire Enedis" - we have no agreement)
+- Use: "Service Indépendant", "Expert Certifié", "25,000+ Dossiers Traités"
+- Add professional testimonials
+- Security badges
+
+6. ACCESSIBILITY FIXES:
+- Fix viewport meta tag
+- Increase touch target sizes (minimum 44px)
+- Improve color contrast ratios
+- Add proper ARIA labels
+- Fix link descriptions
+
+7. TECHNICAL IMPROVEMENTS:
+- Fix browser console errors
+- Add proper source maps
+- Optimize DOM size
+- Fix forced reflows
+
+8. SEO OPTIMIZATION:
+- Perfect 100/100 SEO score maintenance
+- Add structured data
+- Optimize meta descriptions
+- Add proper heading hierarchy
+
+PERFORMANCE TARGETS TO ACHIEVE:
+- LCP < 2.5s (currently 3.5s)
+- FCP < 1.8s (currently 3.5s) 
+- Performance Score > 90 (currently 64)
+- Accessibility Score > 95 (currently 82)
+
+DEPLOYMENT CHECKLIST:
+□ vercel.json configured properly
+□ /enedis-raccordement route works
+□ CTA buttons redirect correctly  
+□ Performance score > 90
+□ LCP < 2.5s
+□ No console errors
+□ All branding removed
+□ Professional trust elements added
+□ Mobile responsive perfect
+□ Fast loading on 3G
+
+This site MUST be faster than raccordement.net and portail-electricite.com. Every millisecond counts for conversions.
+
+Test everything locally first, then deploy only when all metrics are perfect.
+
+MAKE THIS THE FASTEST, MOST PROFESSIONAL RACCORDEMENT SITE IN FRANCE! 🚀
