@@ -24,9 +24,9 @@ import StaffProtectedRoute from "@/lib/staff-protected-route";
 // Import du composant d'animation principal uniquement
 import { PowerElectricLoader } from "@/components/ui/power-electric-loader";
 
-// CRITICAL: Make HomePage lazy-loaded to move heavy deps out of main bundle
+// SAFE: Keep HomePage eagerly loaded for stable layout and conversions
 import NotFound from "@/pages/not-found";
-const HomePage = lazy(() => import("@/pages/home-page").catch(() => ({ default: () => <div>Page non disponible</div> })));
+import HomePage from "@/pages/home-page";
 
 // Lazy loading des pages moins fréquemment utilisées avec gestion d'erreur
 const AuthPage = lazy(() => import("@/pages/auth-page").catch(() => ({ default: () => <div>Page non disponible</div> })));
