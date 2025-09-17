@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Important pages for search engines
+Allow: /raccordement-enedis
+Allow: /raccordement-definitif
+Allow: /raccordement-provisoire
+Allow: /viabilisation-terrain
+Allow: /guide-raccordement
+Allow: /nos-services
+Allow: /contact
+
+# Block admin and internal pages
+Disallow: /admin
+Disallow: /api/
+Disallow: /payment
+Disallow: /debug
+
+# Sitemap location
+Sitemap: https://portail-electricite.com/sitemap.xml
+
+# Crawl delay to be respectful
+Crawl-delay: 1

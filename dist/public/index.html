@@ -192,15 +192,8 @@
     </script>
     
     <!-- Critical performance optimizations -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="dns-prefetch" href="//www.googletagmanager.com">
     <link rel="dns-prefetch" href="//www.google-analytics.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Font optimization with display swap -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Security headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -251,27 +244,20 @@
     </script>
 
     <!-- Critical mobile performance preloads -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="data:application/octet-stream;base64,Ly8gTG9hZCBicm93c2VyIGNvbXBhdGliaWxpdHkgcG9seWZpbGxzIGZpcnN0CmltcG9ydCAiLi9wb2x5ZmlsbHMiOwoKaW1wb3J0IHsgY3JlYXRlUm9vdCB9IGZyb20gInJlYWN0LWRvbS9jbGllbnQiOwppbXBvcnQgQXBwIGZyb20gIi4vQXBwIjsKaW1wb3J0ICIuL2luZGV4LmNzcyI7CmltcG9ydCAiLi9saWIvZ2NsaWQtdHJhY2tpbmciOwppbXBvcnQgIi4vdXRpbHMvZ2VudGxlLXBlcmZvcm1hbmNlIjsKaW1wb3J0ICIuL3V0aWxzL2xjcC1tb25pdG9yIjsKCi8vIEVuc3VyZSBjb252ZXJzaW9uIHRyYWNraW5nIGZ1bmN0aW9ucyBhcmUgYXZhaWxhYmxlIGdsb2JhbGx5CmRlY2xhcmUgZ2xvYmFsIHsKICBpbnRlcmZhY2UgV2luZG93IHsKICAgIHRyaWdnZXJGb3JtU3RhcnRDb252ZXJzaW9uOiAoKSA9PiB2b2lkOwogICAgdHJpZ2dlckZvcm1TdWJtaXRDb252ZXJzaW9uOiAoKSA9PiB2b2lkOwogICAgZ3RhZzogKC4uLmFyZ3M6IGFueVtdKSA9PiB2b2lkOwogICAgZGF0YUxheWVyOiBhbnlbXTsKICB9Cn0KCi8vIEdsb2JhbCBlcnJvciBoYW5kbGVycyB0byBwcmV2ZW50IGRlcGxveW1lbnQgY3Jhc2hlcwp3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcigndW5oYW5kbGVkcmVqZWN0aW9uJywgKGV2ZW50KSA9PiB7CiAgZXZlbnQucHJldmVudERlZmF1bHQoKTsgLy8gU2lsZW50bHkgcHJldmVudCB0aGUgZGVmYXVsdCBiZWhhdmlvcgp9KTsKCndpbmRvdy5hZGRFdmVudExpc3RlbmVyKCdlcnJvcicsIChldmVudCkgPT4gewogIGV2ZW50LnByZXZlbnREZWZhdWx0KCk7IC8vIFNpbGVudGx5IHByZXZlbnQgZXJyb3IgbG9nZ2luZwp9KTsKCi8vIFJlbmRlciBSZWFjdCBhcHAgd2l0aCBtb2JpbGUtb3B0aW1pemVkIHJvb3QKY29uc3Qgcm9vdEVsZW1lbnQgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgicm9vdCIpOwppZiAocm9vdEVsZW1lbnQpIHsKICBjcmVhdGVSb290KHJvb3RFbGVtZW50KS5yZW5kZXIoPEFwcCAvPik7Cn0KCi8vIFNhZmUgcGVyZm9ybWFuY2Ugb3B0aW1pemF0aW9uIHdpdGhvdXQgZXh0ZXJuYWwgZmlsZXMKCi8vIEJhc2ljIHBlcmZvcm1hbmNlIG9wdGltaXphdGlvbnMgb25seQpzZXRUaW1lb3V0KCgpID0+IHsKICAvLyBTaW1wbGUgaW1hZ2Ugb3B0aW1pemF0aW9uIHdpdGhvdXQgYnJlYWtpbmcgbGF5b3V0CiAgY29uc3QgaW1hZ2VzID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnaW1nJyk7CiAgaW1hZ2VzLmZvckVhY2goKGltZywgaW5kZXgpID0+IHsKICAgIGlmIChpbmRleCA9PT0gMCkgewogICAgICBpbWcubG9hZGluZyA9ICdlYWdlcic7CiAgICB9IGVsc2UgewogICAgICBpbWcubG9hZGluZyA9ICdsYXp5JzsKICAgIH0KICB9KTsKfSwgMTAwKTsK" as="script">
     <link rel="preload" href="/favicon-new.svg" as="image">
+    
+    <!-- Preload critical Inter font files for LCP text -->
+    <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/inter-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/inter-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
     
     <!-- Mobile viewport optimization -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <!-- Priority font loading for mobile LCP optimization -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"></noscript>
     
-    <!-- Global site tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GT-MJKTJGCK"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'GT-MJKTJGCK');
-    </script>
     
     <!-- Favicons optimisés - Logo Raccordement Enedis -->
     <link rel="icon" href="/favicon.ico" sizes="any">
@@ -324,8 +310,8 @@
         });
       });
     </script>
-    <script type="module" crossorigin src="/assets/index-Dxb0VdAX.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DRJxxYVk.css">
+    <script type="module" crossorigin src="/assets/index-CmhQ2eGA.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BS1DS1IK.css">
   </head>
   <body>
     <div id="root"></div>
