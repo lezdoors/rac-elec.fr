@@ -5,25 +5,17 @@ import { apiRequest } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
 // REMOVED: Heavy framer-motion import from shared layout component
 import EnedisAuthenticMasterpiece from "@/components/ui/enedis-authentic-logo";
+// PERFORMANCE: Essential icons for shared layout only
 import { 
-  Bolt, 
-  LayoutDashboard, 
   Menu, 
   X, 
-  ChevronRight, 
-  Mail, 
   Phone, 
-  MapPin, 
-  Users, 
-  Clock,
-  Power,
+  Mail,
+  ChevronRight,
+  Home,
   Zap,
-  HelpCircle, 
-  ArrowRight, 
-  Home, 
-  FileText,
-  Send,
-  ShieldCheck
+  HelpCircle,
+  Send
 } from "lucide-react";
 import {
   Dialog,
