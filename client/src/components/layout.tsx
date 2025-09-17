@@ -29,9 +29,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { ContactModal } from "@/components/contact-modal";
-import { ResponsiveFooter } from "@/components/responsive-footer";
-import { ModernFooter } from "@/components/modern-footer";
+// PERFORMANCE: Lazy-load heavy footer and modal components
+import { lazy, Suspense } from "react";
+
+const ContactModal = lazy(() => import("@/components/contact-modal").then(m => ({ default: m.ContactModal })));
+const ResponsiveFooter = lazy(() => import("@/components/responsive-footer").then(m => ({ default: m.ResponsiveFooter })));
+const ModernFooter = lazy(() => import("@/components/modern-footer").then(m => ({ default: m.ModernFooter })));
 
 
 // Utilisation du composant LogoElectricIcon importé depuis "@/components/ui/logo-electric-icon"
@@ -261,14 +264,18 @@ export default function Layout({ children }: LayoutProps) {
       </main>
       
       {/* Footer moderne optimisé pour la performance et le SEO */}
-      <ModernFooter />
+      <Suspense fallback={<div className="h-32 bg-gray-50" />}>
+        <ModernFooter />
+      </Suspense>
       
       {/* Modale de contact email */}
-      <ContactModal
-        defaultOpen={emailModalOpen}
-        onOpenChange={setEmailModalOpen}
-        source="footer"
-      />
+      <Suspense fallback={null}>
+        <ContactModal
+          defaultOpen={emailModalOpen}
+          onOpenChange={setEmailModalOpen}
+          source="footer"
+        />
+      </Suspense>
 
       {/* La modale d'appel téléphonique a été supprimée pour remplacer par des liens directs */}
       
