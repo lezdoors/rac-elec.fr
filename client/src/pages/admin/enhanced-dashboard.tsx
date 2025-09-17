@@ -12,21 +12,8 @@ import { useToast } from "@/hooks/use-toast";
 import { useQuery } from "@tanstack/react-query";
 import { getQueryFn, apiRequest, queryClient } from "@/lib/queryClient";
 import { StripePaymentSync } from "@/components/admin/stripe-payment-sync";
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  ResponsiveContainer, 
-  PieChart, 
-  Pie, 
-  Cell, 
-  LineChart, 
-  Line, 
-  Legend
-} from 'recharts';
+// LIGHTWEIGHT CHARTS: Replaced 60KB+ recharts with simple CSS-based charts
+import { LightweightPieChart, LightweightLineChart, LightweightBarChart } from '@/components/ui/lightweight-charts';
 import { 
   LayoutDashboard, 
   Users, 
@@ -238,26 +225,8 @@ function LeadStatusChart({ stats }: { stats: LeadStatistics }) {
         <CardDescription>Distribution des demandes par état actuel</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="h-[250px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={stats.statusBreakdown}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                outerRadius={80}
-                fill="#8884d8"
-                dataKey="value"
-                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-              >
-                {stats.statusBreakdown.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip formatter={(value) => [value, 'Nombre de demandes']} />
-            </PieChart>
-          </ResponsiveContainer>
+        <div className="h-[250px] flex items-center justify-center">
+          <LightweightPieChart data={stats.statusBreakdown || []} />
         </div>
       </CardContent>
     </Card>
@@ -272,29 +241,8 @@ function RevenueChart({ stats }: { stats: LeadStatistics }) {
         <CardDescription>Suivi des revenus au cours des 7 derniers jours</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="h-[250px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={stats.revenueByDay}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} />
-              <XAxis dataKey="name" />
-              <YAxis 
-                tickFormatter={(value) => `${value}€`}
-                width={60}
-              />
-              <Tooltip 
-                formatter={(value) => [`${value}€`, 'Revenus']}
-                labelFormatter={(label) => `${label}`}
-              />
-              <Line
-                type="monotone"
-                dataKey="value"
-                stroke="#3b82f6"
-                strokeWidth={2}
-                dot={{ r: 4 }}
-                activeDot={{ r: 6 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+        <div className="h-[250px] flex items-center justify-center p-4">
+          <LightweightLineChart data={stats.revenueByDay || []} />
         </div>
       </CardContent>
     </Card>
@@ -309,16 +257,8 @@ function ServiceTypeChart({ stats }: { stats: LeadStatistics }) {
         <CardDescription>Distribution des demandes par type de service</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="h-[250px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={stats.leadsByService} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
-              <XAxis type="number" />
-              <YAxis dataKey="name" type="category" width={150} />
-              <Tooltip formatter={(value) => [value, 'Nombre de demandes']} />
-              <Bar dataKey="value" fill="#3b82f6" radius={[0, 4, 4, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+        <div className="h-[250px] flex items-center justify-center p-4">
+          <LightweightBarChart data={stats.leadsByService || []} />
         </div>
       </CardContent>
     </Card>

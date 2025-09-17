@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, PieChart } from "@/components/ui/charts-dynamic";
+import { LightweightBarChart, LightweightPieChart } from "@/components/ui/lightweight-charts";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -153,14 +153,11 @@ export default function AgentDashboard() {
         className="h-[300px]"
       >
         {tasks && tasks.length > 0 ? (
-          <BarChart
+          <LightweightBarChart
             data={tasks.map((task: any) => ({
-              name: task.title?.substring(0, 20) || "Tâche",
-              total: task.timeSpent || 0,
+              name: task.title?.substring(0, 15) || "Tâche",
               value: task.priority === "high" ? 100 : task.priority === "medium" ? 60 : 30,
             }))}
-            title="Tâches récentes"
-            valueFormatter={(value: number) => `${value} min`}
           />
         ) : (
           <div className="h-full flex flex-col items-center justify-center">
@@ -202,9 +199,8 @@ export default function AgentDashboard() {
         className="h-[300px]"
       >
         {leads && leads.length > 0 ? (
-          <PieChart
+          <LightweightPieChart
             data={leadData}
-            title={isManager ? "Leads de l'équipe" : "Mes leads"}
           />
         ) : (
           <div className="h-full flex flex-col items-center justify-center">

@@ -5009,6 +5009,177 @@ function registerPaymentDebugRoutes(app2) {
   );
 }
 
+// server/security-monitoring.ts
+var SecurityMonitor = class {
+  events = [];
+  alertThreshold = {
+    low: 50,
+    // 50 low events per hour
+    medium: 20,
+    // 20 medium events per hour
+    high: 5,
+    // 5 high events per hour
+    critical: 1
+    // 1 critical event triggers immediate alert
+  };
+  alertCooldown = /* @__PURE__ */ new Map();
+  ALERT_COOLDOWN_MS = 15 * 60 * 1e3;
+  // 15 minutes
+  log(event) {
+    const securityEvent = {
+      ...event,
+      timestamp: /* @__PURE__ */ new Date()
+    };
+    this.events.push(securityEvent);
+    const oneDayAgo = /* @__PURE__ */ new Date();
+    oneDayAgo.setHours(oneDayAgo.getHours() - 24);
+    this.events = this.events.filter((e) => e.timestamp > oneDayAgo);
+    this.checkAlerts(securityEvent);
+    if (event.severity === "high" || event.severity === "critical") {
+      console.error(`\u{1F6A8} SECURITY ALERT [${event.severity.toUpperCase()}]:`, {
+        type: event.type,
+        ip: event.ip,
+        endpoint: event.endpoint,
+        time: securityEvent.timestamp.toISOString()
+      });
+    } else {
+      console.warn(`\u26A0\uFE0F  Security event [${event.severity}]:`, {
+        type: event.type,
+        ip: event.ip,
+        endpoint: event.endpoint
+      });
+    }
+  }
+  checkAlerts(event) {
+    const oneHourAgo = /* @__PURE__ */ new Date();
+    oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+    const recentEvents = this.events.filter((e) => e.timestamp > oneHourAgo);
+    const eventsByIp = recentEvents.filter((e) => e.ip === event.ip);
+    if (eventsByIp.length > 10) {
+      this.triggerAlert({
+        type: "repeated_suspicious_activity",
+        ip: event.ip,
+        count: eventsByIp.length,
+        severity: "high"
+      });
+    }
+    if (event.type === "payment_anomaly" || event.endpoint.includes("/payment") || event.endpoint.includes("/stripe")) {
+      this.triggerAlert({
+        type: "payment_security_event",
+        ip: event.ip,
+        endpoint: event.endpoint,
+        severity: "critical"
+      });
+    }
+    const severityCount = {
+      low: recentEvents.filter((e) => e.severity === "low").length,
+      medium: recentEvents.filter((e) => e.severity === "medium").length,
+      high: recentEvents.filter((e) => e.severity === "high").length,
+      critical: recentEvents.filter((e) => e.severity === "critical").length
+    };
+    for (const [severity, count] of Object.entries(severityCount)) {
+      if (count >= this.alertThreshold[severity]) {
+        this.triggerAlert({
+          type: "threat_level_exceeded",
+          severity,
+          count,
+          timeFrame: "1 hour"
+        });
+      }
+    }
+  }
+  triggerAlert(alertData) {
+    const alertKey = `${alertData.type}-${alertData.ip || "global"}`;
+    const now = Date.now();
+    const lastAlert = this.alertCooldown.get(alertKey) || 0;
+    if (now - lastAlert < this.ALERT_COOLDOWN_MS) {
+      return;
+    }
+    this.alertCooldown.set(alertKey, now);
+    console.error("\u{1F6A8} SECURITY ALERT TRIGGERED:", {
+      ...alertData,
+      timestamp: (/* @__PURE__ */ new Date()).toISOString()
+    });
+  }
+  // Get security stats for admin dashboard
+  getSecurityStats() {
+    const now = /* @__PURE__ */ new Date();
+    const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1e3);
+    const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1e3);
+    const recentEvents = this.events.filter((e) => e.timestamp > oneHourAgo);
+    const dailyEvents = this.events.filter((e) => e.timestamp > oneDayAgo);
+    const stats = {
+      lastHour: {
+        total: recentEvents.length,
+        byType: this.groupBy(recentEvents, "type"),
+        bySeverity: this.groupBy(recentEvents, "severity"),
+        topIPs: this.getTopIPs(recentEvents)
+      },
+      last24Hours: {
+        total: dailyEvents.length,
+        byType: this.groupBy(dailyEvents, "type"),
+        bySeverity: this.groupBy(dailyEvents, "severity"),
+        topIPs: this.getTopIPs(dailyEvents)
+      }
+    };
+    return stats;
+  }
+  groupBy(events, key) {
+    return events.reduce((groups, event) => {
+      const value = event[key];
+      groups[value] = (groups[value] || 0) + 1;
+      return groups;
+    }, {});
+  }
+  getTopIPs(events) {
+    const ipCounts = this.groupBy(events, "ip");
+    return Object.entries(ipCounts).sort(([, a], [, b]) => b - a).slice(0, 10).map(([ip, count]) => ({ ip, count }));
+  }
+  // Check if an IP should be blocked (basic implementation)
+  shouldBlockIP(ip) {
+    const oneHourAgo = /* @__PURE__ */ new Date();
+    oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+    const recentEvents = this.events.filter(
+      (e) => e.ip === ip && e.timestamp > oneHourAgo && (e.severity === "high" || e.severity === "critical")
+    );
+    return recentEvents.length > 3;
+  }
+};
+var securityMonitor = new SecurityMonitor();
+var securityMonitoringMiddleware = (req, res, next) => {
+  const originalSend = res.send;
+  const ip = req.ip || req.socket.remoteAddress || "unknown";
+  if (securityMonitor.shouldBlockIP(ip)) {
+    securityMonitor.log({
+      type: "suspicious_request",
+      ip,
+      endpoint: req.path,
+      severity: "critical"
+    });
+    return res.status(403).json({
+      error: "Acc\xE8s temporairement restreint en raison d'activit\xE9s suspectes"
+    });
+  }
+  res.send = function(data) {
+    if (res.statusCode >= 400 && res.statusCode !== 404) {
+      let severity = "low";
+      if (res.statusCode === 429) severity = "medium";
+      if (res.statusCode >= 500) severity = "high";
+      if (req.path.includes("/payment") || req.path.includes("/stripe")) severity = "critical";
+      securityMonitor.log({
+        type: res.statusCode === 429 ? "rate_limit_exceeded" : "suspicious_request",
+        ip,
+        endpoint: req.path,
+        userAgent: req.get("User-Agent"),
+        severity,
+        data: { statusCode: res.statusCode }
+      });
+    }
+    originalSend.call(this, data);
+  };
+  next();
+};
+
 // server/routes.ts
 init_schema();
 import { eq as eq11, desc as desc6, sql as sql5, and as and7, like, or, gte as gte6, lte as lte5 } from "drizzle-orm";
@@ -8459,6 +8630,30 @@ async function registerRoutes(app2) {
   setupDashboardRoutes(app2);
   registerPaymentDebugRoutes(app2);
   console.log("Service SMTP configur\xE9 - notification@portail-electricite.com \u2192 bonjour@portail-electricite.com");
+  app2.get("/api/admin/security-status", requireAuth, requireAdmin, async (req, res) => {
+    try {
+      const stats = securityMonitor.getSecurityStats();
+      res.json({
+        success: true,
+        data: {
+          securityStats: stats,
+          serverStatus: {
+            uptime: process.uptime(),
+            memoryUsage: process.memoryUsage(),
+            nodeVersion: process.version,
+            environment: process.env.NODE_ENV || "development"
+          },
+          lastUpdated: (/* @__PURE__ */ new Date()).toISOString()
+        }
+      });
+    } catch (error) {
+      console.error("Erreur r\xE9cup\xE9ration statut s\xE9curit\xE9:", error);
+      res.status(500).json({
+        success: false,
+        message: "Erreur lors de la r\xE9cup\xE9ration du statut s\xE9curit\xE9"
+      });
+    }
+  });
   app2.get("/api/admin/smtp-config", requireAuth, requireAdmin, async (req, res) => {
     try {
       const config = await getSmtpConfig();
@@ -17182,6 +17377,119 @@ async function setupVite(app2, server) {
 
 // server/index.ts
 init_email_service();
+
+// server/security-middleware.ts
+var securityHeaders = (req, res, next) => {
+  const csp = [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com https://*.googletagmanager.com https://*.google-analytics.com https://js.stripe.com https://*.stripe.com",
+    "style-src 'self' 'unsafe-inline' https://*.googleapis.com https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com data:",
+    "img-src 'self' data: https: blob:",
+    "connect-src 'self' https://*.googleapis.com https://*.google-analytics.com https://api.stripe.com https://*.stripe.com wss:",
+    "frame-src 'self' https://js.stripe.com https://*.stripe.com",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'none'"
+  ].join("; ");
+  res.setHeader("Content-Security-Policy", csp);
+  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-XSS-Protection", "1; mode=block");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  if (process.env.NODE_ENV === "production") {
+    res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
+  }
+  res.setHeader("X-Download-Options", "noopen");
+  next();
+};
+var createBusinessRateLimit = (maxRequests, windowMs, skipSuccessfulRequests = false) => {
+  const rateLimitMap = /* @__PURE__ */ new Map();
+  return (req, res, next) => {
+    const key = req.ip || req.socket.remoteAddress || "unknown";
+    const now = Date.now();
+    const windowStart = now - windowMs;
+    if (!rateLimitMap.has(key)) {
+      rateLimitMap.set(key, []);
+    }
+    const requests = rateLimitMap.get(key);
+    const recentRequests = requests.filter((timestamp3) => timestamp3 > windowStart);
+    if (recentRequests.length >= maxRequests) {
+      console.warn(`Rate limit exceeded for IP: ${key}, endpoint: ${req.path}, requests: ${recentRequests.length}`);
+      res.setHeader("Retry-After", Math.ceil(windowMs / 1e3));
+      res.setHeader("X-RateLimit-Limit", maxRequests.toString());
+      res.setHeader("X-RateLimit-Remaining", "0");
+      res.setHeader("X-RateLimit-Reset", Math.ceil((now + windowMs) / 1e3).toString());
+      return res.status(429).json({
+        error: "Trop de tentatives. Veuillez r\xE9essayer plus tard.",
+        retryAfter: Math.ceil(windowMs / 1e3)
+      });
+    }
+    recentRequests.push(now);
+    rateLimitMap.set(key, recentRequests);
+    res.setHeader("X-RateLimit-Limit", maxRequests.toString());
+    res.setHeader("X-RateLimit-Remaining", (maxRequests - recentRequests.length).toString());
+    res.setHeader("X-RateLimit-Reset", Math.ceil((now + windowMs) / 1e3).toString());
+    next();
+  };
+};
+var sanitizeInput = (req, res, next) => {
+  if (req.body && typeof req.body === "object") {
+    const sanitizeObject = (obj) => {
+      if (typeof obj === "string") {
+        return obj.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "").replace(/javascript:/gi, "").replace(/on\w+\s*=/gi, "").trim();
+      } else if (Array.isArray(obj)) {
+        return obj.map(sanitizeObject);
+      } else if (obj && typeof obj === "object") {
+        const sanitized = {};
+        for (const [key, value] of Object.entries(obj)) {
+          sanitized[key] = sanitizeObject(value);
+        }
+        return sanitized;
+      }
+      return obj;
+    };
+    req.body = sanitizeObject(req.body);
+  }
+  next();
+};
+var paymentEndpointSecurity = (req, res, next) => {
+  const isPaymentEndpoint = req.path.includes("/payment") || req.path.includes("/stripe") || req.path.startsWith("/api/");
+  const isStaticAsset = req.path.includes("/assets/") || req.path.includes(".css") || req.path.includes(".js") || req.path.includes(".svg") || req.path.includes(".ico");
+  if (isPaymentEndpoint && !isStaticAsset) {
+    console.log(`\u{1F512} Security-sensitive endpoint: ${req.method} ${req.path} from IP: ${req.ip}`);
+  }
+  if (req.path.includes("/payment") || req.path.includes("/stripe")) {
+    const isHttps = req.secure || req.get("X-Forwarded-Proto") === "https";
+    if (process.env.NODE_ENV === "production" && !isHttps) {
+      return res.status(403).json({
+        error: "HTTPS requis pour les paiements s\xE9curis\xE9s"
+      });
+    }
+    const suspicious = [
+      "union select",
+      "drop table",
+      "<script",
+      "javascript:",
+      "eval(",
+      "onclick="
+    ];
+    const bodyStr = JSON.stringify(req.body || {}).toLowerCase();
+    const queryStr = JSON.stringify(req.query || {}).toLowerCase();
+    for (const pattern of suspicious) {
+      if (bodyStr.includes(pattern) || queryStr.includes(pattern)) {
+        console.error(`Suspicious payment request blocked: ${pattern} found in request from IP: ${req.ip}`);
+        return res.status(400).json({
+          error: "Requ\xEAte invalide d\xE9tect\xE9e"
+        });
+      }
+    }
+  }
+  next();
+};
+
+// server/index.ts
 process.on("unhandledRejection", (reason, promise) => {
   console.warn("Unhandled Rejection at:", promise, "reason:", reason);
 });
@@ -17189,6 +17497,9 @@ process.on("uncaughtException", (error) => {
   console.error("Uncaught Exception:", error);
 });
 var app = express2();
+app.set("trust proxy", 1);
+app.use(securityHeaders);
+app.use(securityMonitoringMiddleware);
 app.use(compression({
   filter: (req, res) => {
     if (req.headers["x-no-compression"]) return false;
@@ -17201,8 +17512,18 @@ app.use(compression({
   chunkSize: 16 * 1024
   // Chunks de 16KB pour mobile
 }));
-app.use(express2.json());
-app.use(express2.urlencoded({ extended: false }));
+app.use(express2.json({ limit: "10mb" }));
+app.use(express2.urlencoded({ extended: false, limit: "10mb" }));
+var formRateLimit = createBusinessRateLimit(10, 60 * 1e3);
+var paymentRateLimit = createBusinessRateLimit(5, 60 * 1e3);
+var generalRateLimit = createBusinessRateLimit(100, 60 * 1e3);
+app.use("/api/leads", formRateLimit);
+app.use("/api/service-requests", formRateLimit);
+app.use("/api/payment", paymentRateLimit);
+app.use("/api/stripe", paymentRateLimit);
+app.use("/api/admin", generalRateLimit);
+app.use(sanitizeInput);
+app.use(paymentEndpointSecurity);
 app.post("/api/notifications/lead-created", async (req, res) => {
   try {
     const leadData = req.body;

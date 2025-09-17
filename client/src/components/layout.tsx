@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { apiRequest } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+// REMOVED: Heavy framer-motion import from shared layout component
 import EnedisAuthenticMasterpiece from "@/components/ui/enedis-authentic-logo";
 import { 
   Bolt, 
