@@ -230,6 +230,11 @@
       @media (min-width: 768px) { .md\\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; } }
     </style>
     
+    <!-- PHASE 2B: Deferred CSS Loading - loader-animations.css (3KB) -->
+    <!-- FIXED: Correct media="print" onload technique for non-critical animations -->
+    <link rel="stylesheet" href="/styles/loader-animations.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/styles/loader-animations.css"></noscript>
+    
     <!-- Browser Compatibility Check - Load polyfills for older browsers -->
     <script>
       // Detect older browsers that need polyfills
