@@ -17,6 +17,7 @@ import { ChevronLeft, ChevronRight, CheckCircle, MessageCircle, X, Clock, Shield
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getGclid } from "@/lib/clean-gclid";
 import { EnhancedMobileFormOptimizer } from "@/components/enhanced-mobile-form-optimizer";
+import { FormStep1 } from "@/components/form-step-1";
 import "../styles/conversion-critical.css";
 
 // Hook pour optimiser les performances mobiles
@@ -642,21 +643,7 @@ export default function RaccordementEnedisPage() {
     }
   };
 
-  const renderStep1 = () => (
-    <div className="bg-white rounded-lg md:rounded-xl shadow-sm border border-gray-100 p-2 md:p-8">
-      {/* En-tête optimisé mobile-first */}
-      <div className="mb-1 md:mb-6">
-        <h2 className="text-base md:text-2xl font-semibold text-gray-900 mb-0.5 tracking-tight">
-          Informations personnelles
-        </h2>
-        <p className="text-xs md:text-base text-gray-600 leading-relaxed hidden sm:block">
-          Renseignez vos coordonnées pour initialiser votre demande
-        </p>
-      </div>
-      
-      <div className="space-y-1 md:space-y-3">
-        {/* Type de client - Interface mobile hyper-compacte */}
-        <FormField
+  const renderStep2 = () => (
           control={form.control}
           name="clientType"
           render={({ field }) => (
@@ -1227,9 +1214,6 @@ export default function RaccordementEnedisPage() {
             />
           </div>
         )}
-      </div>
-    </div>
-  );
 
   const renderStep2 = () => (
     <div className="bg-white rounded-lg md:rounded-xl shadow-sm border border-gray-100 p-4 md:p-8">
@@ -2287,7 +2271,7 @@ export default function RaccordementEnedisPage() {
         {/* Formulaire */}
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-1 md:space-y-4">
-            {currentStep === 1 && renderStep1()}
+            {currentStep === 1 && <FormStep1 form={form} />}
             {currentStep === 2 && renderStep2()}
             {currentStep === 3 && renderStep3()}
 
