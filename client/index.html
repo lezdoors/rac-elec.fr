@@ -259,13 +259,52 @@
       }
     </script>
 
-    <!-- Google tag (gtag.js) - CRITICAL FOR CONVERSION TRACKING -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GT-MJKTJGCK"></script>
+    <!-- CRITICAL FIX: Google Analytics config executes IMMEDIATELY -->
+    <!-- GCLID and conversion tracking MUST be available immediately for ads attribution -->
     <script>
+      // Initialize dataLayer immediately for conversion tracking
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
+      
+      // CRITICAL: Configure GA immediately - no deferral for conversion tracking
       gtag('config', 'GT-MJKTJGCK');
+      console.log('✅ Google Analytics config executed immediately for ads attribution');
+      
+      // Only defer the external gtag.js script loading for performance
+      function loadGoogleAnalyticsScript() {
+        if (!window.gtagScriptLoaded) {
+          window.gtagScriptLoaded = true;
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=GT-MJKTJGCK';
+          script.onload = function() {
+            console.log('✅ Google Analytics script loaded after user interaction');
+          };
+          document.head.appendChild(script);
+        }
+      }
+      
+      // Load GA script after user interaction or 3 seconds (but config runs immediately)
+      let gaScriptLoaded = false;
+      const triggerGAScript = () => {
+        if (!gaScriptLoaded) {
+          gaScriptLoaded = true;
+          loadGoogleAnalyticsScript();
+          ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
+            document.removeEventListener(event, triggerGAScript, { passive: true });
+          });
+        }
+      };
+      
+      ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
+        document.addEventListener(event, triggerGAScript, { passive: true, once: true });
+      });
+      
+      // Fallback: Load script after 3 seconds (config already ran immediately)
+      setTimeout(() => {
+        if (!gaScriptLoaded) triggerGAScript();
+      }, 3000);
     </script>
 
     <!-- Critical mobile performance preloads -->
@@ -421,24 +460,43 @@
     };
     </script>
     
-    <!-- Statcounter - Deferred for performance -->
+    <!-- PHASE 3A: Statcounter - Further optimized deferred loading -->
     <script>
       function loadStatcounter() {
-        window.sc_project=13140920; 
-        window.sc_invisible=1; 
-        window.sc_security="3cd76429";
-        
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://www.statcounter.com/counter/counter.js';
-        document.head.appendChild(script);
+        if (!window.statcounterLoaded) {
+          window.statcounterLoaded = true;
+          window.sc_project=13140920; 
+          window.sc_invisible=1; 
+          window.sc_security="3cd76429";
+          
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://www.statcounter.com/counter/counter.js';
+          script.onload = () => console.log('✅ StatCounter loaded after user interaction');
+          document.head.appendChild(script);
+        }
       }
       
-      // Load after user interaction or 5 seconds
-      ['click', 'scroll', 'keydown'].forEach(event => {
-        document.addEventListener(event, loadStatcounter, { once: true, passive: true });
+      // PHASE 3A: Load after user interaction or 5 seconds (aligned with other deferred scripts)
+      let statLoaded = false;
+      const triggerStat = () => {
+        if (!statLoaded) {
+          statLoaded = true;
+          loadStatcounter();
+          ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
+            document.removeEventListener(event, triggerStat, { passive: true });
+          });
+        }
+      };
+      
+      ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
+        document.addEventListener(event, triggerStat, { passive: true, once: true });
       });
-      setTimeout(loadStatcounter, 5000);
+      
+      // Fallback: Load after 5 seconds if no interaction
+      setTimeout(() => {
+        if (!statLoaded) triggerStat();
+      }, 5000);
     </script>
     <noscript><div class="statcounter"><a title="real time web analytics"
     href="https://statcounter.com/" target="_blank"><img class="statcounter"
