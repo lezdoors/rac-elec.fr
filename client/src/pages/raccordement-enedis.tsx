@@ -14,7 +14,6 @@ import { ChevronLeft, ChevronRight, CheckCircle, MessageCircle, X, Clock, Shield
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getGclid } from "@/lib/clean-gclid";
 import { EnhancedMobileFormOptimizer } from "@/components/enhanced-mobile-form-optimizer";
-import "../styles/sleek-checkboxes.css";
 import "../styles/mobile-performance.css";
 
 // Hook pour optimiser les performances mobiles
