@@ -36,7 +36,7 @@ if (rootElement) {
 // Safe performance optimization without external files
 
 // MOBILE PERFORMANCE: Optimized image loading strategy
-setTimeout(() => {
+document.addEventListener('DOMContentLoaded', () => {
   // Aggressive lazy loading for mobile performance
   const images = document.querySelectorAll('img');
   images.forEach((img, index) => {
@@ -49,4 +49,4 @@ setTimeout(() => {
       img.decoding = 'async'; // Background decode for below-fold
     }
   });
-}, 50); // Faster execution for mobile
+});
