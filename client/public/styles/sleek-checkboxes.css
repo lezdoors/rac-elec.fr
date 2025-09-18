@@ -73,10 +73,7 @@ label[for="conditions"],
   transform: none !important;
 }
 
-/* Required asterisk styling */
-.checkbox-container label:has-text("*") {
-  color: #1f2937 !important;
-}
+/* Required asterisk styling - removed invalid :has-text() selector */
 
 /* Centre d'Aide section sleek styling */
 .support-section {
