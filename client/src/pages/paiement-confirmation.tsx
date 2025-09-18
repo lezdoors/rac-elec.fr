@@ -3,7 +3,6 @@ import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { gtagReportConversion } from "@/lib/analytics";
-// Removed gtm-conversion import - using global gtag functions
 import { CheckCircle2, XCircle, Loader2, AlertCircle, Mail, Home, ShieldCheck, Lock, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";

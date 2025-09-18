@@ -24,10 +24,6 @@ const useMobileDetection = () => {
 
 import { Helmet } from "react-helmet";
 import { BreadcrumbNavigation } from "@/components/breadcrumb-navigation";
-// Removed framer-motion for better LCP performance
-// Removed performance-killing CSS imports
-
-// Direct imports for critical content
 import { SeoRichContent } from "@/components/seo-rich-content";
 import EnedisAuthenticMasterpiece from "../components/ui/enedis-authentic-logo";
 import { PerformanceOptimizer } from "@/components/performance-optimizer";

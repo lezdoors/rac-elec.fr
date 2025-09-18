@@ -1,6 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-// Remplacer les imports Lucide par des SVG directement pour éviter les erreurs de rendu
-// import { AlertCircle, CheckCircle, Clock } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function PaymentIndicators() {

@@ -6,14 +6,6 @@ import { useState, useEffect, Suspense, lazy } from "react";
 import AdminProtectedRoute from "@/components/admin/admin-protected-route";
 import { GoogleSnippetsProvider } from "@/components/google-snippets-provider";
 import GoogleAnalyticsProvider from "@/components/google-analytics-provider";
-// Removed performance-killing components for better LCP
-// import AccessibilityChecker from "@/components/accessibility-checker";
-// import MobilePerformanceEnhancer from "@/components/mobile-performance-enhancer";
-// import { useScrollToTop } from "@/hooks/use-scroll-to-top";
-// import { ScrollToTop } from "@/components/scroll-to-top";
-// import { CriticalCSSLoader } from "@/components/critical-css-loader";
-// import { ErrorBoundary } from "@/components/error-boundary";
-// import { PerformanceOptimizer } from "@/components/performance-optimizer";
 
 // Import des constantes de rôles depuis le fichier shared constants
 import { USER_ROLES } from "@shared/constants";
@@ -566,7 +558,6 @@ function Router() {
           </Suspense>
         )} />
 
-        {/* Removed unused showcase and demo routes for cleaner codebase */}
         
         {/* Nouvelles pages de services */}
         <Route path="/solaire" component={() => (

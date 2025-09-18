@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { getQueryFn, apiRequest, queryClient } from "@/lib/queryClient";
 import { AdminLayout } from "@/components/admin/admin-layout";
-// Suppression de l'import RealtimeStatusBadge qui est maintenant géré par AdminLayout
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   Loader2,

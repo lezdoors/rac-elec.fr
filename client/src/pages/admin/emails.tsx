@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { AdminLayout } from "@/components/admin/admin-layout";
-// Suppression de l'import RealtimeStatusBadge qui est maintenant géré par AdminLayout
 import { getSenderName, getSenderInitial, getEmailSubject } from "@/lib/email-helpers";
 import { apiRequest, getQueryFn, queryClient } from "@/lib/queryClient";
 import { useAuth } from "@/hooks/use-auth";
