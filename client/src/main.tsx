@@ -35,15 +35,18 @@ if (rootElement) {
 
 // Safe performance optimization without external files
 
-// Basic performance optimizations only
+// MOBILE PERFORMANCE: Optimized image loading strategy
 setTimeout(() => {
-  // Simple image optimization without breaking layout
+  // Aggressive lazy loading for mobile performance
   const images = document.querySelectorAll('img');
   images.forEach((img, index) => {
-    if (index === 0) {
+    // Keep first 2 images eager for LCP, rest lazy
+    if (index < 2) {
       img.loading = 'eager';
+      img.decoding = 'sync'; // Immediate decode for above-fold
     } else {
       img.loading = 'lazy';
+      img.decoding = 'async'; // Background decode for below-fold
     }
   });
-}, 100);
+}, 50); // Faster execution for mobile
