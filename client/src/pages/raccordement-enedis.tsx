@@ -14,7 +14,7 @@ import { ChevronLeft, ChevronRight, CheckCircle, MessageCircle, X, Clock, Shield
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getGclid } from "@/lib/clean-gclid";
 import { EnhancedMobileFormOptimizer } from "@/components/enhanced-mobile-form-optimizer";
-import "../styles/mobile-performance.css";
+import "../styles/conversion-critical.css";
 
 // Hook pour optimiser les performances mobiles
 const useMobileOptimization = () => {
