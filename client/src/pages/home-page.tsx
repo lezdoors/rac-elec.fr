@@ -214,7 +214,7 @@ export default function HomePage() {
         </section>
 
         {/* REPLACE: Étapes du processus de raccordement électrique Enedis */}
-        <section className="py-16 bg-white" id="process-section">
+        <section className="py-16 bg-white" id="process">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
@@ -279,7 +279,7 @@ export default function HomePage() {
 
             </div>
 
-            <div className="text-center mt-12">
+            <div className="text-center mt-12" id="services">
               <Link href="/raccordement-enedis">
                 <button className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg">
                   Commencer maintenant
@@ -290,7 +290,7 @@ export default function HomePage() {
         </section>
 
         {/* Contact Section - Clean */}
-        <section className="py-16 bg-blue-600 text-white" id="contact-section">
+        <section className="py-16 bg-blue-600 text-white" id="contact">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold mb-4">
@@ -368,15 +368,33 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* Simple Footer */}
+      {/* Google 2025 Required Footer Navigation */}
       <footer className="bg-gray-800 text-white py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm">
-            09 70 70 95 70 · contact@raccordement-connect.com · horaires 8h–18h
-          </p>
-          <div className="mt-4 text-xs text-gray-400">
-            <Link href="/mentions-legales" className="hover:text-white mr-4">Mentions légales</Link>
-            <Link href="/politique-confidentialite" className="hover:text-white">Politique de confidentialité</Link>
+        <div className="container mx-auto px-4">
+          {/* Footer Navigation Links */}
+          <div className="footer-nav grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <Link href="/raccordement-residentiel" className="text-gray-300 hover:text-white transition-colors">
+              Raccordement résidentiel
+            </Link>
+            <Link href="/raccordement-photovoltaique" className="text-gray-300 hover:text-white transition-colors">
+              Raccordement solaire
+            </Link>
+            <Link href="#contact" className="text-gray-300 hover:text-white transition-colors">
+              Contact
+            </Link>
+            <Link href="/mentions-legales" className="text-gray-300 hover:text-white transition-colors">
+              Mentions légales
+            </Link>
+          </div>
+          
+          {/* Contact Info */}
+          <div className="text-center border-t border-gray-700 pt-6">
+            <p className="text-sm text-gray-300">
+              09 70 70 95 70 · contact@raccordement-connect.com · horaires 8h–18h
+            </p>
+            <div className="mt-2 text-xs text-gray-400">
+              <Link href="/politique-confidentialite" className="hover:text-white">Politique de confidentialité</Link>
+            </div>
           </div>
         </div>
       </footer>
