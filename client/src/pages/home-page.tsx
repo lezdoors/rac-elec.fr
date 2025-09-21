@@ -368,36 +368,109 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* Google 2025 Required Footer Navigation */}
-      <footer className="bg-gray-800 text-white py-8">
+      {/* Extended Footer with Services - Matching Screenshots */}
+      <footer className="bg-blue-900 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            {/* Company Info Section */}
+            <div>
+              <div className="flex items-center mb-4">
+                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
+                  <HomeIcon className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white">Votre partenaire</h3>
+                  <p className="text-blue-200 text-sm">Raccordement électrique</p>
+                </div>
+              </div>
+              <p className="text-blue-200 text-sm mb-4">
+                Votre partenaire expert pour tous vos projets de raccordement électrique en France.
+              </p>
+              <div className="bg-blue-800 rounded-lg p-4">
+                <div className="flex items-center">
+                  <Phone className="w-5 h-5 text-white mr-2" />
+                  <span className="text-white font-semibold">09 70 70 95 70</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Services spécialisés Section */}
+            <div>
+              <h3 className="font-semibold text-white mb-4">Services spécialisés</h3>
+              <ul className="space-y-2 text-blue-200">
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+                  Raccordement définitif
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+                  Raccordement provisoire
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+                  Viabilisation terrain
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+                  Vérification compteur
+                </li>
+              </ul>
+            </div>
+
+            {/* Votre projet Section */}
+            <div>
+              <h3 className="font-semibold text-white mb-4">Votre projet</h3>
+              <div className="bg-green-600 rounded-lg p-4 text-center">
+                <button 
+                  onClick={() => setShowCallbackModal(true)}
+                  className="bg-green-500 hover:bg-green-400 text-white font-bold px-6 py-3 rounded-lg w-full transition-colors"
+                >
+                  Demander un devis →
+                </button>
+              </div>
+              <div className="mt-4 text-blue-200 text-sm">
+                <p>✓ Service certifié professionnel</p>
+                <p>✓ Paiement 100% sécurisé</p>
+                <p>✓ Traitement rapide 24-48h</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </footer>
+
+      {/* Bottom Footer with Navigation Links */}
+      <div className="bg-gray-800 text-white py-6">
         <div className="container mx-auto px-4">
           {/* Footer Navigation Links */}
-          <div className="footer-nav grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-            <Link href="/raccordement-residentiel" className="text-gray-300 hover:text-white transition-colors">
+          <div className="footer-nav grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 text-center">
+            <Link href="/raccordement-residentiel" className="text-gray-300 hover:text-white transition-colors text-sm">
               Raccordement résidentiel
             </Link>
-            <Link href="/raccordement-photovoltaique" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/raccordement-photovoltaique" className="text-gray-300 hover:text-white transition-colors text-sm">
               Raccordement solaire
             </Link>
-            <Link href="#contact" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="#contact" className="text-gray-300 hover:text-white transition-colors text-sm">
               Contact
             </Link>
-            <Link href="/mentions-legales" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/mentions-legales" className="text-gray-300 hover:text-white transition-colors text-sm">
               Mentions légales
             </Link>
           </div>
           
           {/* Contact Info */}
-          <div className="text-center border-t border-gray-700 pt-6">
+          <div className="text-center border-t border-gray-700 pt-4">
             <p className="text-sm text-gray-300">
               09 70 70 95 70 · contact@raccordement-connect.com · horaires 8h–18h
             </p>
             <div className="mt-2 text-xs text-gray-400">
-              <Link href="/politique-confidentialite" className="hover:text-white">Politique de confidentialité</Link>
+              <Link href="/politique-confidentialite" className="hover:text-white mr-4">Politique de confidentialité</Link>
+              <span>© 2025 Portail Électricité.com - Tous droits réservés</span>
             </div>
           </div>
         </div>
-      </footer>
+      </div>
 
       {/* Performance Components */}
       <PerformanceOptimizer />
