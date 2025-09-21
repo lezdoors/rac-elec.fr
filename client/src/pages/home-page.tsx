@@ -193,20 +193,187 @@ export default function HomePage() {
               Un seul formulaire, un accompagnement complet.
             </p>
 
-            {/* Main CTA Buttons - Per requirements */}
+            {/* Original Hero Service Cards */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-12 max-w-4xl mx-auto">
+              <Link href="/raccordement-residentiel" className="group">
+                <div className="bg-white/15 hover:bg-white/25 rounded-xl p-6 text-center transition-colors">
+                  <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-3 mx-auto">
+                    <HomeIcon className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-white mb-1">Maison neuve</h3>
+                  <p className="text-white/80 text-sm">Habitation individuelle</p>
+                </div>
+              </Link>
+              
+              <Link href="/raccordement-definitif" className="group">
+                <div className="bg-white/15 hover:bg-white/25 rounded-xl p-6 text-center transition-colors">
+                  <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-3 mx-auto">
+                    <Building className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-white mb-1">Définitif</h3>
+                  <p className="text-white/80 text-sm">Locaux professionnels</p>
+                </div>
+              </Link>
+              
+              <Link href="/raccordement-provisoire" className="group">
+                <div className="bg-white/15 hover:bg-white/25 rounded-xl p-6 text-center transition-colors">
+                  <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-3 mx-auto">
+                    <Clock className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-white mb-1">Provisoire</h3>
+                  <p className="text-white/80 text-sm">Chantiers temporaires</p>
+                </div>
+              </Link>
+              
+              <Link href="/viabilisation" className="group">
+                <div className="bg-white/15 hover:bg-white/25 rounded-xl p-6 text-center transition-colors">
+                  <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-3 mx-auto">
+                    <MapPin className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-white mb-1">Viabilisation</h3>
+                  <p className="text-white/80 text-sm">Parcelles terrain</p>
+                </div>
+              </Link>
+            </div>
+
+            {/* Main CTA */}
             <div className="text-center mt-10">
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link href="/raccordement-enedis#formulaire-raccordement" data-testid="hero-cta-start">
-                  <button className="bg-yellow-400 text-black font-bold px-8 py-4 rounded-lg text-lg hover:bg-yellow-300 transition-colors shadow-lg min-w-[220px]">
-                    Commencer ma demande
-                  </button>
-                </Link>
+              <Link href="/raccordement-enedis#formulaire-raccordement">
+                <button className="bg-yellow-400 text-black font-bold px-8 py-4 rounded-lg text-lg hover:bg-yellow-300 transition-colors shadow-lg">
+                  Déposer ma demande
+                </button>
+              </Link>
+              <p className="text-white/80 text-sm mt-4">145 raccordements traités ce mois-ci</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Votre Demande de Raccordement Section */}
+        <section className="py-16 bg-gray-50" id="formulaire-raccordement">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-4">
+                  Votre Demande de <span className="font-semibold text-green-600">Raccordement</span>
+                </h2>
+                <p className="text-gray-600 text-lg">Processus simplifié en 4 étapes pour votre raccordement Enedis personnalisé</p>
+              </div>
+              
+              <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                <div className="text-center mb-8">
+                  <p className="text-gray-700 mb-2">Besoin d'aide pour remplir le formulaire ?</p>
+                  <div className="flex items-center justify-center gap-4">
+                    <span className="text-2xl font-bold text-blue-600">📞 09 70 70 95 70</span>
+                    <span className="text-gray-500">Lundi-Vendredi 8h-18h</span>
+                  </div>
+                </div>
+                
+                <div className="text-center">
+                  <Link href="/raccordement-enedis">
+                    <button className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg">
+                      Démarrer ma demande
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Quel type de raccordement vous correspond ? */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                  Quel type de <span className="text-blue-600">raccordement</span> vous correspond ?
+                </h2>
+                <p className="text-gray-600">Choisir parmi un unique. Découvrez la solution électrique adaptée à vos besoins spécifiques.</p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                {/* Raccordement Définitif */}
+                <div className="bg-blue-50 rounded-xl p-6 border border-blue-100">
+                  <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+                    <Building className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Raccordement Définitif</h3>
+                  <p className="text-gray-600 text-sm mb-4">Pour nouveau construction, renouvellement ou augmentation de puissance électrique.</p>
+                  <Link href="/raccordement-definitif" className="text-blue-600 text-sm font-medium hover:underline">
+                    En savoir plus →
+                  </Link>
+                </div>
+
+                {/* Raccordement Provisoire */}
+                <div className="bg-blue-50 rounded-xl p-6 border border-blue-100">
+                  <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+                    <Clock className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Raccordement Provisoire</h3>
+                  <p className="text-gray-600 text-sm mb-4">Solution temporaire pour chantiers et événements limités dans le temps.</p>
+                  <Link href="/raccordement-provisoire" className="text-blue-600 text-sm font-medium hover:underline">
+                    En savoir plus →
+                  </Link>
+                </div>
+
+                {/* Viabilisation */}
+                <div className="bg-blue-50 rounded-xl p-6 border border-blue-100">
+                  <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+                    <MapPin className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Viabilisation</h3>
+                  <p className="text-gray-600 text-sm mb-4">Préparation et équipement électrique de parcelles terrain d'énergie verte.</p>
+                  <Link href="/viabilisation" className="text-blue-600 text-sm font-medium hover:underline">
+                    En savoir plus →
+                  </Link>
+                </div>
+
+                {/* Consuel */}
+                <div className="bg-gray-50 rounded-xl p-6 border border-gray-100">
+                  <div className="w-12 h-12 bg-gray-600 rounded-lg flex items-center justify-center mb-4">
+                    <ShieldCheck className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Consuel</h3>
+                  <p className="text-gray-600 text-sm mb-4">Attestation et mise à niveau de votre installation électrique.</p>
+                  <Link href="/consuel" className="text-gray-600 text-sm font-medium hover:underline">
+                    En savoir plus →
+                  </Link>
+                </div>
+
+                {/* Raccordement Collectif */}
+                <div className="bg-gray-50 rounded-xl p-6 border border-gray-100">
+                  <div className="w-12 h-12 bg-gray-600 rounded-lg flex items-center justify-center mb-4">
+                    <Users className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Raccordement Collectif</h3>
+                  <p className="text-gray-600 text-sm mb-4">Solutions pour immeubles, résidences et copropriétés.</p>
+                  <Link href="/raccordement-collectif" className="text-gray-600 text-sm font-medium hover:underline">
+                    En savoir plus →
+                  </Link>
+                </div>
+
+                {/* Comptage Électrique */}
+                <div className="bg-green-50 rounded-xl p-6 border border-green-100">
+                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
+                    <Zap className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Comptage Électrique</h3>
+                  <p className="text-gray-600 text-sm mb-4">Raccordement pour générateur solaires et production d'énergie verte.</p>
+                  <Link href="/comptage-electrique" className="text-green-600 text-sm font-medium hover:underline">
+                    En savoir plus →
+                  </Link>
+                </div>
+
+              </div>
+
+              <div className="text-center mt-12">
+                <p className="text-gray-600 mb-4">Besoin d'aide pour choisir ?</p>
                 <button 
                   onClick={() => setShowCallbackModal(true)}
-                  className="border-2 border-white text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-white hover:text-[#0046a2] transition-colors min-w-[180px]"
-                  data-testid="hero-cta-callback"
+                  className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
                 >
-                  Être rappelé(e)
+                  📞 09 70 70 95 70
                 </button>
               </div>
             </div>
