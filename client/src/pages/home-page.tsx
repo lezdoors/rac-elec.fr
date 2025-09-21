@@ -286,19 +286,21 @@ export default function HomePage() {
       <main id="main-content">
       <section className="bg-[#0046a2] text-white py-16 md:py-20" id="hero">
         <div className="container mx-auto px-4 max-w-6xl text-center">
-          {/* Badge */}
-          <div className="hidden sm:inline-flex items-center rounded-full bg-white/10 px-3 py-1 mb-6 border border-white/20">
-            <span className="text-sm font-medium text-white">Partenaire n°1 en France</span>
+          {/* Authority Badge - Always visible like competitor */}
+          <div className="inline-flex items-center rounded-full bg-white/10 px-4 py-2 mb-6 border border-white/20">
+            <span className="text-sm md:text-base font-semibold text-white">🏆 Leader en France pour les raccordements Enedis</span>
           </div>
           
-          {/* Main Title - Optimized for mobile LCP */}
-          <h1 className="text-2xl sm:text-3xl md:text-6xl font-semibold text-white mb-4 leading-snug md:leading-tight">
-            Votre raccordement Enedis, simplifié.
+          {/* Main Title - Simplified like competitor */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Le raccordement Enedis. <br className="hidden md:block"/>
+            <span className="text-yellow-300">Simple et rapide !</span>
           </h1>
           
-          {/* Subtitle */}
-          <p className="hidden md:block text-lg md:text-xl mb-6 max-w-2xl mx-auto text-white/90">
-            Particuliers, professionnels ou terrains à viabiliser — un seul formulaire, un service 100% en ligne.
+          {/* Subtitle - More compelling like competitor */}
+          <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto text-white/95 leading-relaxed">
+            Particuliers et professionnels. Quel que soit le type de demande de raccordement Enedis. 
+            <span className="font-semibold text-yellow-300"> Un seul formulaire !</span>
           </p>
           {/* Navigation Icons - Simplified */}
           <div className="flex justify-center gap-6 mb-10 lg:hidden">
@@ -367,18 +369,25 @@ export default function HomePage() {
             </Link>
           </div>
           
-          {/* Main CTA Button */}
+          {/* Main CTA Buttons - Like competitor */}
           <div className="text-center mt-10">
-            <Link href="/raccordement-enedis#formulaire-raccordement">
-              <button className="bg-white text-[#0046a2] font-semibold px-8 py-4 rounded-lg text-lg hover:bg-[#0046a2] hover:text-white transition-colors shadow-lg">
-                Déposer ma demande
-              </button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link href="/raccordement-enedis#formulaire-raccordement">
+                <button className="bg-yellow-400 text-black font-bold px-8 py-4 rounded-lg text-lg hover:bg-yellow-300 transition-colors shadow-lg transform hover:scale-105 min-w-[200px]">
+                  Commencer ma demande
+                </button>
+              </Link>
+              <Link href="/contact-page">
+                <button className="bg-white/20 border-2 border-white text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-white hover:text-[#0046a2] transition-colors min-w-[180px]">
+                  Nous contacter
+                </button>
+              </Link>
+            </div>
             
             {/* Counter */}
             <div className="mt-6">
               <p className="text-white/90 text-sm">
-                <span className="font-semibold">{activeUsersCount}</span> demandes traitées en temps réel
+                <span className="font-semibold text-yellow-300">{activeUsersCount}</span> demandes traitées ce mois-ci
               </p>
             </div>
           </div>
@@ -415,206 +424,212 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* Section types de raccordements - Enhanced UX */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white mt-[20px] mb-[20px] pt-[30px] pb-[30px]" id="types-raccordements">
+      {/* Section types de raccordements - Simplified like competitor */}
+      <section className="py-16 bg-white" id="types-raccordements">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-800 text-sm font-medium mb-6">
-              Solutions sur mesure
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Quel type de <span className="text-[#0072CE]">raccordement</span> vous correspond ?
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              Tous types de raccordement Enedis
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Chaque projet est unique. Découvrez la solution électrique adaptée à vos besoins spécifiques.
+            <p className="text-lg text-gray-600">
+              Particuliers et professionnels. Quel que soit le type de demande de raccordement Enedis. Un seul formulaire !
             </p>
           </div>
           
-          {/* Mobile version - Optimisé tactile avec retour visuel parfait */}
-          {isMobile && (
-          <div className="max-w-lg mx-auto px-4">
-            <div className="space-y-3">
-              {/* Ligne 1: Raccordement Définitif + Raccordement Provisoire */}
-              <div className="grid grid-cols-2 gap-3">
-                <Link href="/raccordement-enedis?type=definitif#top" className="group touch-manipulation select-none" aria-label="Raccordement électrique définitif Enedis pour maisons individuelles">
-                  <article className="bg-white border-gray-200 rounded-xl p-4 shadow-sm border hover:shadow-md hover:border-[#0072CE]/30 active:scale-95 active:shadow-sm transition-all duration-200 text-center h-full min-h-[120px]">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform">
-                      <HomeIcon className="h-6 w-6 text-white" />
-                    </div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-tight">Raccordement Définitif Enedis</h3>
-                    <p className="text-xs text-gray-600 leading-relaxed">Nouveau branchement électrique permanent pour maisons individuelles et locaux professionnels</p>
-                  </article>
-                </Link>
-                
-                <Link href="/raccordement-enedis?type=provisoire#top" className="group touch-manipulation select-none" aria-label="Raccordement électrique provisoire Enedis pour chantiers temporaires">
-                  <article className="bg-white border-gray-200 rounded-xl p-4 shadow-sm border hover:shadow-md hover:border-[#0072CE]/30 active:scale-95 active:shadow-sm transition-all duration-200 text-center h-full min-h-[120px]">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform">
-                      <Clock className="h-6 w-6 text-white" />
-                    </div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-tight">Raccordement Provisoire Enedis</h3>
-                    <p className="text-xs text-gray-600 leading-relaxed">Alimentation électrique temporaire pour chantiers et installations éphémères</p>
-                  </article>
-                </Link>
-              </div>
-              
-              {/* Ligne 2: Viabilisation + Modification de Puissance */}
-              <div className="grid grid-cols-2 gap-3">
-                <Link href="/raccordement-enedis?type=viabilisation#top" className="group touch-manipulation select-none" aria-label="Viabilisation électrique terrain par Enedis">
-                  <article className="bg-white border-gray-200 rounded-xl p-4 shadow-sm border hover:shadow-md hover:border-[#0072CE]/30 active:scale-95 active:shadow-sm transition-all duration-200 text-center h-full min-h-[120px]">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform">
-                      <Server className="h-6 w-6 text-white" />
-                    </div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-tight">Viabilisation Électrique Enedis</h3>
-                    <p className="text-xs text-gray-600 leading-relaxed">Préparation et équipement électrique complet de votre terrain constructible</p>
-                  </article>
-                </Link>
-                
-                <Link href="/raccordement-enedis?type=modification#top" className="group touch-manipulation select-none" aria-label="Modification de puissance électrique Enedis">
-                  <article className="bg-white border-gray-200 rounded-xl p-4 shadow-sm border hover:shadow-md hover:border-[#0072CE]/30 active:scale-95 active:shadow-sm transition-all duration-200 text-center h-full min-h-[120px]">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform">
-                      <Wrench className="h-6 w-6 text-white" />
-                    </div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-tight">Modification de Puissance Enedis</h3>
-                    <p className="text-xs text-gray-600 leading-relaxed">Augmentation ou réduction de puissance sur installation électrique existante</p>
-                  </article>
-                </Link>
-              </div>
-              
-              {/* Ligne 3: Raccordement Collectif + Production Électrique */}
-              <div className="grid grid-cols-2 gap-3">
-                <Link href="/raccordement-enedis?type=collectif#top" className="group touch-manipulation select-none" aria-label="Raccordement électrique collectif Enedis pour immeubles">
-                  <article className="bg-white border-gray-200 rounded-xl p-4 shadow-sm border hover:shadow-md hover:border-[#0072CE]/30 active:scale-95 active:shadow-sm transition-all duration-200 text-center h-full min-h-[120px]">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform">
-                      <Building className="h-6 w-6 text-white" />
-                    </div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-tight">Raccordement Collectif Enedis</h3>
-                    <p className="text-xs text-gray-600 leading-relaxed">Solutions électriques pour immeubles, résidences et copropriétés</p>
-                  </article>
-                </Link>
-                
-                <Link href="/raccordement-enedis?type=production#top" className="group touch-manipulation select-none" aria-label="Raccordement production électrique Enedis panneaux solaires">
-                  <article className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 rounded-xl p-4 shadow-sm border hover:shadow-md hover:border-green-300 active:scale-95 active:shadow-sm transition-all duration-200 text-center h-full min-h-[120px]">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#5BC248] to-[#4a9c3a] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform">
-                      <BarChart className="h-6 w-6 text-white" />
-                    </div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-tight">Production Électrique Enedis</h3>
-                    <p className="text-xs text-gray-600 leading-relaxed">Raccordement panneaux solaires et injection d'énergie verte au réseau</p>
-                    <span className="inline-block mt-2 px-2 py-0.5 text-xs font-medium bg-green-200 text-green-800 rounded-full">Écologique</span>
-                  </article>
-                </Link>
-              </div>
-            </div>
-          </div>
-          )}
-
-          {/* Desktop version - Keep full cards avec optimisations performance */}
-          {!isMobile && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto layout-optimized deferred-content">
+          {/* Service Grid - Like competitor with 6 services */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
+            
             {/* Raccordement Définitif */}
-            <Link href="/raccordement-enedis?type=definitif#top" className="group">
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-lg hover:border-[#0072CE]/30 transition-all duration-300 transform hover:-translate-y-1">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <HomeIcon className="h-7 w-7 text-white" />
+            <Link href="/raccordement-enedis?type=definitif" className="group">
+              <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-6 text-center hover:shadow-lg transition-all">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                  <HomeIcon className="h-6 w-6 md:h-8 md:w-8 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Raccordement Définitif</h3>
-                <p className="text-gray-600 mb-4">Pour maisons individuelles, appartements et locaux professionnels</p>
-                <div className="flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
-                  En savoir plus
-                  <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                </div>
+                <h3 className="font-semibold text-gray-900 mb-2 text-sm md:text-base">Raccordement Enedis Définitif / ajout de compteur linky</h3>
               </div>
             </Link>
-            
+
             {/* Raccordement Provisoire */}
-            <Link href="/raccordement-enedis?type=provisoire#top" className="group">
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-lg hover:border-[#0072CE]/30 transition-all duration-300 transform hover:-translate-y-1">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Clock className="h-7 w-7 text-white" />
+            <Link href="/raccordement-enedis?type=provisoire" className="group">
+              <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-6 text-center hover:shadow-lg transition-all">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-orange-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                  <Clock className="h-6 w-6 md:h-8 md:w-8 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Raccordement Provisoire</h3>
-                <p className="text-gray-600 mb-4">Solution temporaire pour chantiers et installations éphémères</p>
-                <div className="flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
-                  En savoir plus
-                  <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                </div>
+                <h3 className="font-semibold text-gray-900 mb-2 text-sm md:text-base">Raccordement Enedis provisoire</h3>
               </div>
             </Link>
-            
+
             {/* Viabilisation */}
-            <Link href="/raccordement-enedis?type=viabilisation#top" className="group">
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-lg hover:border-[#0072CE]/30 transition-all duration-300 transform hover:-translate-y-1">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Server className="h-7 w-7 text-white" />
+            <Link href="/raccordement-enedis?type=viabilisation" className="group">
+              <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-6 text-center hover:shadow-lg transition-all">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-green-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                  <MapPin className="h-6 w-6 md:h-8 md:w-8 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Viabilisation</h3>
-                <p className="text-gray-600 mb-4">Préparation et équipement électrique de votre terrain</p>
-                <div className="flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
-                  En savoir plus
-                  <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                </div>
+                <h3 className="font-semibold text-gray-900 mb-2 text-sm md:text-base">Viabilisation d'un terrain</h3>
               </div>
             </Link>
-            
-            {/* Modification */}
-            <Link href="/raccordement-enedis?type=modification#top" className="group">
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-lg hover:border-[#0072CE]/30 transition-all duration-300 transform hover:-translate-y-1">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Wrench className="h-7 w-7 text-white" />
+
+            {/* Modification de raccordement */}
+            <Link href="/raccordement-enedis?type=modification" className="group">
+              <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-6 text-center hover:shadow-lg transition-all">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-purple-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                  <Settings className="h-6 w-6 md:h-8 md:w-8 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Modification</h3>
-                <p className="text-gray-600 mb-4">Adaptation et mise à niveau de votre installation existante</p>
-                <div className="flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
-                  En savoir plus
-                  <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                </div>
+                <h3 className="font-semibold text-gray-900 mb-2 text-sm md:text-base">Modification de raccordement Enedis</h3>
               </div>
             </Link>
-            
-            {/* Collectif */}
-            <Link href="/raccordement-enedis?type=collectif#top" className="group">
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-lg hover:border-[#0072CE]/30 transition-all duration-300 transform hover:-translate-y-1">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Building className="h-7 w-7 text-white" />
+
+            {/* Raccordement Collectif */}
+            <Link href="/raccordement-enedis?type=collectif" className="group">
+              <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-6 text-center hover:shadow-lg transition-all">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-indigo-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                  <Building className="h-6 w-6 md:h-8 md:w-8 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Raccordement Collectif</h3>
-                <p className="text-gray-600 mb-4">Solutions pour immeubles, résidences et copropriétés</p>
-                <div className="flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
-                  En savoir plus
-                  <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                </div>
+                <h3 className="font-semibold text-gray-900 mb-2 text-sm md:text-base">Raccordement Enedis collectif</h3>
               </div>
             </Link>
-            
-            {/* Production - Special highlight */}
-            <Link href="/raccordement-enedis?type=production#top" className="group">
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 shadow-sm border border-green-200 hover:shadow-lg hover:border-green-300 transition-all duration-300 transform hover:-translate-y-1">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#5BC248] to-[#4a9c3a] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <BarChart className="h-7 w-7 text-white" />
+
+            {/* Raccordement Photovoltaïque */}
+            <Link href="/raccordement-enedis?type=photovoltaique" className="group">
+              <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-6 text-center hover:shadow-lg transition-all">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-yellow-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                  <Power className="h-6 w-6 md:h-8 md:w-8 text-white" />
                 </div>
-                <div className="flex items-center mb-2">
-                  <h3 className="text-lg font-semibold text-gray-900">Production Électrique</h3>
-                  <span className="ml-2 px-2 py-1 text-xs font-medium bg-green-200 text-green-800 rounded-full">Écologique</span>
-                </div>
-                <p className="text-gray-600 mb-4">Raccordement pour panneaux solaires et production d'énergie verte</p>
-                <div className="flex items-center text-[#5BC248] font-medium text-sm group-hover:text-[#4a9c3a]">
-                  En savoir plus
-                  <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                </div>
+                <h3 className="font-semibold text-gray-900 mb-2 text-sm md:text-base">Raccordement Enedis photovoltaïque</h3>
               </div>
+            </Link>
+
+          </div>
+
+          {/* Single CTA Button like competitor */}
+          <div className="text-center mt-12">
+            <Link href="/raccordement-enedis">
+              <button className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg">
+                Commencer ma demande
+              </button>
             </Link>
           </div>
-          )}
+        </div>
+      </section>
+
+      {/* Process Section - Like competitor */}
+      <section className="py-16 bg-gray-50" id="process-section">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              Le raccordement Enedis, comment ça fonctionne ?
+            </h2>
+          </div>
           
-          {/* Help section */}
-          <div className="mt-12 text-center">
-            <div className="bg-blue-50 rounded-xl p-6 max-w-2xl mx-auto">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Besoin d'aide pour choisir ?</h3>
-              <p className="text-gray-600 mb-4">Nos experts vous accompagnent dans le choix de la solution la plus adaptée à votre projet.</p>
-              <a href="tel:0970709570" className="inline-flex items-center text-[#0072CE] font-medium hover:text-[#005eaa] transition-colors">
-                <Phone className="h-4 w-4 mr-2" />
-                09 70 70 95 70
-              </a>
+          {/* 4-step process like competitor with images */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            
+            <div className="text-center">
+              <div className="relative w-20 h-20 mx-auto mb-4">
+                <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center">
+                  <FileCheck className="w-10 h-10 text-white" loading="lazy" />
+                </div>
+                <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-white rounded-full flex items-center justify-center border-2 border-blue-600">
+                  <span className="text-blue-600 font-bold text-sm">1</span>
+                </div>
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Définir le type raccordement Enedis correspondant à mon besoin</h3>
+              <p className="text-gray-600 text-sm">Bénéficiez de notre outil pour définir la demande de raccordement qui correspond à votre besoin. C'est facile et rapide.</p>
             </div>
+
+            <div className="text-center">
+              <div className="relative w-20 h-20 mx-auto mb-4">
+                <div className="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center">
+                  <FileText className="w-10 h-10 text-white" loading="lazy" />
+                </div>
+                <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
+                  <span className="text-green-600 font-bold text-sm">2</span>
+                </div>
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Compléter un formulaire simple ou demander l'assistance de nos experts</h3>
+              <p className="text-gray-600 text-sm">Suivez les étapes du formulaire et renseignez votre projet de raccordement ou prenez rendez-vous avec un Expert.</p>
+            </div>
+
+            <div className="text-center">
+              <div className="relative w-20 h-20 mx-auto mb-4">
+                <div className="w-20 h-20 bg-orange-600 rounded-full flex items-center justify-center">
+                  <Send className="w-10 h-10 text-white" loading="lazy" />
+                </div>
+                <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-white rounded-full flex items-center justify-center border-2 border-orange-600">
+                  <span className="text-orange-600 font-bold text-sm">3</span>
+                </div>
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Nous nous occupons du dépôt du dossier, complet et conforme, chez Enedis</h3>
+              <p className="text-gray-600 text-sm">Nous dédions des experts pour étudier votre demande et vous assister à la constitution d'un dossier complet et conforme.</p>
+            </div>
+
+            <div className="text-center">
+              <div className="relative w-20 h-20 mx-auto mb-4">
+                <div className="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center">
+                  <CheckCircle2 className="w-10 h-10 text-white" loading="lazy" />
+                </div>
+                <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-white rounded-full flex items-center justify-center border-2 border-purple-600">
+                  <span className="text-purple-600 font-bold text-sm">4</span>
+                </div>
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Nous vous accompagnons dans votre raccordement Enedis de A à Z</h3>
+              <p className="text-gray-600 text-sm">Nous nous occupons du suivi de votre demande pas à pas tout en accélérant son avancement.</p>
+            </div>
+
+          </div>
+
+          <div className="text-center mt-12">
+            <Link href="/raccordement-enedis">
+              <button className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg">
+                Commencer ma demande
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section - Like competitor */}
+      <section className="py-16 bg-blue-600 text-white" id="contact-section">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              Besoin d'assistance dans votre démarche de raccordement Enedis ?
+            </h2>
+            <h3 className="text-xl mb-8">Contactez-nous</h3>
+            <p className="text-lg mb-8">Nous sommes à votre écoute</p>
+          </div>
+          
+          {/* Contact options like competitor */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            
+            <a href="tel:0970709570" className="text-center group" data-testid="contact-phone" aria-label="Appelez-nous au 09 70 70 95 70">
+              <div className="bg-white/20 rounded-lg p-6 hover:bg-white/30 transition-colors">
+                <Phone className="w-12 h-12 mx-auto mb-4 text-white" />
+                <h4 className="font-semibold text-white">Appelez-nous</h4>
+              </div>
+            </a>
+
+            <Link href="/contact-page" className="text-center group" data-testid="contact-callback">
+              <div className="bg-white/20 rounded-lg p-6 hover:bg-white/30 transition-colors">
+                <MessageCircle className="w-12 h-12 mx-auto mb-4 text-white" />
+                <h4 className="font-semibold text-white">Rappel gratuit</h4>
+              </div>
+            </Link>
+
+            <Link href="/contact-page" className="text-center group" data-testid="contact-chat">
+              <div className="bg-white/20 rounded-lg p-6 hover:bg-white/30 transition-colors">
+                <MessageCircle className="w-12 h-12 mx-auto mb-4 text-white" />
+                <h4 className="font-semibold text-white">Chat</h4>
+              </div>
+            </Link>
+
+            <Link href="/contact-page" className="text-center group" data-testid="contact-form">
+              <div className="bg-white/20 rounded-lg p-6 hover:bg-white/30 transition-colors">
+                <Mail className="w-12 h-12 mx-auto mb-4 text-white" />
+                <h4 className="font-semibold text-white">Formulaire de contact</h4>
+              </div>
+            </Link>
+
           </div>
         </div>
       </section>
