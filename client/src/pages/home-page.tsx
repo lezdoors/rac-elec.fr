@@ -104,6 +104,51 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden" style={{ willChange: 'auto' }}>
+      {/* Google-Required Navigation Header */}
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            <Link href="/" className="font-bold text-xl text-[#0046a2]">
+              Portail Électricité
+            </Link>
+            <nav className="hidden md:flex space-x-8">
+              <Link href="/" className="text-gray-700 hover:text-[#0046a2] font-medium">
+                Accueil
+              </Link>
+              <Link href="/raccordement-enedis" className="text-gray-700 hover:text-[#0046a2] font-medium">
+                Services
+              </Link>
+              <Link href="/tarifs" className="text-gray-700 hover:text-[#0046a2] font-medium">
+                Tarifs
+              </Link>
+              <Link href="/contact" className="text-gray-700 hover:text-[#0046a2] font-medium">
+                Contact
+              </Link>
+            </nav>
+            <div className="flex items-center space-x-4">
+              <span className="text-sm text-gray-600 hidden lg:block">09 70 70 95 70</span>
+              <button 
+                onClick={() => setShowCallbackModal(true)}
+                className="bg-[#0046a2] text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors"
+              >
+                Être rappelé(e)
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Google-Required Breadcrumbs */}
+      <div className="bg-gray-50 py-2">
+        <div className="container mx-auto px-4">
+          <nav className="text-sm text-gray-600">
+            <Link href="/" className="hover:text-[#0046a2]">Accueil</Link>
+            <span className="mx-2">/</span>
+            <span className="text-gray-900">Demande de raccordement Enedis</span>
+          </nav>
+        </div>
+      </div>
+
       <Helmet>
         <title>Demande de raccordement électrique Enedis | Portail</title>
         <meta name="description" content="Raccordement électrique Enedis simplifié. Un seul formulaire, un accompagnement complet. Service professionnel pour tous types de raccordements en France." />
@@ -149,9 +194,9 @@ export default function HomePage() {
       <main id="main-content">
         <section className="bg-[#0046a2] text-white py-16 md:py-20" id="hero">
           <div className="container mx-auto px-4 max-w-6xl text-center">
-            {/* Main Title - Per requirements */}
+            {/* Google-Compliant Action-Oriented Title */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Raccordement électrique Enedis, simplifié.
+              Commencez votre demande de raccordement Enedis ici
             </h1>
             
             {/* Subtitle - Per requirements */}
@@ -334,15 +379,85 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* Simple Footer */}
-      <footer className="bg-gray-800 text-white py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm">
-            09 70 70 95 70 · contact@raccordement-connect.com · horaires 8h–18h
-          </p>
-          <div className="mt-4 text-xs text-gray-400">
-            <Link href="/mentions-legales" className="hover:text-white mr-4">Mentions légales</Link>
-            <Link href="/politique-confidentialite" className="hover:text-white">Politique de confidentialité</Link>
+      {/* Google-Required Footer Navigation */}
+      <footer className="bg-gray-800 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Company Info */}
+            <div>
+              <h3 className="font-bold text-lg mb-4">Portail Électricité</h3>
+              <p className="text-gray-300 text-sm mb-4">
+                Service spécialisé dans les projets de raccordement électrique en France
+              </p>
+              <p className="text-sm">
+                📞 09 70 70 95 70<br />
+                ✉️ contact@raccordement-connect.com<br />
+                🕒 Horaires 8h–18h
+              </p>
+            </div>
+            
+            {/* Services Navigation */}
+            <div>
+              <h4 className="font-semibold mb-4">Services spécialisés</h4>
+              <nav className="space-y-2">
+                <Link href="/raccordement-neuf" className="block text-gray-300 hover:text-white text-sm">
+                  Maison neuve
+                </Link>
+                <Link href="/raccordement-definitif" className="block text-gray-300 hover:text-white text-sm">
+                  Raccordement définitif
+                </Link>
+                <Link href="/raccordement-provisoire" className="block text-gray-300 hover:text-white text-sm">
+                  Raccordement provisoire
+                </Link>
+                <Link href="/viabilisation-terrain" className="block text-gray-300 hover:text-white text-sm">
+                  Viabilisation terrain
+                </Link>
+              </nav>
+            </div>
+            
+            {/* Project Navigation */}
+            <div>
+              <h4 className="font-semibold mb-4">Votre projet</h4>
+              <nav className="space-y-2">
+                <Link href="/raccordement-enedis" className="block text-gray-300 hover:text-white text-sm">
+                  Démarrer une demande →
+                </Link>
+                <Link href="/tarifs" className="block text-gray-300 hover:text-white text-sm">
+                  Service contre professionnel
+                </Link>
+                <Link href="/contact" className="block text-gray-300 hover:text-white text-sm">
+                  Nous poser une question rapide 24-48h
+                </Link>
+                <Link href="/faq" className="block text-gray-300 hover:text-white text-sm">
+                  Questions fréquentes
+                </Link>
+              </nav>
+            </div>
+            
+            {/* Legal Navigation */}
+            <div>
+              <h4 className="font-semibold mb-4">Informations légales</h4>
+              <nav className="space-y-2">
+                <Link href="/mentions-legales" className="block text-gray-300 hover:text-white text-sm">
+                  Mentions légales
+                </Link>
+                <Link href="/politique-confidentialite" className="block text-gray-300 hover:text-white text-sm">
+                  Politique de confidentialité
+                </Link>
+                <Link href="/cgu" className="block text-gray-300 hover:text-white text-sm">
+                  CGU
+                </Link>
+                <Link href="/contact" className="block text-gray-300 hover:text-white text-sm">
+                  Contact
+                </Link>
+              </nav>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+            <p className="text-gray-400 text-sm">
+              © 2025 Portail Électricité - Tous droits réservés
+            </p>
           </div>
         </div>
       </footer>
