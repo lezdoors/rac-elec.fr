@@ -145,6 +145,40 @@ export default function HomePage() {
         `}</script>
       </Helmet>
 
+      {/* Google 2025 Required Navigation Header */}
+      <header className="site-nav bg-white shadow-sm sticky top-0 z-40">
+        <nav className="container mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="logo text-xl font-bold text-blue-600">
+              Portail Électricité
+            </Link>
+            <div className="nav-links hidden md:flex items-center space-x-6">
+              <Link href="#services" className="text-gray-700 hover:text-blue-600 transition-colors">Services</Link>
+              <Link href="#tarifs" className="text-gray-700 hover:text-blue-600 transition-colors">Tarifs</Link>
+              <Link href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors">Contact</Link>
+              <a href="tel:0970709570" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                09 70 70 95 70
+              </a>
+            </div>
+            {/* Mobile Menu Button */}
+            <button className="md:hidden p-2">
+              <Menu className="h-6 w-6 text-gray-700" />
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Anchor Navigation for Long Pages */}
+      <nav className="page-nav bg-gray-50 border-b">
+        <div className="container mx-auto px-4 py-2">
+          <div className="flex justify-center space-x-6 text-sm">
+            <a href="#process" className="text-gray-600 hover:text-blue-600 transition-colors">Comment ça marche</a>
+            <a href="#services" className="text-gray-600 hover:text-blue-600 transition-colors">Nos services</a>
+            <a href="#contact" className="text-gray-600 hover:text-blue-600 transition-colors">Devis gratuit</a>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <main id="main-content">
         <section className="bg-[#0046a2] text-white py-16 md:py-20" id="hero">

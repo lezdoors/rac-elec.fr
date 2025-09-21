@@ -1,0 +1,48 @@
+Here's the breakdown of Google's 2025 landing page requirements and what needs immediate fixing across all your sites:
+GOOGLE'S NEW 2025 LANDING PAGE RULES
+Core Changes (Verified from Research):
+1. Navigation Requirements (Critical)
+
+Google now views ease of navigation as a core part of the landing page experience The New Google Ads Quality Score in 2025 | RedPandas Digital
+Google introduced a new prediction model to better evaluate the quality of landing page experiences New Google Ads prediction model scores landing page navigation
+Pages without clear navigation are penalized heavily
+
+2. Landing Page Experience Scoring
+
+Google made a big move to assess quality differently in 2025. The company now puts more weight on user experience and transparency than ever before The Simple Way to Fix Your Google Ads Quality Score (2025 Guide)
+If your landing page isn't clear, Google will deprioritize your ad in search results Google Ads Updates Landing Page Quality Score System: What It Means For You
+
+3. "Dead End" Penalties
+
+The focus is on reducing "unexpected destinations" by evaluating whether pages offer easy navigation to relevant content New Google Ads prediction model scores landing page navigation
+Form-only pages without navigation paths are heavily penalized
+
+CRITICAL FIXES FOR ALL 4 SITES
+MUST-HAVE Elements (Apply to All Sites):
+1. Navigation Header
+html<header class="site-nav">
+  <nav>
+    <a href="/" class="logo">[SITE-NAME]</a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#contact">Contact</a>
+      <a href="tel:0123456789">01 23 45 67 89</a>
+    </div>
+  </nav>
+</header>
+2. Footer Navigation
+html<footer>
+  <div class="footer-nav">
+    <a href="/raccordement-residentiel">Raccordement résidentiel</a>
+    <a href="/raccordement-photovoltaique">Raccordement solaire</a>
+    <a href="/contact">Contact</a>
+    <a href="/mentions-legales">Mentions légales</a>
+  </div>
+</footer>
+3. Anchor Navigation on Long Pages
+html<nav class="page-nav">
+  <a href="#process">Comment ça marche</a>
+  <a href="#services">Nos services</a>
+  <a href="#contact">Devis gratuit</a>
+</nav>
