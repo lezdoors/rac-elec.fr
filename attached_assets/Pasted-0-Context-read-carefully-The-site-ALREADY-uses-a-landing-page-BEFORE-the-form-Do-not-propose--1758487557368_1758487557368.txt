@@ -1,0 +1,102 @@
+0) Context (read carefully)
+	•	The site ALREADY uses a landing page BEFORE the form. Do not propose reorganizing to “add a landing page.” Improve the existing landing page and connect it cleanly to the form flow.
+	•	Priority: reduce Google Ads CPC via better Quality Score (speed + relevance), increase CR via clearer value prop + trust.
+
+1) Objectives (ranked)
+	1.	Hero & Value Prop clarity (above the fold, mobile-first)
+	2.	Trust & Process visuals (4-step strip + badges)
+	3.	Conversion flow (CTAs, phone/email capture work flawlessly on mobile)
+	4.	Performance (Core Web Vitals: LCP < 2.5s, CLS < 0.1, INP < 200ms on mid-range mobile)
+	5.	No regressions (routing, form submission, Stripe, and dashboard remain intact)
+
+2) What to KEEP (don’t break)
+	•	Existing multi-step form route and data handling.
+	•	Current pricing and Stripe flow.
+	•	Admin/CRM connectivity.
+	•	French business hours + FR phone formats.
+
+3) Landing Page — REQUIRED sections & content
+
+A) Hero (above the fold)
+	•	Headline: “Raccordement électrique Enedis, simplifié.”
+	•	Sub-head: “Experts dédiés • Dossier conforme • Accompagnement de A à Z.”
+	•	Primary CTA (solid): “Commencer ma demande” → route directly to the form start.
+	•	Secondary CTA (outline): “Être rappelé(e)” → opens a compact modal with Nom, Email, Téléphone (FR) and a free text “Votre besoin”.
+	•	Add a compact trust row: “25 000+ dossiers traités · 15 ans d’expérience · 100% conformité”.
+
+B) Process (4 étapes, with icons/illustrations)
+	1.	“1 — Qualification du besoin”
+	2.	“2 — Constitution et vérification du dossier”
+	3.	“3 — Dépôt et suivi auprès d’Enedis”
+	4.	“4 — Validation et mise en service”
+Each step: one short sentence underneath. Include a “Commencer” mini-CTA after the strip (same target).
+
+C) Pourquoi nous ? (Trust + Proof)
+	•	Badges: “Conforme Enedis”, “Support 8h–18h”, “Paiement sécurisé”, “Données protégées (RGPD)”.
+	•	3 bullet points max: Expertise, Rapidité, Assistance humaine.
+	•	Mini testimonials (2–3 lines each). No stock “lorem ipsum”.
+
+D) FAQ (4–6 Q/R maximales)
+	•	Couvre délais, documents requis, coût, et accompagnement.
+
+E) Footer propre
+	•	Liens légaux, contact (09 70 70 95 70, contact@raccordement-connect.com), horaires 8h–18h. Aucune adresse physique.
+
+4) Visual & UI rules
+	•	Style: sobre, pro (inspi McKinsey/Apple). Pas de couleurs criardes.
+	•	Palette: fond très clair, textes #0F172A/ #111827, accent bleu administratif (proche Enedis) pour CTAs.
+	•	Icônes simples (outline). Illustrations légères SVG (pas de bibliothèques lourdes).
+	•	Mobile-first: éléments empilés, CTAs larges, padding généreux.
+	•	Remove any emoji in mobile headers.
+	•	Fix phone input: accepter tous les formats FR (+33, 0X XX XX XX XX) sans rejet inutile.
+
+5) Conversion flow fixes
+	•	Tous les CTAs du landing mènent soit au début de formulaire, soit au modal callback (aucun 404/scroll cassé).
+	•	Progress indicator visible dès le début du form (étapes claires).
+	•	Ne pas auto-sauver chaque étape (trop lourd) — capturer Step 1 (coordonnées) immédiatement, puis soumettre le reste à la fin.
+	•	Validation douce (messages clairs, FR), pas de blocages agressifs.
+	•	Retirer la case “Je souhaite recevoir…” si demandé; rester strictement service-oriented.
+
+6) Performance (Core Web Vitals) — do this now
+	•	Images: next-gen formats, tailles adaptées, loading="lazy" hors above-the-fold; single hero image optimisée (pas de sliders lourds).
+	•	Code: supprimer dépendances inutiles, tree-shaking, pas de libs UI massives juste pour 2 icônes.
+	•	Bundle: code-split du formulaire (lazy load) — le form ne charge pas sur la landing tant que non cliqué.
+	•	Fonts: 1–2 familles max, display swap.
+	•	CSS: éviter animations coûteuses au fold.
+	•	No monitoring/plugin qui a déjà cassé l’app. Pas d’injecteurs LCP exotiques.
+	•	Targets mesurables (mobile, émul. mid-range):
+	•	LCP < 2.5s, CLS < 0.1, INP < 200ms, TTFB < 800ms.
+
+7) SEO / Ads Quality Score
+	•	Title/Meta: inclure “Raccordement électrique Enedis”, “dossier conforme”, “accompagnement”.
+	•	H1 unique = Hero Headline.
+	•	FAQ en accord avec les requêtes (“demande de raccordement Enedis”, “documents nécessaires”, “délais raccordement”).
+	•	Sémantique claire (sections ,  explicites).
+	•	Aucune mention d’affiliation officielle non prouvable.
+
+8) Analytics & Events (sans casser la perf)
+	•	GA4/GTM déjà présents ? S’assurer d’événements:
+	•	lp_view, cta_click_start, callback_open, callback_submit, form_start, form_submit, purchase.
+	•	Enhanced conversions: hash email/tel uniquement si déjà collectés avec consentement.
+	•	Pas de librairie d’AB testing lourde pour l’instant.
+
+9) Acceptance Criteria (Definition of Done)
+	•	✅ Landing page garde la structure précédente mais plus claire et plus rapide.
+	•	✅ Tous les CTAs fonctionnent et mènent au bon endroit (aucun 404, aucune ancre morte).
+	•	✅ Modal “Être rappelé(e)” valide tous formats FR et envoie correctement.
+	•	✅ 4-step process visible, avec icônes propres, pas de texte-mur.
+	•	✅ LCP mobile ≤ 2.5s sur 4G simulée, CLS ≤ 0.1.
+	•	✅ Aucun composant de monitoring/“optimisation magique” ajouté qui casse l’app.
+	•	✅ Aucune régression: Stripe, form flow, CRM OK.
+	•	✅ Tous textes en FR correct, sans emojis en titres.
+
+10) Deliverables
+	1.	PR/commit unique “Landing+Perf Quick Wins” avec:
+	•	Hero refactor + CTAs + modal callback
+	•	Process 4 étapes (SVG, légers)
+	•	Trust badges + mini témoignages
+	•	Footer propre
+	•	Lazy-load du form (code split)
+	•	Optimisations images & fonts
+	•	Événements analytics listés
+	2.	Rapport court (checklist) avec mesures Lighthouse mobile AVANT/APRÈS.
