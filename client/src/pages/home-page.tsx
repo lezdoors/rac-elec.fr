@@ -380,6 +380,338 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Service de raccordement électrique Enedis en ligne */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                  Service de raccordement électrique Enedis en ligne
+                </h2>
+                <p className="text-gray-600">Étapes du processus de raccordement électrique Enedis</p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold text-xl">1</span>
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Demande en ligne</h3>
+                  <p className="text-gray-600 text-sm">Formulaire sécurisé depuis cette plateforme</p>
+                </div>
+
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold text-xl">2</span>
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Étude et devis</h3>
+                  <p className="text-gray-600 text-sm">Analyse technique et proposition économique</p>
+                </div>
+
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold text-xl">3</span>
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Intervention</h3>
+                  <p className="text-gray-600 text-sm">Pose de votre nouveau raccordement</p>
+                </div>
+
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold text-xl">4</span>
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Mise en service</h3>
+                  <p className="text-gray-600 text-sm">Raccordement opérationnel et testage</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Types de raccordements électriques Enedis */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                  Types de raccordements électriques Enedis
+                </h2>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="flex justify-between items-center py-4 border-b border-gray-200">
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Raccordement définitif</h3>
+                    <p className="text-gray-600 text-sm">Construction et rénovation électrique</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-blue-600 font-semibold">Non-obligatoire provisoire</span>
+                    <Link href="/raccordement-definitif" className="block text-blue-600 text-sm hover:underline">Détail →</Link>
+                  </div>
+                </div>
+                
+                <div className="flex justify-between items-center py-4 border-b border-gray-200">
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Installation provisoire</h3>
+                    <p className="text-gray-600 text-sm">Alimentation en chantiers électriques</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-blue-600 font-semibold">Solution d'énergie temps</span>
+                    <Link href="/raccordement-provisoire" className="block text-blue-600 text-sm hover:underline">Détail →</Link>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center mt-12">
+                <p className="text-gray-600 mb-4">J'ai une question technique ?</p>
+                <p className="text-gray-500 text-sm">Formulaire raccordement Enedis ⚡</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Performance Indicators */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                  Indicateurs de performance du service de raccordement Enedis
+                </h2>
+                <p className="text-gray-600">Données officielles sur la qualité de service dédiées aux raccordements électriques France dans la l'humanité de territoire français.</p>
+                <p className="text-gray-500 text-sm mt-2">Indicateurs de performance - Année 2024</p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div className="bg-white rounded-xl p-6 shadow-lg text-center">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle2 className="w-8 h-8 text-green-600" />
+                  </div>
+                  <div className="text-3xl font-bold text-green-600 mb-2">99.2%</div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Satisfaction globale raccordement électrique</h3>
+                  <p className="text-gray-600 text-sm">Clients satisfaits de leur processus de raccordement selon notre enquête de satisfaction du service client</p>
+                  <p className="text-gray-500 text-xs mt-2">Base : 2 987 répondants clients</p>
+                </div>
+
+                <div className="bg-white rounded-xl p-6 shadow-lg text-center">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Clock className="w-8 h-8 text-blue-600" />
+                  </div>
+                  <div className="text-3xl font-bold text-blue-600 mb-2">97.8%</div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Délais raccordement France respectés</h3>
+                  <p className="text-gray-600 text-sm">Raccordements effectués dans les temps prévus pour les demandes de nos clients en France</p>
+                  <p className="text-gray-500 text-xs mt-2">Base : délais officiels de 2 à 6 mois</p>
+                </div>
+
+                <div className="bg-white rounded-xl p-6 shadow-lg text-center">
+                  <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Shield className="w-8 h-8 text-purple-600" />
+                  </div>
+                  <div className="text-3xl font-bold text-purple-600 mb-2">98.5%</div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Qualité interventions terrain</h3>
+                  <p className="text-gray-600 text-sm">Clients satisfaits de la qualité des interventions techniques des équipes d'intervention terrain</p>
+                  <p className="text-gray-500 text-xs mt-2">Base : contrôles qualité et enquêtes client</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-16 bg-blue-600">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Besoin d'un raccordement électrique Enedis ?
+            </h2>
+            <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
+              Déposez votre demande de raccordement Enedis dès maintenant. Nos experts du territoire français vous accompagnent dans vos projets.
+            </p>
+            <Link href="/raccordement-enedis">
+              <button className="bg-white text-blue-600 font-bold px-8 py-4 rounded-lg text-lg hover:bg-gray-100 transition-colors shadow-lg">
+                Déposer une demande de raccordement →
+              </button>
+            </Link>
+          </div>
+        </section>
+
+        {/* Client Testimonials */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                  Retours clients sur le service de raccordement Enedis
+                </h2>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div className="bg-blue-50 rounded-xl p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-3">
+                      <User className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900">Construction neuve</h3>
+                      <p className="text-gray-600 text-sm">Maison individuelle</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm mb-4">
+                    "Raccordement effectué dans les temps. Service client très réactif pour répondre aux questions pendant le processus."
+                  </p>
+                  <div className="text-blue-600 text-sm">
+                    ⭐⭐⭐⭐⭐ Service impeccable
+                  </div>
+                </div>
+
+                <div className="bg-green-50 rounded-xl p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mr-3">
+                      <Building className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900">Projet commercial</h3>
+                      <p className="text-gray-600 text-sm">Local professionnel</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm mb-4">
+                    "Accompagnement professionnel tout au long des étapes. Les devis transparents ont facilité notre prise de décision."
+                  </p>
+                  <div className="text-green-600 text-sm">
+                    ⭐⭐⭐⭐⭐ Très satisfait
+                  </div>
+                </div>
+
+                <div className="bg-yellow-50 rounded-xl p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center mr-3">
+                      <Zap className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900">Installation solaire</h3>
+                      <p className="text-gray-600 text-sm">Raccordement photovoltaïque</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm mb-4">
+                    "Équipe technique compétente qui a su s'adapter aux contraintes spécifiques de notre installation solaire connectée."
+                  </p>
+                  <div className="text-yellow-600 text-sm">
+                    ⭐⭐⭐⭐⭐ Expertise reconnue
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Votre projet de raccordement électrique */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4 text-center">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                Votre projet de raccordement électrique
+              </h2>
+              <p className="text-gray-600 mb-8">
+                Confiez-nous votre raccordement Enedis ! Nos experts Service accompagnent l'ensemble des projets du territoire français.
+              </p>
+              <Link href="/raccordement-enedis">
+                <button className="bg-gray-800 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-gray-700 transition-colors shadow-lg">
+                  Faire raccordement - Démarrer →
+                </button>
+              </Link>
+              <p className="text-gray-500 text-sm mt-4">⚡ Service gratuit Enedis - Devis gratuit immédiat expert intégration ⚡</p>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-16 bg-blue-600 text-white">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                  Des questions à propos du raccordement Enedis ?
+                </h2>
+                <p className="text-blue-100">Trouvez des réponses précises à vos questions sur le raccordement électrique Enedis pour tous types de projets en France.</p>
+              </div>
+              
+              <div className="space-y-4">
+                
+                <details className="bg-blue-700 rounded-lg">
+                  <summary className="p-4 cursor-pointer font-semibold hover:bg-blue-600 rounded-lg">
+                    Quels documents sont nécessaires pour raccorder une maison neuve ?
+                  </summary>
+                  <div className="p-4 pt-0 text-blue-100">
+                    Pour le raccordement d'une maison neuve, vous devez fournir : permis de construire, plan de situation, plan de masse, attestation Consuel, etc.
+                  </div>
+                </details>
+
+                <details className="bg-blue-700 rounded-lg">
+                  <summary className="p-4 cursor-pointer font-semibold hover:bg-blue-600 rounded-lg">
+                    Comment connaître votre rapport électrique se trouve Enedis ?
+                  </summary>
+                  <div className="p-4 pt-0 text-blue-100">
+                    Vous pouvez consulter votre rapport électrique via votre espace client Enedis ou en contactant directement leur service client.
+                  </div>
+                </details>
+
+                <details className="bg-blue-700 rounded-lg">
+                  <summary className="p-4 cursor-pointer font-semibold hover:bg-blue-600 rounded-lg">
+                    Quel est le coût d'un raccordement Enedis ?
+                  </summary>
+                  <div className="p-4 pt-0 text-blue-100">
+                    Le coût varie selon le type de raccordement, la distance au réseau et la puissance demandée. Un devis personnalisé est établi.
+                  </div>
+                </details>
+
+                <details className="bg-blue-700 rounded-lg">
+                  <summary className="p-4 cursor-pointer font-semibold hover:bg-blue-600 rounded-lg">
+                    Combien de temps dure se raccordement électrique Enedis pour une maison ?
+                  </summary>
+                  <div className="p-4 pt-0 text-blue-100">
+                    En général, comptez entre 2 et 6 mois selon la complexité du projet et la charge de travail d'Enedis dans votre région.
+                  </div>
+                </details>
+
+              </div>
+
+              <div className="text-center mt-12">
+                <button 
+                  onClick={() => setShowCallbackModal(true)}
+                  className="bg-white text-blue-600 font-bold px-8 py-4 rounded-lg text-lg hover:bg-gray-100 transition-colors shadow-lg"
+                >
+                  Poser une question technique
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Services Expert et Rapide */}
+        <section className="py-12 bg-blue-50">
+          <div className="container mx-auto px-4 text-center">
+            <div className="flex items-center justify-center">
+              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                <CheckCircle2 className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-900">Services Expert et Rapide</h3>
+                <p className="text-gray-600 text-sm">Accompagnement complet pour tous raccordements Enedis avec suivi personnalisé</p>
+              </div>
+              <Link href="/raccordement-enedis" className="ml-8">
+                <button className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                  Démarrer ma demande →
+                </button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* REPLACE: Étapes du processus de raccordement électrique Enedis */}
         <section className="py-16 bg-white" id="process">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
