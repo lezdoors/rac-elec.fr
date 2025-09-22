@@ -63,7 +63,7 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <main>
-        <section className="bg-[#0046a2] text-white py-16 md:py-20">
+        <section id="hero" className="bg-[#0046a2] text-white py-16 md:py-20">
           <div className="container mx-auto px-4 max-w-6xl text-center">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Raccordement électrique Enedis, simplifié.

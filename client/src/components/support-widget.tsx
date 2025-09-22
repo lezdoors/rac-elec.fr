@@ -33,21 +33,8 @@ export const SupportWidget = () => {
   const [formData, setFormData] = useState({ email: '', phone: '', message: '' });
   const { isMobile, isPageLoaded } = useMobileOptimization();
 
-  // Auto-open optimized for mobile performance
-  useEffect(() => {
-    if (!isPageLoaded) return; // Wait for critical page load
-
-    // Delayed auto-open for better mobile metrics (FCP/LCP)
-    const delay = isMobile ? 6000 : 3000; // More delay on mobile for performance
-    const timer = setTimeout(() => {
-      // Only auto-open if user isn't actively filling forms
-      if (!document.querySelector('input:focus, textarea:focus, select:focus')) {
-        setIsOpen(true);
-      }
-    }, delay);
-
-    return () => clearTimeout(timer);
-  }, [isMobile, isPageLoaded]);
+  // No auto-opening for Google Ads compliance
+  // Widget only opens on explicit user click
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, Phone } from 'lucide-react';
-import { Link } from 'wouter';
+// No longer using wouter Link for better anchor link behavior
 
 export function FloatingCtaButton() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHeroVisible, setIsHeroVisible] = useState(true);
 
   useEffect(() => {
-    const heroSection = document.getElementById('hero');
+    const heroSection = document.querySelector('section:first-of-type') || document.querySelector('[class*="hero"], [class*="bg-\[#0046a2\]"]');
     if (!heroSection) return;
 
     const observeHero = new IntersectionObserver(
@@ -70,7 +70,7 @@ export function FloatingCtaButton() {
   if (!isMobile) return null;
 
   return (
-    <Link href="/raccordement-enedis#top">
+    <a href="#formulaire-raccordement" style={{ textDecoration: 'none' }}>
       <div 
         className={`floating-cta ${isVisible ? 'floating-cta-visible' : 'floating-cta-hidden'}`}
         style={{
@@ -118,9 +118,9 @@ export function FloatingCtaButton() {
         role="button"
       >
         <Phone className="h-4 w-4" />
-        <span>Démarrer ma demande</span>
+        <span>Faire ma demande</span>
         <ArrowRight className="h-4 w-4" />
       </div>
-    </Link>
+    </a>
   );
 }
