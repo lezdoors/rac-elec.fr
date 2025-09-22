@@ -1,5 +1,4 @@
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
+// PDF libraries loaded dynamically only when needed
 
 // Fonction pour exporter tous les leads au format CSV
 export const exportLeadsToCSV = async (leads: any[]) => {
@@ -259,7 +258,10 @@ export const exportLeadToPDF = async (lead: any) => {
     
     document.body.appendChild(container);
     
-    // Conversion en canvas puis en PDF
+    // Conversion en canvas puis en PDF (charge les libs seulement quand nécessaire)
+    const html2canvas = (await import('html2canvas')).default;
+    const { jsPDF } = await import('jspdf');
+    
     const canvas = await html2canvas(container);
     document.body.removeChild(container);
     

@@ -17781,18 +17781,14 @@ app.use((req, res, next) => {
   console.log(`\u{1F50D} Build check: ${buildExists ? "\u2705 Production build found" : "\u274C No build found"}`);
   console.log(`\u{1F4C1} Dist path: ${distPath}`);
   console.log(`\u{1F30D} Environment: ${process.env.NODE_ENV}`);
-  if (buildExists && isProduction) {
-    console.log("\u{1F680} Serving production build...");
+  if (buildExists) {
+    console.log("\u{1F680} Serving production build (Replit-compatible static files)...");
     app.use(express2.static(distPath));
     app.use("*", (_req, res) => {
       res.sendFile(path6.resolve(distPath, "index.html"));
     });
   } else {
-    if (buildExists) {
-      console.log("\u{1F527} Development mode detected: Skipping production build, setting up Vite dev middleware...");
-    } else {
-      console.log("\u{1F527} No production build found: Setting up Vite dev middleware...");
-    }
+    console.log("\u{1F527} No production build found: Setting up Vite dev middleware...");
     await setupVite(app, server);
     console.log("\u2705 Vite dev server configured");
   }
