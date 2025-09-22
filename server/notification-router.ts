@@ -67,14 +67,15 @@ export interface PerformanceNotification extends GenericUpdateNotification {
 import GlobalContext from './global-context';
 
 export function setupNotificationRoutes(httpServer: Server) {
-  // Configurer le serveur WebSocket pour les notifications en temps réel
-  const wss = new WebSocketServer({ server: httpServer, path: '/ws' });
-  
-  // Stocker les connexions actives
-  const activeConnections = new Set<WS>();
-  
-  // Stocker le WebSocketServer dans le GlobalContext pour usage global
-  GlobalContext.setWebSocketServer(wss);
+  try {
+    // Configurer le serveur WebSocket pour les notifications en temps réel
+    const wss = new WebSocketServer({ server: httpServer, path: '/ws' });
+    
+    // Stocker les connexions actives
+    const activeConnections = new Set<WS>();
+    
+    // Stocker le WebSocketServer dans le GlobalContext pour usage global
+    GlobalContext.setWebSocketServer(wss);
   
   // Configurer le WebSocketServer pour qu'il soit plus performant et stable
   wss.on('headers', (headers, request) => {
@@ -91,7 +92,9 @@ export function setupNotificationRoutes(httpServer: Server) {
 
   // Configuration de gestion des erreurs de niveau serveur
   wss.on('error', (error) => {
-    console.error('WebSocketServer error:', error);
+    console.error('❌ Erreur WebSocket (non fatale):', error.message);
+    console.log('🔄 Application continue sans WebSocket en temps réel');
+    // Ne pas propager l'erreur pour éviter qu'elle fasse planter l'application
   });
   
   // Garder le serveur en vie en envoyant des pings régulièrement
@@ -409,4 +412,25 @@ export function setupNotificationRoutes(httpServer: Server) {
     // Tableau de bord
     broadcastDashboardUpdate
   };
+  
+  } catch (error) {
+    console.error('❌ Erreur lors de la configuration du serveur WebSocket:', error);
+    console.log('🔄 Application en cours d\'exécution sans notifications WebSocket en temps réel');
+    
+    // Créer un service de notification factice pour éviter les erreurs
+    return {
+      createContactNotification: async (contact: any) => {
+        console.log('📧 Notification contact (mode dégradé):', contact.name);
+      },
+      broadcastNewLead: () => {},
+      broadcastUpdateLead: () => {},
+      broadcastNewDemande: () => {},
+      broadcastUpdateDemande: () => {},
+      broadcastNewPaiement: () => {},
+      broadcastUpdatePaiement: () => {},
+      broadcastNewEmail: () => {},
+      broadcastPerformanceUpdate: () => {},
+      broadcastDashboardUpdate: () => {}
+    };
+  }
 }
