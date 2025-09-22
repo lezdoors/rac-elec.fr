@@ -26,55 +26,13 @@ function loadNonCriticalPerformanceScripts(): void {
   import("./utils/gentle-performance").catch(error => {
     console.warn('Gentle performance optimizer failed to load:', error);
   });
-  
+
   // Load LCP monitor after user interaction (non-critical)
   import("./utils/lcp-monitor").catch(error => {
     console.warn('LCP monitor failed to load:', error);
   });
-  
+
   console.log('✅ Non-critical performance scripts loaded after user interaction');
-}
-
-// Set up critical GCLID loading on DOMContentLoaded (immediate for ads attribution)
-function setupCriticalGclidLoading(): void {
-  // Load GCLID tracking immediately on DOM ready (critical for ads attribution)
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadCriticalGclidTracking);
-  } else {
-    // DOM already ready, load immediately
-    loadCriticalGclidTracking();
-  }
-}
-
-// Set up deferred loading for non-critical performance scripts only
-function setupDeferredLoading(): void {
-  let scriptsLoaded = false;
-  
-  // Load after user interaction (only non-critical performance scripts)
-  const triggerEvents = ['click', 'scroll', 'touchstart', 'keydown'];
-  const triggerLoad = () => {
-    if (!scriptsLoaded) {
-      scriptsLoaded = true;
-      loadNonCriticalPerformanceScripts(); // Only non-critical scripts deferred
-      
-      // Remove event listeners after loading
-      triggerEvents.forEach(event => {
-        document.removeEventListener(event, triggerLoad, { passive: true } as any);
-      });
-    }
-  };
-  
-  // Set up event listeners for user interaction
-  triggerEvents.forEach(event => {
-    document.addEventListener(event, triggerLoad, { passive: true, once: true });
-  });
-  
-  // Fallback: Load after 3 seconds if no user interaction
-  setTimeout(() => {
-    if (!scriptsLoaded) {
-      triggerLoad();
-    }
-  }, 3000);
 }
 
 // Ensure conversion tracking functions are available globally
@@ -117,6 +75,75 @@ window.addEventListener('error', (event) => {
 const rootElement = document.getElementById("root");
 if (rootElement) {
   createRoot(rootElement).render(<App />);
+}
+
+// CRITICAL FIX: Initialize critical GCLID tracking immediately
+function setupCriticalGclidLoading(): void {
+  // Load GCLID tracking immediately on DOM ready (critical for ads attribution)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadCriticalGclidTracking);
+  } else {
+    // DOM already ready, load immediately
+    loadCriticalGclidTracking();
+  }
+}
+
+// PHASE 3A: Initialize deferred script loading for non-critical scripts only
+function setupDeferredLoading(): void {
+  let scriptsLoaded = false;
+
+  // Load after user interaction (only non-critical performance scripts)
+  const triggerEvents = ['click', 'scroll', 'touchstart', 'keydown'];
+  const triggerLoad = () => {
+    if (!scriptsLoaded) {
+      scriptsLoaded = true;
+      loadNonCriticalPerformanceScripts(); // Only non-critical scripts deferred
+
+      // Remove event listeners after loading
+      triggerEvents.forEach(event => {
+        document.removeEventListener(event, triggerLoad, { passive: true } as any);
+      });
+    }
+  };
+
+  // Set up event listeners for user interaction
+  triggerEvents.forEach(event => {
+    document.addEventListener(event, triggerLoad, { passive: true, once: true });
+  });
+
+  // Fallback: Load after 3 seconds if no user interaction
+  setTimeout(() => {
+    if (!scriptsLoaded) {
+      triggerLoad();
+    }
+  }, 3000);
+}
+
+// Render React app with mobile-optimized root
+const container = document.getElementById("root");
+if (!container) throw new Error("Root element not found");
+
+const root = createRoot(container);
+
+// Add error boundary for startup issues
+try {
+  root.render(<App />);
+} catch (error) {
+  console.error("Failed to render app:", error);
+  root.render(
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="text-center p-8">
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">Erreur de chargement</h1>
+        <p className="text-gray-600 mb-4">Une erreur s'est produite lors du chargement de l'application.</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Recharger la page
+        </button>
+      </div>
+    </div>
+  );
 }
 
 // CRITICAL FIX: Initialize critical GCLID tracking immediately
