@@ -6,7 +6,6 @@ import { Link, useLocation } from "wouter";
 import { Form } from "@/components/ui/form";
 import { FormStep1 } from "@/components/form-step-1";
 import { CheckCircle2, ChevronLeft, ChevronRight, Menu, Phone, X, Zap, Building, Users, Mail } from "lucide-react";
-import { PerformanceOptimizer } from "@/components/performance-optimizer";
 import { FloatingCtaButton } from "@/components/floating-cta-button";
 import { MobileFormOptimizer } from "@/components/mobile-form-optimizer";
 import { SupportWidget } from "@/components/support-widget";
@@ -622,7 +621,6 @@ export default function HomePage() {
       <ContactModal />
       
       {/* Performance Components */}
-      <PerformanceOptimizer />
       <FloatingCtaButton />
       <MobileFormOptimizer />
     </div>
