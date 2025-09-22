@@ -325,123 +325,266 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* Quel type de raccordement vous correspond ? */}
-        <section className="py-16 bg-gray-50">
+        {/* Modern Services Section - 2025 Design */}
+        <section className="py-20 bg-gradient-to-b from-slate-50/50 via-white to-slate-50/30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                  Quel type de raccordement vous correspond ?
-                </h2>
-                <p className="text-gray-600 mb-2">Choisir un projet de raccordement. Découvrez la solution électrique adaptée à vos besoins spécifiques.</p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                {/* Raccordement Définitif */}
-                <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                    <Building className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Raccordement Définitif</h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Pour maisons individuelles, appartements et locaux professionnels
-                  </p>
-                  <p className="text-xs text-gray-500 mb-4">À partir de 1 300 €</p>
-                  <a href="#formulaire-raccordement" className="text-blue-600 text-sm font-medium hover:text-blue-700 transition-colors">
-                    En savoir plus →
-                  </a>
+            <div className="max-w-7xl mx-auto">
+              
+              {/* Section Header */}
+              <div className="text-center mb-16">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium mb-6">
+                  <Building className="w-4 h-4" />
+                  Solutions adaptées
                 </div>
-
-                {/* Raccordement Provisoire */}
-                <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
-                    <Zap className="w-6 h-6 text-orange-600" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Raccordement Provisoire</h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Solution temporaire pour chantiers et installations temporaires
-                  </p>
-                  <p className="text-xs text-gray-500 mb-4">À partir de 800 €</p>
-                  <a href="#formulaire-raccordement" className="text-blue-600 text-sm font-medium hover:text-blue-700 transition-colors">
-                    En savoir plus →
-                  </a>
-                </div>
-
-                {/* Viabilisation */}
-                <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                    <Menu className="w-6 h-6 text-green-600" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Viabilisation</h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Préparation et équipement électrique de votre terrain
-                  </p>
-                  <p className="text-xs text-gray-500 mb-4">À partir de 2 200 €</p>
-                  <a href="#formulaire-raccordement" className="text-blue-600 text-sm font-medium hover:text-blue-700 transition-colors">
-                    En savoir plus →
-                  </a>
-                </div>
-
-                {/* Modification */}
-                <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                    <Building className="w-6 h-6 text-purple-600" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Modification</h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Association et mise à niveau de votre installation existante
-                  </p>
-                  <p className="text-xs text-gray-500 mb-4">À partir de 900 €</p>
-                  <a href="#formulaire-raccordement" className="text-blue-600 text-sm font-medium hover:text-blue-700 transition-colors">
-                    En savoir plus →
-                  </a>
-                </div>
-
-                {/* Raccordement Collectif */}
-                <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                    <Users className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Raccordement Collectif</h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Solutions pour promoteurs, équipementiers et entreprises
-                  </p>
-                  <p className="text-xs text-gray-500 mb-4">Sur devis personnalisé</p>
-                  <a href="#formulaire-raccordement" className="text-blue-600 text-sm font-medium hover:text-blue-700 transition-colors">
-                    En savoir plus →
-                  </a>
-                </div>
-
-                {/* Production Électrique */}
-                <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow bg-green-50">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                    <Zap className="w-6 h-6 text-green-600" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Production Électrique</h3>
-                  <span className="inline-block bg-green-200 text-green-800 px-2 py-1 rounded text-xs font-medium mb-2">
-                    Nouveau
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                  <span className="block">Quel type de raccordement</span>
+                  <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    vous correspond ?
                   </span>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Raccordement pour panneaux solaires et production d'énergie verte
-                  </p>
-                  <p className="text-xs text-gray-500 mb-4">À partir de 1 800 €</p>
-                  <a href="#formulaire-raccordement" className="text-green-600 text-sm font-medium hover:text-green-700 transition-colors">
-                    En savoir plus →
-                  </a>
+                </h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                  Choisissez votre projet de raccordement. Découvrez la solution électrique parfaitement adaptée à vos besoins spécifiques.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                
+                {/* Raccordement Définitif - Modern Card */}
+                <div className="group relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
+                  <div className="relative bg-white/80 backdrop-blur-sm p-8 rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-1">
+                    
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                      <Building className="w-8 h-8 text-white" />
+                    </div>
+                    
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">Raccordement Définitif</h3>
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      Solution permanente pour maisons individuelles, appartements et locaux professionnels avec garantie complète.
+                    </p>
+                    
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <p className="text-2xl font-bold text-blue-600">À partir de</p>
+                        <p className="text-3xl font-bold text-gray-900">1 300 €</p>
+                      </div>
+                      <div className="text-right text-sm text-gray-500">
+                        <p>• Étude incluse</p>
+                        <p>• Installation certifiée</p>
+                        <p>• SAV garanti</p>
+                      </div>
+                    </div>
+                    
+                    <a href="#formulaire-raccordement" className="group/btn inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+                      <span>Choisir cette solution</span>
+                      <ChevronRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Raccordement Provisoire - Modern Card */}
+                <div className="group relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
+                  <div className="relative bg-white/80 backdrop-blur-sm p-8 rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-1">
+                    
+                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-yellow-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                      <Zap className="w-8 h-8 text-white" />
+                    </div>
+                    
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">Raccordement Provisoire</h3>
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      Solution temporaire idéale pour chantiers, événements et installations temporaires avec mise en service rapide.
+                    </p>
+                    
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <p className="text-2xl font-bold text-orange-600">À partir de</p>
+                        <p className="text-3xl font-bold text-gray-900">800 €</p>
+                      </div>
+                      <div className="text-right text-sm text-gray-500">
+                        <p>• Installation rapide</p>
+                        <p>• Flexible</p>
+                        <p>• Économique</p>
+                      </div>
+                    </div>
+                    
+                    <a href="#formulaire-raccordement" className="group/btn inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-700 hover:to-yellow-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+                      <span>Choisir cette solution</span>
+                      <ChevronRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Viabilisation - Modern Card */}
+                <div className="group relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
+                  <div className="relative bg-white/80 backdrop-blur-sm p-8 rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-1">
+                    
+                    <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                      <Users className="w-8 h-8 text-white" />
+                    </div>
+                    
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">Viabilisation</h3>
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      Préparation et équipement électrique complet de votre terrain avec infrastructure moderne et évolutive.
+                    </p>
+                    
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <p className="text-2xl font-bold text-green-600">À partir de</p>
+                        <p className="text-3xl font-bold text-gray-900">2 200 €</p>
+                      </div>
+                      <div className="text-right text-sm text-gray-500">
+                        <p>• Étude terrain</p>
+                        <p>• Infrastructure</p>
+                        <p>• Évolutif</p>
+                      </div>
+                    </div>
+                    
+                    <a href="#formulaire-raccordement" className="group/btn inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+                      <span>Choisir cette solution</span>
+                      <ChevronRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Modification - Modern Card */}
+                <div className="group relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
+                  <div className="relative bg-white/80 backdrop-blur-sm p-8 rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-1">
+                    
+                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                      <Building className="w-8 h-8 text-white" />
+                    </div>
+                    
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">Modification</h3>
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      Association et mise à niveau de votre installation électrique existante avec technologies modernes.
+                    </p>
+                    
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <p className="text-2xl font-bold text-purple-600">À partir de</p>
+                        <p className="text-3xl font-bold text-gray-900">900 €</p>
+                      </div>
+                      <div className="text-right text-sm text-gray-500">
+                        <p>• Audit inclus</p>
+                        <p>• Mise aux normes</p>
+                        <p>• Modernisation</p>
+                      </div>
+                    </div>
+                    
+                    <a href="#formulaire-raccordement" className="group/btn inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+                      <span>Choisir cette solution</span>
+                      <ChevronRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Raccordement Collectif - Modern Card */}
+                <div className="group relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
+                  <div className="relative bg-white/80 backdrop-blur-sm p-8 rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-1">
+                    
+                    <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                      <Users className="w-8 h-8 text-white" />
+                    </div>
+                    
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">Raccordement Collectif</h3>
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      Solutions professionnelles sur-mesure pour promoteurs, équipementiers et grandes entreprises.
+                    </p>
+                    
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <p className="text-2xl font-bold text-indigo-600">Devis</p>
+                        <p className="text-3xl font-bold text-gray-900">Personnalisé</p>
+                      </div>
+                      <div className="text-right text-sm text-gray-500">
+                        <p>• Étude complète</p>
+                        <p>• Gestion projet</p>
+                        <p>• Support dédié</p>
+                      </div>
+                    </div>
+                    
+                    <a href="#formulaire-raccordement" className="group/btn inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-700 hover:to-cyan-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+                      <span>Choisir cette solution</span>
+                      <ChevronRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Production Électrique - Modern Card */}
+                <div className="group relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
+                  <div className="relative bg-gradient-to-br from-emerald-50/80 to-teal-50/80 backdrop-blur-sm p-8 rounded-2xl border border-emerald-200/30 shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-1">
+                    
+                    <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                      <Zap className="w-8 h-8 text-white" />
+                    </div>
+                    
+                    <div className="flex items-center gap-3 mb-3">
+                      <h3 className="text-xl font-bold text-gray-900">Production Électrique</h3>
+                      <span className="inline-block bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        NOUVEAU
+                      </span>
+                    </div>
+                    
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      Raccordement spécialisé pour panneaux solaires, éoliennes et production d'énergie verte avec revente possible.
+                    </p>
+                    
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <p className="text-2xl font-bold text-emerald-600">À partir de</p>
+                        <p className="text-3xl font-bold text-gray-900">1 800 €</p>
+                      </div>
+                      <div className="text-right text-sm text-gray-500">
+                        <p>• Énergies vertes</p>
+                        <p>• Revente réseau</p>
+                        <p>• Éco-responsable</p>
+                      </div>
+                    </div>
+                    
+                    <a href="#formulaire-raccordement" className="group/btn inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+                      <span>Choisir cette solution</span>
+                      <ChevronRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                    </a>
+                  </div>
                 </div>
               </div>
 
-              {/* Question d'aide */}
-              <div className="text-center mb-8">
-                <p className="text-gray-600 mb-4">
-                  <strong>Besoin d'aide pour choisir ?</strong>
-                </p>
-                <p className="text-sm text-gray-500 mb-4">
-                  Nos experts vous accompagnent dans le choix de la solution la plus adaptée à votre projet.
-                </p>
-                <a href="tel:0970709570" className="text-blue-600 font-medium hover:text-blue-700">
-                  ☎ 09 70 70 95 70
-                </a>
+              {/* Modern Help Section */}
+              <div className="relative mt-16">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 via-purple-50/30 to-indigo-50/50 rounded-3xl"></div>
+                <div className="relative bg-white/60 backdrop-blur-sm rounded-3xl border border-white/20 shadow-xl p-8 text-center">
+                  
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-lg mb-6">
+                    <Phone className="w-8 h-8 text-white" />
+                  </div>
+                  
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                    <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                      Besoin d'aide pour choisir ?
+                    </span>
+                  </h3>
+                  
+                  <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
+                    Nos experts vous accompagnent dans le choix de la solution la plus adaptée à votre projet électrique.
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="tel:0970709570" className="group inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-[1.02]">
+                      <Phone className="w-5 h-5" />
+                      <span>09 70 70 95 70</span>
+                    </a>
+                    
+                    <div className="text-sm text-gray-500">
+                      <p>Lundi à Vendredi : 9h - 18h</p>
+                      <p>Service & appel gratuits</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
