@@ -46,7 +46,7 @@ export default function HomePage() {
       
       // Show success message briefly then redirect
       setTimeout(() => {
-        navigate("/raccordement-enedis?step=2");
+        navigate("/raccordement-enedis?step=2&hero=true");
       }, 1500);
     } catch (error) {
       console.error("Error submitting hero form:", error);
