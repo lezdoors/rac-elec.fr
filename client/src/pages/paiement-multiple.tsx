@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useParams } from "wouter";
-import { loadStripe } from "@stripe/stripe-js";
+// Stripe loaded dynamically only when needed
 import { CardElement, Elements, useStripe, useElements } from "@stripe/react-stripe-js";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,7 +17,11 @@ if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
 }
 
 // Initialisation du client Stripe
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+// Stripe promise loaded dynamically when payment component is needed
+const getStripePromise = async () => {
+  const { loadStripe } = await import("@stripe/stripe-js");
+  return loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+};
 
 // Styles pour l'élément de carte
 const cardElementOptions = {
@@ -334,7 +338,7 @@ export default function PaiementMultiplePage() {
               <Shield className="h-5 w-5 text-green-600" />
               <p className="text-green-800 text-sm">Vos données sont protégées par notre système de paiement sécurisé.</p>
             </div>
-            <Elements stripe={stripePromise}>
+            <Elements stripe={getStripePromise()}>
               <CheckoutForm reference={reference} multiplier={multiplier} />
             </Elements>
           </CardContent>

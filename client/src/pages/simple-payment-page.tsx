@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
-import { loadStripe } from '@stripe/stripe-js';
+// Stripe loaded dynamically only when needed
 import { Elements } from '@stripe/react-stripe-js';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
@@ -10,7 +10,11 @@ import Layout from '@/components/layout';
 import SimpleCheckoutForm from '@/components/payment/simple-checkout-form';
 
 // S'assurer que le chargement de Stripe se produit une seule fois
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY as string);
+// Stripe promise loaded dynamically when payment component is needed
+const getStripePromise = async () => {
+  const { loadStripe } = await import('@stripe/stripe-js');
+  return loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY as string);
+};
 
 type PaymentStatus = 'idle' | 'processing' | 'succeeded' | 'failed' | 'invalid_reference';
 
@@ -172,7 +176,7 @@ export default function SimplePaymentPage() {
                   <div className="py-4">
                     <p className="text-sm text-gray-600 mb-6">Veuillez saisir les informations de votre carte bancaire pour effectuer le paiement de 129,80€ TTC.</p>
                     
-                    <Elements stripe={stripePromise} options={{ clientSecret }}>
+                    <Elements stripe={getStripePromise()} options={{ clientSecret }}>
                       <SimpleCheckoutForm 
                         onSuccess={handlePaymentSuccess}
                         onError={handlePaymentError}

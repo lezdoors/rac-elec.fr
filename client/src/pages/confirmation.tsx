@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRoute, useLocation } from "wouter";
-import { loadStripe } from "@stripe/stripe-js";
+// Stripe loaded dynamically only when needed
 import { Helmet } from "react-helmet";
 import {
   CardElement,
@@ -32,7 +32,11 @@ if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
   throw new Error("La clé publique de paiement n'est pas définie.");
 }
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+// Stripe promise loaded dynamically when payment component is needed
+const getStripePromise = async () => {
+  const { loadStripe } = await import("@stripe/stripe-js");
+  return loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+};
 
 function FormulaireCarteBancaire({ referenceNumber, clientName, serviceRequest, isLoadingRequest }: { referenceNumber: string, clientName: string, serviceRequest: any, isLoadingRequest: boolean }) {
   const stripe = useStripe();
@@ -625,7 +629,7 @@ export default function ConfirmationPage() {
                 </div>
               ) : (
                 // Le provider Elements est nécessaire pour utiliser les composants Stripe
-                <Elements stripe={stripePromise}>
+                <Elements stripe={getStripePromise()}>
                   <FormulaireCarteBancaire 
                     referenceNumber={referenceNumber} 
                     clientName={(serviceRequest?.name || clientName) ?? ""}
