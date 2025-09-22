@@ -11,7 +11,8 @@ export const initGA = () => {
   const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
 
   if (!measurementId) {
-    console.warn('Missing required Google Analytics key: VITE_GA_MEASUREMENT_ID');
+    console.warn('Missing Google Analytics key: VITE_GA_MEASUREMENT_ID - initializing minimal gtag for ads conversions only');
+    initMinimalGtag();
     return;
   }
 
@@ -28,6 +29,26 @@ export const initGA = () => {
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', '${measurementId}');
+  `;
+  document.head.appendChild(script2);
+};
+
+// Initialize minimal gtag for Google Ads conversions when GA is not available
+export const initMinimalGtag = () => {
+  // Add Google tag script for ads conversions
+  const script1 = document.createElement('script');
+  script1.async = true;
+  script1.src = 'https://www.googletagmanager.com/gtag/js?id=AW-16698052873';
+  document.head.appendChild(script1);
+
+  // Initialize gtag for ads conversions
+  const script2 = document.createElement('script');
+  script2.innerHTML = `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16698052873');
+    console.log('✅ Google Ads gtag initialized for conversions: AW-16698052873');
   `;
   document.head.appendChild(script2);
 };

@@ -981,7 +981,7 @@ export function ServiceRequestForm() {
                     </FormLabel>
                     <FormControl>
                       <Select 
-                        value={field.value.toString()} 
+                        value={field.value?.toString() || ""} 
                         onValueChange={field.onChange}
                       >
                         <SelectTrigger>
