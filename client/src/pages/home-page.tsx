@@ -6,6 +6,11 @@ import { Link, useLocation } from "wouter";
 import { Form } from "@/components/ui/form";
 import { FormStep1 } from "@/components/form-step-1";
 import { CheckCircle2, ChevronLeft, ChevronRight, Menu, Phone, X, Zap, Building, Users, Mail } from "lucide-react";
+import { PerformanceOptimizer } from "@/components/performance-optimizer";
+import { FloatingCtaButton } from "@/components/floating-cta-button";
+import { MobileFormOptimizer } from "@/components/mobile-form-optimizer";
+import { SupportWidget } from "@/components/support-widget";
+import { ContactModal } from "@/components/contact-modal";
 
 // Form schema for FormStep1
 const heroFormSchema = z.object({
@@ -292,75 +297,14 @@ export default function HomePage() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-blue-700 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
-                  <Zap className="w-5 h-5 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-white">Votre partenaire</h3>
-                  <p className="text-blue-200 text-sm">Raccordement électrique</p>
-                </div>
-              </div>
-              <p className="text-blue-200 text-sm mb-4">
-                Votre partenaire expert pour tous vos projets de raccordement électrique en France.
-              </p>
-              <div className="bg-blue-800 rounded-lg p-4">
-                <div className="flex items-center">
-                  <Phone className="w-5 h-5 text-white mr-2" />
-                  <span className="text-white font-semibold">09 70 70 95 70</span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-white mb-4">Services spécialisés</h3>
-              <ul className="space-y-2 text-blue-200">
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
-                  Raccordement définitif
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
-                  Raccordement provisoire
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
-                  Viabilisation terrain
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
-                  Vérification compteur
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-white mb-4">Votre projet</h3>
-              <div className="bg-green-600 rounded-lg p-4 text-center mb-4">
-                <a href="#formulaire-raccordement">
-                  <button className="bg-green-500 hover:bg-green-400 text-white font-bold px-6 py-3 rounded-lg w-full transition-colors">
-                    Demander un devis →
-                  </button>
-                </a>
-              </div>
-              <div className="text-blue-200 text-sm">
-                <p>✓ Service certifié professionnel</p>
-                <p>✓ Paiement 100% sécurisé</p>
-                <p>✓ Traitement rapide 24-48h</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-blue-600 pt-8 text-center">
-            <p className="text-blue-200">&copy; 2025 Portail Électricité. Tous droits réservés.</p>
-          </div>
-        </div>
-      </footer>
+      {/* Support and Modal Components */}
+      <SupportWidget />
+      <ContactModal />
+      
+      {/* Performance Components */}
+      <PerformanceOptimizer />
+      <FloatingCtaButton />
+      <MobileFormOptimizer />
     </div>
   );
 }
