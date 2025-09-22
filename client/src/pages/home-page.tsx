@@ -301,15 +301,23 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* Inline Connection Form */}
-              <div className="bg-gray-50 rounded-2xl p-8 md:p-12 shadow-lg">
-                <form onSubmit={handleHeroSubmit} className="space-y-6">
-                  
-                  {/* Type de client - Radio buttons matching main form Step 1 */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-3">
-                      <div className="w-2 h-2 bg-blue-600 rounded-full inline-block mr-2"></div>
-                      Type de client *
+              {/* Hero Form - Matching Main Form Step 1 Design */}
+              <div className="bg-white rounded-lg md:rounded-xl shadow-sm border border-gray-100 p-4 md:p-8">
+                {/* Header */}
+                <div className="mb-4 md:mb-6">
+                  <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-1 tracking-tight">
+                    Informations personnelles
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">
+                    Remplissez vos coordonnées personnelles pour traiter votre demande de raccordement électrique.
+                  </p>
+                </div>
+                <form onSubmit={handleHeroSubmit} className="space-y-4 md:space-y-6">
+                  {/* Type de client - Matching main form Step 1 exactly */}
+                  <div className="space-y-2">
+                    <label className="text-sm md:text-base font-medium text-gray-700 flex items-center gap-2">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0"></div>
+                      <span>Type de client *</span>
                     </label>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                       {/* Particulier */}
@@ -392,106 +400,158 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Prénom */}
-                    <div>
-                      <label htmlFor="prenom" className="block text-sm font-medium text-gray-700 mb-2">
-                        Prénom *
-                      </label>
-                      <input
-                        type="text"
-                        id="prenom"
-                        value={heroForm.prenom}
-                        onChange={(e) => setHeroForm({...heroForm, prenom: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Votre prénom"
-                        required
-                        data-testid="input-first-name"
-                      />
-                    </div>
-
-                    {/* Nom */}
-                    <div>
-                      <label htmlFor="nom" className="block text-sm font-medium text-gray-700 mb-2">
-                        Nom *
-                      </label>
-                      <input
-                        type="text"
-                        id="nom"
-                        value={heroForm.nom}
-                        onChange={(e) => setHeroForm({...heroForm, nom: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Votre nom"
-                        required
-                        data-testid="input-last-name"
-                      />
-                    </div>
-
-                    {/* Email */}
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        value={heroForm.email}
-                        onChange={(e) => setHeroForm({...heroForm, email: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="votre@email.com"
-                        required
-                        data-testid="input-email"
-                      />
-                    </div>
-
-                    {/* Téléphone */}
-                    <div>
-                      <label htmlFor="telephone" className="block text-sm font-medium text-gray-700 mb-2">
-                        Téléphone *
-                      </label>
-                      <input
-                        type="tel"
-                        id="telephone"
-                        value={heroForm.phone}
-                        onChange={(e) => setHeroForm({...heroForm, phone: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="06 12 34 56 78"
-                        required
-                        data-testid="input-phone"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Submit Button */}
-                  <div className="pt-6">
-                    <button
-                      type="submit"
-                      className="w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-lg hover:bg-blue-700 transition-colors text-lg shadow-lg"
-                      data-testid="button-submit-hero-form"
-                    >
-                      Continuer vers l'étape 2 →
-                    </button>
-                    <p className="text-center text-gray-500 text-sm mt-4">
-                      ✓ Passage direct à l'étape 2 • ✓ Données pré-remplies
-                    </p>
-                  </div>
-                </form>
-
-                {/* Success Message */}
-                {showSuccessMessage && (
-                  <div className="mt-8 p-6 bg-green-50 border border-green-200 rounded-lg">
-                    <div className="flex items-center">
-                      <CheckCircle2 className="h-6 w-6 text-green-500 mr-3" />
+                  {/* Input Fields - Grid Layout matching main form */}
+                  <div className="space-y-3 md:space-y-4">
+                    {/* First Row: Nom, Prénom */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <p className="text-green-800 font-semibold text-lg">Informations enregistrées !</p>
-                        <p className="text-green-700 mt-1">
-                          Redirection vers l'étape 2 pour finaliser votre demande...
-                        </p>
+                        <label className="text-sm font-medium text-gray-700 mb-2 block">
+                          <span className="text-red-500 mr-1">•</span>
+                          Nom *
+                        </label>
+                        <input
+                          type="text"
+                          value={heroForm.nom}
+                          onChange={(e) => setHeroForm({...heroForm, nom: e.target.value})}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                          placeholder="Votre nom de famille"
+                          required
+                          data-testid="input-last-name"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label className="text-sm font-medium text-gray-700 mb-2 block">
+                          <span className="text-red-500 mr-1">•</span>
+                          Prénom *
+                        </label>
+                        <input
+                          type="text"
+                          value={heroForm.prenom}
+                          onChange={(e) => setHeroForm({...heroForm, prenom: e.target.value})}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                          placeholder="Votre prénom"
+                          required
+                          data-testid="input-first-name"
+                        />
+                      </div>
+                    </div>
+                    
+                    {/* Second Row: Email, Téléphone */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-sm font-medium text-gray-700 mb-2 block">
+                          <span className="text-red-500 mr-1">•</span>
+                          Email *
+                        </label>
+                        <input
+                          type="email"
+                          value={heroForm.email}
+                          onChange={(e) => setHeroForm({...heroForm, email: e.target.value})}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                          placeholder="votre@email.com"
+                          required
+                          data-testid="input-email"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label className="text-sm font-medium text-gray-700 mb-2 block">
+                          <span className="text-red-500 mr-1">•</span>
+                          Téléphone *
+                        </label>
+                        <input
+                          type="tel"
+                          value={heroForm.phone}
+                          onChange={(e) => setHeroForm({...heroForm, phone: e.target.value})}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                          placeholder="06 12 34 56 78"
+                          required
+                          data-testid="input-phone"
+                        />
                       </div>
                     </div>
                   </div>
-                )}
+
+                  {/* Navigation Buttons - Matching main form style */}
+                  <div className="flex justify-between items-center pt-4">
+                    <button
+                      type="button"
+                      disabled
+                      className="flex items-center gap-2 px-6 py-3 border-2 border-gray-300 text-gray-400 rounded-lg font-medium cursor-not-allowed opacity-50"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                      Précédent
+                    </button>
+
+                    <button
+                      type="submit"
+                      className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 hover:from-blue-700 hover:via-blue-800 hover:to-blue-900 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] font-medium rounded-lg"
+                      data-testid="button-submit-hero-form"
+                    >
+                      Suivant
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                </form>
+                
+                {/* Green Assistance Section - Matching main form */}
+                <div className="mt-6">
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-500 rounded-lg p-4">
+                    <div className="flex items-start gap-3">
+                      <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mt-1">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                        </svg>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-sm font-semibold text-green-800 mb-1">
+                          Difficultés avec le formulaire ?
+                        </h4>
+                        <p className="text-green-700 text-xs leading-relaxed mb-3">
+                          Si vous rencontrez des difficultés pour remplir ce formulaire ou avez des questions sur votre raccordement électrique, notre équipe d'experts est joignable pour vous assister gratuitement. Nous sommes là pour vous accompagner dans votre démarche.
+                        </p>
+                        <a
+                          href="tel:0970709570"
+                          onClick={() => {
+                            if (typeof window !== 'undefined' && window.gtag) {
+                              window.gtag('event', 'phone_call', {
+                                event_category: 'engagement',
+                                event_label: 'hero_form_assistance'
+                              });
+                            }
+                          }}
+                          className="inline-flex items-center justify-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-xs font-medium rounded-lg transition-colors gap-1 min-h-[32px] touch-manipulation shadow-sm hover:shadow-md"
+                        >
+                          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                          </svg>
+                          09 70 70 95 70 - Assistance gratuite
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              {/* Success Message */}
+              {showSuccessMessage && (
+                <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <div className="flex items-center">
+                    <CheckCircle2 className="h-5 w-5 text-green-500 mr-3" />
+                    <div>
+                      <p className="text-green-800 font-semibold">Informations enregistrées !</p>
+                      <p className="text-green-700 text-sm mt-1">
+                        Redirection vers l'étape 2 pour finaliser votre demande...
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
               
             </div>
           </div>
