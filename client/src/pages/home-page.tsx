@@ -41,6 +41,17 @@ export default function HomePage() {
     telephone: ''
   });
   
+  // Connection request modal state
+  const [showConnectionModal, setShowConnectionModal] = useState(false);
+  const [connectionForm, setConnectionForm] = useState({
+    typeRaccordement: '',
+    codePostal: '',
+    nom: '',
+    telephone: '',
+    email: ''
+  });
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  
   // MOBILE PERFORMANCE: Conditional rendering optimization
   const isMobile = useMobileDetection();
 
@@ -194,15 +205,16 @@ export default function HomePage() {
               Un seul formulaire, un accompagnement complet.
             </p>
 
-
-            {/* Main CTA */}
-            <div className="text-center mt-10">
-              <Link href="/raccordement-enedis#formulaire-raccordement">
-                <button className="bg-yellow-400 text-black font-bold px-8 py-4 rounded-lg text-lg hover:bg-yellow-300 transition-colors shadow-lg">
-                  Déposer ma demande
-                </button>
-              </Link>
-              <p className="text-white/80 text-sm mt-4">145 raccordements traités ce mois-ci</p>
+            {/* Primary CTA - Google 2025 Optimized */}
+            <div className="text-center mt-8">
+              <button 
+                onClick={() => setShowConnectionModal(true)}
+                className="bg-yellow-400 text-black font-bold px-12 py-6 rounded-xl text-xl md:text-2xl hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-2xl border-4 border-yellow-300"
+                data-testid="button-commencer-demande"
+              >
+                Commencer ma demande
+              </button>
+              <p className="text-white/80 text-sm mt-6">145 raccordements traités ce mois-ci</p>
             </div>
           </div>
         </section>
