@@ -387,21 +387,18 @@ app.use((req, res, next) => {
   console.log(`📁 Dist path: ${distPath}`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV}`);
   
-  if (buildExists && isProduction) {
-    console.log('🚀 Serving production build...');
+  if (buildExists) {
+    // Use production build when available (Replit blocks Vite dev servers)
+    console.log('🚀 Serving production build (Replit-compatible static files)...');
     // Custom static serving to bypass restricted vite.ts serveStatic function
     app.use(express.static(distPath));
     app.use("*", (_req, res) => {
       res.sendFile(path.resolve(distPath, "index.html"));
     });
   } else {
-    if (buildExists) {
-      console.log('🔧 Development mode detected: Skipping production build, setting up Vite dev middleware...');
-    } else {
-      console.log('🔧 No production build found: Setting up Vite dev middleware...');
-    }
+    console.log('🔧 No production build found: Setting up Vite dev middleware...');
     
-    // Always use Vite in development mode
+    // Fallback to Vite dev server only when no build exists
     await setupVite(app, server);
     console.log('✅ Vite dev server configured');
   }
