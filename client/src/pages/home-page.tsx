@@ -31,6 +31,12 @@ import { PerformanceOptimizer } from "@/components/performance-optimizer";
 import { FloatingCtaButton } from "@/components/floating-cta-button";
 import { MobileFormOptimizer } from "@/components/mobile-form-optimizer";
 import { MobileImageOptimizer } from "@/components/mobile-image-optimizer";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Form } from "@/components/ui/form";
+import { FormStep1 } from "@/components/form-step-1";
+import { getGclid } from "@/lib/clean-gclid";
 
 export default function HomePage() {
   const [scrollY, setScrollY] = useState(0);
@@ -41,13 +47,37 @@ export default function HomePage() {
     telephone: ''
   });
   
-  // Hero form state - matches main form Step 1 exactly
-  const [heroForm, setHeroForm] = useState({
-    clientType: '',
-    nom: '',
-    prenom: '',
-    email: '',
-    phone: ''
+  // Hero form schema - same as main form Step 1
+  const heroFormSchema = z.object({
+    clientType: z.enum(["particulier", "professionnel", "collectivite"]),
+    nom: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
+    prenom: z.string().min(2, "Le prénom doit contenir au moins 2 caractères"),
+    email: z.string().email("L'email doit être valide"),
+    phone: z.string().refine((value) => {
+      const cleanPhone = value.replace(/[\s\.\-]/g, '');
+      return /^(0[1-9]\d{8}|\+33[1-9]\d{8})$/.test(cleanPhone);
+    }, "Format téléphone invalide (ex: 06 12 34 56 78)"),
+    raisonSociale: z.string().optional(),
+    siren: z.string().optional(),
+    nomCollectivite: z.string().optional(),
+    sirenCollectivite: z.string().optional(),
+  });
+  
+  type HeroFormData = z.infer<typeof heroFormSchema>;
+  
+  const heroForm = useForm<HeroFormData>({
+    resolver: zodResolver(heroFormSchema),
+    defaultValues: {
+      clientType: "particulier",
+      nom: "",
+      prenom: "",
+      email: "",
+      phone: "",
+      raisonSociale: "",
+      siren: "",
+      nomCollectivite: "",
+      sirenCollectivite: "",
+    },
   });
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   
@@ -301,178 +331,11 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* Hero Form - Matching Main Form Step 1 Design */}
-              <div className="bg-white rounded-lg md:rounded-xl shadow-sm border border-gray-100 p-4 md:p-8">
-                {/* Header */}
-                <div className="mb-4 md:mb-6">
-                  <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-1 tracking-tight">
-                    Informations personnelles
-                  </h3>
-                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                    Remplissez vos coordonnées personnelles pour traiter votre demande de raccordement électrique.
-                  </p>
-                </div>
-                <form onSubmit={handleHeroSubmit} className="space-y-4 md:space-y-6">
-                  {/* Type de client - Matching main form Step 1 exactly */}
-                  <div className="space-y-2">
-                    <label className="text-sm md:text-base font-medium text-gray-700 flex items-center gap-2">
-                      <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0"></div>
-                      <span>Type de client *</span>
-                    </label>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                      {/* Particulier */}
-                      <div
-                        onClick={() => setHeroForm({...heroForm, clientType: 'particulier'})}
-                        className={`cursor-pointer border-2 rounded-lg p-4 transition-all duration-200 hover:shadow-md ${
-                          heroForm.clientType === 'particulier' 
-                            ? 'border-blue-600 bg-blue-50' 
-                            : 'border-gray-300 bg-white hover:border-blue-300'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                            heroForm.clientType === 'particulier' 
-                              ? 'bg-blue-600 text-white' 
-                              : 'bg-blue-100 text-blue-600'
-                          }`}>
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                            </svg>
-                          </div>
-                          <div>
-                            <div className="font-semibold text-gray-900">Particulier</div>
-                            <div className="text-sm text-gray-600">Domicile résidentiel</div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Professionnel */}
-                      <div
-                        onClick={() => setHeroForm({...heroForm, clientType: 'professionnel'})}
-                        className={`cursor-pointer border-2 rounded-lg p-4 transition-all duration-200 hover:shadow-md ${
-                          heroForm.clientType === 'professionnel' 
-                            ? 'border-orange-600 bg-orange-50' 
-                            : 'border-gray-300 bg-white hover:border-orange-300'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                            heroForm.clientType === 'professionnel' 
-                              ? 'bg-orange-600 text-white' 
-                              : 'bg-orange-100 text-orange-600'
-                          }`}>
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                            </svg>
-                          </div>
-                          <div>
-                            <div className="font-semibold text-gray-900">Professionnel</div>
-                            <div className="text-sm text-gray-600">Entreprise & commerce</div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Collectivité */}
-                      <div
-                        onClick={() => setHeroForm({...heroForm, clientType: 'collectivite'})}
-                        className={`cursor-pointer border-2 rounded-lg p-4 transition-all duration-200 hover:shadow-md ${
-                          heroForm.clientType === 'collectivite' 
-                            ? 'border-green-600 bg-green-50' 
-                            : 'border-gray-300 bg-white hover:border-green-300'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                            heroForm.clientType === 'collectivite' 
-                              ? 'bg-green-600 text-white' 
-                              : 'bg-green-100 text-green-600'
-                          }`}>
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
-                            </svg>
-                          </div>
-                          <div>
-                            <div className="font-semibold text-gray-900">Collectivité</div>
-                            <div className="text-sm text-gray-600">Entité publique</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Input Fields - Grid Layout matching main form */}
-                  <div className="space-y-3 md:space-y-4">
-                    {/* First Row: Nom, Prénom */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium text-gray-700 mb-2 block">
-                          <span className="text-red-500 mr-1">•</span>
-                          Nom *
-                        </label>
-                        <input
-                          type="text"
-                          value={heroForm.nom}
-                          onChange={(e) => setHeroForm({...heroForm, nom: e.target.value})}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
-                          placeholder="Votre nom de famille"
-                          required
-                          data-testid="input-last-name"
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="text-sm font-medium text-gray-700 mb-2 block">
-                          <span className="text-red-500 mr-1">•</span>
-                          Prénom *
-                        </label>
-                        <input
-                          type="text"
-                          value={heroForm.prenom}
-                          onChange={(e) => setHeroForm({...heroForm, prenom: e.target.value})}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
-                          placeholder="Votre prénom"
-                          required
-                          data-testid="input-first-name"
-                        />
-                      </div>
-                    </div>
-                    
-                    {/* Second Row: Email, Téléphone */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium text-gray-700 mb-2 block">
-                          <span className="text-red-500 mr-1">•</span>
-                          Email *
-                        </label>
-                        <input
-                          type="email"
-                          value={heroForm.email}
-                          onChange={(e) => setHeroForm({...heroForm, email: e.target.value})}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
-                          placeholder="votre@email.com"
-                          required
-                          data-testid="input-email"
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="text-sm font-medium text-gray-700 mb-2 block">
-                          <span className="text-red-500 mr-1">•</span>
-                          Téléphone *
-                        </label>
-                        <input
-                          type="tel"
-                          value={heroForm.phone}
-                          onChange={(e) => setHeroForm({...heroForm, phone: e.target.value})}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
-                          placeholder="06 12 34 56 78"
-                          required
-                          data-testid="input-phone"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
+              {/* Hero Form - Using Exact FormStep1 Component */}
+              <Form {...heroForm}>
+                <form onSubmit={heroForm.handleSubmit(handleHeroSubmit)} className="space-y-4">
+                  <FormStep1 form={heroForm} />
+                  
                   {/* Navigation Buttons - Matching main form style */}
                   <div className="flex justify-between items-center pt-4">
                     <button
@@ -480,9 +343,7 @@ export default function HomePage() {
                       disabled
                       className="flex items-center gap-2 px-6 py-3 border-2 border-gray-300 text-gray-400 rounded-lg font-medium cursor-not-allowed opacity-50"
                     >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                      </svg>
+                      <ChevronLeft className="w-4 h-4" />
                       Précédent
                     </button>
 
@@ -492,12 +353,11 @@ export default function HomePage() {
                       data-testid="button-submit-hero-form"
                     >
                       Suivant
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
+                      <ChevronRight className="w-4 h-4" />
                     </button>
                   </div>
                 </form>
+              </Form>
                 
                 {/* Green Assistance Section - Matching main form */}
                 <div className="mt-6">
