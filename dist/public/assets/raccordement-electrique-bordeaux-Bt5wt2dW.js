@@ -1,0 +1,1 @@
+import{j as t}from"./index-DoOyQpDg.js";import{C as r,f as a}from"./french-cities-CwNCuBaw.js";import"./map-pin-yBvTN8tE.js";import"./star-DALFgUY-.js";import"./users-BJhNGsQY.js";function p(){return t.jsx(r,{cityData:a.bordeaux})}export{p as default};
