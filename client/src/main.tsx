@@ -71,11 +71,7 @@ window.addEventListener('error', (event) => {
   }
 });
 
-// Render React app with mobile-optimized root
-const rootElement = document.getElementById("root");
-if (rootElement) {
-  createRoot(rootElement).render(<App />);
-}
+// NOTE: App will be rendered below with error handling - removed duplicate render
 
 // CRITICAL FIX: Initialize critical GCLID tracking immediately
 function setupCriticalGclidLoading(): void {

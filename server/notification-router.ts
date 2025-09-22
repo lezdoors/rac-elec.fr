@@ -4,6 +4,12 @@ import { notifications } from '@shared/schema';
 import { desc, eq } from 'drizzle-orm';
 import { db } from './db';
 
+// Singleton protection to prevent multiple WebSocket servers
+declare global {
+  var __WSS: WebSocketServer | undefined;
+  var __SERVER_INITIALIZED: boolean;
+}
+
 // Extension du type WebSocket pour ajouter nos propriétés personnalisées
 declare module 'ws' {
   interface WebSocket {
@@ -68,8 +74,18 @@ import GlobalContext from './global-context';
 
 export function setupNotificationRoutes(httpServer: Server) {
   try {
+    // Singleton protection: prevent creating multiple WebSocket servers
+    if (globalThis.__WSS) {
+      console.log('🔄 WebSocket server already exists, reusing existing instance');
+      return globalThis.__WSS;
+    }
+
+    console.log('🚀 Creating new WebSocket server...');
     // Configurer le serveur WebSocket pour les notifications en temps réel
     const wss = new WebSocketServer({ server: httpServer, path: '/ws' });
+    
+    // Store in global singleton
+    globalThis.__WSS = wss;
     
     // Stocker les connexions actives
     const activeConnections = new Set<WS>();
