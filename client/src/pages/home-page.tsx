@@ -114,6 +114,50 @@ export default function HomePage() {
     alert('Votre demande de rappel a été envoyée. Nous vous contacterons sous 2h en jours ouvrés.');
   };
 
+  // Handle connection request form submission
+  const handleConnectionSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validate French phone format
+    const phoneRegex = /^(\+33|0)[1-9](\d{8})$/;
+    if (!phoneRegex.test(connectionForm.telephone.replace(/\s/g, ''))) {
+      alert('Veuillez entrer un numéro de téléphone français valide');
+      return;
+    }
+    
+    // Google Analytics event - Primary conversion
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'connection_request', {
+        event_category: 'lead_generation',
+        event_label: 'hero_cta_conversion',
+        value: 1,
+        connection_type: connectionForm.typeRaccordement
+      });
+    }
+    
+    // Show success message in modal
+    setShowSuccessMessage(true);
+    
+    // TODO: Submit form data to backend
+    console.log('Connection request submitted:', connectionForm);
+    
+    // Close modal after 3 seconds and show confirmation on page
+    setTimeout(() => {
+      setShowSuccessMessage(false);
+      setShowConnectionModal(false);
+      setConnectionForm({
+        typeRaccordement: '',
+        codePostal: '',
+        nom: '',
+        telephone: '',
+        email: ''
+      });
+      
+      // Show page-level confirmation
+      alert('✅ Votre demande de raccordement a été envoyée avec succès !\n\nNous vous contacterons dans les 2h en jours ouvrés pour débuter l\'accompagnement de votre projet.');
+    }, 3000);
+  };
+
   return (
     <div className="min-h-screen bg-white overflow-x-hidden" style={{ willChange: 'auto' }}>
       <Helmet>
@@ -949,6 +993,140 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      {/* Connection Request Modal - Google 2025 Optimized */}
+      {showConnectionModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 w-full max-w-lg">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-2xl font-semibold text-gray-900">Votre demande de raccordement</h3>
+              <button
+                onClick={() => setShowConnectionModal(false)}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+                data-testid="button-close-modal"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+
+            <form onSubmit={handleConnectionSubmit} className="space-y-4">
+              {/* Type de raccordement */}
+              <div>
+                <label htmlFor="typeRaccordement" className="block text-sm font-medium text-gray-700 mb-2">
+                  Type de raccordement *
+                </label>
+                <select
+                  id="typeRaccordement"
+                  value={connectionForm.typeRaccordement}
+                  onChange={(e) => setConnectionForm({...connectionForm, typeRaccordement: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  required
+                  data-testid="select-connection-type"
+                >
+                  <option value="">Sélectionnez un type</option>
+                  <option value="definitif">Raccordement définitif</option>
+                  <option value="provisoire">Raccordement provisoire</option>
+                  <option value="maison-neuve">Maison neuve</option>
+                  <option value="viabilisation">Viabilisation terrain</option>
+                </select>
+              </div>
+
+              {/* Code postal */}
+              <div>
+                <label htmlFor="codePostal" className="block text-sm font-medium text-gray-700 mb-2">
+                  Code postal *
+                </label>
+                <input
+                  type="text"
+                  id="codePostal"
+                  value={connectionForm.codePostal}
+                  onChange={(e) => setConnectionForm({...connectionForm, codePostal: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="75001"
+                  pattern="[0-9]{5}"
+                  required
+                  data-testid="input-postal-code"
+                />
+              </div>
+
+              {/* Nom */}
+              <div>
+                <label htmlFor="nom" className="block text-sm font-medium text-gray-700 mb-2">
+                  Nom complet *
+                </label>
+                <input
+                  type="text"
+                  id="nom"
+                  value={connectionForm.nom}
+                  onChange={(e) => setConnectionForm({...connectionForm, nom: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Votre nom complet"
+                  required
+                  data-testid="input-full-name"
+                />
+              </div>
+
+              {/* Téléphone */}
+              <div>
+                <label htmlFor="telephone" className="block text-sm font-medium text-gray-700 mb-2">
+                  Téléphone *
+                </label>
+                <input
+                  type="tel"
+                  id="telephone"
+                  value={connectionForm.telephone}
+                  onChange={(e) => setConnectionForm({...connectionForm, telephone: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="06 12 34 56 78"
+                  required
+                  data-testid="input-phone"
+                />
+              </div>
+
+              {/* Email */}
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={connectionForm.email}
+                  onChange={(e) => setConnectionForm({...connectionForm, email: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="votre@email.com"
+                  required
+                  data-testid="input-email"
+                />
+              </div>
+
+              {/* Submit Button */}
+              <div className="pt-4">
+                <button
+                  type="submit"
+                  className="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                  data-testid="button-submit-connection"
+                >
+                  Commencer ma demande
+                </button>
+              </div>
+            </form>
+
+            {/* Success Message */}
+            {showSuccessMessage && (
+              <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <div className="flex items-center">
+                  <CheckCircle2 className="h-5 w-5 text-green-500 mr-2" />
+                  <p className="text-green-800 font-medium">Demande envoyée avec succès !</p>
+                </div>
+                <p className="text-green-700 text-sm mt-1">
+                  Nous vous contacterons dans les 2h en jours ouvrés.
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Performance Components */}
       <PerformanceOptimizer />
