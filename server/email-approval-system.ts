@@ -36,8 +36,8 @@ class EmailApprovalSystem {
   }): Promise<{ success: boolean; approvalId: string; message: string }> {
     
     // Vérifier que le contenu est en français UNIQUEMENT pour les emails clients
-    // Les notifications internes vers bonjour@portail-electricite.com sont toujours autorisées
-    const isInternalNotification = emailData.to === 'bonjour@portail-electricite.com';
+    // Les notifications internes vers contact@portail-electricite.com sont toujours autorisées
+    const isInternalNotification = emailData.to === 'contact@portail-electricite.com';
     
     if (!isInternalNotification && (this.containsEnglishContent(emailData.subject) || this.containsEnglishContent(emailData.content))) {
       throw new Error('ERREUR CRITIQUE: Contenu détecté en anglais. Tous les emails clients doivent être en français uniquement.');
@@ -192,7 +192,7 @@ export const emailApprovalSystem = new EmailApprovalSystem();
 
 // Configuration initiale des approbateurs
 emailApprovalSystem.addApprover('admin@portail-electricite.com');
-emailApprovalSystem.addApprover('bonjour@portail-electricite.com');
+emailApprovalSystem.addApprover('contact@portail-electricite.com');
 
 console.log(`🛡️ SYSTÈME D'APPROBATION EMAIL INITIALISÉ`);
 console.log(`🇫🇷 Mode: 100% français uniquement`);

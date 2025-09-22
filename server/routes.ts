@@ -86,7 +86,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   registerPaymentDebugRoutes(app);
   
   // Configuration SMTP simplifiée - Une seule configuration
-  console.log("Service SMTP configuré - notification@portail-electricite.com → bonjour@portail-electricite.com");
+  console.log("Service SMTP configuré - notification@portail-electricite.com → contact@portail-electricite.com");
   
   // Security status endpoint for admin monitoring
   app.get("/api/admin/security-status", requireAuth, requireAdmin, async (req, res) => {
@@ -2134,7 +2134,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         };
         
         console.log('📧 ENVOI EMAIL COMPLET - FORMULAIRE FINALISÉ');
-        console.log('📬 Destinataire principal: bonjour@portail-electricite.com');
+        console.log('📬 Destinataire principal: contact@portail-electricite.com');
         console.log('📋 Référence générée:', serviceRequest.referenceNumber);
         
         // Email envoyé via la route /api/notifications/request-completed uniquement

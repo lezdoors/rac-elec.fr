@@ -287,8 +287,8 @@ export default function HomePage() {
                   </div>
                   <h3 className="text-xl font-semibold mb-2">Support en ligne</h3>
                   <p className="text-blue-200 mb-4">Réponse sous 24h garantie</p>
-                  <a href="mailto:bonjour@portail-electricite.com" className="text-yellow-400 font-bold hover:text-yellow-300 transition-colors">
-                    bonjour@portail-electricite.com
+                  <a href="mailto:contact@portail-electricite.com" className="text-yellow-400 font-bold hover:text-yellow-300 transition-colors">
+                    contact@portail-electricite.com
                   </a>
                 </div>
               </div>

@@ -447,7 +447,6 @@ export default function SmtpConfig() {
               // S'assurer que nous avons toujours les emails Namecheap
               let emailsList = [...data.data.emails];
               const primaryEmails = [
-                "bonjour@portail-electricite.com",
                 "contact@portail-electricite.com", 
                 "notification@portail-electricite.com"
               ];
