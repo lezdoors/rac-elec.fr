@@ -314,50 +314,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Types de raccordements électriques Enedis */}
-              <div className="bg-gray-50 p-8 rounded-lg mb-12">
-                <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">
-                  Types de raccordements électriques Enedis
-                </h3>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="bg-white p-6 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 mb-3">Raccordement définitif</h4>
-                    <p className="text-gray-600 text-sm mb-3">
-                      Installation permanente pour maisons individuelles et locaux professionnels
-                    </p>
-                    <ul className="text-xs text-gray-500 space-y-1">
-                      <li>• Étude technique personnalisée</li>
-                      <li>• Travaux de terrassement</li>
-                      <li>• Installation du compteur électrique</li>
-                      <li>• Mise en service garantie</li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-white p-6 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 mb-3">Raccordement provisoire</h4>
-                    <p className="text-gray-600 text-sm mb-3">
-                      Solution temporaire pour chantiers et installations temporaires
-                    </p>
-                    <ul className="text-xs text-gray-500 space-y-1">
-                      <li>• Installation rapide</li>
-                      <li>• Durée limitée selon besoins</li>
-                      <li>• Équipement mobile adapté</li>
-                      <li>• Démontage inclus</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="mt-6 bg-blue-50 p-6 rounded-lg">
-                  <h4 className="font-semibold text-gray-900 mb-3">Solutions professionnelles</h4>
-                  <p className="text-gray-600 text-sm mb-3">
-                    Pour tous vos raccordements électriques Enedis ?
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    Formulaire raccordement Enedis →
-                  </p>
-                </div>
-              </div>
 
               <div className="text-center">
                 <a href="#formulaire-raccordement">
@@ -581,34 +537,79 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Contact Section */}
-        <section className="py-16 bg-blue-600 text-white" id="contact">
+        {/* Modern Contact Section */}
+        <section className="py-16 bg-gradient-to-br from-slate-50 to-blue-50" id="contact">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                Besoin d'assistance pour votre raccordement Enedis ?
-              </h2>
-              <p className="text-lg mb-8">Contactez-nous au 09 70 70 95 70</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Phone className="w-8 h-8 text-white" />
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                  Une question sur votre projet ?
+                </h2>
+                <p className="text-gray-600 text-lg">
+                  Nos conseillers spécialisés vous accompagnent dans toutes vos démarches
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-6 h-6 text-green-600" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Conseil personnalisé</h3>
+                      <p className="text-gray-600 text-sm mb-4">
+                        Parlez directement à un expert raccordement Enedis
+                      </p>
+                      <div className="space-y-2">
+                        <a href="tel:0970709570" className="inline-flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm font-medium">
+                          <Phone className="w-4 h-4" />
+                          <span>09 70 70 95 70</span>
+                        </a>
+                        <p className="text-xs text-gray-500">Lun-Ven 9h-18h • Appel non surtaxé</p>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">Assistance téléphonique</h3>
-                  <p className="text-blue-200 mb-4">Nos experts vous accompagnent</p>
-                  <a href="tel:0970709570" className="text-yellow-400 font-bold text-lg hover:text-yellow-300 transition-colors">
-                    09 70 70 95 70
-                  </a>
                 </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Mail className="w-8 h-8 text-white" />
+
+                <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Support écrit</h3>
+                      <p className="text-gray-600 text-sm mb-4">
+                        Posez vos questions par email, nous vous répondons rapidement
+                      </p>
+                      <div className="space-y-2">
+                        <a href="mailto:contact@portail-electricite.com" className="inline-flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                          <Mail className="w-4 h-4" />
+                          <span>Nous contacter</span>
+                        </a>
+                        <p className="text-xs text-gray-500">Réponse garantie sous 24h</p>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">Support en ligne</h3>
-                  <p className="text-blue-200 mb-4">Réponse sous 24h garantie</p>
-                  <a href="mailto:contact@portail-electricite.com" className="text-yellow-400 font-bold hover:text-yellow-300 transition-colors">
-                    contact@portail-electricite.com
-                  </a>
+                </div>
+              </div>
+
+              {/* Quick FAQ */}
+              <div className="mt-12 bg-white p-6 rounded-xl border border-gray-100">
+                <h3 className="font-semibold text-gray-900 mb-4 text-center">Questions fréquentes</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                  <div className="text-center">
+                    <p className="font-medium text-gray-700">Délai moyen</p>
+                    <p className="text-gray-600">4-6 semaines</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="font-medium text-gray-700">Prix à partir de</p>
+                    <p className="text-gray-600">800€</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="font-medium text-gray-700">Zone couverte</p>
+                    <p className="text-gray-600">France entière</p>
+                  </div>
                 </div>
               </div>
             </div>
