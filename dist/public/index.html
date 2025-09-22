@@ -245,35 +245,17 @@
     <link rel="stylesheet" href="/styles/sleek-checkboxes.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="/styles/sleek-checkboxes.css"></noscript>
     
-    <!-- Browser Compatibility - Non-blocking async polyfill loading -->
+    <!-- Browser Compatibility Check - Load polyfills for older browsers -->
     <script>
-      // Load polyfills asynchronously only for older browsers (non-blocking)
-      function loadPolyfillsAsync() {
-        if (!window.fetch || !window.Promise || !Array.prototype.includes) {
-          const script = document.createElement('script');
-          script.src = 'https://polyfill.io/v3/polyfill.min.js?features=fetch,Promise,Array.prototype.includes,Object.assign';
-          script.async = true;
-          script.onload = () => console.log('✅ Basic polyfills loaded for older browser');
-          document.head.appendChild(script);
-        }
-        
-        // Optional chaining detection - load async if needed
-        try {
-          eval('{}?.test ?? null');
-        } catch (e) {
-          const script = document.createElement('script');
-          script.src = 'https://unpkg.com/@babel/polyfill@7.12.1/dist/polyfill.min.js';
-          script.async = true;
-          script.onload = () => console.log('✅ Advanced polyfills loaded for older browser');
-          document.head.appendChild(script);
-        }
+      // Detect older browsers that need polyfills
+      if (!window.fetch || !window.Promise || !Array.prototype.includes) {
+        document.write('<script src="https://polyfill.io/v3/polyfill.min.js?features=fetch,Promise,Array.prototype.includes,Object.assign"><\/script>');
       }
-      
-      // Load polyfills after page load to not block rendering
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadPolyfillsAsync);
-      } else {
-        loadPolyfillsAsync();
+      // Optional chaining and nullish coalescing detection
+      try {
+        eval('{}?.test ?? null');
+      } catch (e) {
+        document.write('<script src="https://unpkg.com/@babel/polyfill@7.12.1/dist/polyfill.min.js"><\/script>');
       }
     </script>
 
@@ -402,8 +384,8 @@
         });
       });
     </script>
-    <script type="module" crossorigin src="/assets/index-CpDjrPge.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BvZEsLUT.css">
+    <script type="module" crossorigin src="/assets/index-CGjOLLTa.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BhC6egdN.css">
   </head>
   <body>
     <div id="root"></div>
