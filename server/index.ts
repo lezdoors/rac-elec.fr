@@ -416,5 +416,15 @@ app.use((req, res, next) => {
     reusePort: true,
   }, () => {
     log(`serving on port ${port}`);
+    
+    // ✅ MAINTENANT configurer le système de notifications après que le serveur HTTP écoute
+    try {
+      const { setupNotificationRoutes } = require("./notification-router");
+      setupNotificationRoutes(server);
+      console.log("🔌 WebSocket notifications configurées après démarrage du serveur");
+    } catch (error) {
+      console.error("❌ Erreur configuration WebSocket:", error.message);
+      console.log("🔄 Application continue sans notifications WebSocket");
+    }
   });
 })();
