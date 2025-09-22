@@ -862,37 +862,6 @@ export default function HomePage() {
         </div>
       </footer>
 
-      {/* Bottom Footer with Navigation Links */}
-      <div className="bg-gray-800 text-white py-6">
-        <div className="container mx-auto px-4">
-          {/* Footer Navigation Links */}
-          <div className="footer-nav grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 text-center">
-            <Link href="/raccordement-residentiel" className="text-gray-300 hover:text-white transition-colors text-sm">
-              Raccordement résidentiel
-            </Link>
-            <Link href="/raccordement-photovoltaique" className="text-gray-300 hover:text-white transition-colors text-sm">
-              Raccordement solaire
-            </Link>
-            <Link href="#contact" className="text-gray-300 hover:text-white transition-colors text-sm">
-              Contact
-            </Link>
-            <Link href="/mentions-legales" className="text-gray-300 hover:text-white transition-colors text-sm">
-              Mentions légales
-            </Link>
-          </div>
-          
-          {/* Contact Info */}
-          <div className="text-center border-t border-gray-700 pt-4">
-            <p className="text-sm text-gray-300">
-              09 70 70 95 70 · contact@raccordement-connect.com · horaires 8h–18h
-            </p>
-            <div className="mt-2 text-xs text-gray-400">
-              <Link href="/politique-confidentialite" className="hover:text-white mr-4">Politique de confidentialité</Link>
-              <span>© 2025 Portail Électricité.com - Tous droits réservés</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Connection Request Modal - Google 2025 Optimized */}
       {showConnectionModal && (
