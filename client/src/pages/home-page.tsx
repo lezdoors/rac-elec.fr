@@ -5,7 +5,7 @@ import { z } from "zod";
 import { Link, useLocation } from "wouter";
 import { Form } from "@/components/ui/form";
 import { FormStep1 } from "@/components/form-step-1";
-import { CheckCircle2, ChevronLeft, ChevronRight, Menu, Phone, X } from "lucide-react";
+import { CheckCircle2, ChevronLeft, ChevronRight, Menu, Phone, X, Zap, Building, Users, Mail } from "lucide-react";
 
 // Form schema for FormStep1
 const heroFormSchema = z.object({
@@ -138,6 +138,125 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Service de raccordement électrique Enedis en ligne */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                  Service de raccordement électrique Enedis en ligne
+                </h2>
+                <p className="text-gray-600">Étapes du processus de raccordement électrique Enedis</p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold text-xl">1</span>
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Demande en ligne</h3>
+                  <p className="text-gray-600 text-sm">Formulaire sécurisé depuis cette plateforme</p>
+                </div>
+
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold text-xl">2</span>
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Étude et devis</h3>
+                  <p className="text-gray-600 text-sm">Analyse technique et proposition économique</p>
+                </div>
+
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold text-xl">3</span>
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Travaux de raccordement</h3>
+                  <p className="text-gray-600 text-sm">Réalisation des travaux par nos équipes qualifiées</p>
+                </div>
+
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold text-xl">4</span>
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Mise en service</h3>
+                  <p className="text-gray-600 text-sm">Finalisation et activation de votre raccordement</p>
+                </div>
+              </div>
+
+              <div className="text-center mt-12" id="services">
+                <a href="#formulaire-raccordement">
+                  <button className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg">
+                    Commencer maintenant
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Nos Services */}
+        <section className="py-16 bg-white" id="tarifs">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                  Nos services de raccordement électrique
+                </h2>
+                <p className="text-gray-600 max-w-3xl mx-auto">
+                  Service spécialisé dans le raccordement au réseau électrique Enedis pour particuliers, professionnels et collectivités
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="bg-white p-6 rounded-lg shadow-md border">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                    <Phone className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Raccordement résidentiel</h3>
+                  <p className="text-gray-600 mb-4">
+                    Raccordement électrique pour maisons individuelles, appartements et projets résidentiels
+                  </p>
+                  <ul className="text-sm text-gray-500 space-y-1">
+                    <li>• Maison neuve</li>
+                    <li>• Rénovation complète</li>
+                    <li>• Augmentation de puissance</li>
+                  </ul>
+                </div>
+
+                <div className="bg-white p-6 rounded-lg shadow-md border">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                    <Building className="w-6 h-6 text-green-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Raccordement professionnel</h3>
+                  <p className="text-gray-600 mb-4">
+                    Solutions pour commerces, bureaux, industries et projets professionnels
+                  </p>
+                  <ul className="text-sm text-gray-500 space-y-1">
+                    <li>• Local commercial</li>
+                    <li>• Bureau et tertiaire</li>
+                    <li>• Site industriel</li>
+                  </ul>
+                </div>
+
+                <div className="bg-white p-6 rounded-lg shadow-md border">
+                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                    <Users className="w-6 h-6 text-purple-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Raccordement provisoire</h3>
+                  <p className="text-gray-600 mb-4">
+                    Alimentation temporaire pour chantiers, événements et besoins ponctuels
+                  </p>
+                  <ul className="text-sm text-gray-500 space-y-1">
+                    <li>• Chantier de construction</li>
+                    <li>• Événement temporaire</li>
+                    <li>• Installation mobile</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Contact Section */}
         <section className="py-16 bg-blue-600 text-white" id="contact">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -146,15 +265,98 @@ export default function HomePage() {
                 Besoin d'assistance pour votre raccordement Enedis ?
               </h2>
               <p className="text-lg mb-8">Contactez-nous au 09 70 70 95 70</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Phone className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">Assistance téléphonique</h3>
+                  <p className="text-blue-200 mb-4">Nos experts vous accompagnent</p>
+                  <a href="tel:0970709570" className="text-yellow-400 font-bold text-lg hover:text-yellow-300 transition-colors">
+                    09 70 70 95 70
+                  </a>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Mail className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">Support en ligne</h3>
+                  <p className="text-blue-200 mb-4">Réponse sous 24h garantie</p>
+                  <a href="mailto:bonjour@portail-electricite.com" className="text-yellow-400 font-bold hover:text-yellow-300 transition-colors">
+                    bonjour@portail-electricite.com
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="bg-blue-700 text-white py-8">
+      <footer className="bg-blue-700 text-white py-12">
         <div className="container mx-auto px-4">
-          <div className="text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <div className="flex items-center mb-4">
+                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
+                  <Zap className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white">Votre partenaire</h3>
+                  <p className="text-blue-200 text-sm">Raccordement électrique</p>
+                </div>
+              </div>
+              <p className="text-blue-200 text-sm mb-4">
+                Votre partenaire expert pour tous vos projets de raccordement électrique en France.
+              </p>
+              <div className="bg-blue-800 rounded-lg p-4">
+                <div className="flex items-center">
+                  <Phone className="w-5 h-5 text-white mr-2" />
+                  <span className="text-white font-semibold">09 70 70 95 70</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-white mb-4">Services spécialisés</h3>
+              <ul className="space-y-2 text-blue-200">
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+                  Raccordement définitif
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+                  Raccordement provisoire
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+                  Viabilisation terrain
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+                  Vérification compteur
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-white mb-4">Votre projet</h3>
+              <div className="bg-green-600 rounded-lg p-4 text-center mb-4">
+                <a href="#formulaire-raccordement">
+                  <button className="bg-green-500 hover:bg-green-400 text-white font-bold px-6 py-3 rounded-lg w-full transition-colors">
+                    Demander un devis →
+                  </button>
+                </a>
+              </div>
+              <div className="text-blue-200 text-sm">
+                <p>✓ Service certifié professionnel</p>
+                <p>✓ Paiement 100% sécurisé</p>
+                <p>✓ Traitement rapide 24-48h</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-blue-600 pt-8 text-center">
             <p className="text-blue-200">&copy; 2025 Portail Électricité. Tous droits réservés.</p>
           </div>
         </div>
