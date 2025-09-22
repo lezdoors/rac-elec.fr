@@ -278,14 +278,13 @@ export default function HomePage() {
                     Particuliers et professionnels. Quelque soit le type de demande de raccordement Enedis. 
                     <span className="font-semibold"> Un seul formulaire !</span>
                   </p>
-                  <Link href="/raccordement-enedis">
-                    <button 
-                      className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg"
-                      data-testid="button-start-request"
-                    >
-                      Commencer ma demande
-                    </button>
-                  </Link>
+                  <button 
+                    onClick={() => setShowConnectionModal(true)}
+                    className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg"
+                    data-testid="button-start-request"
+                  >
+                    Commencer ma demande
+                  </button>
                 </div>
 
                 {/* Right Illustration */}
