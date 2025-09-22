@@ -307,9 +307,19 @@
       }, 3000);
     </script>
 
-    <!-- Critical mobile performance preloads -->
+    <!-- Critical mobile performance preloads and resource hints -->
     <link rel="preload" href="/src/main.tsx" as="script">
     <link rel="preload" href="/favicon-new.svg" as="image">
+    
+    <!-- CORE WEB VITALS: Preconnect to external domains for faster loading -->
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://www.google-analytics.com">
+    <link rel="preconnect" href="https://js.stripe.com">
+    
+    <!-- Resource hints for better Core Web Vitals -->
+    <link rel="modulepreload" href="/src/main.tsx">
+    <link rel="prefetch" href="/src/components/ui/form.tsx">
+    <link rel="prefetch" href="/src/pages/raccordement-enedis.tsx">
     
     <!-- Preload critical Inter font files for LCP text -->
     <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -377,6 +387,10 @@
   </head>
   <body>
     <div id="root"></div>
+    
+    <!-- CORE WEB VITALS: Performance optimizer loads immediately -->
+    <script src="/performance-optimizer.js"></script>
+    
     <script type="module" src="/src/main.tsx"></script>
     
     <!-- Global conversion functions for form tracking -->
