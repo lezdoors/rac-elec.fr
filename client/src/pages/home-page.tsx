@@ -194,48 +194,6 @@ export default function HomePage() {
               Un seul formulaire, un accompagnement complet.
             </p>
 
-            {/* Original Hero Service Cards */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-12 max-w-4xl mx-auto">
-              <Link href="/raccordement-residentiel" className="group">
-                <div className="bg-white/15 hover:bg-white/25 rounded-xl p-6 text-center transition-colors">
-                  <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-3 mx-auto">
-                    <HomeIcon className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="font-semibold text-white mb-1">Maison neuve</h3>
-                  <p className="text-white/80 text-sm">Habitation individuelle</p>
-                </div>
-              </Link>
-              
-              <Link href="/raccordement-definitif" className="group">
-                <div className="bg-white/15 hover:bg-white/25 rounded-xl p-6 text-center transition-colors">
-                  <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-3 mx-auto">
-                    <Building className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="font-semibold text-white mb-1">Définitif</h3>
-                  <p className="text-white/80 text-sm">Locaux professionnels</p>
-                </div>
-              </Link>
-              
-              <Link href="/raccordement-provisoire" className="group">
-                <div className="bg-white/15 hover:bg-white/25 rounded-xl p-6 text-center transition-colors">
-                  <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-3 mx-auto">
-                    <Clock className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="font-semibold text-white mb-1">Provisoire</h3>
-                  <p className="text-white/80 text-sm">Chantiers temporaires</p>
-                </div>
-              </Link>
-              
-              <Link href="/viabilisation" className="group">
-                <div className="bg-white/15 hover:bg-white/25 rounded-xl p-6 text-center transition-colors">
-                  <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-3 mx-auto">
-                    <MapPin className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="font-semibold text-white mb-1">Viabilisation</h3>
-                  <p className="text-white/80 text-sm">Parcelles terrain</p>
-                </div>
-              </Link>
-            </div>
 
             {/* Main CTA */}
             <div className="text-center mt-10">
