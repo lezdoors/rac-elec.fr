@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Link, useLocation } from "wouter";
+import { useNavigate } from "wouter";
 import { Form } from "@/components/ui/form";
 import { FormStep1 } from "@/components/form-step-1";
-import { CheckCircle2, ChevronLeft, ChevronRight, Menu, Phone, X } from "lucide-react";
+import { CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Form schema for FormStep1
 const heroFormSchema = z.object({
@@ -22,9 +22,9 @@ const heroFormSchema = z.object({
 
 type HeroFormData = z.infer<typeof heroFormSchema>;
 
-export default function HomePage() {
+export function HomePage() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [, navigate] = useLocation();
+  const [, navigate] = useNavigate();
 
   const heroForm = useForm<HeroFormData>({
     resolver: zodResolver(heroFormSchema),
@@ -55,49 +55,16 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <nav className="container mx-auto px-4">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="logo text-xl font-bold text-blue-600">
-              Portail Électricité
-            </Link>
-            <div className="nav-links hidden md:flex items-center space-x-6">
-              <Link href="#services" className="text-gray-700 hover:text-blue-600 transition-colors">Services</Link>
-              <Link href="#tarifs" className="text-gray-700 hover:text-blue-600 transition-colors">Tarifs</Link>
-              <Link href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors">Contact</Link>
-              <a href="tel:0970709570" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                09 70 70 95 70
-              </a>
-            </div>
-            <button className="md:hidden p-2">
-              <Menu className="h-6 w-6 text-gray-700" />
-            </button>
-          </div>
-        </nav>
-      </header>
-
       {/* Hero Section */}
       <main>
-        <section className="bg-[#0046a2] text-white py-16 md:py-20">
+        <section className="bg-[#0046a2] text-white py-16">
           <div className="container mx-auto px-4 max-w-6xl text-center">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold mb-6">
               Raccordement électrique Enedis, simplifié.
             </h1>
             <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
               Un seul formulaire, un accompagnement complet.
             </p>
-            <div className="text-center mt-8">
-              <a href="#formulaire-raccordement">
-                <button 
-                  className="bg-yellow-400 text-black font-bold px-12 py-6 rounded-xl text-xl md:text-2xl hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-2xl border-4 border-yellow-300"
-                  data-testid="button-commencer-demande"
-                >
-                  Commencer ma demande
-                </button>
-              </a>
-              <p className="text-white/80 text-sm mt-6">145 raccordements traités ce mois-ci</p>
-            </div>
           </div>
         </section>
 
@@ -158,28 +125,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
-        {/* Contact Section */}
-        <section className="py-16 bg-blue-600 text-white" id="contact">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                Besoin d'assistance pour votre raccordement Enedis ?
-              </h2>
-              <p className="text-lg mb-8">Contactez-nous au 09 70 70 95 70</p>
-            </div>
-          </div>
-        </section>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-blue-700 text-white py-8">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <p className="text-blue-200">&copy; 2025 Portail Électricité. Tous droits réservés.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

@@ -378,30 +378,32 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // Check if production build exists and prefer it over development
+  // Only serve production build in production environment
   const distPath = path.resolve(import.meta.dirname, "..", "dist", "public");
   const buildExists = fs.existsSync(distPath);
+  const isProduction = process.env.NODE_ENV === 'production';
   
   console.log(`🔍 Build check: ${buildExists ? '✅ Production build found' : '❌ No build found'}`);
   console.log(`📁 Dist path: ${distPath}`);
+  console.log(`🌍 Environment: ${process.env.NODE_ENV}`);
   
-  if (buildExists) {
+  if (buildExists && isProduction) {
     console.log('🚀 Serving production build...');
     // Custom static serving to bypass restricted vite.ts serveStatic function
     app.use(express.static(distPath));
     app.use("*", (_req, res) => {
       res.sendFile(path.resolve(distPath, "index.html"));
     });
-  } else if (app.get("env") === "development") {
-    console.log('🔧 Serving development with Vite...');
-    await setupVite(app, server);
   } else {
-    console.log('❌ No build found and not in development mode');
-    // Fallback static serving
-    app.use(express.static(distPath));
-    app.use("*", (_req, res) => {
-      res.sendFile(path.resolve(distPath, "index.html"));
-    });
+    if (buildExists) {
+      console.log('🔧 Development mode detected: Skipping production build, setting up Vite dev middleware...');
+    } else {
+      console.log('🔧 No production build found: Setting up Vite dev middleware...');
+    }
+    
+    // Always use Vite in development mode
+    await setupVite(app, server);
+    console.log('✅ Vite dev server configured');
   }
 
   // ALWAYS serve the app on port 5000

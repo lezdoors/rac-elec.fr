@@ -1,1 +1,0 @@
-import{j as t}from"./index-DoOyQpDg.js";import{C as e,f as o}from"./french-cities-CwNCuBaw.js";import"./map-pin-yBvTN8tE.js";import"./star-DALFgUY-.js";import"./users-BJhNGsQY.js";function u(){return t.jsx(e,{cityData:o.toulouse})}export{u as default};
