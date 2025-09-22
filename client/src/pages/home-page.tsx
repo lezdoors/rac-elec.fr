@@ -41,13 +41,13 @@ export default function HomePage() {
     telephone: ''
   });
   
-  // Connection request modal state
-  const [connectionForm, setConnectionForm] = useState({
-    typeRaccordement: '',
-    codePostal: '',
+  // Hero form state - matches main form Step 1 exactly
+  const [heroForm, setHeroForm] = useState({
+    clientType: '',
     nom: '',
-    telephone: '',
-    email: ''
+    prenom: '',
+    email: '',
+    phone: ''
   });
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   
@@ -113,44 +113,71 @@ export default function HomePage() {
     alert('Votre demande de rappel a été envoyée. Nous vous contacterons sous 2h en jours ouvrés.');
   };
 
-  // Handle connection request form submission
-  const handleConnectionSubmit = async (e: React.FormEvent) => {
+  // Handle hero form submission - matches main form Step 1 processing
+  const handleHeroSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate French phone format
-    const phoneRegex = /^(\+33|0)[1-9](\d{8})$/;
-    if (!phoneRegex.test(connectionForm.telephone.replace(/\s/g, ''))) {
-      alert('Veuillez entrer un numéro de téléphone français valide');
+    // Validate required fields
+    if (!heroForm.clientType || !heroForm.nom || !heroForm.prenom || !heroForm.email || !heroForm.phone) {
+      alert('Veuillez remplir tous les champs obligatoires');
+      return;
+    }
+    
+    // Validate French phone format (same as main form)
+    const cleanPhone = heroForm.phone.replace(/[\s\.\-]/g, '');
+    if (!/^(0[1-9]\d{8}|\+33[1-9]\d{8})$/.test(cleanPhone)) {
+      alert('Format téléphone invalide (ex: 06 12 34 56 78)');
       return;
     }
     
     // Google Analytics event - Primary conversion
     if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'connection_request', {
+      (window as any).gtag('event', 'hero_form_submit', {
         event_category: 'lead_generation',
-        event_label: 'hero_cta_conversion',
+        event_label: 'hero_step1_completed',
         value: 1,
-        connection_type: connectionForm.typeRaccordement
+        client_type: heroForm.clientType
       });
     }
     
-    // Show success message in modal
-    setShowSuccessMessage(true);
-    
-    // TODO: Submit form data to backend
-    console.log('Connection request submitted:', connectionForm);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setShowSuccessMessage(false);
-      setConnectionForm({
-        typeRaccordement: '',
-        codePostal: '',
-        nom: '',
-        telephone: '',
-        email: ''
+    try {
+      // Store Step 1 data in sessionStorage for main form
+      const step1Data = {
+        clientType: heroForm.clientType,
+        nom: heroForm.nom,
+        prenom: heroForm.prenom,
+        email: heroForm.email,
+        phone: heroForm.phone,
+        step1_completed: true
+      };
+      
+      sessionStorage.setItem('heroFormStep1Data', JSON.stringify(step1Data));
+      
+      // Send notification (same as main form)
+      await fetch("/api/notifications/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type: 'hero_form_step1_completed',
+          data: step1Data,
+          timestamp: new Date().toISOString(),
+        }),
       });
-    }, 3000);
+      
+      // Show success message
+      setShowSuccessMessage(true);
+      
+      // Redirect to main form Step 2 after 2 seconds
+      setTimeout(() => {
+        window.location.href = '/raccordement-enedis?step=2&hero=true';
+      }, 2000);
+      
+    } catch (error) {
+      console.error('Erreur soumission hero form:', error);
+      alert('Erreur lors de l\'envoi. Veuillez réessayer.');
+    }
   };
 
   return (
@@ -276,80 +303,127 @@ export default function HomePage() {
 
               {/* Inline Connection Form */}
               <div className="bg-gray-50 rounded-2xl p-8 md:p-12 shadow-lg">
-                <form onSubmit={handleConnectionSubmit} className="space-y-6">
+                <form onSubmit={handleHeroSubmit} className="space-y-6">
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    
-                    {/* Type de raccordement */}
-                    <div className="md:col-span-2">
-                      <label htmlFor="typeRaccordement" className="block text-sm font-medium text-gray-700 mb-2">
-                        Type de raccordement *
-                      </label>
-                      <select
-                        id="typeRaccordement"
-                        value={connectionForm.typeRaccordement}
-                        onChange={(e) => setConnectionForm({...connectionForm, typeRaccordement: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
-                        required
-                        data-testid="select-connection-type"
+                  {/* Type de client - Radio buttons matching main form Step 1 */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-3">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full inline-block mr-2"></div>
+                      Type de client *
+                    </label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      {/* Particulier */}
+                      <div
+                        onClick={() => setHeroForm({...heroForm, clientType: 'particulier'})}
+                        className={`cursor-pointer border-2 rounded-lg p-4 transition-all duration-200 hover:shadow-md ${
+                          heroForm.clientType === 'particulier' 
+                            ? 'border-blue-600 bg-blue-50' 
+                            : 'border-gray-300 bg-white hover:border-blue-300'
+                        }`}
                       >
-                        <option value="">Sélectionnez un type de raccordement</option>
-                        <option value="definitif">Raccordement définitif</option>
-                        <option value="provisoire">Raccordement provisoire</option>
-                        <option value="maison-neuve">Maison neuve</option>
-                        <option value="viabilisation">Viabilisation terrain</option>
-                      </select>
-                    </div>
+                        <div className="flex items-center gap-3">
+                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                            heroForm.clientType === 'particulier' 
+                              ? 'bg-blue-600 text-white' 
+                              : 'bg-blue-100 text-blue-600'
+                          }`}>
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                          </div>
+                          <div>
+                            <div className="font-semibold text-gray-900">Particulier</div>
+                            <div className="text-sm text-gray-600">Domicile résidentiel</div>
+                          </div>
+                        </div>
+                      </div>
 
-                    {/* Code postal */}
+                      {/* Professionnel */}
+                      <div
+                        onClick={() => setHeroForm({...heroForm, clientType: 'professionnel'})}
+                        className={`cursor-pointer border-2 rounded-lg p-4 transition-all duration-200 hover:shadow-md ${
+                          heroForm.clientType === 'professionnel' 
+                            ? 'border-orange-600 bg-orange-50' 
+                            : 'border-gray-300 bg-white hover:border-orange-300'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                            heroForm.clientType === 'professionnel' 
+                              ? 'bg-orange-600 text-white' 
+                              : 'bg-orange-100 text-orange-600'
+                          }`}>
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                          </div>
+                          <div>
+                            <div className="font-semibold text-gray-900">Professionnel</div>
+                            <div className="text-sm text-gray-600">Entreprise & commerce</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Collectivité */}
+                      <div
+                        onClick={() => setHeroForm({...heroForm, clientType: 'collectivite'})}
+                        className={`cursor-pointer border-2 rounded-lg p-4 transition-all duration-200 hover:shadow-md ${
+                          heroForm.clientType === 'collectivite' 
+                            ? 'border-green-600 bg-green-50' 
+                            : 'border-gray-300 bg-white hover:border-green-300'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                            heroForm.clientType === 'collectivite' 
+                              ? 'bg-green-600 text-white' 
+                              : 'bg-green-100 text-green-600'
+                          }`}>
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                            </svg>
+                          </div>
+                          <div>
+                            <div className="font-semibold text-gray-900">Collectivité</div>
+                            <div className="text-sm text-gray-600">Entité publique</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Prénom */}
                     <div>
-                      <label htmlFor="codePostal" className="block text-sm font-medium text-gray-700 mb-2">
-                        Code postal *
+                      <label htmlFor="prenom" className="block text-sm font-medium text-gray-700 mb-2">
+                        Prénom *
                       </label>
                       <input
                         type="text"
-                        id="codePostal"
-                        value={connectionForm.codePostal}
-                        onChange={(e) => setConnectionForm({...connectionForm, codePostal: e.target.value})}
+                        id="prenom"
+                        value={heroForm.prenom}
+                        onChange={(e) => setHeroForm({...heroForm, prenom: e.target.value})}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="75001"
-                        pattern="[0-9]{5}"
+                        placeholder="Votre prénom"
                         required
-                        data-testid="input-postal-code"
+                        data-testid="input-first-name"
                       />
                     </div>
 
                     {/* Nom */}
                     <div>
                       <label htmlFor="nom" className="block text-sm font-medium text-gray-700 mb-2">
-                        Nom complet *
+                        Nom *
                       </label>
                       <input
                         type="text"
                         id="nom"
-                        value={connectionForm.nom}
-                        onChange={(e) => setConnectionForm({...connectionForm, nom: e.target.value})}
+                        value={heroForm.nom}
+                        onChange={(e) => setHeroForm({...heroForm, nom: e.target.value})}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Votre nom complet"
+                        placeholder="Votre nom"
                         required
-                        data-testid="input-full-name"
-                      />
-                    </div>
-
-                    {/* Téléphone */}
-                    <div>
-                      <label htmlFor="telephone" className="block text-sm font-medium text-gray-700 mb-2">
-                        Téléphone *
-                      </label>
-                      <input
-                        type="tel"
-                        id="telephone"
-                        value={connectionForm.telephone}
-                        onChange={(e) => setConnectionForm({...connectionForm, telephone: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="06 12 34 56 78"
-                        required
-                        data-testid="input-phone"
+                        data-testid="input-last-name"
                       />
                     </div>
 
@@ -361,12 +435,29 @@ export default function HomePage() {
                       <input
                         type="email"
                         id="email"
-                        value={connectionForm.email}
-                        onChange={(e) => setConnectionForm({...connectionForm, email: e.target.value})}
+                        value={heroForm.email}
+                        onChange={(e) => setHeroForm({...heroForm, email: e.target.value})}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="votre@email.com"
                         required
                         data-testid="input-email"
+                      />
+                    </div>
+
+                    {/* Téléphone */}
+                    <div>
+                      <label htmlFor="telephone" className="block text-sm font-medium text-gray-700 mb-2">
+                        Téléphone *
+                      </label>
+                      <input
+                        type="tel"
+                        id="telephone"
+                        value={heroForm.phone}
+                        onChange={(e) => setHeroForm({...heroForm, phone: e.target.value})}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="06 12 34 56 78"
+                        required
+                        data-testid="input-phone"
                       />
                     </div>
                   </div>
@@ -376,12 +467,12 @@ export default function HomePage() {
                     <button
                       type="submit"
                       className="w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-lg hover:bg-blue-700 transition-colors text-lg shadow-lg"
-                      data-testid="button-submit-connection"
+                      data-testid="button-submit-hero-form"
                     >
-                      Envoyer ma demande →
+                      Continuer vers l'étape 2 →
                     </button>
                     <p className="text-center text-gray-500 text-sm mt-4">
-                      ✓ Traitement sous 2h en jours ouvrés • ✓ Devis gratuit
+                      ✓ Passage direct à l'étape 2 • ✓ Données pré-remplies
                     </p>
                   </div>
                 </form>
@@ -392,9 +483,9 @@ export default function HomePage() {
                     <div className="flex items-center">
                       <CheckCircle2 className="h-6 w-6 text-green-500 mr-3" />
                       <div>
-                        <p className="text-green-800 font-semibold text-lg">Demande envoyée avec succès !</p>
+                        <p className="text-green-800 font-semibold text-lg">Informations enregistrées !</p>
                         <p className="text-green-700 mt-1">
-                          Nous vous contacterons dans les 2h en jours ouvrés pour finaliser votre dossier.
+                          Redirection vers l'étape 2 pour finaliser votre demande...
                         </p>
                       </div>
                     </div>
