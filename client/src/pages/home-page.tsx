@@ -61,87 +61,269 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
 
-      {/* Hero Section */}
+      {/* Modern Hero Section - 2025 Design */}
       <main>
-        <section id="hero" className="bg-[#0046a2] text-white py-16 md:py-20">
-          <div className="container mx-auto px-4 max-w-6xl text-center">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Raccordement électrique Enedis, simplifié.
-            </h1>
-            <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
-              Un seul formulaire, un accompagnement complet.
-            </p>
-            <div className="text-center mt-8">
-              <a href="#formulaire-raccordement">
-                <button 
-                  className="bg-yellow-400 text-black font-bold px-12 py-6 rounded-xl text-xl md:text-2xl hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-2xl border-4 border-yellow-300"
-                  data-testid="button-commencer-demande"
-                >
-                  Commencer ma demande
-                </button>
-              </a>
-              <p className="text-white/80 text-sm mt-6">145 raccordements traités ce mois-ci</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Form Section */}
-        <section className="py-16 bg-white" id="formulaire-raccordement">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                  Votre demande de raccordement Enedis
-                </h2>
-                <p className="text-lg text-gray-600">
-                  Particuliers et professionnels. Un seul formulaire pour tous types de raccordements.
+        <section id="hero" className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-100/40">
+          {/* Background Elements */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(120,119,198,0.1),transparent_50%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(99,102,241,0.08),transparent_50%)]"></div>
+          
+          <div className="relative container mx-auto px-4 max-w-6xl py-20 md:py-28">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              
+              {/* Content Side */}
+              <div className="space-y-8 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-6">
+                  <Zap className="w-4 h-4" />
+                  Service Enedis certifié
+                </div>
+                
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                  <span className="text-gray-900">Raccordement</span>
+                  <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
+                    électrique
+                  </span>
+                  <span className="text-gray-900">simplifié</span>
+                </h1>
+                
+                <p className="text-xl md:text-2xl text-gray-600 max-w-2xl lg:max-w-none leading-relaxed">
+                  Une solution moderne pour votre raccordement Enedis. 
+                  <span className="block mt-2 font-medium text-gray-800">Un seul formulaire, un accompagnement complet.</span>
                 </p>
-              </div>
-
-              {/* Hero Form */}
-              <Form {...heroForm}>
-                <form onSubmit={heroForm.handleSubmit(handleHeroSubmit)} className="space-y-4">
-                  <FormStep1 form={heroForm} />
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <a href="#formulaire-raccordement">
+                    <button 
+                      className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1"
+                      data-testid="button-commencer-demande"
+                    >
+                      <span className="relative z-10 flex items-center gap-3">
+                        Commencer ma demande
+                        <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 group-hover:opacity-20 rounded-2xl transition-opacity"></div>
+                    </button>
+                  </a>
                   
-                  <div className="flex justify-between items-center pt-4">
-                    <button
-                      type="button"
-                      disabled
-                      className="flex items-center gap-2 px-6 py-3 border-2 border-gray-300 text-gray-400 rounded-lg font-medium cursor-not-allowed opacity-50"
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                      Précédent
+                  <a href="tel:0970709570">
+                    <button className="inline-flex items-center justify-center px-6 py-4 text-lg font-medium text-gray-700 bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-gray-300 rounded-2xl shadow-md hover:shadow-lg transition-all duration-200">
+                      <Phone className="w-5 h-5 mr-3 text-green-600" />
+                      09 70 70 95 70
                     </button>
-
-                    <button
-                      type="submit"
-                      className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 hover:from-blue-700 hover:via-blue-800 hover:to-blue-900 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] font-medium rounded-lg"
-                      data-testid="button-submit-hero-form"
-                    >
-                      Suivant
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
+                  </a>
+                </div>
+                
+                {/* Trust Indicators */}
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 pt-6 text-sm text-gray-500">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="font-medium text-gray-700">145 raccordements</span> traités ce mois-ci
                   </div>
-                </form>
-              </Form>
-
-              {/* Success Message */}
-              {showSuccessMessage && (
-                <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
-                  <div className="flex items-center">
-                    <CheckCircle2 className="h-5 w-5 text-green-500 mr-3" />
-                    <div>
-                      <p className="text-green-800 font-semibold">Informations enregistrées !</p>
-                      <p className="text-green-700 text-sm mt-1">
-                        Redirection vers l'étape 2 pour finaliser votre demande...
-                      </p>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    <span className="font-medium text-gray-700">99.2%</span> de satisfaction
+                  </div>
+                </div>
+              </div>
+              
+              {/* Visual Side */}
+              <div className="relative lg:block">
+                <div className="relative">
+                  {/* Main Illustration Container */}
+                  <div className="relative mx-auto max-w-md lg:max-w-lg xl:max-w-xl">
+                    
+                    {/* Electric Grid Illustration */}
+                    <div className="relative bg-white/60 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20">
+                      
+                      {/* House Icon */}
+                      <div className="text-center mb-6">
+                        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl shadow-lg">
+                          <Building className="w-10 h-10 text-white" />
+                        </div>
+                      </div>
+                      
+                      {/* Connection Lines */}
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                            <span className="text-sm font-medium text-gray-700">Étude technique</span>
+                          </div>
+                          <span className="text-xs text-gray-500">7-15 jours</span>
+                        </div>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse animation-delay-1000"></div>
+                            <span className="text-sm font-medium text-gray-700">Travaux raccordement</span>
+                          </div>
+                          <span className="text-xs text-gray-500">4-6 semaines</span>
+                        </div>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-3 h-3 bg-purple-500 rounded-full animate-pulse animation-delay-2000"></div>
+                            <span className="text-sm font-medium text-gray-700">Mise en service</span>
+                          </div>
+                          <span className="text-xs text-gray-500">1-2 jours</span>
+                        </div>
+                      </div>
+                      
+                      {/* Bottom CTA */}
+                      <div className="mt-6 pt-6 border-t border-gray-200">
+                        <div className="text-center">
+                          <p className="text-xs text-gray-600 mb-3">Processus 100% dématérialisé</p>
+                          <div className="flex justify-center space-x-2">
+                            <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-green-500 rounded-lg flex items-center justify-center">
+                              <CheckCircle2 className="w-4 h-4 text-white" />
+                            </div>
+                            <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-500 rounded-lg flex items-center justify-center">
+                              <Zap className="w-4 h-4 text-white" />
+                            </div>
+                            <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-purple-500 rounded-lg flex items-center justify-center">
+                              <Mail className="w-4 h-4 text-white" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Floating Elements */}
+                    <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl shadow-lg flex items-center justify-center animate-bounce animation-delay-500">
+                      <Zap className="w-6 h-6 text-white" />
+                    </div>
+                    
+                    <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl shadow-lg flex items-center justify-center animate-pulse">
+                      <CheckCircle2 className="w-8 h-8 text-white" />
                     </div>
                   </div>
                 </div>
-              )}
+              </div>
+              
             </div>
           </div>
         </section>
+
+        {/* Modern Form Section */}
+        <section className="py-20 bg-gradient-to-b from-white via-gray-50/30 to-white" id="formulaire-raccordement">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-5xl mx-auto">
+              
+              {/* Section Header */}
+              <div className="text-center mb-16">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium mb-6">
+                  <CheckCircle2 className="w-4 h-4" />
+                  Processus simplifié
+                </div>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                  <span className="block">Votre demande de</span>
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    raccordement Enedis
+                  </span>
+                </h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                  Particuliers et professionnels. Un seul formulaire intelligent pour tous types de raccordements électriques.
+                </p>
+              </div>
+
+              {/* Modern Form Container */}
+              <div className="relative">
+                {/* Background Decoration */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 via-purple-50/30 to-indigo-50/50 rounded-3xl"></div>
+                <div className="absolute inset-0 bg-white/80 backdrop-blur-sm rounded-3xl border border-white/20 shadow-2xl"></div>
+                
+                <div className="relative p-8 lg:p-12">
+                  {/* Progress Indicator */}
+                  <div className="flex items-center justify-center mb-8">
+                    <div className="flex items-center space-x-4">
+                      <div className="flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
+                          1
+                        </div>
+                        <span className="ml-3 text-sm font-medium text-gray-700">Informations</span>
+                      </div>
+                      <div className="w-12 h-0.5 bg-gray-200"></div>
+                      <div className="flex items-center">
+                        <div className="w-8 h-8 bg-gray-200 text-gray-500 rounded-full flex items-center justify-center text-sm font-bold">
+                          2
+                        </div>
+                        <span className="ml-3 text-sm text-gray-500">Projet</span>
+                      </div>
+                      <div className="w-12 h-0.5 bg-gray-200"></div>
+                      <div className="flex items-center">
+                        <div className="w-8 h-8 bg-gray-200 text-gray-500 rounded-full flex items-center justify-center text-sm font-bold">
+                          3
+                        </div>
+                        <span className="ml-3 text-sm text-gray-500">Validation</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Hero Form */}
+                  <Form {...heroForm}>
+                    <form onSubmit={heroForm.handleSubmit(handleHeroSubmit)} className="space-y-6">
+                      <FormStep1 form={heroForm} />
+                      
+                      <div className="flex flex-col sm:flex-row justify-between items-center pt-8 gap-4">
+                        <button
+                          type="button"
+                          disabled
+                          className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 border-2 border-gray-200 text-gray-400 rounded-2xl font-medium cursor-not-allowed opacity-50 bg-gray-50"
+                        >
+                          <ChevronLeft className="w-4 h-4" />
+                          Précédent
+                        </button>
+
+                        <button
+                          type="submit"
+                          className="w-full sm:w-auto group relative flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 text-white font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 rounded-2xl"
+                          data-testid="button-submit-hero-form"
+                        >
+                          <span className="relative z-10">Continuer ma demande</span>
+                          <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform relative z-10" />
+                          <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 group-hover:opacity-20 rounded-2xl transition-opacity"></div>
+                        </button>
+                      </div>
+                    </form>
+                  </Form>
+                  
+                  {/* Trust Elements */}
+                  <div className="flex flex-wrap items-center justify-center gap-6 mt-8 pt-6 border-t border-gray-100">
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <CheckCircle2 className="w-4 h-4 text-green-500" />
+                      <span>Gratuit et sans engagement</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <Zap className="w-4 h-4 text-blue-500" />
+                      <span>Traitement en 2 minutes</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <Mail className="w-4 h-4 text-purple-500" />
+                      <span>Suivi par email</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Success Message Modal */}
+        {showSuccessMessage && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle2 className="h-8 w-8 text-green-500" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Informations enregistrées !</h3>
+                <p className="text-gray-600">
+                  Redirection vers l'étape 2 pour finaliser votre demande...
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Quel type de raccordement vous correspond ? */}
         <section className="py-16 bg-gray-50">
