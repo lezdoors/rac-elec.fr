@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { AdminButton } from "@/components/ui/admin-button";
 import { Zap, ArrowRight, Building, Home as HomeIcon, BarChart, Clock, Shield, User, Server, Send, Bolt, CheckCheck, Wrench, Phone, AlertCircle, ChevronDown, CheckCircle2, MapPin, Sparkles, FileCheck, Wifi, Users, Lightbulb, Settings, Power, ExternalLink, ShieldCheck, Menu, X, FileText, MessageCircle, Mail } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import formulaireIllustration from '@assets/Completer-Formulaire_1758501124521.png';
 
 // Mobile performance optimization hook
 const useMobileDetection = () => {
@@ -248,33 +249,41 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Votre Demande de Raccordement Section */}
+        {/* Commencez votre demande de raccordement Section */}
         <section className="py-16 bg-gray-50" id="formulaire-raccordement">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-4">
-                  Votre Demande de <span className="font-semibold text-green-600">Raccordement</span>
-                </h2>
-                <p className="text-gray-600 text-lg">Processus simplifié en 4 étapes pour votre raccordement Enedis personnalisé</p>
-              </div>
-              
-              <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-                <div className="text-center mb-8">
-                  <p className="text-gray-700 mb-2">Besoin d'aide pour remplir le formulaire ?</p>
-                  <div className="flex items-center justify-center gap-4">
-                    <span className="text-2xl font-bold text-blue-600">📞 09 70 70 95 70</span>
-                    <span className="text-gray-500">Lundi-Vendredi 8h-18h</span>
-                  </div>
-                </div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 
-                <div className="text-center">
+                {/* Left Content */}
+                <div className="text-center lg:text-left">
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                    Commencez votre demande de raccordement Enedis ici
+                  </h2>
+                  <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                    Particuliers et professionnels. Quelque soit le type de demande de raccordement Enedis. 
+                    <span className="font-semibold"> Un seul formulaire !</span>
+                  </p>
                   <Link href="/raccordement-enedis">
-                    <button className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg">
-                      Démarrer ma demande
+                    <button 
+                      className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg"
+                      data-testid="button-start-request"
+                    >
+                      Commencer ma demande
                     </button>
                   </Link>
                 </div>
+
+                {/* Right Illustration */}
+                <div className="flex justify-center">
+                  <img 
+                    src={formulaireIllustration} 
+                    alt="Illustration de personnes remplissant un formulaire de raccordement électrique"
+                    className="w-full max-w-md h-auto"
+                    data-testid="img-form-illustration"
+                  />
+                </div>
+
               </div>
             </div>
           </div>
