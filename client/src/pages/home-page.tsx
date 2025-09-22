@@ -55,27 +55,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <nav className="container mx-auto px-4">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="logo text-xl font-bold text-blue-600">
-              Portail Électricité
-            </Link>
-            <div className="nav-links hidden md:flex items-center space-x-6">
-              <Link href="#services" className="text-gray-700 hover:text-blue-600 transition-colors">Services</Link>
-              <Link href="#tarifs" className="text-gray-700 hover:text-blue-600 transition-colors">Tarifs</Link>
-              <Link href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors">Contact</Link>
-              <a href="tel:0970709570" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                09 70 70 95 70
-              </a>
-            </div>
-            <button className="md:hidden p-2">
-              <Menu className="h-6 w-6 text-gray-700" />
-            </button>
-          </div>
-        </nav>
-      </header>
 
       {/* Hero Section */}
       <main>
