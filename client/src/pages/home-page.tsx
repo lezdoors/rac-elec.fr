@@ -143,8 +143,130 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Service de raccordement électrique Enedis en ligne */}
+        {/* Quel type de raccordement vous correspond ? */}
         <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                  Quel type de raccordement vous correspond ?
+                </h2>
+                <p className="text-gray-600 mb-2">Choisir un projet de raccordement. Découvrez la solution électrique adaptée à vos besoins spécifiques.</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                {/* Raccordement Définitif */}
+                <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                    <Building className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Raccordement Définitif</h3>
+                  <p className="text-gray-600 text-sm mb-4">
+                    Pour maisons individuelles, appartements et locaux professionnels
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4">À partir de 1 300 €</p>
+                  <a href="#formulaire-raccordement" className="text-blue-600 text-sm font-medium hover:text-blue-700 transition-colors">
+                    En savoir plus →
+                  </a>
+                </div>
+
+                {/* Raccordement Provisoire */}
+                <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+                  <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                    <Zap className="w-6 h-6 text-orange-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Raccordement Provisoire</h3>
+                  <p className="text-gray-600 text-sm mb-4">
+                    Solution temporaire pour chantiers et installations temporaires
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4">À partir de 800 €</p>
+                  <a href="#formulaire-raccordement" className="text-blue-600 text-sm font-medium hover:text-blue-700 transition-colors">
+                    En savoir plus →
+                  </a>
+                </div>
+
+                {/* Viabilisation */}
+                <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                    <Menu className="w-6 h-6 text-green-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Viabilisation</h3>
+                  <p className="text-gray-600 text-sm mb-4">
+                    Préparation et équipement électrique de votre terrain
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4">À partir de 2 200 €</p>
+                  <a href="#formulaire-raccordement" className="text-blue-600 text-sm font-medium hover:text-blue-700 transition-colors">
+                    En savoir plus →
+                  </a>
+                </div>
+
+                {/* Modification */}
+                <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                    <Building className="w-6 h-6 text-purple-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Modification</h3>
+                  <p className="text-gray-600 text-sm mb-4">
+                    Association et mise à niveau de votre installation existante
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4">À partir de 900 €</p>
+                  <a href="#formulaire-raccordement" className="text-blue-600 text-sm font-medium hover:text-blue-700 transition-colors">
+                    En savoir plus →
+                  </a>
+                </div>
+
+                {/* Raccordement Collectif */}
+                <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                    <Users className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Raccordement Collectif</h3>
+                  <p className="text-gray-600 text-sm mb-4">
+                    Solutions pour promoteurs, équipementiers et entreprises
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4">Sur devis personnalisé</p>
+                  <a href="#formulaire-raccordement" className="text-blue-600 text-sm font-medium hover:text-blue-700 transition-colors">
+                    En savoir plus →
+                  </a>
+                </div>
+
+                {/* Production Électrique */}
+                <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow bg-green-50">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                    <Zap className="w-6 h-6 text-green-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Production Électrique</h3>
+                  <span className="inline-block bg-green-200 text-green-800 px-2 py-1 rounded text-xs font-medium mb-2">
+                    Nouveau
+                  </span>
+                  <p className="text-gray-600 text-sm mb-4">
+                    Raccordement pour panneaux solaires et production d'énergie verte
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4">À partir de 1 800 €</p>
+                  <a href="#formulaire-raccordement" className="text-green-600 text-sm font-medium hover:text-green-700 transition-colors">
+                    En savoir plus →
+                  </a>
+                </div>
+              </div>
+
+              {/* Question d'aide */}
+              <div className="text-center mb-8">
+                <p className="text-gray-600 mb-4">
+                  <strong>Besoin d'aide pour choisir ?</strong>
+                </p>
+                <p className="text-sm text-gray-500 mb-4">
+                  Nos experts vous accompagnent dans le choix de la solution la plus adaptée à votre projet.
+                </p>
+                <a href="tel:0970709570" className="text-blue-600 font-medium hover:text-blue-700">
+                  ☎ 09 70 70 95 70
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Service de raccordement électrique Enedis en ligne - Processus détaillé */}
+        <section className="py-16 bg-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
@@ -154,13 +276,14 @@ export default function HomePage() {
                 <p className="text-gray-600">Étapes du processus de raccordement électrique Enedis</p>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="text-white font-bold text-xl">1</span>
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Demande en ligne</h3>
                   <p className="text-gray-600 text-sm">Formulaire sécurisé depuis cette plateforme</p>
+                  <p className="text-xs text-gray-500 mt-2">Délai : instantané</p>
                 </div>
 
                 <div className="text-center">
@@ -169,6 +292,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Étude et devis</h3>
                   <p className="text-gray-600 text-sm">Analyse technique et proposition économique</p>
+                  <p className="text-xs text-gray-500 mt-2">Délai : 7 à 15 jours</p>
                 </div>
 
                 <div className="text-center">
@@ -177,6 +301,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Travaux de raccordement</h3>
                   <p className="text-gray-600 text-sm">Réalisation des travaux par nos équipes qualifiées</p>
+                  <p className="text-xs text-gray-500 mt-2">Délai : 4 à 6 semaines</p>
                 </div>
 
                 <div className="text-center">
@@ -185,13 +310,59 @@ export default function HomePage() {
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Mise en service</h3>
                   <p className="text-gray-600 text-sm">Finalisation et activation de votre raccordement</p>
+                  <p className="text-xs text-gray-500 mt-2">Délai : 1 à 2 jours</p>
                 </div>
               </div>
 
-              <div className="text-center mt-12" id="services">
+              {/* Types de raccordements électriques Enedis */}
+              <div className="bg-gray-50 p-8 rounded-lg mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">
+                  Types de raccordements électriques Enedis
+                </h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="bg-white p-6 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-3">Raccordement définitif</h4>
+                    <p className="text-gray-600 text-sm mb-3">
+                      Installation permanente pour maisons individuelles et locaux professionnels
+                    </p>
+                    <ul className="text-xs text-gray-500 space-y-1">
+                      <li>• Étude technique personnalisée</li>
+                      <li>• Travaux de terrassement</li>
+                      <li>• Installation du compteur électrique</li>
+                      <li>• Mise en service garantie</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-white p-6 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-3">Raccordement provisoire</h4>
+                    <p className="text-gray-600 text-sm mb-3">
+                      Solution temporaire pour chantiers et installations temporaires
+                    </p>
+                    <ul className="text-xs text-gray-500 space-y-1">
+                      <li>• Installation rapide</li>
+                      <li>• Durée limitée selon besoins</li>
+                      <li>• Équipement mobile adapté</li>
+                      <li>• Démontage inclus</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="mt-6 bg-blue-50 p-6 rounded-lg">
+                  <h4 className="font-semibold text-gray-900 mb-3">Solutions professionnelles</h4>
+                  <p className="text-gray-600 text-sm mb-3">
+                    Pour tous vos raccordements électriques Enedis ?
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    Formulaire raccordement Enedis →
+                  </p>
+                </div>
+              </div>
+
+              <div className="text-center">
                 <a href="#formulaire-raccordement">
                   <button className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg">
-                    Commencer maintenant
+                    Commencer votre raccordement Enedis
                   </button>
                 </a>
               </div>
