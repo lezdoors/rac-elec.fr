@@ -201,28 +201,6 @@ export default function HomePage() {
         `}</script>
       </Helmet>
 
-      {/* Google 2025 Required Navigation Header */}
-      <header className="site-nav bg-white shadow-sm sticky top-0 z-40">
-        <nav className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="logo text-xl font-bold text-blue-600">
-              Portail Électricité
-            </Link>
-            <div className="nav-links hidden md:flex items-center space-x-6">
-              <Link href="#services" className="text-gray-700 hover:text-blue-600 transition-colors">Services</Link>
-              <Link href="#tarifs" className="text-gray-700 hover:text-blue-600 transition-colors">Tarifs</Link>
-              <Link href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors">Contact</Link>
-              <a href="tel:0970709570" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                09 70 70 95 70
-              </a>
-            </div>
-            {/* Mobile Menu Button */}
-            <button className="md:hidden p-2">
-              <Menu className="h-6 w-6 text-gray-700" />
-            </button>
-          </div>
-        </nav>
-      </header>
 
 
       {/* Hero Section */}
@@ -816,77 +794,6 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* Extended Footer with Services - Matching Screenshots */}
-      <footer className="bg-blue-900 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            {/* Company Info Section */}
-            <div>
-              <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
-                  <HomeIcon className="w-5 h-5 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-white">Votre partenaire</h3>
-                  <p className="text-blue-200 text-sm">Raccordement électrique</p>
-                </div>
-              </div>
-              <p className="text-blue-200 text-sm mb-4">
-                Votre partenaire expert pour tous vos projets de raccordement électrique en France.
-              </p>
-              <div className="bg-blue-800 rounded-lg p-4">
-                <div className="flex items-center">
-                  <Phone className="w-5 h-5 text-white mr-2" />
-                  <span className="text-white font-semibold">09 70 70 95 70</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Services spécialisés Section */}
-            <div>
-              <h3 className="font-semibold text-white mb-4">Services spécialisés</h3>
-              <ul className="space-y-2 text-blue-200">
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
-                  Raccordement définitif
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
-                  Raccordement provisoire
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
-                  Viabilisation terrain
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
-                  Vérification compteur
-                </li>
-              </ul>
-            </div>
-
-            {/* Votre projet Section */}
-            <div>
-              <h3 className="font-semibold text-white mb-4">Votre projet</h3>
-              <div className="bg-green-600 rounded-lg p-4 text-center">
-                <button 
-                  onClick={() => setShowCallbackModal(true)}
-                  className="bg-green-500 hover:bg-green-400 text-white font-bold px-6 py-3 rounded-lg w-full transition-colors"
-                >
-                  Demander un devis →
-                </button>
-              </div>
-              <div className="mt-4 text-blue-200 text-sm">
-                <p>✓ Service certifié professionnel</p>
-                <p>✓ Paiement 100% sécurisé</p>
-                <p>✓ Traitement rapide 24-48h</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </footer>
 
 
       {/* Connection Request Modal - Google 2025 Optimized */}
