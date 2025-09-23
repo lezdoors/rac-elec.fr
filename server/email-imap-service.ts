@@ -94,22 +94,8 @@ export async function createImapConfigFromUser(userId: number): Promise<ImapConf
     // Pour l'utilisateur admin (ID=1), on utilise toujours prioritairement contact@portail-electricite.com
     if (userId === 1) {
       // Configuration spécifique pour admin avec contact@portail-electricite.com
-      const adminPassword = process.env.IMAP_PASSWORD;
+      const adminPassword = process.env.IMAP_PASSWORD || '';
       console.log(`Utilisation de la configuration IMAP contact@portail-electricite.com pour l'administrateur`);
-      
-      // Only use real IMAP if password is properly configured
-      if (!adminPassword) {
-        console.log('IMAP_PASSWORD not configured for admin, using simulated mode');
-        return {
-          user: 'contact@portail-electricite.com',
-          password: '',
-          host: 's4015.fra1.stableserver.net',
-          port: 993,
-          tls: true,
-          tlsOptions: { rejectUnauthorized: true },
-          useSimulatedBoxes: true // Use simulated mode for security
-        };
-      }
       
       return {
         user: 'contact@portail-electricite.com',
@@ -117,8 +103,8 @@ export async function createImapConfigFromUser(userId: number): Promise<ImapConf
         host: 's4015.fra1.stableserver.net',
         port: 993,
         tls: true,
-        tlsOptions: { rejectUnauthorized: process.env.NODE_ENV === 'production' },
-        useSimulatedBoxes: false // Use real IMAP only when properly configured
+        tlsOptions: { rejectUnauthorized: false },
+        useSimulatedBoxes: false // Désactiver explicitement le mode simulation pour l'admin
       };
     }
     
@@ -156,12 +142,27 @@ export async function createImapConfigFromUser(userId: number): Promise<ImapConf
         host: imapHost,
         port: imapPort,
         tls: true,
-        tlsOptions: { rejectUnauthorized: process.env.NODE_ENV === 'production' }
+        tlsOptions: { rejectUnauthorized: false } // Pour éviter les problèmes de certificat
       };
     }
     
-    // Skip global SMTP config since getSmtpConfig function doesn't exist
-    // Fall back to environment configuration instead
+    // Essayer d'utiliser les paramètres SMTP globaux pour les autres utilisateurs
+    const globalConfig = await emailService.getSmtpConfig();
+    if (globalConfig && globalConfig.host && globalConfig.auth && globalConfig.auth.user && globalConfig.auth.pass && globalConfig.enabled) {
+      // Utiliser le même serveur pour IMAP que pour SMTP
+      // Remplacer smtp. par imap. si nécessaire
+      const imapHost = globalConfig.host.replace(/^smtp\./, 'imap.'); // Utiliser le même domaine
+      console.log(`Utilisation de la configuration IMAP globale pour l'utilisateur ${userId}: ${imapHost}`);
+      
+      return {
+        user: globalConfig.auth.user,
+        password: globalConfig.auth.pass,
+        host: imapHost,
+        port: 993, // Port IMAP par défaut avec SSL/TLS
+        tls: true,
+        tlsOptions: { rejectUnauthorized: false }
+      };
+    }
     
     // Utilisez le mot de passe IMAP de l'environnement si disponible
     if (process.env.IMAP_PASSWORD) {
@@ -172,23 +173,23 @@ export async function createImapConfigFromUser(userId: number): Promise<ImapConf
         host: "s4015.fra1.stableserver.net",
         port: 993,
         tls: true,
-        tlsOptions: { rejectUnauthorized: process.env.NODE_ENV === 'production' },
+        tlsOptions: { rejectUnauthorized: false },
         authTimeout: 10000, // Augmenter le timeout d'authentification
         useSimulatedBoxes: false // Utiliser les emails réels
       };
     }
     
-    // Fallback vers le mode simulé pour des raisons de sécurité
-    console.log(`Pas de configuration d'environnement pour l'utilisateur ${userId}, utilisation du mode simulé`);
+    // Fallback vers le mode réel avec mot de passe spécifié
+    console.log(`Pas de configuration d'environnement pour l'utilisateur ${userId}, utilisation du mot de passe spécifié manuellement`);
     return {
       user: "contact@portail-electricite.com",
-      password: "", // Remove hardcoded password
+      password: "Kamaka00.", // Mot de passe fourni  
       host: "s4015.fra1.stableserver.net",
       port: 993,
       tls: true,
-      tlsOptions: { rejectUnauthorized: process.env.NODE_ENV === 'production' },
-      authTimeout: 10000,
-      useSimulatedBoxes: true // Use simulated mode for security
+      tlsOptions: { rejectUnauthorized: false },
+      authTimeout: 10000, // Augmenter le timeout d'authentification
+      useSimulatedBoxes: false // Utiliser les emails réels
     };
   } catch (error) {
     console.error(`Erreur lors de la création de la configuration IMAP pour l'utilisateur ${userId}:`, error);
@@ -207,7 +208,7 @@ async function connectToImap(config: ImapConfig): Promise<imaps.ImapSimple> {
         host: config.host,
         port: config.port,
         tls: config.tls,
-        tlsOptions: config.tlsOptions || { rejectUnauthorized: process.env.NODE_ENV === 'production' },
+        tlsOptions: config.tlsOptions || { rejectUnauthorized: false },
         authTimeout: 10000
       }
     });

@@ -38,7 +38,7 @@ if (typeof window !== 'undefined' && window.navigator && !window.navigator.clipb
 // Provide fallback values for import.meta.env in older browsers
 if (typeof window !== 'undefined') {
   (window as any).__VITE_ENV__ = {
-    VITE_GA_MEASUREMENT_ID: 'G-PLACEHOLDER123', // TODO: Replace with real GA4 Measurement ID
+    VITE_GA_MEASUREMENT_ID: 'GT-MJKTJGCK',
     VITE_STRIPE_PUBLIC_KEY: '',
     DEV: false,
     PROD: true
