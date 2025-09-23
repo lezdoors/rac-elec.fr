@@ -224,16 +224,6 @@ export default function HomePage() {
         </nav>
       </header>
 
-      {/* Anchor Navigation for Long Pages */}
-      <nav className="page-nav bg-gray-50 border-b">
-        <div className="container mx-auto px-4 py-2">
-          <div className="flex justify-center space-x-6 text-sm">
-            <a href="#process" className="text-gray-600 hover:text-blue-600 transition-colors">Comment ça marche</a>
-            <a href="#services" className="text-gray-600 hover:text-blue-600 transition-colors">Nos services</a>
-            <a href="#contact" className="text-gray-600 hover:text-blue-600 transition-colors">Devis gratuit</a>
-          </div>
-        </div>
-      </nav>
 
       {/* Hero Section */}
       <main id="main-content">
@@ -453,11 +443,13 @@ export default function HomePage() {
             <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
               Déposez votre demande de raccordement Enedis dès maintenant. Nos experts du territoire français vous accompagnent dans vos projets.
             </p>
-            <Link href="/raccordement-enedis">
-              <button className="bg-white text-blue-600 font-bold px-8 py-4 rounded-lg text-lg hover:bg-gray-100 transition-colors shadow-lg">
-                Déposer une demande de raccordement →
-              </button>
-            </Link>
+            <button 
+              onClick={() => setShowConnectionModal(true)}
+              className="bg-white text-blue-600 font-bold px-8 py-4 rounded-lg text-lg hover:bg-gray-100 transition-colors shadow-lg"
+              data-testid="button-deposit-request"
+            >
+              Déposer une demande de raccordement →
+            </button>
           </div>
         </section>
 
@@ -542,11 +534,13 @@ export default function HomePage() {
               <p className="text-gray-600 mb-8">
                 Confiez-nous votre raccordement Enedis ! Nos experts Service accompagnent l'ensemble des projets du territoire français.
               </p>
-              <Link href="/raccordement-enedis">
-                <button className="bg-gray-800 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-gray-700 transition-colors shadow-lg">
-                  Faire raccordement - Démarrer →
-                </button>
-              </Link>
+              <button 
+                onClick={() => setShowConnectionModal(true)}
+                className="bg-gray-800 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-gray-700 transition-colors shadow-lg"
+                data-testid="button-start-connection"
+              >
+                Faire raccordement - Démarrer →
+              </button>
               <p className="text-gray-500 text-sm mt-4">⚡ Service gratuit Enedis - Devis gratuit immédiat expert intégration ⚡</p>
             </div>
           </div>
@@ -626,11 +620,13 @@ export default function HomePage() {
                 <h3 className="font-semibold text-gray-900">Services Expert et Rapide</h3>
                 <p className="text-gray-600 text-sm">Accompagnement complet pour tous raccordements Enedis avec suivi personnalisé</p>
               </div>
-              <Link href="/raccordement-enedis" className="ml-8">
-                <button className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
-                  Démarrer ma demande →
-                </button>
-              </Link>
+              <button 
+                onClick={() => setShowConnectionModal(true)}
+                className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors ml-8"
+                data-testid="button-start-my-request"
+              >
+                Démarrer ma demande →
+              </button>
             </div>
           </div>
         </section>
@@ -702,11 +698,13 @@ export default function HomePage() {
             </div>
 
             <div className="text-center mt-12" id="services">
-              <Link href="/raccordement-enedis">
-                <button className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg">
-                  Commencer maintenant
-                </button>
-              </Link>
+              <button 
+                onClick={() => setShowConnectionModal(true)}
+                className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg"
+                data-testid="button-start-now"
+              >
+                Commencer maintenant
+              </button>
             </div>
           </div>
         </section>
