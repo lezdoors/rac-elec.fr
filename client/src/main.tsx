@@ -20,26 +20,22 @@ function loadCriticalGclidTracking(): void {
   });
 }
 
-// Function to load non-critical performance scripts (can be deferred)
+// Function to load non-critical performance scripts (deferred until after page loads)
 function loadNonCriticalPerformanceScripts(): void {
-  // Load Web Vitals monitoring immediately (lightweight and useful for performance tracking)
-  import("./utils/web-vitals-monitor").then(module => {
-    module.initializeWebVitalsMonitoring();
-  }).catch(error => {
-    console.warn('Web Vitals monitoring failed to load:', error);
-  });
-  
-  // Load performance optimizers after user interaction (non-critical)
-  import("./utils/gentle-performance").catch(error => {
-    console.warn('Gentle performance optimizer failed to load:', error);
-  });
-  
-  // Load LCP monitor after user interaction (non-critical)
-  import("./utils/lcp-monitor").catch(error => {
-    console.warn('LCP monitor failed to load:', error);
-  });
-  
-  console.log('✅ Non-critical performance scripts loaded after user interaction');
+  // PERFORMANCE FIX: Only load monitoring in development, skip in production
+  if (import.meta.env.DEV) {
+    // Load Web Vitals monitoring only in development
+    import("./utils/web-vitals-monitor").then(module => {
+      module.initializeWebVitalsMonitoring();
+    }).catch(error => {
+      console.warn('Web Vitals monitoring failed to load:', error);
+    });
+    
+    console.log('✅ Development performance monitoring loaded');
+  } else {
+    // In production, skip heavy monitoring scripts that slow LCP
+    console.log('✅ Production: Skipping performance monitoring for faster LCP');
+  }
 }
 
 // Set up critical GCLID loading on DOMContentLoaded (immediate for ads attribution)
@@ -76,12 +72,19 @@ function setupDeferredLoading(): void {
     document.addEventListener(event, triggerLoad, { passive: true, once: true });
   });
   
-  // Fallback: Load after 3 seconds if no user interaction
-  setTimeout(() => {
-    if (!scriptsLoaded) {
-      triggerLoad();
+  // PERFORMANCE FIX: Load after window.load + idle time (much later than LCP)
+  window.addEventListener('load', () => {
+    if (window.requestIdleCallback) {
+      window.requestIdleCallback(() => {
+        if (!scriptsLoaded) triggerLoad();
+      }, { timeout: 8000 });
+    } else {
+      // Fallback: Load after 8 seconds if no requestIdleCallback
+      setTimeout(() => {
+        if (!scriptsLoaded) triggerLoad();
+      }, 8000);
     }
-  }, 3000);
+  });
 }
 
 // Ensure conversion tracking functions are available globally
