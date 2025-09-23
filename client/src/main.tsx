@@ -22,6 +22,13 @@ function loadCriticalGclidTracking(): void {
 
 // Function to load non-critical performance scripts (can be deferred)
 function loadNonCriticalPerformanceScripts(): void {
+  // Load Web Vitals monitoring immediately (lightweight and useful for performance tracking)
+  import("./utils/web-vitals-monitor").then(module => {
+    module.initializeWebVitalsMonitoring();
+  }).catch(error => {
+    console.warn('Web Vitals monitoring failed to load:', error);
+  });
+  
   // Load performance optimizers after user interaction (non-critical)
   import("./utils/gentle-performance").catch(error => {
     console.warn('Gentle performance optimizer failed to load:', error);
