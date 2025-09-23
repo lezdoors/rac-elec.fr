@@ -279,7 +279,11 @@
       gtag('js', new Date());
       
       // CRITICAL: Configure GA immediately - no deferral for conversion tracking
-      gtag('config', 'GT-MJKTJGCK');
+      gtag('config', 'GT-MJKTJGCK', {
+        // Optimize for Core Web Vitals
+        transport_type: 'beacon',
+        send_page_view: false // Manual page view after LCP
+      });
       console.log('✅ Google Analytics config executed immediately for ads attribution');
       
       // Only defer the external gtag.js script loading for performance
