@@ -280,7 +280,7 @@
         if (!window.gtagScriptLoaded) {
           window.gtagScriptLoaded = true;
           const script = document.createElement('script');
-          script.async = true;
+          script.async = true; // PERFORMANCE FIX: Make GA script async
           script.src = 'https://www.googletagmanager.com/gtag/js?id=GT-MJKTJGCK';
           script.onload = function() {
             console.log('✅ Google Analytics script loaded after user interaction');
@@ -338,7 +338,22 @@
     <!-- PERFORMANCE FIX: Removed render-blocking MutationObserver script for faster LCP -->
   </head>
   <body>
-    <div id="root"></div>
+    <!-- PERFORMANCE FIX: Static hero content for immediate LCP (before React mounts) -->
+    <div id="root">
+      <div class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700">
+        <div class="container mx-auto px-4 py-16">
+          <div class="text-center text-white max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Raccordement Électrique Simplifié</h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">
+              Votre demande de raccordement électrique en 3 minutes
+            </p>
+            <div class="bg-white/10 backdrop-blur rounded-lg p-6 mb-8">
+              <p class="text-lg">Démarrez votre demande maintenant...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
     
     <!-- Global conversion functions for form tracking -->
