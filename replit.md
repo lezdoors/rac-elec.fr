@@ -33,14 +33,7 @@ Preferred communication style: Simple, everyday language.
 - **Technical Implementations**: Optimized performance (e.g., LCP under 2.5s target, streamlined rendering path, GPU acceleration), comprehensive SEO (JSON-LD, Open Graph, Twitter Cards), robust error handling, and browser compatibility (polyfills for older browsers).
 - **Mobile Optimizations**: Floating CTA button with smart show/hide behavior, enhanced mobile form validation with proper keyboard types, lazy loading images, mobile-first loading strategies, and touch-optimized interface elements.
 
-### Recent Changes (September 2025)
-- **Landing Page Content Restoration**: Restored complete landing page sections including 6 service cards (Raccordement Définitif, Provisoire, Viabilisation, Modification, Collectif, Production Électrique), performance indicators with exact stats (99.2%, 97.8%, 98.5%), customer testimonials, and comprehensive FAQ section.
-- **Google Ads 2025 Compliance**: Removed auto-opening support widget pop-ups to fully comply with Google's no pop-up policy for ad traffic, ensuring maximum ad performance and user experience.
-- **Mobile UX Restoration**: Fixed and restored mobile floating "Faire ma demande" button with proper hero section detection and direct link to form anchor.
-- **Email System Migration**: Successfully migrated all notifications from bonjour@portail-electricite.com to contact@portail-electricite.com across all system components while maintaining SMTP configuration.
-- **Hero Form Integration**: Maintained zero-friction hero form that serves as exact replica of main form Step 1, with seamless redirect to Step 2 and pre-filled data persistence.
-
-### Previous Updates (August 2025)
+### Recent Changes (August 2025)
 - **Mobile-First Enhancements**: Implemented floating CTA button positioned bottom-right with gradient blue design, pulse animations, and intelligent visibility control based on scroll position.
 - **Form Optimization**: Added mobile-specific form validation, proper input types (email, tel, numeric), autocomplete attributes, and enhanced touch targets (minimum 44px).
 - **Performance Improvements**: Integrated lazy loading for images, mobile image optimization, network-aware loading strategies, and reduced motion support.
@@ -55,7 +48,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Email Services
 - **SMTP Server**: s4015.fra1.stableserver.net (Stableserver) for reliable email delivery.
-- **Email Account**: notification@portail-electricite.com (sender) → contact@portail-electricite.com (recipient).
+- **Email Account**: notification@portail-electricite.com (sender) → bonjour@portail-electricite.com (recipient).
 - **Nodemailer**: Email sending library with SSL/TLS encryption on port 465.
 
 ### Analytics & Marketing

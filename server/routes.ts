@@ -86,7 +86,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   registerPaymentDebugRoutes(app);
   
   // Configuration SMTP simplifiée - Une seule configuration
-  console.log("Service SMTP configuré - notification@portail-electricite.com → contact@portail-electricite.com");
+  console.log("Service SMTP configuré - notification@portail-electricite.com → bonjour@portail-electricite.com");
   
   // Security status endpoint for admin monitoring
   app.get("/api/admin/security-status", requireAuth, requireAdmin, async (req, res) => {
@@ -2134,7 +2134,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         };
         
         console.log('📧 ENVOI EMAIL COMPLET - FORMULAIRE FINALISÉ');
-        console.log('📬 Destinataire principal: contact@portail-electricite.com');
+        console.log('📬 Destinataire principal: bonjour@portail-electricite.com');
         console.log('📋 Référence générée:', serviceRequest.referenceNumber);
         
         // Email envoyé via la route /api/notifications/request-completed uniquement
@@ -4930,33 +4930,19 @@ app.post("/api/contact", async (req, res) => {
       ipAddress: req.ip
     });
     
-    // Notification en temps réel via WebSocket avec priorité (configuré après server.listen())
-    console.log('📧 Nouveau contact enregistré:', name, email);
-    
-    // Note: Les notifications WebSocket seront disponibles après le démarrage du serveur
-    try {
-      const globalContext = require('./global-context').default;
-      if (globalContext.wss) {
-        // Créer notification si WebSocket est disponible
-        const contactData = {
-          id: newContact.id,
-          name,
-          email,
-          phone: phone || "",
-          message,
-          subject,
-          priority,
-          source,
-          createdAt: newContact.createdAt,
-          status: newContact.status
-        };
-        
-        // Émettre la notification WebSocket si possible
-        console.log('📡 Notification WebSocket envoyée pour le contact:', contactData.id);
-      }
-    } catch (wsError) {
-      console.log('🔄 WebSocket non disponible pour le contact - continuant sans notifications temps réel');
-    }
+    // Notification en temps réel via WebSocket avec priorité
+    notificationService.createContactNotification({
+      id: newContact.id,
+      name,
+      email,
+      phone: phone || "",
+      message,
+      subject,
+      priority,
+      source,
+      createdAt: newContact.createdAt,
+      status: newContact.status
+    });
     
     console.log(`Nouveau contact créé avec priorité: ${priority}`, {
       id: newContact.id,
@@ -9074,8 +9060,8 @@ app.patch("/api/contacts/:id/status", requireAuth, requireAdminOrManager, async 
     }
   });
 
-  // Configuration du système de notifications - DÉPLACÉ après server.listen() pour éviter les conflits de port
-  // const notificationService = setupNotificationRoutes(httpServer);
+  // Configuration du système de notifications
+  const notificationService = setupNotificationRoutes(httpServer);
   
   // Endpoints de diagnostic Stripe pour analyser les paiements RAC-
   app.post('/api/test/stripe-all-payments', async (req, res) => {
@@ -9144,12 +9130,11 @@ app.patch("/api/contacts/:id/status", requireAuth, requireAdminOrManager, async 
 
   // Routes de test (uniquement en mode développement)
   if (process.env.NODE_ENV === 'development') {
-    console.log("Routes de test activées en mode développement");
-    
-    // Service de notification configuré pour les routes de test
-    console.log("Service de notification configuré pour les routes de test");
-    
-    // Note: setNotificationService sera configuré après server.listen() dans index.ts
+    // Configurer le service de notification pour les routes de test
+    if (notificationService) {
+      // Utiliser directement la fonction importée en haut du fichier
+      setNotificationService(notificationService);
+    }
     
     // Route de test pour l'envoi d'emails
     app.post('/api/test/send-email', async (req, res) => {

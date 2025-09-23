@@ -1,7 +1,5 @@
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __esm = (fn, res) => function __init() {
   return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
 };
@@ -9,15 +7,6 @@ var __export = (target, all) => {
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: true });
 };
-var __copyProps = (to, from, except, desc7) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc7 = __getOwnPropDesc(from, key)) || desc7.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // shared/schema.ts
 var schema_exports = {};
@@ -1904,46 +1893,6 @@ var init_storage = __esm({
   }
 });
 
-// server/global-context.ts
-var global_context_exports = {};
-__export(global_context_exports, {
-  default: () => global_context_default
-});
-var GlobalContextClass, GlobalContext2, global_context_default;
-var init_global_context = __esm({
-  "server/global-context.ts"() {
-    "use strict";
-    GlobalContextClass = class _GlobalContextClass {
-      static instance;
-      requestingUser = null;
-      wss = null;
-      constructor() {
-      }
-      static getInstance() {
-        if (!_GlobalContextClass.instance) {
-          _GlobalContextClass.instance = new _GlobalContextClass();
-        }
-        return _GlobalContextClass.instance;
-      }
-      setRequestingUser(user) {
-        this.requestingUser = user;
-      }
-      getRequestingUser() {
-        return this.requestingUser;
-      }
-      clearRequestingUser() {
-        this.requestingUser = null;
-      }
-      setWebSocketServer(webSocketServer) {
-        this.wss = webSocketServer;
-        console.log("WebSocketServer stored in GlobalContext");
-      }
-    };
-    GlobalContext2 = GlobalContextClass.getInstance();
-    global_context_default = GlobalContext2;
-  }
-});
-
 // server/email-service.ts
 var email_service_exports = {};
 __export(email_service_exports, {
@@ -1975,7 +1924,7 @@ function setupSmtpService() {
       }
     };
     globalTransporter = nodemailer.createTransport(smtpConfig);
-    console.log("\u2705 SMTP STABLESERVER - notification@portail-electricite.com \u2192 contact@portail-electricite.com");
+    console.log("\u2705 SMTP STABLESERVER - notification@portail-electricite.com \u2192 bonjour@portail-electricite.com");
   } catch (error) {
     console.error("\u274C Erreur configuration SMTP:", error);
   }
@@ -2030,7 +1979,7 @@ async function sendPaiementReussiNotification(paiementData) {
     `;
     const mailOptions = {
       from: "notification@portail-electricite.com",
-      to: "contact@portail-electricite.com",
+      to: "bonjour@portail-electricite.com",
       subject: `\u{1F4B0} PAIEMENT CONFIRM\xC9 - ${paiementData.referenceNumber || "N/A"} - ${paiementData.amount ? (parseFloat(paiementData.amount) / 100).toFixed(2) + " \u20AC" : "N/A"}`,
       html: htmlContent,
       text: `\u{1F4B0} PAIEMENT CONFIRM\xC9
@@ -2107,7 +2056,7 @@ async function sendPaiementEchoueNotification(paiementData) {
     `;
     const mailOptions = {
       from: "notification@portail-electricite.com",
-      to: "contact@portail-electricite.com",
+      to: "bonjour@portail-electricite.com",
       subject: `\u{1F6A8} URGENT - PAIEMENT \xC9CHOU\xC9 - ${paiementData.referenceNumber || "N/A"} - ${paiementData.clientName || "Client"}`,
       html: htmlContent,
       text: `\u{1F6A8} URGENT - PAIEMENT \xC9CHOU\xC9
@@ -2183,7 +2132,7 @@ async function sendTentativePaiementNotification(paiementData) {
     `;
     const mailOptions = {
       from: "notification@portail-electricite.com",
-      to: "contact@portail-electricite.com",
+      to: "bonjour@portail-electricite.com",
       subject: `\u{1F504} TENTATIVE PAIEMENT - ${paiementData.referenceNumber || "N/A"} - ${paiementData.clientName || "Client"}`,
       html: htmlContent,
       text: `\u{1F504} TENTATIVE DE PAIEMENT
@@ -2304,7 +2253,7 @@ async function sendLeadNotification(leadData) {
     }
     const mailOptions = {
       from: `"Notifications Raccordement" <notification@portail-electricite.com>`,
-      to: "contact@portail-electricite.com",
+      to: "bonjour@portail-electricite.com",
       subject: `\u{1F3AF} NOUVEAU PROSPECT - ${leadData.prenom || ""} ${leadData.nom || ""} - R\xE9f\xE9rence ${leadData.referenceNumber || "N/A"}`,
       html: contenuEmail
     };
@@ -2357,7 +2306,7 @@ async function sendSupportMessageNotification(supportData) {
     `;
     const mailOptions = {
       from: `"Support Raccordement" <notification@portail-electricite.com>`,
-      to: "contact@portail-electricite.com",
+      to: "bonjour@portail-electricite.com",
       subject: `\u{1F4AC} NOUVEAU MESSAGE SUPPORT - ${supportData.name || "Contact anonyme"}`,
       html: contenuEmail
     };
@@ -2625,7 +2574,7 @@ async function sendRequestCompletedNotification(requestData) {
     `;
     const mailOptions = {
       from: "notification@portail-electricite.com",
-      to: "contact@portail-electricite.com",
+      to: "bonjour@portail-electricite.com",
       subject: `\u2705 DEMANDE COMPL\xC9T\xC9E - ${requestData.prenom || ""} ${requestData.nom || ""} - ${requestData.referenceNumber}`,
       html: contenuEmail
     };
@@ -2710,7 +2659,7 @@ async function sendContactEmail(contactData) {
     `;
     const mailOptions = {
       from: "notification@portail-electricite.com",
-      to: "contact@portail-electricite.com",
+      to: "bonjour@portail-electricite.com",
       subject: `${priorityEmoji} Nouveau message de contact${priority === "haute" ? " - URGENT" : ""} - ${contactData.subject || "Sans sujet"}`,
       html: contenuEmail
     };
@@ -3746,286 +3695,281 @@ var init_email_service_backup = __esm({
   }
 });
 
-// server/notification-router.ts
-var notification_router_exports = {};
-__export(notification_router_exports, {
-  setupNotificationRoutes: () => setupNotificationRoutes
-});
-import { WebSocketServer as WebSocketServer2, WebSocket as WS } from "ws";
-import { desc as desc6, eq as eq11 } from "drizzle-orm";
-function setupNotificationRoutes(httpServer) {
-  try {
-    let broadcastData2 = function(dataType, data, actionType = "new") {
-      const type = `${actionType}_${dataType}`;
-      const message = {
-        type,
-        [dataType === "demandes" ? "demande" : dataType === "paiements" ? "paiement" : dataType.slice(0, -1)]: data,
-        timestamp: (/* @__PURE__ */ new Date()).toISOString()
-      };
-      console.log(`Diffusion temps r\xE9el: ${type}`);
-      activeConnections.forEach((ws) => {
-        if (ws.readyState === WS.OPEN && (!ws.subscribedDataType || ws.subscribedDataType === dataType)) {
-          try {
-            ws.send(JSON.stringify(message));
-          } catch (error) {
-            console.error(`Erreur lors de l'envoi d'une mise \xE0 jour ${dataType}:`, error);
-          }
-        }
-      });
-    }, broadcastNewContact2 = function(contact) {
-      broadcastData2("contacts", contact);
-    }, broadcastNewLead2 = function(lead) {
-      broadcastData2("leads", lead);
-    }, broadcastUpdateLead2 = function(lead) {
-      broadcastData2("leads", lead, "update");
-    }, broadcastNewDemande2 = function(demande) {
-      broadcastData2("demandes", demande);
-    }, broadcastUpdateDemande2 = function(demande) {
-      broadcastData2("demandes", demande, "update");
-    }, broadcastNewPaiement2 = function(paiement) {
-      broadcastData2("paiements", paiement);
-    }, broadcastUpdatePaiement2 = function(paiement) {
-      broadcastData2("paiements", paiement, "update");
-    }, broadcastNewEmail2 = function(email) {
-      broadcastData2("emails", email);
-    }, broadcastPerformanceUpdate2 = function(performance) {
-      broadcastData2("performance", performance, "update");
-    }, broadcastDashboardUpdate2 = function(dashboardData) {
-      broadcastData2("dashboard", dashboardData, "update");
-    };
-    var broadcastData = broadcastData2, broadcastNewContact = broadcastNewContact2, broadcastNewLead = broadcastNewLead2, broadcastUpdateLead = broadcastUpdateLead2, broadcastNewDemande = broadcastNewDemande2, broadcastUpdateDemande = broadcastUpdateDemande2, broadcastNewPaiement = broadcastNewPaiement2, broadcastUpdatePaiement = broadcastUpdatePaiement2, broadcastNewEmail = broadcastNewEmail2, broadcastPerformanceUpdate = broadcastPerformanceUpdate2, broadcastDashboardUpdate = broadcastDashboardUpdate2;
-    if (globalThis.__WSS) {
-      console.log("\u{1F504} WebSocket server already exists, reusing existing instance");
-      return globalThis.__WSS;
-    }
-    console.log("\u{1F680} Creating new WebSocket server...");
-    const wss2 = new WebSocketServer2({ server: httpServer, path: "/ws" });
-    globalThis.__WSS = wss2;
-    const activeConnections = /* @__PURE__ */ new Set();
-    global_context_default.setWebSocketServer(wss2);
-    wss2.on("headers", (headers, request) => {
-      headers.push("Connection: keep-alive");
-      headers.push("Keep-Alive: timeout=120");
-      headers.push("Access-Control-Allow-Origin: *");
-      headers.push("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-      headers.push("Access-Control-Allow-Headers: Content-Type");
-      headers.push("Access-Control-Max-Age: 86400");
-    });
-    wss2.on("error", (error) => {
-      console.error("\u274C Erreur WebSocket (non fatale):", error.message);
-      console.log("\u{1F504} Application continue sans WebSocket en temps r\xE9el");
-    });
-    const pingInterval = setInterval(() => {
-      wss2.clients.forEach((client) => {
-        if (client.readyState === WS.OPEN) {
-          try {
-            client.ping(() => {
-            });
-          } catch (e) {
-            console.error("Erreur lors de l'envoi du ping WebSocket:", e);
-          }
-        }
-      });
-    }, 15e3);
-    wss2.on("connection", (ws, req) => {
-      const url = new URL(req.url || "/", `http://${req.headers.host}`);
-      const clientType = url.searchParams.get("client") || "unknown";
-      const timestamp3 = url.searchParams.get("timestamp") || "none";
-      console.log(`Nouvelle connexion WebSocket \xE9tablie: Client=${clientType}, Timestamp=${timestamp3}`);
-      ws.isAlive = true;
-      ws.on("pong", () => {
-        ws.isAlive = true;
-      });
-      const clientId = req.headers["x-client-id"] || Math.random().toString(36).substring(2, 15);
-      const clientIp = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
-      console.log(`Client WebSocket connect\xE9 - ID: ${clientId}, IP: ${clientIp}`);
-      activeConnections.add(ws);
-      sendNotifications(ws);
-      ws.on("message", async (message) => {
-        try {
-          const data = JSON.parse(message.toString());
-          if (data.type === "ping") {
-            ws.send(JSON.stringify({ type: "pong", timestamp: (/* @__PURE__ */ new Date()).toISOString() }));
-            return;
-          } else if (data.type === "markAsRead") {
-            await db.update(notifications).set({ read: true }).where(eq11(notifications.id, parseInt(data.id)));
-            broadcastNotifications();
-          } else if (data.type === "markAllAsRead") {
-            await db.update(notifications).set({ read: true }).where(eq11(notifications.read, false));
-            broadcastNotifications();
-          } else if (data.type === "subscribe") {
-            ws.subscribedDataType = data.dataType;
-            console.log(`Client WebSocket ID: ${clientId} s'est abonn\xE9 \xE0 ${data.dataType}`);
-          } else if (data.type === "unsubscribe") {
-            delete ws.subscribedDataType;
-            console.log(`Client WebSocket ID: ${clientId} s'est d\xE9sabonn\xE9 de ${data.dataType}`);
-          }
-        } catch (error) {
-          console.error("Erreur lors du traitement du message WebSocket:", error);
-        }
-      });
-      ws.on("close", (code, reason) => {
-        console.log(`Connexion WebSocket ferm\xE9e - ID: ${clientId}, Code: ${code}, Raison: ${reason || "non sp\xE9cifi\xE9e"}`);
-        activeConnections.delete(ws);
-      });
-      ws.on("error", (error) => {
-        console.error(`Erreur WebSocket pour le client ID: ${clientId}:`, error);
-      });
-    });
-    const heartbeatInterval = setInterval(() => {
-      wss2.clients.forEach((client) => {
-        const wsClient = client;
-        if (wsClient.isAlive === false) {
-          console.log("Fermeture d'une connexion WebSocket inactive");
-          return wsClient.terminate();
-        }
-        wsClient.isAlive = false;
-        try {
-          wsClient.ping();
-        } catch (e) {
-          console.error("Erreur lors de l'envoi du ping de heartbeat:", e);
-        }
-      });
-    }, 45e3);
-    process.on("SIGINT", () => {
-      clearInterval(pingInterval);
-      clearInterval(heartbeatInterval);
-      console.log("WebSocket server stopping gracefully...");
-    });
-    async function sendNotifications(ws) {
-      try {
-        const dbNotifications = await db.select().from(notifications).orderBy(desc6(notifications.created_at)).limit(30);
-        const notificationsFormatted = dbNotifications.map((n) => {
-          let parsedData = null;
-          if (n.data) {
-            try {
-              parsedData = typeof n.data === "string" ? JSON.parse(n.data) : n.data;
-            } catch (e) {
-              console.error("Error parsing JSON data:", e);
-            }
-          }
-          return {
-            id: n.id.toString(),
-            type: n.type,
-            title: n.title,
-            message: n.message,
-            time: n.created_at.toISOString(),
-            read: n.read,
-            data: parsedData
-          };
-        });
-        const unreadCount = notificationsFormatted.filter((n) => !n.read).length;
-        ws.send(JSON.stringify({
-          type: "notifications",
-          notifications: notificationsFormatted,
-          unreadCount,
-          timestamp: (/* @__PURE__ */ new Date()).toISOString()
-        }));
-      } catch (error) {
-        console.error("Erreur lors de la r\xE9cup\xE9ration des notifications:", error);
-      }
-    }
-    async function broadcastNotifications() {
-      activeConnections.forEach((ws) => {
-        if (ws.readyState === WS.OPEN) {
-          sendNotifications(ws);
-        }
-      });
-    }
-    return {
-      // Fonctions de base pour les notifications
-      broadcastNotifications,
-      createNotification: async (type, title, message, data) => {
-        await db.insert(notifications).values({
-          type,
-          title,
-          message,
-          read: false,
-          data: data ? JSON.stringify(data) : null
-        });
-        broadcastNotifications();
-      },
-      // Fonction générique pour diffuser des données en temps réel
-      broadcastData: broadcastData2,
-      // Contacts
-      broadcastNewContact: broadcastNewContact2,
-      createContactNotification: async (contact) => {
-        await db.insert(notifications).values({
-          type: "contact",
-          title: "Nouveau contact",
-          message: `Nouveau message de ${contact.name}`,
-          read: false,
-          data: JSON.stringify(contact)
-        });
-        broadcastNotifications();
-        broadcastNewContact2(contact);
-      },
-      // Leads
-      broadcastNewLead: broadcastNewLead2,
-      broadcastUpdateLead: broadcastUpdateLead2,
-      // Demandes
-      broadcastNewDemande: broadcastNewDemande2,
-      broadcastUpdateDemande: broadcastUpdateDemande2,
-      // Paiements
-      broadcastNewPaiement: broadcastNewPaiement2,
-      broadcastUpdatePaiement: broadcastUpdatePaiement2,
-      // Emails
-      broadcastNewEmail: broadcastNewEmail2,
-      // Performance
-      broadcastPerformanceUpdate: broadcastPerformanceUpdate2,
-      // Tableau de bord
-      broadcastDashboardUpdate: broadcastDashboardUpdate2
-    };
-  } catch (error) {
-    console.error("\u274C Erreur lors de la configuration du serveur WebSocket:", error);
-    console.log("\u{1F504} Application en cours d'ex\xE9cution sans notifications WebSocket en temps r\xE9el");
-    return {
-      createContactNotification: async (contact) => {
-        console.log("\u{1F4E7} Notification contact (mode d\xE9grad\xE9):", contact.name);
-      },
-      broadcastNewLead: () => {
-      },
-      broadcastUpdateLead: () => {
-      },
-      broadcastNewDemande: () => {
-      },
-      broadcastUpdateDemande: () => {
-      },
-      broadcastNewPaiement: () => {
-      },
-      broadcastUpdatePaiement: () => {
-      },
-      broadcastNewEmail: () => {
-      },
-      broadcastPerformanceUpdate: () => {
-      },
-      broadcastDashboardUpdate: () => {
-      }
-    };
-  }
-}
-var init_notification_router = __esm({
-  "server/notification-router.ts"() {
-    "use strict";
-    init_schema();
-    init_db();
-    init_global_context();
-  }
-});
-
 // server/index.ts
 import express2 from "express";
-import path6 from "path";
+import path7 from "path";
 import fs6 from "fs";
 import compression from "compression";
 
 // server/routes.ts
 init_storage();
 init_db();
-init_global_context();
 import { createServer } from "http";
+
+// server/global-context.ts
+var GlobalContextClass = class _GlobalContextClass {
+  static instance;
+  requestingUser = null;
+  wss = null;
+  constructor() {
+  }
+  static getInstance() {
+    if (!_GlobalContextClass.instance) {
+      _GlobalContextClass.instance = new _GlobalContextClass();
+    }
+    return _GlobalContextClass.instance;
+  }
+  setRequestingUser(user) {
+    this.requestingUser = user;
+  }
+  getRequestingUser() {
+    return this.requestingUser;
+  }
+  clearRequestingUser() {
+    this.requestingUser = null;
+  }
+  setWebSocketServer(webSocketServer) {
+    this.wss = webSocketServer;
+    console.log("WebSocketServer stored in GlobalContext");
+  }
+};
+var GlobalContext2 = GlobalContextClass.getInstance();
+var global_context_default = GlobalContext2;
+
+// server/routes.ts
 import Stripe2 from "stripe";
 import { WebSocket } from "ws";
+
+// server/notification-router.ts
+init_schema();
+init_db();
+import { WebSocketServer, WebSocket as WS } from "ws";
+import { desc as desc2, eq as eq2 } from "drizzle-orm";
+function setupNotificationRoutes(httpServer) {
+  const wss2 = new WebSocketServer({ server: httpServer, path: "/ws" });
+  const activeConnections = /* @__PURE__ */ new Set();
+  global_context_default.setWebSocketServer(wss2);
+  wss2.on("headers", (headers, request) => {
+    headers.push("Connection: keep-alive");
+    headers.push("Keep-Alive: timeout=120");
+    headers.push("Access-Control-Allow-Origin: *");
+    headers.push("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+    headers.push("Access-Control-Allow-Headers: Content-Type");
+    headers.push("Access-Control-Max-Age: 86400");
+  });
+  wss2.on("error", (error) => {
+    console.error("WebSocketServer error:", error);
+  });
+  const pingInterval = setInterval(() => {
+    wss2.clients.forEach((client) => {
+      if (client.readyState === WS.OPEN) {
+        try {
+          client.ping(() => {
+          });
+        } catch (e) {
+          console.error("Erreur lors de l'envoi du ping WebSocket:", e);
+        }
+      }
+    });
+  }, 15e3);
+  wss2.on("connection", (ws, req) => {
+    const url = new URL(req.url || "/", `http://${req.headers.host}`);
+    const clientType = url.searchParams.get("client") || "unknown";
+    const timestamp3 = url.searchParams.get("timestamp") || "none";
+    console.log(`Nouvelle connexion WebSocket \xE9tablie: Client=${clientType}, Timestamp=${timestamp3}`);
+    ws.isAlive = true;
+    ws.on("pong", () => {
+      ws.isAlive = true;
+    });
+    const clientId = req.headers["x-client-id"] || Math.random().toString(36).substring(2, 15);
+    const clientIp = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+    console.log(`Client WebSocket connect\xE9 - ID: ${clientId}, IP: ${clientIp}`);
+    activeConnections.add(ws);
+    sendNotifications(ws);
+    ws.on("message", async (message) => {
+      try {
+        const data = JSON.parse(message.toString());
+        if (data.type === "ping") {
+          ws.send(JSON.stringify({ type: "pong", timestamp: (/* @__PURE__ */ new Date()).toISOString() }));
+          return;
+        } else if (data.type === "markAsRead") {
+          await db.update(notifications).set({ read: true }).where(eq2(notifications.id, parseInt(data.id)));
+          broadcastNotifications();
+        } else if (data.type === "markAllAsRead") {
+          await db.update(notifications).set({ read: true }).where(eq2(notifications.read, false));
+          broadcastNotifications();
+        } else if (data.type === "subscribe") {
+          ws.subscribedDataType = data.dataType;
+          console.log(`Client WebSocket ID: ${clientId} s'est abonn\xE9 \xE0 ${data.dataType}`);
+        } else if (data.type === "unsubscribe") {
+          delete ws.subscribedDataType;
+          console.log(`Client WebSocket ID: ${clientId} s'est d\xE9sabonn\xE9 de ${data.dataType}`);
+        }
+      } catch (error) {
+        console.error("Erreur lors du traitement du message WebSocket:", error);
+      }
+    });
+    ws.on("close", (code, reason) => {
+      console.log(`Connexion WebSocket ferm\xE9e - ID: ${clientId}, Code: ${code}, Raison: ${reason || "non sp\xE9cifi\xE9e"}`);
+      activeConnections.delete(ws);
+    });
+    ws.on("error", (error) => {
+      console.error(`Erreur WebSocket pour le client ID: ${clientId}:`, error);
+    });
+  });
+  const heartbeatInterval = setInterval(() => {
+    wss2.clients.forEach((client) => {
+      const wsClient = client;
+      if (wsClient.isAlive === false) {
+        console.log("Fermeture d'une connexion WebSocket inactive");
+        return wsClient.terminate();
+      }
+      wsClient.isAlive = false;
+      try {
+        wsClient.ping();
+      } catch (e) {
+        console.error("Erreur lors de l'envoi du ping de heartbeat:", e);
+      }
+    });
+  }, 45e3);
+  process.on("SIGINT", () => {
+    clearInterval(pingInterval);
+    clearInterval(heartbeatInterval);
+    console.log("WebSocket server stopping gracefully...");
+  });
+  async function sendNotifications(ws) {
+    try {
+      const dbNotifications = await db.select().from(notifications).orderBy(desc2(notifications.created_at)).limit(30);
+      const notificationsFormatted = dbNotifications.map((n) => {
+        let parsedData = null;
+        if (n.data) {
+          try {
+            parsedData = typeof n.data === "string" ? JSON.parse(n.data) : n.data;
+          } catch (e) {
+            console.error("Error parsing JSON data:", e);
+          }
+        }
+        return {
+          id: n.id.toString(),
+          type: n.type,
+          title: n.title,
+          message: n.message,
+          time: n.created_at.toISOString(),
+          read: n.read,
+          data: parsedData
+        };
+      });
+      const unreadCount = notificationsFormatted.filter((n) => !n.read).length;
+      ws.send(JSON.stringify({
+        type: "notifications",
+        notifications: notificationsFormatted,
+        unreadCount,
+        timestamp: (/* @__PURE__ */ new Date()).toISOString()
+      }));
+    } catch (error) {
+      console.error("Erreur lors de la r\xE9cup\xE9ration des notifications:", error);
+    }
+  }
+  async function broadcastNotifications() {
+    activeConnections.forEach((ws) => {
+      if (ws.readyState === WS.OPEN) {
+        sendNotifications(ws);
+      }
+    });
+  }
+  function broadcastData(dataType, data, actionType = "new") {
+    const type = `${actionType}_${dataType}`;
+    const message = {
+      type,
+      [dataType === "demandes" ? "demande" : dataType === "paiements" ? "paiement" : dataType.slice(0, -1)]: data,
+      timestamp: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    console.log(`Diffusion temps r\xE9el: ${type}`);
+    activeConnections.forEach((ws) => {
+      if (ws.readyState === WS.OPEN && (!ws.subscribedDataType || ws.subscribedDataType === dataType)) {
+        try {
+          ws.send(JSON.stringify(message));
+        } catch (error) {
+          console.error(`Erreur lors de l'envoi d'une mise \xE0 jour ${dataType}:`, error);
+        }
+      }
+    });
+  }
+  function broadcastNewContact(contact) {
+    broadcastData("contacts", contact);
+  }
+  function broadcastNewLead(lead) {
+    broadcastData("leads", lead);
+  }
+  function broadcastUpdateLead(lead) {
+    broadcastData("leads", lead, "update");
+  }
+  function broadcastNewDemande(demande) {
+    broadcastData("demandes", demande);
+  }
+  function broadcastUpdateDemande(demande) {
+    broadcastData("demandes", demande, "update");
+  }
+  function broadcastNewPaiement(paiement) {
+    broadcastData("paiements", paiement);
+  }
+  function broadcastUpdatePaiement(paiement) {
+    broadcastData("paiements", paiement, "update");
+  }
+  function broadcastNewEmail(email) {
+    broadcastData("emails", email);
+  }
+  function broadcastPerformanceUpdate(performance) {
+    broadcastData("performance", performance, "update");
+  }
+  function broadcastDashboardUpdate(dashboardData) {
+    broadcastData("dashboard", dashboardData, "update");
+  }
+  return {
+    // Fonctions de base pour les notifications
+    broadcastNotifications,
+    createNotification: async (type, title, message, data) => {
+      await db.insert(notifications).values({
+        type,
+        title,
+        message,
+        read: false,
+        data: data ? JSON.stringify(data) : null
+      });
+      broadcastNotifications();
+    },
+    // Fonction générique pour diffuser des données en temps réel
+    broadcastData,
+    // Contacts
+    broadcastNewContact,
+    createContactNotification: async (contact) => {
+      await db.insert(notifications).values({
+        type: "contact",
+        title: "Nouveau contact",
+        message: `Nouveau message de ${contact.name}`,
+        read: false,
+        data: JSON.stringify(contact)
+      });
+      broadcastNotifications();
+      broadcastNewContact(contact);
+    },
+    // Leads
+    broadcastNewLead,
+    broadcastUpdateLead,
+    // Demandes
+    broadcastNewDemande,
+    broadcastUpdateDemande,
+    // Paiements
+    broadcastNewPaiement,
+    broadcastUpdatePaiement,
+    // Emails
+    broadcastNewEmail,
+    // Performance
+    broadcastPerformanceUpdate,
+    // Tableau de bord
+    broadcastDashboardUpdate
+  };
+}
 
 // server/test-routes.ts
 import { Router } from "express";
@@ -4035,7 +3979,7 @@ init_storage();
 init_schema();
 init_db();
 import { compare, hash } from "bcrypt";
-import { eq as eq2 } from "drizzle-orm";
+import { eq as eq3 } from "drizzle-orm";
 var sessionConfig = {
   name: "crm.session",
   secret: process.env.SESSION_SECRET || "default-secret-key-for-development",
@@ -4070,7 +4014,7 @@ var requireAuth = async (req, res, next) => {
         if (token.startsWith("admin-session-")) {
           console.log("Processing session token");
           try {
-            const allUsers = await db.select().from(users).where(eq2(users.active, true)).orderBy(users.lastLogin);
+            const allUsers = await db.select().from(users).where(eq3(users.active, true)).orderBy(users.lastLogin);
             const recentUser = allUsers[allUsers.length - 1];
             if (recentUser) {
               console.log("Found recent user:", recentUser.username);
@@ -4153,7 +4097,7 @@ var loginHandler = async (req, res) => {
         message: "Nom d'utilisateur et mot de passe requis"
       });
     }
-    const users_list = await db.select().from(users).where(eq2(users.username, username));
+    const users_list = await db.select().from(users).where(eq3(users.username, username));
     const user = users_list[0];
     if (!user) {
       console.log(`Tentative de connexion \xE9chou\xE9e pour l'utilisateur: ${username} - Utilisateur non trouv\xE9`);
@@ -4210,7 +4154,7 @@ var loginHandler = async (req, res) => {
     req.session.userId = user.id;
     req.session.userRole = user.role;
     req.session.username = user.username;
-    await db.update(users).set({ lastLogin: /* @__PURE__ */ new Date() }).where(eq2(users.id, user.id));
+    await db.update(users).set({ lastLogin: /* @__PURE__ */ new Date() }).where(eq3(users.id, user.id));
     const authUser = {
       id: user.id,
       username: user.username,
@@ -4243,6 +4187,10 @@ init_schema();
 import { z as z2 } from "zod";
 import { fromZodError } from "zod-validation-error";
 var notificationService = null;
+function setNotificationService(service) {
+  notificationService = service;
+  console.log("Service de notification configur\xE9 pour les routes de test");
+}
 var router = Router();
 var createNotificationSchema = z2.object({
   type: z2.enum(["payment", "lead", "system"]),
@@ -4315,14 +4263,14 @@ init_db();
 init_schema();
 init_storage();
 import { subDays, startOfDay, isWithinInterval } from "date-fns";
-import { eq as eq3, and as and2, desc as desc2, sql as sql2 } from "drizzle-orm";
+import { eq as eq4, and as and2, desc as desc3, sql as sql2 } from "drizzle-orm";
 var PerformanceService = class {
   /**
    * Calcule les métriques de performance pour un utilisateur spécifique
    */
   async getUserPerformanceMetrics(userId) {
     try {
-      const cachedMetrics = await db.select().from(agentPerformanceMetrics).where(eq3(agentPerformanceMetrics.userId, userId)).orderBy(desc2(agentPerformanceMetrics.id)).limit(1);
+      const cachedMetrics = await db.select().from(agentPerformanceMetrics).where(eq4(agentPerformanceMetrics.userId, userId)).orderBy(desc3(agentPerformanceMetrics.id)).limit(1);
       if (cachedMetrics.length > 0) {
         const lastUpdate = new Date(cachedMetrics[0].updatedAt || cachedMetrics[0].createdAt);
         const isRecent = (/* @__PURE__ */ new Date()).getTime() - lastUpdate.getTime() < 60 * 60 * 1e3;
@@ -4368,7 +4316,7 @@ var PerformanceService = class {
       const periodEnd = now;
       const userLeads = await db.select().from(leads).where(
         and2(
-          eq3(leads.assignedTo, userId),
+          eq4(leads.assignedTo, userId),
           sql2`${leads.createdAt} >= ${periodStart.toISOString()}`,
           sql2`${leads.createdAt} <= ${periodEnd.toISOString()}`
         )
@@ -4380,7 +4328,7 @@ var PerformanceService = class {
       });
       const userTasks = await db.select().from(agentTasks2).where(
         and2(
-          eq3(agentTasks2.userId, userId),
+          eq4(agentTasks2.userId, userId),
           sql2`${agentTasks2.createdAt} >= ${periodStart.toISOString()}`,
           sql2`${agentTasks2.createdAt} <= ${periodEnd.toISOString()}`
         )
@@ -4579,13 +4527,13 @@ var performanceRouter = router2;
 // server/active-counter-service.ts
 init_db();
 init_schema();
-import { and as and3, not, eq as eq4, gte as gte2 } from "drizzle-orm";
+import { and as and3, not, eq as eq5, gte as gte2 } from "drizzle-orm";
 async function getActiveConnectionCount() {
   try {
     const recentRequests = await db.query.serviceRequests.findMany({
       where: and3(
-        not(eq4(serviceRequests.status, "cancelled")),
-        not(eq4(serviceRequests.status, "completed")),
+        not(eq5(serviceRequests.status, "cancelled")),
+        not(eq5(serviceRequests.status, "completed")),
         gte2(serviceRequests.createdAt, new Date(Date.now() - 24 * 60 * 60 * 1e3))
       )
     });
@@ -4622,7 +4570,7 @@ var USER_ROLES2 = {
 init_db();
 init_schema();
 import { add, format, startOfDay as startOfDay2, subDays as subDays2 } from "date-fns";
-import { and as and4, between, eq as eq5, sql as sql3, inArray as inArray2 } from "drizzle-orm";
+import { and as and4, between, eq as eq6, sql as sql3, inArray as inArray2 } from "drizzle-orm";
 var performanceRouter2 = Router3();
 performanceRouter2.get(
   "/user/performance/metrics",
@@ -4632,20 +4580,20 @@ performanceRouter2.get(
     try {
       const userId = req.user.id;
       console.log(`[Performance] R\xE9cup\xE9ration des m\xE9triques pour l'utilisateur ${userId}`);
-      const [userMetrics] = await db.select().from(performanceMetrics).where(eq5(performanceMetrics.userId, userId));
+      const [userMetrics] = await db.select().from(performanceMetrics).where(eq6(performanceMetrics.userId, userId));
       if (userMetrics) {
         console.log(`[Performance] M\xE9triques trouv\xE9es pour l'utilisateur ${userId}`);
         const [taskCounts] = await db.select({
           total: sql3`count(*)`.mapWith(Number),
           completed: sql3`sum(case when ${agentTasks2.status} = 'completed' then 1 else 0 end)`.mapWith(Number)
-        }).from(agentTasks2).where(eq5(agentTasks2.userId, userId));
+        }).from(agentTasks2).where(eq6(agentTasks2.userId, userId));
         const [paymentData] = await db.select({
           count: sql3`count(*)`.mapWith(Number),
           totalAmount: sql3`sum(${payments.amount})`.mapWith(Number)
-        }).from(payments).where(eq5(payments.createdBy, userId));
+        }).from(payments).where(eq6(payments.createdBy, userId));
         const [leadsCount] = await db.select({
           count: sql3`count(*)`.mapWith(Number)
-        }).from(leads).where(eq5(leads.assignedTo, userId));
+        }).from(leads).where(eq6(leads.assignedTo, userId));
         const totalCommission = (paymentData?.totalAmount || 0) / 12980 * 1400;
         return res.json({
           metrics: {
@@ -4698,7 +4646,7 @@ performanceRouter2.get(
         count: sql3`count(*)`.mapWith(Number)
       }).from(leads).where(
         and4(
-          eq5(leads.assignedTo, userId),
+          eq6(leads.assignedTo, userId),
           between(leads.createdAt, startDate, endDate)
         )
       ).groupBy(sql3`date_trunc('day', ${leads.createdAt})`).orderBy(sql3`date_trunc('day', ${leads.createdAt})`);
@@ -4707,7 +4655,7 @@ performanceRouter2.get(
         count: sql3`count(*)`.mapWith(Number)
       }).from(serviceRequests).where(
         and4(
-          eq5(serviceRequests.assignedTo, userId),
+          eq6(serviceRequests.assignedTo, userId),
           between(serviceRequests.createdAt, startDate, endDate)
         )
       ).groupBy(sql3`date_trunc('day', ${serviceRequests.createdAt})`).orderBy(sql3`date_trunc('day', ${serviceRequests.createdAt})`);
@@ -4771,7 +4719,7 @@ performanceRouter2.get(
         fullName: users.fullName
       }).from(users);
       if (userRole === USER_ROLES2.MANAGER) {
-        teamQuery = teamQuery.where(eq5(users.managerId, userId));
+        teamQuery = teamQuery.where(eq6(users.managerId, userId));
       }
       const teamMembers = await teamQuery;
       const teamIds = teamMembers.map((member) => member.userId);
@@ -4790,7 +4738,7 @@ performanceRouter2.get(
         });
       }
       const teamMetrics = await db.select().from(performanceMetrics).where(
-        teamIds.length === 1 ? eq5(performanceMetrics.userId, teamIds[0]) : inArray2(performanceMetrics.userId, teamIds)
+        teamIds.length === 1 ? eq6(performanceMetrics.userId, teamIds[0]) : inArray2(performanceMetrics.userId, teamIds)
       );
       const enrichedMetrics = teamMetrics.map((metric) => {
         const user = teamMembers.find((member) => member.userId === metric.userId);
@@ -4804,17 +4752,17 @@ performanceRouter2.get(
         total: sql3`count(*)`.mapWith(Number),
         completed: sql3`sum(case when ${agentTasks2.status} = 'completed' then 1 else 0 end)`.mapWith(Number)
       }).from(agentTasks2).where(
-        teamIds.length === 1 ? eq5(agentTasks2.userId, teamIds[0]) : inArray2(agentTasks2.userId, teamIds)
+        teamIds.length === 1 ? eq6(agentTasks2.userId, teamIds[0]) : inArray2(agentTasks2.userId, teamIds)
       );
       const [teamLeadsCount] = await db.select({
         count: sql3`count(*)`.mapWith(Number)
       }).from(leads).where(
-        teamIds.length === 1 ? eq5(leads.assignedTo, teamIds[0]) : inArray2(leads.assignedTo, teamIds)
+        teamIds.length === 1 ? eq6(leads.assignedTo, teamIds[0]) : inArray2(leads.assignedTo, teamIds)
       );
       const [teamPaymentData] = await db.select({
         totalAmount: sql3`sum(${payments.amount})`.mapWith(Number)
       }).from(payments).where(
-        teamIds.length === 1 ? eq5(payments.createdBy, teamIds[0]) : inArray2(payments.createdBy, teamIds)
+        teamIds.length === 1 ? eq6(payments.createdBy, teamIds[0]) : inArray2(payments.createdBy, teamIds)
       );
       const teamCommission = (teamPaymentData?.totalAmount || 0) / 12980 * 1400;
       const aggregateMetrics = {
@@ -5234,7 +5182,7 @@ var securityMonitoringMiddleware = (req, res, next) => {
 
 // server/routes.ts
 init_schema();
-import { eq as eq10, desc as desc5, sql as sql5, and as and7, like, or, gte as gte6, lte as lte5 } from "drizzle-orm";
+import { eq as eq11, desc as desc6, sql as sql5, and as and7, like, or, gte as gte6, lte as lte5 } from "drizzle-orm";
 import { fromZodError as fromZodError2 } from "zod-validation-error";
 import { hash as hash2 } from "bcrypt";
 
@@ -5374,7 +5322,7 @@ Ta r\xE9ponse doit \xEAtre factuelle, informative et adapt\xE9e au contexte du r
 // server/claude-data-analyzer.ts
 init_db();
 init_schema();
-import { eq as eq6 } from "drizzle-orm";
+import { eq as eq7 } from "drizzle-orm";
 async function analyzeRecentRequests() {
   try {
     console.log("D\xE9marrage de l'analyse des demandes r\xE9centes avec Claude...");
@@ -5396,7 +5344,7 @@ async function analyzeRecentRequests() {
           aiAnalysis: analysis,
           priceEstimate,
           updatedAt: /* @__PURE__ */ new Date()
-        }).where(eq6(serviceRequests.id, request.id));
+        }).where(eq7(serviceRequests.id, request.id));
         console.log(`Demande ${request.referenceNumber} analys\xE9e avec succ\xE8s`);
       } catch (error) {
         console.error(`Erreur lors de l'analyse de la demande ${request.referenceNumber}:`, error);
@@ -5412,7 +5360,7 @@ async function analyzeRecentRequests() {
 async function generateResponseForRequest(referenceNumber) {
   try {
     console.log(`G\xE9n\xE9ration d'une r\xE9ponse pour la demande ${referenceNumber}...`);
-    const [request] = await db.select().from(serviceRequests).where(eq6(serviceRequests.referenceNumber, referenceNumber));
+    const [request] = await db.select().from(serviceRequests).where(eq7(serviceRequests.referenceNumber, referenceNumber));
     if (!request) {
       throw new Error(`Demande ${referenceNumber} introuvable`);
     }
@@ -5420,7 +5368,7 @@ async function generateResponseForRequest(referenceNumber) {
     await db.update(serviceRequests).set({
       customerResponse: response,
       updatedAt: /* @__PURE__ */ new Date()
-    }).where(eq6(serviceRequests.id, request.id));
+    }).where(eq7(serviceRequests.id, request.id));
     console.log(`R\xE9ponse g\xE9n\xE9r\xE9e avec succ\xE8s pour la demande ${referenceNumber}`);
     return response;
   } catch (error) {
@@ -5450,7 +5398,7 @@ async function categorizeRequests() {
         await db.update(serviceRequests).set({
           category,
           updatedAt: /* @__PURE__ */ new Date()
-        }).where(eq6(serviceRequests.id, request.id));
+        }).where(eq7(serviceRequests.id, request.id));
         categorizedCount++;
       } catch (error) {
         console.error(`Erreur lors de la cat\xE9gorisation de la demande ${request.referenceNumber}:`, error);
@@ -5472,7 +5420,7 @@ init_db();
 init_schema();
 import { simpleParser } from "mailparser";
 import imaps from "imap-simple";
-import { eq as eq7 } from "drizzle-orm";
+import { eq as eq8 } from "drizzle-orm";
 var INBOX_FOLDER = "INBOX";
 var SENT_FOLDER = "INBOX.Sent";
 var SPAM_FOLDER = "Spam";
@@ -5506,7 +5454,7 @@ async function createImapConfigFromUser(userId) {
         // Use real IMAP only when properly configured
       };
     }
-    const [user] = await db.select().from(users).where(eq7(users.id, userId));
+    const [user] = await db.select().from(users).where(eq8(users.id, userId));
     if (user && user.smtpHost && user.smtpUser && user.smtpPassword && user.smtpEnabled) {
       let imapHost, imapPort;
       const emailDomain = user.smtpUser.split("@")[1] || "";
@@ -7220,7 +7168,7 @@ init_db();
 import * as fs3 from "fs";
 import * as path3 from "path";
 import * as crypto from "crypto";
-import { eq as eq8 } from "drizzle-orm";
+import { eq as eq9 } from "drizzle-orm";
 function generateAuthenticElectronicSignature(payment) {
   const signatureTimestamp = (/* @__PURE__ */ new Date()).toISOString();
   const signatureData = {
@@ -7258,7 +7206,7 @@ async function generatePaymentReceipt(paymentId) {
   let serviceRequest = null;
   if (payment.referenceNumber && payment.referenceNumber !== "N/A") {
     try {
-      const [request] = await db.select().from(serviceRequests).where(eq8(serviceRequests.referenceNumber, payment.referenceNumber)).limit(1);
+      const [request] = await db.select().from(serviceRequests).where(eq9(serviceRequests.referenceNumber, payment.referenceNumber)).limit(1);
       serviceRequest = request || null;
     } catch (error) {
       console.log("Service request not found for reference:", payment.referenceNumber);
@@ -7282,7 +7230,7 @@ async function generatePaymentReceipt(paymentId) {
 }
 async function getPaymentDetails(paymentId) {
   try {
-    const [localPayment] = await db.select().from(payments).where(eq8(payments.paymentId, paymentId)).limit(1);
+    const [localPayment] = await db.select().from(payments).where(eq9(payments.paymentId, paymentId)).limit(1);
     if (localPayment) {
       return {
         id: localPayment.paymentId,
@@ -7805,7 +7753,7 @@ var setupPaymentReceiptRoutes = (app2) => {
 // server/user-stats-service.ts
 init_db();
 init_schema();
-import { eq as eq9, and as and5, desc as desc3 } from "drizzle-orm";
+import { eq as eq10, and as and5, desc as desc4 } from "drizzle-orm";
 
 // shared/schema-user-stats.ts
 import { pgTable as pgTable2, serial as serial2, integer as integer2, text as text2, boolean as boolean2, jsonb as jsonb2 } from "drizzle-orm/pg-core";
@@ -7878,10 +7826,10 @@ var UserStatsService = class {
    */
   async getCurrentStats(userId, userRole, managedUserIds) {
     try {
-      const conditions = [eq9(userStats.isActive, true)];
+      const conditions = [eq10(userStats.isActive, true)];
       if (userRole === "admin") {
         if (userId) {
-          conditions.push(eq9(userStats.userId, userId));
+          conditions.push(eq10(userStats.userId, userId));
           const results = await db.select().from(userStats).where(and5(...conditions));
           return results.length > 0 ? results[0] : null;
         } else {
@@ -7891,7 +7839,7 @@ var UserStatsService = class {
       } else if (userRole === "manager" && managedUserIds && managedUserIds.length > 0) {
         if (userId) {
           if (userId === managedUserIds[0] || managedUserIds.slice(1).includes(userId)) {
-            conditions.push(eq9(userStats.userId, userId));
+            conditions.push(eq10(userStats.userId, userId));
             const results = await db.select().from(userStats).where(and5(...conditions));
             return results.length > 0 ? results[0] : null;
           } else {
@@ -7906,7 +7854,7 @@ var UserStatsService = class {
         if (!userId) {
           throw new Error("ID utilisateur requis pour les agents");
         }
-        conditions.push(eq9(userStats.userId, userId));
+        conditions.push(eq10(userStats.userId, userId));
         const results = await db.select().from(userStats).where(and5(...conditions));
         return results.length > 0 ? results[0] : null;
       }
@@ -7925,25 +7873,25 @@ var UserStatsService = class {
     try {
       if (userRole === "admin") {
         if (userId) {
-          return await db.select().from(userStatsHistory).where(eq9(userStatsHistory.userId, userId)).orderBy(desc3(userStatsHistory.periodEnd));
+          return await db.select().from(userStatsHistory).where(eq10(userStatsHistory.userId, userId)).orderBy(desc4(userStatsHistory.periodEnd));
         } else {
-          return await db.select().from(userStatsHistory).orderBy(desc3(userStatsHistory.periodEnd));
+          return await db.select().from(userStatsHistory).orderBy(desc4(userStatsHistory.periodEnd));
         }
       } else if (userRole === "manager" && managedUserIds && managedUserIds.length > 0) {
         if (userId) {
           if (userId === managedUserIds[0] || managedUserIds.slice(1).includes(userId)) {
-            return await db.select().from(userStatsHistory).where(eq9(userStatsHistory.userId, userId)).orderBy(desc3(userStatsHistory.periodEnd));
+            return await db.select().from(userStatsHistory).where(eq10(userStatsHistory.userId, userId)).orderBy(desc4(userStatsHistory.periodEnd));
           } else {
             throw new Error("Acc\xE8s non autoris\xE9 \xE0 l'historique de cet utilisateur");
           }
         } else {
-          return await db.select().from(userStatsHistory).where(userStatsHistory.userId.in(managedUserIds)).orderBy(desc3(userStatsHistory.periodEnd));
+          return await db.select().from(userStatsHistory).where(userStatsHistory.userId.in(managedUserIds)).orderBy(desc4(userStatsHistory.periodEnd));
         }
       } else {
         if (!userId) {
           throw new Error("ID utilisateur requis pour acc\xE9der \xE0 l'historique");
         }
-        return await db.select().from(userStatsHistory).where(eq9(userStatsHistory.userId, userId)).orderBy(desc3(userStatsHistory.periodEnd));
+        return await db.select().from(userStatsHistory).where(eq10(userStatsHistory.userId, userId)).orderBy(desc4(userStatsHistory.periodEnd));
       }
     } catch (error) {
       console.error("Erreur lors de la r\xE9cup\xE9ration de l'historique des statistiques:", error);
@@ -7955,7 +7903,7 @@ var UserStatsService = class {
    */
   async getStatsOverview() {
     try {
-      const activeStats = await db.select().from(userStats).where(eq9(userStats.isActive, true));
+      const activeStats = await db.select().from(userStats).where(eq10(userStats.isActive, true));
       const usersData = await db.select().from(users);
       const overview = {
         totalLeads: 0,
@@ -8029,7 +7977,7 @@ var UserStatsService = class {
       await db.update(userStats).set({
         ...updatedStats,
         updatedAt: (/* @__PURE__ */ new Date()).toISOString()
-      }).where(eq9(userStats.id, currentStats.id));
+      }).where(eq10(userStats.id, currentStats.id));
       return await this.getCurrentStats(userId);
     } catch (error) {
       console.error("Erreur lors de la mise \xE0 jour des statistiques utilisateur:", error);
@@ -8057,7 +8005,7 @@ var UserStatsService = class {
    */
   async resetAllUserStats() {
     try {
-      const activeStats = await db.select().from(userStats).where(eq9(userStats.isActive, true));
+      const activeStats = await db.select().from(userStats).where(eq10(userStats.isActive, true));
       for (const stat of activeStats) {
         await this.archiveUserStat(stat);
       }
@@ -8070,7 +8018,7 @@ var UserStatsService = class {
         periodStart: this.getCurrentPeriodStart().toISOString(),
         periodEnd: this.getNextPeriodStart().toISOString(),
         updatedAt: (/* @__PURE__ */ new Date()).toISOString()
-      }).where(eq9(userStats.isActive, true));
+      }).where(eq10(userStats.isActive, true));
       return true;
     } catch (error) {
       console.error("Erreur lors de la r\xE9initialisation des statistiques:", error);
@@ -8342,7 +8290,7 @@ userStatsRouter.post("/increment-payments/:userId", requireAdmin, async (req, re
 // server/routes-dashboard.ts
 init_db();
 init_schema();
-import { sql as sql4, desc as desc4, and as and6, gte as gte5, lte as lte4 } from "drizzle-orm";
+import { sql as sql4, desc as desc5, and as and6, gte as gte5, lte as lte4 } from "drizzle-orm";
 function setupDashboardRoutes(app2) {
   app2.get("/api/stripe/payments", requireAuth, async (req, res) => {
     try {
@@ -8361,7 +8309,7 @@ function setupDashboardRoutes(app2) {
           gte5(payments.createdAt, startDateTime),
           lte4(payments.createdAt, endDateTime)
         )
-      ).orderBy(desc4(payments.createdAt));
+      ).orderBy(desc5(payments.createdAt));
       const formattedPayments = racPayments.map((payment) => {
         let metadata = {};
         try {
@@ -8418,7 +8366,7 @@ function setupDashboardRoutes(app2) {
           gte5(payments.createdAt, startDateTime),
           lte4(payments.createdAt, endDateTime)
         )
-      ).orderBy(desc4(payments.createdAt));
+      ).orderBy(desc5(payments.createdAt));
       console.log("Dashboard API - RAC payments found:", racPayments.length);
       if (racPayments.length > 0) {
         console.log("First payment:", {
@@ -8533,7 +8481,7 @@ function setupDashboardRoutes(app2) {
         gte5(payments.createdAt, startDateTime),
         lte4(payments.createdAt, endDateTime),
         sql4`reference_number LIKE 'RAC-%'`
-      )).orderBy(desc4(payments.createdAt)).limit(5);
+      )).orderBy(desc5(payments.createdAt)).limit(5);
       res.json({
         count: current.count,
         revenue: current.revenue,
@@ -8583,7 +8531,7 @@ function setupDashboardRoutes(app2) {
       const recentLeads = await db.select().from(leads).where(and6(
         gte5(leads.createdAt, startDateTime),
         lte4(leads.createdAt, endDateTime)
-      )).orderBy(desc4(leads.createdAt)).limit(5);
+      )).orderBy(desc5(leads.createdAt)).limit(5);
       res.json({
         count: current.count,
         trend,
@@ -8631,7 +8579,7 @@ function setupDashboardRoutes(app2) {
       const recentRequests = await db.select().from(serviceRequests).where(and6(
         gte5(serviceRequests.createdAt, startDateTime),
         lte4(serviceRequests.createdAt, endDateTime)
-      )).orderBy(desc4(serviceRequests.createdAt)).limit(5);
+      )).orderBy(desc5(serviceRequests.createdAt)).limit(5);
       res.json({
         count: current.count,
         trend,
@@ -8677,7 +8625,7 @@ async function registerRoutes(app2) {
   app2.use("/api/user-stats", userStatsRouter);
   setupDashboardRoutes(app2);
   registerPaymentDebugRoutes(app2);
-  console.log("Service SMTP configur\xE9 - notification@portail-electricite.com \u2192 contact@portail-electricite.com");
+  console.log("Service SMTP configur\xE9 - notification@portail-electricite.com \u2192 bonjour@portail-electricite.com");
   app2.get("/api/admin/security-status", requireAuth, requireAdmin, async (req, res) => {
     try {
       const stats = securityMonitor.getSecurityStats();
@@ -8781,7 +8729,7 @@ async function registerRoutes(app2) {
   });
   app2.get("/api/admin/notification-email", requireAuth, requireAdmin, async (req, res) => {
     try {
-      const [notificationEmailsConfig] = await db.select().from(systemConfigs2).where(eq10(systemConfigs2.configKey, "notification_emails"));
+      const [notificationEmailsConfig] = await db.select().from(systemConfigs2).where(eq11(systemConfigs2.configKey, "notification_emails"));
       let notificationEmails = [];
       try {
         if (notificationEmailsConfig?.configValue) {
@@ -9068,7 +9016,7 @@ async function registerRoutes(app2) {
         });
       }
       const { currentPassword, newPassword } = validationResult.data;
-      const [user] = await db.select().from(users).where(eq10(users.id, req.user.id));
+      const [user] = await db.select().from(users).where(eq11(users.id, req.user.id));
       if (!user) {
         return res.status(404).json({
           success: false,
@@ -9089,7 +9037,7 @@ async function registerRoutes(app2) {
         });
       }
       const hashedPassword = await hashPassword(newPassword);
-      await db.update(users).set({ password: hashedPassword }).where(eq10(users.id, req.user.id));
+      await db.update(users).set({ password: hashedPassword }).where(eq11(users.id, req.user.id));
       await db.insert(activityLogs).values({
         userId: req.user.id,
         action: "password_changed",
@@ -9134,7 +9082,7 @@ async function registerRoutes(app2) {
         });
       }
       const { newPassword } = validationResult.data;
-      const [user] = await db.select().from(users).where(eq10(users.id, userId));
+      const [user] = await db.select().from(users).where(eq11(users.id, userId));
       if (!user) {
         return res.status(404).json({
           success: false,
@@ -9148,7 +9096,7 @@ async function registerRoutes(app2) {
         });
       }
       const hashedPassword = await hashPassword(newPassword);
-      await db.update(users).set({ password: hashedPassword }).where(eq10(users.id, userId));
+      await db.update(users).set({ password: hashedPassword }).where(eq11(users.id, userId));
       await db.insert(activityLogs).values({
         userId: req.user.id,
         action: "password_reset",
@@ -9279,10 +9227,10 @@ async function registerRoutes(app2) {
       console.log("\u2728 Initialisation des animations avec les fonctionnalit\xE9s Enedis am\xE9lior\xE9es...");
       const { initializeAnimations: initializeAnimations2 } = await Promise.resolve().then(() => (init_init_animations(), init_animations_exports));
       await initializeAnimations2();
-      const result = await db.select().from(uiAnimations).where(eq10(uiAnimations.name, "Animation \xC9lectrique Compl\xE8te Enedis"));
+      const result = await db.select().from(uiAnimations).where(eq11(uiAnimations.name, "Animation \xC9lectrique Compl\xE8te Enedis"));
       if (result.length > 0) {
         const enhancedAnimationId = result[0].id;
-        await db.update(uiAnimations).set({ default: true }).where(eq10(uiAnimations.id, enhancedAnimationId));
+        await db.update(uiAnimations).set({ default: true }).where(eq11(uiAnimations.id, enhancedAnimationId));
         if (wss) {
           const notification = {
             type: "animation_updated",
@@ -9338,7 +9286,7 @@ async function registerRoutes(app2) {
       }
       let serviceRequestsList = [];
       if (userRole.toLowerCase() === USER_ROLES.AGENT.toLowerCase()) {
-        serviceRequestsList = await db.select().from(serviceRequests).where(eq10(serviceRequests.assignedTo, userId)).orderBy(desc5(serviceRequests.updatedAt));
+        serviceRequestsList = await db.select().from(serviceRequests).where(eq11(serviceRequests.assignedTo, userId)).orderBy(desc6(serviceRequests.updatedAt));
         console.log(`Agent ${userId} - R\xE9cup\xE9ration de ${serviceRequestsList.length} demandes assign\xE9es`);
       } else {
         serviceRequestsList = await storage.getAllServiceRequests();
@@ -9389,7 +9337,7 @@ async function registerRoutes(app2) {
       await db.update(serviceRequests).set({
         hasReminderSent: true,
         updatedAt: /* @__PURE__ */ new Date()
-      }).where(eq10(serviceRequests.id, Number(id)));
+      }).where(eq11(serviceRequests.id, Number(id)));
       if (req.user) {
         await storage.logActivity({
           userId: req.user.id,
@@ -9478,7 +9426,7 @@ async function registerRoutes(app2) {
         email: leadData.email
       });
       try {
-        const [notificationEmailConfig] = await db.select().from(systemConfigs2).where(eq10(systemConfigs2.configKey, "notification_email"));
+        const [notificationEmailConfig] = await db.select().from(systemConfigs2).where(eq11(systemConfigs2.configKey, "notification_email"));
         const notificationEmail = notificationEmailConfig?.configValue || "marina.alves@portail-electricite.com";
         const emailRecipients = [
           notificationEmail,
@@ -9739,7 +9687,7 @@ async function registerRoutes(app2) {
   });
   app2.get("/api/leads/recent", async (req, res) => {
     try {
-      const recentLeads = await db.select().from(leads).orderBy(desc5(leads.createdAt)).limit(10);
+      const recentLeads = await db.select().from(leads).orderBy(desc6(leads.createdAt)).limit(10);
       return res.status(200).json({
         success: true,
         leads: recentLeads
@@ -10257,7 +10205,7 @@ ${comments}` : tarifJauneNote;
           // Toutes les données brutes du formulaire
         };
         console.log("\u{1F4E7} ENVOI EMAIL COMPLET - FORMULAIRE FINALIS\xC9");
-        console.log("\u{1F4EC} Destinataire principal: contact@portail-electricite.com");
+        console.log("\u{1F4EC} Destinataire principal: bonjour@portail-electricite.com");
         console.log("\u{1F4CB} R\xE9f\xE9rence g\xE9n\xE9r\xE9e:", serviceRequest.referenceNumber);
       } catch (emailError) {
         console.error("Erreur lors de la pr\xE9paration de la notification email:", emailError);
@@ -10318,7 +10266,7 @@ ${comments}` : tarifJauneNote;
           postalCode: serviceRequest.postalCode,
           city: serviceRequest.city
         };
-        const [notificationEmailConfig] = await db.select().from(systemConfigs2).where(eq10(systemConfigs2.configKey, "notification_email"));
+        const [notificationEmailConfig] = await db.select().from(systemConfigs2).where(eq11(systemConfigs2.configKey, "notification_email"));
         sendNewSubmissionNotification(notificationData).then((success) => {
           if (success) {
             console.log(`Notification email envoy\xE9e pour la demande ${serviceRequest.referenceNumber}`);
@@ -10874,10 +10822,10 @@ ${comments}` : tarifJauneNote;
         let assignedUserId = serviceRequest.assignedTo;
         if (!assignedUserId) {
           const activities = await db.select().from(activityLogs).where(and7(
-            eq10(activityLogs.entityType, "service_request"),
-            eq10(activityLogs.entityId, serviceRequest.id),
-            eq10(activityLogs.action, ACTIVITY_ACTIONS.LEAD_ASSIGNED)
-          )).orderBy(desc5(activityLogs.createdAt)).limit(1);
+            eq11(activityLogs.entityType, "service_request"),
+            eq11(activityLogs.entityId, serviceRequest.id),
+            eq11(activityLogs.action, ACTIVITY_ACTIONS.LEAD_ASSIGNED)
+          )).orderBy(desc6(activityLogs.createdAt)).limit(1);
           if (activities.length > 0) {
             try {
               const details = JSON.parse(activities[0].details);
@@ -11066,10 +11014,10 @@ ${comments}` : tarifJauneNote;
         let assignedUserId = serviceRequest.assignedTo;
         if (!assignedUserId) {
           const activities = await db.select().from(activityLogs).where(and7(
-            eq10(activityLogs.entityType, "service_request"),
-            eq10(activityLogs.entityId, serviceRequest.id),
-            eq10(activityLogs.action, ACTIVITY_ACTIONS.LEAD_ASSIGNED)
-          )).orderBy(desc5(activityLogs.createdAt)).limit(1);
+            eq11(activityLogs.entityType, "service_request"),
+            eq11(activityLogs.entityId, serviceRequest.id),
+            eq11(activityLogs.action, ACTIVITY_ACTIONS.LEAD_ASSIGNED)
+          )).orderBy(desc6(activityLogs.createdAt)).limit(1);
           if (activities.length > 0) {
             try {
               const details = JSON.parse(activities[0].details);
@@ -12416,27 +12364,18 @@ ${comments}` : tarifJauneNote;
         details: JSON.stringify({ name, email, subject, source, priority }),
         ipAddress: req.ip
       });
-      console.log("\u{1F4E7} Nouveau contact enregistr\xE9:", name, email);
-      try {
-        const globalContext = (init_global_context(), __toCommonJS(global_context_exports)).default;
-        if (globalContext.wss) {
-          const contactData2 = {
-            id: newContact.id,
-            name,
-            email,
-            phone: phone || "",
-            message,
-            subject,
-            priority,
-            source,
-            createdAt: newContact.createdAt,
-            status: newContact.status
-          };
-          console.log("\u{1F4E1} Notification WebSocket envoy\xE9e pour le contact:", contactData2.id);
-        }
-      } catch (wsError) {
-        console.log("\u{1F504} WebSocket non disponible pour le contact - continuant sans notifications temps r\xE9el");
-      }
+      notificationService2.createContactNotification({
+        id: newContact.id,
+        name,
+        email,
+        phone: phone || "",
+        message,
+        subject,
+        priority,
+        source,
+        createdAt: newContact.createdAt,
+        status: newContact.status
+      });
       console.log(`Nouveau contact cr\xE9\xE9 avec priorit\xE9: ${priority}`, {
         id: newContact.id,
         email,
@@ -12707,7 +12646,7 @@ ${comments}` : tarifJauneNote;
           message: "Utilisateur non authentifi\xE9"
         });
       }
-      await db.update(users).set({ onboardingCompleted: true }).where(eq10(users.id, userId));
+      await db.update(users).set({ onboardingCompleted: true }).where(eq11(users.id, userId));
       await storage.logActivity({
         userId,
         action: "onboarding_completed",
@@ -15516,7 +15455,7 @@ ${comments}` : tarifJauneNote;
     }
     try {
       console.log("[DEBUG] V\xE9rification des t\xE2ches dues (debug)");
-      const allTasks = await db.select().from(agentTasks).where(eq10(agentTasks.status, "pending"));
+      const allTasks = await db.select().from(agentTasks).where(eq11(agentTasks.status, "pending"));
       console.log(`[DEBUG] ${allTasks.length} t\xE2ches en attente au total`);
       const today = /* @__PURE__ */ new Date();
       today.setHours(23, 59, 59, 999);
@@ -15605,7 +15544,7 @@ ${comments}` : tarifJauneNote;
         if ((!customerName || !customerEmail) && referenceNumber) {
           try {
             const dbRequest = await db.select().from(serviceRequests).where(or(
-              eq10(serviceRequests.paymentId, payment.id),
+              eq11(serviceRequests.paymentId, payment.id),
               like(serviceRequests.referenceNumber, `%${referenceNumber}%`)
             )).limit(1);
             if (dbRequest.length > 0) {
@@ -15648,6 +15587,7 @@ ${comments}` : tarifJauneNote;
       });
     }
   });
+  const notificationService2 = setupNotificationRoutes(httpServer);
   app2.post("/api/test/stripe-all-payments", async (req, res) => {
     try {
       const { startDate, endDate } = req.body;
@@ -15701,8 +15641,9 @@ ${comments}` : tarifJauneNote;
     }
   });
   if (process.env.NODE_ENV === "development") {
-    console.log("Routes de test activ\xE9es en mode d\xE9veloppement");
-    console.log("Service de notification configur\xE9 pour les routes de test");
+    if (notificationService2) {
+      setNotificationService(notificationService2);
+    }
     app2.post("/api/test/send-email", async (req, res) => {
       try {
         if (!transporter) {
@@ -15711,7 +15652,7 @@ ${comments}` : tarifJauneNote;
             message: "Le service SMTP n'est pas configur\xE9"
           });
         }
-        const [notificationEmailRow] = await db.select().from(systemConfigs2).where(eq10(systemConfigs2.configKey, "notification_email"));
+        const [notificationEmailRow] = await db.select().from(systemConfigs2).where(eq11(systemConfigs2.configKey, "notification_email"));
         const recipients = notificationEmailRow ? notificationEmailRow.configValue.split(",") : ["contact@portail-electricite.com"];
         const referenceNumber = `REF-${Math.floor(1e3 + Math.random() * 9e3)}-${Math.floor(1e5 + Math.random() * 9e5)}`;
         const info = await transporter.sendMail({
@@ -15967,7 +15908,7 @@ ${comments}` : tarifJauneNote;
   });
   app2.get("/api/email-templates", requireAuth, requireAdmin, async (req, res) => {
     try {
-      const templates = await db.select().from(emailTemplates).orderBy(desc5(emailTemplates.updatedAt));
+      const templates = await db.select().from(emailTemplates).orderBy(desc6(emailTemplates.updatedAt));
       return res.status(200).json({
         success: true,
         templates
@@ -16006,7 +15947,7 @@ ${comments}` : tarifJauneNote;
         const [updated] = await db.update(emailTemplates).set({
           ...templateData,
           updatedAt: /* @__PURE__ */ new Date()
-        }).where(eq10(emailTemplates.id, id)).returning();
+        }).where(eq11(emailTemplates.id, id)).returning();
         template = updated;
       } else {
         const [newTemplate] = await db.insert(emailTemplates).values({
@@ -16033,14 +15974,14 @@ ${comments}` : tarifJauneNote;
   app2.delete("/api/email-templates/:id", requireAuth, requireAdmin, async (req, res) => {
     try {
       const { id } = req.params;
-      const [template] = await db.select().from(emailTemplates).where(eq10(emailTemplates.id, id));
+      const [template] = await db.select().from(emailTemplates).where(eq11(emailTemplates.id, id));
       if (!template) {
         return res.status(404).json({
           success: false,
           message: "Template non trouv\xE9"
         });
       }
-      await db.delete(emailTemplates).where(eq10(emailTemplates.id, id));
+      await db.delete(emailTemplates).where(eq11(emailTemplates.id, id));
       res.status(200).json({
         success: true,
         message: "Template supprim\xE9 avec succ\xE8s"
@@ -16072,7 +16013,7 @@ ${comments}` : tarifJauneNote;
     try {
       const { userId } = req.params;
       const userTable = users;
-      const [user] = await db.select().from(userTable).where(eq10(userTable.id, parseInt(userId)));
+      const [user] = await db.select().from(userTable).where(eq11(userTable.id, parseInt(userId)));
       if (!user) {
         return res.status(404).json({
           success: false,
@@ -16149,7 +16090,7 @@ ${comments}` : tarifJauneNote;
         // Ne mettre à jour le mot de passe que s'il est fourni et non vide
         ...auth.pass && auth.pass !== "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022" ? { smtpPassword: auth.pass } : {},
         smtpFromEmail: fromEmail
-      }).where(eq10(userTable.id, parseInt(userId))).returning();
+      }).where(eq11(userTable.id, parseInt(userId))).returning();
       if (!updatedUser) {
         throw new Error("Erreur lors de la mise \xE0 jour de l'utilisateur");
       }
@@ -17343,8 +17284,39 @@ ${comments}` : tarifJauneNote;
 // server/vite.ts
 import express from "express";
 import fs5 from "fs";
+import path6 from "path";
+import { createServer as createViteServer, createLogger } from "vite";
+
+// vite.config.ts
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 import path5 from "path";
-import { createServer as createViteDevServer, createLogger } from "vite";
+import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+var vite_config_default = defineConfig({
+  plugins: [
+    react(),
+    runtimeErrorOverlay(),
+    ...process.env.NODE_ENV !== "production" && process.env.REPL_ID !== void 0 ? [
+      await import("@replit/vite-plugin-cartographer").then(
+        (m) => m.cartographer()
+      )
+    ] : []
+  ],
+  resolve: {
+    alias: {
+      "@": path5.resolve(import.meta.dirname, "client", "src"),
+      "@shared": path5.resolve(import.meta.dirname, "shared"),
+      "@assets": path5.resolve(import.meta.dirname, "attached_assets")
+    }
+  },
+  root: path5.resolve(import.meta.dirname, "client"),
+  build: {
+    outDir: path5.resolve(import.meta.dirname, "dist/public"),
+    emptyOutDir: true
+  }
+});
+
+// server/vite.ts
 import { nanoid } from "nanoid";
 var viteLogger = createLogger();
 function log(message, source = "express") {
@@ -17357,30 +17329,39 @@ function log(message, source = "express") {
   console.log(`${formattedTime} [${source}] ${message}`);
 }
 async function setupVite(app2, server) {
-  const vite = await createViteDevServer({
-    server: {
-      middlewareMode: true,
-      hmr: {
-        port: 24678,
-        // Changed from 5000 to avoid conflict with main server
-        host: "0.0.0.0"
+  const serverOptions = {
+    middlewareMode: true,
+    hmr: { server },
+    allowedHosts: true
+  };
+  const vite = await createViteServer({
+    ...vite_config_default,
+    configFile: false,
+    customLogger: {
+      ...viteLogger,
+      error: (msg, options) => {
+        viteLogger.error(msg, options);
+        process.exit(1);
       }
     },
-    appType: "spa",
-    optimizeDeps: {
-      exclude: ["ws"]
-    }
+    server: serverOptions,
+    appType: "custom"
   });
   app2.use(vite.middlewares);
-  setupViteDevMiddleware(app2, vite);
-}
-function setupViteDevMiddleware(app2, vite) {
-  const clientTemplate = path5.resolve(import.meta.dirname, "..", "client", "index.html");
   app2.use("*", async (req, res, next) => {
     const url = req.originalUrl;
     try {
+      const clientTemplate = path6.resolve(
+        import.meta.dirname,
+        "..",
+        "client",
+        "index.html"
+      );
       let template = await fs5.promises.readFile(clientTemplate, "utf-8");
-      template = template.replace(`src="/src/main.tsx"`, `src="/src/main.tsx?v=${nanoid()}"`);
+      template = template.replace(
+        `src="/src/main.tsx"`,
+        `src="/src/main.tsx?v=${nanoid()}"`
+      );
       const page = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {
@@ -17724,21 +17705,21 @@ app.post("/api/leads/complete", async (req, res) => {
     res.status(500).json({ success: false, error: error instanceof Error ? error.message : "Unknown error" });
   }
 });
-app.use("/certificates", express2.static(path6.join(process.cwd(), "certificates")));
-app.use("/contracts", express2.static(path6.join(process.cwd(), "contracts")));
+app.use("/certificates", express2.static(path7.join(process.cwd(), "certificates")));
+app.use("/contracts", express2.static(path7.join(process.cwd(), "contracts")));
 app.get("/sitemap.xml", (req, res) => {
-  const sitemapPath = path6.join(process.cwd(), "public", "sitemap.xml");
+  const sitemapPath = path7.join(process.cwd(), "public", "sitemap.xml");
   res.setHeader("Content-Type", "application/xml");
   res.sendFile(sitemapPath);
 });
 app.get("/robots.txt", (req, res) => {
-  const robotsPath = path6.join(process.cwd(), "public", "robots.txt");
+  const robotsPath = path7.join(process.cwd(), "public", "robots.txt");
   res.setHeader("Content-Type", "text/plain");
   res.sendFile(robotsPath);
 });
 app.use((req, res, next) => {
   const start = Date.now();
-  const path7 = req.path;
+  const path8 = req.path;
   let capturedJsonResponse = void 0;
   const originalResJson = res.json;
   res.json = function(bodyJson, ...args) {
@@ -17747,8 +17728,8 @@ app.use((req, res, next) => {
   };
   res.on("finish", () => {
     const duration = Date.now() - start;
-    if (path7.startsWith("/api")) {
-      let logLine = `${req.method} ${path7} ${res.statusCode} in ${duration}ms`;
+    if (path8.startsWith("/api")) {
+      let logLine = `${req.method} ${path8} ${res.statusCode} in ${duration}ms`;
       if (capturedJsonResponse) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
@@ -17775,22 +17756,25 @@ app.use((req, res, next) => {
     res.status(status).json({ message });
     throw err;
   });
-  const distPath = path6.resolve(import.meta.dirname, "..", "dist", "public");
+  const distPath = path7.resolve(import.meta.dirname, "..", "dist", "public");
   const buildExists = fs6.existsSync(distPath);
-  const isProduction = process.env.NODE_ENV === "production";
   console.log(`\u{1F50D} Build check: ${buildExists ? "\u2705 Production build found" : "\u274C No build found"}`);
   console.log(`\u{1F4C1} Dist path: ${distPath}`);
-  console.log(`\u{1F30D} Environment: ${process.env.NODE_ENV}`);
   if (buildExists) {
-    console.log("\u{1F680} Serving production build (Replit-compatible static files)...");
+    console.log("\u{1F680} Serving production build...");
     app.use(express2.static(distPath));
     app.use("*", (_req, res) => {
-      res.sendFile(path6.resolve(distPath, "index.html"));
+      res.sendFile(path7.resolve(distPath, "index.html"));
     });
-  } else {
-    console.log("\u{1F527} No production build found: Setting up Vite dev middleware...");
+  } else if (app.get("env") === "development") {
+    console.log("\u{1F527} Serving development with Vite...");
     await setupVite(app, server);
-    console.log("\u2705 Vite dev server configured");
+  } else {
+    console.log("\u274C No build found and not in development mode");
+    app.use(express2.static(distPath));
+    app.use("*", (_req, res) => {
+      res.sendFile(path7.resolve(distPath, "index.html"));
+    });
   }
   const port = 5e3;
   server.listen({
@@ -17799,13 +17783,5 @@ app.use((req, res, next) => {
     reusePort: true
   }, () => {
     log(`serving on port ${port}`);
-    try {
-      const { setupNotificationRoutes: setupNotificationRoutes2 } = (init_notification_router(), __toCommonJS(notification_router_exports));
-      setupNotificationRoutes2(server);
-      console.log("\u{1F50C} WebSocket notifications configur\xE9es apr\xE8s d\xE9marrage du serveur");
-    } catch (error) {
-      console.error("\u274C Erreur configuration WebSocket:", error.message);
-      console.log("\u{1F504} Application continue sans notifications WebSocket");
-    }
   });
 })();

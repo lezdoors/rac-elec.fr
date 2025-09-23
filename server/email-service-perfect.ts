@@ -330,7 +330,7 @@ export async function sendLeadNotification(leadData: any) {
     
     const mailOptions = {
       from: 'notification@portail-electricite.com',
-      to: 'contact@portail-electricite.com',
+      to: 'bonjour@portail-electricite.com',
       subject: template.subject,
       html: template.getHtml(leadData),
       text: `Nouveau lead généré - Type: ${leadData.clientType} - Nom: ${leadData.nom} - Email: ${leadData.email} - Téléphone: ${leadData.telephone}`
@@ -362,7 +362,7 @@ export async function sendPaiementReussiNotification(paiementData: any) {
     
     const mailOptions = {
       from: 'notification@portail-electricite.com',
-      to: 'contact@portail-electricite.com',
+      to: 'bonjour@portail-electricite.com',
       subject: template.subject.replace('{reference}', paiementData.referenceNumber || 'N/A'),
       html: template.getHtml(paiementData),
       text: `Paiement confirmé - Référence: ${paiementData.referenceNumber} - Montant: ${paiementData.amount ? (parseFloat(paiementData.amount) / 100).toFixed(2) + ' €' : 'N/A'}`
@@ -394,7 +394,7 @@ export async function sendPaiementEchoueNotification(paiementData: any) {
     
     const mailOptions = {
       from: 'notification@portail-electricite.com',
-      to: 'contact@portail-electricite.com',
+      to: 'bonjour@portail-electricite.com',
       subject: template.subject.replace('{reference}', paiementData.referenceNumber || 'N/A'),
       html: template.getHtml(paiementData),
       text: `URGENT - Paiement échoué - Référence: ${paiementData.referenceNumber} - Contact: ${paiementData.clientEmail}`

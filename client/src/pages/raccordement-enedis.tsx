@@ -96,13 +96,7 @@ type FormData = z.infer<typeof formSchema>;
 
 export default function RaccordementEnedisPage() {
   const { isMobile, isPageLoaded } = useMobileOptimization();
-  
-  // Check for hero form redirect parameters
-  const urlParams = new URLSearchParams(window.location.search);
-  const isFromHero = urlParams.get('hero') === 'true';
-  const urlStep = parseInt(urlParams.get('step') || '1');
-  
-  const [currentStep, setCurrentStep] = useState(isFromHero ? urlStep : 1);
+  const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSupportModal, setShowSupportModal] = useState(false);
   const [supportForm, setSupportForm] = useState({ name: '', email: '', message: '' });
@@ -165,38 +159,14 @@ export default function RaccordementEnedisPage() {
     scrollToTop();
   }, [currentStep]);
 
-  // Load hero form data if available
-  const loadHeroFormData = () => {
-    try {
-      const heroDataStr = sessionStorage.getItem('heroFormStep1Data');
-      if (heroDataStr && isFromHero) {
-        const heroData = JSON.parse(heroDataStr);
-        return {
-          clientType: heroData.clientType || "particulier",
-          nom: heroData.nom || "",
-          prenom: heroData.prenom || "",
-          email: heroData.email || "",
-          phone: heroData.phone || "",
-        };
-      }
-    } catch (error) {
-      console.log('Erreur chargement données hero form:', error);
-    }
-    return {
+  const form = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
       clientType: "particulier",
       nom: "",
       prenom: "",
       email: "",
       phone: "",
-    };
-  };
-
-  const heroFormData = loadHeroFormData();
-
-  const form = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      ...heroFormData,
       raisonSociale: "",
       siren: "",
       nomCollectivite: "",
@@ -222,23 +192,6 @@ export default function RaccordementEnedisPage() {
       consentementTraitement: false,
     },
   });
-
-  // Clean up hero form data and URL parameters after successful load
-  useEffect(() => {
-    if (isFromHero) {
-      // Clean up URL parameters for better UX
-      const newUrl = window.location.pathname;
-      window.history.replaceState(null, '', newUrl);
-      
-      // Show success message if coming from hero form
-      console.log('Redirection depuis le formulaire héro réussie - Étape 1 pré-remplie');
-      
-      // Optional: Clean up sessionStorage after successful load
-      // setTimeout(() => {
-      //   sessionStorage.removeItem('heroFormStep1Data');
-      // }, 1000);
-    }
-  }, [isFromHero]);
 
   const clientType = form.watch("clientType");
   const codePostal = form.watch("codePostal");

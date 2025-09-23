@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { apiRequest } from "@/lib/queryClient";
 import { Loader2, CreditCard } from "lucide-react";
-// Stripe loaded dynamically only when needed
+import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CardCheckoutForm from "@/components/payment/card-checkout-form";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
@@ -12,11 +12,7 @@ if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
   throw new Error("La clé publique Stripe (VITE_STRIPE_PUBLIC_KEY) n'est pas définie");
 }
 
-// Stripe promise loaded dynamically when payment component is needed
-const getStripePromise = async () => {
-  const { loadStripe } = await import("@stripe/stripe-js");
-  return loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
-};
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 export default function CardPaymentPage() {
   // Utiliser window.location.search au lieu de useLocation pour éviter les problèmes
@@ -116,7 +112,7 @@ export default function CardPaymentPage() {
             <p className="text-gray-500 text-center">Référence: {reference}</p>
           </div>
           
-          <Elements stripe={getStripePromise()} options={{ clientSecret }}>
+          <Elements stripe={stripePromise} options={{ clientSecret }}>
             <CardCheckoutForm 
               referenceNumber={reference || ""}
               clientSecret={clientSecret}

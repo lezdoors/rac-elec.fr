@@ -378,29 +378,30 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // Only serve production build in production environment
+  // Check if production build exists and prefer it over development
   const distPath = path.resolve(import.meta.dirname, "..", "dist", "public");
   const buildExists = fs.existsSync(distPath);
-  const isProduction = process.env.NODE_ENV === 'production';
   
   console.log(`🔍 Build check: ${buildExists ? '✅ Production build found' : '❌ No build found'}`);
   console.log(`📁 Dist path: ${distPath}`);
-  console.log(`🌍 Environment: ${process.env.NODE_ENV}`);
   
   if (buildExists) {
-    // Use production build when available (Replit blocks Vite dev servers)
-    console.log('🚀 Serving production build (Replit-compatible static files)...');
+    console.log('🚀 Serving production build...');
     // Custom static serving to bypass restricted vite.ts serveStatic function
     app.use(express.static(distPath));
     app.use("*", (_req, res) => {
       res.sendFile(path.resolve(distPath, "index.html"));
     });
-  } else {
-    console.log('🔧 No production build found: Setting up Vite dev middleware...');
-    
-    // Fallback to Vite dev server only when no build exists
+  } else if (app.get("env") === "development") {
+    console.log('🔧 Serving development with Vite...');
     await setupVite(app, server);
-    console.log('✅ Vite dev server configured');
+  } else {
+    console.log('❌ No build found and not in development mode');
+    // Fallback static serving
+    app.use(express.static(distPath));
+    app.use("*", (_req, res) => {
+      res.sendFile(path.resolve(distPath, "index.html"));
+    });
   }
 
   // ALWAYS serve the app on port 5000
@@ -413,15 +414,5 @@ app.use((req, res, next) => {
     reusePort: true,
   }, () => {
     log(`serving on port ${port}`);
-    
-    // ✅ MAINTENANT configurer le système de notifications après que le serveur HTTP écoute
-    try {
-      const { setupNotificationRoutes } = require("./notification-router");
-      setupNotificationRoutes(server);
-      console.log("🔌 WebSocket notifications configurées après démarrage du serveur");
-    } catch (error) {
-      console.error("❌ Erreur configuration WebSocket:", error.message);
-      console.log("🔄 Application continue sans notifications WebSocket");
-    }
   });
 })();

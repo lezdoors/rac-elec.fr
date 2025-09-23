@@ -69,32 +69,6 @@ html, body {
   padding-right: 1rem;
 }
 
-/* Content-visibility Performance Optimization */
-.below-fold-section {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 500px;
-}
-
-.testimonials-section {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 600px;
-}
-
-.faq-section {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 800px;
-}
-
-.service-cards-section {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 400px;
-}
-
-.footer-section {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 300px;
-}
-
 /* Mobile Responsiveness - Critical Priority */
 @media (max-width: 768px) {
   .container { 
