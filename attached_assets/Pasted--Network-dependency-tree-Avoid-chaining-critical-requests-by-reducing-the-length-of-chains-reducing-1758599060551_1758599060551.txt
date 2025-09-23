@@ -1,0 +1,55 @@
+
+Network dependency tree
+Avoid chaining critical requests by reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load.LCP
+Maximum critical path latency: 3,530 ms
+Initial Navigation
+https://portail-electricite.com
+- 140 ms, 7.01 KiB
+/assets/index-CDlbzui6.js(portail-electricite.com)
+- 319 ms, 186.58 KiB
+/assets/gclid-tra….js(portail-electricite.com)
+- 526 ms, 2.34 KiB
+/assets/raccordem….js(portail-electricite.com)
+- 884 ms, 16.80 KiB
+/assets/select-Bnz56bMc.js(portail-electricite.com)
+- 907 ms, 8.72 KiB
+/assets/index-DyN4L8jy.js(portail-electricite.com)
+- 896 ms, 11.77 KiB
+/assets/index-DfjSEEq3.js(portail-electricite.com)
+- 884 ms, 1.92 KiB
+/assets/index-Cbnh7z2k.js(portail-electricite.com)
+- 882 ms, 1.56 KiB
+/assets/index-Bhx1IPZa.js(portail-electricite.com)
+- 904 ms, 1.64 KiB
+/assets/checkbox-S5T5J9jE.js(portail-electricite.com)
+- 897 ms, 2.72 KiB
+/assets/raccordem….css(portail-electricite.com)
+- 883 ms, 2.40 KiB
+/assets/confirmat….js(portail-electricite.com)
+- 899 ms, 7.66 KiB
+/assets/react-stripe.esm-CheoMQbB.js(portail-electricite.com)
+- 907 ms, 5.96 KiB
+/assets/analytics-COZBdMGm.js(portail-electricite.com)
+- 885 ms, 1.86 KiB
+/assets/credit-card-CPiqNQrR.js(portail-electricite.com)
+- 889 ms, 1.78 KiB
+/assets/shield-Rw9ZUGLF.js(portail-electricite.com)
+- 889 ms, 1.85 KiB
+/assets/lock-D1mkcGZ2.js(portail-electricite.com)
+- 904 ms, 1.78 KiB
+/assets/eye-off-17XiFLCY.js(portail-electricite.com)
+- 899 ms, 2.00 KiB
+/assets/web-vital….js(portail-electricite.com)
+- 3,530 ms, 2.13 KiB
+/assets/gentle-performance-DdJFHgXg.js(portail-electricite.com)
+- 3,509 ms, 2.10 KiB
+/assets/lcp-monit….js(portail-electricite.com)
+- 3,514 ms, 2.08 KiB
+/assets/index-C_-eAfdH.css(portail-electricite.com)
+- 262 ms, 36.26 KiB
+Preconnected origins
+preconnect hints help the browser establish a connection earlier in the page load, saving time when the first request for that origin is made. The following are the origins that the page preconnected to.
+no origins were preconnected
+Preconnect candidates
+Add preconnect hints to your most important origins, but try to use no more than 4.
+No additional origins are good candidates for preconnecting
