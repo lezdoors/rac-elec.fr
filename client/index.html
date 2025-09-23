@@ -256,19 +256,8 @@
     <link rel="stylesheet" href="/styles/sleek-checkboxes.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="/styles/sleek-checkboxes.css"></noscript>
     
-    <!-- Browser Compatibility Check - Load polyfills for older browsers -->
-    <script>
-      // Detect older browsers that need polyfills
-      if (!window.fetch || !window.Promise || !Array.prototype.includes) {
-        document.write('<script src="https://polyfill.io/v3/polyfill.min.js?features=fetch,Promise,Array.prototype.includes,Object.assign"><\/script>');
-      }
-      // Optional chaining and nullish coalescing detection
-      try {
-        eval('{}?.test ?? null');
-      } catch (e) {
-        document.write('<script src="https://unpkg.com/@babel/polyfill@7.12.1/dist/polyfill.min.js"><\/script>');
-      }
-    </script>
+    <!-- PERFORMANCE FIX: Remove render-blocking polyfills for faster LCP -->
+    <!-- Modern browsers don't need these polyfills, and they block rendering -->
 
     <!-- CRITICAL FIX: Google Analytics config executes IMMEDIATELY -->
     <!-- GCLID and conversion tracking MUST be available immediately for ads attribution -->
@@ -322,13 +311,8 @@
       }, 3000);
     </script>
 
-    <!-- Critical mobile performance preloads -->
-    <link rel="preload" href="/src/main.tsx" as="script">
+    <!-- PERFORMANCE FIX: Fixed preloads - removed invalid /src/main.tsx and duplicates -->
     <link rel="preload" href="/favicon-new.svg" as="image">
-    
-    <!-- Preload critical Inter font files for LCP text -->
-    <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/inter-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/inter-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
     
     <!-- Mobile viewport optimization -->
@@ -351,44 +335,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="format-detection" content="telephone=no">
     
-    <!-- Suppression du script Replit banner pour éviter le favicon Replit -->
-    <!-- Service Worker disabled to prevent console errors -->
-    <script>
-      // Service Worker registration completely disabled
-      console.log('✅ Ressources statiques mises en cache');
-      
-      // Bloquer les éléments Replit qui peuvent remplacer notre favicon
-      window.addEventListener('load', function() {
-        // Observer le DOM pour éliminer les éléments Replit ajoutés dynamiquement
-        const observer = new MutationObserver((mutations) => {
-          mutations.forEach((mutation) => {
-            if (mutation.addedNodes && mutation.addedNodes.length > 0) {
-              for (let i = 0; i < mutation.addedNodes.length; i++) {
-                const node = mutation.addedNodes[i];
-                if (node.nodeType === 1) {
-                  // Vérifier si c'est un élément Replit
-                  if (node.id && (node.id.includes('replit') || node.className && node.className.includes('replit'))) {
-                    node.remove();
-                  }
-                  // Vérifier les attributs liés à Replit dans les favicon
-                  const icons = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]');
-                  icons.forEach(icon => {
-                    if (icon.href && icon.href.includes('replit.com')) {
-                      icon.href = '/favicon-new.svg';
-                    }
-                  });
-                }
-              }
-            }
-          });
-        });
-        
-        observer.observe(document.body, {
-          childList: true,
-          subtree: true
-        });
-      });
-    </script>
+    <!-- PERFORMANCE FIX: Removed render-blocking MutationObserver script for faster LCP -->
   </head>
   <body>
     <div id="root"></div>
@@ -518,5 +465,43 @@
     src="https://c.statcounter.com/13140920/0/3cd76429/1/" alt="real time web
     analytics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
     <!-- End of Statcounter Code -->
+    
+    <!-- PERFORMANCE FIX: Non-critical Replit cleanup moved to body end -->
+    <script>
+      // Service Worker cache message
+      console.log('✅ Ressources statiques mises en cache');
+      
+      // Non-critical Replit cleanup after page loads
+      window.addEventListener('load', function() {
+        // Observer le DOM pour éliminer les éléments Replit ajoutés dynamiquement
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+              for (let i = 0; i < mutation.addedNodes.length; i++) {
+                const node = mutation.addedNodes[i];
+                if (node.nodeType === 1) {
+                  // Vérifier si c'est un élément Replit
+                  if (node.id && (node.id.includes('replit') || node.className && node.className.includes('replit'))) {
+                    node.remove();
+                  }
+                  // Vérifier les attributs liés à Replit dans les favicon
+                  const icons = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]');
+                  icons.forEach(icon => {
+                    if (icon.href && icon.href.includes('replit.com')) {
+                      icon.href = '/favicon-new.svg';
+                    }
+                  });
+                }
+              }
+            }
+          });
+        });
+        
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      });
+    </script>
   </body>
 </html>
