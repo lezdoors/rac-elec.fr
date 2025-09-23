@@ -201,7 +201,39 @@ export default function HomePage() {
         `}</script>
       </Helmet>
 
+      {/* Google 2025 Required Navigation Header */}
+      <header className="site-nav bg-white shadow-sm sticky top-0 z-40">
+        <nav className="container mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="logo text-xl font-bold text-blue-600">
+              Portail Électricité
+            </Link>
+            <div className="nav-links hidden md:flex items-center space-x-6">
+              <Link href="#services" className="text-gray-700 hover:text-blue-600 transition-colors">Services</Link>
+              <Link href="#tarifs" className="text-gray-700 hover:text-blue-600 transition-colors">Tarifs</Link>
+              <Link href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors">Contact</Link>
+              <a href="tel:0970709570" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                09 70 70 95 70
+              </a>
+            </div>
+            {/* Mobile Menu Button */}
+            <button className="md:hidden p-2">
+              <Menu className="h-6 w-6 text-gray-700" />
+            </button>
+          </div>
+        </nav>
+      </header>
 
+      {/* Anchor Navigation for Long Pages */}
+      <nav className="page-nav bg-gray-50 border-b">
+        <div className="container mx-auto px-4 py-2">
+          <div className="flex justify-center space-x-6 text-sm">
+            <a href="#process" className="text-gray-600 hover:text-blue-600 transition-colors">Comment ça marche</a>
+            <a href="#services" className="text-gray-600 hover:text-blue-600 transition-colors">Nos services</a>
+            <a href="#contact" className="text-gray-600 hover:text-blue-600 transition-colors">Devis gratuit</a>
+          </div>
+        </div>
+      </nav>
 
       {/* Hero Section */}
       <main id="main-content">
@@ -227,34 +259,6 @@ export default function HomePage() {
                 Commencer ma demande
               </button>
               <p className="text-white/80 text-sm mt-6">145 raccordements traités ce mois-ci</p>
-              
-              {/* Trust Signals Row - Google 2025 Optimized */}
-              <div className="flex flex-wrap justify-center items-center gap-6 mt-8 text-white/90 text-sm">
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd"/>
-                  </svg>
-                  <span>Données sécurisées SSL</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                  </svg>
-                  <span>★★★★★ 4.8/5</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd"/>
-                  </svg>
-                  <span>Rappel sous 2h</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-                  </svg>
-                  <span>Service certifié</span>
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -274,13 +278,14 @@ export default function HomePage() {
                     Particuliers et professionnels. Quelque soit le type de demande de raccordement Enedis. 
                     <span className="font-semibold"> Un seul formulaire !</span>
                   </p>
-                  <button 
-                    onClick={() => setShowConnectionModal(true)}
-                    className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg"
-                    data-testid="button-start-request"
-                  >
-                    Commencer ma demande
-                  </button>
+                  <Link href="/raccordement-enedis">
+                    <button 
+                      className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg"
+                      data-testid="button-start-request"
+                    >
+                      Commencer ma demande
+                    </button>
+                  </Link>
                 </div>
 
                 {/* Right Illustration */}
@@ -449,13 +454,11 @@ export default function HomePage() {
             <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
               Déposez votre demande de raccordement Enedis dès maintenant. Nos experts du territoire français vous accompagnent dans vos projets.
             </p>
-            <button 
-              onClick={() => setShowConnectionModal(true)}
-              className="bg-white text-blue-600 font-bold px-8 py-4 rounded-lg text-lg hover:bg-gray-100 transition-colors shadow-lg"
-              data-testid="button-deposit-request"
-            >
-              Déposer une demande de raccordement →
-            </button>
+            <Link href="/raccordement-enedis">
+              <button className="bg-white text-blue-600 font-bold px-8 py-4 rounded-lg text-lg hover:bg-gray-100 transition-colors shadow-lg">
+                Déposer une demande de raccordement →
+              </button>
+            </Link>
           </div>
         </section>
 
@@ -540,13 +543,11 @@ export default function HomePage() {
               <p className="text-gray-600 mb-8">
                 Confiez-nous votre raccordement Enedis ! Nos experts Service accompagnent l'ensemble des projets du territoire français.
               </p>
-              <button 
-                onClick={() => setShowConnectionModal(true)}
-                className="bg-gray-800 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-gray-700 transition-colors shadow-lg"
-                data-testid="button-start-connection"
-              >
-                Faire raccordement - Démarrer →
-              </button>
+              <Link href="/raccordement-enedis">
+                <button className="bg-gray-800 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-gray-700 transition-colors shadow-lg">
+                  Faire raccordement - Démarrer →
+                </button>
+              </Link>
               <p className="text-gray-500 text-sm mt-4">⚡ Service gratuit Enedis - Devis gratuit immédiat expert intégration ⚡</p>
             </div>
           </div>
@@ -626,13 +627,11 @@ export default function HomePage() {
                 <h3 className="font-semibold text-gray-900">Services Expert et Rapide</h3>
                 <p className="text-gray-600 text-sm">Accompagnement complet pour tous raccordements Enedis avec suivi personnalisé</p>
               </div>
-              <button 
-                onClick={() => setShowConnectionModal(true)}
-                className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors ml-8"
-                data-testid="button-start-my-request"
-              >
-                Démarrer ma demande →
-              </button>
+              <Link href="/raccordement-enedis" className="ml-8">
+                <button className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                  Démarrer ma demande →
+                </button>
+              </Link>
             </div>
           </div>
         </section>
@@ -704,13 +703,11 @@ export default function HomePage() {
             </div>
 
             <div className="text-center mt-12" id="services">
-              <button 
-                onClick={() => setShowConnectionModal(true)}
-                className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg"
-                data-testid="button-start-now"
-              >
-                Commencer maintenant
-              </button>
+              <Link href="/raccordement-enedis">
+                <button className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-colors shadow-lg">
+                  Commencer maintenant
+                </button>
+              </Link>
             </div>
           </div>
         </section>
@@ -794,7 +791,109 @@ export default function HomePage() {
         </div>
       )}
 
+      {/* Extended Footer with Services - Matching Screenshots */}
+      <footer className="bg-blue-900 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            {/* Company Info Section */}
+            <div>
+              <div className="flex items-center mb-4">
+                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
+                  <HomeIcon className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white">Votre partenaire</h3>
+                  <p className="text-blue-200 text-sm">Raccordement électrique</p>
+                </div>
+              </div>
+              <p className="text-blue-200 text-sm mb-4">
+                Votre partenaire expert pour tous vos projets de raccordement électrique en France.
+              </p>
+              <div className="bg-blue-800 rounded-lg p-4">
+                <div className="flex items-center">
+                  <Phone className="w-5 h-5 text-white mr-2" />
+                  <span className="text-white font-semibold">09 70 70 95 70</span>
+                </div>
+              </div>
+            </div>
 
+            {/* Services spécialisés Section */}
+            <div>
+              <h3 className="font-semibold text-white mb-4">Services spécialisés</h3>
+              <ul className="space-y-2 text-blue-200">
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+                  Raccordement définitif
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+                  Raccordement provisoire
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+                  Viabilisation terrain
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+                  Vérification compteur
+                </li>
+              </ul>
+            </div>
+
+            {/* Votre projet Section */}
+            <div>
+              <h3 className="font-semibold text-white mb-4">Votre projet</h3>
+              <div className="bg-green-600 rounded-lg p-4 text-center">
+                <button 
+                  onClick={() => setShowCallbackModal(true)}
+                  className="bg-green-500 hover:bg-green-400 text-white font-bold px-6 py-3 rounded-lg w-full transition-colors"
+                >
+                  Demander un devis →
+                </button>
+              </div>
+              <div className="mt-4 text-blue-200 text-sm">
+                <p>✓ Service certifié professionnel</p>
+                <p>✓ Paiement 100% sécurisé</p>
+                <p>✓ Traitement rapide 24-48h</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </footer>
+
+      {/* Bottom Footer with Navigation Links */}
+      <div className="bg-gray-800 text-white py-6">
+        <div className="container mx-auto px-4">
+          {/* Footer Navigation Links */}
+          <div className="footer-nav grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 text-center">
+            <Link href="/raccordement-residentiel" className="text-gray-300 hover:text-white transition-colors text-sm">
+              Raccordement résidentiel
+            </Link>
+            <Link href="/raccordement-photovoltaique" className="text-gray-300 hover:text-white transition-colors text-sm">
+              Raccordement solaire
+            </Link>
+            <Link href="#contact" className="text-gray-300 hover:text-white transition-colors text-sm">
+              Contact
+            </Link>
+            <Link href="/mentions-legales" className="text-gray-300 hover:text-white transition-colors text-sm">
+              Mentions légales
+            </Link>
+          </div>
+          
+          {/* Contact Info */}
+          <div className="text-center border-t border-gray-700 pt-4">
+            <p className="text-sm text-gray-300">
+              09 70 70 95 70 · contact@raccordement-connect.com · horaires 8h–18h
+            </p>
+            <div className="mt-2 text-xs text-gray-400">
+              <Link href="/politique-confidentialite" className="hover:text-white mr-4">Politique de confidentialité</Link>
+              <span>© 2025 Portail Électricité.com - Tous droits réservés</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Connection Request Modal - Google 2025 Optimized */}
       {showConnectionModal && (
