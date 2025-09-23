@@ -235,30 +235,99 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Original Design with 4 Squares */}
       <main id="main-content">
         <section className="bg-[#0046a2] text-white py-16 md:py-20" id="hero">
-          <div className="container mx-auto px-4 max-w-6xl text-center">
-            {/* Main Title - Per requirements */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Raccordement électrique Enedis, simplifié.
-            </h1>
-            
-            {/* Subtitle - Per requirements */}
-            <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto text-white/95 leading-relaxed">
-              Un seul formulaire, un accompagnement complet.
-            </p>
+          <div className="container mx-auto px-4 max-w-6xl">
+            {/* Main Title */}
+            <div className="text-center mb-12">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                Raccordement électrique Enedis, simplifié.
+              </h1>
+              <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto text-white/95 leading-relaxed">
+                Un seul formulaire, un accompagnement complet.
+              </p>
+            </div>
 
-            {/* Primary CTA - Google 2025 Optimized */}
-            <div className="text-center mt-8">
+            {/* 4 Service Selection Squares - 2x2 Grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
+              
+              {/* Maison neuve */}
+              <button 
+                onClick={() => {
+                  setConnectionForm(prev => ({ ...prev, typeRaccordement: 'definitif' }));
+                  setShowConnectionModal(true);
+                }}
+                className="bg-white/95 hover:bg-white rounded-xl p-4 lg:p-6 text-center transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 min-h-[120px] lg:min-h-[140px]"
+                data-testid="button-service-maison-neuve"
+              >
+                <div className="w-10 h-10 lg:w-12 lg:h-12 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-2 lg:mb-3">
+                  <Building className="h-5 w-5 lg:h-6 lg:w-6 text-white" />
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-1 text-sm lg:text-base">Maison neuve</h3>
+                <p className="text-gray-600 text-xs lg:text-sm">Construction neuve</p>
+              </button>
+
+              {/* Définitif */}
+              <button 
+                onClick={() => {
+                  setConnectionForm(prev => ({ ...prev, typeRaccordement: 'definitif' }));
+                  setShowConnectionModal(true);
+                }}
+                className="bg-white/95 hover:bg-white rounded-xl p-4 lg:p-6 text-center transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 min-h-[120px] lg:min-h-[140px]"
+                data-testid="button-service-definitif"
+              >
+                <div className="w-10 h-10 lg:w-12 lg:h-12 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-2 lg:mb-3">
+                  <Zap className="h-5 w-5 lg:h-6 lg:w-6 text-white" />
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-1 text-sm lg:text-base">Définitif</h3>
+                <p className="text-gray-600 text-xs lg:text-sm">Modification/augmentation</p>
+              </button>
+
+              {/* Provisoire */}
+              <button 
+                onClick={() => {
+                  setConnectionForm(prev => ({ ...prev, typeRaccordement: 'provisoire' }));
+                  setShowConnectionModal(true);
+                }}
+                className="bg-white/95 hover:bg-white rounded-xl p-4 lg:p-6 text-center transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 min-h-[120px] lg:min-h-[140px]"
+                data-testid="button-service-provisoire"
+              >
+                <div className="w-10 h-10 lg:w-12 lg:h-12 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-2 lg:mb-3">
+                  <Clock className="h-5 w-5 lg:h-6 lg:w-6 text-white" />
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-1 text-sm lg:text-base">Provisoire</h3>
+                <p className="text-gray-600 text-xs lg:text-sm">Chantier temporaire</p>
+              </button>
+
+              {/* Viabilisation */}
+              <button 
+                onClick={() => {
+                  setConnectionForm(prev => ({ ...prev, typeRaccordement: 'viabilisation' }));
+                  setShowConnectionModal(true);
+                }}
+                className="bg-white/95 hover:bg-white rounded-xl p-4 lg:p-6 text-center transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 min-h-[120px] lg:min-h-[140px]"
+                data-testid="button-service-viabilisation"
+              >
+                <div className="w-10 h-10 lg:w-12 lg:h-12 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-2 lg:mb-3">
+                  <MapPin className="h-5 w-5 lg:h-6 lg:w-6 text-white" />
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-1 text-sm lg:text-base">Viabilisation</h3>
+                <p className="text-gray-600 text-xs lg:text-sm">Terrain à équiper</p>
+              </button>
+              
+            </div>
+
+            {/* Alternative CTA for users who prefer not to preselect */}
+            <div className="text-center">
               <button 
                 onClick={() => setShowConnectionModal(true)}
-                className="bg-yellow-400 text-black font-bold px-12 py-6 rounded-xl text-xl md:text-2xl hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-2xl border-4 border-yellow-300"
-                data-testid="button-commencer-demande"
+                className="bg-yellow-400 text-blue-900 font-bold px-8 py-4 rounded-lg text-lg hover:bg-yellow-300 transition-colors shadow-lg"
+                data-testid="button-start-request-generic"
               >
                 Commencer ma demande
               </button>
-              <p className="text-white/80 text-sm mt-6">145 raccordements traités ce mois-ci</p>
+              <p className="text-white/80 text-sm mt-4">145 raccordements traités ce mois-ci</p>
             </div>
           </div>
         </section>
