@@ -46,3 +46,9 @@ if (typeof window !== 'undefined') {
 }
 
 console.log('✅ Browser compatibility polyfills loaded');
+
+// Export function to make this a proper module
+export function initializePolyfills() {
+  // Polyfills are executed immediately when this module loads
+  return true;
+}

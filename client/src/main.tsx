@@ -1,9 +1,31 @@
-// Load browser compatibility polyfills first
-import "./polyfills";
+// PERFORMANCE FIX: Polyfills moved to feature detection + dynamic import
+// No longer blocking the critical rendering path!
 
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
+
+// PERFORMANCE FIX: Feature-detected polyfill loading
+function loadPolyfillsIfNeeded(): void {
+  // Only load polyfills if browser actually needs them
+  const needsPolyfills = (
+    !window.fetch || 
+    !window.navigator?.clipboard ||
+    !('eval' in window) ||
+    typeof window.eval?.('(() => { try { return {}?.test; } catch { return false; } })()') === 'undefined'
+  );
+  
+  if (needsPolyfills) {
+    console.log('🔧 Loading polyfills for browser compatibility');
+    import("./polyfills").then(module => {
+      module.initializePolyfills();
+    }).catch(error => {
+      console.warn('Polyfills failed to load:', error);
+    });
+  } else {
+    console.log('✅ Modern browser detected - no polyfills needed');
+  }
+}
 
 // PHASE 3A: Defer non-critical tracking and performance scripts
 // These will be loaded after user interaction or with delay
@@ -46,6 +68,16 @@ function setupCriticalGclidLoading(): void {
   } else {
     // DOM already ready, load immediately
     loadCriticalGclidTracking();
+  }
+}
+
+// Set up polyfill loading after initial render (non-blocking)
+function setupPolyfillLoading(): void {
+  // Load polyfills after React has mounted (non-critical path)
+  if (window.requestIdleCallback) {
+    window.requestIdleCallback(() => loadPolyfillsIfNeeded(), { timeout: 1000 });
+  } else {
+    setTimeout(loadPolyfillsIfNeeded, 100);
   }
 }
 
@@ -131,6 +163,9 @@ if (rootElement) {
 
 // CRITICAL FIX: Initialize critical GCLID tracking immediately
 setupCriticalGclidLoading();
+
+// PERFORMANCE FIX: Initialize polyfill loading after React mounts
+setupPolyfillLoading();
 
 // PHASE 3A: Initialize deferred script loading for non-critical scripts only
 setupDeferredLoading();
