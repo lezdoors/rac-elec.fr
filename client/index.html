@@ -218,12 +218,39 @@
     
     <!-- ENHANCED: Inline critical CSS optimized for LCP -->
     <style>
-      /* Critical above-the-fold styles for fastest LCP */
+      /* Critical above-the-fold styles for fastest LCP + Safari compatibility */
       * { box-sizing: border-box; }
-      body { margin: 0; font-family: Inter, system-ui, sans-serif; font-display: swap; -webkit-font-smoothing: antialiased; }
-      .hero-section { min-height: 600px; background: linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%); will-change: transform; }
+      body { 
+        margin: 0; 
+        font-family: Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif; 
+        font-display: swap; 
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%; /* Safari iOS fix */
+        text-size-adjust: 100%; /* Safari desktop fix */
+      }
+      .hero-section { 
+        min-height: 600px; 
+        background: linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%); 
+        will-change: transform;
+        /* Safari gradient fix */
+        background: -webkit-linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%);
+        background: linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%);
+      }
       .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-      .btn-primary { background: #0072CE; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; border: none; font-weight: 600; cursor: pointer; transition: transform 0.1s ease; }
+      .btn-primary { 
+        background: #0072CE; 
+        color: white; 
+        padding: 0.75rem 1.5rem; 
+        border-radius: 0.5rem; 
+        border: none; 
+        font-weight: 600; 
+        cursor: pointer; 
+        transition: transform 0.1s ease;
+        /* Safari compatibility */
+        -webkit-appearance: none;
+        -webkit-border-radius: 0.5rem;
+        -webkit-transition: transform 0.1s ease;
+      }
       .btn-primary:hover { transform: translateY(-1px); }
       .text-3xl { font-size: 1.875rem; line-height: 2.25rem; font-display: swap; }
       .text-white { color: white; }
@@ -315,10 +342,13 @@
     <link rel="preload" href="/favicon-new.svg" as="image">
     <link rel="preload" href="/fonts/inter-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
     
-    <!-- Mobile viewport optimization -->
+    <!-- SAFARI FIX: Enhanced Safari compatibility -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <!-- Safari-specific optimizations -->
+    <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
     
     
     
