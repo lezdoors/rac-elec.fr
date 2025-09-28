@@ -228,6 +228,11 @@
         -webkit-text-size-adjust: 100%; /* Safari iOS fix */
         text-size-adjust: 100%; /* Safari desktop fix */
       }
+      /* CWV OPTIMIZATION: Form container optimizations */
+      .form-container { 
+        contain: layout style paint; 
+        will-change: contents;
+      }
       .hero-section { 
         min-height: 600px; 
         background: linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%); 
@@ -235,6 +240,9 @@
         /* Safari gradient fix */
         background: -webkit-linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%);
         background: linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%);
+        /* CWV OPTIMIZATION: Content visibility optimization */
+        content-visibility: auto;
+        contain-intrinsic-size: 600px;
       }
       .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
       .btn-primary { 
@@ -341,6 +349,12 @@
     <!-- PERFORMANCE FIX: Fixed preloads - removed invalid /src/main.tsx and duplicates -->
     <link rel="preload" href="/favicon-new.svg" as="image">
     <link rel="preload" href="/fonts/inter-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- CWV OPTIMIZATION: Critical asset preloading for form components -->
+    <link rel="modulepreload" href="/src/components/form-step-1.tsx">
+    <link rel="modulepreload" href="/src/components/enhanced-mobile-form-optimizer.tsx">
+    <link rel="preconnect" href="https://geo.api.gouv.fr" crossorigin>
+    <link rel="dns-prefetch" href="//geo.api.gouv.fr">
     
     <!-- SAFARI FIX: Enhanced Safari compatibility -->
     <meta name="mobile-web-app-capable" content="yes">

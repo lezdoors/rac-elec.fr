@@ -23,13 +23,14 @@ export function EnhancedMobileFormOptimizer() {
           }
           processedElementsRef.current.add(inputElement);
           
-          // Ensure minimum touch targets (48px)
-          if (!inputElement.style.minHeight) {
+          // CWV OPTIMIZATION: Ensure minimum touch targets (48px) for better accessibility
+          if (!inputElement.style.minHeight || parseInt(inputElement.style.minHeight) < 48) {
             inputElement.style.minHeight = '48px';
           }
           
-          // Prevent zoom on iOS
-          if (inputElement.style.fontSize !== '16px') {
+          // Prevent zoom on iOS while maintaining readability
+          const computedStyle = window.getComputedStyle(inputElement);
+          if (parseInt(computedStyle.fontSize) < 16) {
             inputElement.style.fontSize = '16px';
           }
           
@@ -94,9 +95,14 @@ export function EnhancedMobileFormOptimizer() {
             inputElement.setAttribute('data-testid', `input-${inputElement.name}`);
           }
           
-          // Add touch-manipulation for better touch response
-          if (!inputElement.classList.contains('touch-manipulation')) {
-            inputElement.classList.add('touch-manipulation');
+          // Add touch-manipulation for better touch response and INP optimization
+          if (!inputElement.style.touchAction) {
+            inputElement.style.touchAction = 'manipulation';
+          }
+          
+          // CWV OPTIMIZATION: Optimize for faster input response
+          if (!inputElement.style.userSelect) {
+            inputElement.style.userSelect = 'text';
           }
           
           // Enhanced validation feedback (non-conflicting with react-hook-form)

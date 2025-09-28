@@ -1,7 +1,21 @@
-import { useState, useEffect, lazy, Suspense, useMemo, useCallback } from "react";
+import { useState, useEffect, lazy, Suspense, useMemo, useCallback, useRef } from "react";
 
-// Lazy load heavy components for better performance
-const SupportWidget = lazy(() => import("@/components/support-widget").then(module => ({ default: module.SupportWidget })));
+// CWV OPTIMIZATION: Lazy load non-critical components for better INP
+const SupportWidget = lazy(() => 
+  new Promise(resolve => {
+    // Use scheduler.postTask for low priority loading if available
+    if ('scheduler' in window && 'postTask' in window.scheduler) {
+      (window.scheduler as any).postTask(() => {
+        resolve(import("@/components/support-widget").then(module => ({ default: module.SupportWidget })));
+      }, { priority: 'background' });
+    } else {
+      // Fallback for browsers without scheduler
+      setTimeout(() => {
+        resolve(import("@/components/support-widget").then(module => ({ default: module.SupportWidget })));
+      }, 100);
+    }
+  })
+);
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -104,6 +118,22 @@ export default function RaccordementEnedisPage() {
   // État pour l'animation de recherche
   const [isSearchingVille, setIsSearchingVille] = useState(false);
   const [isSearchingVilleProjet, setIsSearchingVilleProjet] = useState(false);
+  
+  // CWV OPTIMIZATION: Debounced validation for better INP
+  const validationTimeoutRef = useRef<NodeJS.Timeout>();
+  
+  const debouncedValidation = useCallback((fieldName: string, value: string) => {
+    if (validationTimeoutRef.current) {
+      clearTimeout(validationTimeoutRef.current);
+    }
+    
+    validationTimeoutRef.current = setTimeout(() => {
+      // Only trigger validation if field has content to avoid excessive validation calls
+      if (value.trim()) {
+        form.trigger(fieldName as any);
+      }
+    }, 300); // 300ms debounce for optimal INP performance
+  }, [form]);
 
   // PERFORMANCE: Debounced API calls for INP optimization
   const handleCodePostalChange = useCallback(async (codePostal: string, isFacturation: boolean = false) => {
@@ -1698,7 +1728,7 @@ export default function RaccordementEnedisPage() {
 
         {/* Formulaire */}
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-1 md:space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-1 md:space-y-4 form-container">
             {currentStep === 1 && <FormStep1 form={form} />}
             {currentStep === 2 && renderStep2()}
             {currentStep === 3 && renderStep3()}
