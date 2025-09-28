@@ -33,6 +33,18 @@ Preferred communication style: Simple, everyday language.
 - **Technical Implementations**: Optimized performance (e.g., LCP under 2.5s target, streamlined rendering path, GPU acceleration), comprehensive SEO (JSON-LD, Open Graph, Twitter Cards), robust error handling, and browser compatibility (polyfills for older browsers).
 - **Mobile Optimizations**: Floating CTA button with smart show/hide behavior, enhanced mobile form validation with proper keyboard types, lazy loading images, mobile-first loading strategies, and touch-optimized interface elements.
 
+### Recent Changes (September 2025)
+- **SEO Silo Implementation**: Built comprehensive 3-tier SEO silo structure for local French city rankings:
+  - Service Hub: `/raccordement/` - National overview with regional navigation
+  - Regional Hubs: `/raccordement/[region]/` - Regional pages listing cities with local expertise
+  - City Spokes: `/raccordement/[ville]/` - 500-750 word unique content per city with conversion forms
+  - Dynamic routing system supporting 6 regions and 30+ cities
+  - LocalBusiness and FAQ JSON-LD schemas for enhanced search visibility
+  - Breadcrumb navigation and internal linking structure optimized for SEO authority
+  - Unique meta titles (≤60 chars) and descriptions (≤155 chars) per page
+  - NAP data (Name, Address, Phone) with local business hours per city
+  - Adjacent city linking for improved local search coverage
+
 ### Recent Changes (August 2025)
 - **Mobile-First Enhancements**: Implemented floating CTA button positioned bottom-right with gradient blue design, pulse animations, and intelligent visibility control based on scroll position.
 - **Form Optimization**: Added mobile-specific form validation, proper input types (email, tel, numeric), autocomplete attributes, and enhanced touch targets (minimum 44px).
