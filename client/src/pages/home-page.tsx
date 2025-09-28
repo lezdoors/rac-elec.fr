@@ -456,8 +456,8 @@ export default function HomePage() {
               <div className="grid grid-cols-2 gap-3">
                 <Link href="/raccordement-enedis?type=definitif#top" className="group touch-manipulation select-none" aria-label="Raccordement électrique définitif Enedis pour maisons individuelles">
                   <article className="bg-white border-gray-200 rounded-xl p-4 shadow-sm border hover:shadow-md hover:border-[#0072CE]/30 active:scale-95 active:shadow-sm transition-all duration-200 text-center h-full min-h-[120px]">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform">
-                      <HomeIcon className="h-6 w-6 text-white" />
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform p-2">
+                      <ServiceTypeIllustrations.residential />
                     </div>
                     <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-tight">Raccordement Définitif Enedis</h3>
                     <p className="text-xs text-gray-600 leading-relaxed">Nouveau branchement électrique permanent pour maisons individuelles et locaux professionnels</p>
@@ -466,8 +466,8 @@ export default function HomePage() {
                 
                 <Link href="/raccordement-enedis?type=provisoire#top" className="group touch-manipulation select-none" aria-label="Raccordement électrique provisoire Enedis pour chantiers temporaires">
                   <article className="bg-white border-gray-200 rounded-xl p-4 shadow-sm border hover:shadow-md hover:border-[#0072CE]/30 active:scale-95 active:shadow-sm transition-all duration-200 text-center h-full min-h-[120px]">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform">
-                      <Clock className="h-6 w-6 text-white" />
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform p-2">
+                      <ServiceTypeIllustrations.temporary />
                     </div>
                     <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-tight">Raccordement Provisoire Enedis</h3>
                     <p className="text-xs text-gray-600 leading-relaxed">Alimentation électrique temporaire pour chantiers et installations éphémères</p>
@@ -479,8 +479,8 @@ export default function HomePage() {
               <div className="grid grid-cols-2 gap-3">
                 <Link href="/raccordement-enedis?type=viabilisation#top" className="group touch-manipulation select-none" aria-label="Viabilisation électrique terrain par Enedis">
                   <article className="bg-white border-gray-200 rounded-xl p-4 shadow-sm border hover:shadow-md hover:border-[#0072CE]/30 active:scale-95 active:shadow-sm transition-all duration-200 text-center h-full min-h-[120px]">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform">
-                      <Server className="h-6 w-6 text-white" />
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform p-2">
+                      <ServiceTypeIllustrations.residential />
                     </div>
                     <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-tight">Viabilisation Électrique Enedis</h3>
                     <p className="text-xs text-gray-600 leading-relaxed">Préparation et équipement électrique complet de votre terrain constructible</p>
@@ -489,8 +489,8 @@ export default function HomePage() {
                 
                 <Link href="/raccordement-enedis?type=modification#top" className="group touch-manipulation select-none" aria-label="Modification de puissance électrique Enedis">
                   <article className="bg-white border-gray-200 rounded-xl p-4 shadow-sm border hover:shadow-md hover:border-[#0072CE]/30 active:scale-95 active:shadow-sm transition-all duration-200 text-center h-full min-h-[120px]">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform">
-                      <Wrench className="h-6 w-6 text-white" />
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform p-2">
+                      <ProcessStepIllustrations.step3 />
                     </div>
                     <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-tight">Modification de Puissance Enedis</h3>
                     <p className="text-xs text-gray-600 leading-relaxed">Augmentation ou réduction de puissance sur installation électrique existante</p>
@@ -502,8 +502,8 @@ export default function HomePage() {
               <div className="grid grid-cols-2 gap-3">
                 <Link href="/raccordement-enedis?type=collectif#top" className="group touch-manipulation select-none" aria-label="Raccordement électrique collectif Enedis pour immeubles">
                   <article className="bg-white border-gray-200 rounded-xl p-4 shadow-sm border hover:shadow-md hover:border-[#0072CE]/30 active:scale-95 active:shadow-sm transition-all duration-200 text-center h-full min-h-[120px]">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform">
-                      <Building className="h-6 w-6 text-white" />
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-active:scale-95 transition-transform p-2">
+                      <ServiceTypeIllustrations.commercial />
                     </div>
                     <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-tight">Raccordement Collectif Enedis</h3>
                     <p className="text-xs text-gray-600 leading-relaxed">Solutions électriques pour immeubles, résidences et copropriétés</p>
@@ -531,8 +531,8 @@ export default function HomePage() {
             {/* Raccordement Définitif */}
             <Link href="/raccordement-enedis?type=definitif#top" className="group">
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-lg hover:border-[#0072CE]/30 transition-all duration-300 transform hover:-translate-y-1">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <HomeIcon className="h-7 w-7 text-white" />
+                <div className="w-14 h-14 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform p-3">
+                  <ServiceTypeIllustrations.residential />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Raccordement Définitif</h3>
                 <p className="text-gray-600 mb-4">Pour maisons individuelles, appartements et locaux professionnels</p>
@@ -546,8 +546,8 @@ export default function HomePage() {
             {/* Raccordement Provisoire */}
             <Link href="/raccordement-enedis?type=provisoire#top" className="group">
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-lg hover:border-[#0072CE]/30 transition-all duration-300 transform hover:-translate-y-1">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Clock className="h-7 w-7 text-white" />
+                <div className="w-14 h-14 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform p-3">
+                  <ServiceTypeIllustrations.temporary />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Raccordement Provisoire</h3>
                 <p className="text-gray-600 mb-4">Solution temporaire pour chantiers et installations éphémères</p>
@@ -561,8 +561,8 @@ export default function HomePage() {
             {/* Viabilisation */}
             <Link href="/raccordement-enedis?type=viabilisation#top" className="group">
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-lg hover:border-[#0072CE]/30 transition-all duration-300 transform hover:-translate-y-1">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Server className="h-7 w-7 text-white" />
+                <div className="w-14 h-14 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform p-3">
+                  <ServiceTypeIllustrations.residential />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Viabilisation</h3>
                 <p className="text-gray-600 mb-4">Préparation et équipement électrique de votre terrain</p>
@@ -576,8 +576,8 @@ export default function HomePage() {
             {/* Modification */}
             <Link href="/raccordement-enedis?type=modification#top" className="group">
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-lg hover:border-[#0072CE]/30 transition-all duration-300 transform hover:-translate-y-1">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Wrench className="h-7 w-7 text-white" />
+                <div className="w-14 h-14 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform p-3">
+                  <ProcessStepIllustrations.step3 />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Modification</h3>
                 <p className="text-gray-600 mb-4">Adaptation et mise à niveau de votre installation existante</p>
@@ -591,8 +591,8 @@ export default function HomePage() {
             {/* Collectif */}
             <Link href="/raccordement-enedis?type=collectif#top" className="group">
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-lg hover:border-[#0072CE]/30 transition-all duration-300 transform hover:-translate-y-1">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Building className="h-7 w-7 text-white" />
+                <div className="w-14 h-14 bg-gradient-to-br from-[#0072CE] to-[#005eaa] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform p-3">
+                  <ServiceTypeIllustrations.commercial />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Raccordement Collectif</h3>
                 <p className="text-gray-600 mb-4">Solutions pour immeubles, résidences et copropriétés</p>
@@ -606,8 +606,8 @@ export default function HomePage() {
             {/* Production - Special highlight */}
             <Link href="/raccordement-enedis?type=production#top" className="group">
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 shadow-sm border border-green-200 hover:shadow-lg hover:border-green-300 transition-all duration-300 transform hover:-translate-y-1">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#5BC248] to-[#4a9c3a] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <BarChart className="h-7 w-7 text-white" />
+                <div className="w-14 h-14 bg-gradient-to-br from-[#5BC248] to-[#4a9c3a] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform p-3">
+                  <ServiceTypeIllustrations.solar />
                 </div>
                 <div className="flex items-center mb-2">
                   <h3 className="text-lg font-semibold text-gray-900">Production Électrique</h3>
