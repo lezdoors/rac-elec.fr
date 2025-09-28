@@ -30,6 +30,9 @@ import { PerformanceOptimizer } from "@/components/performance-optimizer";
 import { FloatingCtaButton } from "@/components/floating-cta-button";
 import { MobileFormOptimizer } from "@/components/mobile-form-optimizer";
 import { MobileImageOptimizer } from "@/components/mobile-image-optimizer";
+import { EnhancedCtaButton, StickyMobileCta } from "@/components/ui/enhanced-cta-button";
+import { ProcessStepsSection } from "@/components/ui/process-steps-section";
+import { TestimonialsPerformanceSection } from "@/components/ui/testimonials-performance-section";
 
 // Performance optimization - lazy loading will be implemented inline
 
@@ -369,11 +372,14 @@ export default function HomePage() {
           
           {/* Main CTA Button */}
           <div className="text-center mt-10">
-            <Link href="/raccordement-enedis#formulaire-raccordement">
-              <button className="bg-white text-[#0046a2] font-semibold px-8 py-4 rounded-lg text-lg hover:bg-[#0046a2] hover:text-white transition-colors shadow-lg">
-                Déposer ma demande
-              </button>
-            </Link>
+            <EnhancedCtaButton 
+              href="/raccordement-enedis#formulaire-raccordement"
+              size="xl"
+              className="shadow-2xl"
+              pulseEffect={true}
+            >
+              Déposer ma demande
+            </EnhancedCtaButton>
             
             {/* Counter */}
             <div className="mt-6">
@@ -625,26 +631,11 @@ export default function HomePage() {
         Version mobile ultra-compacte pour économiser l'espace
         Compatible avec tous les navigateurs modernes, optimisé pour les performances
       */}
-      {/* Section satisfaction client - Style administratif Enedis professionnel */}
-      <section className="py-12 md:py-20 bg-gradient-to-b from-slate-50 to-white border-t border-gray-200" id="satisfaction-raccordement-enedis">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* En-tête institutionnel */}
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-8 md:mb-12">
-              <div className="inline-flex items-center mb-4 px-4 py-2 bg-gray-100 text-gray-800 rounded text-sm font-medium border border-gray-300">
-                Certification qualité service
-              </div>
-              
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                Indicateurs de performance du service de raccordement Enedis
-              </h2>
-              
-              <p className="text-base text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Données officielles de client pour les demandes de raccordement électrique Enedis 
-                traitées sur l'ensemble du territoire français.
-              </p>
-            </div>
+      {/* Enhanced Process Steps Section */}
+      <ProcessStepsSection />
+      
+      {/* Enhanced Performance & Testimonials Section */}
+      <TestimonialsPerformanceSection />
 
             {/* Statistiques officielles - Version mobile administrative */}
             <div className="block md:hidden mb-8">
