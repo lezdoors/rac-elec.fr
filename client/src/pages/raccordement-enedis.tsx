@@ -4,7 +4,7 @@ import { useState, useEffect, lazy, Suspense, useMemo, useCallback, useRef } fro
 const SupportWidget = lazy(() => {
   // Use scheduler.postTask for low priority loading if available
   if ('scheduler' in window && 'postTask' in (window as any).scheduler) {
-    return new Promise(resolve => {
+    return new Promise<{ default: React.ComponentType<any> }>(resolve => {
       ((window as any).scheduler as any).postTask(() => {
         import("@/components/support-widget").then(module => {
           resolve({ default: module.SupportWidget });
@@ -13,7 +13,7 @@ const SupportWidget = lazy(() => {
     });
   } else {
     // Fallback for browsers without scheduler
-    return new Promise(resolve => {
+    return new Promise<{ default: React.ComponentType<any> }>(resolve => {
       setTimeout(() => {
         import("@/components/support-widget").then(module => {
           resolve({ default: module.SupportWidget });
