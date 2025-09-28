@@ -28,8 +28,8 @@
     "slug": "nouvelle-aquitaine",
     "description": "Raccordement électrique rapide en Nouvelle-Aquitaine. Service Enedis professionnel pour particuliers et entreprises.",
     "meta_title": "Raccordement Électrique Nouvelle-Aquitaine | Enedis",
-    "meta_description": "Raccordement électrique Nouvelle-Aquitaine ⚡ Bordeaux, Toulouse, Poitiers. Demande Enedis simplifiée, experts locaux agréés.",
-    "cities": ["bordeaux", "toulouse", "poitiers", "limoges", "pau", "bayonne", "angouleme", "perigueux"]
+    "meta_description": "Raccordement électrique Nouvelle-Aquitaine ⚡ Bordeaux, Poitiers, La Rochelle. Demande Enedis simplifiée, experts locaux agréés.",
+    "cities": ["bordeaux", "poitiers", "limoges", "pau", "bayonne", "angouleme", "perigueux", "la-rochelle"]
   },
   "occitanie": {
     "name": "Occitanie",

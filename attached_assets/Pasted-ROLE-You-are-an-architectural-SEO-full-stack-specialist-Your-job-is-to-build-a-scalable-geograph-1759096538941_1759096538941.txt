@@ -1,0 +1,48 @@
+ROLE: You are an architectural SEO + full-stack specialist. Your job is to build a scalable geographic silo for French city pages that rank on Google Search and maximize form conversions.
+
+GOAL: All traffic comes from Google Ads, but we must hyper-optimize SEO to:
+	•	Be visible for organic queries like raccordement électrique + ville.
+	•	Increase Quality Score of Ads with high SEO relevance.
+	•	Drive users to fill the form (primary conversion).
+
+⸻
+
+TASKS
+
+1. Silo Architecture (SEO-first)
+	•	/raccordement/ → National hub.
+	•	/raccordement/[region]/ → Regional hub with intro + list of cities.
+	•	/raccordement/[ville]/ → City page (main SEO + conversion).
+	•	Internal linking: City → Region + 3 adjacent cities.
+
+2. Dynamic City Page Blueprint
+	•	Above-the-fold: H1 with city, trust row (⭐ 24h traitement, 📞 phone), sticky CTA → form.
+	•	Content: 500–750 words unique text per city (intro, process, local specifics, FAQs). No duplicate templates.
+	•	Form: simple lead form (name, email, phone, address, type raccordement). CTA = “Commencer ma demande”.
+	•	NAP data: name, phone, hours dynamically injected near form.
+
+3. SEO Requirements
+	•	Unique Meta Title (≤60) + Meta Description (≤155) per city.
+	•	City-specific LocalBusiness JSON-LD (@id unique).
+	•	FAQ schema per city.
+	•	Canonical URL = city page.
+	•	City copy must mention local entities (postal codes, quartiers).
+
+4. Conversion Optimisation
+	•	Sticky CTA on mobile after scroll.
+	•	Touch-friendly inputs (≥16px).
+	•	Form validated + fast (no CLS shifts).
+	•	Success state confirmation with CTA to call.
+
+⸻
+
+OUTPUT FORMAT
+	•	✅ Routes + folder structure.
+	•	✅ JSON schema for regions/cities with meta, NAP, copy blocks.
+	•	✅ City page template with metadata, schema, unique content injection, and form.
+	•	✅ Internal linking rules applied.
+	•	✅ Acceptance criteria: each city ≥500 words unique, schema valid, form works, SEO metadata in place.
+
+⸻
+
+⚡ PRIORITY: Optimize for SEO visibility (long-tail city queries) + conversion rate. The end goal = more leads from Google traffic filling the form.
