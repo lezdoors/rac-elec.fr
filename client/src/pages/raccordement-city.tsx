@@ -130,6 +130,19 @@ export default function RaccordementCity() {
         <meta name="keywords" content={`raccordement électrique, ${cityData.name}, enedis, ${cityData.postal_codes.join(', ')}`} />
         <link rel="canonical" href={`${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}${cityData.canonical}`} />
         
+        {/* Open Graph */}
+        <meta property="og:title" content={cityData.meta_title} />
+        <meta property="og:description" content={cityData.meta_description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}${cityData.canonical}`} />
+        <meta property="og:site_name" content="Portail-Electricite.com" />
+        <meta property="og:locale" content="fr_FR" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={cityData.meta_title} />
+        <meta name="twitter:description" content={cityData.meta_description} />
+        
         {/* LocalBusiness Schema */}
         <script type="application/ld+json">
           {JSON.stringify({

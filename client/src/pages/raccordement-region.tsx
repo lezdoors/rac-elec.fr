@@ -49,6 +49,18 @@ export default function RaccordementRegion() {
         <meta name="keywords" content={`raccordement électrique, ${regionData.name}, enedis, ${regionData.cities.join(', ')}`} />
         <link rel="canonical" href={`${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}/raccordement/${regionSlug}/`} />
         
+        {/* Open Graph */}
+        <meta property="og:title" content={regionData.meta_title} />
+        <meta property="og:description" content={regionData.meta_description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}/raccordement/${regionSlug}/`} />
+        <meta property="og:site_name" content="Portail-Electricite.com" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={regionData.meta_title} />
+        <meta name="twitter:description" content={regionData.meta_description} />
+        
         {/* Breadcrumb Schema */}
         <script type="application/ld+json">
           {JSON.stringify({
