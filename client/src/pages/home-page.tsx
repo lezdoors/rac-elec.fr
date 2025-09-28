@@ -636,19 +636,67 @@ export default function HomePage() {
       
       {/* Enhanced Performance & Testimonials Section */}
       <TestimonialsPerformanceSection />
-
-            {/* Statistiques officielles - Version mobile administrative */}
-            <div className="block md:hidden mb-8">
-              <div className="bg-white border border-gray-300 rounded-lg overflow-hidden">
-                <div className="bg-gray-100 px-4 py-3 border-b border-gray-300">
-                  <h3 className="text-sm font-semibold text-gray-900">Bilan qualité 2024 - Raccordements Enedis</h3>
-                </div>
-                
-                <div className="divide-y divide-gray-200">
-                  <div className="p-4 text-center">
-                    <div className="text-2xl font-bold text-gray-900 mb-2">99.2%</div>
-                    <div className="text-sm font-medium text-gray-800 mb-1">Taux de satisfaction globale</div>
-                    <div className="text-xs text-gray-600">Service raccordement électrique conforme aux attentes</div>
+      
+      {/* Add sticky mobile CTA */}
+      <StickyMobileCta />
+      
+      {/* Section FAQ optimisée SEO avec données structurées et accordéon interactif - Lazy loaded */}
+      <section 
+        id="faq-raccordement" 
+        className="py-16 bg-gradient-to-b from-blue-950 to-blue-900 relative overflow-hidden below-fold"
+        style={{ willChange: 'auto' }}
+      >
+        {/* Éléments décoratifs optimisés pour performance */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none" style={{ transform: 'translateZ(0)' }}>
+          <div className="absolute w-96 h-96 rounded-full bg-blue-400 filter blur-3xl -top-48 -left-48" style={{ willChange: 'auto' }}></div>
+          <div className="absolute w-96 h-96 rounded-full bg-blue-600 filter blur-3xl -bottom-48 -right-48" style={{ willChange: 'auto' }}></div>
+        </div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-10">
+            {/* Badge d'introduction */}
+            <div className="inline-flex items-center mb-4 px-3 py-1 rounded-full bg-blue-800/50 text-blue-200 text-xs font-medium backdrop-blur-sm border border-blue-700/30">
+              Réponses à vos questions
+            </div>
+            
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight">
+              Des questions à propos du raccordement Enedis ?
+            </h2>
+            
+            <p className="text-blue-100 mb-6 text-base max-w-2xl mx-auto leading-relaxed">
+              Trouvez des réponses précises à vos questions sur le raccordement électrique Enedis pour tous types de projets en France.
+            </p>
+            <div className="flex justify-center mb-6">
+              <Link 
+                href="/raccordement-enedis#formulaire-raccordement"
+                className="inline-flex items-center px-4 py-2 bg-white text-blue-800 text-xs font-medium rounded-md shadow-sm hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                data-seo-action="demarrer-apres-faq"
+              >
+                <span>Démarrer ma demande de raccordement</span>
+                <ArrowRight className="ml-2 h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </div>
+          <div className="max-w-5xl mx-auto">
+            {/* FAQ compacte - Questions essentielles sur 2 colonnes */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+              
+              {/* Question 1 - Raccordement maison neuve */}
+              <div 
+                className="bg-blue-900/40 rounded-md border border-blue-800/30 overflow-hidden"
+                itemScope 
+                itemProp="mainEntity" 
+                itemType="https://schema.org/Question"
+                data-category="maison-neuve"
+              >
+                <button 
+                  onClick={() => toggleFaqItem(1)}
+                  className="w-full text-left p-3 flex items-center justify-between"
+                  aria-expanded={openFaqItems.includes(1)}
+                  data-testid="faq-question-maison-neuve"
+                >
+                  <span itemProp="name" className="text-sm font-medium text-white pr-3">
+                    Combien coûte un raccordement Enedis pour une maison neuve ?
                   </div>
                   
                   <div className="p-4 text-center">
