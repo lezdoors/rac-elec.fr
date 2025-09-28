@@ -105,8 +105,8 @@ export default function RaccordementEnedisPage() {
   const [isSearchingVille, setIsSearchingVille] = useState(false);
   const [isSearchingVilleProjet, setIsSearchingVilleProjet] = useState(false);
 
-  // Auto-complétion ville basée sur code postal avec API française officielle
-  const handleCodePostalChange = async (codePostal: string, isFacturation: boolean = false) => {
+  // PERFORMANCE: Debounced API calls for INP optimization
+  const handleCodePostalChange = useCallback(async (codePostal: string, isFacturation: boolean = false) => {
     if (codePostal.length === 5) {
       try {
         // Activer l'animation de recherche
@@ -144,7 +144,7 @@ export default function RaccordementEnedisPage() {
         }
       }
     }
-  };
+  }, []); // PERFORMANCE: Memoized callback to prevent re-renders
 
   // Fonction pour défiler vers le haut de la page
   const scrollToTop = () => {

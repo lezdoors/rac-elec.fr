@@ -2,29 +2,38 @@ import { UseFormReturn } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { z } from "zod";
 
-// Professional validation schema (matching parent component)
-const formSchema = z.object({
-  clientType: z.enum(["particulier", "professionnel", "collectivite"]),
-  nom: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
-  prenom: z.string().min(2, "Le prénom doit contenir au moins 2 caractères"),
-  email: z.string().email("L'email doit être valide"),
-  phone: z.string().refine((value) => {
-    const cleanPhone = value.replace(/[\s\.\-]/g, '');
-    return /^(0[1-9]\d{8}|\+33[1-9]\d{8})$/.test(cleanPhone);
-  }, "Format téléphone invalide (ex: 06 12 34 56 78)"),
-  raisonSociale: z.string().optional(),
-  siren: z.string().optional(),
-  nomCollectivite: z.string().optional(),
-  sirenCollectivite: z.string().optional(),
-  adresse: z.string().optional(),
-  complementAdresse: z.string().optional(),
-  codePostal: z.string().optional(),
-  ville: z.string().optional(),
-});
-
-type FormData = z.infer<typeof formSchema>;
+// Use the full form data type from the parent component
+interface FormData {
+  clientType: "particulier" | "professionnel" | "collectivite";
+  nom: string;
+  prenom: string;
+  email: string;
+  phone: string;
+  raisonSociale?: string;
+  siren?: string;
+  nomCollectivite?: string;
+  sirenCollectivite?: string;
+  adresse?: string;
+  complementAdresse?: string;
+  codePostal?: string;
+  ville?: string;
+  adresseProjet: string;
+  complementAdresseProjet?: string;
+  codePostalProjet: string;
+  villeProjet: string;
+  typeRaccordement: "nouveau" | "provisoire" | "augmentation" | "deplacement" | "autre";
+  autreTypeRaccordement?: string;
+  typeProjet: "maison" | "immeuble" | "commercial" | "industriel" | "terrain";
+  terrainViabilise?: boolean;
+  typeAlimentation: "monophase" | "triphase" | "inconnu";
+  puissance?: string;
+  adresseFacturationDifferente?: boolean;
+  adresseFacturation?: string;
+  facturationDifferente?: boolean;
+  newsletterOptIn?: boolean;
+  consentementTraitement: boolean;
+}
 
 interface FormStep1Props {
   form: UseFormReturn<FormData>;
