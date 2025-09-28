@@ -2,6 +2,14 @@ import { UseFormReturn } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import { FormFieldWithValidation } from "@/components/ui/form-field-with-validation";
+import { 
+  emailValidationRules, 
+  phoneValidationRules, 
+  nameValidationRules,
+  sirenValidationRules,
+  createValidationRules 
+} from "@/lib/validation-rules";
 
 // Use the full form data type from the parent component
 interface FormData {
@@ -258,95 +266,53 @@ export function FormStep1({ form }: FormStep1Props) {
 
         {/* Form fields grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-4">
-          {/* Nom */}
-          <FormField
+          {/* Nom with real-time validation */}
+          <FormFieldWithValidation
             control={form.control}
             name="nom"
-            render={({ field }) => (
-              <FormItem className="space-y-0.5">
-                <FormLabel className="text-xs md:text-sm font-medium text-gray-700 flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                  Nom *
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    placeholder="Votre nom de famille"
-                    className="h-10 md:h-12 bg-white border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 text-sm md:text-base"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            label="Nom"
+            placeholder="Votre nom de famille"
+            validationRules={createValidationRules([nameValidationRules], true)}
+            required
+            className="space-y-0.5"
           />
 
-          {/* Prénom */}
-          <FormField
+          {/* Prénom with real-time validation */}
+          <FormFieldWithValidation
             control={form.control}
             name="prenom"
-            render={({ field }) => (
-              <FormItem className="space-y-0.5">
-                <FormLabel className="text-xs md:text-sm font-medium text-gray-700 flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                  Prénom *
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    placeholder="Votre prénom"
-                    className="h-10 md:h-12 bg-white border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 text-sm md:text-base"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            label="Prénom"
+            placeholder="Votre prénom"
+            validationRules={createValidationRules([nameValidationRules], true)}
+            required
+            className="space-y-0.5"
           />
         </div>
 
         {/* Email and Phone */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-4">
-          <FormField
+          {/* Email with real-time validation */}
+          <FormFieldWithValidation
             control={form.control}
             name="email"
-            render={({ field }) => (
-              <FormItem className="space-y-0.5">
-                <FormLabel className="text-xs md:text-sm font-medium text-gray-700 flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                  Email *
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    type="email"
-                    placeholder="votre@email.com"
-                    className="h-10 md:h-12 bg-white border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 text-sm md:text-base"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            label="Email"
+            placeholder="votre@email.com"
+            type="email"
+            validationRules={createValidationRules([emailValidationRules], true)}
+            required
+            className="space-y-0.5"
           />
 
-          <FormField
+          {/* Phone with real-time validation */}
+          <FormFieldWithValidation
             control={form.control}
             name="phone"
-            render={({ field }) => (
-              <FormItem className="space-y-0.5">
-                <FormLabel className="text-xs md:text-sm font-medium text-gray-700 flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                  Téléphone *
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    type="tel"
-                    placeholder="06 12 34 56 78"
-                    className="h-10 md:h-12 bg-white border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 text-sm md:text-base"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            label="Téléphone"
+            placeholder="06 12 34 56 78"
+            type="tel"
+            validationRules={createValidationRules([phoneValidationRules], true)}
+            required
+            className="space-y-0.5"
           />
         </div>
 
@@ -373,22 +339,14 @@ export function FormStep1({ form }: FormStep1Props) {
                 )}
               />
 
-              <FormField
+              {/* SIREN with real-time validation */}
+              <FormFieldWithValidation
                 control={form.control}
                 name="siren"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-xs md:text-sm font-medium text-gray-700">SIREN</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder="123 456 789"
-                        className="h-10 md:h-12 bg-white border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 text-sm md:text-base"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                label="SIREN"
+                placeholder="123 456 789"
+                validationRules={sirenValidationRules}
+                description="Numéro d'identification de votre entreprise"
               />
             </div>
           </div>
@@ -416,22 +374,14 @@ export function FormStep1({ form }: FormStep1Props) {
                 )}
               />
 
-              <FormField
+              {/* SIREN Collectivité with real-time validation */}
+              <FormFieldWithValidation
                 control={form.control}
                 name="sirenCollectivite"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-xs md:text-sm font-medium text-gray-700">SIREN</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder="123 456 789"
-                        className="h-10 md:h-12 bg-white border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 text-sm md:text-base"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                label="SIREN"
+                placeholder="123 456 789"
+                validationRules={sirenValidationRules}
+                description="Numéro d'identification de votre collectivité"
               />
             </div>
           </div>
