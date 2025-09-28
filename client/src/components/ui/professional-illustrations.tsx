@@ -182,19 +182,19 @@ export const ServiceTypeIllustrations = {
   temporary: () => (
     <svg viewBox="0 0 80 80" className="w-full h-full" fill="none">
       {/* Construction site */}
-      <rect x="20" y="50" width="40" height="20" fill="#F3F4F6" stroke="#6B7280" strokeWidth="2"/>
+      <rect x="20" y="50" width="40" height="20" fill="#F3F4F6" stroke="#0072CE" strokeWidth="2"/>
       
       {/* Crane */}
-      <line x1="30" y1="50" x2="30" y2="20" stroke="#374151" strokeWidth="3"/>
-      <line x1="30" y1="25" x2="55" y2="25" stroke="#374151" strokeWidth="2"/>
-      <line x1="50" y1="25" x2="45" y2="40" stroke="#374151" strokeWidth="2"/>
+      <line x1="30" y1="50" x2="30" y2="20" stroke="#0072CE" strokeWidth="3"/>
+      <line x1="30" y1="25" x2="55" y2="25" stroke="#0072CE" strokeWidth="2"/>
+      <line x1="50" y1="25" x2="45" y2="40" stroke="#0072CE" strokeWidth="2"/>
       
       {/* Temporary power box */}
-      <rect x="15" y="35" width="8" height="12" fill="#F59E0B" stroke="#D97706" strokeWidth="1"/>
-      <circle cx="19" cy="41" r="1.5" fill="#EF4444"/>
+      <rect x="15" y="35" width="8" height="12" fill="#F59E0B" stroke="#0072CE" strokeWidth="1"/>
+      <circle cx="19" cy="41" r="1.5" fill="#4CAF50"/>
       
       {/* Timer icon */}
-      <circle cx="60" cy="15" r="6" fill="#6B7280"/>
+      <circle cx="60" cy="15" r="6" fill="#0072CE"/>
       <path d="M60 12 L60 15 L62 17" stroke="white" strokeWidth="1" strokeLinecap="round"/>
     </svg>
   )

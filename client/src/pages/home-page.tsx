@@ -294,7 +294,7 @@ export default function HomePage() {
           
           {/* Main Title - Optimized for mobile LCP */}
           <h1 className="text-2xl sm:text-3xl md:text-6xl font-semibold text-white mb-4 leading-snug md:leading-tight">
-            Votre raccordement Enedis, simplifié.
+            Commencer votre demande.
           </h1>
           
           {/* Subtitle */}
@@ -304,23 +304,23 @@ export default function HomePage() {
           {/* Navigation Icons - Simplified */}
           <div className="flex justify-center gap-6 mb-10 lg:hidden">
             <Link href="/particulier" className="group">
-              <div className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
-                <HomeIcon className="h-8 w-8 text-white" />
+              <div className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors p-3">
+                <ServiceTypeIllustrations.residential />
               </div>
             </Link>
             <Link href="/professionnel" className="group">
-              <div className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
-                <Building className="h-8 w-8 text-white" />
+              <div className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors p-3">
+                <ServiceTypeIllustrations.commercial />
               </div>
             </Link>
             <Link href="/raccordement-enedis" className="group">
-              <div className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
-                <Clock className="h-8 w-8 text-white" />
+              <div className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors p-3">
+                <ServiceTypeIllustrations.temporary />
               </div>
             </Link>
             <Link href="/raccordement-enedis" className="group">
-              <div className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
-                <MapPin className="h-8 w-8 text-white" />
+              <div className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors p-3">
+                <ServiceTypeIllustrations.residential />
               </div>
             </Link>
           </div>
@@ -329,8 +329,8 @@ export default function HomePage() {
           <div className="hidden lg:grid grid-cols-4 gap-4 mb-10 max-w-5xl mx-auto">
             <Link href="/particulier" className="w-full">
               <div className="bg-white/15 hover:bg-white/25 rounded-xl p-5 text-center transition-colors">
-                <div className="w-14 h-14 rounded-full bg-blue-500/20 flex items-center justify-center mb-3 mx-auto">
-                  <HomeIcon className="h-7 w-7 text-white" />
+                <div className="w-14 h-14 rounded-full bg-blue-500/20 flex items-center justify-center mb-3 mx-auto p-3">
+                  <ServiceTypeIllustrations.residential />
                 </div>
                 <h3 className="font-semibold text-white mb-2 text-lg">Maison neuve</h3>
                 <p className="text-white/80 text-base">Habitation individuelle</p>
@@ -339,8 +339,8 @@ export default function HomePage() {
             
             <Link href="/professionnel" className="w-full">
               <div className="bg-white/15 hover:bg-white/25 rounded-xl p-5 text-center transition-colors">
-                <div className="w-14 h-14 rounded-full bg-green-500/20 flex items-center justify-center mb-3 mx-auto">
-                  <Building className="h-7 w-7 text-white" />
+                <div className="w-14 h-14 rounded-full bg-green-500/20 flex items-center justify-center mb-3 mx-auto p-3">
+                  <ServiceTypeIllustrations.commercial />
                 </div>
                 <h3 className="font-semibold text-white mb-2 text-lg">Définitif</h3>
                 <p className="text-white/80 text-base">Locaux professionnels</p>
@@ -349,8 +349,8 @@ export default function HomePage() {
             
             <Link href="/raccordement-enedis" className="w-full">
               <div className="bg-white/15 hover:bg-white/25 rounded-xl p-5 text-center transition-colors">
-                <div className="w-14 h-14 rounded-full bg-orange-500/20 flex items-center justify-center mb-3 mx-auto">
-                  <Clock className="h-7 w-7 text-white" />
+                <div className="w-14 h-14 rounded-full bg-orange-500/20 flex items-center justify-center mb-3 mx-auto p-3">
+                  <ServiceTypeIllustrations.temporary />
                 </div>
                 <h3 className="font-semibold text-white mb-2 text-lg">Provisoire</h3>
                 <p className="text-white/80 text-base">Chantiers temporaires</p>
@@ -359,8 +359,8 @@ export default function HomePage() {
             
             <Link href="/raccordement-enedis" className="w-full">
               <div className="bg-white/15 hover:bg-white/25 rounded-xl p-5 text-center transition-colors">
-                <div className="w-14 h-14 rounded-full bg-purple-500/20 flex items-center justify-center mb-3 mx-auto">
-                  <MapPin className="h-7 w-7 text-white" />
+                <div className="w-14 h-14 rounded-full bg-purple-500/20 flex items-center justify-center mb-3 mx-auto p-3">
+                  <ServiceTypeIllustrations.residential />
                 </div>
                 <h3 className="font-semibold text-white mb-2 text-lg">Viabilisation</h3>
                 <p className="text-white/80 text-base">Parcelles terrain</p>
