@@ -5,12 +5,12 @@ const StepIcons = {
   step1: () => (
     <svg viewBox="0 0 64 64" className="w-16 h-16" fill="none">
       <defs>
-        <linearGradient id="step1Gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="step1Gradient-unique" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#3B82F6" />
           <stop offset="100%" stopColor="#1D4ED8" />
         </linearGradient>
       </defs>
-      <circle cx="32" cy="32" r="30" fill="url(#step1Gradient)" stroke="#E5E7EB" strokeWidth="2"/>
+      <circle cx="32" cy="32" r="30" fill="url(#step1Gradient-unique)" stroke="#E5E7EB" strokeWidth="2"/>
       <path d="M20 32h8l4-8 8 16 4-8h8" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
       <circle cx="20" cy="32" r="2" fill="white"/>
       <circle cx="56" cy="32" r="2" fill="white"/>
@@ -20,12 +20,12 @@ const StepIcons = {
   step2: () => (
     <svg viewBox="0 0 64 64" className="w-16 h-16" fill="none">
       <defs>
-        <linearGradient id="step2Gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="step2Gradient-unique" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#10B981" />
           <stop offset="100%" stopColor="#059669" />
         </linearGradient>
       </defs>
-      <circle cx="32" cy="32" r="30" fill="url(#step2Gradient)" stroke="#E5E7EB" strokeWidth="2"/>
+      <circle cx="32" cy="32" r="30" fill="url(#step2Gradient-unique)" stroke="#E5E7EB" strokeWidth="2"/>
       <path d="M22 30h20v20H22z" fill="white" rx="2"/>
       <path d="M26 30V22a6 6 0 0112 0v8" stroke="white" strokeWidth="3" strokeLinecap="round"/>
       <circle cx="32" cy="40" r="2" fill="#10B981"/>
@@ -35,12 +35,12 @@ const StepIcons = {
   step3: () => (
     <svg viewBox="0 0 64 64" className="w-16 h-16" fill="none">
       <defs>
-        <linearGradient id="step3Gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="step3Gradient-unique" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#F59E0B" />
           <stop offset="100%" stopColor="#D97706" />
         </linearGradient>
       </defs>
-      <circle cx="32" cy="32" r="30" fill="url(#step3Gradient)" stroke="#E5E7EB" strokeWidth="2"/>
+      <circle cx="32" cy="32" r="30" fill="url(#step3Gradient-unique)" stroke="#E5E7EB" strokeWidth="2"/>
       <path d="M24 28h16v16H24z" fill="white" rx="2"/>
       <path d="M28 28v-4a4 4 0 018 0v4" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
       <path d="M30 36h4" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round"/>
@@ -51,12 +51,12 @@ const StepIcons = {
   step4: () => (
     <svg viewBox="0 0 64 64" className="w-16 h-16" fill="none">
       <defs>
-        <linearGradient id="step4Gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="step4Gradient-unique" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#8B5CF6" />
           <stop offset="100%" stopColor="#7C3AED" />
         </linearGradient>
       </defs>
-      <circle cx="32" cy="32" r="30" fill="url(#step4Gradient)" stroke="#E5E7EB" strokeWidth="2"/>
+      <circle cx="32" cy="32" r="30" fill="url(#step4Gradient-unique)" stroke="#E5E7EB" strokeWidth="2"/>
       <path d="M20 32L28 40L44 24" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   )

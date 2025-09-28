@@ -343,7 +343,7 @@ export default function HomePage() {
             <EnhancedCtaButton 
               href="/raccordement-enedis#formulaire-raccordement"
               size="xl"
-              className="bg-gradient-to-r from-[#4CAF50] to-[#45a049] hover:from-[#45a049] hover:to-[#3d8b40] shadow-2xl"
+              variant="primary"
             >
               Demander un devis en 2 min
             </EnhancedCtaButton>
