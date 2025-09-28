@@ -5,14 +5,48 @@
  * CRITICAL: Addresses the browser-specific site failures
  */
 
-// Polyfill for optional chaining (?.) - not supported in older browsers
-if (!globalThis.eval?.('(() => { try { return {}?.test; } catch { return false; } })()')) {
-  console.log('🔧 Loading optional chaining polyfill for browser compatibility');
+// SAFARI FIX: URLSearchParams polyfill for older Safari versions
+if (typeof window !== 'undefined' && !window.URLSearchParams) {
+  (window as any).URLSearchParams = class URLSearchParamsPolyfill {
+    private params: Map<string, string> = new Map();
+    
+    constructor(search?: string) {
+      if (search) {
+        const pairs = search.replace(/^\?/, '').split('&');
+        pairs.forEach(pair => {
+          const [key, value] = pair.split('=');
+          if (key) this.params.set(decodeURIComponent(key), decodeURIComponent(value || ''));
+        });
+      }
+    }
+    
+    get(name: string): string | null {
+      return this.params.get(name) || null;
+    }
+    
+    set(name: string, value: string): void {
+      this.params.set(name, value);
+    }
+    
+    has(name: string): boolean {
+      return this.params.has(name);
+    }
+  };
+  console.log('🍎 URLSearchParams polyfill loaded for Safari compatibility');
 }
 
-// Polyfill for nullish coalescing (??) - not supported in older browsers  
-if (typeof globalThis.eval?.('(() => { try { return null ?? "test"; } catch { return false; } })()') === 'undefined') {
-  console.log('🔧 Loading nullish coalescing polyfill for browser compatibility');
+// Optional chaining detection with safer eval
+try {
+  eval('({})?.test');
+} catch (e) {
+  console.log('🔧 Optional chaining not supported - using fallbacks');
+}
+
+// Nullish coalescing detection with safer eval
+try {
+  eval('null ?? "test"');
+} catch (e) {
+  console.log('🔧 Nullish coalescing not supported - using fallbacks');
 }
 
 // Ensure fetch API is available (for older browsers)

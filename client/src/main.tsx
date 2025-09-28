@@ -5,15 +5,41 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 
-// PERFORMANCE FIX: Feature-detected polyfill loading
+// SAFARI FIX: Enhanced browser compatibility detection
 function loadPolyfillsIfNeeded(): void {
-  // Only load polyfills if browser actually needs them
-  const needsPolyfills = (
-    !window.fetch || 
-    !window.navigator?.clipboard ||
-    !('eval' in window) ||
-    typeof window.eval?.('(() => { try { return {}?.test; } catch { return false; } })()') === 'undefined'
-  );
+  // Safari compatibility detection
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const safariVersion = isSafari ? parseInt(navigator.userAgent.match(/Version\/(\d+)/)?.[1] || '0') : 0;
+  const isOldSafari = isSafari && safariVersion < 14;
+  
+  // Feature detection with Safari-specific checks
+  let needsPolyfills = false;
+  
+  try {
+    // Check fetch API
+    if (!window.fetch) needsPolyfills = true;
+    
+    // Check URLSearchParams (Safari < 10.1)
+    if (!window.URLSearchParams) needsPolyfills = true;
+    
+    // Check optional chaining (Safari < 13.1)
+    eval('{}?.test');
+  } catch (e) {
+    needsPolyfills = true;
+  }
+  
+  try {
+    // Check nullish coalescing (Safari < 13.1)
+    eval('null ?? "test"');
+  } catch (e) {
+    needsPolyfills = true;
+  }
+  
+  // Force polyfills for older Safari versions
+  if (isOldSafari) {
+    needsPolyfills = true;
+    console.log('🍎 Safari < 14 detected - loading compatibility polyfills');
+  }
   
   if (needsPolyfills) {
     console.log('🔧 Loading polyfills for browser compatibility');
