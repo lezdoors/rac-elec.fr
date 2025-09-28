@@ -25,6 +25,11 @@ const AuthPage = lazy(() => import("@/pages/auth-page").catch(() => ({ default: 
 const LogoutPage = lazy(() => import("@/pages/logout-page").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const OnboardingPage = lazy(() => import("@/pages/onboarding-page").catch(() => ({ default: () => <div>Page non disponible</div> })));
 
+// SEO Silo Pages for Local SEO
+const RaccordementHub = lazy(() => import("@/pages/raccordement-hub").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const RaccordementRegion = lazy(() => import("@/pages/raccordement-region").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const RaccordementCity = lazy(() => import("@/pages/raccordement-city").catch(() => ({ default: () => <div>Page non disponible</div> })));
+
 const RaccordementEnedisPage = lazy(() => import("@/pages/raccordement-enedis").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const AdminExamplePage = lazy(() => import("@/pages/admin-example").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const ConfirmationPage = lazy(() => import("@/pages/confirmation-page").catch(() => ({ default: () => <div>Page non disponible</div> })));
@@ -176,6 +181,25 @@ function Router() {
           </Suspense>
         )} />
         
+        {/* SEO Silo Routes for Local SEO */}
+        <Route path="/raccordement/" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <RaccordementHub />
+          </Suspense>
+        )} />
+        
+        <Route path="/raccordement/:region/" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <RaccordementRegion />
+          </Suspense>
+        )} />
+        
+        <Route path="/raccordement/:city/" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <RaccordementCity />
+          </Suspense>
+        )} />
+
         {/* Guide de raccordement électrique */}
         <Route path="/guide" component={() => (
           <Layout>
