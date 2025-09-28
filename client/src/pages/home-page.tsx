@@ -30,6 +30,7 @@ import { PerformanceOptimizer } from "@/components/performance-optimizer";
 import { FloatingCtaButton } from "@/components/floating-cta-button";
 import { MobileFormOptimizer } from "@/components/mobile-form-optimizer";
 import { MobileImageOptimizer } from "@/components/mobile-image-optimizer";
+import { HeroFormIllustration, ServiceTypeIllustrations, ProcessStepIllustrations } from '@/components/ui/professional-illustrations';
 
 // Performance optimization - lazy loading will be implemented inline
 
@@ -388,12 +389,29 @@ export default function HomePage() {
       <section className="py-16 md:py-20 bg-gradient-to-br from-gray-50 to-blue-50" id="formulaire-raccordement">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            {/* En-tête du formulaire */}
-            <div className="text-center mb-12">
-              <h2 className="text-2xl xs:text-3xl sm:text-3xl md:text-4xl font-light text-gray-900 mb-4 leading-tight">
-                <span className="whitespace-nowrap">Votre Demande de</span> <span className="font-semibold text-[#4CAF50] whitespace-nowrap">Raccordement</span>
-              </h2>
-              <p className="text-gray-600 text-lg leading-relaxed max-w-2xl mx-auto">Processus simplifié en 4 étapes pour votre raccordement Enedis personnalisé</p>
+            {/* En-tête du formulaire avec illustration professionnelle */}
+            <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
+              <div className="text-center lg:text-left">
+                <h2 className="text-2xl xs:text-3xl sm:text-3xl md:text-4xl font-light text-gray-900 mb-4 leading-tight">
+                  <span className="whitespace-nowrap">Commencer votre</span> <span className="font-semibold text-[#0072CE] whitespace-nowrap">demande</span>
+                </h2>
+                <p className="text-gray-600 text-lg leading-relaxed max-w-2xl lg:max-w-none">Processus simplifié en 4 étapes pour votre raccordement Enedis personnalisé</p>
+                
+                {/* CTA principal avec style professionnel */}
+                <div className="mt-8">
+                  <Link href="/raccordement-enedis#formulaire-raccordement">
+                    <button className="inline-flex items-center bg-[#0072CE] hover:bg-[#005eaa] text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+                      <span>Démarrer ma demande</span>
+                      <ArrowRight className="ml-3 h-5 w-5" />
+                    </button>
+                  </Link>
+                </div>
+              </div>
+              
+              {/* Illustration professionnelle */}
+              <div className="flex justify-center lg:justify-end">
+                <HeroFormIllustration />
+              </div>
             </div>
             
 
