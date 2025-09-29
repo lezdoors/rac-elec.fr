@@ -197,7 +197,7 @@ export default function NosServicesPage() {
             Besoin d'aide pour choisir ?
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Nos experts vous conseillent gratuitement pour déterminer la solution la plus adaptée à votre projet.
+            Nos experts vous conseillent pour déterminer la solution la plus adaptée à votre projet.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact">
@@ -208,7 +208,7 @@ export default function NosServicesPage() {
             </Link>
             <Link href="/raccordement-enedis">
               <Button size="lg" variant="outline" className="px-8">
-                Demander un devis
+                Commencer ma demande
                 <ArrowRight className="h-5 w-5 ml-2" />
               </Button>
             </Link>

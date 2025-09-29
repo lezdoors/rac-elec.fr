@@ -13,13 +13,13 @@ export default function RaccordementHub() {
     <>
       <Helmet>
         <title>Raccordement Électrique France | Service Enedis National</title>
-        <meta name="description" content="Service de raccordement électrique professionnel dans toute la France ⚡ Experts Enedis agréés, devis gratuit sous 48h. Particuliers et professionnels." />
-        <meta name="keywords" content="raccordement électrique, enedis, france, devis, expert, professionnel" />
+        <meta name="description" content="Service de raccordement électrique professionnel dans toute la France ⚡ Experts Enedis agréés, réponse sous 48h. Particuliers et professionnels." />
+        <meta name="keywords" content="raccordement électrique, enedis, france, demande, expert, professionnel" />
         <link rel="canonical" href={`${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}/raccordement/`} />
         
         {/* Open Graph */}
         <meta property="og:title" content="Raccordement Électrique France | Service Enedis National" />
-        <meta property="og:description" content="Service de raccordement électrique professionnel dans toute la France ⚡ Experts Enedis agréés, devis gratuit sous 48h." />
+        <meta property="og:description" content="Service de raccordement électrique professionnel dans toute la France ⚡ Experts Enedis agréés, réponse sous 48h." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}/raccordement/`} />
         
@@ -63,7 +63,7 @@ export default function RaccordementHub() {
                 </div>
                 <div className="flex items-center justify-center space-x-2">
                   <Clock className="h-5 w-5 text-green-400" />
-                  <span className="text-sm">Devis sous 48h</span>
+                  <span className="text-sm">Réponse sous 48h</span>
                 </div>
                 <div className="flex items-center justify-center space-x-2">
                   <MapPin className="h-5 w-5 text-green-400" />
@@ -153,13 +153,13 @@ export default function RaccordementHub() {
               </h2>
               <p className="text-lg text-gray-600 mb-8">
                 Nos experts vous accompagnent dans toutes vos démarches Enedis. 
-                Devis gratuit et personnalisé sous 48h.
+                Accompagnement complet et réponse sous 48h.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/raccordement-enedis">
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-                    Demander un devis
+                    Commencer ma demande
                   </Button>
                 </Link>
                 <Button size="lg" variant="outline">
