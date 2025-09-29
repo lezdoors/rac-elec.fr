@@ -66,20 +66,20 @@ export default function RaccordementProvisoirePage() {
   return (
     <>
       <Helmet>
-        <title>Raccordement Provisoire Enedis – Démarches et Demande en Ligne | Portail Électricité</title>
+        <title>Demande de Raccordement Provisoire Enedis | Chantier</title>
         <meta 
           name="description" 
-          content="Demande de raccordement provisoire Enedis pour chantier. Dossier complet et conforme, accompagnement administratif et paiement sécurisé." 
+          content="Raccordement provisoire Enedis pour chantiers et événements. Démarche complète et rapide. Lancez votre demande en ligne." 
         />
         <link rel="canonical" href="https://portail-electricite.com/raccordement-provisoire" />
         <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="Raccordement Provisoire Enedis – Démarches et Demande en Ligne" />
-        <meta property="og:description" content="Demande de raccordement provisoire Enedis pour chantier. Dossier complet et conforme, accompagnement administratif et paiement sécurisé." />
+        <meta property="og:title" content="Demande de Raccordement Provisoire Enedis | Chantier" />
+        <meta property="og:description" content="Raccordement provisoire Enedis pour chantiers et événements. Démarche complète et rapide. Lancez votre demande en ligne." />
         <meta property="og:url" content="https://portail-electricite.com/raccordement-provisoire" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Raccordement Provisoire Enedis – Démarches et Demande en Ligne" />
-        <meta name="twitter:description" content="Demande de raccordement provisoire Enedis pour chantier. Dossier complet et conforme, accompagnement administratif et paiement sécurisé." />
+        <meta name="twitter:title" content="Demande de Raccordement Provisoire Enedis | Chantier" />
+        <meta name="twitter:description" content="Raccordement provisoire Enedis pour chantiers et événements. Démarche complète et rapide." />
 
         {/* Schema.org JSON-LD */}
         <script type="application/ld+json">
@@ -165,7 +165,7 @@ export default function RaccordementProvisoirePage() {
                 "name": "Quels sont les coûts d'un raccordement provisoire Enedis ?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Les tarifs dépendent de la puissance demandée et des travaux nécessaires. Comptez entre 800€ et 3000€ selon la configuration de votre projet. Un devis personnalisé vous sera fourni après étude de votre demande."
+                  "text": "Les tarifs dépendent de la puissance demandée et des travaux nécessaires. Comptez entre 800€ et 3000€ selon la configuration de votre projet. Une proposition personnalisée vous sera fournie après étude de votre demande."
                 }
               },
               {
@@ -177,6 +177,30 @@ export default function RaccordementProvisoirePage() {
                 }
               }
             ]
+          })}
+        </script>
+
+        {/* Service Schema for Transactional SEO */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Demande de Raccordement Provisoire Enedis",
+            "serviceType": "Raccordement Provisoire",
+            "description": "Service de demande de raccordement provisoire Enedis pour chantiers et événements. Installation électrique temporaire avec accompagnement complet.",
+            "provider": {
+              "@type": "Organization",
+              "name": "Portail-Electricite.com",
+              "url": "https://portail-electricite.com/"
+            },
+            "areaServed": {
+              "@type": "Country",
+              "name": "France"
+            },
+            "offers": {
+              "@type": "Offer",
+              "availability": "https://schema.org/InStock"
+            }
           })}
         </script>
       </Helmet>
@@ -199,11 +223,11 @@ export default function RaccordementProvisoirePage() {
         <section className="pt-16 pb-14 sm:pt-20 sm:pb-16 bg-gradient-to-br from-blue-50 to-indigo-100">
           <div className="mx-auto max-w-3xl text-center px-4 sm:px-6">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-              Raccordement Provisoire Enedis
+              Demande de Raccordement Provisoire
             </h1>
             <h2 className="mt-6 text-lg leading-8 text-gray-600">
-              Démarches et demande en ligne pour l'alimentation électrique temporaire de votre chantier. 
-              Dossier conforme aux exigences Enedis, avec accompagnement administratif complet.
+              Raccordement provisoire Enedis pour chantiers et événements. 
+              Dossier conforme aux exigences Enedis, accompagnement administratif complet.
             </h2>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link 

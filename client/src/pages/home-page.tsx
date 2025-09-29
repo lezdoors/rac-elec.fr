@@ -215,17 +215,17 @@ export default function HomePage() {
       <a href="#services" className="skip-link">Aller aux services</a>
       
       <Helmet>
-        <title>Raccordement Électrique Enedis en Ligne | Service Rapide pour Particuliers et Professionnels</title>
-        <meta name="description" content="Service expert pour votre raccordement Enedis : branchement électrique, déplacement de compteur Linky, augmentation de puissance. Accompagnement complet pour particuliers et professionnels. Délais optimisés et suivi en temps réel." />
+        <title>Demande de Raccordement Enedis | Raccordement Électrique</title>
+        <meta name="description" content="Faites votre demande de raccordement Enedis. Provisoire, définitif, collectif ou augmentation de puissance. Procédure simplifiée et sécurisée." />
         <meta name="keywords" content="raccordement Enedis, branchement électrique, compteur Linky, déplacement compteur, augmentation puissance électrique, raccordement professionnel, mise en service électricité, demande raccordement en ligne, coût raccordement Enedis, délai raccordement électrique, raccordement ERDF, branchement EDF, raccordement électrique maison neuve, raccordement électricité prix, tarif raccordement Enedis 2025, raccordement provisoire chantier, raccordement triphasé, modification branchement électrique, extension électrique, raccordement photovoltaïque, compteur électrique installation, devis raccordement électrique" />
-        <meta property="og:title" content="Raccordement Électrique Enedis en Ligne | Service Rapide et Professionnel" />
-        <meta property="og:description" content="Service expert pour votre raccordement Enedis : branchement électrique, déplacement de compteur Linky, augmentation de puissance. Accompagnement complet pour particuliers et professionnels." />
+        <meta property="og:title" content="Demande de Raccordement Enedis | Raccordement Électrique" />
+        <meta property="og:description" content="Faites votre demande de raccordement Enedis. Provisoire, définitif, collectif ou augmentation de puissance. Procédure simplifiée et sécurisée." />
         <meta property="og:url" content="https://portail-electricite.com/" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Portail-Electricite.com" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Raccordement Électrique Enedis en Ligne | Service Rapide et Professionnel" />
-        <meta name="twitter:description" content="Service expert pour votre raccordement Enedis : branchement électrique, déplacement de compteur Linky, augmentation de puissance." />
+        <meta name="twitter:title" content="Demande de Raccordement Enedis | Raccordement Électrique" />
+        <meta name="twitter:description" content="Faites votre demande de raccordement Enedis. Provisoire, définitif, collectif ou augmentation de puissance." />
         <link rel="canonical" href="https://portail-electricite.com/" />
         
         {/* Google tag loaded once in index.html */}
@@ -280,6 +280,29 @@ export default function HomePage() {
           }
         `}</script>
         
+        {/* Service Schema for Transactional SEO */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Demande de Raccordement Enedis",
+            "serviceType": "Raccordement Électrique",
+            "description": "Service de demande de raccordement électrique Enedis pour particuliers et professionnels en France. Raccordement provisoire, définitif, collectif et augmentation de puissance.",
+            "provider": {
+              "@type": "Organization",
+              "name": "Portail-Electricite.com",
+              "url": "https://portail-electricite.com/"
+            },
+            "areaServed": {
+              "@type": "Country",
+              "name": "France"
+            },
+            "offers": {
+              "@type": "Offer",
+              "availability": "https://schema.org/InStock"
+            }
+          }
+        `}</script>
 
       </Helmet>
       {/* Hero Section - Optimized for Performance */}
@@ -291,9 +314,9 @@ export default function HomePage() {
             <span className="text-sm font-medium text-white">Partenaire n°1 en France</span>
           </div>
           
-          {/* Main Title - Optimized for mobile LCP */}
+          {/* Main Title - Optimized for mobile LCP and transactional SEO */}
           <h1 className="text-2xl sm:text-3xl md:text-6xl font-semibold text-white mb-4 leading-snug md:leading-tight">
-            Votre raccordement Enedis, simplifié.
+            Demande de Raccordement Enedis
           </h1>
           
           {/* Subtitle */}
