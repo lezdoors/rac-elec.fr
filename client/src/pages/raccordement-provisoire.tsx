@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { trackFormStart } from "@/lib/analytics";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Helmet } from "react-helmet";
 import { BreadcrumbNavigation } from "@/components/breadcrumb-navigation";
@@ -18,17 +19,6 @@ export default function RaccordementProvisoirePage() {
     }
   };
 
-  const handlePrimaryCta = () => {
-    // Trigger Google Ads form_start conversion
-    if (typeof window !== 'undefined' && (window as any).triggerFormStartConversion) {
-      try {
-        (window as any).triggerFormStartConversion();
-        console.log('✅ Form start conversion triggered from raccordement provisoire CTA');
-      } catch (error) {
-        console.error('❌ Error triggering form start conversion:', error);
-      }
-    }
-  };
 
   const faqItems = [
     {
@@ -274,7 +264,7 @@ export default function RaccordementProvisoirePage() {
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link 
                 href="/raccordement-enedis#formulaire-raccordement"
-                onClick={handlePrimaryCta}
+                onClick={trackFormStart}
               >
                 <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg">
                   Faire ma demande
@@ -570,7 +560,7 @@ export default function RaccordementProvisoirePage() {
             </p>
             <Link 
               href="/raccordement-enedis#formulaire-raccordement"
-              onClick={handlePrimaryCta}
+              onClick={trackFormStart}
             >
               <Button className="bg-white text-blue-600 hover:bg-gray-50 px-10 py-4 text-xl font-semibold rounded-lg shadow-lg">
                 Commencer ma demande
