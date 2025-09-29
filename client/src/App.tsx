@@ -59,6 +59,9 @@ const ModificationCompteurPage = lazy(() => import("@/pages/modification-compteu
 const RaccordementCollectifPage = lazy(() => import("@/pages/raccordement-collectif").catch(() => ({ default: () => <div>Page non disponible</div> })));
 
 // City-specific pages for local SEO
+const ParisPage = lazy(() => import("@/pages/paris").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const LyonPage = lazy(() => import("@/pages/lyon").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const MarseillePage = lazy(() => import("@/pages/marseille").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const RaccordementElectriqueParis = lazy(() => import("@/pages/city-pages/raccordement-electrique-paris").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const RaccordementElectriqueLyon = lazy(() => import("@/pages/city-pages/raccordement-electrique-lyon").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const RaccordementElectriqueMarseille = lazy(() => import("@/pages/city-pages/raccordement-electrique-marseille").catch(() => ({ default: () => <div>Page non disponible</div> })));
@@ -468,6 +471,25 @@ function Router() {
         <Route path="/faq" component={() => (
           <Suspense fallback={<LoadingFallback />}>
             <FaqPage />
+          </Suspense>
+        )} />
+
+        {/* Local City SEO Pages */}
+        <Route path="/paris" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <ParisPage />
+          </Suspense>
+        )} />
+
+        <Route path="/lyon" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <LyonPage />
+          </Suspense>
+        )} />
+
+        <Route path="/marseille" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <MarseillePage />
           </Suspense>
         )} />
         

@@ -102,3 +102,75 @@ export const trackFormStart = () => {
   
   console.log('✅ Form start tracked');
 };
+
+// SHA-256 hashing utility function
+async function sha256Hash(text: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(text.trim().toLowerCase());
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashHex;
+}
+
+// Track to prevent duplicate enhanced conversion calls
+let enhancedConversionSent = false;
+
+// Enhanced Conversions for Google Ads with SHA-256 hashing (GDPR compliant)
+export const trackEnhancedConversion = async (email?: string, phone?: string) => {
+  // Only run in browser environment
+  if (typeof window === 'undefined' || !window.gtag) {
+    console.warn('⚠️ Enhanced conversion: gtag not available');
+    return;
+  }
+  
+  // Prevent duplicate submissions
+  if (enhancedConversionSent) {
+    console.log('⚠️ Enhanced conversion already sent, skipping duplicate');
+    return;
+  }
+  
+  // Validate at least one parameter is provided
+  if (!email && !phone) {
+    console.warn('⚠️ Enhanced conversion: no email or phone provided');
+    return;
+  }
+  
+  try {
+    const userData: Record<string, string> = {};
+    
+    // Hash email if provided (SHA-256)
+    if (email && email.trim()) {
+      const hashedEmail = await sha256Hash(email);
+      userData.email = hashedEmail;
+    }
+    
+    // Hash phone if provided (SHA-256)
+    if (phone && phone.trim()) {
+      // Remove all non-digit characters for consistent hashing
+      const cleanPhone = phone.replace(/\D/g, '');
+      const hashedPhone = await sha256Hash(cleanPhone);
+      userData.phone_number = hashedPhone;
+    }
+    
+    // Send enhanced conversion data to Google Ads
+    // This respects Consent Mode v2 as gtag automatically handles consent
+    window.gtag('set', 'user_data', userData);
+    
+    // Mark as sent to prevent duplicates
+    enhancedConversionSent = true;
+    
+    console.log('✅ Enhanced conversion data sent (hashed):', {
+      email: userData.email ? 'hashed' : 'not provided',
+      phone: userData.phone_number ? 'hashed' : 'not provided'
+    });
+  } catch (error) {
+    console.error('❌ Enhanced conversion error:', error);
+  }
+};
+
+// Reset enhanced conversion flag (useful for testing or multi-step forms)
+export const resetEnhancedConversion = () => {
+  enhancedConversionSent = false;
+  console.log('🔄 Enhanced conversion flag reset');
+};

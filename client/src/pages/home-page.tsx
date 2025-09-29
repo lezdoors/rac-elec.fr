@@ -31,6 +31,7 @@ import { FloatingCtaButton } from "@/components/floating-cta-button";
 import { MobileFormOptimizer } from "@/components/mobile-form-optimizer";
 import { MobileImageOptimizer } from "@/components/mobile-image-optimizer";
 import { trackFormStart } from "@/lib/analytics";
+import { TrustSection } from "@/components/trust-section";
 
 // Performance optimization - lazy loading will be implemented inline
 
@@ -1515,6 +1516,9 @@ export default function HomePage() {
         </div>
       </section>
       </main>
+      
+      {/* Trust Section */}
+      <TrustSection />
       
       {/* Performance optimization component */}
       <PerformanceOptimizer />
