@@ -56,6 +56,7 @@ const RaccordementDefinitifPage = lazy(() => import("@/pages/raccordement-defini
 const RaccordementProvisoirePage = lazy(() => import("@/pages/raccordement-provisoire").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const ViabilisationTerrainPage = lazy(() => import("@/pages/viabilisation-terrain").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const ModificationCompteurPage = lazy(() => import("@/pages/modification-compteur").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const RaccordementCollectifPage = lazy(() => import("@/pages/raccordement-collectif").catch(() => ({ default: () => <div>Page non disponible</div> })));
 
 // City-specific pages for local SEO
 const RaccordementElectriqueParis = lazy(() => import("@/pages/city-pages/raccordement-electrique-paris").catch(() => ({ default: () => <div>Page non disponible</div> })));
@@ -518,6 +519,12 @@ function Router() {
         <Route path="/modification-compteur" component={() => (
           <Suspense fallback={<LoadingFallback />}>
             <ModificationCompteurPage />
+          </Suspense>
+        )} />
+        
+        <Route path="/raccordement-collectif" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <RaccordementCollectifPage />
           </Suspense>
         )} />
 
