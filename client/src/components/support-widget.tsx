@@ -130,7 +130,7 @@ export const SupportWidget = () => {
               <div className="mb-6">
                 <p className="text-gray-700 mb-4">
                   Besoin d'aide avec votre raccordement électrique ? 
-                  <span className="font-semibold text-blue-600"> Assistance gratuite et personnalisée.</span>
+                  <span className="font-semibold text-blue-600"> Assistance personnalisée.</span>
                 </p>
                 
                 <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
@@ -140,7 +140,7 @@ export const SupportWidget = () => {
                   </div>
                   <div className="flex items-center gap-1">
                     <Shield className="w-4 h-4 text-blue-500" />
-                    <span>100% Gratuit</span>
+                    <span>100% Sécurisé</span>
                   </div>
                 </div>
 

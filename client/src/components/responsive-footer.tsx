@@ -112,7 +112,7 @@ export function ResponsiveFooter() {
                   className="text-gray-300 hover:text-white text-sm relative group transition-colors"
                 >
                   <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300 ease-in-out"></span>
-                  Estimation coût raccordement
+                  Tarifs raccordement
                 </ScrollToTopLink>
               </li>
               <li>

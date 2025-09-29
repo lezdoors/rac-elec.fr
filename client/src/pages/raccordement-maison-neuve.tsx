@@ -8,8 +8,8 @@ export default function RaccordementMaisonNeuvePage() {
   return (
     <>
       <Helmet>
-        <title>Raccordement Maison Neuve | Enedis - Devis et Procédure</title>
-        <meta name="description" content="Raccordement électrique pour maison neuve. Devis gratuit, procédure simplifiée et accompagnement complet pour votre projet de construction." />
+        <title>Raccordement Maison Neuve | Enedis - Procédure Complète</title>
+        <meta name="description" content="Raccordement électrique pour maison neuve. Procédure simplifiée et accompagnement complet pour votre projet de construction." />
       </Helmet>
       
       <Layout>
@@ -23,7 +23,7 @@ export default function RaccordementMaisonNeuvePage() {
               </h1>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                 Obtenez votre raccordement électrique Enedis pour votre nouvelle construction. 
-                Procédure simple, devis gratuit et accompagnement personnalisé.
+                Procédure simple et accompagnement personnalisé.
               </p>
             </div>
 

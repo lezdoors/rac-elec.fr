@@ -102,7 +102,7 @@ export function EnhancedSeoContent() {
                 </h4>
                 <p className="text-sm text-gray-600">
                   Le <strong>prix branchement électrique Enedis</strong> varie selon la distance. 
-                  Devis gratuit avec notre <strong>prestataire raccordement Enedis</strong>.
+                  Contactez notre <strong>prestataire raccordement Enedis</strong> pour une évaluation.
                 </p>
               </div>
               

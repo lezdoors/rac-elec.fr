@@ -165,11 +165,11 @@ export default function SolairePage() {
         <div className="bg-gradient-to-r from-orange-600 to-orange-700 rounded-xl p-8 text-center text-white">
           <h2 className="text-2xl font-bold mb-4">Prêt à installer vos panneaux solaires ?</h2>
           <p className="text-lg mb-6">
-            Obtenez votre devis personnalisé et commencez votre transition énergétique dès aujourd'hui.
+            Commencez votre projet et démarrez votre transition énergétique dès aujourd'hui.
           </p>
           <Link href="/raccordement-enedis">
             <Button className="bg-white text-orange-600 hover:bg-gray-50 px-8 py-3 text-lg font-semibold">
-              Demander un devis gratuit
+              Commencer ma demande
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>

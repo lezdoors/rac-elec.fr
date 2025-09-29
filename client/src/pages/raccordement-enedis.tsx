@@ -1827,7 +1827,7 @@ export default function RaccordementEnedisPage() {
                   Difficultés avec le formulaire ?
                 </h3>
                 <p className="text-green-700 text-sm leading-relaxed mb-4">
-                  Si vous rencontrez des difficultés pour remplir ce formulaire ou avez des questions sur votre raccordement électrique, notre équipe d'experts est joignable pour vous assister gratuitement. Nous sommes là pour vous accompagner dans votre démarche.
+                  Si vous rencontrez des difficultés pour remplir ce formulaire ou avez des questions sur votre raccordement électrique, notre équipe d'experts est joignable pour vous assister. Nous sommes là pour vous accompagner dans votre démarche.
                 </p>
                 <div className="flex justify-start">
                   <a
@@ -1843,7 +1843,7 @@ export default function RaccordementEnedisPage() {
                     className="inline-flex items-center justify-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors gap-2 min-h-[44px] touch-manipulation shadow-md hover:shadow-lg"
                   >
                     <Phone className="w-4 h-4" />
-                    09 70 70 95 70 - Assistance gratuite
+                    09 70 70 95 70 - Assistance
                   </a>
                 </div>
               </div>

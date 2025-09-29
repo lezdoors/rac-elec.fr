@@ -4,7 +4,7 @@
     "slug": "ile-de-france",
     "description": "Raccordement électrique rapide en Île-de-France. Nos experts vous accompagnent pour votre demande de raccordement Enedis dans toute la région parisienne.",
     "meta_title": "Raccordement Électrique Île-de-France | Demande Enedis Rapide",
-    "meta_description": "Raccordement électrique en Île-de-France ⚡ Demande Enedis simplifiée, devis gratuit sous 48h. Experts locaux agréés pour particuliers et professionnels.",
+    "meta_description": "Raccordement électrique en Île-de-France ⚡ Demande Enedis simplifiée, réponse sous 48h. Experts locaux agréés pour particuliers et professionnels.",
     "cities": ["paris", "boulogne-billancourt", "saint-denis", "argenteuil", "montreuil", "creteil", "nanterre", "versailles"]
   },
   "provence-alpes-cote-d-azur": {
@@ -12,7 +12,7 @@
     "slug": "provence-alpes-cote-d-azur", 
     "description": "Service de raccordement électrique professionnel en PACA. Accompagnement personnalisé pour votre raccordement Enedis dans le Sud-Est.",
     "meta_title": "Raccordement Électrique PACA | Service Enedis Provence",
-    "meta_description": "Raccordement électrique en PACA ⚡ Marseille, Nice, Toulon. Demande Enedis rapide, devis sous 48h. Experts agréés région Provence-Alpes-Côte d'Azur.",
+    "meta_description": "Raccordement électrique en PACA ⚡ Marseille, Nice, Toulon. Demande Enedis rapide, réponse sous 48h. Experts agréés région Provence-Alpes-Côte d'Azur.",
     "cities": ["marseille", "nice", "toulon", "aix-en-provence", "cannes", "antibes", "avignon", "grasse"]
   },
   "auvergne-rhone-alpes": {
@@ -20,7 +20,7 @@
     "slug": "auvergne-rhone-alpes",
     "description": "Raccordement électrique expert en Auvergne-Rhône-Alpes. Solutions personnalisées pour votre projet de raccordement Enedis.",
     "meta_title": "Raccordement Électrique Auvergne-Rhône-Alpes | Enedis",
-    "meta_description": "Raccordement électrique Auvergne-Rhône-Alpes ⚡ Lyon, Grenoble, Saint-Étienne. Service Enedis professionnel, devis gratuit sous 48h.",
+    "meta_description": "Raccordement électrique Auvergne-Rhône-Alpes ⚡ Lyon, Grenoble, Saint-Étienne. Service Enedis professionnel, réponse sous 48h.",
     "cities": ["lyon", "grenoble", "villeurbanne", "saint-etienne", "annecy", "clermont-ferrand", "chambery", "valence"]
   },
   "nouvelle-aquitaine": {
@@ -36,7 +36,7 @@
     "slug": "occitanie",
     "description": "Service de raccordement électrique en Occitanie. Accompagnement expert pour votre demande de raccordement Enedis.",
     "meta_title": "Raccordement Électrique Occitanie | Service Enedis Sud",
-    "meta_description": "Raccordement électrique Occitanie ⚡ Montpellier, Toulouse, Nîmes. Service Enedis professionnel, devis sous 48h, experts locaux.",
+    "meta_description": "Raccordement électrique Occitanie ⚡ Montpellier, Toulouse, Nîmes. Service Enedis professionnel, réponse sous 48h, experts locaux.",
     "cities": ["montpellier", "toulouse", "nimes", "perpignan", "beziers", "narbonne", "carcassonne", "albi"]
   },
   "hauts-de-france": {
@@ -44,7 +44,7 @@
     "slug": "hauts-de-france",
     "description": "Raccordement électrique professionnel dans les Hauts-de-France. Service Enedis rapide et efficace pour votre projet.",
     "meta_title": "Raccordement Électrique Hauts-de-France | Enedis Nord",
-    "meta_description": "Raccordement électrique Hauts-de-France ⚡ Lille, Amiens, Roubaix. Service Enedis expert, devis gratuit, accompagnement personnalisé.",
+    "meta_description": "Raccordement électrique Hauts-de-France ⚡ Lille, Amiens, Roubaix. Service Enedis expert, accompagnement complet et personnalisé.",
     "cities": ["lille", "amiens", "roubaix", "tourcoing", "dunkerque", "calais", "valenciennes", "boulogne-sur-mer"]
   }
 }

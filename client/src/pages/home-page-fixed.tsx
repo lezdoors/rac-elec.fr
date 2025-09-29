@@ -592,7 +592,7 @@ export default function HomePage() {
                   3
                 </div>
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Devis transparent</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Tarification claire</h3>
               <p className="text-gray-600 text-sm">
                 Planification précise et tarification claire, sans surprise ni frais cachés.
               </p>
