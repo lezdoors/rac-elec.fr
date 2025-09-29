@@ -1,0 +1,98 @@
+Context
+Project: portail-electricite.com
+Goal: Strengthen transactional SEO for demande de raccordement Enedis by adding local pages, deeper service content, trust signals, FAQ schema, and enhanced conversions.
+⚠️ Do NOT change existing routes. Form remains at /raccordement-enedis#formulaire-raccordement.
+⚠️ No A/B testing for now.
+
+⸻
+
+1. Expand Content on Existing Service Pages
+
+For each service page (provisoire, définitif, collectif, augmentation de puissance, maison-neuve, solaire):
+	•	Ensure content length: 500–700 words.
+	•	Structure:
+	•	Intro: explain the type of raccordement and why it matters.
+	•	Process (H2): step-by-step (always end with CTA → form anchor).
+	•	Documents nécessaires (H2).
+	•	Délais moyens (H2).
+	•	CTA section: “Commencer ma demande” button → /raccordement-enedis#formulaire-raccordement.
+	•	Remove or replace any remaining mentions of gratuit/devis.
+
+⸻
+
+2. Local SEO Pages (City-Specific)
+
+Create 3 new static pages under / (no subfolders for now):
+	•	/paris
+	•	/lyon
+	•	/marseille
+
+Each page:
+	•	Title: Demande de Raccordement Enedis [City] | Raccordement Électrique
+	•	Meta: Simplifiez votre demande de raccordement Enedis à [City]. Provisoire, définitif, collectif ou augmentation de puissance.
+	•	H1: Demande de raccordement électrique à [City]
+	•	300–400 words describing how residents/businesses in that city request raccordement.
+	•	End with CTA → /raccordement-enedis#formulaire-raccordement.
+	•	Canonical: self-referential (/paris, /lyon, /marseille).
+	•	Add Service JSON-LD schema with areaServed = the city.
+
+⸻
+
+3. Trust & Proof Section
+
+On homepage + all service pages, add a block before the footer:
+	•	Headline: “Pourquoi nous faire confiance ?”
+	•	Content:
+	•	“+1200 demandes traitées avec succès”
+	•	“Procédure conforme aux exigences Enedis”
+	•	“Paiement sécurisé et accompagnement complet”
+	•	Style: simple 3-column icons or badges.
+
+⸻
+
+4. FAQ Schema
+
+On each service page:
+	•	Add 2–3 FAQ entries (visible in HTML + JSON-LD).
+Example (for provisoire):
+	•	“Quels documents faut-il fournir pour un raccordement provisoire ?”
+	•	“Quel est le délai moyen pour un raccordement provisoire Enedis ?”
+	•	Ensure FAQPage schema validates.
+	•	CTAs inside answers should also link → /raccordement-enedis#formulaire-raccordement.
+
+⸻
+
+5. Enhanced Conversions (Google Ads)
+	•	On Step 1 form submission (email + phone collected):
+	•	Hash (SHA-256) email and phone.
+	•	Push to gtag('set', 'user_data', {...}) for Enhanced Conversions.
+	•	Ensure it respects GDPR/Consent Mode v2.
+	•	Only fire once per submission.
+
+⸻
+
+6. Sitemap & Robots Update
+	•	Update sitemap.xml to include the new local pages: /paris, /lyon, /marseille.
+	•	Ensure all existing pages remain.
+	•	robots.txt should allow crawling and reference sitemap.
+
+⸻
+
+7. QA Checklist
+	•	Each service page = 500–700 words, structured with H2s, CTA present.
+	•	/paris, /lyon, /marseille live, with proper title/meta/H1/CTA/schema.
+	•	Trust block appears on homepage + service pages.
+	•	FAQ visible + valid JSON-LD.
+	•	Enhanced conversions firing with hashed email/phone (confirm in Network tab).
+	•	Sitemap + robots updated.
+
+⸻
+
+Deliverables in PR
+	•	List of pages updated/created.
+	•	Word count check per service page.
+	•	Screenshots of:
+	•	Local pages (/paris, /lyon, /marseille)
+	•	FAQ schema validation
+	•	Trust block section
+	•	Enhanced conversions event payload (debug screenshot).
