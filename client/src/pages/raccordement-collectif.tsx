@@ -288,6 +288,44 @@ export default function RaccordementCollectifPage() {
           </div>
         </section>
 
+        {/* Services Connexes - Internal Linking SILO */}
+        <section className="pt-12 pb-12 bg-gray-50">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
+              Autres types de raccordement
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Link href="/raccordement-definitif" className="block">
+                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-purple-200">
+                  <h3 className="font-semibold text-lg text-gray-900 mb-2">
+                    Raccordement Définitif
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-3">
+                    Alimentation permanente pour habitations et locaux
+                  </p>
+                  <span className="text-purple-600 font-medium text-sm inline-flex items-center">
+                    En savoir plus <ArrowRight className="h-4 w-4 ml-1" />
+                  </span>
+                </div>
+              </Link>
+              
+              <Link href="/raccordement-provisoire" className="block">
+                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-purple-200">
+                  <h3 className="font-semibold text-lg text-gray-900 mb-2">
+                    Raccordement Provisoire
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-3">
+                    Pour chantiers et événements temporaires
+                  </p>
+                  <span className="text-purple-600 font-medium text-sm inline-flex items-center">
+                    En savoir plus <ArrowRight className="h-4 w-4 ml-1" />
+                  </span>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Final */}
         <section className="pt-16 pb-16 bg-gradient-to-r from-purple-600 to-purple-800 text-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">

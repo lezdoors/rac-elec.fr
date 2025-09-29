@@ -127,6 +127,42 @@ export default function ModificationCompteurPage() {
                 </div>
               </div>
             </div>
+
+            {/* Services Connexes - Internal Linking SILO */}
+            <div className="mt-12">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+                Autres services de raccordement
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Link href="/raccordement-definitif" className="block">
+                  <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-indigo-200">
+                    <h3 className="font-semibold text-lg text-gray-900 mb-2">
+                      Raccordement Définitif
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-3">
+                      Alimentation permanente pour habitations et locaux
+                    </p>
+                    <span className="text-indigo-600 font-medium text-sm inline-flex items-center">
+                      En savoir plus <ArrowRight className="h-4 w-4 ml-1" />
+                    </span>
+                  </div>
+                </Link>
+                
+                <Link href="/raccordement-provisoire" className="block">
+                  <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-indigo-200">
+                    <h3 className="font-semibold text-lg text-gray-900 mb-2">
+                      Raccordement Provisoire
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-3">
+                      Pour chantiers et événements temporaires
+                    </p>
+                    <span className="text-indigo-600 font-medium text-sm inline-flex items-center">
+                      En savoir plus <ArrowRight className="h-4 w-4 ml-1" />
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </Layout>

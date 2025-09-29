@@ -127,6 +127,56 @@ export default function RaccordementDefinitifPage() {
                 </div>
               </div>
             </div>
+
+            {/* Services Connexes - Internal Linking SILO */}
+            <div className="mt-12">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+                Autres types de raccordement
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <Link href="/raccordement-provisoire" className="block">
+                  <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-blue-200">
+                    <h3 className="font-semibold text-lg text-gray-900 mb-2">
+                      Raccordement Provisoire
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-3">
+                      Pour chantiers et événements temporaires
+                    </p>
+                    <span className="text-blue-600 font-medium text-sm inline-flex items-center">
+                      En savoir plus <ArrowRight className="h-4 w-4 ml-1" />
+                    </span>
+                  </div>
+                </Link>
+                
+                <Link href="/modification-compteur" className="block">
+                  <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-blue-200">
+                    <h3 className="font-semibold text-lg text-gray-900 mb-2">
+                      Augmentation de Puissance
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-3">
+                      Passage mono/triphasé et changement de puissance
+                    </p>
+                    <span className="text-blue-600 font-medium text-sm inline-flex items-center">
+                      En savoir plus <ArrowRight className="h-4 w-4 ml-1" />
+                    </span>
+                  </div>
+                </Link>
+
+                <Link href="/raccordement-collectif" className="block">
+                  <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-blue-200">
+                    <h3 className="font-semibold text-lg text-gray-900 mb-2">
+                      Raccordement Collectif
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-3">
+                      Pour lotissements et copropriétés
+                    </p>
+                    <span className="text-blue-600 font-medium text-sm inline-flex items-center">
+                      En savoir plus <ArrowRight className="h-4 w-4 ml-1" />
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </Layout>
