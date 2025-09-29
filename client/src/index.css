@@ -33,9 +33,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import conversion-optimized styles */
-@import './styles/conversion-optimized.css';
-
 /* Essential layout fixes */
 html, body {
   overflow-x: hidden;
