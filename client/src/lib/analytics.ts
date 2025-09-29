@@ -124,6 +124,20 @@ export const trackEnhancedConversion = async (email?: string, phone?: string) =>
     return;
   }
   
+  // Check for ad_storage consent (Consent Mode v2)
+  // Google Ads Enhanced Conversions require ad_storage consent
+  if (typeof window.dataLayer !== 'undefined') {
+    const consentState = window.dataLayer.find((item: any) => 
+      item[0] === 'consent' && item[1] === 'default'
+    );
+    
+    // If consent is explicitly denied, skip
+    if (consentState && consentState[2]?.ad_storage === 'denied') {
+      console.log('⚠️ Enhanced conversion skipped: ad_storage consent denied');
+      return;
+    }
+  }
+  
   // Prevent duplicate submissions
   if (enhancedConversionSent) {
     console.log('⚠️ Enhanced conversion already sent, skipping duplicate');
