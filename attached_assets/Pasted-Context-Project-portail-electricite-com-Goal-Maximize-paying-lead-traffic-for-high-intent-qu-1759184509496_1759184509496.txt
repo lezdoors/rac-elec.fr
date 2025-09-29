@@ -1,0 +1,116 @@
+Context
+	•	Project: portail-electricite.com
+	•	Goal: Maximize paying-lead traffic for high-intent queries:
+demande de raccordement enedis, demande de raccordement électrique, raccordement enedis, demande de raccordement provisoire, raccordement définitif, raccordement collectif, augmentation de puissance compteur.
+	•	Do not change routes. The form must stay at: /raccordement-enedis#formulaire-raccordement.
+	•	Remove/avoid “gratuit / devis / estimation / comparateur” everywhere.
+
+0) Guardrails
+	•	❌ No route or slug changes today.
+	•	✅ Single idempotent PR. Clean diffs. Reversible.
+	•	✅ Keep all working components and form logic intact.
+
+1) Crawl & Map (Auto-Inventory)
+	1.	Produce a page inventory (paths & titles).
+	2.	Map each page to the closest transactional intent:
+	•	Demande de raccordement Enedis (primary)
+	•	Demande de raccordement électrique
+	•	Demande de raccordement provisoire
+	•	Demande de raccordement définitif
+	•	Raccordement collectif
+	•	Augmentation de puissance (compteur)
+	•	(Keep “maison-neuve”, “solaire” if they exist; map to the above with clear CTA.)
+	3.	Output a table: route | intent | <title> | <meta> | H1 | CTA link.
+
+2) Titles & Metas (Transactional, <60 / <160)
+
+Apply without changing URLs. Use/adjust these templates:
+	•	Homepage
+Title: Demande de Raccordement Enedis en Ligne | Raccordement Électrique
+Meta: Faites votre demande de raccordement Enedis. Provisoire, définitif, collectif ou augmentation de puissance. Procédure simplifiée et sécurisée.
+	•	/raccordement-enedis
+Title: Demande de Raccordement Enedis | Dossier & Suivi
+Meta: Nous gérons votre demande de raccordement Enedis de A à Z. Dossiers, documents et suivi jusqu’à validation.
+	•	Provisoire
+Title: Demande de Raccordement Provisoire Enedis | Chantier & Événement
+Meta: Raccordement provisoire pour chantiers et événements. Démarrez votre demande en ligne, prise en charge complète.
+	•	Définitif
+Title: Demande de Raccordement Définitif | Mise en Service
+Meta: Raccordement définitif au réseau Enedis. Étapes, pièces requises et accompagnement clé en main.
+	•	Collectif
+Title: Raccordement Collectif Enedis | Immeubles & Copropriétés
+Meta: Gestion du raccordement collectif: coordination technique et suivi du dossier jusqu’à validation.
+	•	Augmentation de puissance
+Title: Augmentation de Puissance Compteur Enedis | Mono & Triphasé
+Meta: Passez à la puissance adaptée (mono/triphasé). Étude, dossier et suivi jusqu’à modification du contrat.
+
+3) Headings & Copy
+	•	Exactly one H1 per page, mirroring mapped intent (examples above).
+	•	2–5 H2s focused on conversion:
+	•	Ce que nous prenons en charge
+	•	Documents nécessaires
+	•	Délais & étapes
+	•	Tarification & modalités (sans “gratuit/devis”)
+	•	Commencer votre demande
+	•	Purge any wording that attracts bargain/free intent.
+
+4) Anchor Integrity (Form)
+	•	Ensure the form wrapper has id="formulaire-raccordement".
+	•	Add scroll-margin-top to the form section to avoid sticky header overlap.
+	•	Global smooth scroll: html { scroll-behavior: smooth; }.
+	•	Ensure all primary CTAs link to: /raccordement-enedis#formulaire-raccordement.
+
+5) Internal Linking (SILO)
+	•	Homepage: prominent links to each service page and a persistent CTA to the anchor.
+	•	Cross-link block between service pages (provisoire ↔ definitif ↔ collectif ↔ augmentation de puissance), each with a CTA to the anchor.
+	•	Support/informational pages (if any) link upward to the most relevant service page (no sideways loops).
+
+6) Canonical, Sitemap, Robots
+	•	Add self-referential canonical to every page (no fragments).
+	•	Sitemap (in /public/sitemap.xml) must list existing key URLs only (no # fragments). Include: /, /raccordement-enedis, /provisoire, /definitif (or actual slug), /collectif, /augmentation-puissance, /maison-neuve, /solaire if present.
+	•	robots.txt: allow crawling; reference sitemap.xml.
+
+7) Structured Data (JSON-LD)
+	•	On homepage: Organization with brand, url, contactPoint.
+	•	On each service page (including /raccordement-enedis): Service
+	•	name: page H1
+	•	serviceType: one of the intents above
+	•	areaServed: FR
+	•	provider: Organization (brand)
+	•	BreadcrumbList on service pages: Accueil > Raccordement > [Page] (no fragments in URLs).
+	•	Validate that no FAQ schema attracts low-intent queries; if present, keep minimal and CTA-driven.
+
+8) Analytics & Consent (Ads-ready)
+	•	Keep existing Google Ads tags.
+	•	Fire form_start on CTA click before navigation:
+gtag('event','conversion',{send_to:'AW-16683623620/Q9NDCOzCr6IbEMTJr5M-'}); (nonBlocking)
+	•	Fallback: fire once when form enters viewport (guard boolean).
+	•	Ensure Consent Mode v2 is present and doesn’t block firing of conversion pings in “denied” mode (advanced consent pings).
+
+9) Performance/CLS Quick Wins
+	•	Set explicit width/height or aspect-ratio on hero/illustrations.
+	•	Lazy-load below-the-fold images.
+	•	Preload main font if FOUT/CLS observed.
+	•	Ensure mobile tap targets ≥44px; inputs font-size ≥16px (avoid iOS zoom).
+
+10) QA — Must Pass
+	•	Source shows updated title/meta and canonical.
+	•	Exactly one H1 per page; copy is transactional (no “gratuit/devis”).
+	•	Deep link /raccordement-enedis#formulaire-raccordement lands correctly.
+	•	All CTAs point to the anchor and fire form_start once.
+	•	JSON-LD (Service, Organization, BreadcrumbList) validates.
+	•	sitemap.xml exists, includes current URLs, and robots.txt references it.
+
+11) Deliverables (in PR description)
+	•	Page inventory table (route | intent | title | meta | H1 | CTA link).
+	•	List of files edited, with succinct diffs (head tags, JSON-LD, CTA hrefs).
+	•	Screenshots:
+	•	View Source showing canonical & JSON-LD on /raccordement-enedis.
+	•	Network panel showing form_start event firing.
+	•	GIF: deep-link scroll to the form.
+	•	Confirmation that no routes/slugs changed.
+
+Deployment (Replit)
+	•	Rebuild and restart the repl so head/meta updates are served:
+rm -rf .next && npm run build && npm run start (adapt to stack).
+	•	Then provide me the updated page inventory table.
