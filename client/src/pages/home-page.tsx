@@ -295,7 +295,7 @@ export default function HomePage() {
                 {/* Fixed aspect ratio container to prevent CLS */}
                 <div className="aspect-[4/3] w-full max-w-lg mx-auto lg:max-w-full">
                   <img 
-                    src="/attached_assets/hero-illu_1759103230636.png"
+                    src="/hero-illu.png"
                     alt="Famille avec maison équipée de panneaux solaires et borne de recharge électrique"
                     className="w-full h-full object-contain"
                     loading="eager"

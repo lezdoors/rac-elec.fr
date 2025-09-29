@@ -1,0 +1,68 @@
+{
+  "name": "Paris",
+  "slug": "paris",
+  "region": "ile-de-france",
+  "region_name": "Île-de-France",
+  "postal_codes": ["75001", "75002", "75003", "75004", "75005", "75006", "75007", "75008", "75009", "75010", "75011", "75012", "75013", "75014", "75015", "75016", "75017", "75018", "75019", "75020"],
+  "meta_title": "Raccordement Électrique Paris | Demande Enedis Rapide 75",
+  "meta_description": "Raccordement électrique à Paris ⚡ Service Enedis professionnel tous arrondissements. Devis gratuit sous 24h, experts agréés. Demande simplifiée.",
+  "canonical": "/raccordement/paris/",
+  "nap": {
+    "business_name": "Portail Électricité Paris",
+    "address": "125 Boulevard Saint-Germain, 75006 Paris",
+    "phone": "01 83 62 41 33",
+    "email": "paris@portail-electricite.com",
+    "hours": {
+      "monday": "08:00-19:00",
+      "tuesday": "08:00-19:00", 
+      "wednesday": "08:00-19:00",
+      "thursday": "08:00-19:00",
+      "friday": "08:00-19:00",
+      "saturday": "09:00-17:00",
+      "sunday": "Fermé"
+    }
+  },
+  "adjacent_cities": ["boulogne-billancourt", "saint-denis", "montreuil"],
+  "hero": {
+    "h1": "Raccordement Électrique à Paris",
+    "subtitle": "Service Enedis professionnel pour tous vos projets de raccordement électrique dans la capitale. Accompagnement personnalisé et devis sous 24h.",
+    "trust_indicators": [
+      "✅ Expert agréé Enedis",
+      "✅ Devis gratuit sous 24h",
+      "✅ Service tous arrondissements", 
+      "✅ +2000 raccordements réalisés"
+    ]
+  },
+  "content": {
+    "intro": "Paris, capitale économique de la France, connaît un développement urbain constant qui nécessite de nombreux raccordements électriques. Que vous soyez un particulier souhaitant raccorder votre nouveau logement, un professionnel développant un projet immobilier ou une entreprise s'implantant dans la capitale, notre service expert vous accompagne dans toutes vos démarches de raccordement électrique Enedis à Paris.",
+    "process": "Le processus de raccordement électrique à Paris suit une procédure spécifique adaptée à la densité urbaine de la capitale. Notre équipe d'experts connaît parfaitement les spécificités parisiennes : contraintes d'urbanisme, réglementations d'arrondissement, coordination avec les services municipaux et délais d'intervention Enedis. Nous gérons l'intégralité de votre dossier, de l'étude de faisabilité jusqu'à la mise en service, en passant par les autorisations nécessaires et le suivi des travaux.",
+    "benefits": "Faire appel à notre service de raccordement électrique à Paris vous garantit un accompagnement professionnel et personnalisé. Nous connaissons les spécificités de chaque arrondissement parisien et entretenons des relations privilégiées avec Enedis Île-de-France. Notre expertise locale nous permet d'optimiser les délais et de vous proposer les solutions les plus adaptées à votre projet, qu'il s'agisse d'un raccordement résidentiel, tertiaire ou industriel.",
+    "local_expertise": "Paris présente des défis uniques en matière de raccordement électrique : patrimoine historique protégé, contraintes architecturales, densité du réseau souterrain et réglementations strictes. Notre équipe parisienne maîtrise ces enjeux et vous propose des solutions adaptées à chaque situation. Nous intervenons dans tous les arrondissements, du 1er au 20ème, avec une parfaite connaissance des spécificités locales."
+  },
+  "faqs": [
+    {
+      "question": "Quels sont les délais de raccordement électrique à Paris ?",
+      "answer": "Les délais de raccordement électrique à Paris varient selon la complexité du projet. Pour un raccordement simple en zone urbaine dense, comptez entre 2 et 4 mois. Les projets nécessitant des travaux d'extension du réseau peuvent prendre 6 à 10 mois. Notre service vous accompagne pour optimiser ces délais."
+    },
+    {
+      "question": "Quels documents sont nécessaires pour un raccordement à Paris ?",
+      "answer": "Pour votre raccordement électrique parisien, vous devrez fournir : le permis de construire ou déclaration de travaux, le plan de situation, le plan de masse avec l'emplacement du compteur, et la puissance souhaitée. Notre équipe vous aide à constituer votre dossier complet."
+    },
+    {
+      "question": "Quel est le coût d'un raccordement électrique à Paris ?",
+      "answer": "Le coût d'un raccordement électrique à Paris dépend de la puissance demandée, de la distance au réseau et de la complexité des travaux. Comptez entre 1 500€ et 3 000€ pour un raccordement standard. Nous vous proposons un devis personnalisé gratuit sous 24h."
+    },
+    {
+      "question": "Puis-je raccorder mon logement dans un immeuble haussmannien ?",
+      "answer": "Oui, le raccordement dans un immeuble haussmannien est possible mais nécessite une attention particulière aux contraintes patrimoniales. Notre équipe connaît les spécificités des immeubles anciens parisiens et vous accompagne dans toutes les démarches, y compris les autorisations spéciales si nécessaires."
+    }
+  ],
+  "schema_data": {
+    "local_business_id": "https://portail-electricite.com/paris",
+    "service_area": "Paris, Île-de-France, France",
+    "geo_coordinates": {
+      "latitude": "48.8566",
+      "longitude": "2.3522"
+    }
+  }
+}

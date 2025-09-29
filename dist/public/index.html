@@ -38,6 +38,16 @@
     <meta property="og:locale" content="fr_FR">
     <meta property="og:site_name" content="Portail Électricité">
     
+    <!-- MOBILE PERFORMANCE CRITICAL: Font preloading for faster FCP -->
+    <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/inter-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- MOBILE PERFORMANCE: Preload payment icons for faster checkout -->
+    <link rel="preload" href="/visa.svg" as="image" type="image/svg+xml">
+    <link rel="preload" href="/mastercard.svg" as="image" type="image/svg+xml">
+    <link rel="preload" href="/amex.svg" as="image" type="image/svg+xml">
+    <link rel="preload" href="/cb.svg" as="image" type="image/svg+xml">
+    
     <!-- Données structurées Schema.org - Organisation -->
     <script type="application/ld+json">
     {
@@ -191,9 +201,14 @@
     }
     </script>
     
-    <!-- Critical performance optimizations -->
-    <link rel="dns-prefetch" href="//www.googletagmanager.com">
-    <link rel="dns-prefetch" href="//www.google-analytics.com">
+    <!-- ENHANCED: Critical performance optimizations for Core Web Vitals -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//unpkg.com">
+    <link rel="dns-prefetch" href="//geo.api.gouv.fr">
+    <link rel="dns-prefetch" href="//www.statcounter.com">
     
     <!-- Security headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -201,14 +216,51 @@
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     
-    <!-- Inline critical CSS to eliminate render-blocking -->
+    <!-- ENHANCED: Inline critical CSS optimized for LCP -->
     <style>
-      /* Critical above-the-fold styles */
-      body { margin: 0; font-family: Inter, system-ui, sans-serif; }
-      .hero-section { min-height: 600px; background: linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%); }
+      /* Critical above-the-fold styles for fastest LCP + Safari compatibility */
+      * { box-sizing: border-box; }
+      body { 
+        margin: 0; 
+        font-family: Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif; 
+        font-display: swap; 
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%; /* Safari iOS fix */
+        -moz-text-size-adjust: 100%;
+             text-size-adjust: 100%; /* Safari desktop fix */
+      }
+      /* CWV OPTIMIZATION: Form container optimizations */
+      .form-container { 
+        contain: layout style paint; 
+        will-change: contents;
+      }
+      .hero-section { 
+        min-height: 600px; 
+        background: linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%); 
+        will-change: transform;
+        /* Safari gradient fix */
+        background: linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%);
+        /* CWV OPTIMIZATION: Content visibility optimization */
+        content-visibility: auto;
+        contain-intrinsic-size: 600px;
+      }
       .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-      .btn-primary { background: #0072CE; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; border: none; font-weight: 600; cursor: pointer; }
-      .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+      .btn-primary { 
+        background: #0072CE; 
+        color: white; 
+        padding: 0.75rem 1.5rem; 
+        border-radius: 0.5rem; 
+        border: none; 
+        font-weight: 600; 
+        cursor: pointer; 
+        transition: transform 0.1s ease;
+        /* Safari compatibility */
+        -webkit-appearance: none;
+        -webkit-border-radius: 0.5rem;
+        -webkit-transition: transform 0.1s ease;
+      }
+      .btn-primary:hover { transform: translateY(-1px); }
+      .text-3xl { font-size: 1.875rem; line-height: 2.25rem; font-display: swap; }
       .text-white { color: white; }
       .font-bold { font-weight: 700; }
       .mb-4 { margin-bottom: 1rem; }
@@ -217,45 +269,100 @@
       .items-center { align-items: center; }
       .justify-center { justify-content: center; }
       .text-center { text-align: center; }
+      /* Optimized form inputs for faster rendering */
+      input, select, textarea { font-family: inherit; font-size: 16px; }
+      /* Prevent layout shifts */
+      img { height: auto; max-width: 100%; }
       @media (min-width: 768px) { .md\\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; } }
     </style>
     
-    <!-- Browser Compatibility Check - Load polyfills for older browsers -->
-    <script>
-      // Detect older browsers that need polyfills
-      if (!window.fetch || !window.Promise || !Array.prototype.includes) {
-        document.write('<script src="https://polyfill.io/v3/polyfill.min.js?features=fetch,Promise,Array.prototype.includes,Object.assign"><\/script>');
-      }
-      // Optional chaining and nullish coalescing detection
-      try {
-        eval('{}?.test ?? null');
-      } catch (e) {
-        document.write('<script src="https://unpkg.com/@babel/polyfill@7.12.1/dist/polyfill.min.js"><\/script>');
-      }
-    </script>
+    <!-- PHASE 2B: Deferred CSS Loading - loader-animations.css (3KB) -->
+    <!-- FIXED: Correct media="print" onload technique for non-critical animations -->
+    <link rel="stylesheet" href="/styles/loader-animations.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/styles/loader-animations.css"></noscript>
+    
+    <!-- PHASE 2C: Deferred CSS Loading - mobile-adjustments.css (4KB) -->
+    <!-- Mobile enhancements and responsive design optimizations -->
+    <link rel="stylesheet" href="/styles/mobile-adjustments.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/styles/mobile-adjustments.css"></noscript>
+    
+    <!-- PHASE 2C: Deferred CSS Loading - sleek-checkboxes.css (2KB) -->
+    <!-- Form decorations and enhanced checkbox styling -->
+    <link rel="stylesheet" href="/styles/sleek-checkboxes.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/styles/sleek-checkboxes.css"></noscript>
+    
+    <!-- PERFORMANCE FIX: Remove render-blocking polyfills for faster LCP -->
+    <!-- Modern browsers don't need these polyfills, and they block rendering -->
 
-    <!-- Google tag (gtag.js) - CRITICAL FOR CONVERSION TRACKING -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GT-MJKTJGCK"></script>
+    <!-- CRITICAL FIX: Google Analytics config executes IMMEDIATELY -->
+    <!-- GCLID and conversion tracking MUST be available immediately for ads attribution -->
     <script>
+      // Initialize dataLayer immediately for conversion tracking
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'GT-MJKTJGCK');
+      
+      // CRITICAL: Configure GA immediately - no deferral for conversion tracking
+      gtag('config', 'GT-MJKTJGCK', {
+        // Optimize for Core Web Vitals
+        transport_type: 'beacon',
+        send_page_view: false // Manual page view after LCP
+      });
+      console.log('✅ Google Analytics config executed immediately for ads attribution');
+      
+      // Only defer the external gtag.js script loading for performance
+      function loadGoogleAnalyticsScript() {
+        if (!window.gtagScriptLoaded) {
+          window.gtagScriptLoaded = true;
+          const script = document.createElement('script');
+          script.async = true; // PERFORMANCE FIX: Make GA script async
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=GT-MJKTJGCK';
+          script.onload = function() {
+            console.log('✅ Google Analytics script loaded after user interaction');
+          };
+          document.head.appendChild(script);
+        }
+      }
+      
+      // Load GA script after user interaction or 3 seconds (but config runs immediately)
+      let gaScriptLoaded = false;
+      const triggerGAScript = () => {
+        if (!gaScriptLoaded) {
+          gaScriptLoaded = true;
+          loadGoogleAnalyticsScript();
+          ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
+            document.removeEventListener(event, triggerGAScript, { passive: true });
+          });
+        }
+      };
+      
+      ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
+        document.addEventListener(event, triggerGAScript, { passive: true, once: true });
+      });
+      
+      // Fallback: Load script after 3 seconds (config already ran immediately)
+      setTimeout(() => {
+        if (!gaScriptLoaded) triggerGAScript();
+      }, 3000);
     </script>
 
-    <!-- Critical mobile performance preloads -->
-    <link rel="preload" href="data:application/octet-stream;base64,Ly8gTG9hZCBicm93c2VyIGNvbXBhdGliaWxpdHkgcG9seWZpbGxzIGZpcnN0CmltcG9ydCAiLi9wb2x5ZmlsbHMiOwoKaW1wb3J0IHsgY3JlYXRlUm9vdCB9IGZyb20gInJlYWN0LWRvbS9jbGllbnQiOwppbXBvcnQgQXBwIGZyb20gIi4vQXBwIjsKaW1wb3J0ICIuL2luZGV4LmNzcyI7CmltcG9ydCAiLi9saWIvZ2NsaWQtdHJhY2tpbmciOwppbXBvcnQgIi4vdXRpbHMvZ2VudGxlLXBlcmZvcm1hbmNlIjsKaW1wb3J0ICIuL3V0aWxzL2xjcC1tb25pdG9yIjsKCi8vIEVuc3VyZSBjb252ZXJzaW9uIHRyYWNraW5nIGZ1bmN0aW9ucyBhcmUgYXZhaWxhYmxlIGdsb2JhbGx5CmRlY2xhcmUgZ2xvYmFsIHsKICBpbnRlcmZhY2UgV2luZG93IHsKICAgIHRyaWdnZXJGb3JtU3RhcnRDb252ZXJzaW9uOiAoKSA9PiB2b2lkOwogICAgdHJpZ2dlckZvcm1TdWJtaXRDb252ZXJzaW9uOiAoKSA9PiB2b2lkOwogICAgZ3RhZzogKC4uLmFyZ3M6IGFueVtdKSA9PiB2b2lkOwogICAgZGF0YUxheWVyOiBhbnlbXTsKICB9Cn0KCi8vIEdsb2JhbCBlcnJvciBoYW5kbGVycyB0byBwcmV2ZW50IGRlcGxveW1lbnQgY3Jhc2hlcwp3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcigndW5oYW5kbGVkcmVqZWN0aW9uJywgKGV2ZW50KSA9PiB7CiAgZXZlbnQucHJldmVudERlZmF1bHQoKTsgLy8gU2lsZW50bHkgcHJldmVudCB0aGUgZGVmYXVsdCBiZWhhdmlvcgp9KTsKCndpbmRvdy5hZGRFdmVudExpc3RlbmVyKCdlcnJvcicsIChldmVudCkgPT4gewogIGV2ZW50LnByZXZlbnREZWZhdWx0KCk7IC8vIFNpbGVudGx5IHByZXZlbnQgZXJyb3IgbG9nZ2luZwp9KTsKCi8vIFJlbmRlciBSZWFjdCBhcHAgd2l0aCBtb2JpbGUtb3B0aW1pemVkIHJvb3QKY29uc3Qgcm9vdEVsZW1lbnQgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgicm9vdCIpOwppZiAocm9vdEVsZW1lbnQpIHsKICBjcmVhdGVSb290KHJvb3RFbGVtZW50KS5yZW5kZXIoPEFwcCAvPik7Cn0KCi8vIFNhZmUgcGVyZm9ybWFuY2Ugb3B0aW1pemF0aW9uIHdpdGhvdXQgZXh0ZXJuYWwgZmlsZXMKCi8vIEJhc2ljIHBlcmZvcm1hbmNlIG9wdGltaXphdGlvbnMgb25seQpzZXRUaW1lb3V0KCgpID0+IHsKICAvLyBTaW1wbGUgaW1hZ2Ugb3B0aW1pemF0aW9uIHdpdGhvdXQgYnJlYWtpbmcgbGF5b3V0CiAgY29uc3QgaW1hZ2VzID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnaW1nJyk7CiAgaW1hZ2VzLmZvckVhY2goKGltZywgaW5kZXgpID0+IHsKICAgIGlmIChpbmRleCA9PT0gMCkgewogICAgICBpbWcubG9hZGluZyA9ICdlYWdlcic7CiAgICB9IGVsc2UgewogICAgICBpbWcubG9hZGluZyA9ICdsYXp5JzsKICAgIH0KICB9KTsKfSwgMTAwKTsK" as="script">
+    <!-- PERFORMANCE FIX: Fixed preloads - removed invalid /src/main.tsx and duplicates -->
     <link rel="preload" href="/favicon-new.svg" as="image">
-    
-    <!-- Preload critical Inter font files for LCP text -->
-    <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/inter-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/inter-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
     
-    <!-- Mobile viewport optimization -->
+    <!-- CWV OPTIMIZATION: Critical asset preloading for form components -->
+    <link rel="modulepreload" href="/assets/form-step-1-y2v61Za1.tsx">
+    <link rel="modulepreload" href="/assets/enhanced-mobile-form-optimizer-LCGyeaLi.tsx">
+    <link rel="preconnect" href="https://geo.api.gouv.fr" crossorigin>
+    <link rel="dns-prefetch" href="//geo.api.gouv.fr">
+    
+    <!-- SAFARI FIX: Enhanced Safari compatibility -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <!-- Safari-specific optimizations -->
+    <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
     
     
     
@@ -272,49 +379,27 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="format-detection" content="telephone=no">
     
-    <!-- Suppression du script Replit banner pour éviter le favicon Replit -->
-    <!-- Service Worker disabled to prevent console errors -->
-    <script>
-      // Service Worker registration completely disabled
-      console.log('✅ Ressources statiques mises en cache');
-      
-      // Bloquer les éléments Replit qui peuvent remplacer notre favicon
-      window.addEventListener('load', function() {
-        // Observer le DOM pour éliminer les éléments Replit ajoutés dynamiquement
-        const observer = new MutationObserver((mutations) => {
-          mutations.forEach((mutation) => {
-            if (mutation.addedNodes && mutation.addedNodes.length > 0) {
-              for (let i = 0; i < mutation.addedNodes.length; i++) {
-                const node = mutation.addedNodes[i];
-                if (node.nodeType === 1) {
-                  // Vérifier si c'est un élément Replit
-                  if (node.id && (node.id.includes('replit') || node.className && node.className.includes('replit'))) {
-                    node.remove();
-                  }
-                  // Vérifier les attributs liés à Replit dans les favicon
-                  const icons = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]');
-                  icons.forEach(icon => {
-                    if (icon.href && icon.href.includes('replit.com')) {
-                      icon.href = '/favicon-new.svg';
-                    }
-                  });
-                }
-              }
-            }
-          });
-        });
-        
-        observer.observe(document.body, {
-          childList: true,
-          subtree: true
-        });
-      });
-    </script>
-    <script type="module" crossorigin src="/assets/index-DK4hKOIU.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DeDBALxD.css">
+    <!-- PERFORMANCE FIX: Removed render-blocking MutationObserver script for faster LCP -->
+    <script type="module" crossorigin src="/assets/index-DzUC1K2s.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DVIr2eig.css">
   </head>
   <body>
-    <div id="root"></div>
+    <!-- PERFORMANCE FIX: Static hero content for immediate LCP (before React mounts) -->
+    <div id="root">
+      <div class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700">
+        <div class="container mx-auto px-4 py-16">
+          <div class="text-center text-white max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Raccordement Électrique Simplifié</h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">
+              Votre demande de raccordement électrique en 3 minutes
+            </p>
+            <div class="bg-white/10 backdrop-blur rounded-lg p-6 mb-8">
+              <p class="text-lg">Démarrez votre demande maintenant...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     
     <!-- Global conversion functions for form tracking -->
     <script>
@@ -397,29 +482,86 @@
     };
     </script>
     
-    <!-- Statcounter - Deferred for performance -->
+    <!-- PHASE 3A: Statcounter - Further optimized deferred loading -->
     <script>
       function loadStatcounter() {
-        window.sc_project=13140920; 
-        window.sc_invisible=1; 
-        window.sc_security="3cd76429";
-        
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://www.statcounter.com/counter/counter.js';
-        document.head.appendChild(script);
+        if (!window.statcounterLoaded) {
+          window.statcounterLoaded = true;
+          window.sc_project=13140920; 
+          window.sc_invisible=1; 
+          window.sc_security="3cd76429";
+          
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://www.statcounter.com/counter/counter.js';
+          script.onload = () => console.log('✅ StatCounter loaded after user interaction');
+          document.head.appendChild(script);
+        }
       }
       
-      // Load after user interaction or 5 seconds
-      ['click', 'scroll', 'keydown'].forEach(event => {
-        document.addEventListener(event, loadStatcounter, { once: true, passive: true });
+      // PHASE 3A: Load after user interaction or 5 seconds (aligned with other deferred scripts)
+      let statLoaded = false;
+      const triggerStat = () => {
+        if (!statLoaded) {
+          statLoaded = true;
+          loadStatcounter();
+          ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
+            document.removeEventListener(event, triggerStat, { passive: true });
+          });
+        }
+      };
+      
+      ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
+        document.addEventListener(event, triggerStat, { passive: true, once: true });
       });
-      setTimeout(loadStatcounter, 5000);
+      
+      // Fallback: Load after 5 seconds if no interaction
+      setTimeout(() => {
+        if (!statLoaded) triggerStat();
+      }, 5000);
     </script>
     <noscript><div class="statcounter"><a title="real time web analytics"
     href="https://statcounter.com/" target="_blank"><img class="statcounter"
     src="https://c.statcounter.com/13140920/0/3cd76429/1/" alt="real time web
     analytics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
     <!-- End of Statcounter Code -->
+    
+    <!-- PERFORMANCE FIX: Non-critical Replit cleanup moved to body end -->
+    <script>
+      // Service Worker cache message
+      console.log('✅ Ressources statiques mises en cache');
+      
+      // Non-critical Replit cleanup after page loads
+      window.addEventListener('load', function() {
+        // Observer le DOM pour éliminer les éléments Replit ajoutés dynamiquement
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+              for (let i = 0; i < mutation.addedNodes.length; i++) {
+                const node = mutation.addedNodes[i];
+                if (node.nodeType === 1) {
+                  // Vérifier si c'est un élément Replit
+                  if (node.id && (node.id.includes('replit') || node.className && node.className.includes('replit'))) {
+                    node.remove();
+                  }
+                  // Vérifier les attributs liés à Replit dans les favicon
+                  const icons = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]');
+                  icons.forEach(icon => {
+                    if (icon.href && icon.href.includes('replit.com')) {
+                      icon.href = '/favicon-new.svg';
+                    }
+                  });
+                }
+              }
+            }
+          });
+        });
+        
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      });
+    </script>
   </body>
 </html>
