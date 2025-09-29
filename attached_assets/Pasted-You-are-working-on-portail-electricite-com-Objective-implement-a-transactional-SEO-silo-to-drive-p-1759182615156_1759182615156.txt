@@ -1,0 +1,115 @@
+You are working on portail-electricite.com. Objective: implement a transactional SEO silo to drive paying leads for Enedis raccordement. Do not change any URLs or routes today. Only edit on-page SEO (titles, metas, H1/H2), internal linking, breadcrumbs, schema, and CTAs. Remove all “gratuit/devis” wording. Keep the current design/layout, but fix meta/SEO/content structure.
+
+0) Guardrails
+	•	Do not rename routes, files, or slugs.
+	•	Do not remove existing functional components or form logic.
+	•	Do not add “gratuit”, “devis”, “estimation”, “comparateur”.
+	•	All changes must be idempotent and reversible (single PR).
+
+1) Page Inventory & Mapping
+	1.	Crawl the codebase/pages and produce a list of existing top pages (homepage + service pages).
+	2.	Map each existing page to the closest transactional intent (pick one):
+	•	Demande de raccordement Enedis (primary)
+	•	Demande de raccordement électrique
+	•	Demande de raccordement provisoire
+	•	Demande de raccordement définitif
+	•	Raccordement collectif
+	•	Augmentation de puissance (compteur)
+
+2) Title & Meta (No URL change)
+
+For each page, set/override <title> and <meta name="description"> to match the mapped intent. Use these templates (edit city/type words to match the page):
+	•	Homepage
+	•	Title: Demande de Raccordement Enedis en Ligne | Raccordement Électrique
+	•	Meta: Faites votre demande de raccordement Enedis. Provisoire, définitif, collectif ou augmentation de puissance. Procédure simplifiée et sécurisée.
+	•	Provisoire (existing page that fits this intent)
+	•	Title: Demande de Raccordement Provisoire Enedis | Chantier & Événement
+	•	Meta: Raccordement provisoire Enedis pour chantiers et événements. Démarche complète et rapide. Lancez votre demande en ligne.
+	•	Définitif
+	•	Title: Demande de Raccordement Définitif | Mise en Service au Réseau
+	•	Meta: Raccordement définitif au réseau Enedis. Dossiers, étapes et accompagnement clé en main jusqu’à la mise en service.
+	•	Collectif
+	•	Title: Raccordement Collectif Enedis | Immeubles & Copropriétés
+	•	Meta: Gérez le raccordement collectif pour immeubles et copropriétés. Dossiers techniques, coordination et suivi jusqu’à validation.
+	•	Augmentation de puissance
+	•	Title: Augmentation de Puissance Compteur Enedis | Mono & Triphasé
+	•	Meta: Augmentez la puissance de votre installation (mono/triphasé). Étude, dossier et suivi jusqu’à la modification du contrat.
+
+(If a page doesn’t match any of these, choose the closest and adapt the copy accordingly.)
+
+3) H1/H2 Structure (Per Page)
+	•	Set exactly one H1 that mirrors the page’s target query:
+	•	Examples:
+	•	Demande de raccordement Enedis
+	•	Demande de raccordement électrique
+	•	Demande de raccordement provisoire
+	•	Demande de raccordement définitif
+	•	Raccordement collectif Enedis
+	•	Augmentation de puissance compteur
+	•	Add H2 sections (2–5) that support conversion:
+	•	Ce que nous prenons en charge
+	•	Documents et informations nécessaires
+	•	Délais et étapes
+	•	Tarification et modalités (sans mention “gratuit/devis”)
+	•	Commencer votre demande
+
+4) Internal Linking (Silo)
+	•	From homepage, add prominent internal links to each mapped service page (above the fold and again mid-page).
+	•	Between service pages, add a short cross-link block:
+	•	Provisoire ↔ Définitif ↔ Collectif ↔ Augmentation de puissance
+	•	From support/informational pages (if any), link upward only to the most relevant service page (no cross-linking sideways).
+
+5) Breadcrumbs
+	•	Implement semantic breadcrumbs on all service pages:
+	•	Accueil > Raccordement (section) > [Page courante]
+	•	Mark up with JSON-LD BreadcrumbList.
+
+6) Schema.org (JSON-LD)
+
+Add to each page (in <head> via next/head or index.html equivalents):
+	•	Service:
+	•	@type: Service
+	•	name = page’s H1
+	•	areaServed: France
+	•	provider = Organization (site brand)
+	•	serviceType one of: “Demande de raccordement Enedis”, “Raccordement électrique”, “Raccordement provisoire”, “Raccordement définitif”, “Raccordement collectif”, “Augmentation de puissance”
+	•	Organization (once site-wide, on homepage):
+	•	@type: Organization, name, url, contactPoint (phone/email), sameAs if available.
+	•	BreadcrumbList as above.
+
+7) Canonicals & Indexing
+	•	Add self-referential canonical to all pages (point to their current URL).
+	•	Ensure all pages are indexable unless explicitly flagged.
+	•	Update sitemap.xml if present (no new routes today; just ensure current pages are listed).
+
+8) Content Tweaks for Conversion
+	•	Remove or rewrite any “gratuit”, “devis”, “estimation” phrasing → use:
+	•	“Procédure officielle simplifiée”
+	•	“Accompagnement complet”
+	•	“Service clé en main”
+	•	Ensure CTA components read: “Commencer ma demande” (hero + mid-page + bottom).
+	•	Keep form links/buttons intact (no route edits).
+
+9) Performance/CLS (Quick Wins Only)
+	•	Set explicit width/height or aspect-ratio on hero/illustration images to avoid layout shifts.
+	•	Preload main font if not already.
+
+10) QA Checklist (Must Pass)
+	•	No route/URL changed.
+	•	Each top page has unique Title (<60c) and Meta (<160c).
+	•	Exactly one H1 per page, matching the mapped intent.
+	•	Breadcrumbs render and validate in Rich Results test (structure only).
+	•	JSON-LD validates for Service and Organization.
+	•	Homepage links to all service pages; service pages cross-link.
+	•	Zero instances of “gratuit”, “devis”, “estimation”.
+	•	CTAs present in hero, mid-page, and footer area.
+
+11) Deliverables
+	•	One PR with:
+	•	List of pages + their mapped intent.
+	•	Diff showing changes to titles, metas, H1/H2, JSON-LD, breadcrumbs.
+	•	Screenshot or snippet proving internal links/CTAs added.
+	•	Confirmation that canonical tags are present and correct.
+	•	Short note on any copy refinements made to remove “gratuit/devis”.
+
+Execute now without altering any routes. End of prompt.
