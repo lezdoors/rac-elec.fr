@@ -215,7 +215,6 @@ export default function HomePage() {
       <a href="#main-content" className="skip-link">Aller au contenu principal</a>
       <a href="#navigation" className="skip-link">Aller à la navigation</a>
       <a href="#services" className="skip-link">Aller aux services</a>
-      
       <Helmet>
         <title>Demande de Raccordement Enedis en Ligne | Raccordement Électrique</title>
         <meta name="description" content="Faites votre demande de raccordement Enedis. Provisoire, définitif, collectif ou augmentation de puissance. Procédure simplifiée et sécurisée." />
@@ -395,9 +394,7 @@ export default function HomePage() {
           {/* Main CTA Button */}
           <div className="text-center mt-10">
             <Link href="/raccordement-enedis#formulaire-raccordement">
-              <button className="bg-white text-[#0046a2] font-semibold px-8 py-4 rounded-lg text-lg hover:bg-[#0046a2] hover:text-white transition-colors shadow-lg">
-                Déposer ma demande
-              </button>
+              <button className="bg-white text-[#0046a2] font-semibold px-8 py-4 rounded-lg text-lg hover:bg-[#0046a2] hover:text-white transition-colors shadow-lg">commencer ma demande</button>
             </Link>
             
             {/* Counter */}
@@ -1516,20 +1513,15 @@ export default function HomePage() {
         </div>
       </section>
       </main>
-      
       {/* Trust Section */}
       <TrustSection />
-      
       {/* Performance optimization component */}
       <PerformanceOptimizer />
-      
       {/* Mobile optimizations */}
       <MobileFormOptimizer />
       <MobileImageOptimizer />
-      
       {/* Mobile floating CTA button */}
       <FloatingCtaButton />
-
     </>
   );
 }
