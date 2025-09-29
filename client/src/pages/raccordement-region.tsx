@@ -140,7 +140,7 @@ export default function RaccordementRegion() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Clock className="h-5 w-5 text-green-400" />
-                  <span className="text-sm">Devis sous 48h</span>
+                  <span className="text-sm">Réponse sous 48h</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <MapPin className="h-5 w-5 text-green-400" />
@@ -165,7 +165,7 @@ export default function RaccordementRegion() {
                 </h2>
                 <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                   Sélectionnez votre ville pour obtenir des informations spécifiques 
-                  et un devis personnalisé pour votre raccordement électrique.
+                  et commencer votre demande de raccordement électrique.
                 </p>
               </div>
 
@@ -188,7 +188,7 @@ export default function RaccordementRegion() {
                       <div className="space-y-3">
                         <div className="flex items-center justify-between text-sm text-gray-600">
                           <span>✅ Expert local agréé</span>
-                          <span>✅ Devis gratuit</span>
+                          <span>✅ Accompagnement complet</span>
                         </div>
                         
                         <Link href={`/raccordement/${city.slug}/`}>
@@ -220,7 +220,7 @@ export default function RaccordementRegion() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/raccordement-enedis">
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-                    Demander un devis
+                    Commencer ma demande
                   </Button>
                 </Link>
                 <Button size="lg" variant="outline">

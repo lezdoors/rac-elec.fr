@@ -270,7 +270,7 @@ export default function RaccordementCity() {
                 className="bg-white text-blue-600 hover:bg-blue-50 font-semibold"
                 onClick={() => window.scrollTo({ top: document.getElementById('contact-form')?.offsetTop || 0, behavior: 'smooth' })}
               >
-                Obtenir un devis gratuit
+                Commencer ma demande
               </Button>
             </div>
           </div>
@@ -410,7 +410,7 @@ export default function RaccordementCity() {
                 {/* Quick Contact Form */}
                 <Card id="contact-form">
                   <CardHeader>
-                    <CardTitle>Demande de devis gratuit</CardTitle>
+                    <CardTitle>Commencer ma demande de raccordement</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <form className="space-y-4">
@@ -450,11 +450,11 @@ export default function RaccordementCity() {
                           <option value="collectivite">Collectivité</option>
                         </select>
                       </div>
-                      <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700" data-testid="button-submit-devis">
-                        Obtenir mon devis gratuit
+                      <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700" data-testid="button-submit-demande">
+                        Commencer ma demande
                       </Button>
                       <p className="text-xs text-gray-500 text-center">
-                        Réponse sous 24h • Service gratuit et sans engagement
+                        Réponse sous 24h • Accompagnement complet
                       </p>
                     </form>
                   </CardContent>

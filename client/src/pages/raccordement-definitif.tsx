@@ -8,8 +8,8 @@ export default function RaccordementDefinitifPage() {
   return (
     <>
       <Helmet>
-        <title>Raccordement Définitif Enedis | Devis Gratuit</title>
-        <meta name="description" content="Raccordement définitif au réseau Enedis. Service professionnel, devis gratuit et accompagnement complet pour votre projet." />
+        <title>Demande de Raccordement Définitif | Mise en Service</title>
+        <meta name="description" content="Raccordement définitif au réseau Enedis. Dossiers, étapes et accompagnement clé en main jusqu'à la mise en service." />
       </Helmet>
       
       <Layout>
@@ -18,7 +18,7 @@ export default function RaccordementDefinitifPage() {
             
             <div className="text-center mb-12">
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Raccordement Définitif Enedis
+                Demande de Raccordement Définitif
               </h1>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                 Raccordement permanent au réseau électrique public pour votre logement ou entreprise.
