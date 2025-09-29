@@ -38,6 +38,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getGclid } from "@/lib/clean-gclid";
 import { EnhancedMobileFormOptimizer } from "@/components/enhanced-mobile-form-optimizer";
 import { FormStep1 } from "@/components/form-step-1";
+import { Helmet } from "react-helmet";
 import "../styles/conversion-critical.css";
 
 // Hook pour optimiser les performances mobiles
@@ -1661,12 +1662,62 @@ export default function RaccordementEnedisPage() {
   );
 
   return (
-    <div className={`min-h-screen py-8 sm:py-12 px-4 main-form-container ${
-      isMobile 
-        ? 'bg-slate-50' // Couleur solide pour mobile (performance)
-        : 'bg-gradient-to-br from-slate-50 via-blue-50/30 to-red-50/20' // Dégradé pour desktop
-    }`}>
-      <EnhancedMobileFormOptimizer />
+    <>
+      <Helmet>
+        <title>Demande de Raccordement Enedis | Dossier & Suivi</title>
+        <meta name="description" content="Nous gérons votre demande de raccordement Enedis de A à Z. Dossiers, documents et suivi jusqu'à validation." />
+        <link rel="canonical" href="https://portail-electricite.com/raccordement-enedis" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Service JSON-LD */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Demande de Raccordement Enedis",
+            "serviceType": "Raccordement Électrique Enedis",
+            "description": "Service de gestion complète des demandes de raccordement électrique Enedis. Dossiers, documents et suivi personnalisé jusqu'à validation.",
+            "provider": {
+              "@type": "Organization",
+              "name": "Portail-Electricite.com",
+              "url": "https://portail-electricite.com/"
+            },
+            "areaServed": {
+              "@type": "Country",
+              "name": "France"
+            }
+          }
+        `}</script>
+        
+        {/* BreadcrumbList JSON-LD */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Accueil",
+                "item": "https://portail-electricite.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Raccordement Enedis",
+                "item": "https://portail-electricite.com/raccordement-enedis"
+              }
+            ]
+          }
+        `}</script>
+      </Helmet>
+      
+      <div className={`min-h-screen py-8 sm:py-12 px-4 main-form-container ${
+        isMobile 
+          ? 'bg-slate-50' // Couleur solide pour mobile (performance)
+          : 'bg-gradient-to-br from-slate-50 via-blue-50/30 to-red-50/20' // Dégradé pour desktop
+      }`}>
+        <EnhancedMobileFormOptimizer />
       <div id="formulaire-raccordement" className="max-w-4xl mx-auto critical-content" style={{ scrollMarginTop: '100px' }}>
         
         {/* Indicateur de progression français compact - Optimisé mobile */}
@@ -1982,5 +2033,6 @@ export default function RaccordementEnedisPage() {
         </Suspense>
       )}
     </div>
+    </>
   );
 }

@@ -66,13 +66,55 @@ export default function RaccordementProvisoirePage() {
   return (
     <>
       <Helmet>
-        <title>Demande de Raccordement Provisoire Enedis | Chantier</title>
+        <title>Demande de Raccordement Provisoire Enedis | Chantier & Événement</title>
         <meta 
           name="description" 
-          content="Raccordement provisoire Enedis pour chantiers et événements. Démarche complète et rapide. Lancez votre demande en ligne." 
+          content="Raccordement provisoire pour chantiers et événements. Démarrez votre demande en ligne, prise en charge complète." 
         />
         <link rel="canonical" href="https://portail-electricite.com/raccordement-provisoire" />
         <meta name="robots" content="index, follow" />
+        
+        {/* Service JSON-LD */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Demande de Raccordement Provisoire Enedis",
+            "serviceType": "Raccordement Provisoire",
+            "description": "Raccordement électrique temporaire pour chantiers, événements et activités à durée limitée. Accompagnement complet de la demande à la mise en service.",
+            "provider": {
+              "@type": "Organization",
+              "name": "Portail-Electricite.com",
+              "url": "https://portail-electricite.com/"
+            },
+            "areaServed": {
+              "@type": "Country",
+              "name": "France"
+            }
+          }
+        `}</script>
+        
+        {/* BreadcrumbList JSON-LD */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Accueil",
+                "item": "https://portail-electricite.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Raccordement Provisoire",
+                "item": "https://portail-electricite.com/raccordement-provisoire"
+              }
+            ]
+          }
+        `}</script>
         <meta property="og:title" content="Demande de Raccordement Provisoire Enedis | Chantier" />
         <meta property="og:description" content="Raccordement provisoire Enedis pour chantiers et événements. Démarche complète et rapide. Lancez votre demande en ligne." />
         <meta property="og:url" content="https://portail-electricite.com/raccordement-provisoire" />

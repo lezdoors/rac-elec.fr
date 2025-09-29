@@ -8,8 +8,52 @@ export default function ModificationCompteurPage() {
   return (
     <>
       <Helmet>
-        <title>Modification Compteur Électrique | Changement Puissance</title>
-        <meta name="description" content="Modification de compteur électrique et changement de puissance. Service Enedis pour adapter votre installation." />
+        <title>Augmentation de Puissance Compteur Enedis | Mono & Triphasé</title>
+        <meta name="description" content="Passez à la puissance adaptée (mono/triphasé). Étude, dossier et suivi jusqu'à modification du contrat." />
+        <link rel="canonical" href="https://portail-electricite.com/modification-compteur" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Service JSON-LD */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Augmentation de Puissance Compteur Enedis",
+            "serviceType": "Augmentation de Puissance Électrique",
+            "description": "Service d'augmentation de puissance électrique (mono/triphasé). Étude technique, dossier et accompagnement jusqu'à modification du contrat Enedis.",
+            "provider": {
+              "@type": "Organization",
+              "name": "Portail-Electricite.com",
+              "url": "https://portail-electricite.com/"
+            },
+            "areaServed": {
+              "@type": "Country",
+              "name": "France"
+            }
+          }
+        `}</script>
+        
+        {/* BreadcrumbList JSON-LD */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Accueil",
+                "item": "https://portail-electricite.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Augmentation de Puissance",
+                "item": "https://portail-electricite.com/modification-compteur"
+              }
+            ]
+          }
+        `}</script>
       </Helmet>
       
       <Layout>
@@ -18,17 +62,17 @@ export default function ModificationCompteurPage() {
             
             <div className="text-center mb-12">
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Modification Compteur Électrique
+                Augmentation de Puissance Compteur
               </h1>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Changement de puissance, remplacement ou mise à niveau de votre compteur électrique.
+                Augmentez la puissance de votre installation électrique (mono/triphasé) pour répondre à vos besoins.
               </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
               <div className="bg-white rounded-xl shadow-lg p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                  Modification de Compteur
+                  Augmentation de Puissance
                 </h2>
                 
                 <div className="space-y-4 mb-6">
@@ -37,19 +81,19 @@ export default function ModificationCompteurPage() {
                   </p>
                   
                   <div className="bg-indigo-50 p-4 rounded-lg border border-indigo-200">
-                    <h3 className="font-semibold text-indigo-900 mb-2">Types de modifications</h3>
+                    <h3 className="font-semibold text-indigo-900 mb-2">Services inclus</h3>
                     <ul className="space-y-2 text-sm text-indigo-800">
                       <li className="flex items-center">
                         <CheckCircle className="h-4 w-4 mr-2 text-indigo-600" />
-                        Changement de puissance
+                        Étude de faisabilité technique
                       </li>
                       <li className="flex items-center">
                         <CheckCircle className="h-4 w-4 mr-2 text-indigo-600" />
-                        Passage au compteur Linky
+                        Passage monophasé/triphasé
                       </li>
                       <li className="flex items-center">
                         <CheckCircle className="h-4 w-4 mr-2 text-indigo-600" />
-                        Remplacement de compteur défaillant
+                        Suivi jusqu'à modification contrat
                       </li>
                     </ul>
                   </div>
@@ -58,10 +102,10 @@ export default function ModificationCompteurPage() {
 
               <div className="bg-white rounded-xl shadow-lg p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                  Demandez votre modification de compteur
+                  Demandez votre augmentation de puissance
                 </h2>
                 
-                <Link href="/raccordement-enedis">
+                <Link href="/raccordement-enedis#formulaire-raccordement">
                   <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 mb-4">
                     <ArrowRight className="h-4 w-4 mr-2" />
                     Faire ma demande

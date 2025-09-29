@@ -9,7 +9,51 @@ export default function RaccordementDefinitifPage() {
     <>
       <Helmet>
         <title>Demande de Raccordement Définitif | Mise en Service</title>
-        <meta name="description" content="Raccordement définitif au réseau Enedis. Dossiers, étapes et accompagnement clé en main jusqu'à la mise en service." />
+        <meta name="description" content="Raccordement définitif au réseau Enedis. Étapes, pièces requises et accompagnement clé en main." />
+        <link rel="canonical" href="https://portail-electricite.com/raccordement-definitif" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Service JSON-LD */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Demande de Raccordement Définitif",
+            "serviceType": "Raccordement Définitif Enedis",
+            "description": "Raccordement électrique permanent pour habitations et locaux professionnels. Accompagnement complet de la demande à la mise en service.",
+            "provider": {
+              "@type": "Organization",
+              "name": "Portail-Electricite.com",
+              "url": "https://portail-electricite.com/"
+            },
+            "areaServed": {
+              "@type": "Country",
+              "name": "France"
+            }
+          }
+        `}</script>
+        
+        {/* BreadcrumbList JSON-LD */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Accueil",
+                "item": "https://portail-electricite.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Raccordement Définitif",
+                "item": "https://portail-electricite.com/raccordement-definitif"
+              }
+            ]
+          }
+        `}</script>
       </Helmet>
       
       <Layout>
@@ -61,7 +105,7 @@ export default function RaccordementDefinitifPage() {
                   Demandez votre raccordement
                 </h2>
                 
-                <Link href="/raccordement-enedis">
+                <Link href="/raccordement-enedis#formulaire-raccordement">
                   <Button className="w-full bg-green-600 hover:bg-green-700 text-white py-3 mb-4">
                     <ArrowRight className="h-4 w-4 mr-2" />
                     Faire ma demande
