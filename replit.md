@@ -34,6 +34,11 @@ Preferred communication style: Simple, everyday language.
 - **Mobile Optimizations**: Floating CTA button with smart show/hide behavior, enhanced mobile form validation with proper keyboard types, lazy loading images, mobile-first loading strategies, and touch-optimized interface elements.
 
 ### Recent Changes (September 2025)
+- **Reusable Trust & FAQ Components**: Created TrustSection component with 3 key trust signals (+1200 demandes traitées, Procédure conforme Enedis, Paiement 100% sécurisé) and FaqSection component with FAQPage JSON-LD schema support. Both components deployed across all service pages and homepage for improved conversion credibility.
+- **Service Pages Content Expansion**: Expanded all 6 service pages (raccordement-provisoire, raccordement-definitif, raccordement-collectif, modification-compteur, raccordement-maison-neuve, viabilisation-terrain) to 500-700 words with required H2 structure (Le processus de raccordement, Documents nécessaires, Délais moyens). Integrated TrustSection and FaqSection components on all pages. Removed all "gratuit" and "devis" mentions per requirements.
+- **Local City SEO Pages**: Created 3 new city-specific landing pages (/paris, /lyon, /marseille) with unique 300-400 word content, Service JSON-LD schemas with areaServed properties, proper SEO metadata (title, description, canonical, robots), and full integration of TrustSection and FAQ components.
+- **Google Ads Enhanced Conversions**: Implemented Enhanced Conversions with SHA-256 client-side hashing for email and phone data in analytics.ts. Includes Consent Mode v2 compliance (ad_storage check), duplicate prevention mechanism, proper error handling, and security best practices. Ready for improved attribution and reduced Google Ads costs.
+- **Infrastructure Updates**: Updated App.tsx routes for city pages with lazy loading, updated sitemap.xml with all 3 city pages (priority 0.8), and added TrustSection to homepage for enhanced trust signals above footer.
 - **SEO Silo Implementation**: Built comprehensive 3-tier SEO silo structure for local French city rankings:
   - Service Hub: `/raccordement/` - National overview with regional navigation
   - Regional Hubs: `/raccordement/[region]/` - Regional pages listing cities with local expertise
@@ -65,7 +70,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Analytics & Marketing
 - **Google Analytics**: Conversion tracking.
-- **Google Ads**: Conversion tracking (including GCLID capture).
+- **Google Ads**: Conversion tracking (including GCLID capture) with Enhanced Conversions (SHA-256 hashing, Consent Mode v2 compliance).
 
 ### Other Integrations
 - **Puppeteer**: Server-side PDF generation.
