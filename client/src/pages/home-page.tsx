@@ -215,16 +215,16 @@ export default function HomePage() {
       <a href="#services" className="skip-link">Aller aux services</a>
       
       <Helmet>
-        <title>Demande de Raccordement Enedis | Raccordement Électrique</title>
+        <title>Demande de Raccordement Enedis en Ligne | Raccordement Électrique</title>
         <meta name="description" content="Faites votre demande de raccordement Enedis. Provisoire, définitif, collectif ou augmentation de puissance. Procédure simplifiée et sécurisée." />
-        <meta name="keywords" content="raccordement Enedis, branchement électrique, compteur Linky, déplacement compteur, augmentation puissance électrique, raccordement professionnel, mise en service électricité, demande raccordement en ligne, coût raccordement Enedis, délai raccordement électrique, raccordement ERDF, branchement EDF, raccordement électrique maison neuve, raccordement électricité prix, tarif raccordement Enedis 2025, raccordement provisoire chantier, raccordement triphasé, modification branchement électrique, extension électrique, raccordement photovoltaïque, compteur électrique installation, devis raccordement électrique" />
-        <meta property="og:title" content="Demande de Raccordement Enedis | Raccordement Électrique" />
+        <meta name="keywords" content="demande de raccordement enedis, demande de raccordement électrique, raccordement enedis, demande de raccordement provisoire, raccordement définitif, raccordement collectif, augmentation de puissance compteur, branchement électrique, compteur Linky, raccordement professionnel, mise en service électricité, coût raccordement Enedis, délai raccordement électrique, raccordement ERDF, branchement EDF, raccordement électrique maison neuve, raccordement provisoire chantier, raccordement triphasé, modification branchement électrique, raccordement photovoltaïque, compteur électrique installation" />
+        <meta property="og:title" content="Demande de Raccordement Enedis en Ligne | Raccordement Électrique" />
         <meta property="og:description" content="Faites votre demande de raccordement Enedis. Provisoire, définitif, collectif ou augmentation de puissance. Procédure simplifiée et sécurisée." />
         <meta property="og:url" content="https://portail-electricite.com/" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Portail-Electricite.com" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Demande de Raccordement Enedis | Raccordement Électrique" />
+        <meta name="twitter:title" content="Demande de Raccordement Enedis en Ligne | Raccordement Électrique" />
         <meta name="twitter:description" content="Faites votre demande de raccordement Enedis. Provisoire, définitif, collectif ou augmentation de puissance." />
         <link rel="canonical" href="https://portail-electricite.com/" />
         
@@ -335,12 +335,12 @@ export default function HomePage() {
                 <Building className="h-8 w-8 text-white" />
               </div>
             </Link>
-            <Link href="/raccordement-enedis" className="group">
+            <Link href="/raccordement-enedis#formulaire-raccordement" className="group">
               <div className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
                 <Clock className="h-8 w-8 text-white" />
               </div>
             </Link>
-            <Link href="/raccordement-enedis" className="group">
+            <Link href="/raccordement-enedis#formulaire-raccordement" className="group">
               <div className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
                 <MapPin className="h-8 w-8 text-white" />
               </div>
@@ -369,7 +369,7 @@ export default function HomePage() {
               </div>
             </Link>
             
-            <Link href="/raccordement-enedis" className="w-full">
+            <Link href="/raccordement-enedis#formulaire-raccordement" className="w-full">
               <div className="bg-white/15 hover:bg-white/25 rounded-xl p-5 text-center transition-colors">
                 <div className="w-14 h-14 rounded-full bg-orange-500/20 flex items-center justify-center mb-3 mx-auto">
                   <Clock className="h-7 w-7 text-white" />
@@ -379,7 +379,7 @@ export default function HomePage() {
               </div>
             </Link>
             
-            <Link href="/raccordement-enedis" className="w-full">
+            <Link href="/raccordement-enedis#formulaire-raccordement" className="w-full">
               <div className="bg-white/15 hover:bg-white/25 rounded-xl p-5 text-center transition-colors">
                 <div className="w-14 h-14 rounded-full bg-purple-500/20 flex items-center justify-center mb-3 mx-auto">
                   <MapPin className="h-7 w-7 text-white" />

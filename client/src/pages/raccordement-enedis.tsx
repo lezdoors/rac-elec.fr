@@ -1667,7 +1667,7 @@ export default function RaccordementEnedisPage() {
         : 'bg-gradient-to-br from-slate-50 via-blue-50/30 to-red-50/20' // Dégradé pour desktop
     }`}>
       <EnhancedMobileFormOptimizer />
-      <div className="max-w-4xl mx-auto critical-content">
+      <div id="formulaire-raccordement" className="max-w-4xl mx-auto critical-content" style={{ scrollMarginTop: '100px' }}>
         
         {/* Indicateur de progression français compact - Optimisé mobile */}
         <div className={`bg-white/80 rounded-2xl border border-white/50 p-4 sm:p-6 mb-6 relative overflow-hidden ${
