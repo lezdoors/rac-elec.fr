@@ -3,6 +3,7 @@ import Layout from "../components/layout";
 import { Button } from "../components/ui/button";
 import { ArrowRight, Gauge, CheckCircle, Phone, Mail } from "lucide-react";
 import { Link } from "wouter";
+import { trackFormStart } from "@/lib/analytics";
 
 export default function ModificationCompteurPage() {
   return (
@@ -105,7 +106,7 @@ export default function ModificationCompteurPage() {
                   Demandez votre augmentation de puissance
                 </h2>
                 
-                <Link href="/raccordement-enedis#formulaire-raccordement">
+                <Link href="/raccordement-enedis#formulaire-raccordement" onClick={trackFormStart}>
                   <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 mb-4">
                     <ArrowRight className="h-4 w-4 mr-2" />
                     Faire ma demande

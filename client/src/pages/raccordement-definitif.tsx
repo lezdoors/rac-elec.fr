@@ -3,6 +3,7 @@ import Layout from "../components/layout";
 import { Button } from "../components/ui/button";
 import { ArrowRight, Zap, CheckCircle, Phone, Mail } from "lucide-react";
 import { Link } from "wouter";
+import { trackFormStart } from "@/lib/analytics";
 
 export default function RaccordementDefinitifPage() {
   return (
@@ -105,7 +106,7 @@ export default function RaccordementDefinitifPage() {
                   Demandez votre raccordement
                 </h2>
                 
-                <Link href="/raccordement-enedis#formulaire-raccordement">
+                <Link href="/raccordement-enedis#formulaire-raccordement" onClick={trackFormStart}>
                   <Button className="w-full bg-green-600 hover:bg-green-700 text-white py-3 mb-4">
                     <ArrowRight className="h-4 w-4 mr-2" />
                     Faire ma demande

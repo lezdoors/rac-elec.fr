@@ -90,3 +90,15 @@ export const gtagReportConversion = (referenceNumber?: string, callback?: () => 
   
   return false;
 };
+
+// Track form_start conversion when user clicks CTA to access form
+export const trackFormStart = () => {
+  if (typeof window === 'undefined' || !window.gtag) return;
+  
+  window.gtag('event', 'form_start', {
+    event_category: 'engagement',
+    event_label: 'raccordement_form',
+  });
+  
+  console.log('✅ Form start tracked');
+};

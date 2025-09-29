@@ -30,6 +30,7 @@ import { PerformanceOptimizer } from "@/components/performance-optimizer";
 import { FloatingCtaButton } from "@/components/floating-cta-button";
 import { MobileFormOptimizer } from "@/components/mobile-form-optimizer";
 import { MobileImageOptimizer } from "@/components/mobile-image-optimizer";
+import { trackFormStart } from "@/lib/analytics";
 
 // Performance optimization - lazy loading will be implemented inline
 

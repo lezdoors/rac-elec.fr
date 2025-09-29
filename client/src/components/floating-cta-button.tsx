@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, Phone } from 'lucide-react';
 import { Link } from 'wouter';
+import { trackFormStart } from '@/lib/analytics';
 
 export function FloatingCtaButton() {
   const [isVisible, setIsVisible] = useState(false);
@@ -70,7 +71,7 @@ export function FloatingCtaButton() {
   if (!isMobile) return null;
 
   return (
-    <Link href="/raccordement-enedis#top">
+    <Link href="/raccordement-enedis#formulaire-raccordement" onClick={trackFormStart}>
       <div 
         className={`floating-cta ${isVisible ? 'floating-cta-visible' : 'floating-cta-hidden'}`}
         style={{
