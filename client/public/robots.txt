@@ -5,6 +5,8 @@ Allow: /
 Allow: /raccordement-enedis
 Allow: /raccordement-definitif
 Allow: /raccordement-provisoire
+Allow: /raccordement-collectif
+Allow: /modification-compteur
 Allow: /viabilisation-terrain
 Allow: /guide-raccordement
 Allow: /nos-services
