@@ -335,13 +335,13 @@ export default function PaiementConfirmationPage() {
         <title>Confirmation de Paiement | Raccordement Électrique Enedis</title>
         <meta name="description" content="Confirmation de votre paiement pour votre demande de raccordement électrique Enedis. Suivez le statut de votre demande et recevez des mises à jour en temps réel." />
         <meta name="keywords" content="confirmation paiement, raccordement enedis, suivi demande, branchement électrique, raccordement électrique, paiement raccordement" />
-        <link rel="canonical" href="https://portail-electricite.com/paiement-confirmation" />
+        <link rel="canonical" href="https://www.raccordement-connect.com/paiement-confirmation" />
         
         {/* Balises Open Graph */}
         <meta property="og:title" content="Confirmation de Paiement | Raccordement Électrique Enedis" />
         <meta property="og:description" content="Confirmation du traitement de votre demande de raccordement électrique et de votre paiement. Suivez l'avancement de votre dossier en temps réel." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://portail-electricite.com/paiement-confirmation" />
+        <meta property="og:url" content="https://www.raccordement-connect.com/paiement-confirmation" />
         
         {/* Balisage Schema.org pour Order et Service */}
         <script type="application/ld+json">
@@ -358,19 +358,19 @@ export default function PaiementConfirmationPage() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Accueil",
-                    "item": "https://portail-electricite.com/"
+                    "item": "https://www.raccordement-connect.com/"
                   },
                   {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Raccordement Électrique",
-                    "item": "https://portail-electricite.com/raccordement-enedis"
+                    "item": "https://www.raccordement-connect.com/raccordement-enedis"
                   },
                   {
                     "@type": "ListItem",
                     "position": 3,
                     "name": "Confirmation de Paiement",
-                    "item": "https://portail-electricite.com/paiement-confirmation"
+                    "item": "https://www.raccordement-connect.com/paiement-confirmation"
                   }
                 ]
               },

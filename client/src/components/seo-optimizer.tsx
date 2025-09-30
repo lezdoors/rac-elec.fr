@@ -28,9 +28,9 @@ export const SEOOptimizer = ({
   noindex = false,
   nofollow = false
 }: SEOData) => {
-  const fullTitle = title.includes("Portail-Electricite.com") 
+  const fullTitle = title.includes("Raccordement-Connect.com") 
     ? title 
-    : `${title} | Portail-Electricite.com`;
+    : `${title} | Raccordement-Connect.com`;
 
   const defaultKeywords = "raccordement électrique, Enedis, branchement électrique, compteur Linky, raccordement maison, électricité, France";
   const metaKeywords = keywords ? `${keywords}, ${defaultKeywords}` : defaultKeywords;
@@ -53,7 +53,7 @@ export const SEOOptimizer = ({
       <meta property="og:description" content={description} />
       <meta property="og:type" content={ogType} />
       <meta property="og:image" content={ogImage} />
-      <meta property="og:site_name" content="Portail-Electricite.com" />
+      <meta property="og:site_name" content="Raccordement-Connect.com" />
       
       {/* Twitter Card */}
       <meta name="twitter:card" content={twitterCard} />
@@ -128,7 +128,7 @@ export const LocalBusinessSchema = () => {
     "@type": "LocalBusiness",
     "name": "Raccordement-Elec.fr",
     "description": "Service professionnel de raccordement électrique Enedis en France",
-    "url": "https://portail-electricite.com",
+    "url": "https://www.raccordement-connect.com",
     "telephone": "09 70 70 95 70",
     "priceRange": "€€",
     "areaServed": {
@@ -242,7 +242,7 @@ export const SEOBreadcrumb = ({
       "@type": "ListItem",
       "position": index + 1,
       "name": item.name,
-      "item": item.url ? `https://portail-electricite.com${item.url}` : undefined
+      "item": item.url ? `https://www.raccordement-connect.com${item.url}` : undefined
     }))
   };
 

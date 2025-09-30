@@ -114,7 +114,7 @@ export function LocalSeoContent({
               <meta itemProp="addressCountry" content="FR" />
             </div>
             <meta itemProp="telephone" content="09 70 70 95 70" />
-            <meta itemProp="url" content="https://portail-electricite.com" />
+            <meta itemProp="url" content="https://www.raccordement-connect.com" />
           </div>
         </div>
       </div>

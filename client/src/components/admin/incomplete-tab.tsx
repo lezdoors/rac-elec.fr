@@ -190,7 +190,7 @@ export function IncompleteLeadsTab({
                                   const clientName = (lead.firstName || lead.lastName) ? 
                                     `${lead.firstName || ''} ${lead.lastName || ''}`.trim() : 
                                     (lead.name || 'Client');
-                                  const message = `Bonjour ${clientName}, nous avons bien reçu votre demande de raccordement électrique. L'équipe Portail-Electricite.com souhaite vous contacter pour finaliser votre dossier.`;
+                                  const message = `Bonjour ${clientName}, nous avons bien reçu votre demande de raccordement électrique. L'équipe Raccordement-Connect.com souhaite vous contacter pour finaliser votre dossier.`;
                                   
                                   // Ouvrir WhatsApp dans un nouvel onglet
                                   window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');

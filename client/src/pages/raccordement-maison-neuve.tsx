@@ -28,7 +28,7 @@ export default function RaccordementMaisonNeuvePage() {
       <Helmet>
         <title>Raccordement Maison Neuve | Enedis - Procédure Complète</title>
         <meta name="description" content="Raccordement électrique pour maison neuve. Procédure simplifiée et accompagnement complet pour votre projet de construction." />
-        <link rel="canonical" href="https://portail-electricite.com/raccordement-maison-neuve" />
+        <link rel="canonical" href="https://www.raccordement-connect.com/raccordement-maison-neuve" />
         <meta name="robots" content="index, follow" />
         
         {/* Service JSON-LD */}
@@ -41,8 +41,8 @@ export default function RaccordementMaisonNeuvePage() {
             "description": "Raccordement électrique pour maison neuve. Accompagnement complet de la demande à la mise en service pour votre projet de construction.",
             "provider": {
               "@type": "Organization",
-              "name": "Portail-Electricite.com",
-              "url": "https://portail-electricite.com/"
+              "name": "Raccordement-Connect.com",
+              "url": "https://www.raccordement-connect.com/"
             },
             "areaServed": {
               "@type": "Country",
@@ -61,13 +61,13 @@ export default function RaccordementMaisonNeuvePage() {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Accueil",
-                "item": "https://portail-electricite.com/"
+                "item": "https://www.raccordement-connect.com/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Raccordement Maison Neuve",
-                "item": "https://portail-electricite.com/raccordement-maison-neuve"
+                "item": "https://www.raccordement-connect.com/raccordement-maison-neuve"
               }
             ]
           }

@@ -12,7 +12,7 @@ export default function ParisPage() {
       <Helmet>
         <title>Demande de Raccordement Enedis Paris | Raccordement Électrique</title>
         <meta name="description" content="Simplifiez votre demande de raccordement Enedis à Paris. Provisoire, définitif, collectif ou augmentation de puissance." />
-        <link rel="canonical" href="https://portail-electricite.com/paris" />
+        <link rel="canonical" href="https://www.raccordement-connect.com/paris" />
         <meta name="robots" content="index, follow" />
         
         {/* Service JSON-LD with areaServed */}
@@ -25,8 +25,8 @@ export default function ParisPage() {
             "description": "Service de demande de raccordement électrique Enedis à Paris. Provisoire, définitif, collectif et augmentation de puissance pour particuliers et professionnels parisiens.",
             "provider": {
               "@type": "Organization",
-              "name": "Portail-Electricite.com",
-              "url": "https://portail-electricite.com/"
+              "name": "Raccordement-Connect.com",
+              "url": "https://www.raccordement-connect.com/"
             },
             "areaServed": {
               "@type": "City",

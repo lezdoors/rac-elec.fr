@@ -45,7 +45,7 @@ export function ResponsiveFooter() {
                 <div className="p-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/10">
                   <div className="flex flex-col justify-center">
                     <div className="text-xl font-bold text-white leading-tight tracking-tight">
-                      Portail-Electricite.com
+                      Raccordement-Connect.com
                     </div>
                     <div className="text-xs text-white/80 tracking-wide">
                       Partenaire n°1 pour vos démarches Enedis
@@ -352,7 +352,7 @@ export function ResponsiveFooter() {
         {/* Mentions de copyright */}
         <div className="flex flex-wrap justify-between items-center mt-6 pt-4 border-t border-blue-900/40 text-xs text-gray-400">
           <div className="flex items-center">
-            <span className="text-blue-300 font-medium mr-1">©</span> {year} <span className="text-blue-200 font-medium mx-1">Portail-Electricite.com</span> - Tous droits réservés
+            <span className="text-blue-300 font-medium mr-1">©</span> {year} <span className="text-blue-200 font-medium mx-1">Raccordement-Connect.com</span> - Tous droits réservés
           </div>
           <div className="flex space-x-4">
             <ScrollToTopLink href="/mentions-legales" className="hover:text-white">Mentions légales</ScrollToTopLink>

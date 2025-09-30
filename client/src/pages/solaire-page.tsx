@@ -35,7 +35,7 @@ export default function SolairePage() {
         <title>Raccordement Photovoltaïques Enedis | Installation Panneaux Solaires</title>
         <meta name="description" content="Raccordement de vos installations photovoltaïques au réseau Enedis. Panneaux solaires, autoconsommation et revente d'électricité. Démarches simplifiées." />
         <meta name="keywords" content="raccordement photovoltaïques, installation photovoltaïque, Enedis solaire, panneaux solaires, autoconsommation électrique" />
-        <link rel="canonical" href="https://portail-electricite.com/raccordement-panneau-solaire" />
+        <link rel="canonical" href="https://www.raccordement-connect.com/raccordement-panneau-solaire" />
         
         {/* Service JSON-LD */}
         <script type="application/ld+json">{`
@@ -47,8 +47,8 @@ export default function SolairePage() {
             "description": "Raccordement de vos installations photovoltaïques au réseau Enedis. Autoconsommation, revente d'électricité et accompagnement complet.",
             "provider": {
               "@type": "Organization",
-              "name": "Portail-Electricite.com",
-              "url": "https://portail-electricite.com/"
+              "name": "Raccordement-Connect.com",
+              "url": "https://www.raccordement-connect.com/"
             },
             "areaServed": {
               "@type": "Country",
@@ -67,13 +67,13 @@ export default function SolairePage() {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Accueil",
-                "item": "https://portail-electricite.com/"
+                "item": "https://www.raccordement-connect.com/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Raccordement Photovoltaïques",
-                "item": "https://portail-electricite.com/raccordement-panneau-solaire"
+                "item": "https://www.raccordement-connect.com/raccordement-panneau-solaire"
               }
             ]
           }

@@ -84,7 +84,7 @@ export default function CGUPage() {
               </p>
               
               <div className="text-sm text-gray-500 mt-12 text-center italic">
-                Portail-Electricite.com n'est pas affilié à Enedis. Enedis est une marque déposée.
+                Raccordement-Connect.com n'est pas affilié à Enedis. Enedis est une marque déposée.
               </div>
             </div>
           </div>

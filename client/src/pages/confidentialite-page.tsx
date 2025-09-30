@@ -21,7 +21,7 @@ export default function ConfidentialitePage() {
               
               <h2 className="text-xl font-semibold text-blue-700 mt-8 mb-4">1. Introduction</h2>
               <p>
-                Portail-Electricite.com s'engage à protéger votre vie privée. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations personnelles lorsque vous utilisez notre site web et nos services.
+                Raccordement-Connect.com s'engage à protéger votre vie privée. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations personnelles lorsque vous utilisez notre site web et nos services.
               </p>
               
               <h2 className="text-xl font-semibold text-blue-700 mt-8 mb-4">2. Informations que nous collectons</h2>
@@ -102,7 +102,7 @@ export default function ConfidentialitePage() {
               </p>
               
               <div className="text-sm text-gray-500 mt-12 text-center italic">
-                Portail-Electricite.com n'est pas affilié à Enedis. Enedis est une marque déposée.
+                Raccordement-Connect.com n'est pas affilié à Enedis. Enedis est une marque déposée.
               </div>
             </div>
           </div>

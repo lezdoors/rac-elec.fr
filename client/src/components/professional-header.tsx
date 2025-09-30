@@ -29,7 +29,7 @@ export function ProfessionalHeader() {
                 <div className="w-4 h-4 bg-white" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}></div>
               </div>
               <div className="text-lg font-bold text-blue-600 hidden sm:block">
-                Portail-Electricite.com
+                Raccordement-Connect.com
               </div>
             </div>
           </Link>

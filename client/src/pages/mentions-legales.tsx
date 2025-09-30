@@ -9,12 +9,12 @@ export default function MentionsLegalesPage() {
     <Layout>
       <div id="top" className="min-h-screen bg-gray-50 py-12">
         <Helmet>
-          <title>Mentions Légales | Portail-Electricite.com</title>
+          <title>Mentions Légales | Raccordement-Connect.com</title>
           <meta 
             name="description" 
-            content="Mentions légales de Portail-Electricite.com, service d'accompagnement pour vos démarches de raccordement électrique." 
+            content="Mentions légales de Raccordement-Connect.com, service d'accompagnement pour vos démarches de raccordement électrique." 
           />
-          <link rel="canonical" href="https://portail-electricite.com/mentions-legales" />
+          <link rel="canonical" href="https://www.raccordement-connect.com/mentions-legales" />
         </Helmet>
 
         <div className="container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,7 +98,7 @@ export default function MentionsLegalesPage() {
               </p>
               
               <div className="text-sm text-gray-500 mt-12 text-center italic">
-                Portail-Electricite.com n'est pas affilié à Enedis. Enedis est une marque déposée.
+                Raccordement-Connect.com n'est pas affilié à Enedis. Enedis est une marque déposée.
               </div>
             </div>
             
