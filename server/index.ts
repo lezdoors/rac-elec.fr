@@ -324,6 +324,13 @@ app.get('/googlef78ec66127d019c8.html', (req, res) => {
   res.sendFile(verificationPath);
 });
 
+// Route spécifique pour le logo Google Ads
+app.get('/logo-google-ads-1200x1200.png', (req, res) => {
+  const logoPath = path.join(process.cwd(), 'public', 'logo-google-ads-1200x1200.png');
+  res.setHeader('Content-Type', 'image/png');
+  res.sendFile(logoPath);
+});
+
 // Middleware de collecte de métriques de performance désactivé temporairement
 // app.use(performanceService.performanceMiddleware);
 
