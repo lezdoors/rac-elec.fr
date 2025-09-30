@@ -15,13 +15,13 @@ export default function RaccordementHub() {
         <title>Raccordement Électrique France | Service Enedis National</title>
         <meta name="description" content="Service de raccordement électrique professionnel dans toute la France ⚡ Experts Enedis agréés, réponse sous 48h. Particuliers et professionnels." />
         <meta name="keywords" content="raccordement électrique, enedis, france, demande, expert, professionnel" />
-        <link rel="canonical" href={`${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}/raccordement/`} />
+        <link rel="canonical" href={`${import.meta.env.VITE_SITE_URL || 'https://www.raccordement-connect.com'}/raccordement/`} />
         
         {/* Open Graph */}
         <meta property="og:title" content="Raccordement Électrique France | Service Enedis National" />
         <meta property="og:description" content="Service de raccordement électrique professionnel dans toute la France ⚡ Experts Enedis agréés, réponse sous 48h." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}/raccordement/`} />
+        <meta property="og:url" content={`${import.meta.env.VITE_SITE_URL || 'https://www.raccordement-connect.com'}/raccordement/`} />
         
         {/* Schema.org Service Organization */}
         <script type="application/ld+json">
@@ -32,8 +32,8 @@ export default function RaccordementHub() {
             "description": "Service professionnel de raccordement électrique Enedis dans toute la France",
             "provider": {
               "@type": "Organization",
-              "name": "Portail Électricité",
-              "url": "https://portail-electricite.com"
+              "name": "Raccordement Connect",
+              "url": "https://www.raccordement-connect.com"
             },
             "areaServed": {
               "@type": "Country",

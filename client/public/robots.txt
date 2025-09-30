@@ -19,7 +19,7 @@ Disallow: /payment
 Disallow: /debug
 
 # Sitemap location
-Sitemap: https://portail-electricite.com/sitemap.xml
+Sitemap: https://www.raccordement-connect.com/sitemap.xml
 
 # Crawl delay to be respectful
 Crawl-delay: 1

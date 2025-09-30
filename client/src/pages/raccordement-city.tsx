@@ -128,14 +128,14 @@ export default function RaccordementCity() {
         <title>{cityData.meta_title}</title>
         <meta name="description" content={cityData.meta_description} />
         <meta name="keywords" content={`raccordement électrique, ${cityData.name}, enedis, ${cityData.postal_codes.join(', ')}`} />
-        <link rel="canonical" href={`${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}${cityData.canonical}`} />
+        <link rel="canonical" href={`${import.meta.env.VITE_SITE_URL || 'https://www.raccordement-connect.com'}${cityData.canonical}`} />
         
         {/* Open Graph */}
         <meta property="og:title" content={cityData.meta_title} />
         <meta property="og:description" content={cityData.meta_description} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}${cityData.canonical}`} />
-        <meta property="og:site_name" content="Portail-Electricite.com" />
+        <meta property="og:url" content={`${import.meta.env.VITE_SITE_URL || 'https://www.raccordement-connect.com'}${cityData.canonical}`} />
+        <meta property="og:site_name" content="Raccordement-Connect.com" />
         <meta property="og:locale" content="fr_FR" />
         
         {/* Twitter Cards */}
@@ -203,19 +203,19 @@ export default function RaccordementCity() {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Raccordement Électrique",
-                "item": `${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}/raccordement/`
+                "item": `${import.meta.env.VITE_SITE_URL || 'https://www.raccordement-connect.com'}/raccordement/`
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": cityData.region_name,
-                "item": `${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}/raccordement/${cityData.region}/`
+                "item": `${import.meta.env.VITE_SITE_URL || 'https://www.raccordement-connect.com'}/raccordement/${cityData.region}/`
               },
               {
                 "@type": "ListItem",
                 "position": 3,
                 "name": cityData.name,
-                "item": `${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}${cityData.canonical}`
+                "item": `${import.meta.env.VITE_SITE_URL || 'https://www.raccordement-connect.com'}${cityData.canonical}`
               }
             ]
           })}

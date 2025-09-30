@@ -221,13 +221,13 @@ export default function HomePage() {
         <meta name="keywords" content="demande de raccordement enedis, demande de raccordement électrique, raccordement enedis, demande de raccordement provisoire, raccordement définitif, raccordement collectif, augmentation de puissance compteur, branchement électrique, compteur Linky, raccordement professionnel, mise en service électricité, coût raccordement Enedis, délai raccordement électrique, raccordement ERDF, branchement EDF, raccordement électrique maison neuve, raccordement provisoire chantier, raccordement triphasé, modification branchement électrique, raccordement photovoltaïque, compteur électrique installation" />
         <meta property="og:title" content="Demande de Raccordement Enedis en Ligne | Raccordement Électrique" />
         <meta property="og:description" content="Faites votre demande de raccordement Enedis. Provisoire, définitif, collectif ou augmentation de puissance. Procédure simplifiée et sécurisée." />
-        <meta property="og:url" content="https://portail-electricite.com/" />
+        <meta property="og:url" content="https://www.raccordement-connect.com/" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Portail-Electricite.com" />
+        <meta property="og:site_name" content="Raccordement-Connect.com" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Demande de Raccordement Enedis en Ligne | Raccordement Électrique" />
         <meta name="twitter:description" content="Faites votre demande de raccordement Enedis. Provisoire, définitif, collectif ou augmentation de puissance." />
-        <link rel="canonical" href="https://portail-electricite.com/" />
+        <link rel="canonical" href="https://www.raccordement-connect.com/" />
         
         {/* Google tag loaded once in index.html */}
         
@@ -236,9 +236,9 @@ export default function HomePage() {
           {
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "Portail-Electricite.com",
-            "url": "https://portail-electricite.com/",
-            "logo": "https://portail-electricite.com/favicon-new.svg",
+            "name": "Raccordement-Connect.com",
+            "url": "https://www.raccordement-connect.com/",
+            "logo": "https://www.raccordement-connect.com/favicon-new.svg",
             "description": "Services professionnels de raccordement électrique Enedis pour particuliers et professionnels en France.",
             "address": {
               "@type": "PostalAddress",
@@ -259,7 +259,7 @@ export default function HomePage() {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "Services de Raccordement Enedis",
-            "image": "https://portail-electricite.com/og-image.jpg",
+            "image": "https://www.raccordement-connect.com/og-image.jpg",
             "description": "Services professionnels pour tous vos besoins de raccordement électrique, branchement Enedis, compteur Linky et modifications de puissance.",
             "priceRange": "€€",
             "address": {
@@ -267,7 +267,7 @@ export default function HomePage() {
               "addressCountry": "FR"
             },
             "telephone": "+33 9 70 70 95 70",
-            "url": "https://portail-electricite.com/",
+            "url": "https://www.raccordement-connect.com/",
             "serviceArea": {
               "@type": "Country",
               "name": "France"
@@ -291,8 +291,8 @@ export default function HomePage() {
             "description": "Service de demande de raccordement électrique Enedis pour particuliers et professionnels en France. Raccordement provisoire, définitif, collectif et augmentation de puissance.",
             "provider": {
               "@type": "Organization",
-              "name": "Portail-Electricite.com",
-              "url": "https://portail-electricite.com/"
+              "name": "Raccordement-Connect.com",
+              "url": "https://www.raccordement-connect.com/"
             },
             "areaServed": {
               "@type": "Country",

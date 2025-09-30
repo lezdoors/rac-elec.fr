@@ -47,14 +47,14 @@ export default function RaccordementRegion() {
         <title>{regionData.meta_title}</title>
         <meta name="description" content={regionData.meta_description} />
         <meta name="keywords" content={`raccordement électrique, ${regionData.name}, enedis, ${regionData.cities.join(', ')}`} />
-        <link rel="canonical" href={`${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}/raccordement/${regionSlug}/`} />
+        <link rel="canonical" href={`${import.meta.env.VITE_SITE_URL || 'https://www.raccordement-connect.com'}/raccordement/${regionSlug}/`} />
         
         {/* Open Graph */}
         <meta property="og:title" content={regionData.meta_title} />
         <meta property="og:description" content={regionData.meta_description} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}/raccordement/${regionSlug}/`} />
-        <meta property="og:site_name" content="Portail-Electricite.com" />
+        <meta property="og:url" content={`${import.meta.env.VITE_SITE_URL || 'https://www.raccordement-connect.com'}/raccordement/${regionSlug}/`} />
+        <meta property="og:site_name" content="Raccordement-Connect.com" />
         
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -71,13 +71,13 @@ export default function RaccordementRegion() {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Raccordement Électrique",
-                "item": `${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}/raccordement/`
+                "item": `${import.meta.env.VITE_SITE_URL || 'https://www.raccordement-connect.com'}/raccordement/`
               },
               {
                 "@type": "ListItem", 
                 "position": 2,
                 "name": regionData.name,
-                "item": `${import.meta.env.VITE_SITE_URL || 'https://portail-electricite.com'}/raccordement/${regionSlug}/`
+                "item": `${import.meta.env.VITE_SITE_URL || 'https://www.raccordement-connect.com'}/raccordement/${regionSlug}/`
               }
             ]
           })}
@@ -92,7 +92,7 @@ export default function RaccordementRegion() {
             "description": regionData.description,
             "provider": {
               "@type": "Organization",
-              "name": "Portail Électricité"
+              "name": "Raccordement Connect"
             },
             "areaServed": {
               "@type": "AdministrativeArea",
