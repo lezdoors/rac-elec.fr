@@ -317,6 +317,13 @@ app.get('/robots.txt', (req, res) => {
   res.sendFile(robotsPath);
 });
 
+// Route spécifique pour le fichier de vérification Google Search Console
+app.get('/googlef78ec66127d019c8.html', (req, res) => {
+  const verificationPath = path.join(process.cwd(), 'public', 'googlef78ec66127d019c8.html');
+  res.setHeader('Content-Type', 'text/html');
+  res.sendFile(verificationPath);
+});
+
 // Middleware de collecte de métriques de performance désactivé temporairement
 // app.use(performanceService.performanceMiddleware);
 
