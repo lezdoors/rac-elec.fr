@@ -106,6 +106,41 @@ export default function Layout({ children }: LayoutProps) {
     };
   }, []);
 
+  // Lock background scroll when mobile menu is open (mobile-compatible)
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [mobileMenuOpen]);
+
+  // Handle Escape key to close mobile menu
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [mobileMenuOpen]);
+
   return (
     <div className="min-h-screen flex flex-col">
 
@@ -177,6 +212,7 @@ export default function Layout({ children }: LayoutProps) {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label={mobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
                 style={{ WebkitTapHighlightColor: 'transparent' }}
+                data-testid="button-open-menu"
               >
                 <Menu className="w-7 h-7 text-gray-700 transition-all duration-200" />
               </button>
@@ -200,16 +236,20 @@ export default function Layout({ children }: LayoutProps) {
                 onClick={() => setMobileMenuOpen(false)}
               />
               
-              {/* Slide-in Menu from Right */}
+              {/* Slide-in Menu from Right - Full Screen */}
               <motion.div
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
-                className="lg:hidden fixed top-0 right-0 bottom-0 w-[85vw] max-w-sm bg-white shadow-2xl z-50 flex flex-col"
+                className="lg:hidden fixed top-0 right-0 bottom-0 w-screen bg-white shadow-2xl z-50 flex flex-col"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Menu de navigation mobile"
+                data-testid="dialog-mobile-menu"
               >
                 {/* Header: Logo + Tagline + Close Button */}
-                <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200">
+                <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200 relative z-10">
                   <div className="flex-1">
                     <div className="w-[160px] h-auto mb-1">
                       <EnedisAuthenticMasterpiece size="md" variant="light" />
@@ -218,8 +258,10 @@ export default function Layout({ children }: LayoutProps) {
                   </div>
                   <button
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-2 rounded-md hover:bg-gray-100 transition-colors touch-manipulation"
+                    className="p-2 rounded-md hover:bg-gray-100 transition-colors touch-manipulation relative z-20"
                     aria-label="Fermer le menu"
+                    data-testid="button-close-menu"
+                    autoFocus
                   >
                     <X className="h-6 w-6 text-gray-700" />
                   </button>
@@ -235,6 +277,7 @@ export default function Layout({ children }: LayoutProps) {
                         href="/" 
                         className={`flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-medium text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/' ? 'bg-blue-50 text-[#0072CE]' : ''}`}
                         onClick={() => setMobileMenuOpen(false)}
+                        data-testid="link-nav-accueil"
                       >
                         <Home className="h-5 w-5 mr-3 flex-shrink-0" />
                         Accueil
@@ -244,6 +287,7 @@ export default function Layout({ children }: LayoutProps) {
                         href="/nos-services" 
                         className={`flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-medium text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/nos-services' ? 'bg-blue-50 text-[#0072CE]' : ''}`}
                         onClick={() => setMobileMenuOpen(false)}
+                        data-testid="link-nav-services"
                       >
                         <Zap className="h-5 w-5 mr-3 flex-shrink-0" />
                         Nos Services
@@ -253,6 +297,7 @@ export default function Layout({ children }: LayoutProps) {
                         href="/guide-raccordement" 
                         className={`flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-medium text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/guide-raccordement' ? 'bg-blue-50 text-[#0072CE]' : ''}`}
                         onClick={() => setMobileMenuOpen(false)}
+                        data-testid="link-nav-guide"
                       >
                         <FileText className="h-5 w-5 mr-3 flex-shrink-0" />
                         Guide
@@ -262,6 +307,7 @@ export default function Layout({ children }: LayoutProps) {
                         href="/contact" 
                         className={`flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-medium text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/contact' ? 'bg-blue-50 text-[#0072CE]' : ''}`}
                         onClick={() => setMobileMenuOpen(false)}
+                        data-testid="link-nav-contact"
                       >
                         <Mail className="h-5 w-5 mr-3 flex-shrink-0" />
                         Contact
@@ -276,6 +322,7 @@ export default function Layout({ children }: LayoutProps) {
                       href="tel:0970709570" 
                       className="flex items-center justify-center w-full p-4 bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 text-[#0072CE] rounded-lg transition-all duration-200 group touch-manipulation mb-3"
                       onClick={() => setMobileMenuOpen(false)}
+                      data-testid="link-phone-help"
                     >
                       <Phone className="h-6 w-6 mr-3 group-hover:scale-110 transition-transform" />
                       <span className="font-bold text-lg">09 70 70 95 70</span>
@@ -284,6 +331,7 @@ export default function Layout({ children }: LayoutProps) {
                       href="/faq" 
                       className="flex items-center justify-center w-full p-3 text-gray-600 hover:text-[#0072CE] text-sm font-medium transition-colors touch-manipulation"
                       onClick={() => setMobileMenuOpen(false)}
+                      data-testid="link-faq"
                     >
                       <HelpCircle className="h-4 w-4 mr-2" />
                       Consulter la FAQ
@@ -292,12 +340,13 @@ export default function Layout({ children }: LayoutProps) {
                 </div>
 
                 {/* Bottom Sticky CTA Section */}
-                <div className="px-6 py-5 border-t border-gray-200 bg-gray-50">
+                <div className="px-6 py-5 border-t border-gray-200 bg-gray-50" style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom))' }}>
                   {/* Main CTA Button */}
                   <Link 
                     href="/raccordement-enedis#formulaire-raccordement" 
                     className="flex items-center justify-center w-full bg-[#0072CE] hover:bg-[#005bb5] text-white py-4 rounded-lg transition-all duration-300 font-bold text-base shadow-lg hover:shadow-xl active:scale-95 touch-manipulation mb-4"
                     onClick={() => setMobileMenuOpen(false)}
+                    data-testid="button-cta-commencer"
                   >
                     <ArrowRight className="h-5 w-5 mr-2" />
                     Commencer ma demande
