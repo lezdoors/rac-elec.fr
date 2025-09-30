@@ -1,0 +1,59 @@
+You are a senior web developer. Update my Next.js/Lovable project for raccordement-connect.com so that Google Ads conversion tracking is correctly implemented.
+
+Requirements:
+
+1. Global Google Ads tag
+- Place this snippet inside the <Head> of every page (e.g., _document.tsx or layout.tsx depending on framework):
+<!-- Global site tag (gtag.js) - Google Ads -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16698052873"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-16698052873');
+</script>
+
+2. Purchase conversion (thank-you page)
+- On the /merci (thank-you) page, before </body>, add:
+<script>
+  gtag('event', 'conversion', {
+    'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
+    'transaction_id': ''  // leave blank or pass Stripe order ID if available
+  });
+</script>
+
+3. Form start conversion
+- Create a function in global JS that fires when the user clicks the “Commencer ma demande” button:
+<script>
+  function gads_form_start(){
+    gtag('event','conversion',{ 'send_to':'AW-16698052873/5o3ICMLjpMUaEImioJo-' });
+    return true;
+  }
+</script>
+- Attach this to the CTA button that begins the form process:
+<button type="button" onclick="gads_form_start();">Commencer ma demande</button>
+
+4. Form submit conversion
+- Create a function to fire after a successful form submission:
+<script>
+  function gads_form_submit(){
+    gtag('event','conversion',{ 'send_to':'AW-16698052873/PqZMCJW-tMUaEImioJo-' });
+    return true;
+  }
+</script>
+- Call gads_form_submit() only after the form has been validated and the data successfully posted to Supabase/Stripe.
+
+5. Do not mix GTM and gtag
+- Remove any incorrect loader such as GTM (GTM-xxxx) or GA4-only code unless explicitly required.
+- Keep a single global tag with ID AW-16698052873 and the three conversion events above.
+
+6. Verification
+- Ensure global tag loads on all pages.
+- Ensure purchase conversion fires only on /merci.
+- Ensure form_start fires on CTA click.
+- Ensure form_submit fires only after successful form completion.
+
+Deliverables:
+- Commit message: "feat(tracking): add Google Ads global tag and conversion events"
+- Show me the updated files (Head component, form component, thank-you page).
+- Provide console.log tests in development to confirm events fire correctly.
