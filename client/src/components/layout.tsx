@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { apiRequest } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
-// REMOVED: Heavy framer-motion import from shared layout component
+import { motion, AnimatePresence } from "framer-motion";
 import EnedisAuthenticMasterpiece from "@/components/ui/enedis-authentic-logo";
 import { 
   Bolt, 
@@ -23,7 +23,9 @@ import {
   Home, 
   FileText,
   Send,
-  ShieldCheck
+  ShieldCheck,
+  Lock,
+  CheckCircle
 } from "lucide-react";
 import {
   Dialog,
@@ -176,11 +178,7 @@ export default function Layout({ children }: LayoutProps) {
                 aria-label={mobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
                 style={{ WebkitTapHighlightColor: 'transparent' }}
               >
-                {mobileMenuOpen ? (
-                  <ChevronRight className="w-7 h-7 text-gray-700 transition-all duration-200 rotate-90" />
-                ) : (
-                  <Menu className="w-7 h-7 text-gray-700 transition-all duration-200" />
-                )}
+                <Menu className="w-7 h-7 text-gray-700 transition-all duration-200" />
               </button>
               
             </div>
@@ -188,79 +186,143 @@ export default function Layout({ children }: LayoutProps) {
         </div>
           
         
-        {/* MENU MOBILE PERFECTIONNÉ - Interface optimale */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-2xl z-40">
-            <div className="px-3 py-5">
+        {/* MENU MOBILE CONVERSION-FOCUSED - Slide-in from right */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <>
+              {/* Dark Overlay */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="lg:hidden fixed inset-0 bg-black/50 z-50"
+                onClick={() => setMobileMenuOpen(false)}
+              />
               
-              {/* Navigation mobile simplifiée */}
-              <div className="space-y-1">
-                <Link 
-                  href="/" 
-                  className={`flex items-center px-4 py-4 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-semibold text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/' ? 'bg-blue-50 text-[#0072CE] border-l-4 border-[#0072CE]' : ''}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Home className="h-5 w-5 mr-3 flex-shrink-0" />
-                  Accueil
-                </Link>
-                
-                <Link 
-                  href="/nos-services" 
-                  className={`flex items-center px-4 py-4 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-semibold text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/nos-services' ? 'bg-blue-50 text-[#0072CE] border-l-4 border-[#0072CE]' : ''}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Zap className="h-5 w-5 mr-3 flex-shrink-0" />
-                  Nos Services
-                </Link>
-                
-                <Link 
-                  href="/faq" 
-                  className={`flex items-center px-4 py-4 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-semibold text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/faq' ? 'bg-blue-50 text-[#0072CE] border-l-4 border-[#0072CE]' : ''}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <HelpCircle className="h-5 w-5 mr-3 flex-shrink-0" />
-                  Guide
-                </Link>
-                
-                <Link 
-                  href="/contact" 
-                  className={`flex items-center px-4 py-4 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-semibold text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/contact' ? 'bg-blue-50 text-[#0072CE] border-l-4 border-[#0072CE]' : ''}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Mail className="h-5 w-5 mr-3 flex-shrink-0" />
-                  Contact
-                </Link>
-              </div>
-              
-              {/* Séparateur */}
-              <div className="border-t border-gray-100 my-5"></div>
-              
-              {/* Actions principales */}
-              <div className="space-y-3">
-                {/* Bouton principal CTA */}
-                <Link 
-                  href="/raccordement-enedis#top" 
-                  className="flex items-center justify-center w-full bg-[#0072CE] hover:bg-[#005bb5] text-white py-4 rounded-lg transition-all duration-300 font-semibold text-base shadow-lg hover:shadow-xl active:scale-95 touch-manipulation"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Send className="h-5 w-5 mr-3" />
-                  Faire ma demande
-                </Link>
-                
-                {/* Appel téléphonique */}
-                <a 
-                  href="tel:0970709570" 
-                  className="flex items-center justify-center w-full p-4 bg-gray-50 hover:bg-gray-100 text-gray-700 hover:text-[#0072CE] rounded-lg transition-all duration-200 group touch-manipulation"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Phone className="h-5 w-5 mr-3 text-[#0072CE] group-hover:scale-110 transition-transform" />
-                  <span className="font-semibold text-base">09 70 70 95 70</span>
-                </a>
-              </div>
-              
-            </div>
-          </div>
-        )}
+              {/* Slide-in Menu from Right */}
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="lg:hidden fixed top-0 right-0 bottom-0 w-[85vw] max-w-sm bg-white shadow-2xl z-50 flex flex-col"
+              >
+                {/* Header: Logo + Tagline + Close Button */}
+                <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200">
+                  <div className="flex-1">
+                    <div className="w-[160px] h-auto mb-1">
+                      <EnedisAuthenticMasterpiece size="md" variant="light" />
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">Service de raccordement électrique</p>
+                  </div>
+                  <button
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2 rounded-md hover:bg-gray-100 transition-colors touch-manipulation"
+                    aria-label="Fermer le menu"
+                  >
+                    <X className="h-6 w-6 text-gray-700" />
+                  </button>
+                </div>
+
+                {/* Scrollable Content */}
+                <div className="flex-1 overflow-y-auto">
+                  {/* Navigation Section */}
+                  <div className="px-6 py-5">
+                    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Navigation</h3>
+                    <div className="space-y-1">
+                      <Link 
+                        href="/" 
+                        className={`flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-medium text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/' ? 'bg-blue-50 text-[#0072CE]' : ''}`}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <Home className="h-5 w-5 mr-3 flex-shrink-0" />
+                        Accueil
+                      </Link>
+                      
+                      <Link 
+                        href="/nos-services" 
+                        className={`flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-medium text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/nos-services' ? 'bg-blue-50 text-[#0072CE]' : ''}`}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <Zap className="h-5 w-5 mr-3 flex-shrink-0" />
+                        Nos Services
+                      </Link>
+                      
+                      <Link 
+                        href="/guide-raccordement" 
+                        className={`flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-medium text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/guide-raccordement' ? 'bg-blue-50 text-[#0072CE]' : ''}`}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <FileText className="h-5 w-5 mr-3 flex-shrink-0" />
+                        Guide
+                      </Link>
+                      
+                      <Link 
+                        href="/contact" 
+                        className={`flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-medium text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/contact' ? 'bg-blue-50 text-[#0072CE]' : ''}`}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <Mail className="h-5 w-5 mr-3 flex-shrink-0" />
+                        Contact
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Help Section */}
+                  <div className="px-6 py-5 border-t border-gray-100">
+                    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Besoin d'aide ?</h3>
+                    <a 
+                      href="tel:0970709570" 
+                      className="flex items-center justify-center w-full p-4 bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 text-[#0072CE] rounded-lg transition-all duration-200 group touch-manipulation mb-3"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Phone className="h-6 w-6 mr-3 group-hover:scale-110 transition-transform" />
+                      <span className="font-bold text-lg">09 70 70 95 70</span>
+                    </a>
+                    <Link 
+                      href="/faq" 
+                      className="flex items-center justify-center w-full p-3 text-gray-600 hover:text-[#0072CE] text-sm font-medium transition-colors touch-manipulation"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <HelpCircle className="h-4 w-4 mr-2" />
+                      Consulter la FAQ
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Bottom Sticky CTA Section */}
+                <div className="px-6 py-5 border-t border-gray-200 bg-gray-50">
+                  {/* Main CTA Button */}
+                  <Link 
+                    href="/raccordement-enedis#formulaire-raccordement" 
+                    className="flex items-center justify-center w-full bg-[#0072CE] hover:bg-[#005bb5] text-white py-4 rounded-lg transition-all duration-300 font-bold text-base shadow-lg hover:shadow-xl active:scale-95 touch-manipulation mb-4"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <ArrowRight className="h-5 w-5 mr-2" />
+                    Commencer ma demande
+                  </Link>
+                  
+                  {/* Trust Indicators */}
+                  <div className="grid grid-cols-1 gap-2">
+                    <div className="flex items-center text-xs text-gray-600">
+                      <Users className="h-4 w-4 mr-2 text-[#0072CE] flex-shrink-0" />
+                      <span className="font-medium">+1200 demandes traitées</span>
+                    </div>
+                    <div className="flex items-center text-xs text-gray-600">
+                      <Lock className="h-4 w-4 mr-2 text-[#0072CE] flex-shrink-0" />
+                      <span className="font-medium">Paiement 100% sécurisé</span>
+                    </div>
+                    <div className="flex items-center text-xs text-gray-600">
+                      <CheckCircle className="h-4 w-4 mr-2 text-[#0072CE] flex-shrink-0" />
+                      <span className="font-medium">Procédure conforme Enedis</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </header>
       
       {/* Main Content */}
