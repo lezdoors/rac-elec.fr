@@ -294,57 +294,39 @@
     <!-- PERFORMANCE FIX: Remove render-blocking polyfills for faster LCP -->
     <!-- Modern browsers don't need these polyfills, and they block rendering -->
 
-    <!-- CRITICAL FIX: Google Analytics config executes IMMEDIATELY -->
-    <!-- GCLID and conversion tracking MUST be available immediately for ads attribution -->
+    <!-- GOOGLE ADS & ANALYTICS: Immediate load for conversion tracking -->
+    <!-- Purchase conversion (AW-16698052873/IFUxCJLHtMUaEImioJo) must fire on /thank-you -->
     <script>
-      // Initialize dataLayer immediately for conversion tracking
+      // Bootstrap: Initialize dataLayer and gtag wrapper immediately
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       
-      // CRITICAL: Configure GA immediately - no deferral for conversion tracking
+      // Consent Mode V2 (optional, can be configured later)
+      // gtag('consent', 'default', {
+      //   'ad_storage': 'granted',
+      //   'analytics_storage': 'granted'
+      // });
+      
+      // Configure Google Ads immediately for conversion tracking
+      gtag('config', 'AW-16698052873', {
+        anonymize_ip: true,
+        transport_type: 'beacon'
+      });
+      
+      // Configure GA4 immediately for analytics
       gtag('config', 'GT-MJKTJGCK', {
-        // Optimize for Core Web Vitals
         transport_type: 'beacon',
         send_page_view: false // Manual page view after LCP
       });
-      console.log('✅ Google Analytics config executed immediately for ads attribution');
       
-      // Only defer the external gtag.js script loading for performance
-      function loadGoogleAnalyticsScript() {
-        if (!window.gtagScriptLoaded) {
-          window.gtagScriptLoaded = true;
-          const script = document.createElement('script');
-          script.async = true; // PERFORMANCE FIX: Make GA script async
-          script.src = 'https://www.googletagmanager.com/gtag/js?id=GT-MJKTJGCK';
-          script.onload = function() {
-            console.log('✅ Google Analytics script loaded after user interaction');
-          };
-          document.head.appendChild(script);
-        }
+      if (typeof console !== 'undefined' && console.log) {
+        console.log('✅ Google Ads & Analytics config executed immediately');
       }
-      
-      // Load GA script after user interaction or 3 seconds (but config runs immediately)
-      let gaScriptLoaded = false;
-      const triggerGAScript = () => {
-        if (!gaScriptLoaded) {
-          gaScriptLoaded = true;
-          loadGoogleAnalyticsScript();
-          ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
-            document.removeEventListener(event, triggerGAScript, { passive: true });
-          });
-        }
-      };
-      
-      ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
-        document.addEventListener(event, triggerGAScript, { passive: true, once: true });
-      });
-      
-      // Fallback: Load script after 3 seconds (config already ran immediately)
-      setTimeout(() => {
-        if (!gaScriptLoaded) triggerGAScript();
-      }, 3000);
     </script>
+    
+    <!-- Load gtag.js immediately (async to avoid blocking) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16698052873"></script>
 
     <!-- PERFORMANCE FIX: Fixed preloads - removed invalid /src/main.tsx and duplicates -->
     <link rel="preload" href="/favicon-new.svg" as="image">
@@ -468,16 +450,71 @@
       return false;
     };
     
-    window.directPurchaseConversion = function(transactionId) {
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'conversion', {
-          'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
-          'transaction_id': transactionId || ''
-        });
-        console.log('✅ Direct purchase conversion sent for:', transactionId);
-        return true;
+    /**
+     * Google Ads Purchase Conversion (AW-16698052873/IFUxCJLHtMUaEImioJo)
+     * 
+     * Fires a Purchase conversion event for Google Ads.
+     * Should be called once on /thank-you page after successful payment.
+     * 
+     * @param {string|object} params - Transaction ID (string) or {transactionId, value, currency}
+     * @returns {boolean} - true if event was queued, false if gtag wrapper unavailable
+     * 
+     * Example:
+     *   window.directPurchaseConversion('RAC-2025-001')
+     *   window.directPurchaseConversion({transactionId: 'RAC-2025-001', value: 129.80, currency: 'EUR'})
+     */
+    window.directPurchaseConversion = function(params) {
+      // gtag wrapper always exists from bootstrap, but check anyway for safety
+      if (typeof gtag === 'undefined') {
+        if (typeof console !== 'undefined' && console.error) {
+          console.error('❌ [Purchase] gtag wrapper not found - bootstrap failed');
+        }
+        return false;
       }
-      return false;
+      
+      // Parse params (support both string and object formats)
+      var transactionId, value, currency;
+      if (typeof params === 'string') {
+        transactionId = params;
+      } else if (params && typeof params === 'object') {
+        transactionId = params.transactionId || params.transaction_id || '';
+        value = params.value;
+        currency = params.currency || 'EUR';
+      } else {
+        transactionId = '';
+      }
+      
+      // Build conversion payload
+      var conversionData = {
+        'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
+        'transaction_id': transactionId
+      };
+      
+      // Add optional value and currency
+      if (value !== undefined && value !== null) {
+        conversionData.value = value;
+      }
+      if (currency) {
+        conversionData.currency = currency;
+      }
+      
+      // Queue the conversion event (gtag wrapper queues even if script not fully loaded)
+      gtag('event', 'conversion', conversionData);
+      
+      // Debug log (only in development - check hostname)
+      if (typeof window !== 'undefined' && typeof console !== 'undefined' && console.info) {
+        var isDev = window.location.hostname === 'localhost' || window.location.hostname.includes('repl');
+        if (isDev) {
+          console.info('[Ads] Purchase conversion queued:', {
+            transactionId: transactionId,
+            value: value,
+            currency: currency,
+            send_to: 'AW-16698052873/IFUxCJLHtMUaEImioJo-'
+          });
+        }
+      }
+      
+      return true;
     };
     </script>
     
