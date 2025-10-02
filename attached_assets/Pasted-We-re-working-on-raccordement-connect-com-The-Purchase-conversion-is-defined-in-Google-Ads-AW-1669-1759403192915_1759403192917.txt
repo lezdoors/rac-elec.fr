@@ -1,0 +1,50 @@
+We’re working on raccordement-connect.com. The Purchase conversion is defined in Google Ads (AW-16698052873 / IFUxCJLHtMUaEImioJo). Currently, gtag() loads late and window.directPurchaseConversion() may run before gtag is ready on /thank-you, so the conversion doesn’t fire.
+
+Goals
+	1.	Load gtag.js immediately on every page (not deferred).
+	2.	Ensure a safe command queue exists before the external script loads.
+	3.	Fire exactly one Purchase event on the thank-you screen with transaction_id (and optional value/currency).
+	4.	Add a retry fallback if gtag is still initializing.
+	5.	Add debug logs (disabled in production) and verify with Tag Assistant.
+
+Tasks
+	1.	Move gtag to immediate load
+	•	In the main HTML template (e.g., client/index.html or the root layout/head), remove the delayed/timeout loader and include:
+	•	a synchronous inline bootstrap (window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);})
+	•	immediate <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16698052873">
+	•	gtag('js', new Date()) and gtag('config','AW-16698052873', { anonymize_ip: true })
+	•	Do not gate this behind user interaction.
+	2.	Keep the direct call helper
+	•	Keep window.directPurchaseConversion(transactionId) but ensure it:
+	•	accepts { value, currency } optionally
+	•	queues the event even if gtag is booting (using the function wrapper above)
+	•	returns a boolean and logs a debug message in dev only.
+	3.	Thank-you page firing (SPA-safe)
+	•	In the /thank-you component:
+	•	On first mount (or first route entry), call window.directPurchaseConversion(transactionId) once.
+	•	If the function returns false (gtag not ready), retry up to 5 times with 300ms spacing, then stop.
+	•	Guard with a ref/flag to avoid duplicate fires on re-renders or history pops.
+	4.	Event payload
+	•	Send:
+	•	send_to: 'AW-16698052873/IFUxCJLHtMUaEImioJo'
+	•	transaction_id: '<uuid or payment id>'
+	•	If available: value: <number>, currency: 'EUR'
+	•	Ensure transaction_id is stable and unique per order (pass through from checkout/Stripe).
+	5.	Consent Mode V2 compatibility
+	•	If Consent Mode is active, respect it. Initialize gtag('consent','default',…) before gtag('config',…). Do not block the Purchase event after consent granted.
+	6.	Verification
+	•	Use Tag Assistant (Chrome) on /thank-you:
+	•	Confirm Google Ads – Purchase event fires once with the correct send_to and transaction_id.
+	•	Confirm no console errors.
+	•	In Google Ads → Conversions → Purchase, check Status: Recording (recent activity) after a test.
+	•	Add a temporary console log: console.info('[Ads] Purchase fired', transactionId) (only in development).
+	7.	Hardening
+	•	Ensure the helper never throws if window.gtag is undefined (the wrapper must exist from bootstrap).
+	•	Make the thank-you fire idempotent (won’t send twice on refresh or back/forward navigation).
+	•	Document the helper in a code comment with the action ID and where to update if the Ads ID changes.
+
+Acceptance Criteria
+	•	The Purchase event fires once on /thank-you with the right send_to and transaction_id.
+	•	Tag Assistant shows the event; Google Ads conversion status updates to Recording.
+	•	No delays/timeout loaders remain for gtag; CLS and LCP unaffected.
+	•	Retry logic works if the network is slow; no duplicate conversions for a single transaction.
