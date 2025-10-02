@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { useLocation } from 'wouter';
 import { CheckCircle, Download, Phone, Mail, Calendar, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { trackEvent, trackConversion } from '@/lib/analytics';
+import { trackEvent } from '@/lib/analytics';
 import { getGclid } from '@/lib/clean-gclid';
 
 interface ThankYouPageProps {}
@@ -13,102 +13,92 @@ export default function ThankYouPage({}: ThankYouPageProps) {
   const [location] = useLocation();
   const [referenceNumber, setReferenceNumber] = useState<string>('');
   const [purchaseData, setPurchaseData] = useState<any>(null);
+  
+  // Track if conversion already fired (prevent duplicates on re-renders or back/forward navigation)
+  const conversionFired = useRef(false);
 
   // Scroll to top on page load
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Extract reference and purchase data from URL params
+  // Extract reference and fire Purchase conversion ONCE
   useEffect(() => {
-    const trackPurchase = async () => {
-      const params = new URLSearchParams(window.location.search);
-      const ref = params.get('reference') || params.get('ref');
-      const amount = params.get('amount');
-      const currency = params.get('currency') || 'EUR';
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('reference') || params.get('ref');
+    const amount = params.get('amount');
+    const currency = params.get('currency') || 'EUR';
+    
+    if (!ref || conversionFired.current) {
+      return;
+    }
+    
+    // Mark as fired immediately to prevent race conditions
+    conversionFired.current = true;
+    
+    setReferenceNumber(ref);
+    
+    // Prepare purchase data
+    const purchaseInfo = {
+      transaction_id: ref,
+      value: amount ? parseFloat(amount) : 129.80,
+      currency: currency,
+      items: [{
+        item_id: 'raccordement-enedis',
+        item_name: 'Service de raccordement Enedis',
+        category: 'Services',
+        quantity: 1,
+        price: amount ? parseFloat(amount) : 129.80
+      }]
+    };
+    
+    setPurchaseData(purchaseInfo);
+    
+    // Fire Google Analytics ecommerce purchase event
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'purchase', {
+        transaction_id: ref,
+        value: purchaseInfo.value,
+        currency: purchaseInfo.currency,
+        items: purchaseInfo.items
+      });
+    }
+    
+    // Fire Google Ads Purchase conversion with retry logic
+    const firePurchaseConversion = (attempt = 1) => {
+      const maxAttempts = 5;
+      const retryDelay = 300; // ms
       
-      if (ref) {
-        setReferenceNumber(ref);
-        
-        // Prepare purchase data for Google Analytics
-        const purchaseInfo = {
-          transaction_id: ref,
-          value: amount ? parseFloat(amount) : 129.80,
-          currency: currency,
-          items: [{
-            item_id: 'raccordement-enedis',
-            item_name: 'Service de raccordement Enedis',
-            category: 'Services',
-            quantity: 1,
-            price: amount ? parseFloat(amount) : 129.80
-          }]
-        };
-        
-        setPurchaseData(purchaseInfo);
-        
-        // Track purchase event with Google Analytics
-        if (typeof window !== 'undefined' && window.gtag) {
-          // Enhanced ecommerce purchase tracking
-          window.gtag('event', 'purchase', {
-            transaction_id: ref,
+      if (typeof window !== 'undefined' && (window as any).directPurchaseConversion) {
+        try {
+          const success = (window as any).directPurchaseConversion({
+            transactionId: ref,
             value: purchaseInfo.value,
-            currency: purchaseInfo.currency,
-            items: purchaseInfo.items
+            currency: purchaseInfo.currency
           });
           
-          // Purchase Conversion Tracking - CRITICAL FOR GOOGLE ADS
-          console.log('🎯 Attempting purchase conversion tracking...');
-          
-          let purchaseConversionSent = false;
-          
-          // Method 1: Direct purchase function
-          if (typeof window !== 'undefined' && (window as any).directPurchaseConversion) {
-            try {
-              purchaseConversionSent = (window as any).directPurchaseConversion(ref);
-              console.log('✅ Purchase conversion via direct function');
-            } catch (e) {
-              console.warn('Direct purchase function failed:', e);
-            }
+          if (success) {
+            console.log(`✅ Purchase conversion fired (attempt ${attempt})`);
+            return;
           }
-          
-          // Method 2: Raw gtag call with full data
-          if (!purchaseConversionSent && typeof window !== 'undefined' && (window as any).gtag) {
-            try {
-              (window as any).gtag('event', 'conversion', {
-                'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
-                'transaction_id': ref,
-                'value': purchaseInfo.value,
-                'currency': purchaseInfo.currency
-              });
-              console.log('✅ Purchase conversion via raw gtag for:', ref);
-              purchaseConversionSent = true;
-            } catch (e) {
-              console.warn('Raw gtag purchase failed:', e);
-            }
-          }
-          
-          // Method 3: Backup using trackConversion
-          if (!purchaseConversionSent) {
-            try {
-              trackConversion(ref);
-              console.log('✅ Purchase conversion via trackConversion backup');
-              purchaseConversionSent = true;
-            } catch (e) {
-              console.warn('trackConversion backup failed:', e);
-            }
-          }
-          
-          if (!purchaseConversionSent) {
-            console.error('❌ All purchase conversion methods failed');
-          }
-          
-          console.log('✅ Google Analytics purchase tracking sent:', purchaseInfo);
-          console.log('✅ Google Ads conversion tracking sent for transaction:', ref);
+        } catch (e) {
+          console.warn(`⚠️ Purchase conversion attempt ${attempt} failed:`, e);
         }
+      }
+      
+      // Retry if not successful and under max attempts
+      if (attempt < maxAttempts) {
+        setTimeout(() => {
+          firePurchaseConversion(attempt + 1);
+        }, retryDelay);
+      } else {
+        console.error('❌ Purchase conversion failed after', maxAttempts, 'attempts');
       }
     };
     
-    trackPurchase();
+    // Start firing with retry logic
+    firePurchaseConversion();
+    
   }, [location]);
 
   const handleDownloadReceipt = () => {
@@ -127,18 +117,6 @@ export default function ThankYouPage({}: ThankYouPageProps) {
         <title>Merci pour votre commande - Raccordement Enedis confirmé</title>
         <meta name="description" content="Votre demande de raccordement Enedis a été confirmée. Suivez l'avancement de votre dossier." />
         <meta name="robots" content="noindex, nofollow" />
-        
-        {/* Google tag loaded once in index.html */}
-        
-        {/* Purchase conversion tracking - FIXED CONVERSION ID */}
-        <script>{`
-          if (typeof window !== 'undefined' && window.gtag) {
-            gtag('event', 'conversion', {
-              'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
-              'transaction_id': '${referenceNumber || ''}'
-            });
-          }
-        `}</script>
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-white">
