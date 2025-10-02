@@ -36,6 +36,7 @@ export default function ThankYouPage({}: ThankYouPageProps) {
     // Check if conversion already fired for this transaction (persistent across reloads)
     const storageKey = `purchase_conversion_${ref}`;
     if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(storageKey)) {
+      setReferenceNumber(ref); // Still set the reference for display
       return; // Already fired for this transaction
     }
     
@@ -49,7 +50,7 @@ export default function ThankYouPage({}: ThankYouPageProps) {
     
     setReferenceNumber(ref);
     
-    // Prepare purchase data
+    // Prepare purchase data for display
     const purchaseInfo = {
       transaction_id: ref,
       value: amount ? parseFloat(amount) : 129.80,
@@ -75,58 +76,15 @@ export default function ThankYouPage({}: ThankYouPageProps) {
       });
     }
     
-    // Check if development environment for debug logging
-    const isDev = typeof window !== 'undefined' && 
-                  (window.location.hostname === 'localhost' || 
-                   window.location.hostname.includes('repl') ||
-                   window.location.hostname.includes('127.0.0.1'));
-    
-    // Fire Google Ads Purchase conversion with retry logic
-    const firePurchaseConversion = (attempt = 1) => {
-      const maxAttempts = 5;
-      const retryDelay = 300; // ms
+    // Fire Google Ads Purchase conversion
+    if (typeof window !== 'undefined' && (window as any).gads_purchase) {
+      (window as any).gads_purchase(ref);
       
-      if (typeof window !== 'undefined' && (window as any).directPurchaseConversion) {
-        try {
-          const success = (window as any).directPurchaseConversion({
-            transactionId: ref,
-            value: purchaseInfo.value,
-            currency: purchaseInfo.currency
-          });
-          
-          if (success) {
-            // Persist success to sessionStorage to prevent duplicates on refresh/back/forward
-            if (typeof sessionStorage !== 'undefined') {
-              sessionStorage.setItem(storageKey, 'true');
-            }
-            
-            if (isDev) {
-              console.log(`✅ Purchase conversion fired (attempt ${attempt})`);
-            }
-            return;
-          }
-        } catch (e) {
-          if (isDev) {
-            console.warn(`⚠️ Purchase conversion attempt ${attempt} failed:`, e);
-          }
-        }
+      // Mark as fired in sessionStorage to prevent duplicates on refresh/back/forward
+      if (typeof sessionStorage !== 'undefined') {
+        sessionStorage.setItem(storageKey, 'true');
       }
-      
-      // Retry if not successful and under max attempts
-      if (attempt < maxAttempts) {
-        setTimeout(() => {
-          firePurchaseConversion(attempt + 1);
-        }, retryDelay);
-      } else {
-        // All retries failed - allow retry on next page load by NOT setting sessionStorage
-        if (isDev) {
-          console.error('❌ Purchase conversion failed after', maxAttempts, 'attempts - will retry on next page load');
-        }
-      }
-    };
-    
-    // Start firing with retry logic
-    firePurchaseConversion();
+    }
     
   }, [location]);
 
