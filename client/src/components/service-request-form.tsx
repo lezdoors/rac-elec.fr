@@ -91,6 +91,15 @@ function Section({ title, icon, children, defaultOpen = true }: SectionProps) {
 export function ServiceRequestForm() {
   const { toast } = useToast();
   const [referenceNumber, setReferenceNumber] = useState<string | null>(null);
+  const [formStartTracked, setFormStartTracked] = useState(false);
+  
+  // Track form start on first interaction
+  const handleFormStart = () => {
+    if (!formStartTracked && typeof window !== 'undefined' && (window as any).gads_form_start) {
+      (window as any).gads_form_start();
+      setFormStartTracked(true);
+    }
+  };
   
   // Get tomorrow's date for min date input
   const tomorrow = new Date();
@@ -207,6 +216,11 @@ export function ServiceRequestForm() {
       // Envoyer les données à l'API
       submitMutation.mutate(formData, {
         onSuccess: (data) => {
+          // Fire Google Ads form submit conversion
+          if (typeof window !== 'undefined' && (window as any).gads_form_submit) {
+            (window as any).gads_form_submit();
+          }
+          
           // Après la soumission réussie, rediriger directement vers la page de paiement
           setTimeout(() => {
             // Ajout de logs pour débogage
@@ -618,6 +632,9 @@ export function ServiceRequestForm() {
                     <Select 
                       value={field.value} 
                       onValueChange={field.onChange}
+                      onOpenChange={(open) => {
+                        if (open) handleFormStart();
+                      }}
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Sélectionnez votre profil" />
@@ -644,7 +661,11 @@ export function ServiceRequestForm() {
                       {clientType === "particulier" ? "Nom et prénom" : "Nom du représentant légal"}
                     </FormLabel>
                     <FormControl>
-                      <Input placeholder="Jean Dupont" {...field} />
+                      <Input 
+                        placeholder="Jean Dupont" 
+                        {...field} 
+                        onFocus={handleFormStart}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
