@@ -294,39 +294,14 @@
     <!-- PERFORMANCE FIX: Remove render-blocking polyfills for faster LCP -->
     <!-- Modern browsers don't need these polyfills, and they block rendering -->
 
-    <!-- GOOGLE ADS & ANALYTICS: Immediate load for conversion tracking -->
-    <!-- Purchase conversion (AW-16698052873/IFUxCJLHtMUaEImioJo) must fire on /thank-you -->
-    <script>
-      // Bootstrap: Initialize dataLayer and gtag wrapper immediately
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      
-      // Consent Mode V2 (optional, can be configured later)
-      // gtag('consent', 'default', {
-      //   'ad_storage': 'granted',
-      //   'analytics_storage': 'granted'
-      // });
-      
-      // Configure Google Ads immediately for conversion tracking
-      gtag('config', 'AW-16698052873', {
-        anonymize_ip: true,
-        transport_type: 'beacon'
-      });
-      
-      // Configure GA4 immediately for analytics
-      gtag('config', 'GT-MJKTJGCK', {
-        transport_type: 'beacon',
-        send_page_view: false // Manual page view after LCP
-      });
-      
-      if (typeof console !== 'undefined' && console.log) {
-        console.log('✅ Google Ads & Analytics config executed immediately');
-      }
-    </script>
-    
-    <!-- Load gtag.js immediately (async to avoid blocking) -->
+    <!-- Google tag for Google Ads -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16698052873"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'AW-16698052873');
+    </script>
 
     <!-- PERFORMANCE FIX: Fixed preloads - removed invalid /src/main.tsx and duplicates -->
     <link rel="preload" href="/favicon-new.svg" as="image">
@@ -382,140 +357,32 @@
     </div>
     <script type="module" src="/src/main.tsx"></script>
     
-    <!-- Global conversion functions for form tracking -->
+    <!-- Google Ads conversion functions -->
     <script>
-    // Form Start Conversion
-    function gtag_report_conversion_form_start(url) {
-      var callback = function () {
-        if (typeof(url) != 'undefined') {
-          window.location = url;
-        }
-      };
-      gtag('event', 'conversion', {
-        'send_to': 'AW-16698052873/5o3ICMLjpMUaEImioJo-',
-        'event_callback': callback
-      });
-      return false;
-    }
-    
-    // Form Submit Conversion
-    function gtag_report_conversion_form_submit(url) {
-      var callback = function () {
-        if (typeof(url) != 'undefined') {
-          window.location = url;
-        }
-      };
-      gtag('event', 'conversion', {
-        'send_to': 'AW-16698052873/PqZMCJW-tMUaEImioJo-',
-        'event_callback': callback
-      });
-      return false;
-    }
-    
-    // Make functions globally accessible
-    window.gtag_report_conversion_form_start = gtag_report_conversion_form_start;
-    window.gtag_report_conversion_form_submit = gtag_report_conversion_form_submit;
-    
-    // Global trigger functions for React components
-    window.triggerFormStartConversion = function() {
-      console.log('🎯 Global form start conversion triggered: AW-16698052873/5o3ICMLjpMUaEImioJo-');
-      return gtag_report_conversion_form_start();
-    };
-    
-    window.triggerFormSubmitConversion = function() {
-      console.log('🎯 Global form submit conversion triggered: AW-16698052873/PqZMCJW-tMUaEImioJo-');
-      return gtag_report_conversion_form_submit();
-    };
-    
-    // Backup direct conversion functions accessible from any page
-    window.directFormStartConversion = function() {
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'conversion', {
-          'send_to': 'AW-16698052873/5o3ICMLjpMUaEImioJo-'
-        });
-        console.log('✅ Direct form start conversion sent');
-        return true;
-      }
-      return false;
-    };
-    
-    window.directFormSubmitConversion = function() {
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'conversion', {
-          'send_to': 'AW-16698052873/PqZMCJW-tMUaEImioJo-'
-        });
-        console.log('✅ Direct form submit conversion sent');
-        return true;
-      }
-      return false;
-    };
-    
-    /**
-     * Google Ads Purchase Conversion (AW-16698052873/IFUxCJLHtMUaEImioJo)
-     * 
-     * Fires a Purchase conversion event for Google Ads.
-     * Should be called once on /thank-you page after successful payment.
-     * 
-     * @param {string|object} params - Transaction ID (string) or {transactionId, value, currency}
-     * @returns {boolean} - true if event was queued, false if gtag wrapper unavailable
-     * 
-     * Example:
-     *   window.directPurchaseConversion('RAC-2025-001')
-     *   window.directPurchaseConversion({transactionId: 'RAC-2025-001', value: 129.80, currency: 'EUR'})
-     */
-    window.directPurchaseConversion = function(params) {
-      // gtag wrapper always exists from bootstrap, but check anyway for safety
-      if (typeof gtag === 'undefined') {
-        if (typeof console !== 'undefined' && console.error) {
-          console.error('❌ [Purchase] gtag wrapper not found - bootstrap failed');
-        }
-        return false;
-      }
-      
-      // Parse params (support both string and object formats)
-      var transactionId, value, currency;
-      if (typeof params === 'string') {
-        transactionId = params;
-      } else if (params && typeof params === 'object') {
-        transactionId = params.transactionId || params.transaction_id || '';
-        value = params.value;
-        currency = params.currency || 'EUR';
-      } else {
-        transactionId = '';
-      }
-      
-      // Build conversion payload
-      var conversionData = {
-        'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
-        'transaction_id': transactionId
-      };
-      
-      // Add optional value and currency
-      if (value !== undefined && value !== null) {
-        conversionData.value = value;
-      }
-      if (currency) {
-        conversionData.currency = currency;
-      }
-      
-      // Queue the conversion event (gtag wrapper queues even if script not fully loaded)
-      gtag('event', 'conversion', conversionData);
-      
-      // Debug log (only in development - check hostname)
-      if (typeof window !== 'undefined' && typeof console !== 'undefined' && console.info) {
-        var isDev = window.location.hostname === 'localhost' || window.location.hostname.includes('repl');
-        if (isDev) {
-          console.info('[Ads] Purchase conversion queued:', {
-            transactionId: transactionId,
-            value: value,
-            currency: currency,
-            send_to: 'AW-16698052873/IFUxCJLHtMUaEImioJo-'
+      window.gads_form_start = function() {
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-16698052873/5o3ICMLjpMUaEImioJo-'
           });
         }
-      }
-      
-      return true;
-    };
+      };
+
+      window.gads_form_submit = function() {
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-16698052873/PqZMCJW-tMUaEImioJo-'
+          });
+        }
+      };
+
+      window.gads_purchase = function(transactionId) {
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
+            'transaction_id': transactionId || ''
+          });
+        }
+      };
     </script>
     
     <!-- PHASE 3A: Statcounter - Further optimized deferred loading -->
