@@ -1,0 +1,57 @@
+You are working on the raccordement-connect.com project.
+
+Goal: Fix Google Ads conversion tracking so all events (form_start, form_submit, purchase) fire correctly.
+
+Tasks:
+1. In client/index.html (or the main layout file), replace the current Google tag code with:
+
+<!-- Google tag for Google Ads -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16698052873"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'AW-16698052873');
+</script>
+
+2. Remove duplicate gtag_report_conversion functions. Instead, define ONE script block after the global tag with three unique functions:
+
+<script>
+  window.gads_form_start = function() {
+    if (typeof gtag === 'function') {
+      gtag('event', 'conversion', {
+        'send_to': 'AW-16698052873/5o3ICMLjpMUaEImioJo-'
+      });
+    }
+  };
+
+  window.gads_form_submit = function() {
+    if (typeof gtag === 'function') {
+      gtag('event', 'conversion', {
+        'send_to': 'AW-16698052873/PqZMCJW-tMUaEImioJo-'
+      });
+    }
+  };
+
+  window.gads_purchase = function(transactionId) {
+    if (typeof gtag === 'function') {
+      gtag('event', 'conversion', {
+        'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
+        'transaction_id': transactionId || ''
+      });
+    }
+  };
+</script>
+
+3. Update buttons and form logic:
+- On “Commencer ma demande” (or first CTA button) add onclick="gads_form_start()".
+- On successful form submit (before redirect) call window.gads_form_submit().
+- After Stripe payment success, call window.gads_purchase(order.id) with the real order/transaction ID.
+
+4. Make sure only ONE global gtag snippet is loaded, and it uses the correct Ads account (AW-16698052873).
+
+5. Verify no conflicts with GTM container GT-MJKTJGCK. If GTM is needed, move conversions into GTM and remove direct gtag code. For now, keep direct Ads gtag only.
+
+6. Test locally and in preview: use Chrome DevTools → Network (filter: collect? and conversion) to ensure each event fires.
+
+Deliverable: Updated index.html (or equivalent entrypoint) with the corrected tag, three helper functions, and clean integration.
