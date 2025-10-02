@@ -22,18 +22,29 @@ export default function ThankYouPage({}: ThankYouPageProps) {
     window.scrollTo(0, 0);
   }, []);
 
-  // Extract reference and fire Purchase conversion ONCE
+  // Extract reference and fire Purchase conversion ONCE (idempotent across page reloads)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const ref = params.get('reference') || params.get('ref');
     const amount = params.get('amount');
     const currency = params.get('currency') || 'EUR';
     
-    if (!ref || conversionFired.current) {
+    if (!ref) {
       return;
     }
     
-    // Mark as fired immediately to prevent race conditions
+    // Check if conversion already fired for this transaction (persistent across reloads)
+    const storageKey = `purchase_conversion_${ref}`;
+    if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(storageKey)) {
+      return; // Already fired for this transaction
+    }
+    
+    // Prevent duplicate firing in this render cycle
+    if (conversionFired.current) {
+      return;
+    }
+    
+    // Mark as fired immediately to prevent race conditions within this render
     conversionFired.current = true;
     
     setReferenceNumber(ref);
@@ -64,6 +75,12 @@ export default function ThankYouPage({}: ThankYouPageProps) {
       });
     }
     
+    // Check if development environment for debug logging
+    const isDev = typeof window !== 'undefined' && 
+                  (window.location.hostname === 'localhost' || 
+                   window.location.hostname.includes('repl') ||
+                   window.location.hostname.includes('127.0.0.1'));
+    
     // Fire Google Ads Purchase conversion with retry logic
     const firePurchaseConversion = (attempt = 1) => {
       const maxAttempts = 5;
@@ -78,11 +95,20 @@ export default function ThankYouPage({}: ThankYouPageProps) {
           });
           
           if (success) {
-            console.log(`✅ Purchase conversion fired (attempt ${attempt})`);
+            // Persist success to sessionStorage to prevent duplicates on refresh/back/forward
+            if (typeof sessionStorage !== 'undefined') {
+              sessionStorage.setItem(storageKey, 'true');
+            }
+            
+            if (isDev) {
+              console.log(`✅ Purchase conversion fired (attempt ${attempt})`);
+            }
             return;
           }
         } catch (e) {
-          console.warn(`⚠️ Purchase conversion attempt ${attempt} failed:`, e);
+          if (isDev) {
+            console.warn(`⚠️ Purchase conversion attempt ${attempt} failed:`, e);
+          }
         }
       }
       
@@ -92,7 +118,10 @@ export default function ThankYouPage({}: ThankYouPageProps) {
           firePurchaseConversion(attempt + 1);
         }, retryDelay);
       } else {
-        console.error('❌ Purchase conversion failed after', maxAttempts, 'attempts');
+        // All retries failed - allow retry on next page load by NOT setting sessionStorage
+        if (isDev) {
+          console.error('❌ Purchase conversion failed after', maxAttempts, 'attempts - will retry on next page load');
+        }
       }
     };
     
