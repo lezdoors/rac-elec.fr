@@ -359,20 +359,34 @@
     
     <!-- Google Ads conversion functions -->
     <script>
-      window.gads_form_start = function() {
+      window.gads_form_start = function(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
         if (typeof gtag === 'function') {
           gtag('event', 'conversion', {
-            'send_to': 'AW-16698052873/5o3ICMLjpMUaEImioJo-'
+            'send_to': 'AW-16698052873/5o3ICMLjpMUaEImioJo-',
+            'event_callback': callback
           });
         }
+        return false;
       };
 
-      window.gads_form_submit = function() {
+      window.gads_form_submit = function(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
         if (typeof gtag === 'function') {
           gtag('event', 'conversion', {
-            'send_to': 'AW-16698052873/PqZMCJW-tMUaEImioJo-'
+            'send_to': 'AW-16698052873/PqZMCJW-tMUaEImioJo-',
+            'event_callback': callback
           });
         }
+        return false;
       };
 
       window.gads_purchase = function(transactionId) {
