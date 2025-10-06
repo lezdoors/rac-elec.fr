@@ -43,19 +43,6 @@ export default function MainLayout({
         <Helmet>
           <title>{title}</title>
           <meta name="description" content={description} />
-          
-          {/* Google Tag Manager */}
-          <script async src="https://www.googletagmanager.com/gtag/js?id=GT-MJKTJGCK"></script>
-          <script>
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'GT-MJKTJGCK');
-            `}
-          </script>
-          
-          <script src="/google-ads-conversion.js"></script>
         </Helmet>
       )}
       
