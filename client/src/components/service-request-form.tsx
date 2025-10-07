@@ -95,8 +95,8 @@ export function ServiceRequestForm() {
   
   // Track form start on first interaction
   const handleFormStart = () => {
-    if (!formStartTracked && typeof window !== 'undefined' && (window as any).gads_form_start) {
-      (window as any).gads_form_start();
+    if (!formStartTracked && typeof window !== 'undefined' && (window as any).trackFormStart) {
+      (window as any).trackFormStart();
       setFormStartTracked(true);
     }
   };
@@ -216,9 +216,9 @@ export function ServiceRequestForm() {
       // Envoyer les données à l'API
       submitMutation.mutate(formData, {
         onSuccess: (data) => {
-          // Fire Google Ads form submit conversion
-          if (typeof window !== 'undefined' && (window as any).gads_form_submit) {
-            (window as any).gads_form_submit();
+          // Fire GTM form submit event
+          if (typeof window !== 'undefined' && (window as any).trackFormSubmit) {
+            (window as any).trackFormSubmit();
           }
           
           // Après la soumission réussie, rediriger directement vers la page de paiement
