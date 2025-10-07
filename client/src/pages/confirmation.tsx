@@ -13,7 +13,6 @@ import {
 } from "@stripe/react-stripe-js";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { gtagReportConversion } from "@/lib/analytics";
 import { CreditCard, Loader2, Shield, Phone, Home, Mail, MapPin, Calendar, Zap, X, Lock as LockIcon, ShieldCheck as ShieldCheckIcon, EyeOff as EyeOffIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -195,11 +194,9 @@ function FormulaireCarteBancaire({ referenceNumber, clientName, serviceRequest, 
         // Erreur de paiement
         throw error;
       } else if (paymentIntent.status === "succeeded") {
-        // Paiement réussi - déclencher le tracking de conversion Google Ads
-        gtagReportConversion(referenceNumber, () => {
-          // Rediriger vers la page de confirmation après le tracking
-          navigate(`/paiement-confirmation?reference=${referenceNumber}&status=success`);
-        });
+        // Paiement réussi - rediriger vers la page de confirmation
+        // Note: GTM Purchase conversion is tracked on /merci page via trackPurchase()
+        navigate(`/paiement-confirmation?reference=${referenceNumber}&status=success`);
       } else {
         // Statut intermédiaire - rediriger vers confirmation avec vérification
         navigate(`/paiement-confirmation?reference=${referenceNumber}&payment_intent=${paymentIntent.id}`);
