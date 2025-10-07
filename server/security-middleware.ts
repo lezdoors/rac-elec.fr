@@ -9,12 +9,12 @@ export const securityHeaders = (req: Request, res: Response, next: NextFunction)
   // Content Security Policy - Carefully crafted to not break existing functionality
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com https://*.googletagmanager.com https://*.google-analytics.com https://js.stripe.com https://*.stripe.com",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://js.stripe.com https://*.stripe.com",
     "style-src 'self' 'unsafe-inline' https://*.googleapis.com https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com data:",
     "img-src 'self' data: https: blob:",
-    "connect-src 'self' https://*.googleapis.com https://*.google-analytics.com https://api.stripe.com https://*.stripe.com wss:",
-    "frame-src 'self' https://js.stripe.com https://*.stripe.com",
+    "connect-src 'self' https://*.google-analytics.com https://stats.g.doubleclick.net https://www.googleadservices.com https://api.stripe.com https://*.stripe.com wss:",
+    "frame-src 'self' https://www.googletagmanager.com https://www.google.com https://js.stripe.com https://*.stripe.com",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
