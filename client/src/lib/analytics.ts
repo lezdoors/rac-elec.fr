@@ -68,39 +68,6 @@ export const trackEvent = (
   });
 };
 
-// ⚠️ DEPRECATED: Use window.gads_purchase() from index.html instead
-// These functions are kept for backwards compatibility but should NOT be used
-// All Google Ads conversions are now managed in client/index.html:
-// - Form Start: window.gads_form_start()
-// - Form Submit: window.gads_form_submit()
-// - Purchase: window.gads_purchase()
-
-// DEPRECATED: Use window.gads_purchase() instead
-export const trackConversion = (transactionId?: string) => {
-  console.warn('⚠️ trackConversion() is deprecated. Use window.gads_purchase() instead');
-  if (typeof window === 'undefined') return;
-  
-  // Redirect to new function
-  if ((window as any).gads_purchase) {
-    (window as any).gads_purchase(transactionId);
-  }
-};
-
-// DEPRECATED: Use window.gads_purchase() instead  
-export const gtagReportConversion = (referenceNumber?: string, callback?: () => void) => {
-  console.warn('⚠️ gtagReportConversion() is deprecated. Use window.gads_purchase() instead');
-  if (typeof window === 'undefined') return false;
-  
-  // Redirect to new function
-  if ((window as any).gads_purchase) {
-    (window as any).gads_purchase(referenceNumber);
-  }
-  
-  // Execute callback if provided
-  if (callback) callback();
-  
-  return false;
-};
 
 // Track form_start conversion when user clicks CTA to access form
 export const trackFormStart = () => {
