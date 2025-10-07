@@ -68,25 +68,36 @@ export const trackEvent = (
   });
 };
 
-// Purchase conversion tracking for success pages
+// ⚠️ DEPRECATED: Use window.gads_purchase() from index.html instead
+// These functions are kept for backwards compatibility but should NOT be used
+// All Google Ads conversions are now managed in client/index.html:
+// - Form Start: window.gads_form_start()
+// - Form Submit: window.gads_form_submit()
+// - Purchase: window.gads_purchase()
+
+// DEPRECATED: Use window.gads_purchase() instead
 export const trackConversion = (transactionId?: string) => {
-  if (typeof window === 'undefined' || !window.gtag) return;
+  console.warn('⚠️ trackConversion() is deprecated. Use window.gads_purchase() instead');
+  if (typeof window === 'undefined') return;
   
-  window.gtag('event', 'conversion', {
-    'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
-    'transaction_id': transactionId || ''
-  });
+  // Redirect to new function
+  if ((window as any).gads_purchase) {
+    (window as any).gads_purchase(transactionId);
+  }
 };
 
-// Google Ads conversion reporting function
+// DEPRECATED: Use window.gads_purchase() instead  
 export const gtagReportConversion = (referenceNumber?: string, callback?: () => void) => {
-  if (typeof window === 'undefined' || !window.gtag) return false;
+  console.warn('⚠️ gtagReportConversion() is deprecated. Use window.gads_purchase() instead');
+  if (typeof window === 'undefined') return false;
   
-  window.gtag('event', 'conversion', {
-    'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
-    'transaction_id': referenceNumber || '',
-    'event_callback': callback
-  });
+  // Redirect to new function
+  if ((window as any).gads_purchase) {
+    (window as any).gads_purchase(referenceNumber);
+  }
+  
+  // Execute callback if provided
+  if (callback) callback();
   
   return false;
 };

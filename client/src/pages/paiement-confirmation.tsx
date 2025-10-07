@@ -62,15 +62,8 @@ export default function PaiementConfirmationPage() {
           setPaymentStatus("success");
           console.log("Paiement CONFIRMÉ comme réussi par l'API");
           
-          // 🎯 GOOGLE ADS CONVERSION TRACKING - PURCHASE
-          // Tag de conversion spécifique pour les achats réussis
-          if (typeof window !== 'undefined' && window.gtag) {
-            window.gtag('event', 'conversion', {
-              'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
-              'transaction_id': referenceNumber
-            });
-            console.log('✅ Google Ads conversion tracking sent for transaction:', referenceNumber);
-          }
+          // Note: Google Ads Purchase conversion is tracked on /merci page via window.gads_purchase()
+          // No need to fire conversion here to avoid duplicates
         } else if (data.status === "failed" || data.status === "canceled") {
           setPaymentStatus("failed");
           console.log("Paiement CONFIRMÉ comme échoué par l'API");
