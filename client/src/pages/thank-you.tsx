@@ -76,9 +76,9 @@ export default function ThankYouPage({}: ThankYouPageProps) {
       });
     }
     
-    // Fire Google Ads Purchase conversion
-    if (typeof window !== 'undefined' && (window as any).gads_purchase) {
-      (window as any).gads_purchase(ref);
+    // Fire GTM Purchase event
+    if (typeof window !== 'undefined' && (window as any).trackPurchase) {
+      (window as any).trackPurchase(ref);
       
       // Mark as fired in sessionStorage to prevent duplicates on refresh/back/forward
       if (typeof sessionStorage !== 'undefined') {
