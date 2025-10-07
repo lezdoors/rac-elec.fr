@@ -1,0 +1,61 @@
+Goal: Make raccordement-connect.com track only via GTM container GTM-T2VZ5DL. 
+Remove/avoid any direct gtag.js calls. Fire events via dataLayer, respecting consent.
+
+What to implement:
+1) Install GTM
+   - Insert GTM container GTM-T2VZ5DL <script> in <head> and noscript iframe right after <body>.
+   - Ensure no other GTM/gtag snippets remain.
+
+2) Consent gating
+   - We already store cookie consent in localStorage under "cookieConsent" with a boolean "ads".
+   - Before pushing any marketing event, check: 
+       const consent = JSON.parse(localStorage.getItem('cookieConsent')||'{}');
+       if (!consent.ads) return;
+   - Do not load or call gtag directly.
+
+3) Emit these dataLayer events at the right moments:
+   A) On first interaction with the form (Step 1):
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'form_start',
+        event_category: 'engagement',
+        event_label: 'Connect - Step 1 Started'
+      });
+
+   B) When the lead form is submitted (final step prior to payment or lead completion):
+      window.dataLayer.push({
+        event: 'form_submit',
+        event_category: 'engagement',
+        event_label: 'Connect - Form Submitted',
+        lead_id: <leadId_if_available>,
+        demande_id: <internalId_if_available>
+      });
+
+   C) On successful payment/confirmation page:
+      // Only once per session
+      if (!sessionStorage.getItem('purchase_conversion_fired')) {
+        sessionStorage.setItem('purchase_conversion_fired','true');
+        window.dataLayer.push({
+          event: 'purchase',
+          ecommerce: {
+            transaction_id: <sessionId_or_orderId>,
+            value: <amount_number>,
+            currency: <ISO_currency>, // e.g. 'EUR'
+            items: [{
+              item_name: 'Raccordement Connect',
+              item_category: 'Service',
+              price: <amount_number>,
+              quantity: 1
+            }]
+          }
+        });
+      }
+
+4) Remove any legacy code:
+   - Delete any gtag('config', ...) or gtag('event', ...) calls.
+   - Delete any old Google Ads/GA4 hardcoded snippets.
+
+5) QA Checklist:
+   - With Tag Assistant (GTM preview), confirm events fire: form_start, form_submit, purchase.
+   - No network loads of gtag.js directly from site code; GTM should load it.
+   - Consent “ads=false” prevents events; “ads=true” allows them.
