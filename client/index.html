@@ -303,6 +303,82 @@
       gtag('config', 'GT-MJKTJGCK');
     </script>
 
+    <!-- Google Ads Conversion Functions - Loaded BEFORE React for availability -->
+    <script>
+      // Helper function to wait for gtag to be ready
+      function waitForGtag(callback, maxAttempts = 50) {
+        let attempts = 0;
+        const checkGtag = setInterval(() => {
+          attempts++;
+          if (typeof gtag === 'function' && window.dataLayer) {
+            clearInterval(checkGtag);
+            callback();
+          } else if (attempts >= maxAttempts) {
+            clearInterval(checkGtag);
+            console.error('❌ Google Ads: gtag failed to load after 5 seconds');
+          }
+        }, 100); // Check every 100ms
+      }
+
+      // Form Start Conversion - AW-16698052873/5o3ICMLjpMUaEImioJo-
+      window.gads_form_start = function(url) {
+        console.log('🎯 Google Ads: Form Start conversion triggered');
+        
+        waitForGtag(() => {
+          var callback = function () {
+            if (typeof(url) != 'undefined') {
+              window.location = url;
+            }
+          };
+          
+          gtag('event', 'conversion', {
+            'send_to': 'AW-16698052873/5o3ICMLjpMUaEImioJo-',
+            'event_callback': callback
+          });
+          console.log('✅ Google Ads: Form Start conversion sent to AW-16698052873/5o3ICMLjpMUaEImioJo-');
+        });
+        
+        return false;
+      };
+
+      // Form Submit Conversion - AW-16698052873/PqZMCJW-tMUaEImioJo-
+      window.gads_form_submit = function(url) {
+        console.log('🎯 Google Ads: Form Submit conversion triggered');
+        
+        waitForGtag(() => {
+          var callback = function () {
+            if (typeof(url) != 'undefined') {
+              window.location = url;
+            }
+          };
+          
+          gtag('event', 'conversion', {
+            'send_to': 'AW-16698052873/PqZMCJW-tMUaEImioJo-',
+            'event_callback': callback
+          });
+          console.log('✅ Google Ads: Form Submit conversion sent to AW-16698052873/PqZMCJW-tMUaEImioJo-');
+        });
+        
+        return false;
+      };
+
+      // Purchase Conversion - AW-16698052873/IFUxCJLHtMUaEImioJo-
+      window.gads_purchase = function(transactionId) {
+        console.log('🎯 Google Ads: Purchase conversion triggered with transaction_id:', transactionId);
+        
+        waitForGtag(() => {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
+            'transaction_id': transactionId || ''
+          });
+          console.log('✅ Google Ads: Purchase conversion sent to AW-16698052873/IFUxCJLHtMUaEImioJo- with transaction_id:', transactionId);
+        });
+      };
+
+      // Log when functions are ready
+      console.log('✅ Google Ads: Conversion functions loaded and ready (gads_form_start, gads_form_submit, gads_purchase)');
+    </script>
+
     <!-- PERFORMANCE FIX: Fixed preloads - removed invalid /src/main.tsx and duplicates -->
     <link rel="preload" href="/favicon-new.svg" as="image">
     <link rel="preload" href="/fonts/inter-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -356,48 +432,6 @@
       </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>
-    
-    <!-- Google Ads conversion functions -->
-    <script>
-      window.gads_form_start = function(url) {
-        var callback = function () {
-          if (typeof(url) != 'undefined') {
-            window.location = url;
-          }
-        };
-        if (typeof gtag === 'function') {
-          gtag('event', 'conversion', {
-            'send_to': 'AW-16698052873/5o3ICMLjpMUaEImioJo-',
-            'event_callback': callback
-          });
-        }
-        return false;
-      };
-
-      window.gads_form_submit = function(url) {
-        var callback = function () {
-          if (typeof(url) != 'undefined') {
-            window.location = url;
-          }
-        };
-        if (typeof gtag === 'function') {
-          gtag('event', 'conversion', {
-            'send_to': 'AW-16698052873/PqZMCJW-tMUaEImioJo-',
-            'event_callback': callback
-          });
-        }
-        return false;
-      };
-
-      window.gads_purchase = function(transactionId) {
-        if (typeof gtag === 'function') {
-          gtag('event', 'conversion', {
-            'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
-            'transaction_id': transactionId || ''
-          });
-        }
-      };
-    </script>
     
     <!-- PHASE 3A: Statcounter - Further optimized deferred loading -->
     <script>
