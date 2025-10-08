@@ -27,4 +27,18 @@ export const trackPurchase = (transactionId?: string, email?: string, phone?: st
   }
 };
 
+// Generic event tracking (for backward compatibility - events now flow through GTM)
+export const trackEvent = (action: string, category?: string, label?: string, value?: number) => {
+  // Events now tracked via GTM dataLayer - this is a no-op for backward compatibility
+  if (typeof window !== 'undefined' && window.dataLayer) {
+    window.dataLayer.push({
+      event: 'custom_event',
+      event_action: action,
+      event_category: category,
+      event_label: label,
+      event_value: value
+    });
+  }
+};
+
 export {};

@@ -216,6 +216,12 @@ export function ServiceRequestForm() {
       // Envoyer les données à l'API
       submitMutation.mutate(formData, {
         onSuccess: (data) => {
+          // Store email/phone securely in sessionStorage for Enhanced Conversions on thank-you page
+          if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
+            sessionStorage.setItem('ec_email', formData.email || '');
+            sessionStorage.setItem('ec_phone', formData.phone || '');
+          }
+          
           // Fire GTM form submit event with Enhanced Conversions data
           if (typeof window !== 'undefined' && (window as any).trackFormSubmit) {
             (window as any).trackFormSubmit(formData.email, formData.phone);

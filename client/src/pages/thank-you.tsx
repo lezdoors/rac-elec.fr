@@ -66,19 +66,20 @@ export default function ThankYouPage({}: ThankYouPageProps) {
     
     setPurchaseData(purchaseInfo);
     
-    // Fire Google Analytics ecommerce purchase event
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'purchase', {
-        transaction_id: ref,
-        value: purchaseInfo.value,
-        currency: purchaseInfo.currency,
-        items: purchaseInfo.items
-      });
+    // Retrieve email/phone from sessionStorage for Enhanced Conversions (if available)
+    let email = '';
+    let phone = '';
+    if (typeof sessionStorage !== 'undefined') {
+      email = sessionStorage.getItem('ec_email') || '';
+      phone = sessionStorage.getItem('ec_phone') || '';
+      // Clean up after retrieval
+      sessionStorage.removeItem('ec_email');
+      sessionStorage.removeItem('ec_phone');
     }
     
-    // Fire GTM Purchase event
+    // Fire GTM Purchase event with Enhanced Conversions data
     if (typeof window !== 'undefined' && (window as any).trackPurchase) {
-      (window as any).trackPurchase(ref);
+      (window as any).trackPurchase(ref, email, phone);
       
       // Mark as fired in sessionStorage to prevent duplicates on refresh/back/forward
       if (typeof sessionStorage !== 'undefined') {
