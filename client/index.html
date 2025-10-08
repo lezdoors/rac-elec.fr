@@ -304,29 +304,47 @@
     </script>
     <!-- End Google Tag Manager -->
 
-    <!-- DataLayer Tracking Helpers -->
+    <!-- DataLayer Tracking Helpers for GTM Enhanced Conversions -->
     <script>
       window.dataLayer = window.dataLayer || [];
       
-      window.trackFormStart = function() {
-        console.log('📊 GTM: form_start event pushed to dataLayer');
-        dataLayer.push({event: 'form_start'});
+      // Track form start with Enhanced Conversions data (email/phone unhashed for GTM)
+      window.trackFormStart = function(email, phone) {
+        const eventData = {
+          event: 'form_start',
+          email: email || undefined,
+          phone: phone || undefined
+        };
+        console.log('📊 GTM: form_start event pushed to dataLayer', eventData);
+        dataLayer.push(eventData);
       };
       
-      window.trackFormSubmit = function() {
-        console.log('📊 GTM: form_submit event pushed to dataLayer');
-        dataLayer.push({event: 'form_submit'});
+      // Track form submit with Enhanced Conversions data (email/phone unhashed for GTM)
+      window.trackFormSubmit = function(email, phone) {
+        const eventData = {
+          event: 'form_submit',
+          email: email || undefined,
+          phone: phone || undefined
+        };
+        console.log('📊 GTM: form_submit event pushed to dataLayer', eventData);
+        dataLayer.push(eventData);
       };
       
-      window.trackPurchase = function(transactionId) {
-        console.log('📊 GTM: purchase event pushed to dataLayer with transaction_id:', transactionId);
-        dataLayer.push({
+      // Track purchase with transaction details and Enhanced Conversions data
+      window.trackPurchase = function(transactionId, email, phone) {
+        const eventData = {
           event: 'purchase',
-          transaction_id: transactionId || ''
-        });
+          transaction_id: transactionId || '',
+          value: 129.80,
+          currency: 'EUR',
+          email: email || undefined,
+          phone: phone || undefined
+        };
+        console.log('📊 GTM: purchase event pushed to dataLayer', eventData);
+        dataLayer.push(eventData);
       };
       
-      console.log('✅ GTM: DataLayer helpers loaded (trackFormStart, trackFormSubmit, trackPurchase)');
+      console.log('✅ GTM: DataLayer helpers loaded with Enhanced Conversions support');
     </script>
 
     <!-- PERFORMANCE FIX: Fixed preloads - removed invalid /src/main.tsx and duplicates -->
