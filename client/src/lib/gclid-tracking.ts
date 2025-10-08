@@ -151,7 +151,7 @@ export function getCurrentGclid(): string | null {
 }
 
 /**
- * Initialize GCLID tracking on page load with enhanced attribution
+ * Initialize GCLID tracking on page load
  */
 export function initializeGclidTracking(): void {
   if (typeof window === 'undefined') return;
@@ -159,24 +159,6 @@ export function initializeGclidTracking(): void {
   const gclid = getGclidFromUrl();
   if (gclid && isValidGclid(gclid)) {
     storeGclid(gclid);
-    
-    // Enhanced Google Analytics configuration
-    if (window.gtag) {
-      window.gtag('config', 'GT-MJKTJGCK', {
-        custom_map: {
-          'custom_parameter_1': 'gclid'
-        },
-        gclid: gclid
-      });
-      
-      // Send GCLID as custom event for better tracking
-      window.gtag('event', 'gclid_captured', {
-        event_category: 'attribution',
-        event_label: gclid,
-        custom_parameter_1: gclid
-      });
-    }
-    
     console.log('✅ GCLID tracking initialized:', gclid);
   }
   
@@ -200,32 +182,6 @@ export function addGclidToConversion(conversionData: Record<string, any>): Recor
   return conversionData;
 }
 
-/**
- * Enhanced conversion tracking with GCLID and validation
- */
-export function trackConversionWithGclid(sendTo: string, additionalData: Record<string, any> = {}): void {
-  if (typeof window === 'undefined' || !window.gtag) return;
-  
-  const gclid = getCurrentGclid();
-  const conversionData: Record<string, any> = {
-    send_to: sendTo,
-    ...additionalData
-  };
-  
-  if (gclid && isValidGclid(gclid)) {
-    conversionData.gclid = gclid;
-    
-    // Add UTM data if available
-    const utmData = getStoredUtmData();
-    if (utmData) {
-      Object.assign(conversionData, utmData);
-    }
-    
-    console.log('✅ Conversion tracked with GCLID:', gclid);
-  }
-  
-  window.gtag('event', 'conversion', conversionData);
-}
 
 /**
  * Validate GCLID format (should be alphanumeric and specific length)
@@ -273,10 +229,4 @@ if (typeof window !== 'undefined') {
   
   // Clean up expired GCLID on page load
   cleanupExpiredGclid();
-}
-
-declare global {
-  interface Window {
-    gtag: (...args: any[]) => void;
-  }
 }
