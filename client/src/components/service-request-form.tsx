@@ -216,9 +216,9 @@ export function ServiceRequestForm() {
       // Envoyer les données à l'API
       submitMutation.mutate(formData, {
         onSuccess: (data) => {
-          // Fire GTM form submit event
+          // Fire GTM form submit event with Enhanced Conversions data
           if (typeof window !== 'undefined' && (window as any).trackFormSubmit) {
-            (window as any).trackFormSubmit();
+            (window as any).trackFormSubmit(formData.email, formData.phone);
           }
           
           // Après la soumission réussie, rediriger directement vers la page de paiement
