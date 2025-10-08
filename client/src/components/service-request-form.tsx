@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { serviceRequestSchema, type ServiceRequestFormData } from "@/lib/validators";
@@ -93,14 +93,6 @@ export function ServiceRequestForm() {
   const [referenceNumber, setReferenceNumber] = useState<string | null>(null);
   const [formStartTracked, setFormStartTracked] = useState(false);
   
-  // Track form start on first interaction
-  const handleFormStart = () => {
-    if (!formStartTracked && typeof window !== 'undefined' && (window as any).trackFormStart) {
-      (window as any).trackFormStart();
-      setFormStartTracked(true);
-    }
-  };
-  
   // Get tomorrow's date for min date input
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -162,6 +154,20 @@ export function ServiceRequestForm() {
   const projectStatus = watchedValues.projectStatus;
   const hasArchitect = watchedValues.hasArchitect;
   const useDifferentBillingAddress = Boolean(watchedValues.useDifferentBillingAddress);
+  
+  // Track form_start event with Enhanced Conversions when email AND phone are filled
+  useEffect(() => {
+    const email = watchedValues.email;
+    const phone = watchedValues.phone;
+    
+    // Track form_start once user has provided email AND phone (Enhanced Conversions ready)
+    if (!formStartTracked && email && phone && email.includes('@') && phone.length >= 10) {
+      if (typeof window !== 'undefined' && (window as any).trackFormStart) {
+        (window as any).trackFormStart(email, phone);
+        setFormStartTracked(true);
+      }
+    }
+  }, [watchedValues.email, watchedValues.phone, formStartTracked]);
   
   // Handle API submission
   const submitMutation = useMutation({
@@ -638,9 +644,6 @@ export function ServiceRequestForm() {
                     <Select 
                       value={field.value} 
                       onValueChange={field.onChange}
-                      onOpenChange={(open) => {
-                        if (open) handleFormStart();
-                      }}
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Sélectionnez votre profil" />
@@ -669,8 +672,7 @@ export function ServiceRequestForm() {
                     <FormControl>
                       <Input 
                         placeholder="Jean Dupont" 
-                        {...field} 
-                        onFocus={handleFormStart}
+                        {...field}
                       />
                     </FormControl>
                     <FormMessage />
