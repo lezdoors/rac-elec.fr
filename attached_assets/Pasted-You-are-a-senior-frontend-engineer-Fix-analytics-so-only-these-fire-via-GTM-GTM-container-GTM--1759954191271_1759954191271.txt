@@ -1,0 +1,44 @@
+You are a senior frontend engineer. Fix analytics so only these fire via GTM:
+	•	GTM container: GTM-T2VZD5DL (sole script on pages)
+	•	GA4: G-VJSY5MXCY7
+	•	Google Tag: GT-MJKTJGCK
+Remove everything else.
+
+Tasks
+	1.	Purge duplicates in codebase
+	•	Search entire project for any direct gtag.js installs and remove them (any GA4 G-…, any Ads AW-…, any Google Tag GT-…), keeping no hardcoded analytics/ads except GTM.
+	•	Ensure there is only one GTM container ID and it is GTM-T2VZD5DL on all pages (SSR + client routes).
+	2.	Standardize dataLayer events (no inline code in output)
+	•	Implement three dataLayer pushes the app will emit:
+	•	form_start when the user begins the multi-step form (first interaction).
+	•	form_submit on successful form completion (just before redirect to payment).
+	•	purchase on Stripe success/“merci” page, with transaction_id, value (129.80), currency (EUR).
+	•	Make events fire once per session where appropriate and be resilient to soft navigations.
+	3.	Wire UI triggers
+	•	Hook the above events to the existing buttons/flows:
+	•	Start CTA → form_start
+	•	Final submit (lead created / payment handoff) → form_submit
+	•	Stripe success route → purchase (read session/order id if available)
+	4.	Enhanced Conversions (prep for GTM)
+	•	Expose email and phone values from the form to dataLayer with the events so GTM can map:
+	•	user_data.email_address
+	•	user_data.phone_number
+	•	Do not hash in app; GTM/Google will handle hashing.
+	5.	Housekeeping
+	•	Keep/ensure one Conversion Linker (GTM will own it).
+	•	Ensure no other analytics/ads snippets remain in HTML, layouts, or components.
+	•	Ensure compatibility with SPA routing (events still fire on client transitions).
+	6.	QA & Deliverables
+	•	Provide a short test plan:
+	•	Open Tag Assistant (Preview) and confirm on page load only these fire: Conversion Linker, Google Tag (GT-MJKTJGCK), GA4 (G-VJSY5MXCY7).
+	•	Trigger form start → Ads – Form Start fires.
+	•	Complete form → Ads – Form Submit fires.
+	•	Visit Stripe success/merci → Ads – Purchase fires.
+	•	Output a checklist for my GTM workspace to finish mapping (tag names, triggers, and variable names to use).
+	•	Output a note for Google Ads Admin: under Manage Google tag (GT-MJKTJGCK) remove any extra destinations except GA4 G-VJSY5MXCY7 (and Ads if we keep it), and enable “Ignore duplicate instances of on-page configuration”.
+
+Success Criteria
+	•	No direct gtag.js scripts left anywhere; only GTM loads.
+	•	Only G-VJSY5MXCY7 and GT-MJKTJGCK run via GTM.
+	•	form_start, form_submit, purchase events push reliably.
+	•	Tag Assistant shows correct base tags on all pages and conversion tags on the right interactions.
