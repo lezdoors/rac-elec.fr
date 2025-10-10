@@ -50,14 +50,15 @@ export default function ConfirmationPage() {
         <meta name="description" content="Votre paiement a été confirmé. Votre demande de raccordement Enedis est en cours de traitement." />
         <meta name="robots" content="noindex, nofollow" />
         
-        {/* Google tag loaded once in index.html */}
+        {/* GTM-only setup - conversion via dataLayer */}
         
-        {/* Purchase conversion tracking - FIXED CONVERSION ID */}
+        {/* Purchase conversion tracking via GTM dataLayer */}
         <script>{`
-          if (typeof window !== 'undefined' && window.gtag) {
-            gtag('event', 'conversion', {
-              'send_to': 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
-              'transaction_id': '${referenceNumber || ''}'
+          if (typeof window !== 'undefined' && Array.isArray(window.dataLayer)) {
+            window.dataLayer.push({
+              event: 'ads_conversion',
+              conversion_id: 'AW-16698052873/IFUxCJLHtMUaEImioJo-',
+              transaction_id: '${referenceNumber || ''}'
             });
           }
         `}</script>

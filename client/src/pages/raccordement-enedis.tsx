@@ -342,16 +342,17 @@ export default function RaccordementEnedisPage() {
             }
           }
           
-          // Method 3: Raw gtag call
-          if (!conversionSent && typeof window !== 'undefined' && (window as any).gtag) {
+          // Method 3: GTM dataLayer push (GTM-only setup)
+          if (!conversionSent && typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
             try {
-              (window as any).gtag('event', 'conversion', {
-                'send_to': 'AW-16698052873/5o3ICMLjpMUaEImioJo-'
+              (window as any).dataLayer.push({
+                event: 'ads_conversion',
+                conversion_id: 'AW-16698052873/5o3ICMLjpMUaEImioJo-'
               });
-              console.log('✅ Form start conversion via raw gtag');
+              console.log('✅ Form start conversion via GTM dataLayer');
               conversionSent = true;
             } catch (e) {
-              console.warn('Raw gtag failed:', e);
+              console.warn('GTM dataLayer push failed:', e);
             }
           }
           
@@ -590,16 +591,17 @@ export default function RaccordementEnedisPage() {
           }
         }
         
-        // Method 3: Raw gtag call
-        if (!conversionSent && typeof window !== 'undefined' && (window as any).gtag) {
+        // Method 3: GTM dataLayer push (GTM-only setup)
+        if (!conversionSent && typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
           try {
-            (window as any).gtag('event', 'conversion', {
-              'send_to': 'AW-16698052873/PqZMCJW-tMUaEImioJo-'
+            (window as any).dataLayer.push({
+              event: 'ads_conversion',
+              conversion_id: 'AW-16698052873/PqZMCJW-tMUaEImioJo-'
             });
-            console.log('✅ Form submit conversion via raw gtag');
+            console.log('✅ Form submit conversion via GTM dataLayer');
             conversionSent = true;
           } catch (e) {
-            console.warn('Raw gtag submit failed:', e);
+            console.warn('GTM dataLayer push failed:', e);
           }
         }
         
@@ -661,12 +663,13 @@ export default function RaccordementEnedisPage() {
       if (typeof window !== 'undefined' && window.triggerFormSubmitConversion) {
         window.triggerFormSubmitConversion();
         console.log('✅ Final form submit conversion triggered via global function');
-      } else if (typeof window !== 'undefined' && window.gtag) {
-        // Fallback: Direct gtag call
-        window.gtag('event', 'conversion', {
-          'send_to': 'AW-16698052873/PqZMCJW-tMUaEtmioJo-'
+      } else if (typeof window !== 'undefined' && Array.isArray(window.dataLayer)) {
+        // Fallback: GTM dataLayer push (GTM-only setup)
+        window.dataLayer.push({
+          event: 'ads_conversion',
+          conversion_id: 'AW-16698052873/PqZMCJW-tMUaEtmioJo-'
         });
-        console.log('✅ Final form submit conversion sent via direct gtag call');
+        console.log('✅ Final form submit conversion sent via GTM dataLayer');
       } else {
         console.error('❌ Final form submit conversion failed - no tracking method available');
       }
@@ -1884,8 +1887,9 @@ export default function RaccordementEnedisPage() {
                   <a
                     href="tel:0970709570"
                     onClick={() => {
-                      if (typeof window !== 'undefined' && window.gtag) {
-                        window.gtag('event', 'phone_call', {
+                      if (typeof window !== 'undefined' && Array.isArray(window.dataLayer)) {
+                        window.dataLayer.push({
+                          event: 'phone_call',
                           event_category: 'engagement',
                           event_label: 'contact_phone_form_assistance'
                         });
