@@ -1,0 +1,68 @@
+{
+  "name": "Nice",
+  "slug": "nice",
+  "region": "provence-alpes-cote-d-azur",
+  "region_name": "Provence-Alpes-Côte d'Azur",
+  "postal_codes": ["06000", "06100", "06200", "06300"],
+  "meta_title": "Raccordement Électrique Nice | Expert Enedis Alpes-Maritimes",
+  "meta_description": "Raccordement électrique Nice ⚡ Service Enedis professionnel Côte d'Azur. Devis gratuit 24h, expert agréé 06000, tous quartiers.",
+  "canonical": "/raccordement/nice/",
+  "nap": {
+    "business_name": "Portail Électricité Nice",
+    "address": "32 Avenue Jean Médecin, 06000 Nice",
+    "phone": "04 93 82 15 27",
+    "email": "nice@portail-electricite.com",
+    "hours": {
+      "monday": "08:00-19:00",
+      "tuesday": "08:00-19:00",
+      "wednesday": "08:00-19:00",
+      "thursday": "08:00-19:00",
+      "friday": "08:00-19:00",
+      "saturday": "09:00-17:00",
+      "sunday": "Fermé"
+    }
+  },
+  "adjacent_cities": ["marseille", "cannes", "antibes"],
+  "hero": {
+    "h1": "Raccordement Électrique Nice",
+    "subtitle": "Expert en raccordement électrique Enedis à Nice. Service professionnel Côte d'Azur tous quartiers, devis sous 24h.",
+    "trust_indicators": [
+      "✅ Expert Côte d'Azur",
+      "✅ Tous quartiers Nice", 
+      "✅ Devis gratuit 24h",
+      "✅ Service premium"
+    ]
+  },
+  "content": {
+    "intro": "Nice, joyau de la Côte d'Azur et cinquième ville de France, attire une clientèle internationale exigeante nécessitant des raccordements électriques de qualité. De la Promenade des Anglais aux collines de Cimiez, en passant par le Port et les nouveaux quartiers d'affaires, notre service expert vous accompagne dans tous vos projets de raccordement électrique Enedis à Nice.",
+    "process": "Le raccordement électrique à Nice nécessite une connaissance approfondie des spécificités locales : contraintes climatiques méditerranéennes, réglementations strictes liées au patrimoine architectural, densité urbaine et coordination avec la Métropole Nice Côte d'Azur. Notre équipe niçoise maîtrise ces enjeux complexes et gère votre projet intégralement.",
+    "benefits": "Faire appel à notre service de raccordement électrique à Nice vous garantit une expertise locale de premier plan. Nous connaissons parfaitement les différents quartiers niçois, de la vieille ville aux zones d'activités modernes. Nos relations privilégiées avec Enedis Alpes-Maritimes et les services métropolitains nous permettent d'optimiser les délais et de vous proposer des solutions haut de gamme.",
+    "local_expertise": "Nice présente des défis uniques : proximité de la mer, relief accidenté, patrimoine Belle Époque protégé, quartiers d'affaires internationaux et zones résidentielles de prestige. Notre équipe possède l'expertise nécessaire pour naviguer dans cet environnement exigeant et vous proposer des solutions de raccordement adaptées aux standards niçois."
+  },
+  "faqs": [
+    {
+      "question": "Quels sont les délais de raccordement électrique à Nice ?",
+      "answer": "À Nice, les délais de raccordement électrique varient de 2 à 4 mois selon la complexité et le quartier. Les zones en développement comme l'Eco-Vallée bénéficient d'infrastructures modernes permettant des délais optimisés. Notre expertise locale nous permet d'accélérer les procédures."
+    },
+    {
+      "question": "Y a-t-il des spécificités pour le Vieux Nice ?",
+      "answer": "Le Vieux Nice, patrimoine historique protégé, nécessite des autorisations spéciales et des techniques adaptées pour préserver l'architecture. Notre équipe maîtrise ces contraintes patrimoniales et vous accompagne dans toutes les démarches spécialisées."
+    },
+    {
+      "question": "Quel budget pour un raccordement dans les Alpes-Maritimes ?",
+      "answer": "Dans les Alpes-Maritimes, le coût d'un raccordement électrique varie entre 1 500€ et 4 000€ selon la puissance et la localisation. Nice bénéficie d'un excellent réseau qui optimise les coûts. Devis premium gratuit sous 24h."
+    },
+    {
+      "question": "Comment raccorder une villa sur les hauteurs de Nice ?",
+      "answer": "Les raccordements sur les hauteurs de Nice nécessitent une attention particulière au relief et aux contraintes d'accès. Notre équipe connaît parfaitement ces spécificités techniques et vous propose des solutions adaptées aux propriétés de prestige."
+    }
+  ],
+  "schema_data": {
+    "local_business_id": "https://www.raccordement-connect.com/nice",
+    "service_area": "Nice, Alpes-Maritimes, Provence-Alpes-Côte d'Azur",
+    "geo_coordinates": {
+      "latitude": "43.7102",
+      "longitude": "7.2620"
+    }
+  }
+}
