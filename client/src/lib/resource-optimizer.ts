@@ -58,8 +58,8 @@ export function setupCaching() {
  */
 export function deferNonCriticalScripts() {
   // Identifier les scripts non critiques (analytics, tracking, etc.)
+  // NOTE: gtag.js removed - using GTM-only setup (GTM-T2VZD5DL)
   const nonCriticalScripts = [
-    'https://www.googletagmanager.com/gtag/js',
     'facebook-pixel',
     'hotjar',
     'intercom'

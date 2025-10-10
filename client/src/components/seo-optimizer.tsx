@@ -99,9 +99,10 @@ export const useUserEngagement = () => {
     const trackEngagement = () => {
       const timeSpent = Math.round((Date.now() - startTime) / 1000);
       
-      // Envoyer les métriques d'engagement
-      if (window.gtag) {
-        window.gtag('event', 'user_engagement', {
+      // Send to GTM dataLayer (GTM-only setup - no direct gtag)
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: 'user_engagement',
           engagement_time_msec: timeSpent * 1000,
           scroll_depth: maxScroll,
           interactions: interactions

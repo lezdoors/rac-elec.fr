@@ -29,12 +29,13 @@ function logMetric(name: string, value: number) {
   const emoji = rating === 'good' ? '✅' : rating === 'needs-improvement' ? '⚠️' : '❌';
   console.log(`${emoji} ${name}:`, Math.round(value), `(${rating})`);
   
-  // Send to Google Analytics if available
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', 'web_vitals', {
-      custom_parameter_1: name,
-      custom_parameter_2: value,
-      custom_parameter_3: rating
+  // Send to GTM dataLayer (GTM-only setup - no direct gtag)
+  if (typeof window !== 'undefined' && window.dataLayer) {
+    window.dataLayer.push({
+      event: 'web_vitals',
+      metric_name: name,
+      metric_value: value,
+      metric_rating: rating
     });
   }
 }

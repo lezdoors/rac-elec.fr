@@ -78,29 +78,30 @@ export function GoogleSnippetButton({
           } else {
             console.warn(`⚠️ La fonction gtag_report_conversion n'a pas été trouvée pour ${snippet.id}`);
             
-            // Tentative d'interception de l'appel gtag direct, au cas où gtag_report_conversion n'est pas utilisé
-            if (typeof (window as any).gtag === 'function' && snippet.code.includes('AW-')) {
-              console.log(`🔄 Tentative d'appel direct à gtag pour ${snippet.id}`);
+            // GTM-only: Push conversion to dataLayer instead of direct gtag
+            if (Array.isArray((window as any).dataLayer) && snippet.code.includes('AW-')) {
+              console.log(`🔄 Pushing conversion to GTM dataLayer for ${snippet.id}`);
               try {
-                // Extraire l'ID de conversion
+                // Extract conversion ID
                 const match = snippet.code.match(/AW-([0-9]+\/[a-zA-Z0-9]+)/) || 
                              snippet.code.match(/AW-([0-9]+)/);
                 if (match) {
-                  console.log(`📊 Envoi manuel de conversion Google Ads vers ${match[0]}`);
-                  (window as any).gtag('event', 'conversion', {
-                    'send_to': match[0]
+                  console.log(`📊 GTM conversion event for ${match[0]}`);
+                  (window as any).dataLayer.push({
+                    event: 'ads_conversion',
+                    conversion_id: match[0]
                   });
-                  console.log(`✅ Envoi manuel réussi pour ${match[0]}`);
+                  console.log(`✅ GTM dataLayer push successful for ${match[0]}`);
                 }
               } catch (error) {
-                console.error(`❌ Erreur lors de l'appel manuel à gtag:`, error);
+                console.error(`❌ Error pushing to GTM dataLayer:`, error);
               }
             }
           }
         }, 300);
-      } else if (snippet.code && snippet.code.includes('gtag("event", "conversion"') || 
-                snippet.code.includes('gtag(\'event\', \'conversion\'')) {
-        console.log(`🔔 Snippet ${snippet.id} contient un appel direct à gtag - Conversion probablement envoyée`);
+      } else if (snippet.code && (snippet.code.includes('gtag("event", "conversion"') || 
+                snippet.code.includes('gtag(\'event\', \'conversion\''))) {
+        console.log(`🔔 Snippet ${snippet.id} uses gtag - should be migrated to GTM dataLayer`);
       }
     });
     

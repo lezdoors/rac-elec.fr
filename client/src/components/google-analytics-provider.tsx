@@ -1,49 +1,33 @@
 import { useEffect } from 'react';
 
 /**
- * Composant qui vérifie la présence et initialise Google Analytics si nécessaire
- * Ce composant est utilisé au niveau racine de l'application
+ * GTM Analytics Provider - Validates GTM-only setup
+ * NO direct gtag.js - all analytics flow through GTM-T2VZD5DL
  */
 export function GoogleAnalyticsProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    // Vérifier si Google Analytics est déjà chargé
     if (typeof window !== 'undefined') {
-      if (typeof window.gtag !== 'function') {
-        console.warn('⚠️ La fonction gtag() n\'est pas disponible. Les conversions Google Ads ne fonctionneront pas correctement.');
+      // Verify GTM dataLayer is available (GTM-only setup)
+      if (window.dataLayer) {
+        console.log('✅ GTM dataLayer available - analytics ready');
         
-        // Créer une fonction gtag de secours pour éviter les erreurs
-        window.gtag = function() {
-          console.warn('⚠️ Appel à gtag() mais la fonction originale n\'est pas disponible:', 
-            Array.from(arguments));
-        };
-        
-        console.log('ℹ️ Une fonction gtag() de secours a été créée pour éviter les erreurs.');
+        // Send app initialization event via dataLayer
+        window.dataLayer.push({
+          event: 'app_initialized',
+          app_name: 'RaccordementConnect',
+          app_version: '2.0.0'
+        });
       } else {
-        console.log('✅ Google Analytics est correctement chargé et disponible.');
-        
-        // Envoyer un événement de test pour vérifier que tout fonctionne
-        try {
-          const gtagResult = window.gtag('event', 'app_initialized', {
-            'app_name': 'RaccordementElec',
-            'app_version': '1.0.0'
-          });
-          
-          // Si gtag retourne une promesse, gérer les rejections potentielles
-          if (gtagResult && typeof gtagResult.catch === 'function') {
-            gtagResult.catch((error: any) => {
-              console.warn('⚠️ Erreur non critique lors de l\'envoi de l\'événement Google Analytics:', error);
-            });
-          }
-          
-          console.log('✅ Événement de test envoyé à Google Analytics.');
-        } catch (error) {
-          console.error('❌ Erreur lors de l\'envoi de l\'événement de test:', error);
-        }
+        console.warn('⚠️ GTM dataLayer not found - check GTM container GTM-T2VZD5DL');
+      }
+      
+      // Warn if legacy gtag() exists (should not be present in GTM-only setup)
+      if (typeof window.gtag === 'function') {
+        console.warn('⚠️ Legacy gtag() detected - should use GTM dataLayer only');
       }
     }
   }, []);
   
-  // Pas de rendu spécifique, juste retourner les enfants
   return <>{children}</>;
 }
 

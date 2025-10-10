@@ -1,32 +1,14 @@
 /**
- * Types pour l'intégration Google Ads
- * Ces types permettent de définir les interfaces pour les objets et fonctions Google Ads
+ * GTM Google Ads Integration (GTM-only - no direct gtag)
+ * All conversion events flow through GTM dataLayer (GTM-T2VZD5DL)
  */
 
-// Étendre l'interface Window pour inclure les fonctions Google Ads
 declare global {
   interface Window {
     /**
-     * Fonction Google Analytics/GTM pour le suivi des événements
+     * GTM dataLayer for event tracking (GTM-only setup)
      */
-    gtag: (...args: any[]) => void;
-    
-    /**
-     * Fonction Google Ads pour le suivi des conversions
-     * @param url URL de redirection optionnelle
-     * @returns false pour empêcher la redirection par défaut
-     */
-    gtag_report_conversion?: (url?: string) => boolean;
-    
-    /**
-     * Indicateur que les appels à gtag ont été interceptés pour le débogage
-     */
-    _gtagIntercepted?: boolean;
-    
-    /**
-     * Indicateur que les appels à gtag_report_conversion ont été interceptés pour le débogage
-     */
-    _gtagReportConversionIntercepted?: boolean;
+    dataLayer: any[];
   }
 }
 
@@ -62,30 +44,31 @@ export interface GoogleAdsConversionData {
 }
 
 /**
- * Fonctions utilitaires pour le suivi des conversions Google Ads
+ * GTM Google Ads Helper - All conversions via dataLayer (GTM-only)
  */
 export const GoogleAdsHelper = {
   /**
-   * Vérifie si gtag est disponible
+   * Check if GTM dataLayer is available
    */
-  isGtagAvailable(): boolean {
-    return typeof window !== 'undefined' && typeof window.gtag === 'function';
+  isDataLayerAvailable(): boolean {
+    return typeof window !== 'undefined' && Array.isArray(window.dataLayer);
   },
   
   /**
-   * Envoie une conversion Google Ads
-   * @param conversionId Identifiant de conversion (AW-XXXXXXXXXX/YYYYYYYYYYYYY)
-   * @param transactionId Identifiant de transaction optionnel
-   * @param value Valeur monétaire optionnelle
+   * Send Google Ads conversion via GTM dataLayer
+   * @param conversionId Conversion ID (AW-XXXXXXXXXX/YYYYYYYYYYYYY)
+   * @param transactionId Optional transaction ID
+   * @param value Optional monetary value
    */
   sendConversion(conversionId: string, transactionId?: string, value?: number): boolean {
-    if (!this.isGtagAvailable()) {
-      console.warn("⚠️ gtag n'est pas disponible, la conversion ne sera pas envoyée");
+    if (!this.isDataLayerAvailable()) {
+      console.warn("⚠️ GTM dataLayer not available, conversion not sent");
       return false;
     }
     
-    const conversionData: GoogleAdsConversionData = {
-      send_to: conversionId
+    const conversionData: any = {
+      event: 'ads_conversion',
+      conversion_id: conversionId
     };
     
     if (transactionId) {
@@ -98,11 +81,11 @@ export const GoogleAdsHelper = {
     }
     
     try {
-      window.gtag('event', 'conversion', conversionData);
-      console.log("✅ Conversion Google Ads envoyée:", conversionData);
+      window.dataLayer.push(conversionData);
+      console.log("✅ GTM conversion event pushed:", conversionData);
       return true;
     } catch (error) {
-      console.error("❌ Erreur lors de l'envoi de la conversion Google Ads:", error);
+      console.error("❌ Error pushing conversion to dataLayer:", error);
       return false;
     }
   }

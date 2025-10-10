@@ -66,13 +66,13 @@ class LCPMonitor {
       console.log(`LCP: ${metric.value.toFixed(0)}ms ${status}`);
     }
 
-    // Send to analytics in production
-    if (typeof window !== 'undefined' && 'gtag' in window) {
-      (window as any).gtag('event', 'web_vitals', {
-        name: 'LCP',
-        value: Math.round(metric.value),
-        event_category: 'Web Vitals',
-        event_label: isGood ? 'good' : needsImprovement ? 'needs-improvement' : 'poor'
+    // Send to GTM dataLayer (GTM-only setup - no direct gtag)
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({
+        event: 'web_vitals',
+        metric_name: 'LCP',
+        metric_value: Math.round(metric.value),
+        metric_rating: isGood ? 'good' : needsImprovement ? 'needs-improvement' : 'poor'
       });
     }
   }

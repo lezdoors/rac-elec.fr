@@ -1,7 +1,6 @@
 declare global {
   interface Window {
     dataLayer: any[];
-    gtag?: (...args: any[]) => void;
     trackFormStart?: (email?: string, phone?: string) => void;
     trackFormSubmit?: (email?: string, phone?: string) => void;
     trackPurchase?: (transactionId?: string, email?: string, phone?: string) => void;

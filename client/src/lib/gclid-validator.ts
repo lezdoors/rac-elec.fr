@@ -60,10 +60,10 @@ export function validateGclidSetup(): GclidValidationResult {
       }
     }
 
-    // Check Google Tag availability
-    result.checks.googleTag = typeof window.gtag === 'function';
+    // Check GTM dataLayer availability (GTM-only setup)
+    result.checks.googleTag = Array.isArray(window.dataLayer);
     if (!result.checks.googleTag) {
-      result.errors.push('Google Tag (gtag) not available');
+      result.errors.push('GTM dataLayer not available');
     }
 
     // Check conversion tracking setup
@@ -94,12 +94,12 @@ export function validateGclidSetup(): GclidValidationResult {
 }
 
 /**
- * Test GCLID conversion tracking
+ * Test GCLID conversion tracking via GTM dataLayer
  */
 export async function testGclidConversion(conversionId: string): Promise<boolean> {
   try {
-    if (typeof window.gtag !== 'function') {
-      throw new Error('Google Tag not available');
+    if (!Array.isArray(window.dataLayer)) {
+      throw new Error('GTM dataLayer not available');
     }
 
     const gclid = getCurrentGclid();
@@ -107,18 +107,17 @@ export async function testGclidConversion(conversionId: string): Promise<boolean
       throw new Error('No GCLID available for testing');
     }
 
-    // Send test conversion with GCLID
-    window.gtag('event', 'conversion', {
-      send_to: conversionId,
+    // Send test conversion with GCLID via dataLayer (GTM-only)
+    window.dataLayer.push({
+      event: 'ads_conversion',
+      conversion_id: conversionId,
       gclid: gclid,
       transaction_id: `test_${Date.now()}`,
       value: 1.0,
-      currency: 'EUR',
-      event_category: 'test',
-      event_label: 'gclid_test_conversion'
+      currency: 'EUR'
     });
 
-    console.log('✅ Test conversion sent with GCLID:', gclid);
+    console.log('✅ Test conversion pushed to GTM dataLayer with GCLID:', gclid);
     return true;
 
   } catch (error) {
@@ -171,7 +170,7 @@ export function generateGclidDiagnostic(): string {
   report += `ENVIRONMENT INFO:\n`;
   report += `- User Agent: ${navigator.userAgent}\n`;
   report += `- Local Storage Available: ${typeof Storage !== 'undefined'}\n`;
-  report += `- Google Tag Available: ${typeof window.gtag === 'function'}\n`;
+  report += `- GTM dataLayer Available: ${Array.isArray(window.dataLayer)}\n`;
   report += `- Session Storage: ${Object.keys(sessionStorage).length} items\n`;
   report += `- Local Storage: ${Object.keys(localStorage).length} items\n`;
   
@@ -234,9 +233,9 @@ function checkGclidChanges(): void {
   });
 }
 
-// Type declarations for global gtag
+// Type declarations for GTM dataLayer
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
+    dataLayer: any[];
   }
 }
