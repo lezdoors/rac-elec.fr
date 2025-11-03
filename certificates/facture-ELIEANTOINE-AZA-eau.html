@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture Raccordement Eau - RAC-EAU-2025-8421</title>
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 12mm;
+            }
+            body { 
+                margin: 0; 
+                padding: 0;
+                font-size: 10pt;
+                line-height: 1.2;
+            }
+            .no-print { display: none !important; }
+        }
+        
+        body {
+            font-family: "Arial", "Helvetica", sans-serif;
+            line-height: 1.3;
+            color: #000;
+            margin: 0;
+            padding: 12mm;
+            background-color: white;
+            font-size: 10pt;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .logo-section {
+            flex: 1;
+        }
+        
+        .logo-section img {
+            max-width: 280px;
+            height: auto;
+        }
+        
+        .invoice-title {
+            text-align: right;
+            flex: 1;
+        }
+        
+        .invoice-title h1 {
+            font-size: 20pt;
+            font-weight: bold;
+            color: #000;
+            margin: 0 0 8px 0;
+        }
+        
+        .invoice-number {
+            font-size: 10pt;
+            color: #333;
+        }
+        
+        .parties-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            gap: 15px;
+        }
+        
+        .party-box {
+            flex: 1;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 3px;
+            background-color: #f9f9f9;
+        }
+        
+        .party-title {
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 6px;
+            font-size: 10pt;
+            text-transform: uppercase;
+        }
+        
+        .party-content {
+            font-size: 9pt;
+            color: #000;
+            line-height: 1.4;
+        }
+        
+        .services-section {
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #000;
+            border-bottom: 2px solid #000;
+            padding-bottom: 3px;
+            font-size: 11pt;
+        }
+        
+        .services-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        
+        .services-table th {
+            background-color: #000;
+            color: white;
+            padding: 6px;
+            text-align: left;
+            font-size: 9pt;
+            font-weight: bold;
+        }
+        
+        .services-table td {
+            padding: 6px;
+            border-bottom: 1px solid #ddd;
+            font-size: 9pt;
+        }
+        
+        .services-table .qty-col {
+            width: 10%;
+            text-align: center;
+        }
+        
+        .services-table .price-col {
+            width: 20%;
+            text-align: right;
+        }
+        
+        .services-table .total-col {
+            width: 20%;
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        .total-section {
+            margin-left: auto;
+            width: 250px;
+            border: 2px solid #000;
+            padding: 10px;
+            background-color: #f9f9f9;
+            margin-bottom: 12px;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 10pt;
+        }
+        
+        .total-row.final {
+            border-top: 2px solid #000;
+            margin-top: 6px;
+            padding-top: 6px;
+            font-size: 13pt;
+            font-weight: bold;
+        }
+        
+        .status-paid {
+            background-color: #000;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 3px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 9pt;
+        }
+        
+        .legal-notice {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 3px;
+            margin: 12px 0;
+        }
+        
+        .legal-title {
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 6px;
+            font-size: 10pt;
+        }
+        
+        .legal-text {
+            font-size: 8pt;
+            line-height: 1.4;
+            color: #000;
+        }
+        
+        .legal-text ul {
+            margin: 4px 0;
+            padding-left: 15px;
+        }
+        
+        .legal-text li {
+            margin-bottom: 3px;
+        }
+        
+        .footer {
+            margin-top: 12px;
+            padding-top: 8px;
+            border-top: 1px solid #ccc;
+            font-size: 8pt;
+            color: #555;
+            text-align: center;
+            line-height: 1.3;
+        }
+        
+        .download-btn {
+            background-color: #000;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 3px;
+            font-size: 12pt;
+            cursor: pointer;
+            margin: 20px 0;
+            display: block;
+            width: 300px;
+            margin: 20px auto;
+        }
+        
+        .download-btn:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="no-print">
+        <button class="download-btn" onclick="window.print()">
+            📄 Télécharger en PDF (Ctrl+P)
+        </button>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo-section">
+                <img src="../attached_assets/Capture d'écran 2025-11-03 à 13.33.50_1762173232796.png" alt="Raccordement à l'Eau">
+            </div>
+            <div class="invoice-title">
+                <h1>FACTURE</h1>
+                <div class="invoice-number">
+                    N° RAC-EAU-2025-8421<br>
+                    Date : 03 novembre 2025<br>
+                    <span class="status-paid">PAYÉ</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="parties-section">
+            <div class="party-box">
+                <div class="party-title">Client</div>
+                <div class="party-content">
+                    <strong>Elieantoine AZA</strong><br>
+                    124 Avenue Marceau Hamecher<br>
+                    82000 Montauban<br>
+                    France<br>
+                    Email : elieantoine.azar@icloud.com<br>
+                    Tél : 0660546703
+                </div>
+            </div>
+            <div class="party-box">
+                <div class="party-title">Détails de paiement</div>
+                <div class="party-content">
+                    <strong>Mode de paiement :</strong> Carte bancaire via Stripe<br>
+                    <strong>Date de paiement :</strong> 03 novembre 2025<br>
+                    <strong>Référence :</strong> RAC-EAU-2025-8421<br>
+                    <strong>Statut :</strong> Transaction validée
+                </div>
+            </div>
+        </div>
+
+        <div class="services-section">
+            <div class="section-title">DÉTAIL DES PRESTATIONS - RACCORDEMENT EAU POTABLE</div>
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>Description du service</th>
+                        <th class="qty-col">Qté</th>
+                        <th class="price-col">Prix unitaire</th>
+                        <th class="total-col">Total TTC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Étude & Viabilisation</strong><br><span style="color: #555; font-size: 8pt;">Étude de faisabilité et analyse du terrain</span></td>
+                        <td class="qty-col">1</td>
+                        <td class="price-col">129,80 €</td>
+                        <td class="total-col">129,80 €</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Travaux de Raccordement</strong><br><span style="color: #555; font-size: 8pt;">Réalisation des travaux de raccordement au réseau</span></td>
+                        <td class="qty-col">1</td>
+                        <td class="price-col">129,80 €</td>
+                        <td class="total-col">129,80 €</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Installation du compteur & Mise en conformité</strong><br><span style="color: #555; font-size: 8pt;">Pose du compteur et mise aux normes</span></td>
+                        <td class="qty-col">1</td>
+                        <td class="price-col">129,80 €</td>
+                        <td class="total-col">129,80 €</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mise en service & Gestion administrative</strong><br><span style="color: #555; font-size: 8pt;">Activation du service et démarches administratives</span></td>
+                        <td class="qty-col">1</td>
+                        <td class="price-col">129,80 €</td>
+                        <td class="total-col">129,80 €</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="total-section">
+            <div class="total-row">
+                <span>Sous-total HT :</span>
+                <span>519,20 €</span>
+            </div>
+            <div class="total-row">
+                <span>TVA (0%) :</span>
+                <span>0,00 €</span>
+            </div>
+            <div class="total-row final">
+                <span>TOTAL TTC :</span>
+                <span>519,20 €</span>
+            </div>
+        </div>
+
+        <div class="legal-notice">
+            <div class="legal-title">DEVOIR DE CONSEIL & LÉGITIMITÉ DE LA TRANSACTION</div>
+            <div class="legal-text">
+                <p><strong>Conformément à la réglementation en vigueur</strong>, nous informons notre client que :</p>
+                <ul>
+                    <li>Cette prestation consiste en une assistance complète pour le raccordement au réseau public d'eau potable.</li>
+                    <li>Le client reste libre de contacter directement le service des eaux de sa commune.</li>
+                    <li>Notre service apporte un accompagnement personnalisé et une gestion complète des démarches administratives et techniques.</li>
+                    <li>Le tarif de 519,20 € TTC correspond aux frais de service, d'étude, de coordination et de gestion administrative.</li>
+                </ul>
+                <p><strong>Preuves de légitimité :</strong> Client identifié avec coordonnées complètes et vérifiables. Service réel commandé. Paiement sécurisé Stripe validé. Transaction conforme à la législation française. Ce document constitue une preuve de service légale et peut être utilisé comme justificatif auprès de Stripe, des établissements bancaires et de toute autorité compétente.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Cette facture constitue un justificatif légal de transaction et un reçu de paiement.</strong></p>
+            <p>Service de raccordement au réseau public d'eau potable - Document généré le 03 novembre 2025</p>
+            <p>&copy; 2025 Raccordement à l'Eau - Tous droits réservés</p>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            if (window.location.search.includes('autoprint=true')) {
+                setTimeout(() => window.print(), 1000);
+            }
+        });
+    </script>
+</body>
+</html>
