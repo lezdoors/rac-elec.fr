@@ -6,9 +6,63 @@
     <title>Facture - Guenaelle Pascale Garcon - Menana LTD</title>
     <style>
         @media print {
-            body { margin: 0; padding: 0; }
+            body { 
+                margin: 0; 
+                padding: 0;
+                background-color: white;
+            }
             .download-btn { display: none !important; }
-            @page { size: A4; margin: 10mm; }
+            @page { 
+                size: A4; 
+                margin: 8mm;
+            }
+            .container {
+                padding: 8mm;
+                box-shadow: none;
+                max-width: 100%;
+                min-height: auto;
+            }
+            .header {
+                margin-bottom: 8px;
+                padding-bottom: 6px;
+            }
+            .invoice-title {
+                margin: 6px 0;
+                font-size: 16pt;
+            }
+            .invoice-meta {
+                margin-bottom: 8px;
+            }
+            .client-info {
+                padding: 6px;
+                margin-bottom: 8px;
+            }
+            .service-table {
+                margin-bottom: 8px;
+            }
+            .total-section {
+                margin-bottom: 8px;
+            }
+            .payment-info-box {
+                padding: 6px;
+                margin-bottom: 8px;
+            }
+            .devoir-conseil {
+                padding: 6px;
+                margin-bottom: 6px;
+            }
+            .footer {
+                margin-top: 6px;
+                padding-top: 4px;
+            }
+            .footer-signature {
+                margin-top: 6px;
+                padding-top: 4px;
+            }
+            .footer-logo {
+                max-width: 100px;
+                margin: 4px auto;
+            }
         }
         
         * {
