@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture - Guenaelle Pascale Garcon - Menana LTD</title>
+    <style>
+        @media print {
+            body { margin: 0; padding: 0; }
+            .download-btn { display: none !important; }
+            @page { size: A4; margin: 10mm; }
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            padding: 15px;
+            color: #000;
+        }
+        
+        .container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background-color: white;
+            padding: 15mm;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            min-height: 277mm;
+            position: relative;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #000;
+        }
+        
+        .company-info {
+            flex: 1;
+        }
+        
+        .company-name {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 4px;
+        }
+        
+        .company-details {
+            font-size: 8pt;
+            line-height: 1.3;
+            color: #333;
+        }
+        
+        .logo {
+            width: 120px;
+            height: auto;
+        }
+        
+        .invoice-title {
+            text-align: center;
+            font-size: 20pt;
+            font-weight: bold;
+            margin: 12px 0;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .invoice-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 8.5pt;
+        }
+        
+        .meta-box {
+            flex: 1;
+            padding: 8px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            margin-right: 8px;
+        }
+        
+        .meta-box:last-child {
+            margin-right: 0;
+        }
+        
+        .meta-label {
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 3px;
+        }
+        
+        .client-info {
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-left: 3px solid #000;
+            font-size: 9pt;
+        }
+        
+        .section-title {
+            font-size: 11pt;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #000;
+            text-transform: uppercase;
+        }
+        
+        .service-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 9pt;
+        }
+        
+        .service-table th {
+            background-color: #000;
+            color: white;
+            padding: 8px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 9pt;
+        }
+        
+        .service-table td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .service-table tr:last-child td {
+            border-bottom: 2px solid #000;
+        }
+        
+        .total-section {
+            text-align: right;
+            margin-bottom: 15px;
+            font-size: 9pt;
+        }
+        
+        .total-row {
+            padding: 4px 0;
+        }
+        
+        .total-label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+        
+        .total-amount {
+            display: inline-block;
+            width: 100px;
+            text-align: right;
+        }
+        
+        .grand-total {
+            background-color: #000;
+            color: white;
+            padding: 8px 12px;
+            margin-top: 6px;
+            display: inline-block;
+            font-size: 11pt;
+            font-weight: bold;
+        }
+        
+        .payment-info-box {
+            background-color: #f9f9f9;
+            border: 2px solid #000;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 8.5pt;
+        }
+        
+        .payment-info-title {
+            font-weight: bold;
+            font-size: 10pt;
+            margin-bottom: 6px;
+            color: #000;
+        }
+        
+        .devoir-conseil {
+            background-color: #fafafa;
+            border: 1px solid #ccc;
+            padding: 8px;
+            margin-bottom: 10px;
+            font-size: 7.5pt;
+            line-height: 1.4;
+        }
+        
+        .conseil-title {
+            font-weight: bold;
+            font-size: 9pt;
+            margin-bottom: 4px;
+            color: #000;
+        }
+        
+        .legal-text {
+            font-size: 7pt;
+            line-height: 1.3;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .legal-text ul {
+            margin-left: 12px;
+            margin-top: 3px;
+        }
+        
+        .legal-text li {
+            margin-bottom: 2px;
+        }
+        
+        .footer {
+            margin-top: 8px;
+            padding-top: 6px;
+            border-top: 1px solid #ccc;
+            font-size: 7.5pt;
+            color: #555;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .footer-signature {
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .footer-logo {
+            max-width: 150px;
+            height: auto;
+            margin: 8px auto;
+            display: block;
+        }
+        
+        .download-btn {
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 10pt;
+            cursor: pointer;
+            margin: 15px auto;
+            display: block;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .download-btn:hover {
+            background-color: #333;
+        }
+        
+        @media screen {
+            .container {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="download-btn" onclick="window.print()">📥 Télécharger / Imprimer la facture</button>
+    
+    <div class="container">
+        <div class="header">
+            <div class="company-info">
+                <div class="company-name">MENANA LTD</div>
+                <div class="company-details">
+                    71-75 Shelton Street, Covent Garden<br>
+                    London, United Kingdom, WC2H 9JQ<br>
+                    Email: Contact@menana.net<br>
+                    Téléphone: +44 78 7875 4718
+                </div>
+            </div>
+            <div>
+                <svg class="logo" viewBox="0 0 400 80" xmlns="http://www.w3.org/2000/svg">
+                    <text x="200" y="50" font-family="Arial Black, Arial, sans-serif" font-size="48" font-weight="900" fill="#DC2626" text-anchor="middle" letter-spacing="-2">
+                        MENANA
+                    </text>
+                    <text x="200" y="68" font-family="Arial, sans-serif" font-size="10" fill="#666" text-anchor="middle" letter-spacing="2">
+                        HADDAOUI
+                    </text>
+                </svg>
+            </div>
+        </div>
+
+        <div class="invoice-title">Facture</div>
+
+        <div class="invoice-meta">
+            <div class="meta-box">
+                <div class="meta-label">Numéro de facture</div>
+                <div>MENANA-AUTO-2025-1112</div>
+            </div>
+            <div class="meta-box">
+                <div class="meta-label">Date d'émission</div>
+                <div>12 novembre 2025</div>
+            </div>
+            <div class="meta-box">
+                <div class="meta-label">Date de paiement</div>
+                <div>12 novembre 2025</div>
+            </div>
+        </div>
+
+        <div class="client-info">
+            <div class="section-title">Client</div>
+            <strong>Nom :</strong> Guenaelle Pascale Garcon<br>
+            <strong>Email :</strong> Tichamad@hotmail.fr<br>
+            <strong>Téléphone :</strong> 0696095817
+        </div>
+
+        <table class="service-table">
+            <thead>
+                <tr>
+                    <th style="width: 60%;">Description du service</th>
+                    <th style="width: 15%; text-align: center;">Quantité</th>
+                    <th style="width: 12%; text-align: right;">Prix unitaire</th>
+                    <th style="width: 13%; text-align: right;">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <strong>Service de mise en relation - Assurance automobile</strong><br>
+                        <span style="font-size: 8pt; color: #555;">
+                            Mise en relation avec notre partenaire courtier en assurance Zenassur SASU (ORIAS: 25004749) pour le traitement de votre demande d'assurance automobile. Prise de rendez-vous et accompagnement personnalisé.
+                        </span>
+                    </td>
+                    <td style="text-align: center;">1</td>
+                    <td style="text-align: right;">200,00 €</td>
+                    <td style="text-align: right;"><strong>200,00 €</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="total-section">
+            <div class="total-row">
+                <span class="total-label">Sous-total HT :</span>
+                <span class="total-amount">200,00 €</span>
+            </div>
+            <div class="total-row">
+                <span class="total-label">TVA (non applicable) :</span>
+                <span class="total-amount">0,00 €</span>
+            </div>
+            <div style="margin-top: 8px;">
+                <div class="grand-total">
+                    TOTAL TTC : 200,00 €
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-info-box">
+            <div class="payment-info-title">✓ PAIEMENT REÇU</div>
+            <div>
+                <strong>Montant payé :</strong> 200,00 €<br>
+                <strong>Mode de paiement :</strong> Virement bancaire (Wise)<br>
+                <strong>Date de paiement :</strong> 12 novembre 2025<br>
+                <strong>Statut :</strong> <span style="color: green; font-weight: bold;">PAYÉ</span>
+            </div>
+        </div>
+
+        <div class="devoir-conseil">
+            <div class="conseil-title">DEVOIR DE CONSEIL - INTERMÉDIATION EN ASSURANCE</div>
+            <div class="legal-text">
+                <p><strong>Nature du service :</strong> Menana LTD est un intermédiaire en assurance proposant un service de mise en relation avec des courtiers partenaires agréés.</p>
+                
+                <p style="margin-top: 4px;"><strong>Partenaire courtier :</strong> Zenassur SASU, courtier en assurance immatriculé à l'ORIAS sous le numéro 25004749. Vous pouvez vérifier cette immatriculation sur <a href="https://www.orias.fr" style="color: #000;">www.orias.fr</a>.</p>
+                
+                <p style="margin-top: 4px;"><strong>Service rendu :</strong></p>
+                <ul>
+                    <li>Analyse de votre demande d'assurance automobile</li>
+                    <li>Mise en relation avec Zenassur SASU pour traitement de votre dossier</li>
+                    <li>Prise de rendez-vous avec un conseiller spécialisé</li>
+                    <li>Accompagnement dans vos démarches administratives</li>
+                </ul>
+
+                <p style="margin-top: 4px;"><strong>Important :</strong> Le montant de 200,00 € correspond aux frais de service de mise en relation et d'accompagnement. Ce montant est distinct de la prime d'assurance qui sera établie par le courtier partenaire selon votre profil et vos besoins.</p>
+
+                <p style="margin-top: 4px;"><strong>Liberté de choix :</strong> Vous restez libre de souscrire ou non à l'offre d'assurance qui vous sera proposée par le courtier partenaire. Notre service se limite à la mise en relation et à l'accompagnement dans vos démarches.</p>
+
+                <p style="margin-top: 4px;"><strong>Conformité :</strong> Menana LTD respecte la réglementation en vigueur concernant l'intermédiation en assurance et la protection des consommateurs.</p>
+
+                <p style="margin-top: 6px;"><strong>Confirmation de service :</strong> Client identifié avec coordonnées complètes. Service réel commandé et confirmé. Paiement validé par virement bancaire. Transaction conforme à la législation en vigueur.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Merci pour votre confiance.</strong></p>
+            <p>Service de mise en relation en assurance automobile - Document généré le 12 novembre 2025</p>
+            <p style="font-weight: bold; margin-top: 8px;">
+                Menana LTD<br>
+                71-75 Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ<br>
+                Email: Contact@menana.net
+            </p>
+            <div class="footer-signature">
+                <svg class="footer-logo" viewBox="0 0 400 80" xmlns="http://www.w3.org/2000/svg">
+                    <text x="200" y="50" font-family="Arial Black, Arial, sans-serif" font-size="48" font-weight="900" fill="#DC2626" text-anchor="middle" letter-spacing="-2">
+                        MENANA
+                    </text>
+                    <text x="200" y="68" font-family="Arial, sans-serif" font-size="10" fill="#666" text-anchor="middle" letter-spacing="2">
+                        HADDAOUI
+                    </text>
+                </svg>
+            </div>
+            <p>&copy; 2025 Menana LTD - Tous droits réservés</p>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            document.title = 'Facture_Guenaelle_Garcon_MENANA_AUTO_2025_1112.pdf';
+        });
+    </script>
+</body>
+</html>
