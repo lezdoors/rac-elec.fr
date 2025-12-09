@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Zap, ArrowRight, Building, Home as HomeIcon, BarChart, Clock, Shield, Phone, CheckCircle, MapPin, FileText, Rocket, ChevronDown, Check, Users, Lock, Star } from "lucide-react";
+import { Zap, ArrowRight, Building, Home as HomeIcon, BarChart, Clock, Shield, Phone, CheckCircle, MapPin, FileText, Rocket, ChevronDown, Check, Users, Lock } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { TrustSection } from "@/components/trust-section";
@@ -25,22 +25,8 @@ const useMobileDetection = () => {
 };
 
 export default function HomePage() {
-  const [activeUsersCount, setActiveUsersCount] = useState(114);
   const [isVisible, setIsVisible] = useState<{[key: string]: boolean}>({});
   const isMobile = useMobileDetection();
-  const specificCounts = [311, 256, 148, 382, 99, 114, 214, 74, 277, 128, 312, 298];
-  
-  useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * specificCounts.length);
-    setActiveUsersCount(specificCounts[randomIndex]);
-    
-    const interval = setInterval(() => {
-      const newIndex = Math.floor(Math.random() * specificCounts.length);
-      setActiveUsersCount(specificCounts[newIndex]);
-    }, 10000);
-    
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -90,98 +76,76 @@ export default function HomePage() {
       </Helmet>
 
       <main id="main-content">
-        {/* HERO SECTION - Modern Gradient Design */}
+        {/* HERO SECTION - Clean White Design */}
         <section 
-          className="relative overflow-hidden py-16 md:py-24 lg:py-28"
-          style={{ background: 'linear-gradient(135deg, #0052D4 0%, #4364F7 50%, #6FB1FC 100%)' }}
+          className="relative overflow-hidden py-12 md:py-16 lg:py-20 bg-white"
           data-testid="hero-section"
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-7xl">
-            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-              {/* Left Content - 55% */}
-              <div className="w-full lg:w-[55%] text-center lg:text-left">
-                {/* Partner Badge - Glassmorphism */}
-                <div 
-                  className="inline-flex items-center px-5 py-2.5 rounded-full mb-6 border"
-                  style={{ 
-                    background: 'rgba(255, 255, 255, 0.2)',
-                    backdropFilter: 'blur(10px)',
-                    WebkitBackdropFilter: 'blur(10px)',
-                    borderColor: 'rgba(255, 255, 255, 0.3)',
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
-                  }}
-                  data-testid="partner-badge"
-                >
-                  <Star className="w-4 h-4 text-yellow-300 mr-2 fill-yellow-300" />
-                  <span className="text-sm font-semibold text-white">Partenaire n°1 en France</span>
-                </div>
-
+            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+              {/* Left Content - 50% */}
+              <div className="w-full lg:w-[50%] text-center lg:text-left">
                 {/* Main Headline - Two Lines */}
-                <h1 className="mb-6" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.15)' }}>
-                  <span className="block text-3xl sm:text-4xl md:text-5xl font-medium text-white leading-tight tracking-tight" style={{ letterSpacing: '-0.03em' }}>
+                <h1 className="mb-4">
+                  <span className="block text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight tracking-tight" style={{ letterSpacing: '-0.02em' }}>
                     Demande de
                   </span>
-                  <span className="block text-4xl sm:text-5xl md:text-[58px] font-bold text-white leading-tight tracking-tight" style={{ letterSpacing: '-0.03em' }}>
+                  <span className="block text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight tracking-tight" style={{ letterSpacing: '-0.02em' }}>
                     Raccordement Enedis
                   </span>
                 </h1>
 
                 {/* Subheadline */}
-                <p className="text-base sm:text-lg md:text-xl text-white/95 leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8">
-                  Particuliers, professionnels ou terrains à viabiliser — un seul formulaire, un service 100% en ligne.
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-md mx-auto lg:mx-0 mb-6">
+                  Votre expert raccordement Enedis en ligne.<br />
+                  Déposez votre demande en quelques minutes.
                 </p>
 
-                {/* CTA Button */}
-                <Link href="/raccordement-enedis#formulaire-raccordement">
-                  <button 
-                    className="bg-white text-[#0052D4] font-semibold text-lg px-10 py-5 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
-                    style={{ boxShadow: '0 8px 24px rgba(0,0,0,0.2)' }}
-                    data-testid="cta-hero-button"
-                  >
-                    Commencer ma demande
-                  </button>
-                </Link>
-
-                {/* Trust Badges */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-8 mt-7 text-white/90">
-                  <div className="flex items-center gap-2">
-                    <Check className="w-5 h-5 text-green-300" />
-                    <span className="text-sm sm:text-base">100% en ligne</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-5 h-5 text-blue-200" />
-                    <span className="text-sm sm:text-base">Réponse en 48h</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Shield className="w-5 h-5 text-purple-200" />
-                    <span className="text-sm sm:text-base">Sécurisé</span>
-                  </div>
+                {/* Two CTA Buttons */}
+                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8">
+                  <Link href="/raccordement-enedis#formulaire-raccordement">
+                    <button 
+                      className="bg-[#4F46E5] hover:bg-[#4338CA] text-white font-semibold text-base px-6 py-3 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300"
+                      data-testid="cta-hero-button"
+                    >
+                      Démarrer ma demande
+                    </button>
+                  </Link>
+                  <Link href="/contact">
+                    <button 
+                      className="bg-white hover:bg-gray-50 text-gray-700 font-semibold text-base px-6 py-3 rounded-lg border border-gray-300 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-2"
+                      data-testid="contact-hero-button"
+                    >
+                      <Phone className="w-4 h-4" />
+                      Nous contacter
+                    </button>
+                  </Link>
                 </div>
 
-                {/* Social Proof */}
-                <div className="mt-6 flex items-center justify-center lg:justify-start gap-2 text-white/85">
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-400"></span>
-                  </span>
-                  <span className="text-sm">
-                    <span className="font-semibold">{activeUsersCount}</span> demandes traitées en temps réel
-                  </span>
+                {/* Trust Badges */}
+                <div className="flex flex-wrap justify-center lg:justify-start gap-6 text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-sm">100% en ligne</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-5 h-5 text-gray-500" />
+                    <span className="text-sm">Réponse en 48h</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Shield className="w-5 h-5 text-gray-500" />
+                    <span className="text-sm">Sécurisé</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Right Illustration - 45% */}
-              <div className="w-full lg:w-[45%] flex justify-center lg:justify-end">
-                <div 
-                  className="relative w-full max-w-md lg:max-w-xl animate-float"
-                  style={{
-                    animation: 'float 4s ease-in-out infinite'
-                  }}
-                >
+              {/* Right Illustration - 50% */}
+              <div className="w-full lg:w-[50%] flex justify-center lg:justify-end">
+                <div className="relative w-full max-w-lg lg:max-w-xl">
                   <img 
                     src={heroIllustration} 
                     alt="Famille devant une maison avec panneaux solaires et voiture électrique - Raccordement électrique Enedis"
-                    className="w-full h-auto drop-shadow-2xl"
+                    className="w-full h-auto"
                     loading="eager"
                     data-testid="hero-illustration"
                   />
@@ -189,17 +153,6 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-
-          {/* CSS for float animation */}
-          <style>{`
-            @keyframes float {
-              0%, 100% { transform: translateY(0px); }
-              50% { transform: translateY(-10px); }
-            }
-            .animate-float {
-              animation: float 4s ease-in-out infinite;
-            }
-          `}</style>
         </section>
 
         {/* SERVICE CARDS SECTION */}
