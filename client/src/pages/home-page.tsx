@@ -387,15 +387,14 @@ export default function HomePage() {
             
             {/* Right Column - Illustration (40%) */}
             <div 
-              className="order-1 lg:order-2 lg:col-span-2 flex justify-center animate-fade-in-right"
+              className="order-1 lg:order-2 lg:col-span-2 flex justify-center animate-fade-in-right bg-transparent"
               style={{ animationDuration: '0.8s', animationDelay: '0.2s', animationFillMode: 'both' }}
             >
               <img 
                 src={heroIllustration} 
                 alt="Famille devant maison avec panneaux solaires et voiture électrique" 
-                className="w-full max-w-[90%] md:max-w-lg lg:max-w-xl h-auto"
+                className="w-full max-w-[90%] md:max-w-lg lg:max-w-xl h-auto bg-transparent"
                 loading="eager"
-                style={{ mixBlendMode: 'multiply' }}
               />
             </div>
           </div>
