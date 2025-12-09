@@ -1,1 +1,0 @@
-import{j as t}from"./index-CLkeU-RR.js";import{C as r,f as a}from"./french-cities-snaPVK_w.js";import"./star-3MyPTsyw.js";import"./users-NdOvorzD.js";function m(){return t.jsx(r,{cityData:a.strasbourg})}export{m as default};

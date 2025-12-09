@@ -47,6 +47,7 @@ const MentionsLegalesPage = lazy(() => import("@/pages/mentions-legales.tsx").ca
 const FaqPage = lazy(() => import("@/pages/faq-page").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const ContactPage = lazy(() => import("@/pages/contact-page").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const ThankYouPage = lazy(() => import("@/pages/thank-you").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const RecuPage = lazy(() => import("@/pages/recu").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const SolairePage = lazy(() => import("@/pages/solaire-page").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const NosServicesPage = lazy(() => import("@/pages/nos-services").catch(() => ({ default: () => <div>Page non disponible</div> })));
 
@@ -182,6 +183,13 @@ function Router() {
         <Route path="/confirmation" component={() => (
           <Suspense fallback={<LoadingFallback />}>
             <ConfirmationPage />
+          </Suspense>
+        )} />
+        
+        {/* Page de reçu professionnel avec référence */}
+        <Route path="/recu/:reference" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <RecuPage />
           </Suspense>
         )} />
         

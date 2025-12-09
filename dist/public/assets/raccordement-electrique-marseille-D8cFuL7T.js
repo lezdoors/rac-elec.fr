@@ -1,1 +1,0 @@
-import{j as t}from"./index-CLkeU-RR.js";import{C as e,f as a}from"./french-cities-snaPVK_w.js";import"./star-3MyPTsyw.js";import"./users-NdOvorzD.js";function s(){return t.jsx(e,{cityData:a.marseille})}export{s as default};
