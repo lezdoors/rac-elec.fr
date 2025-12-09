@@ -33,6 +33,17 @@ Preferred communication style: Simple, everyday language.
 - **Technical Implementations**: Optimized performance (e.g., LCP under 2.5s target, streamlined rendering path, GPU acceleration), comprehensive SEO (JSON-LD, Open Graph, Twitter Cards), robust error handling, and browser compatibility (polyfills for older browsers).
 - **Mobile Optimizations**: Floating CTA button with smart show/hide behavior, enhanced mobile form validation with proper keyboard types, lazy loading images, mobile-first loading strategies, and touch-optimized interface elements.
 
+### Recent Changes (December 2025)
+- **Modern Landing Page Redesign**: Complete redesign of home-page.tsx with conversion-focused modern UI:
+  - Hero section with gradient background (linear-gradient #0052D4 → #4364F7 → #6FB1FC), glassmorphism partner badge, two-line headline, trust badges (100% en ligne, Réponse 48h, Sécurisé), floating house illustration with animation
+  - 4 service cards with colorful gradient icons and hover effects
+  - "Comment ça marche?" process timeline with 4 connected steps showing time estimates
+  - Service types section with 6 detailed cards for all raccordement types
+  - Trust section with 3 pillars (+1200 demandes, Procédure conforme, Paiement sécurisé)
+  - Final CTA banner with inverted gradient before footer
+  - Scroll reveal animations using IntersectionObserver
+  - Mobile-first responsive design tested on iPhone 14 viewport
+
 ### Recent Changes (October 2025)
 - **GTM-Only Analytics Migration (COMPLETED)**: Comprehensive migration to GTM-T2VZD5DL as the sole analytics source. Removed all direct gtag.js references from 10+ files (web-vitals-monitor.ts, lcp-monitor.ts, seo-optimizer.tsx, google-analytics-provider.tsx, google-ads-types.ts, gclid-validator.ts, google-snippet-button.tsx, raccordement-enedis.tsx, confirmation-page.tsx, analytics.ts). All conversion tracking now flows through window.dataLayer.push(). GTM container loads GA4 (G-VJSY5MXCY7) and Google Tag (GT-MJKTJGCK) internally. Clean build verified with no duplicate scripts. Enhanced Conversions ready with email/phone data via dataLayer. See GTM_MIGRATION_COMPLETE.md for full documentation.
 
