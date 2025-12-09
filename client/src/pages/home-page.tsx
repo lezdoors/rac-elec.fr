@@ -308,72 +308,94 @@ export default function HomePage() {
         `}</script>
 
       </Helmet>
-      {/* Hero Section - New Design with Illustration */}
+      {/* Hero Section - Clean Modern Design */}
       <main id="main-content">
-      <section className="bg-white py-12 md:py-20" id="hero">
-        <div className="container mx-auto px-4 max-w-7xl">
-          {/* Trust Badges */}
-          <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-8 md:mb-12">
-            <div className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-full px-4 py-2">
-              <CheckCircle2 className="h-5 w-5 text-green-600" />
-              <span className="text-sm font-medium text-green-800">100% en ligne</span>
-            </div>
-            <div className="flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-full px-4 py-2">
-              <Clock className="h-5 w-5 text-blue-600" />
-              <span className="text-sm font-medium text-blue-800">Réponse en 48h</span>
-            </div>
-            <div className="flex items-center gap-2 bg-purple-50 border border-purple-200 rounded-full px-4 py-2">
-              <Shield className="h-5 w-5 text-purple-600" />
-              <span className="text-sm font-medium text-purple-800">Sécurisé</span>
-            </div>
-          </div>
-
-          {/* Hero Content - 2 columns on desktop */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Left Column - Text */}
-            <div className="text-center lg:text-left order-2 lg:order-1">
-              {/* Badge */}
-              <div className="inline-flex items-center rounded-full bg-blue-100 px-4 py-2 mb-6">
-                <span className="text-sm font-semibold text-blue-800">Partenaire n°1 en France</span>
+      <section className="bg-white pt-10 pb-[60px] md:pt-20 md:pb-[60px]" id="hero">
+        <div className="container mx-auto px-4 sm:px-5 max-w-[1280px]">
+          {/* Hero Content - 60/40 layout on desktop */}
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center">
+            {/* Left Column - Text (60%) */}
+            <div 
+              className="text-center lg:text-left order-2 lg:order-1 lg:col-span-3 animate-fade-up"
+              style={{ animationDuration: '0.6s', animationFillMode: 'both' }}
+            >
+              {/* Partner Badge */}
+              <div className="inline-flex items-center rounded-2xl bg-[#EFF6FF] px-4 py-2 mb-6 shadow-[0_1px_3px_rgba(0,0,0,0.08)]">
+                <Sparkles className="h-4 w-4 text-[#0066CC] mr-2" />
+                <span className="text-[13px] font-semibold text-[#0066CC]">Partenaire n°1 en France</span>
               </div>
               
-              {/* Main Title */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                Demande de <span className="text-[#0072CE]">Raccordement Enedis</span>
+              {/* Main Title - Modern Typography */}
+              <h1 className="mb-5 leading-tight tracking-[-0.02em]" style={{ fontFamily: "'Inter', 'Segoe UI', 'Roboto', -apple-system, system-ui, sans-serif" }}>
+                <span className="block text-[32px] md:text-[42px] font-medium text-[#1a202c] leading-[1.2]">
+                  Demande de
+                </span>
+                <span className="block text-[38px] md:text-[52px] font-bold text-[#0066CC] leading-[1.1]">
+                  Raccordement Enedis
+                </span>
               </h1>
               
               {/* Subtitle */}
-              <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0">
+              <p className="text-[18px] font-normal text-[#4a5568] leading-[1.6] mb-8 max-w-[600px] mx-auto lg:mx-0">
                 Particuliers, professionnels ou terrains à viabiliser — un seul formulaire, un service 100% en ligne.
               </p>
               
-              {/* CTA Button */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-6">
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-6">
                 <Link href="/raccordement-enedis#formulaire-raccordement">
                   <button 
-                    className="bg-[#0072CE] text-white font-semibold px-8 py-4 rounded-xl text-lg hover:bg-[#005eaa] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 w-full sm:w-auto"
+                    className="bg-[#0066CC] text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-[15px] sm:text-[16px] hover:bg-[#0052a3] transition-all duration-200 ease-out shadow-[0_4px_12px_rgba(0,102,204,0.3)] hover:shadow-[0_6px_20px_rgba(0,102,204,0.4)] hover:scale-[1.02] w-full sm:w-auto"
                     data-testid="hero-cta-button"
                   >
                     Commencer ma demande
                   </button>
                 </Link>
+                <a href="tel:0970709570" className="flex">
+                  <button 
+                    className="bg-white text-[#1a202c] font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-[15px] sm:text-[16px] border-2 border-[#e2e8f0] hover:border-[#0066CC] hover:text-[#0066CC] transition-all duration-200 w-full sm:w-auto"
+                    data-testid="hero-contact-button"
+                  >
+                    Nous contacter
+                  </button>
+                </a>
               </div>
               
-              {/* Counter */}
-              <p className="text-gray-500 text-sm">
-                <span className={`font-bold text-[#0072CE] transition-all duration-300 ${isCountHighlighted ? 'scale-110' : ''}`}>
-                  {activeUsersCount}
-                </span> demandes traitées en temps réel
-              </p>
+              {/* Social Proof Counter */}
+              <div className="flex items-center justify-center lg:justify-start gap-2 mb-6">
+                <Zap className="h-4 w-4 text-[#0066CC]" />
+                <p className="text-[15px] font-semibold text-[#0066CC]">
+                  {activeUsersCount} demandes traitées en temps réel
+                </p>
+              </div>
+              
+              {/* Trust Signals - Option B (below CTA) */}
+              <div className="flex flex-wrap justify-center lg:justify-start gap-6 sm:gap-10">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-green-500" />
+                  <span className="text-[14px] text-[#4a5568]">100% en ligne</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="h-5 w-5 text-[#0066CC]" />
+                  <span className="text-[14px] text-[#4a5568]">Réponse en 48h</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-purple-500" />
+                  <span className="text-[14px] text-[#4a5568]">Paiement sécurisé</span>
+                </div>
+              </div>
             </div>
             
-            {/* Right Column - Illustration */}
-            <div className="order-1 lg:order-2 flex justify-center">
+            {/* Right Column - Illustration (40%) */}
+            <div 
+              className="order-1 lg:order-2 lg:col-span-2 flex justify-center animate-fade-in-right"
+              style={{ animationDuration: '0.8s', animationDelay: '0.2s', animationFillMode: 'both' }}
+            >
               <img 
                 src={heroIllustration} 
                 alt="Famille devant maison avec panneaux solaires et voiture électrique" 
-                className="w-full max-w-lg lg:max-w-xl xl:max-w-2xl h-auto"
+                className="w-full max-w-[90%] md:max-w-lg lg:max-w-xl h-auto"
                 loading="eager"
+                style={{ mixBlendMode: 'multiply' }}
               />
             </div>
           </div>
