@@ -422,6 +422,88 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      
+      {/* Section 3 Étapes Simples */}
+      <section className="py-16 md:py-24 bg-[#F8F9FA]" id="etapes-simples">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left Column - Illustration */}
+            <div className="flex justify-center order-1">
+              <img 
+                src={formIntroIllustration} 
+                alt="Femme remplissant un formulaire en ligne sur ordinateur" 
+                className="w-full max-w-md lg:max-w-lg h-auto"
+                loading="lazy"
+              />
+            </div>
+            
+            {/* Right Column - Steps */}
+            <div className="order-2">
+              {/* Section Header */}
+              <div className="mb-10">
+                <div className="inline-flex items-center rounded-full bg-blue-100 px-4 py-2 mb-4">
+                  <span className="text-sm font-semibold text-blue-800">Processus simplifié</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  3 Étapes <span className="text-[#0072CE]">Simples</span>
+                </h2>
+                <p className="text-lg text-gray-600">
+                  Votre demande de raccordement en quelques minutes seulement.
+                </p>
+              </div>
+              
+              {/* Steps */}
+              <div className="space-y-6">
+                {/* Step 1 */}
+                <div className="flex gap-4 items-start">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-md">
+                    1
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-gray-900 text-lg mb-1">Remplissez le formulaire</h3>
+                    <p className="text-gray-600">Complétez votre demande en 5 minutes avec toutes les informations nécessaires.</p>
+                  </div>
+                </div>
+                
+                {/* Step 2 */}
+                <div className="flex gap-4 items-start">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-md">
+                    2
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-gray-900 text-lg mb-1">Étude de votre dossier</h3>
+                    <p className="text-gray-600">Notre équipe analyse votre demande et prépare votre dossier Enedis.</p>
+                  </div>
+                </div>
+                
+                {/* Step 3 */}
+                <div className="flex gap-4 items-start">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-md">
+                    3
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-gray-900 text-lg mb-1">Intervention Enedis</h3>
+                    <p className="text-gray-600">Enedis réalise les travaux et active votre compteur électrique.</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* CTA Button */}
+              <div className="mt-10">
+                <Link href="/raccordement-enedis#formulaire-raccordement">
+                  <button 
+                    className="bg-[#0072CE] text-white font-semibold px-8 py-4 rounded-xl text-lg hover:bg-[#005eaa] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                    data-testid="steps-cta-button"
+                  >
+                    Commencer ma demande
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       {/* Formulaire de raccordement avec 5 étapes - Composant complet */}
       <section className="py-16 md:py-20 bg-gradient-to-br from-gray-50 to-blue-50" id="formulaire-raccordement">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
