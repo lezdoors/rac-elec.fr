@@ -1,0 +1,309 @@
+I want to redesign the entire landing page to be modern, high-converting, 
+and remarkable. Here's the complete vision:
+
+═══════════════════════════════════════════════════════════════════
+SECTION 1: HERO SECTION - GRADIENT DESIGN
+═══════════════════════════════════════════════════════════════════
+
+BACKGROUND:
+Replace the solid blue (#0066CC) with a modern gradient:
+- Background: linear-gradient(135deg, #0052D4 0%, #4364F7 50%, #6FB1FC 100%)
+- This creates depth and modernity
+- The illustration will sit naturally on this gradient
+
+LAYOUT:
+- Container: max-width 1280px, padding 80px 60px
+- Two columns: 55% content (left) / 45% illustration (right)
+- Vertical center alignment
+
+CONTENT STRUCTURE:
+
+1. PARTNER BADGE (top):
+   - "Partenaire n°1 en France"
+   - Background: rgba(255, 255, 255, 0.2)
+   - Backdrop-filter: blur(10px) (glassmorphism effect)
+   - Color: white
+   - Border: 1px solid rgba(255, 255, 255, 0.3)
+   - Padding: 10px 20px
+   - Border-radius: 24px
+   - Font-size: 14px, font-weight: 600
+   - Subtle shadow: 0 4px 15px rgba(0,0,0,0.1)
+
+2. MAIN HEADLINE:
+   - "Demande de Raccordement Enedis"
+   - Split into two lines for impact
+   - Line 1: "Demande de" - font-size: 48px, font-weight: 500, color: white
+   - Line 2: "Raccordement Enedis" - font-size: 58px, font-weight: 700, color: white
+   - Letter-spacing: -0.03em (tighter, more modern)
+   - Line-height: 1.1
+   - Add text-shadow: 0 2px 20px rgba(0,0,0,0.15) for depth
+
+3. SUBHEADLINE:
+   - "Particuliers, professionnels ou terrains à viabiliser — un seul formulaire, un service 100% en ligne."
+   - Color: rgba(255, 255, 255, 0.95)
+   - Font-size: 19px
+   - Line-height: 1.6
+   - Max-width: 540px
+   - Margin-top: 24px
+
+4. CTA BUTTON:
+   - Text: "Commencer ma demande"
+   - Background: white
+   - Color: #0052D4 (matches gradient start)
+   - Font-size: 18px, font-weight: 600
+   - Padding: 18px 40px
+   - Border-radius: 12px
+   - Margin-top: 36px
+   - Shadow: 0 8px 24px rgba(0,0,0,0.2)
+   - Hover effects:
+     * transform: translateY(-2px)
+     * box-shadow: 0 12px 32px rgba(0,0,0,0.25)
+     * transition: all 0.3s ease
+
+5. TRUST BADGES (below CTA):
+   - Horizontal layout with 32px gap
+   - Each badge: icon (20px) + text
+   - "✓ 100% en ligne" | "⏱ Réponse en 48h" | "🛡 Sécurisé"
+   - Color: rgba(255, 255, 255, 0.9)
+   - Font-size: 15px
+   - Margin-top: 28px
+
+6. SOCIAL PROOF:
+   - "114 demandes traitées en temps réel"
+   - Color: rgba(255, 255, 255, 0.85)
+   - Font-size: 14px
+   - Margin-top: 20px
+   - Add pulsing dot animation: ⚡
+
+ILLUSTRATION:
+   - Position: absolute right
+   - Max-width: 100%
+   - Height: auto
+   - Add subtle float animation (up/down 10px, 4s ease-in-out infinite)
+   - The gradient background will naturally work with the illustration
+
+RESPONSIVE:
+   - Desktop (1024px+): Side by side
+   - Tablet (768-1023px): Reduce font sizes by 15%
+   - Mobile (<768px): 
+     * Stack vertically
+     * Headline: 36px / 42px
+     * Padding: 60px 24px
+     * Illustration below content
+
+═══════════════════════════════════════════════════════════════════
+SECTION 2: SERVICE CARDS - FLOATING CARD DESIGN
+═══════════════════════════════════════════════════════════════════
+
+BACKGROUND: White (creating contrast from gradient hero)
+
+LAYOUT:
+- Container: max-width 1280px
+- Padding: 100px 60px
+- Grid: 4 columns on desktop, 2 on tablet, 1 on mobile
+- Gap: 24px
+
+4 SERVICE CARDS:
+
+Card Design (all cards):
+- Background: white
+- Border: 1px solid #E2E8F0
+- Border-radius: 16px
+- Padding: 32px
+- Box-shadow: 0 4px 20px rgba(0,0,0,0.08)
+- Hover effects:
+  * transform: translateY(-8px)
+  * box-shadow: 0 12px 40px rgba(0,102,204,0.15)
+  * border-color: #0066CC
+  * transition: all 0.3s ease
+
+Card 1 - Maison neuve:
+- Icon: Blue house (keep current)
+- Background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) for icon circle
+- Icon color: white
+- Title: "Maison neuve"
+- Subtitle: "Habitation individuelle"
+
+Card 2 - Définitif:
+- Icon: Building (keep current)
+- Background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)
+- Title: "Définitif"
+- Subtitle: "Locaux professionnels"
+
+Card 3 - Provisoire:
+- Icon: Clock (keep current)
+- Background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)
+- Title: "Provisoire"
+- Subtitle: "Chantiers temporaires"
+
+Card 4 - Viabilisation:
+- Icon: Location pin (keep current)
+- Background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)
+- Title: "Viabilisation"
+- Subtitle: "Parcelles terrain"
+
+═══════════════════════════════════════════════════════════════════
+SECTION 3: PROCESS TIMELINE - "COMMENT ÇA MARCHE?"
+═══════════════════════════════════════════════════════════════════
+
+NEW SECTION (add this after service cards)
+
+BACKGROUND: Light gradient (top to bottom)
+- Background: linear-gradient(180deg, #F8F9FB 0%, #FFFFFF 100%)
+
+LAYOUT:
+- Container: max-width 1200px
+- Padding: 100px 60px
+- Center-aligned content
+
+HEADER:
+- Badge: "Processus simplifié" (light blue background)
+- Title: "Comment ça marche ?"
+- Subtitle: "Votre raccordement Enedis en 4 étapes simples et rapides"
+
+TIMELINE (4 steps):
+
+Horizontal layout with connecting line:
+- Steps in a row on desktop
+- Vertical on mobile
+- Connecting line between steps (2px, #E2E8F0, dashed)
+
+Step 1:
+- Illustration: "Commencez votre demande.webp" (80px circle)
+- Number badge: "1" (blue circle, 40px)
+- Title: "Remplissez le formulaire"
+- Text: "Complétez votre demande en 5 minutes avec toutes les informations nécessaires"
+- Time: "5 min"
+
+Step 2:
+- Illustration: "Dépôt du dossier.webp"
+- Number: "2" (green circle)
+- Title: "Recevez votre devis"
+- Text: "Sous 48h, recevez un devis détaillé et personnalisé pour votre projet"
+- Time: "48h"
+
+Step 3:
+- Illustration: Use form illustration
+- Number: "3" (orange circle)
+- Title: "Validation du dossier"
+- Text: "Notre équipe analyse votre demande et prépare votre dossier Enedis"
+- Time: "2-3 semaines"
+
+Step 4:
+- Illustration: "Suivi-Dossier.webp"
+- Number: "4" (purple circle)
+- Title: "Intervention Enedis"
+- Text: "Enedis réalise les travaux et active votre compteur électrique"
+- Time: "4-6 semaines"
+
+CTA BUTTON at bottom:
+- "Commencer ma demande maintenant"
+- Blue background, white text
+- Large and prominent
+
+═══════════════════════════════════════════════════════════════════
+SECTION 4: SERVICE TYPES - DETAILED CARDS
+═══════════════════════════════════════════════════════════════════
+
+Keep current structure but enhance:
+
+HEADER:
+- "Votre Demande de Raccordement"
+- Keep help section with phone/hours
+
+CARDS GRID (3x2 on desktop):
+Replace icons with actual illustrations:
+
+1. Raccordement Définitif → "Raccordement-Definitif.webp" (100px)
+2. Raccordement Provisoire → "Raccordement-Provisoire.webp" (100px)
+3. Viabilisation → Current icon is fine
+4. Modification → "augmentation de puissance.webp" (100px)
+5. Raccordement Collectif → "Service-Collectif.webp" (100px)
+6. Production Électrique → "Photovoltaic.webp" (100px, highlight with green border)
+
+Card styling:
+- Add hover: scale(1.02) and shadow increase
+- "En savoir plus" links: blue color with arrow →
+
+═══════════════════════════════════════════════════════════════════
+SECTION 5: TRUST SECTION - BEFORE FAQ
+═══════════════════════════════════════════════════════════════════
+
+NEW SECTION (add before FAQ)
+
+BACKGROUND: White
+
+HEADER:
+- "Pourquoi nous faire confiance ?"
+- Center-aligned
+
+3 TRUST PILLARS (horizontal cards):
+
+Pillar 1:
+- Icon: Checkmark in circle (blue)
+- Stat: "+1200 demandes traitées"
+- Text: "Des centaines de clients satisfaits nous font confiance"
+
+Pillar 2:
+- Icon: Shield (green)
+- Stat: "Procédure conforme"
+- Text: "Processus respectant les normes Enedis"
+
+Pillar 3:
+- Icon: Lock (orange)
+- Stat: "Paiement sécurisé"
+- Text: "Transactions protégées par Stripe"
+
+═══════════════════════════════════════════════════════════════════
+SECTION 6: CTA BANNER - BEFORE FOOTER
+═══════════════════════════════════════════════════════════════════
+
+NEW SECTION
+
+BACKGROUND: Gradient (matching hero but reversed)
+- linear-gradient(135deg, #6FB1FC 0%, #4364F7 50%, #0052D4 100%)
+
+LAYOUT:
+- Full-width section
+- Padding: 80px 60px
+- Center-aligned content
+
+CONTENT:
+- Icon: Lightning bolt or rocket (64px, white)
+- Headline: "Prêt à démarrer votre projet ?"
+- Subtext: "Rejoignez les centaines de clients satisfaits"
+- CTA Button: White background, blue text, large
+- Text: "Commencer ma demande"
+- Secondary text: "Devis gratuit et sans engagement"
+
+═══════════════════════════════════════════════════════════════════
+GLOBAL IMPROVEMENTS
+═══════════════════════════════════════════════════════════════════
+
+ANIMATIONS:
+- Add scroll reveal animations (fade up on scroll)
+- Stagger animations for cards (0.1s delay between each)
+- Smooth transitions everywhere (0.3s ease)
+
+PERFORMANCE:
+- Lazy load all images below fold
+- Use WebP format for all illustrations
+- Minify CSS and JavaScript
+- Target: < 2s page load time
+
+RESPONSIVE:
+- Mobile-first approach
+- Test on 375px, 768px, 1024px, 1440px
+- Ensure touch targets are 48px minimum
+- Stack all sections vertically on mobile
+
+ACCESSIBILITY:
+- Proper alt text for all images
+- ARIA labels for interactive elements
+- Keyboard navigation support
+- Color contrast ratio > 4.5:1
+
+═══════════════════════════════════════════════════════════════════
+
+Build this complete landing page with all sections and show me the result.
+Focus on creating a cohesive, modern, high-converting experience.
