@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { TrustSection } from "@/components/trust-section";
 import { FloatingCtaButton } from "@/components/floating-cta-button";
+import heroIllustration from "@assets/hero-illustration_1765320964105.webp";
 
 const useMobileDetection = () => {
   const [isMobile, setIsMobile] = useState(true);
@@ -172,31 +173,18 @@ export default function HomePage() {
               {/* Right Illustration - 45% */}
               <div className="w-full lg:w-[45%] flex justify-center lg:justify-end">
                 <div 
-                  className="relative w-full max-w-md lg:max-w-lg animate-float"
+                  className="relative w-full max-w-md lg:max-w-xl animate-float"
                   style={{
                     animation: 'float 4s ease-in-out infinite'
                   }}
                 >
-                  <svg viewBox="0 0 400 350" className="w-full h-auto drop-shadow-2xl">
-                    {/* House */}
-                    <rect x="100" y="150" width="200" height="150" fill="white" rx="8"/>
-                    <polygon points="200,80 80,170 320,170" fill="white"/>
-                    <rect x="170" y="220" width="60" height="80" fill="#0052D4" rx="4"/>
-                    <circle cx="215" cy="260" r="6" fill="white"/>
-                    {/* Windows */}
-                    <rect x="120" y="180" width="40" height="40" fill="#6FB1FC" rx="4"/>
-                    <rect x="240" y="180" width="40" height="40" fill="#6FB1FC" rx="4"/>
-                    {/* Power lines */}
-                    <line x1="0" y1="100" x2="80" y2="120" stroke="white" strokeWidth="3"/>
-                    <line x1="80" y1="120" x2="100" y2="130" stroke="white" strokeWidth="3"/>
-                    <circle cx="80" cy="120" r="8" fill="#FFD700"/>
-                    {/* Lightning bolt */}
-                    <path d="M340 60 L320 110 L335 110 L310 160 L350 100 L330 100 L355 60 Z" fill="#FFD700" opacity="0.9"/>
-                    {/* Meter */}
-                    <rect x="290" y="200" width="50" height="70" fill="#4364F7" rx="6"/>
-                    <rect x="300" y="215" width="30" height="20" fill="white" rx="2"/>
-                    <circle cx="315" cy="255" r="8" fill="#22C55E"/>
-                  </svg>
+                  <img 
+                    src={heroIllustration} 
+                    alt="Famille devant une maison avec panneaux solaires et voiture électrique - Raccordement électrique Enedis"
+                    className="w-full h-auto drop-shadow-2xl"
+                    loading="eager"
+                    data-testid="hero-illustration"
+                  />
                 </div>
               </div>
             </div>
