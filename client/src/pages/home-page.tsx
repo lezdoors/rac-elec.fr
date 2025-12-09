@@ -32,6 +32,8 @@ import { MobileFormOptimizer } from "@/components/mobile-form-optimizer";
 import { MobileImageOptimizer } from "@/components/mobile-image-optimizer";
 import { trackFormStart } from "@/lib/analytics";
 import { TrustSection } from "@/components/trust-section";
+import heroIllustration from "@assets/hero-illustration_1765314868628.webp";
+import formIntroIllustration from "@assets/form-intro-illustartion_(Website)_1765314876416.webp";
 
 // Performance optimization - lazy loading will be implemented inline
 
@@ -306,103 +308,117 @@ export default function HomePage() {
         `}</script>
 
       </Helmet>
-      {/* Hero Section - Optimized for Performance */}
+      {/* Hero Section - New Design with Illustration */}
       <main id="main-content">
-      <section className="bg-[#0046a2] text-white py-16 md:py-20" id="hero">
-        <div className="container mx-auto px-4 max-w-6xl text-center">
-          {/* Badge */}
-          <div className="hidden sm:inline-flex items-center rounded-full bg-white/10 px-3 py-1 mb-6 border border-white/20">
-            <span className="text-sm font-medium text-white">Partenaire n°1 en France</span>
+      <section className="bg-white py-12 md:py-20" id="hero">
+        <div className="container mx-auto px-4 max-w-7xl">
+          {/* Trust Badges */}
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-8 md:mb-12">
+            <div className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-full px-4 py-2">
+              <CheckCircle2 className="h-5 w-5 text-green-600" />
+              <span className="text-sm font-medium text-green-800">100% en ligne</span>
+            </div>
+            <div className="flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-full px-4 py-2">
+              <Clock className="h-5 w-5 text-blue-600" />
+              <span className="text-sm font-medium text-blue-800">Réponse en 48h</span>
+            </div>
+            <div className="flex items-center gap-2 bg-purple-50 border border-purple-200 rounded-full px-4 py-2">
+              <Shield className="h-5 w-5 text-purple-600" />
+              <span className="text-sm font-medium text-purple-800">Sécurisé</span>
+            </div>
           </div>
-          
-          {/* Main Title - Optimized for mobile LCP and transactional SEO */}
-          <h1 className="text-2xl sm:text-3xl md:text-6xl font-semibold text-white mb-4 leading-snug md:leading-tight">
-            Demande de Raccordement Enedis
-          </h1>
-          
-          {/* Subtitle */}
-          <p className="hidden md:block text-lg md:text-xl mb-6 max-w-2xl mx-auto text-white/90">
-            Particuliers, professionnels ou terrains à viabiliser — un seul formulaire, un service 100% en ligne.
-          </p>
-          {/* Navigation Icons - Simplified */}
-          <div className="flex justify-center gap-6 mb-10 lg:hidden">
-            <Link href="/particulier" className="group">
-              <div className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
-                <HomeIcon className="h-8 w-8 text-white" />
+
+          {/* Hero Content - 2 columns on desktop */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left Column - Text */}
+            <div className="text-center lg:text-left order-2 lg:order-1">
+              {/* Badge */}
+              <div className="inline-flex items-center rounded-full bg-blue-100 px-4 py-2 mb-6">
+                <span className="text-sm font-semibold text-blue-800">Partenaire n°1 en France</span>
               </div>
-            </Link>
-            <Link href="/professionnel" className="group">
-              <div className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
-                <Building className="h-8 w-8 text-white" />
+              
+              {/* Main Title */}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                Demande de <span className="text-[#0072CE]">Raccordement Enedis</span>
+              </h1>
+              
+              {/* Subtitle */}
+              <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0">
+                Particuliers, professionnels ou terrains à viabiliser — un seul formulaire, un service 100% en ligne.
+              </p>
+              
+              {/* CTA Button */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-6">
+                <Link href="/raccordement-enedis#formulaire-raccordement">
+                  <button 
+                    className="bg-[#0072CE] text-white font-semibold px-8 py-4 rounded-xl text-lg hover:bg-[#005eaa] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 w-full sm:w-auto"
+                    data-testid="hero-cta-button"
+                  >
+                    Commencer ma demande
+                  </button>
+                </Link>
               </div>
-            </Link>
-            <Link href="/raccordement-enedis#formulaire-raccordement" className="group">
-              <div className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
-                <Clock className="h-8 w-8 text-white" />
-              </div>
-            </Link>
-            <Link href="/raccordement-enedis#formulaire-raccordement" className="group">
-              <div className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
-                <MapPin className="h-8 w-8 text-white" />
-              </div>
-            </Link>
-          </div>
-            
-          {/* Desktop version - Simplified cards */}
-          <div className="hidden lg:grid grid-cols-4 gap-4 mb-10 max-w-5xl mx-auto">
-            <Link href="/particulier" className="w-full">
-              <div className="bg-white/15 hover:bg-white/25 rounded-xl p-5 text-center transition-colors">
-                <div className="w-14 h-14 rounded-full bg-blue-500/20 flex items-center justify-center mb-3 mx-auto">
-                  <HomeIcon className="h-7 w-7 text-white" />
-                </div>
-                <h3 className="font-semibold text-white mb-2 text-lg">Maison neuve</h3>
-                <p className="text-white/80 text-base">Habitation individuelle</p>
-              </div>
-            </Link>
-            
-            <Link href="/professionnel" className="w-full">
-              <div className="bg-white/15 hover:bg-white/25 rounded-xl p-5 text-center transition-colors">
-                <div className="w-14 h-14 rounded-full bg-green-500/20 flex items-center justify-center mb-3 mx-auto">
-                  <Building className="h-7 w-7 text-white" />
-                </div>
-                <h3 className="font-semibold text-white mb-2 text-lg">Définitif</h3>
-                <p className="text-white/80 text-base">Locaux professionnels</p>
-              </div>
-            </Link>
-            
-            <Link href="/raccordement-enedis#formulaire-raccordement" className="w-full">
-              <div className="bg-white/15 hover:bg-white/25 rounded-xl p-5 text-center transition-colors">
-                <div className="w-14 h-14 rounded-full bg-orange-500/20 flex items-center justify-center mb-3 mx-auto">
-                  <Clock className="h-7 w-7 text-white" />
-                </div>
-                <h3 className="font-semibold text-white mb-2 text-lg">Provisoire</h3>
-                <p className="text-white/80 text-base">Chantiers temporaires</p>
-              </div>
-            </Link>
-            
-            <Link href="/raccordement-enedis#formulaire-raccordement" className="w-full">
-              <div className="bg-white/15 hover:bg-white/25 rounded-xl p-5 text-center transition-colors">
-                <div className="w-14 h-14 rounded-full bg-purple-500/20 flex items-center justify-center mb-3 mx-auto">
-                  <MapPin className="h-7 w-7 text-white" />
-                </div>
-                <h3 className="font-semibold text-white mb-2 text-lg">Viabilisation</h3>
-                <p className="text-white/80 text-base">Parcelles terrain</p>
-              </div>
-            </Link>
-          </div>
-          
-          {/* Main CTA Button */}
-          <div className="text-center mt-10">
-            <Link href="/raccordement-enedis#formulaire-raccordement">
-              <button className="bg-white text-[#0046a2] font-semibold px-8 py-4 rounded-lg text-lg hover:bg-[#0046a2] hover:text-white transition-colors shadow-lg">commencer ma demande</button>
-            </Link>
-            
-            {/* Counter */}
-            <div className="mt-6">
-              <p className="text-white/90 text-sm">
-                <span className="font-semibold">{activeUsersCount}</span> demandes traitées en temps réel
+              
+              {/* Counter */}
+              <p className="text-gray-500 text-sm">
+                <span className={`font-bold text-[#0072CE] transition-all duration-300 ${isCountHighlighted ? 'scale-110' : ''}`}>
+                  {activeUsersCount}
+                </span> demandes traitées en temps réel
               </p>
             </div>
+            
+            {/* Right Column - Illustration */}
+            <div className="order-1 lg:order-2 flex justify-center">
+              <img 
+                src={heroIllustration} 
+                alt="Famille devant maison avec panneaux solaires et voiture électrique" 
+                className="w-full max-w-lg lg:max-w-xl xl:max-w-2xl h-auto"
+                loading="eager"
+              />
+            </div>
+          </div>
+          
+          {/* Service Cards - 4 columns */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-12 md:mt-16">
+            <Link href="/raccordement-enedis?type=definitif#formulaire-raccordement" className="group" data-testid="card-maison-neuve">
+              <div className="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 text-center shadow-sm hover:shadow-lg hover:border-blue-300 transition-all duration-300 h-full">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform">
+                  <HomeIcon className="h-7 w-7 md:h-8 md:w-8 text-white" />
+                </div>
+                <h3 className="font-bold text-gray-900 mb-2 text-base md:text-lg">Maison neuve</h3>
+                <p className="text-gray-600 text-sm">Habitation individuelle</p>
+              </div>
+            </Link>
+            
+            <Link href="/raccordement-enedis?type=definitif#formulaire-raccordement" className="group" data-testid="card-definitif">
+              <div className="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 text-center shadow-sm hover:shadow-lg hover:border-green-300 transition-all duration-300 h-full">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform">
+                  <Building className="h-7 w-7 md:h-8 md:w-8 text-white" />
+                </div>
+                <h3 className="font-bold text-gray-900 mb-2 text-base md:text-lg">Définitif</h3>
+                <p className="text-gray-600 text-sm">Locaux professionnels</p>
+              </div>
+            </Link>
+            
+            <Link href="/raccordement-enedis?type=provisoire#formulaire-raccordement" className="group" data-testid="card-provisoire">
+              <div className="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 text-center shadow-sm hover:shadow-lg hover:border-orange-300 transition-all duration-300 h-full">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform">
+                  <Clock className="h-7 w-7 md:h-8 md:w-8 text-white" />
+                </div>
+                <h3 className="font-bold text-gray-900 mb-2 text-base md:text-lg">Provisoire</h3>
+                <p className="text-gray-600 text-sm">Chantiers temporaires</p>
+              </div>
+            </Link>
+            
+            <Link href="/raccordement-enedis?type=viabilisation#formulaire-raccordement" className="group" data-testid="card-viabilisation">
+              <div className="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 text-center shadow-sm hover:shadow-lg hover:border-purple-300 transition-all duration-300 h-full">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform">
+                  <MapPin className="h-7 w-7 md:h-8 md:w-8 text-white" />
+                </div>
+                <h3 className="font-bold text-gray-900 mb-2 text-base md:text-lg">Viabilisation</h3>
+                <p className="text-gray-600 text-sm">Parcelles terrain</p>
+              </div>
+            </Link>
           </div>
         </div>
       </section>
