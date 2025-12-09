@@ -1,0 +1,169 @@
+You are working on a Replit project that powers our “raccordement électrique” site.
+This project will now be used for the domain:
+
+https://www.demande-raccordement.fr/
+
+Your mission is to only change the aesthetics (UI / layout / CSS) so that the Replit site visually matches the style and structure of demande-raccordement.fr, using the same type of illustrations that we will upload.
+
+Do NOT change:
+	•	existing backend logic
+	•	Stripe / payment logic
+	•	Supabase / database calls
+	•	form validation or submission behaviour
+	•	routes/URLs that already exist and work (keep the current URLs functional).
+
+You can refactor components and styles, but the business logic must remain intact.
+
+⸻
+
+1. Analyze the current project
+	1.	Inspect the project and identify:
+	•	The main app shell (e.g. App.jsx, App.tsx, or main layout file)
+	•	The homepage / landing component
+	•	The header / navigation component
+	•	The footer component
+	•	The main Demande form component and any steps / sub-components (don’t change their logic).
+	2.	Add a short comment at the top of each of these files summarizing their role (e.g. // Main landing page for demande-raccordement.fr).
+
+⸻
+
+2. Global visual direction
+
+Change the design to look like an administrative / service-public website, taking demande-raccordement.fr as the visual reference (screenshots provided):
+	•	Clean blue/white palette (institutional, similar to current demande-raccordement.fr).
+	•	Rounded cards with subtle shadows.
+	•	Large, clear typography with good hierarchy.
+	•	Plenty of white space and consistent vertical rhythm.
+	•	“Service Enedis” / “Demande de Raccordement” messaging clearly visible.
+
+Keep the current brand blue and green tones if they exist, but bring structure and spacing closer to demande-raccordement.fr.
+
+⸻
+
+3. Illustrations (very important)
+
+We will upload new illustrations (SVG/PNG) into the project.
+	1.	Create a clear folder for them, for example:
+	•	public/illustrations/ or src/assets/illustrations/
+	2.	Save each uploaded illustration with explicit names such as:
+	•	hero-raccordement.png
+	•	type-maison-neuve.png
+	•	type-definitif.png
+	•	type-provisoire.png
+	•	type-viabilisation.png
+	3.	Replace any existing placeholder icons/images on the homepage with these new illustrations, following the same placement and style as shown in the screenshots of demande-raccordement.fr.
+	4.	Ensure paths are correct in production (e.g. if using Vite, import from src/assets/illustrations/... or use /illustrations/... from public).
+
+⸻
+
+4. Homepage layout (root path for demande-raccordement.fr)
+
+Adapt the current homepage to mirror the structure of demande-raccordement.fr as closely as possible, without altering form logic:
+
+4.1 Header
+	•	White background, subtle bottom border, sticky at the top.
+	•	Left: logo block with title + subtitle:
+	•	Title: “Votre partenaire”
+	•	Subtitle: “Raccordement au réseau d’électricité d’Enedis”
+	•	Middle: navigation items:
+	•	Accueil
+	•	Nos Services
+	•	Contact
+	•	Right: phone number and CTA button:
+	•	Phone: 09 70 70 95 70
+	•	Button: “Faire ma demande” → link to the existing main demande form route (do not invent a new route; use the route currently used in the app).
+
+Make sure the nav and CTA layout looks like the screenshots: clean, centered, and aligned.
+
+4.2 Hero section
+Create a hero section similar to demande-raccordement.fr:
+	•	Full-width blue background block.
+	•	Small pill badge at the top: “Partenaire n°1 en France”.
+	•	Main H1: “Demande de Raccordement Enedis”.
+	•	Subline: “Particuliers, professionnels ou terrains à viabiliser — un seul formulaire, un service 100% en ligne.”
+	•	4 cards below for the main use cases:
+	1.	Maison neuve – Habitation individuelle
+	2.	Définitif – Locaux professionnels
+	3.	Provisoire – Chantiers temporaires
+	4.	Viabilisation – Parcelles terrain
+Each card should:
+	•	Use one of the uploaded illustrations/icons.
+	•	Have a strong title and a short description.
+	•	Respect the rounded, elevated style (border-radius and shadow) shown on demande-raccordement.fr.
+	•	Under the cards, a prominent CTA area:
+	•	Button: “Commencer ma demande” → link to the demande form route.
+	•	Small text below: “XX demandes traitées en temps réel” (keep the existing dynamic counter if there is one; otherwise leave text static).
+
+4.3 “Votre Demande de Raccordement” section
+Create a section similar to the second screenshot:
+	•	Title: “Votre Demande de Raccordement” (with “Raccordement” in green or accented color).
+	•	Subheading: “Processus simplifié en 4 étapes pour votre raccordement Enedis personnalisé.”
+	•	Help line below:
+	•	Text: “Besoin d’aide pour remplir le formulaire ?”
+	•	Phone + hours: “09 70 70 95 70 – Lundi–Vendredi 9h–18h”.
+	•	4 step cards in a horizontal or responsive grid:
+	1.	Demande en ligne – Formulaire simplifié 5 minutes
+	2.	Études et devis – Analyse technique personnalisée
+	3.	Intervention – Travaux qualifiés par Enedis
+	4.	Mise en service – Activation compteur électrique
+
+Use neutral background (very light grey) and soft cards; match the visual hierarchy from the screenshots.
+
+4.4 “Quel type de raccordement vous correspond ?”
+Add a section similar to the third screenshot:
+	•	Badge: “Solutions sur mesure”.
+	•	Title: “Quel type de raccordement vous correspond ?”
+	•	Short explanatory paragraph.
+	•	Main grid of 3 cards:
+	•	Raccordement Définitif
+	•	Raccordement Provisoire
+	•	Viabilisation
+Each card:
+	•	Includes one of the relevant illustrations.
+	•	Has a short descriptive paragraph.
+	•	Includes a “En savoir plus →” link that points to the existing form route with appropriate query string (if this logic already exists). Do not create new backend endpoints.
+	•	Second grid of “secondary” cards:
+	•	Modification
+	•	Raccordement Collectif
+	•	Production Électrique (with a small “Écologique” badge).
+
+4.5 Help box
+	•	Add a centered blue/soft box:
+	•	Title: “Besoin d’aide pour choisir ?”
+	•	Text: “Nos experts vous accompagnent…”
+	•	Phone: “📞 09 70 70 95 70”.
+
+4.6 Footer
+	•	Light grey background, small text.
+	•	Mention: “Service indépendant d’aide aux démarches Enedis.”
+	•	Links: Mentions légales, CGU, Politique de confidentialité (keep existing routes or placeholders if they already exist).
+
+⸻
+
+5. Responsive design
+	•	Ensure all new layouts are responsive:
+	•	On desktop: hero cards in 4 columns, steps in 4 columns, types in 3 columns.
+	•	On tablet/mobile: stack cards in 2 columns or 1 column with proper spacing.
+	•	No horizontal scrolling on mobile.
+	•	Keep buttons large and touch-friendly.
+
+⸻
+
+6. SEO details (only front-end/meta)
+	•	Ensure <title> and <meta description> reflect demande-raccordement.fr, e.g.:
+	•	Title: Demande de Raccordement Enedis – Service d’aide aux démarches
+	•	Description: describe the online assistance for raccordement (no need to change routing).
+	•	If there is a canonical tag, set it to:
+https://www.demande-raccordement.fr/
+
+Do not change analytics / tag manager IDs unless instructed elsewhere; just keep them working.
+
+⸻
+
+7. Constraints and checks
+	•	Do not change any form submission handlers, Stripe session creation, or Supabase queries.
+	•	After modifications, check:
+	•	Homepage loads without console errors.
+	•	The main demande form works exactly as before (same route, same steps).
+	•	Stripe/payment flow still redirects to the same success/thank you page.
+	•	Keep your changes well-structured and commented so it’s clear what was updated for demande-raccordement.fr.
