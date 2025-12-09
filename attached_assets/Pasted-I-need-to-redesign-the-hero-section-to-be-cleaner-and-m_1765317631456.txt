@@ -1,0 +1,126 @@
+I need to redesign the hero section to be cleaner and more modern. Here are the exact requirements:
+
+## HERO SECTION REDESIGN
+
+### 1. LAYOUT & STRUCTURE
+- Full-width hero section with pure white background (#FFFFFF)
+- Container max-width: 1280px, centered
+- Two-column layout on desktop (60% content / 40% illustration)
+- Stack vertically on mobile (content first, then image)
+- Padding: 80px top, 60px bottom on desktop; 40px top/bottom on mobile
+
+### 2. ILLUSTRATION FIX (CRITICAL)
+- Remove any colored square/background from the illustration
+- The illustration should have a transparent background OR pure white
+- If the illustration has a background, crop it out or use CSS to blend it
+- Ensure the illustration scales proportionally (max-width: 100%, height: auto)
+- Add subtle fade-in animation on page load
+
+### 3. TYPOGRAPHY (USE MODERN FONT STACK)
+- Font family: 'Inter', 'Segoe UI', 'Roboto', -apple-system, system-ui, sans-serif
+- Headline structure:
+  * "Demande de" - font-size: 42px, font-weight: 500, color: #1a202c, line-height: 1.2
+  * "Raccordement Enedis" - font-size: 52px, font-weight: 700, color: #0066CC, line-height: 1.1
+  * Letter-spacing: -0.02em for both (tighter, more modern)
+- Subheadline:
+  * font-size: 18px, font-weight: 400, color: #4a5568, line-height: 1.6
+  * Max-width: 600px
+  * Margin-top: 20px
+
+### 4. BADGES & TRUST SIGNALS
+Two options - choose the cleaner one:
+
+OPTION A (Top badges - like screenshot 1 but better):
+- Position badges ABOVE the headline
+- Horizontal layout with 24px gap between badges
+- Each badge: padding: 10px 20px, border-radius: 24px, font-size: 14px, font-weight: 500
+- Colors:
+  * "100% en ligne": background: #E6F7ED, color: #16A34A, border: 1px solid #BBF7D0
+  * "Réponse en 48h": background: #EFF6FF, color: #0066CC, border: 1px solid #BFDBFE
+  * "Sécurisé": background: #F3E8FF, color: #9333EA, border: 1px solid #E9D5FF
+- Icons should be inline with text (16px size)
+
+OPTION B (Bottom trust signals - like screenshot 2 but cleaner):
+- Position BELOW the CTA buttons
+- Horizontal layout with 40px gap
+- Each item: icon (20px, colored) + text (14px, #4a5568)
+- No backgrounds, just icons and text side-by-side
+
+Choose whichever looks cleaner. I prefer OPTION B for a more modern feel.
+
+### 5. PARTNER BADGE
+- "Partenaire n°1 en France" badge:
+- Position: above badges/headline
+- Style: background: #EFF6FF, color: #0066CC, padding: 8px 16px
+- Border-radius: 16px, font-size: 13px, font-weight: 600
+- Add subtle shadow: 0 1px 3px rgba(0,0,0,0.08)
+
+### 6. CTA BUTTONS
+Primary button ("Commencer ma demande"):
+- Background: #0066CC, color: white
+- Padding: 16px 32px, border-radius: 12px
+- Font-size: 16px, font-weight: 600
+- Add shadow: 0 4px 12px rgba(0,102,204,0.3)
+- Hover effect: scale(1.02), shadow increases
+- Transition: all 0.2s ease
+
+Secondary button (if needed - "Nous contacter"):
+- Background: white, color: #1a202c, border: 2px solid #e2e8f0
+- Same size as primary
+- Hover: border-color: #0066CC, color: #0066CC
+
+Button layout:
+- Horizontal on desktop with 16px gap
+- Stack on mobile with 12px gap
+- Margin-top: 32px from subheadline
+
+### 7. SOCIAL PROOF COUNTER
+- "312 demandes traitées en temps réel"
+- Position: below buttons
+- Style: font-size: 15px, color: #0066CC, font-weight: 600
+- Add small icon: ⚡ or checkmark (16px)
+- Margin-top: 24px
+
+### 8. RESPONSIVE BEHAVIOR
+Desktop (1024px+):
+- Two columns side by side
+- Illustration stays right
+
+Tablet (768px - 1023px):
+- Reduce font sizes by 15%
+- Stack vertically if needed
+- Illustration scales down
+
+Mobile (< 768px):
+- Stack vertically: content → illustration
+- Headline: 32px / 38px
+- Buttons stack vertically, full width
+- Padding: 40px 20px
+- Illustration max-width: 90%, centered
+
+### 9. PERFORMANCE & ANIMATION
+- Lazy load illustration (load after critical CSS)
+- Add fade-in animation:
+  * Content: fade up from bottom (0.6s ease)
+  * Illustration: fade in from right (0.8s ease, delay 0.2s)
+- Use will-change: transform for smooth animations
+- Ensure Total Blocking Time < 200ms
+
+### 10. SPACING & WHITESPACE
+- Increase spacing between ALL elements
+- Headline to subheadline: 20px
+- Subheadline to buttons: 32px
+- Buttons to counter: 24px
+- Use consistent spacing scale: 8px, 16px, 24px, 32px, 40px, 48px
+
+## CODE STRUCTURE
+Create a reusable HeroSection component with:
+- Clean, semantic HTML
+- Tailwind classes (or CSS modules)
+- Proper alt text for illustration
+- Optimized image loading
+- ARIA labels for accessibility
+
+## OUTPUT
+Show me the updated hero section with all these improvements applied.
+Make it clean, modern, and conversion-optimized.
