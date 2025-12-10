@@ -1,0 +1,313 @@
+Rebuild the landing page with performance and conversions as top priorities.
+Remove duplicate sections and add new structured content.
+
+═══════════════════════════════════════════════════════════════════
+SECTION 1: HERO - KEEP AS IS BUT OPTIMIZE
+═══════════════════════════════════════════════════════════════════
+
+Current hero section is good. Only apply these optimizations:
+
+1. IMAGE OPTIMIZATION:
+   - Compress hero-illustration.webp to under 80KB
+   - Add explicit width and height attributes
+   - Add: loading="eager" and fetchpriority="high"
+   - Ensure transparent background blends with white
+
+2. REMOVE ANIMATIONS:
+   - No fade-in effects
+   - No floating animation
+   - Static content only for faster render
+
+3. SIMPLIFY TRUST BADGES:
+   - Keep icons simple (line style, inline SVG)
+   - Remove any pulsing effects on social proof counter
+   - Static green dot only
+
+Keep everything else as is - headline, buttons, layout all good.
+
+═══════════════════════════════════════════════════════════════════
+SECTION 2: REMOVE DUPLICATE SERVICE CARDS
+═══════════════════════════════════════════════════════════════════
+
+DELETE the 4 service cards currently below the hero section.
+They are duplicate of content that appears later.
+
+This section should be completely removed.
+
+═══════════════════════════════════════════════════════════════════
+SECTION 3: NEW - "COMMENT FAIRE SA DEMANDE" (STEP-BY-STEP PROCESS)
+═══════════════════════════════════════════════════════════════════
+
+Create this section immediately after hero.
+
+BACKGROUND: Very light gray (#F8F9FB)
+
+SECTION HEADER:
+- Badge: "Processus simplifié" (light blue background)
+- Title: "Comment Faire sa Demande de Raccordement Électrique en Ligne ?"
+- Subtitle: "Suivez notre processus en 4 étapes simples pour votre raccordement Enedis"
+
+LAYOUT: 4 steps in horizontal timeline (desktop) / vertical (mobile)
+
+STEP 1:
+- Number: "1" (blue circle, 48px diameter, white text)
+- Illustration: "Commencez votre demande.webp" (max-width: 200px, lazy load)
+- Title: "Complétez le formulaire en ligne"
+- Description: "Renseignez les informations de votre projet : adresse, type de raccordement, puissance souhaitée. Le formulaire prend 5 minutes."
+- Time badge: "5 min" (light blue background)
+
+STEP 2:
+- Number: "2" (green circle)
+- Illustration: "Completer-Formulaire.webp" (max-width: 200px, lazy load)
+- Title: "Joignez vos documents"
+- Description: "Téléchargez les pièces justificatives : titre de propriété, plan de situation, autorisation d'urbanisme si nécessaire."
+- Time badge: "Immédiat" (light green background)
+
+STEP 3:
+- Number: "3" (orange circle)
+- Illustration: "Dépôt du dossier.webp" (max-width: 200px, lazy load)
+- Title: "Recevez votre devis personnalisé"
+- Description: "Notre équipe analyse votre demande et vous transmet un devis détaillé sous 48 heures ouvrées."
+- Time badge: "48h" (light orange background)
+
+STEP 4:
+- Number: "4" (purple circle)
+- Illustration: "Suivi-Dossier.webp" (max-width: 200px, lazy load)
+- Title: "Suivi et réalisation"
+- Description: "Après validation, votre dossier est transmis à Enedis. Suivez l'avancement en temps réel depuis votre espace client."
+- Time badge: "2-6 semaines" (light purple background)
+
+CONNECTING LINE:
+- Horizontal dashed line between numbered circles (desktop only)
+- CSS: border-top: 2px dashed #D1D5DB
+- Position behind circles
+
+CTA BUTTON:
+- "Démarrer ma demande maintenant"
+- Centered below steps
+- Blue background (#0066CC)
+- Padding: 18px 36px
+- No shadow, simple design
+
+STYLING:
+- Section padding: 80px 60px
+- Step spacing: 40px between each
+- Numbered circles: 48px diameter, bold white numbers
+- Time badges: padding 6px 14px, border-radius 12px, font-size 13px
+- Illustrations: lazy load, compress to under 40KB each
+
+MOBILE:
+- Stack vertically
+- Remove connecting line
+- Illustrations: 150px width
+- Circles: 40px diameter
+
+═══════════════════════════════════════════════════════════════════
+SECTION 4: SERVICE TYPES - 6 DETAILED CARDS
+═══════════════════════════════════════════════════════════════════
+
+BACKGROUND: White
+
+SECTION HEADER:
+- Title: "Types de Raccordement Électrique"
+- Subtitle: "Choisissez le raccordement adapté à votre situation"
+- Help section:
+  * "Besoin d'aide pour choisir ?"
+  * Phone icon + "09 70 70 95 70"
+  * Clock icon + "Lundi-Vendredi 9h-18h"
+
+LAYOUT:
+- 3 columns × 2 rows on desktop
+- 2 columns on tablet
+- 1 column on mobile
+- Gap: 24px
+- Container: max-width 1280px
+
+6 CARDS:
+
+Card 1 - Raccordement Définitif:
+- Icon: "Raccordement-Definitif.webp" (80px, lazy load, compress to 30KB)
+- Title: "Raccordement Définitif"
+- Description: "Pour maisons individuelles, appartements et locaux professionnels. Solution permanente pour une installation électrique complète."
+- Link: "En savoir plus →" (blue text)
+- Tag: "DEF" (top-right corner, gray background)
+
+Card 2 - Raccordement Provisoire:
+- Icon: "Raccordement-Provisoire.webp" (80px, lazy load, 30KB)
+- Title: "Raccordement Provisoire"
+- Description: "Solution temporaire pour chantiers, installations éphémères et événements. Durée limitée avec conditions spécifiques."
+- Link: "En savoir plus →"
+- Tag: "PROV"
+
+Card 3 - Viabilisation Terrain:
+- Icon: Keep current location pin icon (inline SVG)
+- Title: "Viabilisation Terrain"
+- Description: "Préparation et équipement électrique de votre terrain constructible. Extension du réseau Enedis jusqu'à votre parcelle."
+- Link: "En savoir plus →"
+- Tag: "VIA"
+
+Card 4 - Modification de Puissance:
+- Icon: "augmentation de puissance.webp" (80px, lazy load, 30KB)
+- Title: "Modification de Puissance"
+- Description: "Augmentation ou modification de la puissance de votre compteur existant. Adaptation à vos nouveaux besoins énergétiques."
+- Link: "En savoir plus →"
+- Tag: "MODIF"
+
+Card 5 - Raccordement Collectif:
+- Icon: "Service-Collectif.webp" (80px, lazy load, 30KB)
+- Title: "Raccordement Collectif"
+- Description: "Solutions pour immeubles, résidences, copropriétés et lotissements. Gestion de projets multi-logements."
+- Link: "En savoir plus →"
+- Tag: "COLL"
+
+Card 6 - Maison Neuve:
+- Icon: Keep current house icon (inline SVG)
+- Title: "Maison Neuve"
+- Description: "Premier raccordement pour construction neuve. De la demande initiale jusqu'à la mise en service de votre compteur Linky."
+- Link: "En savoir plus →"
+- Tag: "NEUF"
+- Badge: "Populaire" (top-right, light green background)
+
+CARD STYLING:
+- Background: white
+- Border: 1px solid #E2E8F0
+- Border-radius: 12px
+- Padding: 28px
+- Box-shadow: 0 1px 3px rgba(0,0,0,0.06)
+- Hover: border-color changes to #0066CC (no transform, no shadow change)
+- Transition: border-color 0.2s
+
+LINK STYLING:
+- Color: #0066CC
+- Font-size: 15px
+- Font-weight: 500
+- Arrow: → (simple unicode, no icon library)
+- Hover: text-decoration underline
+
+═══════════════════════════════════════════════════════════════════
+SECTION 5: TRUST INDICATORS
+═══════════════════════════════════════════════════════════════════
+
+BACKGROUND: White
+
+SECTION HEADER:
+- Title: "Pourquoi Choisir Notre Service ?"
+- Center-aligned
+
+LAYOUT: 3 columns
+
+INDICATOR 1:
+- Icon: Checkmark in circle (inline SVG, blue, 64px)
+- Number: "+1200"
+- Label: "demandes traitées"
+- Description: "Des centaines de clients satisfaits nous font confiance pour leurs projets de raccordement électrique."
+
+INDICATOR 2:
+- Icon: Shield (inline SVG, green, 64px)
+- Label: "Procédure conforme"
+- Sublabel: "Normes Enedis"
+- Description: "Notre processus respecte scrupuleusement les normes et exigences officielles imposées par Enedis."
+
+INDICATOR 3:
+- Icon: Lock (inline SVG, orange, 64px)
+- Label: "Paiement sécurisé"
+- Sublabel: "100% protégé"
+- Description: "Transactions protégées par Stripe. Accompagnement personnalisé à chaque étape de votre projet."
+
+STYLING:
+- Simple white background (no colored cards)
+- Light border: 1px solid #E2E8F0
+- Border-radius: 12px
+- Padding: 36px
+- Number font-size: 36px, font-weight: 700
+- No hover effects
+
+═══════════════════════════════════════════════════════════════════
+SECTION 6: CTA BANNER
+═══════════════════════════════════════════════════════════════════
+
+BACKGROUND: Solid blue #0066CC (no gradient)
+
+CONTENT (centered):
+- Icon: Rocket (inline SVG, white, 56px)
+- Title: "Prêt à Démarrer Votre Projet ?"
+- Subtitle: "Rejoignez les centaines de clients qui nous ont fait confiance"
+- Button: "Commencer ma demande" (white background, blue text)
+- Small text: "Devis gratuit • Sans engagement • Réponse sous 48h"
+
+STYLING:
+- Padding: 80px 60px
+- All text: white
+- Button: padding 20px 40px, font-size 18px
+- Button hover: slight opacity change only (no shadow, no transform)
+
+═══════════════════════════════════════════════════════════════════
+SECTION 7: FOOTER - KEEP CURRENT
+═══════════════════════════════════════════════════════════════════
+
+Current footer is good. Keep as is.
+
+Ensure:
+- Dark blue background (#003D82 or similar)
+- White text
+- Phone number prominent
+- Service links organized
+- Legal links at bottom
+- Copyright: "© 2025 Raccordement-Connect.com"
+
+═══════════════════════════════════════════════════════════════════
+GLOBAL PERFORMANCE REQUIREMENTS
+═══════════════════════════════════════════════════════════════════
+
+IMAGES:
+- All illustrations: WebP format, compressed to under 40KB each
+- Hero illustration: under 80KB, loading="eager"
+- All other images: loading="lazy"
+- Add explicit width/height to prevent layout shift
+- Use srcset for responsive images where appropriate
+
+CSS:
+- Inline critical CSS for above-fold content
+- Use system fonts only:
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif
+- NO web fonts
+- Minify all CSS
+- Remove unused styles
+
+JAVASCRIPT:
+- Minimal JavaScript only
+- Use native Intersection Observer for lazy loading
+- Defer all scripts: <script defer>
+- No animation libraries
+- No jQuery or other heavy libraries
+
+HOVER EFFECTS:
+- Only simple color changes
+- No transforms (translateY, scale, etc.)
+- No shadow changes
+- Transition: 0.2s for border-color or color only
+
+ANIMATIONS:
+- Remove all fade-in, slide-in animations
+- Remove all pulsing, floating effects
+- Static content only
+- Exception: Simple color transitions on hover
+
+LAYOUT:
+- Explicit dimensions on all images
+- Reserve space for lazy-loaded content
+- Prevent cumulative layout shift
+- Section padding: 80px top/bottom (60px on mobile)
+
+TARGET METRICS:
+- Page size: under 600KB total
+- First Contentful Paint: under 1.5s
+- Largest Contentful Paint: under 2.5s
+- Total Blocking Time: under 200ms
+- Images: 10-12 total (including lazy-loaded)
+
+═══════════════════════════════════════════════════════════════════
+
+Build this complete landing page structure.
+Focus on: Performance, Professional French administrative aesthetic, Clear conversions.
+Remove all unnecessary elements. Keep it clean, fast, and effective.
