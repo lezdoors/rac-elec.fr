@@ -177,7 +177,7 @@ export default function HomePage() {
 
         {/* 4-STEP PROCESS SECTION - Right after Hero */}
         <section 
-          className="py-16 md:py-20 lg:py-24"
+          className="py-10 md:py-14"
           style={{ background: 'linear-gradient(180deg, #EBF4FF 0%, #F8FAFF 100%)' }}
           id="process"
           data-animate
@@ -310,7 +310,7 @@ export default function HomePage() {
 
         {/* 3 STEPS SIMPLE SECTION - Like original site */}
         <section 
-          className="py-16 md:py-20 lg:py-24"
+          className="py-10 md:py-14"
           style={{ background: 'linear-gradient(180deg, #F8FAFF 0%, #FFFFFF 100%)' }}
           id="steps-simple"
           data-animate
@@ -396,7 +396,7 @@ export default function HomePage() {
         </section>
 
         {/* SERVICE TYPES SECTION - Centered Card Layout Like Original */}
-        <section className="py-16 md:py-20 lg:py-24 bg-white" id="types-raccordements" data-animate data-testid="service-types-section">
+        <section className="py-10 md:py-14 bg-white" id="types-raccordements" data-animate data-testid="service-types-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
             <div className="text-center mb-12 md:mb-14">
@@ -507,7 +507,7 @@ export default function HomePage() {
         </section>
 
         {/* ASSISTANCE SECTION - Transparent icons like original site */}
-        <section className="py-16 md:py-20 lg:py-24 bg-gray-50" id="assistance" data-animate data-testid="assistance-section">
+        <section className="py-10 md:py-14 bg-gray-50" id="assistance" data-animate data-testid="assistance-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
             <div className="text-center mb-10 md:mb-12">
@@ -578,7 +578,7 @@ export default function HomePage() {
         </section>
 
         {/* BESOIN D'AIDE SECTION - Like Original */}
-        <section className="py-16 md:py-20 bg-white" id="besoin-aide" data-animate data-testid="besoin-aide-section">
+        <section className="py-10 md:py-14 bg-white" id="besoin-aide" data-animate data-testid="besoin-aide-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             <div className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 transition-all duration-700 ${isVisible['besoin-aide'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               {/* Left - Illustration */}
@@ -628,10 +628,10 @@ export default function HomePage() {
         </section>
 
         {/* TESTIMONIALS SECTION - Professional Design */}
-        <section className="py-16 md:py-24 bg-white" id="testimonials" data-animate data-testid="testimonials-section">
+        <section className="py-12 md:py-16 bg-white" id="testimonials" data-animate data-testid="testimonials-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-12 md:mb-16">
+            <div className="text-center mb-8 md:mb-10">
               <h2 className="text-[28px] sm:text-[32px] md:text-[42px] font-bold text-[#0066CC] mb-4">
                 Ce que nos clients disent de nous
               </h2>
@@ -793,10 +793,10 @@ export default function HomePage() {
         </section>
 
         {/* FAQ SECTION - Professional Multi-Column Design */}
-        <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white" id="faq" data-animate data-testid="faq-section">
+        <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white" id="faq" data-animate data-testid="faq-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-12 md:mb-16">
+            <div className="text-center mb-8 md:mb-10">
               <h2 className="text-[28px] sm:text-[32px] md:text-[42px] font-bold text-[#0066CC] mb-4 italic">
                 Questions frequemment posees
               </h2>
@@ -805,8 +805,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* FAQ Categories Grid */}
-            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mb-12 transition-all duration-700 ${isVisible['faq'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            {/* FAQ Categories Grid - 2 columns for better balance */}
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 mb-10 transition-all duration-700 ${isVisible['faq'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               
               {/* Category 1: Demarches et Documents */}
               <div>
@@ -931,15 +931,15 @@ export default function HomePage() {
 
         {/* CTA BANNER - Blue Gradient */}
         <section 
-          className="py-16 md:py-20"
+          className="py-10 md:py-14"
           style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)' }}
           data-testid="cta-banner-section"
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-3xl text-center">
-            <h2 className="text-[24px] sm:text-[28px] md:text-[34px] font-bold text-white mb-6">
+            <h2 className="text-[24px] sm:text-[28px] md:text-[34px] font-bold text-white mb-4">
               Pret a demarrer votre projet ?
             </h2>
-            <p className="text-lg md:text-xl text-white/90 mb-10">
+            <p className="text-lg md:text-xl text-white/90 mb-8">
               Rejoignez les centaines de clients satisfaits
             </p>
             <Link href="/raccordement-enedis#formulaire-raccordement">

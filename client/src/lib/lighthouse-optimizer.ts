@@ -40,9 +40,9 @@ export const optimizeFCP = () => {
   // Inline critical CSS for immediate rendering
   const criticalCSS = `
     body{font-family:system-ui,-apple-system,sans-serif;margin:0;color:#1a202c}
-    .hero-section{min-height:100vh;background:linear-gradient(135deg,#0A3A82,#0058B0,#0072CE);display:flex;align-items:center;justify-content:center;color:white}
+    .hero-section{background:white;display:flex;align-items:center;justify-content:center;color:#1a202c}
     .hero-title-mobile{font-size:clamp(1.75rem,5vw,4rem);font-weight:700;line-height:1.1;text-align:center;margin:0 0 1.5rem}
-    .cta-mobile{background:#10b981;color:white;padding:1rem 2rem;border:none;border-radius:0.5rem;font-size:1.125rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem}
+    .cta-mobile{background:#3B82F6;color:white;padding:1rem 2rem;border:none;border-radius:0.5rem;font-size:1.125rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem}
   `;
   
   if (!document.querySelector('[data-critical="fcp"]')) {

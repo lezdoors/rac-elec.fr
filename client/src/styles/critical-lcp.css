@@ -1,12 +1,11 @@
 /* Critical CSS for LCP optimization - loads immediately */
 
-/* Priority 1: Hero section essentials */
+/* Priority 1: Hero section essentials - white background to match homepage */
 .hero-section {
-  background: linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%);
-  color: white;
+  background: white;
+  color: #1a202c;
   padding: 3rem 1rem;
-  text-align: center;
-  min-height: 60vh;
+  min-height: auto;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -24,8 +24,7 @@
 
 /* Optimized gradient backgrounds for performance */
 .bg-gradient-optimized {
-  background: linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%);
-  background-attachment: fixed;
+  background: white;
 }
 
 /* Lazy loading placeholder styles */
