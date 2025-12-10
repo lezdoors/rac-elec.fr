@@ -1,0 +1,103 @@
+Your task: improve the home page layout and visuals to feel as clean and balanced as the original version, without touching any business logic or forms.
+
+Please work ONLY on the home page layout, CSS and assets. Do not change routing, form behavior, or any backend code.
+
+⸻
+
+1. Header logo: use the new brand
+	1.	Find the component that renders the main header/navigation (for example Header, Navbar or similar, typically used in App or the main page).
+	2.	Replace the current logo with the new logo image I uploaded (the blue house with plug and green lightning). Save it in the project (for example under public/ as service-raccordement-logo.png) and reference that.
+	3.	To the right of the logo, create a lockup with a thin vertical separator line:
+	•	Left: the logo icon (not too big, around 28–32px tall).
+	•	Separator: a 1px vertical line in a light neutral color.
+	•	Right: two lines of text:
+	•	Line 1 (bolder): Service Raccordement Électricité
+	•	Line 2 (smaller, lighter): Expert raccordement Enedis
+	4.	Align icon + text vertically so it looks like this:
+[icon] | Service Raccordement Électricité
+         Expert raccordement Enedis
+
+Follow the existing typography system (same font family). Use something like:
+	•	Line 1: semibold, ~16px
+	•	Line 2: regular, ~12–13px, slightly lighter color (e.g. gray-500).
+
+Goal: unified, professional brand header like on the old site.
+
+⸻
+
+2. Section order on the home page
+Re-order the main sections on the home page so the vertical flow is:
+	1.	Hero section: main “Demande de Raccordement Enedis” hero with big headline, subtext and primary CTA.
+	2.	Directly under the hero:
+“Comment Faire sa Demande de Raccordement Électrique en Ligne ?” section with the 4 steps (icons 1–4 and explanation).
+	3.	Then: the section with all the raccordement service cards (6 cards: Raccordement Définitif, Provisoire, Viabilisation, etc.).
+	4.	Then: “Assistance pour Votre Demande de Raccordement Enedis” (call, rappel gratuit, chat, contact form).
+	5.	Then FAQ, then final CTA + footer.
+
+Make sure vertical spacing between sections is consistent and not too big. It should feel similar to the old site: hero → process → services → assistance → FAQ → bottom CTA.
+
+Goal: more natural narrative: understand what we do (hero), how it works (steps), what services exist, how to get help, then FAQ and final CTA.
+
+⸻
+
+3. Process section right under hero (visual tweaks)
+In the section “Comment Faire sa Demande de Raccordement Électrique en Ligne ?”:
+	•	Keep the 4 steps, but slightly increase the illustration size for each step so they are easier to see.
+	•	Ensure the section heading and subheading use a clear typographic hierarchy:
+	•	Title ~28–32px, bold.
+	•	Subtitle ~14–16px, regular, max width so it doesn’t stretch too wide.
+	•	Reduce any excessive top margin so this section is visually connected to the hero (not too much white space between them).
+
+Goal: the first scroll should immediately show the process section, not a large empty gap.
+
+⸻
+
+4. Service cards & illustrations
+In the section with the 6 service cards (Raccordement Définitif, Provisoire, etc.):
+	1.	Slightly increase the size of the icons/illustrations at the top of each card. On desktop they can be around 48–56px wide so the cards feel more substantial.
+	2.	Keep the same grid layout (2 rows × 3 columns on desktop) but:
+	•	Increase vertical padding inside each card a bit.
+	•	Make sure the titles are clearly larger than descriptions.
+	3.	Confirm hover state is subtle and consistent (e.g., light shadow or slight border color). Reuse existing style if already implemented.
+
+Goal: cards should feel as solid and “clickable” as on the old site, not tiny or lost in white space.
+
+⸻
+
+5. Assistance section illustrations (no white squares)
+In the “Assistance pour Votre Demande de Raccordement Enedis” section:
+	1.	Currently, the assistance options (Appelez-nous, Rappel gratuit, Chat, Formulaire de contact) show the illustrations inside small white squares; the original assets were transparent (no background).
+	2.	Update the design so:
+	•	The icons/illustrations are used with transparent background (no white rounded box behind them).
+	•	Increase icon size slightly so they are more visible.
+	•	Keep the card containers clean and minimal (e.g., simple layout: icon above text, or icon left text right) using the existing design language.
+	3.	Ensure the background of the whole section remains clean (white or very light gray) so it doesn’t compete with the gradient sections.
+
+Goal: make the assistance icons look like native, modern illustrations instead of tiny stickers inside white boxes.
+
+⸻
+
+6. Remove the orange and align with brand colors
+	1.	Locate the orange CTA band near the bottom (“Prêt à démarrer votre projet ?”).
+	2.	Replace the orange background with a color that fits the brand:
+	•	Use the same blue/purple gradient used elsewhere on the site OR a solid brand blue that matches the primary buttons.
+	3.	Update the CTA button inside that band:
+	•	Use the same primary button style used in the hero (blue button).
+	•	Adjust text color for good contrast (white text on dark background).
+	4.	Check for any other remaining orange elements on the page (buttons, links, badges) and replace their color with the brand primary or a subtle accent consistent with the rest of the UI.
+
+Goal: consistent blue/green brand palette, no random orange.
+
+⸻
+
+7. General spacing & typography polish
+Without changing content:
+	•	Ensure the max width of main text blocks (hero copy, process description, services description) is around 640–720px so lines don’t become too long on wide screens.
+	•	Check vertical rhythm:
+	•	Section titles: consistent top margin.
+	•	Subtitles: smaller gap to title than to the section content.
+	•	Confirm that on mobile:
+	•	The hero stack is vertical: title → text → buttons → illustration.
+	•	Cards and assistance items stack cleanly with comfortable spacing.
+
+Goal: the page should feel tight, airy, and consistent, like a professional SaaS landing page.
