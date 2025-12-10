@@ -210,6 +210,13 @@ img {
   outline-offset: 2px;
 }
 
+/* Remove focus outline on logo links */
+a[href="/"]:focus,
+.no-focus-outline:focus {
+  outline: none !important;
+  outline-offset: 0 !important;
+}
+
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .hero-section {
