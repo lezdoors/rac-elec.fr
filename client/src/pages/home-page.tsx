@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import { TrustSection } from "@/components/trust-section";
 import { FloatingCtaButton } from "@/components/floating-cta-button";
 import heroIllustration from "@assets/hero-illustration_1765320964105.webp";
+import formIllustration from "@assets/form-intro-illustartion_(Website)_1765332563939.webp";
 
 const useMobileDetection = () => {
   const [isMobile, setIsMobile] = useState(true);
@@ -220,19 +221,19 @@ export default function HomePage() {
 
         {/* PROCESS TIMELINE SECTION - "Comment ça marche?" */}
         <section 
-          className="py-20 md:py-28"
+          className="py-16 md:py-24"
           style={{ background: 'linear-gradient(180deg, #F8F9FB 0%, #FFFFFF 100%)' }}
           id="process"
           data-animate
           data-testid="process-section"
         >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-6xl">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-7xl">
             {/* Header */}
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-6">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-4">
                 Processus simplifié
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
                 Comment ça marche ?
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -240,76 +241,93 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Timeline Steps */}
-            <div className="relative">
-              {/* Connecting Line - Desktop only */}
-              <div className="hidden lg:block absolute top-24 left-[12%] right-[12%] h-0.5 border-t-2 border-dashed border-gray-300"></div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
-                {/* Step 1 */}
-                <div className={`relative text-center transition-all duration-500 delay-100 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <div className="relative z-10 w-20 h-20 mx-auto mb-4 bg-white rounded-full shadow-lg flex items-center justify-center border-4 border-blue-500">
-                    <FileText className="w-8 h-8 text-blue-500" />
-                  </div>
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
-                    1
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2 mt-6">Remplissez le formulaire</h3>
-                  <p className="text-sm text-gray-600 mb-2">Complétez votre demande en 5 minutes avec toutes les informations nécessaires</p>
-                  <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">5 min</span>
-                </div>
-
-                {/* Step 2 */}
-                <div className={`relative text-center transition-all duration-500 delay-200 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <div className="relative z-10 w-20 h-20 mx-auto mb-4 bg-white rounded-full shadow-lg flex items-center justify-center border-4 border-green-500">
-                    <BarChart className="w-8 h-8 text-green-500" />
-                  </div>
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
-                    2
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2 mt-6">Recevez votre devis</h3>
-                  <p className="text-sm text-gray-600 mb-2">Sous 48h, recevez un devis détaillé et personnalisé pour votre projet</p>
-                  <span className="inline-block px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">48h</span>
-                </div>
-
-                {/* Step 3 */}
-                <div className={`relative text-center transition-all duration-500 delay-300 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <div className="relative z-10 w-20 h-20 mx-auto mb-4 bg-white rounded-full shadow-lg flex items-center justify-center border-4 border-orange-500">
-                    <CheckCircle className="w-8 h-8 text-orange-500" />
-                  </div>
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
-                    3
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2 mt-6">Validation du dossier</h3>
-                  <p className="text-sm text-gray-600 mb-2">Notre équipe analyse votre demande et prépare votre dossier Enedis</p>
-                  <span className="inline-block px-3 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded-full">2-3 semaines</span>
-                </div>
-
-                {/* Step 4 */}
-                <div className={`relative text-center transition-all duration-500 delay-400 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <div className="relative z-10 w-20 h-20 mx-auto mb-4 bg-white rounded-full shadow-lg flex items-center justify-center border-4 border-purple-500">
-                    <Zap className="w-8 h-8 text-purple-500" />
-                  </div>
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 w-10 h-10 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
-                    4
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2 mt-6">Intervention Enedis</h3>
-                  <p className="text-sm text-gray-600 mb-2">Enedis réalise les travaux et active votre compteur électrique</p>
-                  <span className="inline-block px-3 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded-full">4-6 semaines</span>
+            {/* Two-Column Layout: Illustration + Steps */}
+            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+              {/* Left Side - Illustration */}
+              <div className="w-full lg:w-[40%] flex justify-center">
+                <div className={`transition-all duration-700 ${isVisible['process'] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
+                  <img 
+                    src={formIllustration}
+                    alt="Femme remplissant un formulaire en ligne sur son ordinateur - Processus de demande de raccordement"
+                    className="w-full max-w-sm lg:max-w-md h-auto"
+                    loading="lazy"
+                    data-testid="process-illustration"
+                  />
                 </div>
               </div>
-            </div>
 
-            {/* CTA Button */}
-            <div className="text-center mt-16">
-              <Link href="/raccordement-enedis#formulaire-raccordement">
-                <button 
-                  className="bg-[#0052D4] hover:bg-[#0046a2] text-white font-semibold text-lg px-10 py-5 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
-                  data-testid="cta-process-button"
-                >
-                  Commencer ma demande maintenant
-                </button>
-              </Link>
+              {/* Right Side - Steps Grid */}
+              <div className="w-full lg:w-[60%]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {/* Step 1 */}
+                  <div className={`relative bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '100ms' }}>
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
+                        1
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-base font-semibold text-gray-900 mb-1">Remplissez le formulaire</h3>
+                        <p className="text-sm text-gray-600 mb-2">Complétez votre demande en 5 minutes</p>
+                        <span className="inline-block px-2.5 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">5 min</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 2 */}
+                  <div className={`relative bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
+                        2
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-base font-semibold text-gray-900 mb-1">Recevez votre devis</h3>
+                        <p className="text-sm text-gray-600 mb-2">Devis détaillé et personnalisé</p>
+                        <span className="inline-block px-2.5 py-0.5 bg-green-100 text-green-700 text-xs font-medium rounded-full">48h</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div className={`relative bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '300ms' }}>
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
+                        3
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-base font-semibold text-gray-900 mb-1">Validation du dossier</h3>
+                        <p className="text-sm text-gray-600 mb-2">Notre équipe prépare votre dossier Enedis</p>
+                        <span className="inline-block px-2.5 py-0.5 bg-orange-100 text-orange-700 text-xs font-medium rounded-full">2-3 semaines</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 4 */}
+                  <div className={`relative bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '400ms' }}>
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 w-12 h-12 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
+                        4
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-base font-semibold text-gray-900 mb-1">Intervention Enedis</h3>
+                        <p className="text-sm text-gray-600 mb-2">Travaux et activation du compteur</p>
+                        <span className="inline-block px-2.5 py-0.5 bg-purple-100 text-purple-700 text-xs font-medium rounded-full">4-6 semaines</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CTA Button */}
+                <div className="mt-8 text-center lg:text-left">
+                  <Link href="/raccordement-enedis#formulaire-raccordement">
+                    <button 
+                      className="bg-[#4F46E5] hover:bg-[#4338CA] text-white font-semibold text-base px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300"
+                      data-testid="cta-process-button"
+                    >
+                      Commencer ma demande maintenant
+                    </button>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
