@@ -909,14 +909,10 @@ export default function HomePage() {
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
                 <p className="text-base font-semibold text-gray-900">Une question ? Nos conseillers vous repondent.</p>
-                <div className="flex items-center gap-6 text-sm text-gray-600">
+                <div className="flex items-center text-sm text-gray-600">
                   <a href="tel:0970709570" className="flex items-center gap-2 hover:text-[#3B82F6] transition-colors">
                     <Phone className="w-4 h-4" />
                     09 70 70 95 70
-                  </a>
-                  <a href="mailto:contact@demande-raccordement.fr" className="flex items-center gap-2 hover:text-[#3B82F6] transition-colors">
-                    <Mail className="w-4 h-4" />
-                    contact@demande-raccordement.fr
                   </a>
                 </div>
               </div>
