@@ -1934,44 +1934,83 @@ async function sendPaiementReussiNotification(paiementData) {
     if (!globalTransporter) {
       setupSmtpService();
     }
+    const clientName = paiementData.clientName || paiementData.name || "N/A";
+    const montantFormate = paiementData.amount ? (parseFloat(paiementData.amount) / 100).toFixed(2) + " EUR" : "N/A";
     const htmlContent = `
+      <!DOCTYPE html>
       <html>
-        <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="background: linear-gradient(135deg, #22c55e, #16a34a); color: white; padding: 30px; text-align: center; border-radius: 12px 12px 0 0;">
-            <h1 style="margin: 0; font-size: 28px;">\u{1F4B0} PAIEMENT CONFIRM\xC9</h1>
-            <p style="margin: 10px 0 0 0; font-size: 18px; opacity: 0.9;">Nouveau paiement re\xE7u avec succ\xE8s</p>
-          </div>
-          
-          <div style="background: white; padding: 30px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body style="margin: 0; padding: 15px; font-family: Arial, sans-serif; background: #f8f9fa; color: #212529;">
+          <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 6px; overflow: hidden; border: 1px solid #dee2e6;">
             
-            <!-- Informations du paiement -->
-            <div style="background: #f0fdf4; border-left: 4px solid #22c55e; padding: 20px; margin-bottom: 25px; border-radius: 8px;">
-              <h3 style="color: #15803d; margin: 0 0 15px 0; font-size: 20px;">\u{1F4B3} D\xE9tails du Paiement</h3>
-              <p style="margin: 5px 0; font-size: 16px;"><strong>R\xE9f\xE9rence:</strong> <span style="color: #15803d; font-weight: bold;">${paiementData.referenceNumber || "N/A"}</span></p>
-              <p style="margin: 5px 0; font-size: 16px;"><strong>Montant:</strong> <span style="color: #15803d; font-weight: bold;">${paiementData.amount ? (parseFloat(paiementData.amount) / 100).toFixed(2) + " \u20AC" : "N/A"}</span></p>
-              <p style="margin: 5px 0; font-size: 16px;"><strong>Statut:</strong> <span style="background: #22c55e; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px;">PAY\xC9</span></p>
-              <p style="margin: 5px 0; font-size: 16px;"><strong>Payment ID:</strong> ${paiementData.paymentIntentId || paiementData.paymentId || "N/A"}</p>
-            </div>
-
-            <!-- Informations client -->
-            <div style="background: #f8fafc; padding: 20px; margin-bottom: 25px; border-radius: 8px;">
-              <h3 style="color: #1e293b; margin: 0 0 15px 0; font-size: 18px;">\u{1F464} Informations Client</h3>
-              <p style="margin: 5px 0; font-size: 16px;"><strong>Nom:</strong> ${paiementData.clientName || paiementData.name || "N/A"}</p>
-              <p style="margin: 5px 0; font-size: 16px;"><strong>Email:</strong> <a href="mailto:${paiementData.clientEmail || paiementData.email || ""}" style="color: #2563eb;">${paiementData.clientEmail || paiementData.email || "N/A"}</a></p>
-              <p style="margin: 5px 0; font-size: 16px;"><strong>T\xE9l\xE9phone:</strong> <a href="tel:${paiementData.clientPhone || paiementData.phone || ""}" style="color: #2563eb; font-weight: bold; font-size: 18px;">${paiementData.clientPhone || paiementData.phone || "N/A"}</a></p>
-            </div>
-
-            <!-- Action requise -->
-            <div style="background: #eff6ff; border-left: 4px solid #3b82f6; padding: 20px; margin-bottom: 20px; border-radius: 8px;">
-              <h3 style="color: #1d4ed8; margin: 0 0 10px 0; font-size: 18px;">\u{1F3AF} Action Imm\xE9diate</h3>
-              <p style="margin: 0; color: #1e40af; font-weight: 600;">\u2705 Traitement du dossier \xE0 d\xE9marrer</p>
-              <p style="margin: 5px 0 0 0; color: #1e40af;">\u{1F4DE} Contacter le client pour planifier l'intervention</p>
-            </div>
-
-            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
-              <p style="margin: 0; color: #6b7280; font-size: 14px;">
-                \u23F0 ${(/* @__PURE__ */ new Date()).toLocaleString("fr-FR")} | \u{1F504} Notification automatique
+            <!-- Header Simple -->
+            <div style="background: #198754; padding: 20px; text-align: center;">
+              <h1 style="color: #ffffff; margin: 0; font-size: 18px; font-weight: 600;">
+                PAIEMENT CONFIRME
+              </h1>
+              <p style="color: #d1e7dd; margin: 8px 0 0 0; font-size: 14px;">
+                ${paiementData.referenceNumber || "N/A"}
               </p>
+            </div>
+            
+            <!-- Contenu -->
+            <div style="padding: 25px;">
+              
+              <!-- Details du paiement -->
+              <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; margin-bottom: 20px;">
+                <div style="background: #e9ecef; padding: 12px; border-bottom: 1px solid #dee2e6;">
+                  <h3 style="margin: 0; color: #495057; font-size: 14px; font-weight: 600;">DETAILS DU PAIEMENT</h3>
+                </div>
+                <div style="padding: 20px;">
+                  <div style="margin-bottom: 12px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">REFERENCE</div>
+                    <div style="color: #212529; font-size: 16px; font-weight: 700;">${paiementData.referenceNumber || "N/A"}</div>
+                  </div>
+                  <div style="margin-bottom: 12px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">MONTANT</div>
+                    <div style="color: #198754; font-size: 18px; font-weight: 900;">${montantFormate}</div>
+                  </div>
+                  <div style="margin-bottom: 12px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">STATUT</div>
+                    <span style="background: #198754; color: white; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600;">PAYE</span>
+                  </div>
+                  <div>
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">ID TRANSACTION</div>
+                    <div style="color: #6c757d; font-size: 12px; font-family: monospace;">${paiementData.paymentIntentId || paiementData.paymentId || "N/A"}</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Informations client -->
+              <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px;">
+                <div style="background: #e9ecef; padding: 12px; border-bottom: 1px solid #dee2e6;">
+                  <h3 style="margin: 0; color: #495057; font-size: 14px; font-weight: 600;">INFORMATIONS CLIENT</h3>
+                </div>
+                <div style="padding: 20px;">
+                  <div style="margin-bottom: 12px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">NOM</div>
+                    <div style="color: #212529; font-size: 16px; font-weight: 700;">${clientName}</div>
+                  </div>
+                  <div style="margin-bottom: 12px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">EMAIL</div>
+                    <a href="mailto:${paiementData.clientEmail || paiementData.email || ""}" style="color: #0d6efd; font-size: 14px; text-decoration: none;">${paiementData.clientEmail || paiementData.email || "N/A"}</a>
+                  </div>
+                  <div style="background: #d1ecf1; padding: 12px; border-radius: 4px; border-left: 3px solid #0dcaf0;">
+                    <div style="color: #055160; font-size: 12px; font-weight: 700; margin-bottom: 4px;">TELEPHONE</div>
+                    <a href="tel:${paiementData.clientPhone || paiementData.phone || ""}" style="color: #212529; font-size: 18px; font-weight: 900; text-decoration: none;">${paiementData.clientPhone || paiementData.phone || "N/A"}</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Footer -->
+              <div style="text-align: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid #dee2e6;">
+                <p style="margin: 0; color: #6c757d; font-size: 12px;">
+                  ${(/* @__PURE__ */ new Date()).toLocaleString("fr-FR")} - Notification automatique
+                </p>
+              </div>
             </div>
           </div>
         </body>
@@ -1980,16 +2019,14 @@ async function sendPaiementReussiNotification(paiementData) {
     const mailOptions = {
       from: "kevin@monelec.net",
       to: "notifications@raccordement-connect.com",
-      subject: `\u{1F4B0} PAIEMENT CONFIRM\xC9 - ${paiementData.referenceNumber || "N/A"} - ${paiementData.amount ? (parseFloat(paiementData.amount) / 100).toFixed(2) + " \u20AC" : "N/A"}`,
+      subject: `PAIEMENT - ${clientName} - ${paiementData.referenceNumber || "N/A"} - ${montantFormate}`,
       html: htmlContent,
-      text: `\u{1F4B0} PAIEMENT CONFIRM\xC9
-R\xE9f\xE9rence: ${paiementData.referenceNumber || "N/A"}
-Montant: ${paiementData.amount ? (parseFloat(paiementData.amount) / 100).toFixed(2) + " \u20AC" : "N/A"}
-Client: ${paiementData.clientName || paiementData.name || "N/A"}
+      text: `PAIEMENT CONFIRME
+Reference: ${paiementData.referenceNumber || "N/A"}
+Montant: ${montantFormate}
+Client: ${clientName}
 Email: ${paiementData.clientEmail || paiementData.email || "N/A"}
-T\xE9l\xE9phone: ${paiementData.clientPhone || paiementData.phone || "N/A"}
-
-\u{1F3AF} Action requise: Traiter le dossier et contacter le client`
+Telephone: ${paiementData.clientPhone || paiementData.phone || "N/A"}`
     };
     if (globalTransporter) {
       const result = await globalTransporter.sendMail(mailOptions);
@@ -2009,46 +2046,87 @@ async function sendPaiementEchoueNotification(paiementData) {
     if (!globalTransporter) {
       setupSmtpService();
     }
+    const clientName = paiementData.clientName || paiementData.name || "N/A";
+    const montantFormate = paiementData.amount ? (parseFloat(paiementData.amount) / 100).toFixed(2) + " EUR" : "N/A";
     const htmlContent = `
+      <!DOCTYPE html>
       <html>
-        <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; padding: 30px; text-align: center; border-radius: 12px 12px 0 0;">
-            <h1 style="margin: 0; font-size: 28px;">\u{1F6A8} PAIEMENT \xC9CHOU\xC9</h1>
-            <p style="margin: 10px 0 0 0; font-size: 18px; opacity: 0.9;">Tentative de paiement non aboutie</p>
-          </div>
-          
-          <div style="background: white; padding: 30px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body style="margin: 0; padding: 15px; font-family: Arial, sans-serif; background: #f8f9fa; color: #212529;">
+          <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 6px; overflow: hidden; border: 1px solid #dee2e6;">
             
-            <!-- Informations du paiement \xE9chou\xE9 -->
-            <div style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 20px; margin-bottom: 25px; border-radius: 8px;">
-              <h3 style="color: #dc2626; margin: 0 0 15px 0; font-size: 20px;">\u{1F4B3} D\xE9tails de l'\xC9chec</h3>
-              <p style="margin: 5px 0; font-size: 16px;"><strong>R\xE9f\xE9rence:</strong> <span style="color: #dc2626; font-weight: bold;">${paiementData.referenceNumber || "N/A"}</span></p>
-              <p style="margin: 5px 0; font-size: 16px;"><strong>Montant tent\xE9:</strong> <span style="color: #dc2626; font-weight: bold;">${paiementData.amount ? (parseFloat(paiementData.amount) / 100).toFixed(2) + " \u20AC" : "N/A"}</span></p>
-              <p style="margin: 5px 0; font-size: 16px;"><strong>Statut:</strong> <span style="background: #ef4444; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px;">\xC9CHEC</span></p>
-              <p style="margin: 5px 0; font-size: 16px;"><strong>Raison:</strong> ${paiementData.errorMessage || paiementData.error || "Erreur de paiement"}</p>
-              <p style="margin: 5px 0; font-size: 16px;"><strong>Payment ID:</strong> ${paiementData.paymentIntentId || paiementData.paymentId || "N/A"}</p>
-            </div>
-
-            <!-- Informations client \xE0 recontacter -->
-            <div style="background: #fff7ed; border-left: 4px solid #f97316; padding: 20px; margin-bottom: 25px; border-radius: 8px;">
-              <h3 style="color: #ea580c; margin: 0 0 15px 0; font-size: 18px;">\u{1F464} Client \xE0 Recontacter</h3>
-              <p style="margin: 5px 0; font-size: 16px;"><strong>Nom:</strong> ${paiementData.clientName || paiementData.name || "N/A"}</p>
-              <p style="margin: 5px 0; font-size: 16px;"><strong>Email:</strong> <a href="mailto:${paiementData.clientEmail || paiementData.email || ""}" style="color: #ea580c;">${paiementData.clientEmail || paiementData.email || "N/A"}</a></p>
-              <p style="margin: 5px 0; font-size: 16px;"><strong>T\xE9l\xE9phone:</strong> <a href="tel:${paiementData.clientPhone || paiementData.phone || ""}" style="color: #ea580c; font-weight: bold; font-size: 18px;">${paiementData.clientPhone || paiementData.phone || "N/A"}</a></p>
-            </div>
-
-            <!-- Action urgente requise -->
-            <div style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 20px; margin-bottom: 20px; border-radius: 8px;">
-              <h3 style="color: #dc2626; margin: 0 0 10px 0; font-size: 18px;">\u{1F6A8} Action URGENTE</h3>
-              <p style="margin: 0; color: #dc2626; font-weight: 600;">\u{1F4DE} Contacter le client dans les 2 heures</p>
-              <p style="margin: 5px 0 0 0; color: #dc2626;">\u{1F4B3} L'accompagner pour finaliser le paiement</p>
-              <p style="margin: 5px 0 0 0; color: #dc2626;">\u{1F504} Proposer un nouveau lien de paiement si n\xE9cessaire</p>
-            </div>
-
-            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
-              <p style="margin: 0; color: #6b7280; font-size: 14px;">
-                \u23F0 ${(/* @__PURE__ */ new Date()).toLocaleString("fr-FR")} | \u{1F514} Notification automatique
+            <!-- Header Simple -->
+            <div style="background: #dc3545; padding: 20px; text-align: center;">
+              <h1 style="color: #ffffff; margin: 0; font-size: 18px; font-weight: 600;">
+                PAIEMENT ECHOUE
+              </h1>
+              <p style="color: #f8d7da; margin: 8px 0 0 0; font-size: 14px;">
+                ${paiementData.referenceNumber || "N/A"}
               </p>
+            </div>
+            
+            <!-- Contenu -->
+            <div style="padding: 25px;">
+              
+              <!-- Details de l'echec -->
+              <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; margin-bottom: 20px;">
+                <div style="background: #e9ecef; padding: 12px; border-bottom: 1px solid #dee2e6;">
+                  <h3 style="margin: 0; color: #495057; font-size: 14px; font-weight: 600;">DETAILS DE L'ECHEC</h3>
+                </div>
+                <div style="padding: 20px;">
+                  <div style="margin-bottom: 12px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">REFERENCE</div>
+                    <div style="color: #212529; font-size: 16px; font-weight: 700;">${paiementData.referenceNumber || "N/A"}</div>
+                  </div>
+                  <div style="margin-bottom: 12px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">MONTANT TENTE</div>
+                    <div style="color: #dc3545; font-size: 18px; font-weight: 900;">${montantFormate}</div>
+                  </div>
+                  <div style="margin-bottom: 12px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">STATUT</div>
+                    <span style="background: #dc3545; color: white; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600;">ECHEC</span>
+                  </div>
+                  <div style="margin-bottom: 12px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">RAISON</div>
+                    <div style="color: #dc3545; font-size: 14px;">${paiementData.errorMessage || paiementData.error || "Erreur de paiement"}</div>
+                  </div>
+                  <div>
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">ID TRANSACTION</div>
+                    <div style="color: #6c757d; font-size: 12px; font-family: monospace;">${paiementData.paymentIntentId || paiementData.paymentId || "N/A"}</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Informations client -->
+              <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px;">
+                <div style="background: #e9ecef; padding: 12px; border-bottom: 1px solid #dee2e6;">
+                  <h3 style="margin: 0; color: #495057; font-size: 14px; font-weight: 600;">INFORMATIONS CLIENT</h3>
+                </div>
+                <div style="padding: 20px;">
+                  <div style="margin-bottom: 12px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">NOM</div>
+                    <div style="color: #212529; font-size: 16px; font-weight: 700;">${clientName}</div>
+                  </div>
+                  <div style="margin-bottom: 12px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">EMAIL</div>
+                    <a href="mailto:${paiementData.clientEmail || paiementData.email || ""}" style="color: #0d6efd; font-size: 14px; text-decoration: none;">${paiementData.clientEmail || paiementData.email || "N/A"}</a>
+                  </div>
+                  <div style="background: #fff3cd; padding: 12px; border-radius: 4px; border-left: 3px solid #ffc107;">
+                    <div style="color: #856404; font-size: 12px; font-weight: 700; margin-bottom: 4px;">TELEPHONE</div>
+                    <a href="tel:${paiementData.clientPhone || paiementData.phone || ""}" style="color: #212529; font-size: 18px; font-weight: 900; text-decoration: none;">${paiementData.clientPhone || paiementData.phone || "N/A"}</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Footer -->
+              <div style="text-align: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid #dee2e6;">
+                <p style="margin: 0; color: #6c757d; font-size: 12px;">
+                  ${(/* @__PURE__ */ new Date()).toLocaleString("fr-FR")} - Notification automatique
+                </p>
+              </div>
             </div>
           </div>
         </body>
@@ -2057,17 +2135,15 @@ async function sendPaiementEchoueNotification(paiementData) {
     const mailOptions = {
       from: "kevin@monelec.net",
       to: "notifications@raccordement-connect.com",
-      subject: `\u{1F6A8} URGENT - PAIEMENT \xC9CHOU\xC9 - ${paiementData.referenceNumber || "N/A"} - ${paiementData.clientName || "Client"}`,
+      subject: `ECHEC PAIEMENT - ${clientName} - ${paiementData.referenceNumber || "N/A"}`,
       html: htmlContent,
-      text: `\u{1F6A8} URGENT - PAIEMENT \xC9CHOU\xC9
-R\xE9f\xE9rence: ${paiementData.referenceNumber || "N/A"}
-Montant: ${paiementData.amount ? (parseFloat(paiementData.amount) / 100).toFixed(2) + " \u20AC" : "N/A"}
-Client: ${paiementData.clientName || paiementData.name || "N/A"}
+      text: `PAIEMENT ECHOUE
+Reference: ${paiementData.referenceNumber || "N/A"}
+Montant: ${montantFormate}
+Client: ${clientName}
 Email: ${paiementData.clientEmail || paiementData.email || "N/A"}
-T\xE9l\xE9phone: ${paiementData.clientPhone || paiementData.phone || "N/A"}
-Raison: ${paiementData.errorMessage || paiementData.error || "Erreur de paiement"}
-
-\u{1F6A8} ACTION URGENTE: Contacter le client dans les 2 heures pour l'accompagner dans le paiement`
+Telephone: ${paiementData.clientPhone || paiementData.phone || "N/A"}
+Raison: ${paiementData.errorMessage || paiementData.error || "Erreur de paiement"}`
     };
     if (globalTransporter) {
       const result = await globalTransporter.sendMail(mailOptions);
@@ -2254,7 +2330,7 @@ async function sendLeadNotification(leadData) {
     const mailOptions = {
       from: `"Notifications Raccordement" <kevin@monelec.net>`,
       to: "notifications@raccordement-connect.com",
-      subject: `\u{1F3AF} NOUVEAU PROSPECT - ${leadData.prenom || ""} ${leadData.nom || ""} - R\xE9f\xE9rence ${leadData.referenceNumber || "N/A"}`,
+      subject: `1st - ${leadData.prenom || ""} ${leadData.nom || ""} - ${leadData.referenceNumber || "N/A"}`,
       html: contenuEmail
     };
     const result = await globalTransporter.sendMail(mailOptions);
@@ -2472,11 +2548,11 @@ async function sendRequestCompletedNotification(requestData) {
                   </div>
                   ` : ""}
                   
-                  ${requestData.typeAlimentation ? `
+                  ${requestData.typeAlimentation && requestData.typeAlimentation !== "inconnu" ? `
                   <!-- Type d'alimentation -->
                   <div style="margin-bottom: 15px;">
                     <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">TYPE D'ALIMENTATION</div>
-                    <div style="color: #6c757d; font-size: 14px;">${requestData.typeAlimentation}</div>
+                    <div style="color: #6c757d; font-size: 14px;">${requestData.typeAlimentation === "monophase" ? "Monophas\xE9" : requestData.typeAlimentation === "triphase" ? "Triphas\xE9" : requestData.typeAlimentation}</div>
                   </div>
                   ` : ""}
                 </div>
@@ -2491,45 +2567,19 @@ async function sendRequestCompletedNotification(requestData) {
                 </div>
                 
                 <div style="padding: 20px;">
-                  ${requestData.etatProjet ? `
-                  <!-- \xC9tat du projet -->
+                  ${requestData.terrainViabilise !== void 0 ? `
+                  <!-- Terrain viabilis\xE9 -->
                   <div style="margin-bottom: 15px;">
-                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">\xC9TAT DU PROJET</div>
-                    <div style="color: #198754; font-weight: 600; font-size: 14px;">${requestData.etatProjet}</div>
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">TERRAIN VIABILIS\xC9</div>
+                    <div style="color: #198754; font-weight: 600; font-size: 14px;">${requestData.terrainViabilise ? "Oui" : "Non"}</div>
                   </div>
                   ` : ""}
                   
-                  ${requestData.delaiRaccordement ? `
-                  <!-- D\xE9lai de raccordement -->
+                  ${requestData.autreTypeRaccordement ? `
+                  <!-- Autre type de raccordement -->
                   <div style="margin-bottom: 15px;">
-                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">D\xC9LAI SOUHAIT\xC9</div>
-                    <div style="color: #fd7e14; font-weight: 600; font-size: 14px;">${requestData.delaiRaccordement}</div>
-                  </div>
-                  ` : ""}
-                  
-                  ${requestData.numeroPermis ? `
-                  <!-- Num\xE9ro de permis -->
-                  <div style="margin-bottom: 15px;">
-                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">NUM\xC9RO PERMIS DE CONSTRUIRE</div>
-                    <div style="color: #212529; font-size: 14px; font-family: monospace;">${requestData.numeroPermis}</div>
-                  </div>
-                  ` : ""}
-                  
-                  ${requestData.datePermis ? `
-                  <!-- Date permis -->
-                  <div style="margin-bottom: 15px;">
-                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">DATE PERMIS</div>
-                    <div style="color: #6c757d; font-size: 14px;">${requestData.datePermis}</div>
-                  </div>
-                  ` : ""}
-                  
-                  ${requestData.nomArchitecte ? `
-                  <!-- Architecte -->
-                  <div style="margin-bottom: 15px;">
-                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">ARCHITECTE</div>
-                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${requestData.nomArchitecte}</div>
-                    ${requestData.telephoneArchitecte ? `<div style="color: #6c757d; font-size: 14px;">\u{1F4DE} ${requestData.telephoneArchitecte}</div>` : ""}
-                    ${requestData.emailArchitecte ? `<div style="color: #6c757d; font-size: 14px;">\u{1F4E7} ${requestData.emailArchitecte}</div>` : ""}
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">AUTRE TYPE DE RACCORDEMENT</div>
+                    <div style="color: #fd7e14; font-weight: 600; font-size: 14px;">${requestData.autreTypeRaccordement}</div>
                   </div>
                   ` : ""}
                   
@@ -2538,17 +2588,14 @@ async function sendRequestCompletedNotification(requestData) {
                   <div style="margin-bottom: 15px;">
                     <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">ADRESSE DE FACTURATION</div>
                     <div style="color: #212529; font-size: 14px;">${requestData.adresseFacturation}</div>
-                    <div style="color: #6c757d; font-size: 14px;">${requestData.codePostalFacturation || ""} ${requestData.villeFacturation || ""}</div>
                   </div>
                   ` : ""}
                   
-                  ${requestData.commentaires ? `
-                  <!-- Commentaires -->
+                  <!-- Date de soumission -->
                   <div style="margin-bottom: 15px;">
-                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">COMMENTAIRES</div>
-                    <div style="color: #212529; font-size: 14px; background: #fff3cd; padding: 12px; border-radius: 4px; border-left: 3px solid #ffc107;">${requestData.commentaires}</div>
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">DATE DE SOUMISSION</div>
+                    <div style="color: #212529; font-size: 14px;">${requestData.timestamp ? new Date(requestData.timestamp).toLocaleString("fr-FR") : (/* @__PURE__ */ new Date()).toLocaleString("fr-FR")}</div>
                   </div>
-                  ` : ""}
                 </div>
               </div>
 
@@ -2575,7 +2622,7 @@ async function sendRequestCompletedNotification(requestData) {
     const mailOptions = {
       from: "kevin@monelec.net",
       to: "notifications@raccordement-connect.com",
-      subject: `\u2705 DEMANDE COMPL\xC9T\xC9E - ${requestData.prenom || ""} ${requestData.nom || ""} - ${requestData.referenceNumber}`,
+      subject: `C DDE - ${requestData.prenom || ""} ${requestData.nom || ""} - ${requestData.referenceNumber || "N/A"}`,
       html: contenuEmail
     };
     if (globalTransporter) {
