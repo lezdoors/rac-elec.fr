@@ -205,7 +205,7 @@ export default function HomePage() {
 
         {/* PROCESS SECTION - "Comment Faire sa Demande" - 4 Steps with Illustrations */}
         <section 
-          className="py-16 md:py-24"
+          className="py-16 md:py-20"
           style={{ background: 'linear-gradient(180deg, #EBF4FF 0%, #F0F7FF 50%, #FFFFFF 100%)' }}
           id="process"
           data-animate
@@ -213,12 +213,12 @@ export default function HomePage() {
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-7xl">
             {/* Header */}
-            <div className="text-center mb-12 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0066CC] mb-4 leading-tight">
-                Comment Faire sa Demande de Raccordement Électrique en Ligne ?
+            <div className="text-center mb-10 md:mb-12">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-[#0066CC] mb-3 leading-tight">
+                Comment Faire sa Demande de Raccordement Electrique en Ligne ?
               </h2>
-              <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Processus 100% en ligne en 4 étapes simples. Votre demande de raccordement Enedis traitée rapidement avec accompagnement personnalisé.
+              <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Processus 100% en ligne en 4 etapes simples. Votre demande de raccordement Enedis traitee rapidement avec accompagnement personnalise.
               </p>
             </div>
 
@@ -342,7 +342,7 @@ export default function HomePage() {
             <div className="text-center">
               <Link href="/raccordement-enedis#formulaire-raccordement">
                 <button 
-                  className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-full shadow-md hover:shadow-lg transition-all duration-300"
+                  className="bg-[#4F46E5] hover:bg-[#4338CA] text-white font-medium text-sm px-6 py-3 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
                   data-testid="cta-process-button"
                 >
                   Commencer maintenant
@@ -353,15 +353,15 @@ export default function HomePage() {
         </section>
 
         {/* SERVICE TYPES SECTION - Detailed Cards */}
-        <section className="py-20 md:py-24 bg-white" id="types-raccordements" data-animate data-testid="service-types-section">
+        <section className="py-16 md:py-20 bg-white" id="types-raccordements" data-animate data-testid="service-types-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-7xl">
             {/* Header */}
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-10">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-3">
                 Votre Demande de <span className="text-[#0072CE]">Raccordement</span>
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
-                Choisissez le type de raccordement adapté à votre projet
+              <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto mb-5">
+                Choisissez le type de raccordement adapte a votre projet
               </p>
               
               {/* Help section */}
@@ -596,30 +596,25 @@ export default function HomePage() {
 
         {/* CTA BANNER - Before Footer */}
         <section 
-          className="py-20 md:py-24"
-          style={{ background: 'linear-gradient(135deg, #6FB1FC 0%, #4364F7 50%, #0052D4 100%)' }}
+          className="py-16 md:py-20"
+          style={{ background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)' }}
           data-testid="cta-banner-section"
         >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-4xl text-center">
-            {/* Icon */}
-            <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 backdrop-blur-sm">
-              <Rocket className="w-10 h-10 text-white" />
-            </div>
-
+          <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-3xl text-center">
             {/* Headline */}
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Prêt à démarrer votre projet ?
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-3">
+              Pret a demarrer votre projet ?
             </h2>
 
             {/* Subtext */}
-            <p className="text-lg text-white/90 mb-8">
+            <p className="text-base text-white/90 mb-6">
               Rejoignez les centaines de clients satisfaits
             </p>
 
             {/* CTA Button */}
             <Link href="/raccordement-enedis#formulaire-raccordement">
               <button 
-                className="bg-white text-[#0052D4] font-semibold text-lg px-10 py-5 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 mb-4"
+                className="bg-white text-[#4F46E5] font-medium text-sm px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 mb-3"
                 data-testid="cta-final-button"
               >
                 Commencer ma demande
@@ -627,8 +622,8 @@ export default function HomePage() {
             </Link>
 
             {/* Secondary text */}
-            <p className="text-white/80 text-sm">
-              Accompagnement personnalisé sans engagement
+            <p className="text-white/70 text-sm">
+              Accompagnement personnalise sans engagement
             </p>
           </div>
         </section>
