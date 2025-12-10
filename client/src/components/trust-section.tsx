@@ -46,7 +46,7 @@ export function TrustSection() {
               Paiement sécurisé et accompagnement complet
             </h3>
             <p className="text-gray-600">
-              Transactions protégées par Stripe et accompagnement personnalisé à chaque étape de votre projet.
+              Transactions 100% securisees et accompagnement personnalise a chaque etape de votre projet.
             </p>
           </div>
         </div>

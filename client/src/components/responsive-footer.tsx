@@ -66,12 +66,6 @@ export function ResponsiveFooter() {
                 </div>
                 <span>09 70 70 95 70</span>
               </a>
-              <a href="mailto:contact@demande-raccordement.fr" className="flex items-center text-gray-300 hover:text-white transition-colors group">
-                <div className="flex-shrink-0 mr-3 p-2 rounded-full bg-[#0072CE]/20 group-hover:bg-[#0072CE]/30 transition-colors">
-                  <Mail className="h-4 w-4 text-[#5BC248]" />
-                </div>
-                <span>contact@demande-raccordement.fr</span>
-              </a>
             </div>
           </div>
           

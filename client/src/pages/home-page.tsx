@@ -820,9 +820,9 @@ export default function HomePage() {
                     { q: "Puis-je modifier ma demande apres envoi ?", a: "Oui, contactez notre equipe pour toute modification. Nous ajusterons votre dossier avant sa transmission finale." }
                   ].map((item, idx) => (
                     <details key={idx} className="group" data-testid={`faq-demarches-${idx + 1}`}>
-                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] transition-colors">
+                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] group-open:text-[#3B82F6] transition-colors outline-none focus:outline-none [&::-webkit-details-marker]:hidden">
                         <span className="text-sm font-medium pr-4">{item.q}</span>
-                        <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 transition-transform flex-shrink-0" />
+                        <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 group-open:text-[#3B82F6] transition-transform flex-shrink-0" />
                       </summary>
                       <div className="pb-3 text-sm text-gray-500 leading-relaxed pl-0">
                         {item.a}
@@ -844,9 +844,9 @@ export default function HomePage() {
                     { q: "Quand intervient Enedis sur mon terrain ?", a: "Apres validation du devis et realisation des travaux prealables, Enedis planifie l'intervention sous 2 a 8 semaines." }
                   ].map((item, idx) => (
                     <details key={idx} className="group" data-testid={`faq-delais-${idx + 1}`}>
-                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] transition-colors">
+                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] group-open:text-[#3B82F6] transition-colors outline-none focus:outline-none [&::-webkit-details-marker]:hidden">
                         <span className="text-sm font-medium pr-4">{item.q}</span>
-                        <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 transition-transform flex-shrink-0" />
+                        <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 group-open:text-[#3B82F6] transition-transform flex-shrink-0" />
                       </summary>
                       <div className="pb-3 text-sm text-gray-500 leading-relaxed pl-0">
                         {item.a}
@@ -863,14 +863,14 @@ export default function HomePage() {
                 </h3>
                 <div className="space-y-3">
                   {[
-                    { q: "Le paiement en ligne est-il securise ?", a: "Oui, via Stripe certifie PCI DSS niveau 1. Vos donnees bancaires sont chiffrees et jamais stockees." },
+                    { q: "Le paiement en ligne est-il securise ?", a: "Oui, notre systeme de paiement est certifie PCI DSS niveau 1. Vos donnees bancaires sont chiffrees et jamais stockees." },
                     { q: "Quels sont les frais de service ?", a: "Nos frais de constitution de dossier sont affiches clairement. Les frais Enedis sont factures separement par le gestionnaire." },
                     { q: "Puis-je payer en plusieurs fois ?", a: "Actuellement, le paiement s'effectue en une fois lors de la validation de votre demande." }
                   ].map((item, idx) => (
                     <details key={idx} className="group" data-testid={`faq-tarifs-${idx + 1}`}>
-                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] transition-colors">
+                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] group-open:text-[#3B82F6] transition-colors outline-none focus:outline-none [&::-webkit-details-marker]:hidden">
                         <span className="text-sm font-medium pr-4">{item.q}</span>
-                        <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 transition-transform flex-shrink-0" />
+                        <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 group-open:text-[#3B82F6] transition-transform flex-shrink-0" />
                       </summary>
                       <div className="pb-3 text-sm text-gray-500 leading-relaxed pl-0">
                         {item.a}
@@ -892,9 +892,9 @@ export default function HomePage() {
                     { q: "Proposez-vous le raccordement collectif ?", a: "Oui, pour les lotissements et immeubles collectifs avec gestion des parties communes." }
                   ].map((item, idx) => (
                     <details key={idx} className="group" data-testid={`faq-types-${idx + 1}`}>
-                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] transition-colors">
+                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] group-open:text-[#3B82F6] transition-colors outline-none focus:outline-none [&::-webkit-details-marker]:hidden">
                         <span className="text-sm font-medium pr-4">{item.q}</span>
-                        <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 transition-transform flex-shrink-0" />
+                        <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 group-open:text-[#3B82F6] transition-transform flex-shrink-0" />
                       </summary>
                       <div className="pb-3 text-sm text-gray-500 leading-relaxed pl-0">
                         {item.a}
