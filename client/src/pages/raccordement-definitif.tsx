@@ -28,7 +28,7 @@ export default function RaccordementDefinitifPage() {
       <Helmet>
         <title>Demande de Raccordement Définitif | Mise en Service</title>
         <meta name="description" content="Raccordement définitif au réseau Enedis. Étapes, pièces requises et accompagnement clé en main." />
-        <link rel="canonical" href="https://www.raccordement-connect.com/raccordement-definitif" />
+        <link rel="canonical" href="https://www.demande-raccordement.fr/raccordement-definitif" />
         <meta name="robots" content="index, follow" />
         
         {/* Service JSON-LD */}
@@ -41,8 +41,8 @@ export default function RaccordementDefinitifPage() {
             "description": "Raccordement électrique permanent pour habitations et locaux professionnels. Accompagnement complet de la demande à la mise en service.",
             "provider": {
               "@type": "Organization",
-              "name": "Raccordement-Connect.com",
-              "url": "https://www.raccordement-connect.com/"
+              "name": "demande-raccordement.fr",
+              "url": "https://www.demande-raccordement.fr/"
             },
             "areaServed": {
               "@type": "Country",
@@ -61,13 +61,13 @@ export default function RaccordementDefinitifPage() {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Accueil",
-                "item": "https://www.raccordement-connect.com/"
+                "item": "https://www.demande-raccordement.fr/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Raccordement Définitif",
-                "item": "https://www.raccordement-connect.com/raccordement-definitif"
+                "item": "https://www.demande-raccordement.fr/raccordement-definitif"
               }
             ]
           }

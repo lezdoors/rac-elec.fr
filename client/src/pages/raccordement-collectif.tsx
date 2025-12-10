@@ -28,7 +28,7 @@ export default function RaccordementCollectifPage() {
       <Helmet>
         <title>Raccordement Collectif Enedis | Lotissement & Copropriété</title>
         <meta name="description" content="Raccordement collectif pour lotissements, copropriétés et projets immobiliers. Étude, dossier et coordination avec Enedis." />
-        <link rel="canonical" href="https://www.raccordement-connect.com/raccordement-collectif" />
+        <link rel="canonical" href="https://www.demande-raccordement.fr/raccordement-collectif" />
         <meta name="robots" content="index, follow" />
         
         {/* Service JSON-LD */}
@@ -41,8 +41,8 @@ export default function RaccordementCollectifPage() {
             "description": "Raccordement électrique pour lotissements, copropriétés et projets immobiliers multi-logements. Coordination complète avec Enedis de l'étude à la mise en service.",
             "provider": {
               "@type": "Organization",
-              "name": "Raccordement-Connect.com",
-              "url": "https://www.raccordement-connect.com/"
+              "name": "demande-raccordement.fr",
+              "url": "https://www.demande-raccordement.fr/"
             },
             "areaServed": {
               "@type": "Country",
@@ -61,13 +61,13 @@ export default function RaccordementCollectifPage() {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Accueil",
-                "item": "https://www.raccordement-connect.com/"
+                "item": "https://www.demande-raccordement.fr/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Raccordement Collectif",
-                "item": "https://www.raccordement-connect.com/raccordement-collectif"
+                "item": "https://www.demande-raccordement.fr/raccordement-collectif"
               }
             ]
           }

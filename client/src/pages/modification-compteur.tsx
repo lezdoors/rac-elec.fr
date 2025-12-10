@@ -28,7 +28,7 @@ export default function ModificationCompteurPage() {
       <Helmet>
         <title>Augmentation de Puissance Compteur Enedis | Mono & Triphasé</title>
         <meta name="description" content="Passez à la puissance adaptée (mono/triphasé). Étude, dossier et suivi jusqu'à modification du contrat." />
-        <link rel="canonical" href="https://www.raccordement-connect.com/modification-compteur" />
+        <link rel="canonical" href="https://www.demande-raccordement.fr/modification-compteur" />
         <meta name="robots" content="index, follow" />
         
         {/* Service JSON-LD */}
@@ -41,8 +41,8 @@ export default function ModificationCompteurPage() {
             "description": "Service d'augmentation de puissance électrique (mono/triphasé). Étude technique, dossier et accompagnement jusqu'à modification du contrat Enedis.",
             "provider": {
               "@type": "Organization",
-              "name": "Raccordement-Connect.com",
-              "url": "https://www.raccordement-connect.com/"
+              "name": "demande-raccordement.fr",
+              "url": "https://www.demande-raccordement.fr/"
             },
             "areaServed": {
               "@type": "Country",
@@ -61,13 +61,13 @@ export default function ModificationCompteurPage() {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Accueil",
-                "item": "https://www.raccordement-connect.com/"
+                "item": "https://www.demande-raccordement.fr/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Augmentation de Puissance",
-                "item": "https://www.raccordement-connect.com/modification-compteur"
+                "item": "https://www.demande-raccordement.fr/modification-compteur"
               }
             ]
           }

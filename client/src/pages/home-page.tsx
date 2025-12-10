@@ -67,17 +67,17 @@ export default function HomePage() {
         <title>Demande de Raccordement Enedis en Ligne | Raccordement Electrique</title>
         <meta name="description" content="Faites votre demande de raccordement Enedis. Provisoire, definitif, collectif ou augmentation de puissance. Procedure simplifiee et securisee." />
         <meta name="keywords" content="demande de raccordement enedis, raccordement electrique, compteur Linky, branchement EDF" />
-        <link rel="canonical" href="https://www.raccordement-connect.com/" />
+        <link rel="canonical" href="https://www.demande-raccordement.fr/" />
         <meta property="og:title" content="Demande de Raccordement Enedis en Ligne" />
         <meta property="og:description" content="Faites votre demande de raccordement Enedis simplifiee et securisee." />
-        <meta property="og:url" content="https://www.raccordement-connect.com/" />
+        <meta property="og:url" content="https://www.demande-raccordement.fr/" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{`
           {
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "Raccordement-Connect.com",
-            "url": "https://www.raccordement-connect.com/",
+            "name": "demande-raccordement.fr",
+            "url": "https://www.demande-raccordement.fr/",
             "description": "Services professionnels de raccordement electrique Enedis pour particuliers et professionnels en France.",
             "contactPoint": {
               "@type": "ContactPoint",

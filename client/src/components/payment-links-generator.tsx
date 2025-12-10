@@ -18,7 +18,7 @@ export function PaymentLinksGenerator({ referenceNumber }: PaymentLinksGenerator
   
   // Générer l'URL complète avec le domaine demande-raccordement.fr
   const generateUrl = (multiplier: number) => {
-    return `https://www.raccordement-connect.com/paiement-multiple/${referenceNumber}/${multiplier}`;
+    return `https://www.demande-raccordement.fr/paiement-multiple/${referenceNumber}/${multiplier}`;
   };
   
   // Fonction pour copier un lien dans le presse-papier

@@ -117,7 +117,7 @@ export async function sendNewSubmissionNotificationReplit(data: NewSubmissionEma
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px;">
         <div style="text-align: center; margin-bottom: 20px;">
-          <img src="https://www.raccordement-connect.com/logo-dark.png" alt="Raccordement.net" style="max-width: 200px;">
+          <img src="https://www.demande-raccordement.fr/logo-dark.png" alt="Raccordement.net" style="max-width: 200px;">
         </div>
         <h2 style="color: #0047AB; border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;">Nouvelle demande de raccordement</h2>
         <p>Une nouvelle demande de raccordement Enedis a été soumise sur le site.</p>
@@ -135,7 +135,7 @@ export async function sendNewSubmissionNotificationReplit(data: NewSubmissionEma
         
         <p>Connectez-vous à votre espace administrateur pour consulter les détails complets de la demande.</p>
         <div style="text-align: center; margin: 25px 0;">
-          <a href="https://www.raccordement-connect.com/admin/demandes" style="background-color: #0047AB; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+          <a href="https://www.demande-raccordement.fr/admin/demandes" style="background-color: #0047AB; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
             Voir la demande
           </a>
         </div>
@@ -173,7 +173,7 @@ export async function sendPaymentConfirmationReplit(data: PaymentConfirmationEma
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px;">
         <div style="text-align: center; margin-bottom: 20px;">
-          <img src="https://www.raccordement-connect.com/logo-dark.png" alt="Raccordement.net" style="max-width: 200px;">
+          <img src="https://www.demande-raccordement.fr/logo-dark.png" alt="Raccordement.net" style="max-width: 200px;">
         </div>
         <h2 style="color: #0047AB; border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;">Confirmation de paiement</h2>
         <p>Cher(e) ${data.clientName},</p>

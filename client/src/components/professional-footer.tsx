@@ -106,7 +106,7 @@ export function ProfessionalFooter() {
       <div className="border-t border-gray-800">
         <div className="container mx-auto px-4 py-4">
           <div className="text-center text-gray-400 text-sm">
-            © {currentYear} Raccordement-Connect.com — Tous droits réservés.
+            © {currentYear} demande-raccordement.fr — Tous droits réservés.
           </div>
         </div>
       </div>

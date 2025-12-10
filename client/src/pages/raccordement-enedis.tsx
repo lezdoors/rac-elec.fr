@@ -1669,7 +1669,7 @@ export default function RaccordementEnedisPage() {
       <Helmet>
         <title>Demande de Raccordement Enedis | Dossier & Suivi</title>
         <meta name="description" content="Nous gérons votre demande de raccordement Enedis de A à Z. Dossiers, documents et suivi jusqu'à validation." />
-        <link rel="canonical" href="https://www.raccordement-connect.com/raccordement-enedis" />
+        <link rel="canonical" href="https://www.demande-raccordement.fr/raccordement-enedis" />
         <meta name="robots" content="index, follow" />
         
         {/* Service JSON-LD */}
@@ -1682,8 +1682,8 @@ export default function RaccordementEnedisPage() {
             "description": "Service de gestion complète des demandes de raccordement électrique Enedis. Dossiers, documents et suivi personnalisé jusqu'à validation.",
             "provider": {
               "@type": "Organization",
-              "name": "Raccordement-Connect.com",
-              "url": "https://www.raccordement-connect.com/"
+              "name": "demande-raccordement.fr",
+              "url": "https://www.demande-raccordement.fr/"
             },
             "areaServed": {
               "@type": "Country",
@@ -1702,13 +1702,13 @@ export default function RaccordementEnedisPage() {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Accueil",
-                "item": "https://www.raccordement-connect.com/"
+                "item": "https://www.demande-raccordement.fr/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Raccordement Enedis",
-                "item": "https://www.raccordement-connect.com/raccordement-enedis"
+                "item": "https://www.demande-raccordement.fr/raccordement-enedis"
               }
             ]
           }

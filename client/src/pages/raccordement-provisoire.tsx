@@ -31,7 +31,7 @@ export default function RaccordementProvisoirePage() {
           name="description" 
           content="Raccordement provisoire pour chantiers et événements. Démarrez votre demande en ligne, prise en charge complète." 
         />
-        <link rel="canonical" href="https://www.raccordement-connect.com/raccordement-provisoire" />
+        <link rel="canonical" href="https://www.demande-raccordement.fr/raccordement-provisoire" />
         <meta name="robots" content="index, follow" />
         
         {/* Service JSON-LD */}
@@ -44,8 +44,8 @@ export default function RaccordementProvisoirePage() {
             "description": "Raccordement électrique temporaire pour chantiers, événements et activités à durée limitée. Accompagnement complet de la demande à la mise en service.",
             "provider": {
               "@type": "Organization",
-              "name": "Raccordement-Connect.com",
-              "url": "https://www.raccordement-connect.com/"
+              "name": "demande-raccordement.fr",
+              "url": "https://www.demande-raccordement.fr/"
             },
             "areaServed": {
               "@type": "Country",
@@ -64,20 +64,20 @@ export default function RaccordementProvisoirePage() {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Accueil",
-                "item": "https://www.raccordement-connect.com/"
+                "item": "https://www.demande-raccordement.fr/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Raccordement Provisoire",
-                "item": "https://www.raccordement-connect.com/raccordement-provisoire"
+                "item": "https://www.demande-raccordement.fr/raccordement-provisoire"
               }
             ]
           }
         `}</script>
         <meta property="og:title" content="Demande de Raccordement Provisoire Enedis | Chantier" />
         <meta property="og:description" content="Raccordement provisoire Enedis pour chantiers et événements. Démarche complète et rapide. Lancez votre demande en ligne." />
-        <meta property="og:url" content="https://www.raccordement-connect.com/raccordement-provisoire" />
+        <meta property="og:url" content="https://www.demande-raccordement.fr/raccordement-provisoire" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Demande de Raccordement Provisoire Enedis | Chantier" />

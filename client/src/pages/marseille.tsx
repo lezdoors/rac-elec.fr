@@ -12,7 +12,7 @@ export default function MarseillePage() {
       <Helmet>
         <title>Demande de Raccordement Enedis Marseille | Raccordement Électrique</title>
         <meta name="description" content="Simplifiez votre demande de raccordement Enedis à Marseille. Provisoire, définitif, collectif ou augmentation de puissance." />
-        <link rel="canonical" href="https://www.raccordement-connect.com/marseille" />
+        <link rel="canonical" href="https://www.demande-raccordement.fr/marseille" />
         <meta name="robots" content="index, follow" />
         
         {/* Service JSON-LD with areaServed */}
@@ -25,8 +25,8 @@ export default function MarseillePage() {
             "description": "Service de demande de raccordement électrique Enedis à Marseille. Provisoire, définitif, collectif et augmentation de puissance pour particuliers et professionnels marseillais.",
             "provider": {
               "@type": "Organization",
-              "name": "Raccordement-Connect.com",
-              "url": "https://www.raccordement-connect.com/"
+              "name": "demande-raccordement.fr",
+              "url": "https://www.demande-raccordement.fr/"
             },
             "areaServed": {
               "@type": "City",

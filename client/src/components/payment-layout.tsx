@@ -179,7 +179,7 @@ export default function PaymentLayout({ children }: PaymentLayoutProps) {
                 <Home className="h-3.5 w-3.5 text-[#33b060] z-10" />
               </div>
               <span className="text-sm text-gray-400">
-                © {new Date().getFullYear()} Raccordement-Connect.com - Tous droits réservés
+                © {new Date().getFullYear()} demande-raccordement.fr - Tous droits réservés
               </span>
             </div>
             

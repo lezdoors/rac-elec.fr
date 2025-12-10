@@ -30,8 +30,8 @@ export function CityLandingPageTemplate({ cityData }: CityLandingPageProps) {
         
         <meta property="og:title" content={`Raccordement Électrique Enedis ${name} | Service Rapide et Professionnel`} />
         <meta property="og:description" content={`Service expert de raccordement électrique Enedis à ${name}. Branchement électrique, déplacement de compteur Linky, augmentation de puissance.`} />
-        <meta property="og:url" content={`https://www.raccordement-connect.com/raccordement-electrique-${slug}`} />
-        <link rel="canonical" href={`https://www.raccordement-connect.com/raccordement-electrique-${slug}`} />
+        <meta property="og:url" content={`https://www.demande-raccordement.fr/raccordement-electrique-${slug}`} />
+        <link rel="canonical" href={`https://www.demande-raccordement.fr/raccordement-electrique-${slug}`} />
         
         {/* BreadcrumbList JSON-LD */}
         <script type="application/ld+json">{`
@@ -43,19 +43,19 @@ export function CityLandingPageTemplate({ cityData }: CityLandingPageProps) {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Accueil",
-                "item": "https://www.raccordement-connect.com/"
+                "item": "https://www.demande-raccordement.fr/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Services",
-                "item": "https://www.raccordement-connect.com/nos-services"
+                "item": "https://www.demande-raccordement.fr/nos-services"
               },
               {
                 "@type": "ListItem",
                 "position": 3,
                 "name": "Raccordement ${name}",
-                "item": "https://www.raccordement-connect.com/raccordement-electrique-${slug}"
+                "item": "https://www.demande-raccordement.fr/raccordement-electrique-${slug}"
               }
             ]
           }
@@ -76,7 +76,7 @@ export function CityLandingPageTemplate({ cityData }: CityLandingPageProps) {
               "addressCountry": "FR"
             },
             "telephone": "+33 9 70 70 95 70",
-            "url": "https://www.raccordement-connect.com/raccordement-electrique-${slug}",
+            "url": "https://www.demande-raccordement.fr/raccordement-electrique-${slug}",
             "priceRange": "€€",
             "serviceArea": {
               "@type": "City",

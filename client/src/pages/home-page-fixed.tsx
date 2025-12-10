@@ -134,7 +134,7 @@ export default function HomePage() {
         <meta name="keywords" content="raccordement Enedis, branchement électrique, compteur Linky, mise en service électricité, raccordement EDF, raccordement provisoire, raccordement définitif" />
         <meta property="og:title" content="Raccordement Électrique Enedis | Procédure Simplifiée 2025" />
         <meta property="og:description" content="Service officiel pour votre raccordement électrique Enedis. Simplifiez et accélérez votre démarche de branchement définitif ou provisoire en France." />
-        <link rel="canonical" href="https://www.raccordement-connect.com/" />
+        <link rel="canonical" href="https://www.demande-raccordement.fr/" />
       </Helmet>
       
       <BreadcrumbNavigation 

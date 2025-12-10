@@ -141,7 +141,7 @@ export default function Home() {
       <Helmet>
         <title>Raccordement Électrique Enedis – Demande en Ligne | demande-raccordement.fr</title>
         <meta name="description" content="Demande de raccordement Enedis simplifiée. Service rapide et sécurisé pour tous projets électriques." />
-        <link rel="canonical" href="https://www.raccordement-connect.com/" />
+        <link rel="canonical" href="https://www.demande-raccordement.fr/" />
       </Helmet>
       <div className="bg-slate-50 min-h-screen font-sans text-gray-800">
       <div className="container max-w-3xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
@@ -232,7 +232,7 @@ export default function Home() {
         
         {/* Footer */}
         <div className="mt-6 text-center text-gray-500 text-sm py-4">
-          <p>&copy; {new Date().getFullYear()} Raccordement-Connect.com. Tous droits réservés.</p>
+          <p>&copy; {new Date().getFullYear()} demande-raccordement.fr. Tous droits réservés.</p>
         </div>
       </div>
       </div>
