@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Zap, ArrowRight, Building, Home as HomeIcon, BarChart, Clock, Shield, Phone, CheckCircle, MapPin, FileText, Rocket, ChevronDown, Check, Users, Lock, Mail, Star, Plus } from "lucide-react";
+import { ContactModal } from "@/components/contact-modal";
 import { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { FloatingCtaButton } from "@/components/floating-cta-button";
@@ -90,36 +91,36 @@ export default function HomePage() {
       </Helmet>
 
       <main id="main-content">
-        {/* HERO SECTION - Premium Design */}
+        {/* HERO SECTION - Premium Design - Fully Responsive */}
         <section 
-          className="relative overflow-hidden pt-12 md:pt-16 lg:pt-20 pb-16 md:pb-20 lg:pb-24 bg-white"
+          className="relative overflow-hidden pt-6 sm:pt-8 md:pt-12 lg:pt-16 pb-8 sm:pb-10 md:pb-14 lg:pb-16 bg-white"
           data-testid="hero-section"
         >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
-            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-12 xl:px-20 max-w-screen-xl">
+            <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16">
               {/* Left Content */}
-              <div className="w-full lg:w-[45%] text-center lg:text-left">
-                {/* Main Headline - H1: 48px bold */}
-                <h1 className="mb-6">
-                  <span className="block text-[36px] sm:text-[44px] md:text-[48px] font-bold text-gray-900 leading-[1.15] tracking-tight">
+              <div className="w-full lg:w-1/2 xl:w-[45%] text-center lg:text-left">
+                {/* Main Headline - Responsive sizing */}
+                <h1 className="mb-4 sm:mb-5 md:mb-6">
+                  <span className="block text-[28px] sm:text-[32px] md:text-[40px] lg:text-[44px] xl:text-[48px] font-bold text-gray-900 leading-[1.1] tracking-tight">
                     Demande de
                   </span>
-                  <span className="block text-[36px] sm:text-[44px] md:text-[48px] font-bold text-gray-900 leading-[1.15] tracking-tight">
+                  <span className="block text-[28px] sm:text-[32px] md:text-[40px] lg:text-[44px] xl:text-[48px] font-bold text-gray-900 leading-[1.1] tracking-tight">
                     Raccordement Enedis
                   </span>
                 </h1>
 
                 {/* Subheadline */}
-                <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-[500px] mx-auto lg:mx-0 mb-10">
-                  Votre expert raccordement Enedis en ligne.<br />
+                <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-[500px] mx-auto lg:mx-0 mb-6 sm:mb-8 md:mb-10">
+                  Votre expert raccordement Enedis en ligne.<br className="hidden sm:block" />
                   Deposez votre demande en quelques minutes.
                 </p>
 
-                {/* Two CTA Buttons */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-12">
+                {/* Two CTA Buttons - Responsive */}
+                <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4 mb-6 sm:mb-8 md:mb-10">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+                      className="w-full sm:w-auto bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
                       data-testid="cta-hero-button"
                     >
                       Demarrer ma demande
@@ -127,41 +128,41 @@ export default function HomePage() {
                   </Link>
                   <Link href="/contact">
                     <button 
-                      className="bg-white hover:bg-gray-50 text-gray-700 font-semibold text-base px-8 py-4 rounded-full border border-gray-300 shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-2"
+                      className="w-full sm:w-auto bg-white hover:bg-gray-50 text-gray-700 font-semibold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-gray-300 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2"
                       data-testid="contact-hero-button"
                     >
-                      <Phone className="w-5 h-5" />
+                      <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
                       Nous contacter
                     </button>
                   </Link>
                 </div>
 
-                {/* Trust Badges */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-8 text-gray-600">
+                {/* Trust Badges - Responsive */}
+                <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-6 md:gap-8 text-gray-600">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
-                      <Check className="w-4 h-4 text-green-600" />
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-100 flex items-center justify-center">
+                      <Check className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
                     </div>
-                    <span className="text-base">100% en ligne</span>
+                    <span className="text-sm sm:text-base">100% en ligne</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center">
-                      <Clock className="w-4 h-4 text-blue-600" />
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-blue-100 flex items-center justify-center">
+                      <Clock className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
                     </div>
-                    <span className="text-base">Reponse en 48h</span>
+                    <span className="text-sm sm:text-base">Reponse en 48h</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center">
-                      <Shield className="w-4 h-4 text-purple-600" />
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-purple-100 flex items-center justify-center">
+                      <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-purple-600" />
                     </div>
-                    <span className="text-base">Securise</span>
+                    <span className="text-sm sm:text-base">Securise</span>
                   </div>
                 </div>
               </div>
 
-              {/* Right Illustration - MUCH LARGER (+35-40%) */}
-              <div className="w-full lg:w-[55%] flex justify-center lg:justify-end">
-                <div className="relative w-full max-w-[600px] lg:max-w-[700px]">
+              {/* Right Illustration - Responsive sizing */}
+              <div className="w-full lg:w-1/2 xl:w-[55%] flex justify-center lg:justify-end mt-4 sm:mt-6 lg:mt-0">
+                <div className="relative w-full max-w-[320px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[550px] xl:max-w-[650px]">
                   <img 
                     src={heroIllustration} 
                     alt="Famille devant une maison avec panneaux solaires et voiture electrique - Raccordement electrique Enedis"
@@ -906,9 +907,9 @@ export default function HomePage() {
             </div>
 
             {/* Contact Bar */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
-                <p className="text-base font-semibold text-gray-900">Une question ? Nos conseillers vous repondent.</p>
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-8 text-center sm:text-left">
+                <p className="text-sm sm:text-base font-semibold text-gray-900">Une question&nbsp;? Nos conseillers vous repondent.</p>
                 <div className="flex items-center text-sm text-gray-600">
                   <a href="tel:0970709570" className="flex items-center gap-2 hover:text-[#3B82F6] transition-colors">
                     <Phone className="w-4 h-4" />
@@ -916,11 +917,17 @@ export default function HomePage() {
                   </a>
                 </div>
               </div>
-              <Link href="/contact">
-                <button className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-sm px-6 py-3 rounded-full transition-all duration-200">
-                  Etre rappele
-                </button>
-              </Link>
+              <ContactModal 
+                source="faq_callback"
+                trigger={
+                  <button 
+                    className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-sm px-6 py-3 rounded-full transition-all duration-200"
+                    data-testid="faq-callback-button"
+                  >
+                    Être rappelé
+                  </button>
+                }
+              />
             </div>
           </div>
         </section>
