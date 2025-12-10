@@ -1,0 +1,186 @@
+1. Scope & Constraints
+	1.	Work ONLY on the main landing page (Accueil) for demande-raccordement.fr.
+	•	Update React/Next/Vite page and any related layout or component files that render:
+	•	Hero
+	•	“Commencez votre demande” section under hero
+	•	4-step process section
+	•	“Votre Demande de Raccordement” service cards
+	•	FAQ section
+	•	“Assistance pour votre demande…” section
+	•	Purple CTA block and footer
+	2.	Do NOT touch:
+	•	Google Tag Manager / GA4 / conversion tags
+	•	Forms logic, Supabase, API calls, routing
+	•	Meta tags, structured data, canonical tags
+	3.	If the project uses Tailwind, keep using Tailwind.
+If it uses CSS modules / styled-components, keep the current system. Do NOT introduce a new CSS framework.
+	4.	Keep the existing content and structure; we are only improving:
+	•	Spacing
+	•	Typography scale
+	•	Illustration sizing & consistency
+	•	Card styles
+	•	Separators between sections
+
+⸻
+
+2. Design System to Implement
+
+2.1 Spacing Scale
+
+Implement/align all sections to this spacing system (use nearest equivalents in the existing system):
+	•	XS = 8px
+	•	S = 16px
+	•	M = 24px
+	•	L = 40px
+	•	XL = 64px
+	•	XXL = 96px
+
+Rules:
+	•	Vertical space between major sections ≈ 96px
+	•	Hero top padding ≈ 120px, bottom padding 96px
+	•	Inside section (title → subtitle, subtitle → content) ≈ 24px
+	•	Gaps between cards/columns ≈ 40px
+
+Normalize existing paddings/margins to this system so the whole page feels consistent.
+
+⸻
+
+2.2 Typography Scale
+
+Base font: keep the current one (likely Inter or similar), but adjust sizes using this scale:
+	•	H1 (main hero title): 48px, semibold
+	•	H2 (section titles): 32–36px, semibold
+	•	H3 (card titles, FAQ question headings, assistance titles): 22–24px, medium
+	•	Body text: 16–18px, regular
+	•	Small meta text (badges, sub-labels): 14px
+
+Make sure:
+	•	The hero H1 is clearly larger than all other titles.
+	•	Section titles (“Comment faire sa demande…”, “Votre demande de raccordement”, “Questions fréquentes”, “Assistance pour votre demande…”) use the same H2 style.
+	•	Card titles and FAQ questions are consistent with each other as H3.
+
+Do NOT change the actual wording; only adjust classes / styles.
+
+⸻
+
+2.3 Illustrations & Proportions
+
+We have several .webp illustrations in the project. Map and size them as follows (adapt paths to the real locations in /public or assets folder):
+	•	Hero illustration: keep the current house + solar + people illustration, but increase its visible width by about 15–20% so it balances the hero text.
+	•	Section “Commencez votre demande de raccordement Enedis ici” (just under the hero):
+	•	On the left: text
+	•	On the right: use the illustration of the woman at a laptop with the form (e.g. Commencez votre demande.webp).
+	•	Increase this illustration size so it feels clearly bigger than the icons in the later sections (approx the same visual weight as hero illustrations but slightly smaller).
+	•	Assistance section (“Assistance pour votre demande de raccordement Enedis”):
+	•	4 cards laid out in a row on desktop, stacked on mobile.
+	•	Use these images (names may differ; pick the best match in the repo and wire them correctly):
+	1.	“Appelez-nous” → use the phone illustration with headset + laptop (e.g. Appelez-nous.webp).
+	2.	“Rappel gratuit” → use the illustration where a person is next to a phone / callback bubble (e.g. Rappel gratuit0.webp).
+	3.	“Chat” → use the chat bubbles illustration (e.g. Chat.webp).
+	4.	“Formulaire de contact” → use the support agent with “FAQ/form” icon or the person at laptop (e.g. Besoin d'aide.webp or Formulaire de contact.webp).
+	•	Make all 4 icons consistent in size (around 120–140px wide) and centered.
+	•	FAQ section:
+	•	At the top (near “Questions fréquentes”), optionally display the FAQ illustration (e.g. FAQ.webp) aligned to one side on desktop and hidden or centered on mobile.
+	•	Keep it subtle so it does not distract from the accordions.
+
+Ensure all illustrations share similar visual weight and are not randomly small or huge.
+
+⸻
+
+2.4 Card Styles
+
+For service cards and assistance cards, give them a unified professional card style:
+	•	background: #FFFFFF
+	•	border-radius: 16px
+	•	border: 1px solid rgba(15, 23, 42, 0.06) (subtle)
+	•	box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04)
+	•	Internal padding around content: ~32px (or Tailwind p-8)
+
+On hover (desktop only):
+	•	Slight raise: transform: translateY(-2px)
+	•	Background tint: background-color: #F5F7FF
+	•	Transition: transition: all 0.15s ease-out
+
+Apply this style to:
+	•	The 6 “Votre demande de raccordement” cards
+	•	The 4 “Assistance” cards
+
+Do NOT change the text inside; only styles.
+
+⸻
+
+2.5 Section-Specific Changes
+
+Hero section (“Demande de Raccordement Enedis”)
+	1.	Keep layout: left text, right illustration.
+	2.	Increase hero H1 to 48px equivalent.
+	3.	Ensure subtitle and bullet line are not too wide (max 620px width).
+	4.	Add subtle visual separation under the hero so the next section doesn’t feel like a second hero:
+	•	Either a light bottom border:
+border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+	•	Or a very light gradient background for the hero only, e.g.:
+background: radial-gradient(circle at 70% 30%, #EEF2FF 0%, #FFFFFF 60%);
+
+Use whichever integrates better with the current code.
+
+“Commencez votre demande de raccordement Enedis ici”
+	1.	Ensure this section has ~80px top padding in relation to the hero, not as large as a new hero.
+	2.	Use a two-column layout:
+	•	Left: text block (max 560–600px width).
+	•	Right: the laptop/form illustration, centered vertically.
+	3.	Increase the CTA button spacing slightly so it breathes.
+
+4-step process (“Comment faire sa demande de raccordement électrique en ligne ?”)
+	1.	Keep the 4 steps but:
+	•	Increase each step icon size modestly.
+	•	Make numbers (1,2,3,4) consistent size and alignment.
+	•	Check vertical alignment of titles and descriptions under icons; they should align visually in a 4-column grid.
+	2.	Maintain section padding: ~96px top and bottom, consistent with other sections.
+
+Service cards (“Votre demande de raccordement”)
+	1.	Apply the unified card style above.
+	2.	Make sure card titles use the H3 style (22–24px) and descriptions use 16px body text.
+	3.	At the very top of this section, reduce top padding so it visually follows the process section by about 80px.
+
+FAQ section
+	1.	Ensure section title is H2 (32–36px) and centered.
+	2.	Add the FAQ illustration as described under 2.3, if it fits nicely with the layout.
+	3.	Slightly reduce vertical padding in each accordion item so the list does not feel too tall, but do not hurt readability.
+
+Assistance section
+	1.	Ensure section heading “Assistance pour votre demande de raccordement Enedis” uses H2 style.
+	2.	Subtitle “Nous sommes à votre écoute…” uses regular 16–18px text.
+	3.	Use a responsive grid: 4 cards in a row on desktop, 2x2 on tablet, 1 per row on mobile.
+	4.	Apply the unified card style and icon sizing as specified.
+
+CTA + Footer
+	1.	Reduce the height of the purple CTA band:
+	•	Vertical padding around the text + button: around 56–72px instead of something very tall.
+	2.	Keep the copy and button as they are.
+	3.	Add a bit of space (e.g. 40px) between CTA band and the footer.
+	4.	Make sure typography in the footer is 14–16px and consistent.
+
+⸻
+
+3. Code Hygiene
+	•	Keep changes modular: if there is a Home or Landing component, update it and related CSS/utility files rather than sprinkling ad-hoc styles everywhere.
+	•	Do not rename components or routes.
+	•	Run the project locally (if supported) and ensure no TypeScript or ESLint errors are introduced.
+
+⸻
+
+4. Acceptance Criteria
+
+The task is complete when:
+	1.	The landing page visually matches these principles:
+	•	Consistent spacing scale between all sections
+	•	Clear typography hierarchy (hero H1 > H2 sections > card titles > body)
+	•	Illustrations balanced & consistent
+	•	Cards visually unified and professional
+	•	Hero is clearly separated from the second section (no “double hero” effect)
+	2.	No tracking scripts, forms, or API logic have been modified.
+	3.	The page still builds and renders correctly with responsive behavior on mobile, tablet, and desktop.
+
+⸻
+
+Please start by locating the main landing page file and any shared layout/components used for the sections listed above. Then implement all design system and section-specific changes described, keeping logic and tracking untouched.
