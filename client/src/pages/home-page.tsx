@@ -175,6 +175,139 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* 4-STEP PROCESS SECTION - Right after Hero */}
+        <section 
+          className="py-16 md:py-20 lg:py-24"
+          style={{ background: 'linear-gradient(180deg, #EBF4FF 0%, #F8FAFF 100%)' }}
+          id="process"
+          data-animate
+          data-testid="process-section"
+        >
+          <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
+            {/* Header */}
+            <div className="text-center mb-12 md:mb-14">
+              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-[#0066CC] mb-4 leading-tight">
+                Comment Faire sa Demande de Raccordement Electrique en&nbsp;Ligne&nbsp;?
+              </h2>
+              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Processus 100% en ligne en 4 etapes simples. Votre demande de raccordement Enedis traitee rapidement avec accompagnement personnalise.
+              </p>
+            </div>
+
+            {/* 4 Steps Grid */}
+            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-16 transition-all duration-700 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              
+              {/* Step 1 */}
+              <div className="text-center">
+                <div className="flex flex-col items-center">
+                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-6 shadow-lg">
+                    1
+                  </div>
+                  <div className="w-44 h-44 md:w-52 md:h-52 flex items-center justify-center mb-6">
+                    <img 
+                      src={step1Illustration}
+                      alt="Definir le type de raccordement"
+                      className="w-full h-full object-contain"
+                      loading="lazy"
+                      data-testid="step1-illustration"
+                    />
+                  </div>
+                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 leading-tight">
+                    Definir le type de raccordement correspondant a mon besoin
+                  </h3>
+                  <p className="text-base md:text-lg text-gray-500">
+                    Utilisez notre outil pour cadrer precisement votre demande.
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 2 */}
+              <div className="text-center">
+                <div className="flex flex-col items-center">
+                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-6 shadow-lg">
+                    2
+                  </div>
+                  <div className="w-44 h-44 md:w-52 md:h-52 flex items-center justify-center mb-6">
+                    <img 
+                      src={step2Illustration}
+                      alt="Completer un formulaire simple"
+                      className="w-full h-full object-contain"
+                      loading="lazy"
+                      data-testid="step2-illustration"
+                    />
+                  </div>
+                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 leading-tight">
+                    Completer un formulaire simple ou demander l'assistance de nos experts
+                  </h3>
+                  <p className="text-base md:text-lg text-gray-500">
+                    Renseignez votre projet en quelques etapes.
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 3 */}
+              <div className="text-center">
+                <div className="flex flex-col items-center">
+                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-6 shadow-lg">
+                    3
+                  </div>
+                  <div className="w-44 h-44 md:w-52 md:h-52 flex items-center justify-center mb-6">
+                    <img 
+                      src={step3Illustration}
+                      alt="Depot du dossier chez Enedis"
+                      className="w-full h-full object-contain"
+                      loading="lazy"
+                      data-testid="step3-illustration"
+                    />
+                  </div>
+                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 leading-tight">
+                    Nous deposons un dossier complet et conforme chez Enedis
+                  </h3>
+                  <p className="text-base md:text-lg text-gray-500">
+                    Constitution et depot de votre dossier.
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 4 */}
+              <div className="text-center">
+                <div className="flex flex-col items-center">
+                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-6 shadow-lg">
+                    4
+                  </div>
+                  <div className="w-44 h-44 md:w-52 md:h-52 flex items-center justify-center mb-6">
+                    <img 
+                      src={step4Illustration}
+                      alt="Suivi de dossier jusqu'a la mise en service"
+                      className="w-full h-full object-contain"
+                      loading="lazy"
+                      data-testid="step4-illustration"
+                    />
+                  </div>
+                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 leading-tight">
+                    Suivi personnalise jusqu'a la mise en service
+                  </h3>
+                  <p className="text-base md:text-lg text-gray-500">
+                    Accompagnement de A a Z.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA Button */}
+            <div className="text-center">
+              <Link href="/raccordement-enedis#formulaire-raccordement">
+                <button 
+                  className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+                  data-testid="cta-process-button"
+                >
+                  Commencer maintenant
+                </button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* 3 STEPS SIMPLE SECTION - Like original site */}
         <section 
           className="py-16 md:py-20 lg:py-24"
@@ -439,139 +572,6 @@ export default function HomePage() {
                   />
                 </div>
                 <h3 className="text-lg md:text-xl font-semibold text-[#0072CE]">Formulaire de contact</h3>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* 4-STEP PROCESS SECTION - Larger Icons & Numbers */}
-        <section 
-          className="py-16 md:py-20 lg:py-24"
-          style={{ background: 'linear-gradient(180deg, #EBF4FF 0%, #F8FAFF 100%)' }}
-          id="process"
-          data-animate
-          data-testid="process-section"
-        >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
-            {/* Header */}
-            <div className="text-center mb-12 md:mb-14">
-              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-[#0066CC] mb-4 leading-tight">
-                Comment Faire sa Demande de Raccordement Electrique en Ligne ?
-              </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Processus 100% en ligne en 4 etapes simples. Votre demande de raccordement Enedis traitee rapidement avec accompagnement personnalise.
-              </p>
-            </div>
-
-            {/* 4 Steps Grid - Larger Icons (56px+) and Numbers (44px) */}
-            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-16 transition-all duration-700 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              
-              {/* Step 1 */}
-              <div className="text-center">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-6 shadow-lg">
-                    1
-                  </div>
-                  <div className="w-44 h-44 md:w-52 md:h-52 flex items-center justify-center mb-6">
-                    <img 
-                      src={step1Illustration}
-                      alt="Definir le type de raccordement"
-                      className="w-full h-full object-contain"
-                      loading="lazy"
-                      data-testid="step1-illustration"
-                    />
-                  </div>
-                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                    Definir le type de raccordement correspondant a mon besoin
-                  </h3>
-                  <p className="text-base md:text-lg text-gray-500">
-                    Utilisez notre outil pour cadrer precisement votre demande.
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div className="text-center">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-6 shadow-lg">
-                    2
-                  </div>
-                  <div className="w-44 h-44 md:w-52 md:h-52 flex items-center justify-center mb-6">
-                    <img 
-                      src={step2Illustration}
-                      alt="Completer un formulaire simple"
-                      className="w-full h-full object-contain"
-                      loading="lazy"
-                      data-testid="step2-illustration"
-                    />
-                  </div>
-                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                    Completer un formulaire simple ou demander l'assistance de nos experts
-                  </h3>
-                  <p className="text-base md:text-lg text-gray-500">
-                    Renseignez votre projet en quelques etapes.
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div className="text-center">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-6 shadow-lg">
-                    3
-                  </div>
-                  <div className="w-44 h-44 md:w-52 md:h-52 flex items-center justify-center mb-6">
-                    <img 
-                      src={step3Illustration}
-                      alt="Depot du dossier chez Enedis"
-                      className="w-full h-full object-contain"
-                      loading="lazy"
-                      data-testid="step3-illustration"
-                    />
-                  </div>
-                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                    Nous deposons un dossier complet et conforme chez Enedis
-                  </h3>
-                  <p className="text-base md:text-lg text-gray-500">
-                    Constitution et depot de votre dossier.
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 4 */}
-              <div className="text-center">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-6 shadow-lg">
-                    4
-                  </div>
-                  <div className="w-44 h-44 md:w-52 md:h-52 flex items-center justify-center mb-6">
-                    <img 
-                      src={step4Illustration}
-                      alt="Suivi de dossier jusqu'a la mise en service"
-                      className="w-full h-full object-contain"
-                      loading="lazy"
-                      data-testid="step4-illustration"
-                    />
-                  </div>
-                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                    Suivi personnalise jusqu'a la mise en service
-                  </h3>
-                  <p className="text-base md:text-lg text-gray-500">
-                    Accompagnement de A a Z.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* CTA Button */}
-            <div className="text-center">
-              <Link href="/raccordement-enedis#formulaire-raccordement">
-                <button 
-                  className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
-                  data-testid="cta-process-button"
-                >
-                  Commencer maintenant
-                </button>
               </Link>
             </div>
           </div>
