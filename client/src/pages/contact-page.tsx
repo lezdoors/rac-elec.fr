@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { Mail, Phone, MapPin, MessageSquare, Send, CheckCircle, Clock } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
@@ -16,6 +17,7 @@ interface ContactFormData {
 }
 
 export default function ContactPage() {
+  const [, setLocation] = useLocation();
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
@@ -187,8 +189,9 @@ export default function ContactPage() {
                       Envoyer un autre message
                     </Button>
                     <Button 
-                      onClick={() => window.location.href = '/raccordement-enedis'}
+                      onClick={() => setLocation('/raccordement-enedis')}
                       className="bg-blue-600 hover:bg-blue-700"
+                      data-testid="button-new-request"
                     >
                       Faire une demande de raccordement
                     </Button>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 import Layout from "@/components/layout";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,6 +18,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { ElectricTransition } from "@/components/ui/electric-transition";
 
 export default function FaqPage() {
+  const [, setLocation] = useLocation();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("general");
   const [activeItems, setActiveItems] = useState<string[]>([]);
@@ -160,8 +162,8 @@ export default function FaqPage() {
   // Fonction pour gérer la redirection directe sans animation vers la page de demande
   const handleRequestButtonClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    // Redirection directe sans animation
-    window.location.href = "/raccordement-enedis#formulaire-raccordement";
+    // Navigation SPA instantanée
+    setLocation("/raccordement-enedis#formulaire-raccordement");
   };
 
   // Fonction pour gérer l'appel téléphonique avec animation

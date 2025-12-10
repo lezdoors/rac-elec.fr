@@ -10,7 +10,7 @@ import { getGclid } from '@/lib/clean-gclid';
 interface ThankYouPageProps {}
 
 export default function ThankYouPage({}: ThankYouPageProps) {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const [referenceNumber, setReferenceNumber] = useState<string>('');
   const [purchaseData, setPurchaseData] = useState<any>(null);
   
@@ -267,10 +267,11 @@ export default function ThankYouPage({}: ThankYouPageProps) {
                   <Button 
                     onClick={() => {
                       trackEvent('new_request', 'conversion', 'thank_you_page');
-                      window.location.href = '/raccordement-enedis';
+                      setLocation('/raccordement-enedis');
                     }}
                     variant="outline" 
                     className="w-full sm:w-auto"
+                    data-testid="button-new-request"
                   >
                     <ArrowRight className="w-4 h-4 mr-2" />
                     Nouvelle demande
@@ -278,10 +279,11 @@ export default function ThankYouPage({}: ThankYouPageProps) {
                   <Button 
                     onClick={() => {
                       trackEvent('return_home', 'navigation', 'thank_you_page');
-                      window.location.href = '/';
+                      setLocation('/');
                     }}
                     variant="ghost"
                     className="w-full sm:w-auto"
+                    data-testid="button-return-home"
                   >
                     Retour à l'accueil
                   </Button>

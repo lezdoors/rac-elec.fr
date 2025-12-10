@@ -1,14 +1,16 @@
-import React from 'react';
+import { useLocation } from 'wouter';
 import { AccessibleCTAButton } from '@/components/ui/accessible-cta-button';
 
 /**
  * Composant de Call-to-Action de la page d'accueil avec accessibilité améliorée
- * Remplace les boutons verts standard par des boutons avec un contraste suffisant
+ * Utilise le router wouter pour une navigation SPA instantanée
  */
 export const HomepageCTA = () => {
+  const [, setLocation] = useLocation();
+
   const handleClick = () => {
-    // Navigate to form without conversion tracking (tracking happens on "Suivant" button)
-    window.location.href = '/raccordement-enedis#formulaire-raccordement';
+    // Navigation SPA instantanée vers le formulaire
+    setLocation('/raccordement-enedis#formulaire-raccordement');
     return false;
   };
 
@@ -18,6 +20,7 @@ export const HomepageCTA = () => {
       variant="default"
       size="lg"
       className="font-semibold shadow-md"
+      data-testid="button-start-request"
     >
       Démarrer ma demande de raccordement
     </AccessibleCTAButton>
