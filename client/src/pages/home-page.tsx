@@ -7,6 +7,12 @@ import { TrustSection } from "@/components/trust-section";
 import { FloatingCtaButton } from "@/components/floating-cta-button";
 import heroIllustration from "@assets/hero-illustration_1765320964105.webp";
 import formIllustration from "@assets/form-intro-illustartion_(Website)_1765332563939.webp";
+import raccordementDefinitifIcon from "@assets/Raccordement-Definitif_1765333395814.webp";
+import raccordementProvisoireIcon from "@assets/Raccordement-Provisoire_1765333395814.webp";
+import raccordementCollectifIcon from "@assets/Raccordement-Collectif_1765333395814.webp";
+import augmentationPuissanceIcon from "@assets/augmentation_de_puissance_1765333395814.webp";
+import servicesTechniquesIcon from "@assets/services-techniques_1765333395814.webp";
+import raccordementEnedisIcon from "@assets/Raccordement-Enedis_1765333395814.webp";
 
 const useMobileDetection = () => {
   const [isMobile, setIsMobile] = useState(true);
@@ -357,92 +363,113 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Service Grid - 3x2 */}
-            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 ${isVisible['types-raccordements'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            {/* Service Grid - 3x2 - Clean Administrative Design */}
+            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 transition-all duration-700 ${isVisible['types-raccordements'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               {/* Raccordement Définitif */}
               <Link href="/raccordement-definitif" className="group">
-                <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:scale-[1.02] hover:border-[#0072CE]/30 transition-all duration-300">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <HomeIcon className="w-8 h-8 text-white" />
+                <div className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md hover:border-[#0072CE]/40 transition-all duration-300">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <img src={raccordementDefinitifIcon} alt="Raccordement Définitif" className="w-14 h-14 object-contain" loading="lazy" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-semibold text-gray-900 mb-1">Raccordement Définitif</h3>
+                      <p className="text-gray-600 text-sm mb-2 line-clamp-2">Pour maisons individuelles, appartements et locaux professionnels</p>
+                      <span className="inline-flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
+                        En savoir plus <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Raccordement Définitif</h3>
-                  <p className="text-gray-600 text-sm mb-4">Pour maisons individuelles, appartements et locaux professionnels</p>
-                  <span className="inline-flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
-                    En savoir plus <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </span>
                 </div>
               </Link>
 
               {/* Raccordement Provisoire */}
               <Link href="/raccordement-provisoire" className="group">
-                <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:scale-[1.02] hover:border-[#0072CE]/30 transition-all duration-300">
-                  <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Clock className="w-8 h-8 text-white" />
+                <div className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md hover:border-[#0072CE]/40 transition-all duration-300">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <img src={raccordementProvisoireIcon} alt="Raccordement Provisoire" className="w-14 h-14 object-contain" loading="lazy" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-semibold text-gray-900 mb-1">Raccordement Provisoire</h3>
+                      <p className="text-gray-600 text-sm mb-2 line-clamp-2">Solution temporaire pour chantiers et installations éphémères</p>
+                      <span className="inline-flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
+                        En savoir plus <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Raccordement Provisoire</h3>
-                  <p className="text-gray-600 text-sm mb-4">Solution temporaire pour chantiers et installations éphémères</p>
-                  <span className="inline-flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
-                    En savoir plus <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </span>
                 </div>
               </Link>
 
               {/* Viabilisation */}
               <Link href="/viabilisation-terrain" className="group">
-                <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:scale-[1.02] hover:border-[#0072CE]/30 transition-all duration-300">
-                  <div className="w-16 h-16 bg-gradient-to-br from-teal-400 to-teal-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <MapPin className="w-8 h-8 text-white" />
+                <div className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md hover:border-[#0072CE]/40 transition-all duration-300">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <img src={servicesTechniquesIcon} alt="Viabilisation Terrain" className="w-14 h-14 object-contain" loading="lazy" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-semibold text-gray-900 mb-1">Viabilisation Terrain</h3>
+                      <p className="text-gray-600 text-sm mb-2 line-clamp-2">Préparation et équipement électrique de votre terrain</p>
+                      <span className="inline-flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
+                        En savoir plus <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Viabilisation Terrain</h3>
-                  <p className="text-gray-600 text-sm mb-4">Préparation et équipement électrique de votre terrain</p>
-                  <span className="inline-flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
-                    En savoir plus <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </span>
                 </div>
               </Link>
 
               {/* Modification */}
               <Link href="/modification-compteur" className="group">
-                <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:scale-[1.02] hover:border-[#0072CE]/30 transition-all duration-300">
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <BarChart className="w-8 h-8 text-white" />
+                <div className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md hover:border-[#0072CE]/40 transition-all duration-300">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <img src={augmentationPuissanceIcon} alt="Modification Compteur" className="w-14 h-14 object-contain" loading="lazy" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-semibold text-gray-900 mb-1">Modification Compteur</h3>
+                      <p className="text-gray-600 text-sm mb-2 line-clamp-2">Augmentation ou modification de puissance électrique</p>
+                      <span className="inline-flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
+                        En savoir plus <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Modification Compteur</h3>
-                  <p className="text-gray-600 text-sm mb-4">Augmentation ou modification de puissance électrique</p>
-                  <span className="inline-flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
-                    En savoir plus <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </span>
                 </div>
               </Link>
 
               {/* Raccordement Collectif */}
               <Link href="/raccordement-collectif" className="group">
-                <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:scale-[1.02] hover:border-[#0072CE]/30 transition-all duration-300">
-                  <div className="w-16 h-16 bg-gradient-to-br from-indigo-400 to-indigo-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Building className="w-8 h-8 text-white" />
+                <div className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md hover:border-[#0072CE]/40 transition-all duration-300">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <img src={raccordementCollectifIcon} alt="Raccordement Collectif" className="w-14 h-14 object-contain" loading="lazy" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-semibold text-gray-900 mb-1">Raccordement Collectif</h3>
+                      <p className="text-gray-600 text-sm mb-2 line-clamp-2">Solutions pour immeubles, résidences et copropriétés</p>
+                      <span className="inline-flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
+                        En savoir plus <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Raccordement Collectif</h3>
-                  <p className="text-gray-600 text-sm mb-4">Solutions pour immeubles, résidences et copropriétés</p>
-                  <span className="inline-flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
-                    En savoir plus <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </span>
                 </div>
               </Link>
 
-              {/* Production Électrique - Highlighted */}
-              <Link href="/raccordement-enedis?type=production#top" className="group">
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:scale-[1.02] hover:border-green-300 transition-all duration-300">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Zap className="w-8 h-8 text-white" />
+              {/* Maison Neuve / Raccordement Enedis */}
+              <Link href="/raccordement-maison-neuve" className="group">
+                <div className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md hover:border-[#0072CE]/40 transition-all duration-300">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <img src={raccordementEnedisIcon} alt="Raccordement Maison Neuve" className="w-14 h-14 object-contain" loading="lazy" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-semibold text-gray-900 mb-1">Maison Neuve</h3>
+                      <p className="text-gray-600 text-sm mb-2 line-clamp-2">Premier raccordement pour construction neuve</p>
+                      <span className="inline-flex items-center text-[#0072CE] font-medium text-sm group-hover:text-[#005eaa]">
+                        En savoir plus <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <h3 className="text-lg font-semibold text-gray-900">Production Électrique</h3>
-                    <span className="px-2 py-0.5 text-xs font-medium bg-green-200 text-green-800 rounded-full">Écologique</span>
-                  </div>
-                  <p className="text-gray-600 text-sm mb-4">Raccordement panneaux solaires et production d'énergie verte</p>
-                  <span className="inline-flex items-center text-green-600 font-medium text-sm group-hover:text-green-700">
-                    En savoir plus <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </span>
                 </div>
               </Link>
             </div>
