@@ -174,16 +174,16 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* 4 Steps Grid */}
-            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-16 transition-all duration-700 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            {/* 4 Steps Grid - Parfaitement symétrique */}
+            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 mb-16 transition-all duration-700 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               
               {/* Step 1 */}
-              <div className="text-center">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-6 shadow-lg">
+              <div className="text-center h-full">
+                <div className="flex flex-col items-center h-full">
+                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-5 shadow-lg flex-shrink-0">
                     1
                   </div>
-                  <div className="w-44 h-44 md:w-52 md:h-52 flex items-center justify-center mb-6">
+                  <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center mb-5 flex-shrink-0">
                     <img 
                       src={step1Illustration}
                       alt="Définir le type de raccordement"
@@ -192,84 +192,92 @@ export default function HomePage() {
                       data-testid="step1-illustration"
                     />
                   </div>
-                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                    Définir le type de raccordement correspondant à mon besoin
-                  </h3>
-                  <p className="text-base md:text-lg text-gray-500">
-                    Utilisez notre outil pour cadrer précisément votre demande.
-                  </p>
+                  <div className="flex-1 flex flex-col">
+                    <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 leading-snug min-h-[3.5rem] flex items-center justify-center">
+                      Définir le type de raccordement
+                    </h3>
+                    <p className="text-sm md:text-base text-gray-500 leading-relaxed">
+                      Utilisez notre outil pour cadrer votre demande.
+                    </p>
+                  </div>
                 </div>
               </div>
 
               {/* Step 2 */}
-              <div className="text-center">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-6 shadow-lg">
+              <div className="text-center h-full">
+                <div className="flex flex-col items-center h-full">
+                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-5 shadow-lg flex-shrink-0">
                     2
                   </div>
-                  <div className="w-44 h-44 md:w-52 md:h-52 flex items-center justify-center mb-6">
+                  <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center mb-5 flex-shrink-0">
                     <img 
                       src={step2Illustration}
-                      alt="Completer un formulaire simple"
+                      alt="Compléter un formulaire simple"
                       className="w-full h-full object-contain"
                       loading="lazy"
                       data-testid="step2-illustration"
                     />
                   </div>
-                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                    Compléter un formulaire simple ou demander l'assistance de nos experts
-                  </h3>
-                  <p className="text-base md:text-lg text-gray-500">
-                    Renseignez votre projet en quelques étapes.
-                  </p>
+                  <div className="flex-1 flex flex-col">
+                    <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 leading-snug min-h-[3.5rem] flex items-center justify-center">
+                      Compléter le formulaire en ligne
+                    </h3>
+                    <p className="text-sm md:text-base text-gray-500 leading-relaxed">
+                      Renseignez votre projet en quelques minutes.
+                    </p>
+                  </div>
                 </div>
               </div>
 
               {/* Step 3 */}
-              <div className="text-center">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-6 shadow-lg">
+              <div className="text-center h-full">
+                <div className="flex flex-col items-center h-full">
+                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-5 shadow-lg flex-shrink-0">
                     3
                   </div>
-                  <div className="w-44 h-44 md:w-52 md:h-52 flex items-center justify-center mb-6">
+                  <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center mb-5 flex-shrink-0">
                     <img 
                       src={step3Illustration}
-                      alt="Depot du dossier chez Enedis"
+                      alt="Dépôt du dossier chez Enedis"
                       className="w-full h-full object-contain"
                       loading="lazy"
                       data-testid="step3-illustration"
                     />
                   </div>
-                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                    Nous deposons un dossier complet et conforme chez Enedis
-                  </h3>
-                  <p className="text-base md:text-lg text-gray-500">
-                    Constitution et depot de votre dossier.
-                  </p>
+                  <div className="flex-1 flex flex-col">
+                    <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 leading-snug min-h-[3.5rem] flex items-center justify-center">
+                      Dépôt du dossier chez Enedis
+                    </h3>
+                    <p className="text-sm md:text-base text-gray-500 leading-relaxed">
+                      Constitution et envoi de votre dossier complet.
+                    </p>
+                  </div>
                 </div>
               </div>
 
               {/* Step 4 */}
-              <div className="text-center">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-6 shadow-lg">
+              <div className="text-center h-full">
+                <div className="flex flex-col items-center h-full">
+                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-5 shadow-lg flex-shrink-0">
                     4
                   </div>
-                  <div className="w-44 h-44 md:w-52 md:h-52 flex items-center justify-center mb-6">
+                  <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center mb-5 flex-shrink-0">
                     <img 
                       src={step4Illustration}
-                      alt="Suivi de dossier jusqu'a la mise en service"
+                      alt="Suivi jusqu'à la mise en service"
                       className="w-full h-full object-contain"
                       loading="lazy"
                       data-testid="step4-illustration"
                     />
                   </div>
-                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                    Suivi personnalisé jusqu'à la mise en service
-                  </h3>
-                  <p className="text-base md:text-lg text-gray-500">
-                    Accompagnement de A à Z.
-                  </p>
+                  <div className="flex-1 flex flex-col">
+                    <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 leading-snug min-h-[3.5rem] flex items-center justify-center">
+                      Suivi jusqu'à la mise en service
+                    </h3>
+                    <p className="text-sm md:text-base text-gray-500 leading-relaxed">
+                      Accompagnement personnalisé de A à Z.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
