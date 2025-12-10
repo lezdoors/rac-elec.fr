@@ -631,141 +631,80 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Testimonial Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              
-              {/* Testimonial 1 */}
-              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div className="flex items-start gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-full bg-[#3B82F6] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
-                    SB
+            {/* Testimonial Cards Carousel - Infinite scroll */}
+            <div className="overflow-hidden">
+              <div 
+                className="flex gap-6 animate-scroll-testimonials"
+                style={{
+                  width: 'max-content',
+                  animation: 'scrollTestimonials 30s linear infinite'
+                }}
+              >
+                {/* First set of testimonials */}
+                {[
+                  { initials: 'SB', color: '#3B82F6', name: 'Sophie Bertrand', location: 'Raccordement maison neuve - Bordeaux', text: '"Service impeccable du début à la fin. Mon dossier de raccordement pour ma maison neuve a été traité en 3 semaines. L\'équipe m\'a tenu informé à chaque étape."', date: 'Novembre 2025' },
+                  { initials: 'MD', color: '#10B981', name: 'Marc Dupont', location: 'Raccordement provisoire - Lyon', text: '"En tant que chef de chantier, j\'ai besoin de réactivité. La demande de raccordement provisoire a été traitée rapidement et le suivi était parfait."', date: 'Octobre 2025' },
+                  { initials: 'CL', color: '#8B5CF6', name: 'Claire Laurent', location: 'Modification compteur - Nantes', text: '"Je ne savais pas par où commencer pour augmenter la puissance de mon compteur. Tout a été pris en charge, je n\'ai eu qu\'à valider. Simple et efficace."', date: 'Décembre 2025' },
+                  { initials: 'PG', color: '#F59E0B', name: 'Philippe Garcia', location: 'Viabilisation terrain - Marseille', text: '"Pour la viabilisation de mon terrain, les démarches administratives étaient complexes. Cette équipe a su gérer tout le processus avec Enedis."', date: 'Septembre 2025' },
+                  { initials: 'AM', color: '#EC4899', name: 'Amélie Martin', location: 'Raccordement définitif - Paris', text: '"Le formulaire en ligne est très intuitif et l\'équipe répond rapidement aux questions. Mon raccordement définitif a été effectué dans les délais."', date: 'Novembre 2025' },
+                  { initials: 'TR', color: '#06B6D4', name: 'Thomas Roux', location: 'Raccordement collectif - Lille', text: '"Pour notre projet de lotissement, nous avions besoin d\'un partenaire fiable. La coordination avec Enedis a été parfaitement gérée."', date: 'Octobre 2025' },
+                ].map((testimonial, idx) => (
+                  <div key={`first-${idx}`} className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-100 shadow-sm min-w-[320px] max-w-[320px] flex-shrink-0">
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-base flex-shrink-0" style={{ backgroundColor: testimonial.color }}>
+                        {testimonial.initials}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900 text-sm">{testimonial.name}</p>
+                        <p className="text-xs text-gray-500">{testimonial.location}</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-0.5 mb-3">
+                      {[1,2,3,4,5].map((star) => (
+                        <Star key={star} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                    <p className="text-gray-700 text-sm leading-relaxed">{testimonial.text}</p>
+                    <p className="text-xs text-gray-400 mt-3">{testimonial.date}</p>
                   </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Sophie Bertrand</p>
-                    <p className="text-sm text-gray-500">Raccordement maison neuve - Bordeaux</p>
+                ))}
+                {/* Duplicate set for seamless loop */}
+                {[
+                  { initials: 'SB', color: '#3B82F6', name: 'Sophie Bertrand', location: 'Raccordement maison neuve - Bordeaux', text: '"Service impeccable du début à la fin. Mon dossier de raccordement pour ma maison neuve a été traité en 3 semaines. L\'équipe m\'a tenu informé à chaque étape."', date: 'Novembre 2025' },
+                  { initials: 'MD', color: '#10B981', name: 'Marc Dupont', location: 'Raccordement provisoire - Lyon', text: '"En tant que chef de chantier, j\'ai besoin de réactivité. La demande de raccordement provisoire a été traitée rapidement et le suivi était parfait."', date: 'Octobre 2025' },
+                  { initials: 'CL', color: '#8B5CF6', name: 'Claire Laurent', location: 'Modification compteur - Nantes', text: '"Je ne savais pas par où commencer pour augmenter la puissance de mon compteur. Tout a été pris en charge, je n\'ai eu qu\'à valider. Simple et efficace."', date: 'Décembre 2025' },
+                  { initials: 'PG', color: '#F59E0B', name: 'Philippe Garcia', location: 'Viabilisation terrain - Marseille', text: '"Pour la viabilisation de mon terrain, les démarches administratives étaient complexes. Cette équipe a su gérer tout le processus avec Enedis."', date: 'Septembre 2025' },
+                  { initials: 'AM', color: '#EC4899', name: 'Amélie Martin', location: 'Raccordement définitif - Paris', text: '"Le formulaire en ligne est très intuitif et l\'équipe répond rapidement aux questions. Mon raccordement définitif a été effectué dans les délais."', date: 'Novembre 2025' },
+                  { initials: 'TR', color: '#06B6D4', name: 'Thomas Roux', location: 'Raccordement collectif - Lille', text: '"Pour notre projet de lotissement, nous avions besoin d\'un partenaire fiable. La coordination avec Enedis a été parfaitement gérée."', date: 'Octobre 2025' },
+                ].map((testimonial, idx) => (
+                  <div key={`second-${idx}`} className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-100 shadow-sm min-w-[320px] max-w-[320px] flex-shrink-0">
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-base flex-shrink-0" style={{ backgroundColor: testimonial.color }}>
+                        {testimonial.initials}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900 text-sm">{testimonial.name}</p>
+                        <p className="text-xs text-gray-500">{testimonial.location}</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-0.5 mb-3">
+                      {[1,2,3,4,5].map((star) => (
+                        <Star key={star} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                    <p className="text-gray-700 text-sm leading-relaxed">{testimonial.text}</p>
+                    <p className="text-xs text-gray-400 mt-3">{testimonial.date}</p>
                   </div>
-                </div>
-                <div className="flex gap-1 mb-4">
-                  {[1,2,3,4,5].map((star) => (
-                    <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-gray-700 leading-relaxed">
-                  "Service impeccable du début à la fin. Mon dossier de raccordement pour ma maison neuve a été traité en 3 semaines. L'équipe m'a tenu informé à chaque étape. Je recommande vivement."
-                </p>
-                <p className="text-xs text-gray-400 mt-4">Novembre 2025</p>
-              </div>
-
-              {/* Testimonial 2 */}
-              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div className="flex items-start gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-full bg-[#10B981] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
-                    MD
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Marc Dupont</p>
-                    <p className="text-sm text-gray-500">Raccordement provisoire chantier - Lyon</p>
-                  </div>
-                </div>
-                <div className="flex gap-1 mb-4">
-                  {[1,2,3,4,5].map((star) => (
-                    <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-gray-700 leading-relaxed">
-                  "En tant que chef de chantier, j'ai besoin de réactivité. La demande de raccordement provisoire a été traitée rapidement et le suivi était parfait. Très professionnel."
-                </p>
-                <p className="text-xs text-gray-400 mt-4">Octobre 2025</p>
-              </div>
-
-              {/* Testimonial 3 */}
-              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div className="flex items-start gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-full bg-[#8B5CF6] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
-                    CL
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Claire Laurent</p>
-                    <p className="text-sm text-gray-500">Modification compteur - Nantes</p>
-                  </div>
-                </div>
-                <div className="flex gap-1 mb-4">
-                  {[1,2,3,4,5].map((star) => (
-                    <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-gray-700 leading-relaxed">
-                  "Je ne savais pas par où commencer pour augmenter la puissance de mon compteur. Tout a été pris en charge, je n'ai eu qu'à valider. Simple et efficace."
-                </p>
-                <p className="text-xs text-gray-400 mt-4">Décembre 2025</p>
-              </div>
-
-              {/* Testimonial 4 */}
-              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div className="flex items-start gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-full bg-[#F59E0B] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
-                    PG
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Philippe Garcia</p>
-                    <p className="text-sm text-gray-500">Viabilisation terrain - Marseille</p>
-                  </div>
-                </div>
-                <div className="flex gap-1 mb-4">
-                  {[1,2,3,4,5].map((star) => (
-                    <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-gray-700 leading-relaxed">
-                  "Pour la viabilisation de mon terrain, les démarches administratives étaient complexes. Cette équipe a su gérer tout le processus avec Enedis. Merci !"
-                </p>
-                <p className="text-xs text-gray-400 mt-4">Septembre 2025</p>
-              </div>
-
-              {/* Testimonial 5 */}
-              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div className="flex items-start gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-full bg-[#EC4899] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
-                    AM
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Amélie Martin</p>
-                    <p className="text-sm text-gray-500">Raccordement définitif - Paris</p>
-                  </div>
-                </div>
-                <div className="flex gap-1 mb-4">
-                  {[1,2,3,4,5].map((star) => (
-                    <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-gray-700 leading-relaxed">
-                  "Le formulaire en ligne est très intuitif et l'équipe répond rapidement aux questions. Mon raccordement définitif a été effectué dans les délais annoncés."
-                </p>
-                <p className="text-xs text-gray-400 mt-4">Novembre 2025</p>
-              </div>
-
-              {/* Testimonial 6 */}
-              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div className="flex items-start gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-full bg-[#06B6D4] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
-                    TR
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Thomas Roux</p>
-                    <p className="text-sm text-gray-500">Raccordement collectif - Lille</p>
-                  </div>
-                </div>
-                <div className="flex gap-1 mb-4">
-                  {[1,2,3,4,5].map((star) => (
-                    <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-gray-700 leading-relaxed">
-                  "Pour notre projet de lotissement, nous avions besoin d'un partenaire fiable. La coordination avec Enedis a été parfaitement gérée. Très satisfait du service."
-                </p>
-                <p className="text-xs text-gray-400 mt-4">Octobre 2025</p>
+                ))}
               </div>
             </div>
+            
+            <style>{`
+              @keyframes scrollTestimonials {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+              }
+            `}</style>
 
             {/* Trust Indicator */}
             <div className="text-center mt-12">

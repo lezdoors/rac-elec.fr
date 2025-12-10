@@ -1,0 +1,1 @@
+import{j as t}from"./index-BpEpgGGg.js";import{C as e,f as r}from"./french-cities-DkpYsvL4.js";import"./map-pin-DqoxhdBZ.js";import"./shield-DodtIpid.js";import"./building-DPykNqqv.js";import"./users-CBNM61ZD.js";function n(){return t.jsx(e,{cityData:r.marseille})}export{n as default};
