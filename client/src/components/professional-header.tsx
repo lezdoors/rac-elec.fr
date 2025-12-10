@@ -24,7 +24,7 @@ export function ProfessionalHeader() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo Lockup: Icon | Separator | Two-line text */}
-          <Link href="/" className="flex-shrink-0">
+          <Link href="/" className="flex-shrink-0 outline-none focus:outline-none">
             <div className="flex items-center gap-3">
               {/* Logo Icon */}
               <img 
