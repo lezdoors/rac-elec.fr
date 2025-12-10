@@ -235,14 +235,11 @@
         will-change: contents;
       }
       .hero-section { 
-        min-height: 600px; 
-        background: linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%); 
+        min-height: auto; 
+        background: white; 
         will-change: transform;
-        /* Safari gradient fix */
-        background: linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%);
         /* CWV OPTIMIZATION: Content visibility optimization */
         content-visibility: auto;
-        contain-intrinsic-size: 600px;
       }
       .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
       .btn-primary { 
@@ -381,8 +378,8 @@
     <meta name="format-detection" content="telephone=no">
     
     <!-- PERFORMANCE FIX: Removed render-blocking MutationObserver script for faster LCP -->
-    <script type="module" crossorigin src="/assets/index-C7UKPZwE.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Cb42a01P.css">
+    <script type="module" crossorigin src="/assets/index-D52AX0RJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CGahiK0y.css">
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -390,22 +387,8 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     
-    <!-- PERFORMANCE FIX: Static hero content for immediate LCP (before React mounts) -->
-    <div id="root">
-      <div class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700">
-        <div class="container mx-auto px-4 py-16">
-          <div class="text-center text-white max-w-4xl mx-auto">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6">Raccordement Électrique Simplifié</h1>
-            <p class="text-xl md:text-2xl mb-8 opacity-90">
-              Votre demande de raccordement électrique en 3 minutes
-            </p>
-            <div class="bg-white/10 backdrop-blur rounded-lg p-6 mb-8">
-              <p class="text-lg">Démarrez votre demande maintenant...</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- Root element for React - no static content to prevent flash -->
+    <div id="root"></div>
     
     <!-- PHASE 3A: Statcounter - Further optimized deferred loading -->
     <script>

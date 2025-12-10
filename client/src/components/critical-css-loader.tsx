@@ -5,11 +5,10 @@ export function CriticalCSSLoader() {
     // Inline critical CSS for above-the-fold content
     const criticalCSS = `
       .hero-section {
-        background: linear-gradient(135deg, #0A3A82 0%, #0058B0 50%, #0072CE 100%);
-        color: white;
+        background: white;
+        color: #1a202c;
         padding: 3rem 1rem;
-        text-align: center;
-        min-height: 50vh;
+        min-height: auto;
         display: flex;
         align-items: center;
         justify-content: center;

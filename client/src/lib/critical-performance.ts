@@ -13,12 +13,12 @@ export const inlineCriticalCSS = () => {
     
     /* Hero critical styles for LCP */
     .hero-section{
-      min-height:100vh;
-      background:linear-gradient(135deg,#0A3A82 0%,#0058B0 50%,#0072CE 100%);
+      min-height:auto;
+      background:white;
       display:flex;
       align-items:center;
       justify-content:center;
-      color:white;
+      color:#1a202c;
       position:relative;
       overflow:hidden;
     }
