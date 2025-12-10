@@ -65,7 +65,7 @@ export default function HomePage() {
     <>
       <a href="#main-content" className="sr-only focus:not-sr-only">Aller au contenu principal</a>
       <Helmet>
-        <title>Demande de Raccordement Enedis en Ligne | Raccordement Electrique</title>
+        <title>Demande de Raccordement Enedis en Ligne | Raccordement Électrique</title>
         <meta name="description" content="Faites votre demande de raccordement Enedis. Provisoire, définitif, collectif ou augmentation de puissance. Procédure simplifiée et sécurisée." />
         <meta name="keywords" content="demande de raccordement enedis, raccordement électrique, compteur Linky, branchement EDF" />
         <link rel="canonical" href="https://www.demande-raccordement.fr/" />
@@ -300,7 +300,7 @@ export default function HomePage() {
             {/* Header */}
             <div className="text-center mb-12 md:mb-14">
               <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-[#0066CC] mb-4 leading-tight">
-                3 Etapes Simples Pour Votre Raccordement Enedis
+                3 Étapes Simples Pour Votre Raccordement Enedis
               </h2>
               <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
                 Remplissez notre formulaire en ligne en quelques minutes. Nous nous occupons du reste.
@@ -332,7 +332,7 @@ export default function HomePage() {
                     </div>
                     <div>
                       <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2">Renseignez vos informations</h3>
-                      <p className="text-base md:text-lg text-gray-600">Coordonnees et details de votre projet</p>
+                      <p className="text-base md:text-lg text-gray-600">Coordonnées et détails de votre projet</p>
                     </div>
                   </div>
 
@@ -381,7 +381,7 @@ export default function HomePage() {
             {/* Header */}
             <div className="text-center mb-12 md:mb-14">
               <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-4">
-                Tous les Types de Raccordement Electrique Enedis
+                Tous les Types de Raccordement Électrique Enedis
               </h2>
               <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
                 Quelle que soit la nature de votre projet, nous vous accompagnons dans votre demande de raccordement électrique
@@ -398,7 +398,7 @@ export default function HomePage() {
                     <img src={raccordementProvisoireIcon} alt="Raccordement Provisoire" className="w-full h-full object-contain" loading="lazy" />
                   </div>
                   <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Raccordement Provisoire</h3>
-                  <p className="text-base md:text-lg text-gray-600 mb-6">Pour chantiers, evenements temporaires et installations provisoires</p>
+                  <p className="text-base md:text-lg text-gray-600 mb-6">Pour chantiers, événements temporaires et installations provisoires</p>
                   <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
                     Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </span>
@@ -409,9 +409,9 @@ export default function HomePage() {
               <Link href="/raccordement-definitif" className="group">
                 <div className="bg-white rounded-2xl p-8 md:p-10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-xl border border-gray-100 h-full">
                   <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6">
-                    <img src={raccordementDefinitifIcon} alt="Raccordement Definitif" className="w-full h-full object-contain" loading="lazy" />
+                    <img src={raccordementDefinitifIcon} alt="Raccordement Définitif" className="w-full h-full object-contain" loading="lazy" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Raccordement Definitif</h3>
+                  <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Raccordement Définitif</h3>
                   <p className="text-base md:text-lg text-gray-600 mb-6">Maisons neuves, locaux commerciaux et installations permanentes</p>
                   <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
                     Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -440,7 +440,7 @@ export default function HomePage() {
                     <img src={raccordementCollectifIcon} alt="Raccordement Collectif" className="w-full h-full object-contain" loading="lazy" />
                   </div>
                   <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Raccordement Collectif</h3>
-                  <p className="text-base md:text-lg text-gray-600 mb-6">Immeubles residentiels, coproprietes et batiments multi-logements</p>
+                  <p className="text-base md:text-lg text-gray-600 mb-6">Immeubles résidentiels, copropriétés et bâtiments multi-logements</p>
                   <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
                     Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </span>
@@ -718,8 +718,8 @@ export default function HomePage() {
                     AM
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Amelie Martin</p>
-                    <p className="text-sm text-gray-500">Raccordement definitif - Paris</p>
+                    <p className="font-semibold text-gray-900">Amélie Martin</p>
+                    <p className="text-sm text-gray-500">Raccordement définitif - Paris</p>
                   </div>
                 </div>
                 <div className="flex gap-1 mb-4">
@@ -867,8 +867,8 @@ export default function HomePage() {
                 </h3>
                 <div className="space-y-3">
                   {[
-                    { q: "Gerez-vous les raccordements provisoires ?", a: "Oui, pour les chantiers de construction. Ce raccordement temporaire alimente votre chantier pendant les travaux." },
-                    { q: "Quelle difference entre provisoire et definitif ?", a: "Le provisoire est temporaire pour les chantiers. Le definitif est permanent pour l'habitation terminee." },
+                    { q: "Gérez-vous les raccordements provisoires ?", a: "Oui, pour les chantiers de construction. Ce raccordement temporaire alimente votre chantier pendant les travaux." },
+                    { q: "Quelle différence entre provisoire et définitif ?", a: "Le provisoire est temporaire pour les chantiers. Le définitif est permanent pour l'habitation terminée." },
                     { q: "Proposez-vous le raccordement collectif ?", a: "Oui, pour les lotissements et immeubles collectifs avec gestion des parties communes." }
                   ].map((item, idx) => (
                     <details key={idx} className="group" data-testid={`faq-types-${idx + 1}`}>

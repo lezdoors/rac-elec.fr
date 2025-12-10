@@ -118,7 +118,7 @@ export default function Layout({ children }: LayoutProps) {
               <Link href="/" className="flex items-center group transition-transform duration-200 hover:scale-105">
                 <img 
                   src="/logo-service-raccordement.png" 
-                  alt="Service Raccordement Electricite - Expert raccordement Enedis" 
+                  alt="Service Raccordement Électricité - Expert raccordement Enedis" 
                   className="h-[40px] sm:h-[45px] lg:h-[55px] xl:h-[60px] w-auto object-contain"
                 />
               </Link>
