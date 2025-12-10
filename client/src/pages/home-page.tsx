@@ -6,7 +6,10 @@ import { Helmet } from "react-helmet";
 import { TrustSection } from "@/components/trust-section";
 import { FloatingCtaButton } from "@/components/floating-cta-button";
 import heroIllustration from "@assets/hero-illustration_1765320964105.webp";
-import formIllustration from "@assets/form-intro-illustartion_(Website)_1765332563939.webp";
+import step1Illustration from "@assets/Définir_le_type_1765357131561.webp";
+import step2Illustration from "@assets/Completer-Formulaire_1765357131561.webp";
+import step3Illustration from "@assets/Dépôt_du_dossier_1765357131561.webp";
+import step4Illustration from "@assets/Suivi-Dossier_1765357131561.webp";
 import raccordementDefinitifIcon from "@assets/Raccordement-Definitif_1765333395814.webp";
 import raccordementProvisoireIcon from "@assets/Raccordement-Provisoire_1765333395814.webp";
 import raccordementCollectifIcon from "@assets/Raccordement-Collectif_1765333395814.webp";
@@ -225,115 +228,151 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* PROCESS TIMELINE SECTION - "Comment ça marche?" */}
+        {/* PROCESS SECTION - "Comment Faire sa Demande" - 4 Steps with Illustrations */}
         <section 
           className="py-16 md:py-24"
-          style={{ background: 'linear-gradient(180deg, #F8F9FB 0%, #FFFFFF 100%)' }}
+          style={{ background: 'linear-gradient(180deg, #EBF4FF 0%, #F0F7FF 50%, #FFFFFF 100%)' }}
           id="process"
           data-animate
           data-testid="process-section"
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-7xl">
             {/* Header */}
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-4">
-                Processus simplifié
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-                Comment ça marche ?
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0066CC] mb-4 leading-tight">
+                Comment Faire sa Demande de Raccordement Électrique en Ligne ?
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Votre raccordement Enedis en 4 étapes simples et rapides
+              <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Processus 100% en ligne en 4 étapes simples. Votre demande de raccordement Enedis traitée rapidement avec accompagnement personnalisé.
               </p>
             </div>
 
-            {/* Two-Column Layout: Illustration + Steps */}
-            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-              {/* Left Side - Illustration */}
-              <div className="w-full lg:w-[40%] flex justify-center">
-                <div className={`transition-all duration-700 ${isVisible['process'] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-                  <img 
-                    src={formIllustration}
-                    alt="Femme remplissant un formulaire en ligne sur son ordinateur - Processus de demande de raccordement"
-                    className="w-full max-w-sm lg:max-w-md h-auto"
-                    loading="lazy"
-                    data-testid="process-illustration"
-                  />
+            {/* 4 Steps - Horizontal on desktop, Vertical on mobile */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 mb-12">
+              
+              {/* Step 1 */}
+              <div className="text-center">
+                <div className="flex flex-col items-center">
+                  {/* Numbered Circle */}
+                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-4 shadow-md">
+                    1
+                  </div>
+                  {/* Illustration */}
+                  <div className="w-32 h-32 md:w-36 md:h-36 flex items-center justify-center mb-4">
+                    <img 
+                      src={step1Illustration}
+                      alt="Définir le type de raccordement"
+                      className="w-full h-full object-contain"
+                      loading="lazy"
+                      data-testid="step1-illustration"
+                    />
+                  </div>
+                  {/* Title */}
+                  <h3 className="text-base font-semibold text-gray-900 mb-2 leading-tight px-2">
+                    Définir le type de raccordement correspondant à mon besoin
+                  </h3>
+                  {/* Description */}
+                  <p className="text-sm text-gray-500 px-2">
+                    Utilisez notre outil pour cadrer précisément votre demande.
+                  </p>
                 </div>
               </div>
 
-              {/* Right Side - Steps Grid */}
-              <div className="w-full lg:w-[60%]">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {/* Step 1 */}
-                  <div className={`relative bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '100ms' }}>
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
-                        1
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-base font-semibold text-gray-900 mb-1">Remplissez le formulaire</h3>
-                        <p className="text-sm text-gray-600 mb-2">Complétez votre demande en 5 minutes</p>
-                        <span className="inline-block px-2.5 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">5 min</span>
-                      </div>
-                    </div>
+              {/* Step 2 */}
+              <div className="text-center">
+                <div className="flex flex-col items-center">
+                  {/* Numbered Circle */}
+                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-4 shadow-md">
+                    2
                   </div>
-
-                  {/* Step 2 */}
-                  <div className={`relative bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
-                        2
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-base font-semibold text-gray-900 mb-1">Recevez votre devis</h3>
-                        <p className="text-sm text-gray-600 mb-2">Devis détaillé et personnalisé</p>
-                        <span className="inline-block px-2.5 py-0.5 bg-green-100 text-green-700 text-xs font-medium rounded-full">48h</span>
-                      </div>
-                    </div>
+                  {/* Illustration */}
+                  <div className="w-32 h-32 md:w-36 md:h-36 flex items-center justify-center mb-4">
+                    <img 
+                      src={step2Illustration}
+                      alt="Compléter un formulaire simple"
+                      className="w-full h-full object-contain"
+                      loading="lazy"
+                      data-testid="step2-illustration"
+                    />
                   </div>
-
-                  {/* Step 3 */}
-                  <div className={`relative bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '300ms' }}>
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
-                        3
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-base font-semibold text-gray-900 mb-1">Validation du dossier</h3>
-                        <p className="text-sm text-gray-600 mb-2">Notre équipe prépare votre dossier Enedis</p>
-                        <span className="inline-block px-2.5 py-0.5 bg-orange-100 text-orange-700 text-xs font-medium rounded-full">2-3 semaines</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Step 4 */}
-                  <div className={`relative bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '400ms' }}>
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
-                        4
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-base font-semibold text-gray-900 mb-1">Intervention Enedis</h3>
-                        <p className="text-sm text-gray-600 mb-2">Travaux et activation du compteur</p>
-                        <span className="inline-block px-2.5 py-0.5 bg-purple-100 text-purple-700 text-xs font-medium rounded-full">4-6 semaines</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* CTA Button */}
-                <div className="mt-8 text-center lg:text-left">
-                  <Link href="/raccordement-enedis#formulaire-raccordement">
-                    <button 
-                      className="bg-[#4F46E5] hover:bg-[#4338CA] text-white font-semibold text-base px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300"
-                      data-testid="cta-process-button"
-                    >
-                      Commencer ma demande maintenant
-                    </button>
-                  </Link>
+                  {/* Title */}
+                  <h3 className="text-base font-semibold text-gray-900 mb-2 leading-tight px-2">
+                    Compléter un formulaire simple ou demander l'assistance de nos experts
+                  </h3>
+                  {/* Description */}
+                  <p className="text-sm text-gray-500 px-2">
+                    Renseignez votre projet en quelques étapes.
+                  </p>
                 </div>
               </div>
+
+              {/* Step 3 */}
+              <div className="text-center">
+                <div className="flex flex-col items-center">
+                  {/* Numbered Circle */}
+                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-4 shadow-md">
+                    3
+                  </div>
+                  {/* Illustration */}
+                  <div className="w-32 h-32 md:w-36 md:h-36 flex items-center justify-center mb-4">
+                    <img 
+                      src={step3Illustration}
+                      alt="Dépôt du dossier chez Enedis"
+                      className="w-full h-full object-contain"
+                      loading="lazy"
+                      data-testid="step3-illustration"
+                    />
+                  </div>
+                  {/* Title */}
+                  <h3 className="text-base font-semibold text-gray-900 mb-2 leading-tight px-2">
+                    Nous déposons un dossier complet et conforme chez Enedis
+                  </h3>
+                  {/* Description */}
+                  <p className="text-sm text-gray-500 px-2">
+                    Constitution et dépôt de votre dossier.
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 4 */}
+              <div className="text-center">
+                <div className="flex flex-col items-center">
+                  {/* Numbered Circle */}
+                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-4 shadow-md">
+                    4
+                  </div>
+                  {/* Illustration */}
+                  <div className="w-32 h-32 md:w-36 md:h-36 flex items-center justify-center mb-4">
+                    <img 
+                      src={step4Illustration}
+                      alt="Suivi de dossier jusqu'à la mise en service"
+                      className="w-full h-full object-contain"
+                      loading="lazy"
+                      data-testid="step4-illustration"
+                    />
+                  </div>
+                  {/* Title */}
+                  <h3 className="text-base font-semibold text-gray-900 mb-2 leading-tight px-2">
+                    Suivi personnalisé jusqu'à la mise en service
+                  </h3>
+                  {/* Description */}
+                  <p className="text-sm text-gray-500 px-2">
+                    Accompagnement de A à Z.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA Button */}
+            <div className="text-center">
+              <Link href="/raccordement-enedis#formulaire-raccordement">
+                <button 
+                  className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-full shadow-md hover:shadow-lg transition-all duration-300"
+                  data-testid="cta-process-button"
+                >
+                  Commencer maintenant
+                </button>
+              </Link>
             </div>
           </div>
         </section>
