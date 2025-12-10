@@ -487,9 +487,12 @@ export default function HomePage() {
             {/* FAQ Link */}
             <div className="text-center mt-16">
               <p className="text-lg text-gray-600 mb-4">Vous ne savez pas quel type de raccordement choisir ?</p>
-              <Link href="#faq" className="inline-flex items-center text-[#0072CE] font-medium text-lg hover:text-[#005eaa]">
+              <button 
+                onClick={() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })}
+                className="inline-flex items-center text-[#0072CE] font-medium text-lg hover:text-[#005eaa] cursor-pointer"
+              >
                 Consultez notre FAQ <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
+              </button>
             </div>
           </div>
         </section>
