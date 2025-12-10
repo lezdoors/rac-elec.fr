@@ -820,7 +820,7 @@ export default function HomePage() {
                     { q: "Puis-je modifier ma demande apres envoi ?", a: "Oui, contactez notre equipe pour toute modification. Nous ajusterons votre dossier avant sa transmission finale." }
                   ].map((item, idx) => (
                     <details key={idx} className="group" data-testid={`faq-demarches-${idx + 1}`}>
-                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] group-open:text-[#3B82F6] transition-colors outline-none focus:outline-none [&::-webkit-details-marker]:hidden">
+                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] group-open:text-[#3B82F6] transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 [&::-webkit-details-marker]:hidden list-none">
                         <span className="text-sm font-medium pr-4">{item.q}</span>
                         <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 group-open:text-[#3B82F6] transition-transform flex-shrink-0" />
                       </summary>
@@ -844,7 +844,7 @@ export default function HomePage() {
                     { q: "Quand intervient Enedis sur mon terrain ?", a: "Apres validation du devis et realisation des travaux prealables, Enedis planifie l'intervention sous 2 a 8 semaines." }
                   ].map((item, idx) => (
                     <details key={idx} className="group" data-testid={`faq-delais-${idx + 1}`}>
-                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] group-open:text-[#3B82F6] transition-colors outline-none focus:outline-none [&::-webkit-details-marker]:hidden">
+                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] group-open:text-[#3B82F6] transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 [&::-webkit-details-marker]:hidden list-none">
                         <span className="text-sm font-medium pr-4">{item.q}</span>
                         <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 group-open:text-[#3B82F6] transition-transform flex-shrink-0" />
                       </summary>
@@ -868,7 +868,7 @@ export default function HomePage() {
                     { q: "Puis-je payer en plusieurs fois ?", a: "Actuellement, le paiement s'effectue en une fois lors de la validation de votre demande." }
                   ].map((item, idx) => (
                     <details key={idx} className="group" data-testid={`faq-tarifs-${idx + 1}`}>
-                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] group-open:text-[#3B82F6] transition-colors outline-none focus:outline-none [&::-webkit-details-marker]:hidden">
+                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] group-open:text-[#3B82F6] transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 [&::-webkit-details-marker]:hidden list-none">
                         <span className="text-sm font-medium pr-4">{item.q}</span>
                         <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 group-open:text-[#3B82F6] transition-transform flex-shrink-0" />
                       </summary>
@@ -892,7 +892,7 @@ export default function HomePage() {
                     { q: "Proposez-vous le raccordement collectif ?", a: "Oui, pour les lotissements et immeubles collectifs avec gestion des parties communes." }
                   ].map((item, idx) => (
                     <details key={idx} className="group" data-testid={`faq-types-${idx + 1}`}>
-                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] group-open:text-[#3B82F6] transition-colors outline-none focus:outline-none [&::-webkit-details-marker]:hidden">
+                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] group-open:text-[#3B82F6] transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 [&::-webkit-details-marker]:hidden list-none">
                         <span className="text-sm font-medium pr-4">{item.q}</span>
                         <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 group-open:text-[#3B82F6] transition-transform flex-shrink-0" />
                       </summary>
