@@ -1,0 +1,113 @@
+You are updating the UI/UX of the homepage. Do not modify logic, routing, forms, Supabase calls, or any backend code. Only adjust layout, spacing, illustration sizes, typography, and component styling.
+
+Goal:
+Make the homepage match the clean, premium layout of the original /net site.
+The current /demande homepage feels cramped and unbalanced because illustrations, spacing, and card sizes are too small. Improve visual hierarchy and breathing room.
+
+⸻
+
+1. Increase illustration sizes
+
+Apply these changes to all hero and section illustrations:
+	•	Increase hero illustration width by +35–40%
+	•	Increase section illustration (e.g., “3 steps”) by +30%
+	•	Ensure illustrations scale responsively but maintain strong visual weight
+	•	Add max-w-* classes to prevent them from shrinking too much
+
+⸻
+
+2. Increase spacing between sections
+
+The original site uses generous white space.
+Apply:
+	•	Section padding-top: 100–120px
+	•	Section padding-bottom: 100–120px
+	•	Increase vertical spacing between section titles and content
+	•	Maintain consistent spacing across all sections
+
+⸻
+
+3. Improve card design for services
+
+The service cards currently look too small and tight.
+
+Update card styling:
+	•	Increase internal padding to 32–40px
+	•	Increase icon size to 48px minimum
+	•	Increase card height slightly to improve breathing room
+	•	Increase font size of card titles to match original hierarchy
+	•	Add subtle shadow or border to improve structure
+	•	Ensure hover effects are smooth and consistent
+
+⸻
+
+4. Improve typography hierarchy
+
+Match the original site’s premium typography scale:
+	•	h1 → 48px / bold
+	•	h2 → 34px
+	•	h3 → 22px
+	•	Body text → 18px
+	•	Increase line-height for readability
+	•	Use consistent spacing below headings
+
+⸻
+
+5. Align components to a consistent max-width
+
+Match /net layout width:
+	•	Wrap main content in a container of max-w-screen-xl (≈1280px)
+	•	Ensure all sections align to the same grid
+	•	Avoid inconsistent left-right padding
+
+⸻
+
+6. 3-Step or 4-Step process section improvements
+
+Apply:
+	•	Increase icon size to 56px
+	•	Increase number bubbles to 44px
+	•	Increase horizontal spacing between steps
+	•	Improve vertical spacing for cleaner readability
+	•	Match the visual balance of the original site’s steps section
+
+⸻
+
+7. Maintain design consistency
+
+Ensure:
+	•	All section titles use the same font size and weight
+	•	All buttons use consistent spacing, padding, and radius
+	•	Text blocks have consistent max-width and alignment
+	•	No irregular spacing between components
+
+⸻
+
+Important rules
+	•	Do NOT modify any logic, API code, data fetching, Supabase integration, or routing.
+	•	Do NOT change any form behavior, endpoints, authentication, or state management.
+	•	Improve ONLY:
+	•	layout
+	•	spacing
+	•	typography
+	•	illustration sizes
+	•	card styling
+	•	visual balance
+
+Everything else must remain untouched.
+
+⸻
+
+Purpose of These Improvements (tell the agent why)
+
+This is important for the agent to understand context:
+	•	The original website feels more premium because it uses larger illustrations, wider spacing, and stronger typography hierarchy.
+	•	The current /demande site feels cramped and less professional.
+	•	Our goal is to make the new site visually match or exceed the clarity, spacing, and softness of the original site.
+	•	The changes are strictly visual and should not affect any business logic or functionality.
+
+⸻
+
+Deliverable
+
+Update the homepage components (hero, services section, steps section, and any supporting sections) with the improvements listed above. Apply Tailwind or existing component classes accordingly. Maintain compatibility with the current design system.
