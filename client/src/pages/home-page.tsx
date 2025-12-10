@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Zap, ArrowRight, Building, Home as HomeIcon, BarChart, Clock, Shield, Phone, CheckCircle, MapPin, FileText, Rocket, ChevronDown, Check, Users, Lock } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
-import { TrustSection } from "@/components/trust-section";
 import { FloatingCtaButton } from "@/components/floating-cta-button";
 import heroIllustration from "@assets/hero-illustration_1765320964105.webp";
 import step1Illustration from "@assets/Definir-le-type_1765357131561.webp";
@@ -166,31 +165,13 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* FORM INTRO SECTION */}
-        <section className="py-16 md:py-20 bg-gradient-to-b from-[#F8FAFC] to-white" id="form-intro" data-animate data-testid="form-intro-section">
+        {/* FORM INTRO SECTION - Informational, not hero-like */}
+        <section className="py-10 md:py-12 bg-white" id="form-intro" data-animate data-testid="form-intro-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-7xl">
-            <div className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-16 transition-all duration-700 ${isVisible['form-intro'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {/* Left Content */}
-              <div className="w-full lg:w-1/2 text-center lg:text-left">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
-                  Commencez votre demande de raccordement Enedis ici
-                </h2>
-                <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0">
-                  Demarrez votre demande de raccordement electrique Enedis en quelques clics. Formulaire 100% en ligne, traitement rapide, accompagnement expert inclus.
-                </p>
-                <Link href="/raccordement-enedis#formulaire-raccordement">
-                  <button 
-                    className="bg-[#4F46E5] hover:bg-[#4338CA] text-white font-semibold text-base px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300"
-                    data-testid="cta-form-intro-button"
-                  >
-                    Demarrer ma demande
-                  </button>
-                </Link>
-              </div>
-
-              {/* Right Illustration */}
-              <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-                <div className="relative w-full max-w-md">
+            <div className={`flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-12 transition-all duration-700 ${isVisible['form-intro'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              {/* Left Illustration */}
+              <div className="w-full lg:w-2/5 flex justify-center lg:justify-start">
+                <div className="relative w-full max-w-xs">
                   <img 
                     src={formIntroIllustration} 
                     alt="Femme remplissant un formulaire en ligne pour sa demande de raccordement electrique"
@@ -199,6 +180,24 @@ export default function HomePage() {
                     data-testid="form-intro-illustration"
                   />
                 </div>
+              </div>
+
+              {/* Right Content */}
+              <div className="w-full lg:w-3/5 text-center lg:text-left">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-3 leading-snug">
+                  Commencez votre demande de raccordement Enedis ici
+                </h2>
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-5 max-w-lg mx-auto lg:mx-0">
+                  Demarrez votre demande de raccordement electrique Enedis en quelques clics. Formulaire 100% en ligne, traitement rapide, accompagnement expert inclus.
+                </p>
+                <Link href="/raccordement-enedis#formulaire-raccordement">
+                  <button 
+                    className="bg-[#4F46E5] hover:bg-[#4338CA] text-white font-medium text-sm px-6 py-3 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+                    data-testid="cta-form-intro-button"
+                  >
+                    Demarrer ma demande
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -491,45 +490,106 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* TRUST SECTION - "Pourquoi nous faire confiance?" */}
-        <section className="py-20 md:py-24 bg-gray-50" id="trust" data-animate data-testid="trust-section">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-6xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Pourquoi nous faire confiance ?
+        {/* FAQ SECTION */}
+        <section className="py-16 md:py-20 bg-gray-50" id="faq" data-animate data-testid="faq-section">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-4xl">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-3">
+                Questions frequentes
               </h2>
+              <p className="text-gray-600 text-base">
+                Retrouvez les reponses aux questions les plus courantes sur nos services
+              </p>
             </div>
 
-            <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-700 ${isVisible['trust'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {/* Pillar 1 */}
-              <div className="bg-white rounded-2xl p-8 shadow-sm text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle className="w-8 h-8 text-blue-600" />
+            <div className={`space-y-4 transition-all duration-700 ${isVisible['faq'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              {/* FAQ Item 1 */}
+              <details className="bg-white rounded-lg border border-gray-200 group" data-testid="faq-item-1">
+                <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors">
+                  <span>Quels documents sont necessaires pour une demande de raccordement ?</span>
+                  <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
+                </summary>
+                <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
+                  Les documents requis varient selon le type de raccordement. Generalement, vous aurez besoin d'un justificatif d'identite, d'un plan de situation du terrain, d'un plan de masse, et d'une autorisation d'urbanisme (permis de construire ou declaration prealable).
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">+1200</div>
-                <div className="text-lg font-semibold text-gray-800 mb-2">demandes traitées</div>
-                <p className="text-gray-600 text-sm">Des centaines de clients satisfaits nous font confiance</p>
-              </div>
+              </details>
 
-              {/* Pillar 2 */}
-              <div className="bg-white rounded-2xl p-8 shadow-sm text-center">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Shield className="w-8 h-8 text-green-600" />
+              {/* FAQ Item 2 */}
+              <details className="bg-white rounded-lg border border-gray-200 group" data-testid="faq-item-2">
+                <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors">
+                  <span>Quel est le delai moyen de traitement d'un dossier ?</span>
+                  <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
+                </summary>
+                <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
+                  Le delai de traitement depend du type de raccordement. Pour un raccordement provisoire, comptez 2 a 4 semaines. Pour un raccordement definitif, le delai varie de 2 a 6 mois selon la complexite des travaux a realiser.
                 </div>
-                <div className="text-lg font-bold text-gray-900 mb-2">Procédure conforme</div>
-                <div className="text-lg font-semibold text-gray-800 mb-2">Normes Enedis</div>
-                <p className="text-gray-600 text-sm">Processus respectant les normes officielles Enedis</p>
-              </div>
+              </details>
 
-              {/* Pillar 3 */}
-              <div className="bg-white rounded-2xl p-8 shadow-sm text-center">
-                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Lock className="w-8 h-8 text-orange-600" />
+              {/* FAQ Item 3 */}
+              <details className="bg-white rounded-lg border border-gray-200 group" data-testid="faq-item-3">
+                <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors">
+                  <span>Gerez-vous les demandes de raccordement provisoire pour les chantiers ?</span>
+                  <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
+                </summary>
+                <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
+                  Oui, nous prenons en charge les demandes de raccordement provisoire pour les chantiers de construction. Ce type de raccordement temporaire permet d'alimenter le chantier en electricite pendant la duree des travaux.
                 </div>
-                <div className="text-lg font-bold text-gray-900 mb-2">Paiement sécurisé</div>
-                <div className="text-lg font-semibold text-gray-800 mb-2">100% protégé</div>
-                <p className="text-gray-600 text-sm">Transactions protégées par Stripe</p>
-              </div>
+              </details>
+
+              {/* FAQ Item 4 */}
+              <details className="bg-white rounded-lg border border-gray-200 group" data-testid="faq-item-4">
+                <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors">
+                  <span>Votre service inclut-il le depot du dossier aupres d'Enedis ?</span>
+                  <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
+                </summary>
+                <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
+                  Oui, notre service comprend la constitution complete de votre dossier et son depot officiel aupres d'Enedis. Nous verifions que tous les documents sont conformes avant transmission pour eviter tout rejet ou retard.
+                </div>
+              </details>
+
+              {/* FAQ Item 5 */}
+              <details className="bg-white rounded-lg border border-gray-200 group" data-testid="faq-item-5">
+                <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors">
+                  <span>Puis-je suivre l'avancement de ma demande ?</span>
+                  <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
+                </summary>
+                <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
+                  Absolument. Vous recevrez des notifications par email a chaque etape importante de votre dossier. Notre equipe reste disponible pour repondre a vos questions et vous tenir informe de l'avancement.
+                </div>
+              </details>
+
+              {/* FAQ Item 6 */}
+              <details className="bg-white rounded-lg border border-gray-200 group" data-testid="faq-item-6">
+                <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors">
+                  <span>Les frais de raccordement Enedis sont-ils inclus dans votre service ?</span>
+                  <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
+                </summary>
+                <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
+                  Non, notre tarif couvre uniquement notre service d'accompagnement et de constitution de dossier. Les frais de raccordement factures par Enedis sont a votre charge et vous seront communiques directement par Enedis apres etude de votre dossier.
+                </div>
+              </details>
+
+              {/* FAQ Item 7 */}
+              <details className="bg-white rounded-lg border border-gray-200 group" data-testid="faq-item-7">
+                <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors">
+                  <span>Le paiement en ligne est-il securise ?</span>
+                  <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
+                </summary>
+                <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
+                  Oui, tous les paiements sont traites via Stripe, une plateforme de paiement certifiee PCI DSS niveau 1. Vos donnees bancaires sont chiffrees et ne sont jamais stockees sur nos serveurs.
+                </div>
+              </details>
+
+              {/* FAQ Item 8 */}
+              <details className="bg-white rounded-lg border border-gray-200 group" data-testid="faq-item-8">
+                <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors">
+                  <span>Comment contacter votre service client ?</span>
+                  <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
+                </summary>
+                <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
+                  Vous pouvez nous contacter par email ou via notre formulaire de contact. Notre equipe repond generalement sous 24 a 48 heures ouvrées. Vous trouverez egalement nos coordonnees telephoniques sur notre page de contact.
+                </div>
+              </details>
             </div>
           </div>
         </section>
@@ -573,8 +633,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* TrustSection component */}
-        <TrustSection />
       </main>
 
       {/* Floating CTA Button */}
