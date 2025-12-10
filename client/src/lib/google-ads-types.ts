@@ -1,6 +1,6 @@
 /**
- * GTM Google Ads Integration (GTM-only - no direct gtag)
- * All conversion events flow through GTM dataLayer (GTM-T2VZD5DL)
+ * GTM Google Ads Integration (GTM-K597C4C2 + Google Ads AW-16683623620)
+ * All conversion events flow through GTM dataLayer + Google Ads gtag
  */
 
 declare global {
