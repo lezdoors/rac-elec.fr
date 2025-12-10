@@ -129,6 +129,9 @@ export default function RaccordementEnedisPage() {
   // CWV OPTIMIZATION: Debounced validation for better INP
   const validationTimeoutRef = useRef<NodeJS.Timeout>();
 
+  // Référence stable pour le form
+  const formRef = useRef<typeof form | null>(null);
+  
   // PERFORMANCE: Debounced API calls for INP optimization
   const handleCodePostalChange = useCallback(async (codePostal: string, isFacturation: boolean = false) => {
     if (codePostal.length === 5) {
@@ -149,13 +152,27 @@ export default function RaccordementEnedisPage() {
             // Petit délai pour montrer l'animation
             setTimeout(() => {
               if (isFacturation) {
-                form.setValue("ville", ville);
+                formRef.current?.setValue("ville", ville);
                 setIsSearchingVille(false);
               } else {
-                form.setValue("villeProjet", ville);
+                formRef.current?.setValue("villeProjet", ville);
                 setIsSearchingVilleProjet(false);
               }
             }, 300);
+          } else {
+            // Aucune ville trouvée - arrêter l'animation
+            if (isFacturation) {
+              setIsSearchingVille(false);
+            } else {
+              setIsSearchingVilleProjet(false);
+            }
+          }
+        } else {
+          // Réponse non OK - arrêter l'animation
+          if (isFacturation) {
+            setIsSearchingVille(false);
+          } else {
+            setIsSearchingVilleProjet(false);
           }
         }
       } catch (error) {
@@ -216,6 +233,9 @@ export default function RaccordementEnedisPage() {
       consentementTraitement: false,
     },
   });
+  
+  // Mettre à jour la référence stable du form
+  formRef.current = form;
 
   // CWV OPTIMIZATION: Debounced validation after form initialization
   const debouncedValidation = useCallback((fieldName: string, value: string) => {
