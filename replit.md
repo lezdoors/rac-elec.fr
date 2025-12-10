@@ -79,9 +79,11 @@ Preferred communication style: Simple, everyday language.
 
 ### Email Services
 - **SMTP Server**: s3474.fra1.stableserver.net (Stableserver) for reliable email delivery.
-- **Email Account**: kevin@monelec.net (sender) → notifications@raccordement-connect.com (recipient).
-- **Nodemailer**: Email sending library with SSL/TLS encryption on port 465.
-- **SMTP Configuration Updated**: December 2025 - New credentials and destination email configured.
+- **SMTP Port**: 465 (SSL/TLS)
+- **Sender**: kevin@monelec.net
+- **Recipient**: notifications@raccordement-connect.com
+- **Nodemailer**: Email sending library with SSL/TLS encryption.
+- **SMTP Configuration Updated**: December 2025
 
 ### Analytics & Marketing
 - **Google Tag Manager**: GTM-T2VZD5DL (sole analytics script - all tracking via dataLayer)
