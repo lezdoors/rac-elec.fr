@@ -929,6 +929,30 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* CTA BANNER - Blue Gradient */}
+        <section 
+          className="py-10 md:py-14"
+          style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)' }}
+          data-testid="cta-banner-section"
+        >
+          <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-3xl text-center">
+            <h2 className="text-[24px] sm:text-[28px] md:text-[34px] font-bold text-white mb-4">
+              Pret a demarrer votre projet ?
+            </h2>
+            <p className="text-lg md:text-xl text-white/90 mb-8">
+              Rejoignez les centaines de clients satisfaits
+            </p>
+            <Link href="/raccordement-enedis#formulaire-raccordement">
+              <button 
+                className="bg-white text-[#3B82F6] font-semibold text-base px-10 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+                data-testid="cta-final-button"
+              >
+                Commencer ma demande
+              </button>
+            </Link>
+          </div>
+        </section>
+
       </main>
 
       {/* Floating CTA Button */}
