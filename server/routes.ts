@@ -86,7 +86,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   registerPaymentDebugRoutes(app);
   
   // Configuration SMTP simplifiée - Une seule configuration
-  console.log("Service SMTP configuré - notification@demande-raccordement.fr → bonjour@demande-raccordement.fr");
+  console.log("Service SMTP configuré - kevin@monelec.net → notifications@raccordement-connect.com");
   
   // Security status endpoint for admin monitoring
   app.get("/api/admin/security-status", requireAuth, requireAdmin, async (req, res) => {
@@ -232,7 +232,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       // S'assurer que les emails standards sont toujours inclus
-      const standardEmails = ["marina.alves@demande-raccordement.fr", "Bonjour@demande-raccordement.fr"];
+      const standardEmails = ["notifications@raccordement-connect.com"];
       standardEmails.forEach(email => {
         if (!notificationEmails.includes(email)) {
           notificationEmails.push(email);
@@ -241,7 +241,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Si le tableau est toujours vide après tout cela, utiliser l'adresse par défaut
       if (notificationEmails.length === 0) {
-        notificationEmails = ["notification@demande-raccordement.fr"];
+        notificationEmails = ["notifications@raccordement-connect.com"];
       }
       
       // Pour compatibilité avec le code existant, renvoyer aussi le premier email comme propriété 'email'
@@ -2134,7 +2134,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         };
         
         console.log('📧 ENVOI EMAIL COMPLET - FORMULAIRE FINALISÉ');
-        console.log('📬 Destinataire principal: bonjour@demande-raccordement.fr');
+        console.log('📬 Destinataire principal: notifications@raccordement-connect.com');
         console.log('📋 Référence générée:', serviceRequest.referenceNumber);
         
         // Email envoyé via la route /api/notifications/request-completed uniquement
@@ -9156,7 +9156,7 @@ app.patch("/api/contacts/:id/status", requireAuth, requireAdminOrManager, async 
         
         // Envoyer l'email
         const info = await transporter.sendMail({
-          from: `"Service Raccordement" <${process.env.SMTP_USER || 'notification@demande-raccordement.fr'}>`,
+          from: `"Service Raccordement" <${process.env.SMTP_USER || 'kevin@monelec.net'}>`,
           to: recipients.join(', '),
           subject: `🔔 Test de notification email - ${referenceNumber}`,
           html: `

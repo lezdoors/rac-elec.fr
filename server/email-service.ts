@@ -25,12 +25,12 @@ function getOptimalCallTime(): string {
 export function setupSmtpService() {
   try {
     const smtpConfig = {
-      host: 's4015.fra1.stableserver.net',
+      host: 's3474.fra1.stableserver.net',
       port: 465,
       secure: true, // SSL
       auth: {
-        user: 'notification@demande-raccordement.fr',
-        pass: 'xecmug-wakDed-xunje5'
+        user: 'kevin@monelec.net',
+        pass: 'Kamaka00.'
       },
       tls: {
         rejectUnauthorized: false
@@ -38,7 +38,7 @@ export function setupSmtpService() {
     };
 
     globalTransporter = nodemailer.createTransport(smtpConfig);
-    console.log('✅ SMTP STABLESERVER - notification@demande-raccordement.fr → bonjour@demande-raccordement.fr');
+    console.log('✅ SMTP STABLESERVER - kevin@monelec.net → notifications@raccordement-connect.com');
   } catch (error) {
     console.error('❌ Erreur configuration SMTP:', error);
   }
@@ -99,8 +99,8 @@ export async function sendPaiementReussiNotification(paiementData: any) {
     `;
 
     const mailOptions = {
-      from: 'notification@demande-raccordement.fr',
-      to: 'bonjour@demande-raccordement.fr',
+      from: 'kevin@monelec.net',
+      to: 'notifications@raccordement-connect.com',
       subject: `💰 PAIEMENT CONFIRMÉ - ${paiementData.referenceNumber || 'N/A'} - ${paiementData.amount ? (parseFloat(paiementData.amount) / 100).toFixed(2) + ' €' : 'N/A'}`,
       html: htmlContent,
       text: `💰 PAIEMENT CONFIRMÉ
@@ -182,8 +182,8 @@ export async function sendPaiementEchoueNotification(paiementData: any) {
     `;
 
     const mailOptions = {
-      from: 'notification@demande-raccordement.fr',
-      to: 'bonjour@demande-raccordement.fr',
+      from: 'kevin@monelec.net',
+      to: 'notifications@raccordement-connect.com',
       subject: `🚨 URGENT - PAIEMENT ÉCHOUÉ - ${paiementData.referenceNumber || 'N/A'} - ${paiementData.clientName || 'Client'}`,
       html: htmlContent,
       text: `🚨 URGENT - PAIEMENT ÉCHOUÉ
@@ -264,8 +264,8 @@ export async function sendTentativePaiementNotification(paiementData: any) {
     `;
 
     const mailOptions = {
-      from: 'notification@demande-raccordement.fr',
-      to: 'bonjour@demande-raccordement.fr',
+      from: 'kevin@monelec.net',
+      to: 'notifications@raccordement-connect.com',
       subject: `🔄 TENTATIVE PAIEMENT - ${paiementData.referenceNumber || 'N/A'} - ${paiementData.clientName || 'Client'}`,
       html: htmlContent,
       text: `🔄 TENTATIVE DE PAIEMENT
@@ -394,8 +394,8 @@ export async function sendLeadNotification(leadData: any) {
     }
 
     const mailOptions = {
-      from: `"Notifications Raccordement" <notification@demande-raccordement.fr>`,
-      to: 'bonjour@demande-raccordement.fr',
+      from: `"Notifications Raccordement" <kevin@monelec.net>`,
+      to: 'notifications@raccordement-connect.com',
       subject: `🎯 NOUVEAU PROSPECT - ${leadData.prenom || ''} ${leadData.nom || ''} - Référence ${leadData.referenceNumber || 'N/A'}`,
       html: contenuEmail
     };
@@ -454,8 +454,8 @@ export async function sendSupportMessageNotification(supportData: any) {
     `;
 
     const mailOptions = {
-      from: `"Support Raccordement" <notification@demande-raccordement.fr>`,
-      to: 'bonjour@demande-raccordement.fr',
+      from: `"Support Raccordement" <kevin@monelec.net>`,
+      to: 'notifications@raccordement-connect.com',
       subject: `💬 NOUVEAU MESSAGE SUPPORT - ${supportData.name || 'Contact anonyme'}`,
       html: contenuEmail
     };
@@ -729,8 +729,8 @@ export async function sendRequestCompletedNotification(requestData: any) {
     `;
 
     const mailOptions = {
-      from: 'notification@demande-raccordement.fr',
-      to: 'bonjour@demande-raccordement.fr',
+      from: 'kevin@monelec.net',
+      to: 'notifications@raccordement-connect.com',
       subject: `✅ DEMANDE COMPLÉTÉE - ${requestData.prenom || ''} ${requestData.nom || ''} - ${requestData.referenceNumber}`,
       html: contenuEmail
     };
@@ -836,8 +836,8 @@ export async function sendContactEmail(contactData: any) {
     `;
 
     const mailOptions = {
-      from: 'notification@demande-raccordement.fr',
-      to: 'bonjour@demande-raccordement.fr',
+      from: 'kevin@monelec.net',
+      to: 'notifications@raccordement-connect.com',
       subject: `${priorityEmoji} Nouveau message de contact${priority === 'haute' ? ' - URGENT' : ''} - ${contactData.subject || 'Sans sujet'}`,
       html: contenuEmail
     };

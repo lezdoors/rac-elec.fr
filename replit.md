@@ -78,9 +78,10 @@ Preferred communication style: Simple, everyday language.
 - **Stripe**: Payment gateway for secure transactions.
 
 ### Email Services
-- **SMTP Server**: s4015.fra1.stableserver.net (Stableserver) for reliable email delivery.
-- **Email Account**: notification@portail-electricite.com (sender) → bonjour@portail-electricite.com (recipient).
+- **SMTP Server**: s3474.fra1.stableserver.net (Stableserver) for reliable email delivery.
+- **Email Account**: kevin@monelec.net (sender) → notifications@raccordement-connect.com (recipient).
 - **Nodemailer**: Email sending library with SSL/TLS encryption on port 465.
+- **SMTP Configuration Updated**: December 2025 - New credentials and destination email configured.
 
 ### Analytics & Marketing
 - **Google Tag Manager**: GTM-T2VZD5DL (sole analytics script - all tracking via dataLayer)
