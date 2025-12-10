@@ -400,7 +400,7 @@ export default function HomePage() {
             <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 transition-all duration-700 ${isVisible['types-raccordements'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               
               {/* Raccordement Provisoire */}
-              <Link href="/raccordement-provisoire" className="group">
+              <Link href="/raccordement-enedis" className="group">
                 <div className="bg-white rounded-2xl p-8 md:p-10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-xl border border-gray-100 h-full">
                   <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6">
                     <img src={raccordementProvisoireIcon} alt="Raccordement Provisoire" className="w-full h-full object-contain" loading="lazy" />
@@ -414,7 +414,7 @@ export default function HomePage() {
               </Link>
 
               {/* Raccordement Definitif */}
-              <Link href="/raccordement-definitif" className="group">
+              <Link href="/raccordement-enedis" className="group">
                 <div className="bg-white rounded-2xl p-8 md:p-10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-xl border border-gray-100 h-full">
                   <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6">
                     <img src={raccordementDefinitifIcon} alt="Raccordement Définitif" className="w-full h-full object-contain" loading="lazy" />
@@ -428,7 +428,7 @@ export default function HomePage() {
               </Link>
 
               {/* Augmentation de Puissance */}
-              <Link href="/modification-compteur" className="group">
+              <Link href="/raccordement-enedis" className="group">
                 <div className="bg-white rounded-2xl p-8 md:p-10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-xl border border-gray-100 h-full">
                   <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6">
                     <img src={augmentationPuissanceIcon} alt="Augmentation de Puissance" className="w-full h-full object-contain" loading="lazy" />
@@ -442,7 +442,7 @@ export default function HomePage() {
               </Link>
 
               {/* Raccordement Collectif */}
-              <Link href="/raccordement-collectif" className="group">
+              <Link href="/raccordement-enedis" className="group">
                 <div className="bg-white rounded-2xl p-8 md:p-10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-xl border border-gray-100 h-full">
                   <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6">
                     <img src={raccordementCollectifIcon} alt="Raccordement Collectif" className="w-full h-full object-contain" loading="lazy" />
@@ -456,7 +456,7 @@ export default function HomePage() {
               </Link>
 
               {/* Viabilisation Terrain */}
-              <Link href="/viabilisation-terrain" className="group">
+              <Link href="/raccordement-enedis" className="group">
                 <div className="bg-white rounded-2xl p-8 md:p-10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-xl border border-gray-100 h-full">
                   <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6">
                     <img src={servicesTechniquesIcon} alt="Viabilisation Terrain" className="w-full h-full object-contain" loading="lazy" />
@@ -470,7 +470,7 @@ export default function HomePage() {
               </Link>
 
               {/* Modification Raccordement */}
-              <Link href="/raccordement-maison-neuve" className="group">
+              <Link href="/raccordement-enedis" className="group">
                 <div className="bg-white rounded-2xl p-8 md:p-10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-xl border border-gray-100 h-full">
                   <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6">
                     <img src={raccordementEnedisIcon} alt="Maison Neuve" className="w-full h-full object-contain" loading="lazy" />
