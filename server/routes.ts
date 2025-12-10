@@ -8922,28 +8922,54 @@ app.patch("/api/contacts/:id/status", requireAuth, requireAdminOrManager, async 
   });
   
   // Route pour récupérer tous les paiements RAC- authentiques depuis Stripe
+  // MISE A JOUR: Affiche tous les paiements a partir du 10 decembre 2025 (date de nettoyage)
+  // Les anciens paiements avant cette date ne s'affichent plus, mais tous les nouveaux sont visibles
   app.get('/api/stripe/rac-payments', requireAuth, async (req, res) => {
     try {
       if (!stripe) {
         return res.status(500).json({ 
           success: false, 
-          message: "Stripe non configuré" 
+          message: "Stripe non configure" 
         });
       }
 
-      console.log("Récupération de tous les paiements RAC- depuis Stripe...");
+      console.log("Recuperation des paiements RAC- depuis Stripe (a partir du 10/12/2025)...");
       
-      // Récupérer tous les paiements des 60 derniers jours pour avoir un historique complet
-      const sixtyDaysAgo = new Date();
-      sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
+      // Date de coupure fixe: 10 decembre 2025 a minuit (heure de Paris)
+      // Tous les paiements a partir de cette date sont affiches (passes et futurs)
+      // Seuls les paiements AVANT cette date sont masques
+      const cleanupDate = new Date('2025-12-10T00:00:00+01:00');
       
-      const paymentIntents = await stripe.paymentIntents.list({
-        created: {
-          gte: Math.floor(sixtyDaysAgo.getTime() / 1000),
-        },
-        limit: 100,
-        expand: ['data.payment_method', 'data.customer'],
-      });
+      // Recuperer TOUS les paiements sans limite depuis la date de nettoyage
+      let allPaymentIntents: any[] = [];
+      let hasMore = true;
+      let startingAfter: string | undefined = undefined;
+      
+      while (hasMore) {
+        const params: any = {
+          created: {
+            gte: Math.floor(cleanupDate.getTime() / 1000),
+          },
+          limit: 100, // Maximum par requete Stripe
+          expand: ['data.payment_method', 'data.customer'],
+        };
+        
+        if (startingAfter) {
+          params.starting_after = startingAfter;
+        }
+        
+        const response = await stripe.paymentIntents.list(params);
+        allPaymentIntents = allPaymentIntents.concat(response.data);
+        hasMore = response.has_more;
+        
+        if (response.data.length > 0) {
+          startingAfter = response.data[response.data.length - 1].id;
+        } else {
+          hasMore = false;
+        }
+      }
+      
+      const paymentIntents = { data: allPaymentIntents };
 
       // Filtrer les paiements RAC-
       const filteredPayments = paymentIntents.data

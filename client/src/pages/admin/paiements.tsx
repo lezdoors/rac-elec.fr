@@ -805,8 +805,9 @@ export default function PaymentDashboard() {
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   
-  // Constante pour définir le nombre d'éléments par page
-  const ITEMS_PER_PAGE = 20;
+  // MISE A JOUR: Affichage de tous les paiements depuis le 10/12/2025
+  // Les anciens paiements sont filtres cote serveur, pagination conservee pour performance
+  const ITEMS_PER_PAGE = 50; // Pagination de 50 elements pour performance optimale
   
   // Récupérer tous les paiements RAC- authentiques depuis Stripe
   const { 

@@ -66,11 +66,11 @@ export default function HomePage() {
       <a href="#main-content" className="sr-only focus:not-sr-only">Aller au contenu principal</a>
       <Helmet>
         <title>Demande de Raccordement Enedis en Ligne | Raccordement Electrique</title>
-        <meta name="description" content="Faites votre demande de raccordement Enedis. Provisoire, definitif, collectif ou augmentation de puissance. Procedure simplifiee et securisee." />
-        <meta name="keywords" content="demande de raccordement enedis, raccordement electrique, compteur Linky, branchement EDF" />
+        <meta name="description" content="Faites votre demande de raccordement Enedis. Provisoire, définitif, collectif ou augmentation de puissance. Procédure simplifiée et sécurisée." />
+        <meta name="keywords" content="demande de raccordement enedis, raccordement électrique, compteur Linky, branchement EDF" />
         <link rel="canonical" href="https://www.demande-raccordement.fr/" />
         <meta property="og:title" content="Demande de Raccordement Enedis en Ligne" />
-        <meta property="og:description" content="Faites votre demande de raccordement Enedis simplifiee et securisee." />
+        <meta property="og:description" content="Faites votre demande de raccordement Enedis simplifiée et sécurisée." />
         <meta property="og:url" content="https://www.demande-raccordement.fr/" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{`
@@ -79,7 +79,7 @@ export default function HomePage() {
             "@type": "Organization",
             "name": "demande-raccordement.fr",
             "url": "https://www.demande-raccordement.fr/",
-            "description": "Services professionnels de raccordement electrique Enedis pour particuliers et professionnels en France.",
+            "description": "Services professionnels de raccordement électrique Enedis pour particuliers et professionnels en France.",
             "contactPoint": {
               "@type": "ContactPoint",
               "telephone": "+33 9 70 70 16 43",
@@ -113,7 +113,7 @@ export default function HomePage() {
                 {/* Subheadline */}
                 <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-[500px] mx-auto lg:mx-0 mb-6 sm:mb-8 md:mb-10">
                   Votre expert raccordement Enedis en ligne.<br className="hidden sm:block" />
-                  Deposez votre demande en quelques minutes.
+                  Déposez votre demande en quelques minutes.
                 </p>
 
                 {/* Two CTA Buttons - Responsive */}
@@ -123,7 +123,7 @@ export default function HomePage() {
                       className="w-full sm:w-auto bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
                       data-testid="cta-hero-button"
                     >
-                      Demarrer ma demande
+                      Démarrer ma demande
                     </button>
                   </Link>
                   <Link href="/contact">
@@ -137,26 +137,11 @@ export default function HomePage() {
                   </Link>
                 </div>
 
-                {/* Trust Badges - Responsive */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-6 md:gap-8 text-gray-600">
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-100 flex items-center justify-center">
-                      <Check className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
-                    </div>
-                    <span className="text-sm sm:text-base">100% en ligne</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-blue-100 flex items-center justify-center">
-                      <Clock className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
-                    </div>
-                    <span className="text-sm sm:text-base">Reponse en 48h</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-purple-100 flex items-center justify-center">
-                      <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-purple-600" />
-                    </div>
-                    <span className="text-sm sm:text-base">Securise</span>
-                  </div>
+                {/* Trust Badges - Style professionnel sous les CTA */}
+                <div className="flex justify-center lg:justify-start">
+                  <p className="text-sm sm:text-base text-gray-500 font-normal">
+                    100% en ligne &middot; Réponse immédiate &middot; Sécurisé
+                  </p>
                 </div>
               </div>
 
@@ -165,7 +150,7 @@ export default function HomePage() {
                 <div className="relative w-full max-w-[320px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[550px] xl:max-w-[650px]">
                   <img 
                     src={heroIllustration} 
-                    alt="Famille devant une maison avec panneaux solaires et voiture electrique - Raccordement electrique Enedis"
+                    alt="Famille devant une maison avec panneaux solaires et voiture électrique - Raccordement électrique Enedis"
                     className="w-full h-auto"
                     loading="eager"
                     data-testid="hero-illustration"
@@ -191,7 +176,7 @@ export default function HomePage() {
                 Traitement des Demandes de Raccordement Électrique par Enedis
               </h2>
               <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Processus 100% en ligne en 4 etapes simples. Votre demande de raccordement Enedis traitee rapidement avec accompagnement personnalise.
+                Processus 100% en ligne en 4 étapes simples. Votre demande de raccordement Enedis traitée rapidement avec accompagnement personnalisé.
               </p>
             </div>
 
@@ -207,17 +192,17 @@ export default function HomePage() {
                   <div className="w-44 h-44 md:w-52 md:h-52 flex items-center justify-center mb-6">
                     <img 
                       src={step1Illustration}
-                      alt="Definir le type de raccordement"
+                      alt="Définir le type de raccordement"
                       className="w-full h-full object-contain"
                       loading="lazy"
                       data-testid="step1-illustration"
                     />
                   </div>
                   <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                    Definir le type de raccordement correspondant a mon besoin
+                    Définir le type de raccordement correspondant à mon besoin
                   </h3>
                   <p className="text-base md:text-lg text-gray-500">
-                    Utilisez notre outil pour cadrer precisement votre demande.
+                    Utilisez notre outil pour cadrer précisément votre demande.
                   </p>
                 </div>
               </div>
@@ -238,10 +223,10 @@ export default function HomePage() {
                     />
                   </div>
                   <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                    Completer un formulaire simple ou demander l'assistance de nos experts
+                    Compléter un formulaire simple ou demander l'assistance de nos experts
                   </h3>
                   <p className="text-base md:text-lg text-gray-500">
-                    Renseignez votre projet en quelques etapes.
+                    Renseignez votre projet en quelques étapes.
                   </p>
                 </div>
               </div>
@@ -286,10 +271,10 @@ export default function HomePage() {
                     />
                   </div>
                   <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                    Suivi personnalise jusqu'a la mise en service
+                    Suivi personnalisé jusqu'à la mise en service
                   </h3>
                   <p className="text-base md:text-lg text-gray-500">
-                    Accompagnement de A a Z.
+                    Accompagnement de A à Z.
                   </p>
                 </div>
               </div>
@@ -364,7 +349,7 @@ export default function HomePage() {
                     </div>
                     <div>
                       <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2">Recevez votre devis</h3>
-                      <p className="text-base md:text-lg text-gray-600">Sous 48h, un devis detaille et personnalise</p>
+                      <p className="text-base md:text-lg text-gray-600">Sous 48h, un devis détaillé et personnalisé</p>
                     </div>
                   </div>
 
@@ -375,7 +360,7 @@ export default function HomePage() {
                     </div>
                     <div>
                       <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2">Validation et raccordement</h3>
-                      <p className="text-base md:text-lg text-gray-600">Nous gerons toutes les demarches avec Enedis</p>
+                      <p className="text-base md:text-lg text-gray-600">Nous gérons toutes les démarches avec Enedis</p>
                     </div>
                   </div>
                 </div>
@@ -387,7 +372,7 @@ export default function HomePage() {
                       className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
                       data-testid="cta-steps-simple-button"
                     >
-                      Demarrer ma demande maintenant
+                      Démarrer ma demande maintenant
                     </button>
                   </Link>
                 </div>
@@ -405,7 +390,7 @@ export default function HomePage() {
                 Tous les Types de Raccordement Electrique Enedis
               </h2>
               <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-                Quelle que soit la nature de votre projet, nous vous accompagnons dans votre demande de raccordement electrique
+                Quelle que soit la nature de votre projet, nous vous accompagnons dans votre demande de raccordement électrique
               </p>
             </div>
 
@@ -447,7 +432,7 @@ export default function HomePage() {
                     <img src={augmentationPuissanceIcon} alt="Augmentation de Puissance" className="w-full h-full object-contain" loading="lazy" />
                   </div>
                   <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Augmentation de Puissance</h3>
-                  <p className="text-base md:text-lg text-gray-600 mb-6">Augmentez la capacite de votre raccordement electrique existant</p>
+                  <p className="text-base md:text-lg text-gray-600 mb-6">Augmentez la capacité de votre raccordement électrique existant</p>
                   <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
                     Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </span>
@@ -475,7 +460,7 @@ export default function HomePage() {
                     <img src={servicesTechniquesIcon} alt="Viabilisation Terrain" className="w-full h-full object-contain" loading="lazy" />
                   </div>
                   <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Viabilisation Terrain</h3>
-                  <p className="text-base md:text-lg text-gray-600 mb-6">Preparation electrique de votre terrain a batir</p>
+                  <p className="text-base md:text-lg text-gray-600 mb-6">Préparation électrique de votre terrain à bâtir</p>
                   <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
                     Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </span>
@@ -516,7 +501,7 @@ export default function HomePage() {
                 Assistance pour Votre Demande de Raccordement Enedis
               </h2>
               <p className="text-lg md:text-xl text-gray-600">
-                Nous sommes a votre ecoute
+                Nous sommes à votre écoute
               </p>
             </div>
 
@@ -600,7 +585,7 @@ export default function HomePage() {
                   Besoin d'aide ?
                 </h2>
                 <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-lg mx-auto lg:mx-0">
-                  Notre equipe d'experts est disponible pour repondre a toutes vos questions
+                  Notre équipe d'experts est disponible pour répondre à toutes vos questions
                 </p>
                 
                 {/* Contact Buttons */}
@@ -621,7 +606,7 @@ export default function HomePage() {
                 </div>
                 
                 <p className="text-base text-gray-500">
-                  Lundi - Vendredi, 8h a 18h
+                  Lundi - Vendredi, 8h à 18h
                 </p>
               </div>
             </div>
@@ -637,7 +622,7 @@ export default function HomePage() {
                 Ce que nos clients disent de nous
               </h2>
               <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
-                Des centaines de particuliers et professionnels nous font confiance pour leurs demarches de raccordement electrique
+                Des centaines de particuliers et professionnels nous font confiance pour leurs démarches de raccordement électrique
               </p>
             </div>
 
@@ -661,7 +646,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="text-gray-700 leading-relaxed">
-                  "Service impeccable du debut a la fin. Mon dossier de raccordement pour ma maison neuve a ete traite en 3 semaines. L'equipe m'a tenu informe a chaque etape. Je recommande vivement."
+                  "Service impeccable du début à la fin. Mon dossier de raccordement pour ma maison neuve a été traité en 3 semaines. L'équipe m'a tenu informé à chaque étape. Je recommande vivement."
                 </p>
                 <p className="text-xs text-gray-400 mt-4">Novembre 2024</p>
               </div>
@@ -683,7 +668,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="text-gray-700 leading-relaxed">
-                  "En tant que chef de chantier, j'ai besoin de reactivite. La demande de raccordement provisoire a ete traitee rapidement et le suivi etait parfait. Tres professionnel."
+                  "En tant que chef de chantier, j'ai besoin de réactivité. La demande de raccordement provisoire a été traitée rapidement et le suivi était parfait. Très professionnel."
                 </p>
                 <p className="text-xs text-gray-400 mt-4">Octobre 2024</p>
               </div>
@@ -705,9 +690,9 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="text-gray-700 leading-relaxed">
-                  "Je ne savais pas par ou commencer pour augmenter la puissance de mon compteur. Tout a ete pris en charge, je n'ai eu qu'a valider. Simple et efficace."
+                  "Je ne savais pas par où commencer pour augmenter la puissance de mon compteur. Tout a été pris en charge, je n'ai eu qu'à valider. Simple et efficace."
                 </p>
-                <p className="text-xs text-gray-400 mt-4">Decembre 2024</p>
+                <p className="text-xs text-gray-400 mt-4">Décembre 2024</p>
               </div>
 
               {/* Testimonial 4 */}
@@ -727,7 +712,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="text-gray-700 leading-relaxed">
-                  "Pour la viabilisation de mon terrain, les demarches administratives etaient complexes. Cette equipe a su gerer tout le processus avec Enedis. Merci !"
+                  "Pour la viabilisation de mon terrain, les démarches administratives étaient complexes. Cette équipe a su gérer tout le processus avec Enedis. Merci !"
                 </p>
                 <p className="text-xs text-gray-400 mt-4">Septembre 2024</p>
               </div>
@@ -749,7 +734,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="text-gray-700 leading-relaxed">
-                  "Le formulaire en ligne est tres intuitif et l'equipe repond rapidement aux questions. Mon raccordement definitif a ete effectue dans les delais annonces."
+                  "Le formulaire en ligne est très intuitif et l'équipe répond rapidement aux questions. Mon raccordement définitif a été effectué dans les délais annoncés."
                 </p>
                 <p className="text-xs text-gray-400 mt-4">Novembre 2024</p>
               </div>
@@ -771,7 +756,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="text-gray-700 leading-relaxed">
-                  "Pour notre projet de lotissement, nous avions besoin d'un partenaire fiable. La coordination avec Enedis a ete parfaitement geree. Tres satisfait du service."
+                  "Pour notre projet de lotissement, nous avions besoin d'un partenaire fiable. La coordination avec Enedis a été parfaitement gérée. Très satisfait du service."
                 </p>
                 <p className="text-xs text-gray-400 mt-4">Octobre 2024</p>
               </div>
@@ -799,10 +784,10 @@ export default function HomePage() {
             {/* Header */}
             <div className="text-center mb-8 md:mb-10">
               <h2 className="text-[28px] sm:text-[32px] md:text-[42px] font-bold text-[#0066CC] mb-4 italic">
-                Questions frequemment posees
+                Questions fréquemment posées
               </h2>
               <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
-                Trouvez rapidement les reponses a vos questions sur le raccordement electrique Enedis
+                Trouvez rapidement les réponses à vos questions sur le raccordement électrique Enedis
               </p>
             </div>
 
@@ -812,13 +797,13 @@ export default function HomePage() {
               {/* Category 1: Demarches et Documents */}
               <div>
                 <h3 className="text-lg font-bold text-gray-900 mb-6 pb-2 border-b-2 border-[#3B82F6]">
-                  Demarches et documents
+                  Démarches et documents
                 </h3>
                 <div className="space-y-3">
                   {[
-                    { q: "Quels documents fournir pour mon dossier ?", a: "Un justificatif d'identite, plan de situation, plan de masse et autorisation d'urbanisme (permis ou declaration prealable)." },
-                    { q: "Mon dossier est-il depose aupres d'Enedis ?", a: "Oui, nous constituons et deposons votre dossier complet aupres d'Enedis apres verification de conformite." },
-                    { q: "Puis-je modifier ma demande apres envoi ?", a: "Oui, contactez notre equipe pour toute modification. Nous ajusterons votre dossier avant sa transmission finale." }
+                    { q: "Quels documents fournir pour mon dossier ?", a: "Un justificatif d'identité, plan de situation, plan de masse et autorisation d'urbanisme (permis ou déclaration préalable)." },
+                    { q: "Mon dossier est-il déposé auprès d'Enedis ?", a: "Oui, nous constituons et déposons votre dossier complet auprès d'Enedis après vérification de conformité." },
+                    { q: "Puis-je modifier ma demande après envoi ?", a: "Oui, contactez notre équipe pour toute modification. Nous ajusterons votre dossier avant sa transmission finale." }
                   ].map((item, idx) => (
                     <details key={idx} className="group" data-testid={`faq-demarches-${idx + 1}`}>
                       <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] group-open:text-[#3B82F6] transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 [&::-webkit-details-marker]:hidden list-none">
@@ -836,13 +821,13 @@ export default function HomePage() {
               {/* Category 2: Delais et Suivi */}
               <div>
                 <h3 className="text-lg font-bold text-gray-900 mb-6 pb-2 border-b-2 border-[#3B82F6]">
-                  Delais et suivi
+                  Délais et suivi
                 </h3>
                 <div className="space-y-3">
                   {[
-                    { q: "Quel est le delai de traitement moyen ?", a: "Raccordement provisoire : 2-4 semaines. Raccordement definitif : 2-6 mois selon la complexite des travaux." },
-                    { q: "Puis-je suivre l'avancement de ma demande ?", a: "Oui, vous recevez des notifications email a chaque etape et notre equipe reste disponible pour vous informer." },
-                    { q: "Quand intervient Enedis sur mon terrain ?", a: "Apres validation du devis et realisation des travaux prealables, Enedis planifie l'intervention sous 2 a 8 semaines." }
+                    { q: "Quel est le délai de traitement moyen ?", a: "Raccordement provisoire : 2-4 semaines. Raccordement définitif : 2-6 mois selon la complexité des travaux." },
+                    { q: "Puis-je suivre l'avancement de ma demande ?", a: "Oui, vous recevez des notifications email à chaque étape et notre équipe reste disponible pour vous informer." },
+                    { q: "Quand intervient Enedis sur mon terrain ?", a: "Après validation du devis et réalisation des travaux préalables, Enedis planifie l'intervention sous 2 à 8 semaines." }
                   ].map((item, idx) => (
                     <details key={idx} className="group" data-testid={`faq-delais-${idx + 1}`}>
                       <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] group-open:text-[#3B82F6] transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 [&::-webkit-details-marker]:hidden list-none">
@@ -864,8 +849,8 @@ export default function HomePage() {
                 </h3>
                 <div className="space-y-3">
                   {[
-                    { q: "Le paiement en ligne est-il securise ?", a: "Oui, notre systeme de paiement est certifie PCI DSS niveau 1. Vos donnees bancaires sont chiffrees et jamais stockees." },
-                    { q: "Quels sont les frais de service ?", a: "Nos frais de constitution de dossier sont affiches clairement. Les frais Enedis sont factures separement par le gestionnaire." },
+                    { q: "Le paiement en ligne est-il sécurisé ?", a: "Oui, notre système de paiement est certifié PCI DSS niveau 1. Vos données bancaires sont chiffrées et jamais stockées." },
+                    { q: "Quels sont les frais de service ?", a: "Nos frais de constitution de dossier sont affichés clairement. Les frais Enedis sont facturés séparément par le gestionnaire." },
                     { q: "Puis-je payer en plusieurs fois ?", a: "Actuellement, le paiement s'effectue en une fois lors de la validation de votre demande." }
                   ].map((item, idx) => (
                     <details key={idx} className="group" data-testid={`faq-tarifs-${idx + 1}`}>
@@ -909,7 +894,7 @@ export default function HomePage() {
             {/* Contact Bar */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-8 text-center sm:text-left">
-                <p className="text-sm sm:text-base font-semibold text-gray-900">Une question&nbsp;? Nos conseillers vous repondent.</p>
+                <p className="text-sm sm:text-base font-semibold text-gray-900">Une question&nbsp;? Nos conseillers vous répondent.</p>
                 <div className="flex items-center text-sm text-gray-600">
                   <a href="tel:0970709570" className="flex items-center gap-2 hover:text-[#3B82F6] transition-colors">
                     <Phone className="w-4 h-4" />
