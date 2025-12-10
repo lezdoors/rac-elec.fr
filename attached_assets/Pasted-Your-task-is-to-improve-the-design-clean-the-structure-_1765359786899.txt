@@ -1,0 +1,137 @@
+Your task is to improve the design, clean the structure, and adjust the typography while keeping the site professional and administrative.
+
+Do not modify any logic (Stripe, Supabase, form, routing).
+This task is purely UI/UX.
+
+⸻
+
+1. Fix the section below the hero (“double hero” issue)
+
+The current layout creates the impression of two hero sections, which breaks the visual hierarchy.
+
+You must:
+
+A. Remove the “double hero” feel
+
+The section right under the hero should NOT look like another hero.
+
+B. Move the illustration (“woman filling the form”)
+
+Place the illustration on the LEFT side.
+
+C. Move the text to the RIGHT side
+
+Text block includes:
+	•	H2 title
+	•	Paragraph
+	•	CTA button (“Start my request” / “Démarrer ma demande”)
+
+D. Reduce vertical spacing
+
+This section should look informational, not like a hero banner.
+
+E. Typography adjustments
+	•	H2 should be smaller than the main hero H1
+	•	Paragraph spacing should be tighter
+	•	Maintain an administrative/government-style simplicity
+
+Section outcome
+
+Left → illustration
+Right → structured information block
+Background should be white or very light gray — not hero-style.
+
+⸻
+
+2. Replace the last “Why trust us?” section above the footer
+
+Currently, you have duplicate trust sections.
+Remove the last one (the one just above the footer).
+
+Replace it with a professional FAQ section
+
+Add a clean FAQ with 6–8 questions.
+Here are the questions to use:
+	1.	What documents are required for a connection request?
+	2.	What is the typical processing time for a dossier?
+	3.	Do you handle temporary connection requests for construction sites?
+	4.	Does your service include submitting the dossier to Enedis?
+	5.	Can I track the progress of my request?
+	6.	Are connection costs included in your service?
+	7.	Is online payment secure?
+	8.	How can I contact your support team?
+
+FAQ formatting:
+	•	Use collapsible accordion components or simple Q&A blocks
+	•	No emojis
+	•	Clean, professional typography
+	•	Spacing consistent with the rest of the website
+
+⸻
+
+3. Typography and visual hierarchy improvements
+
+Apply the following:
+
+A. Use one consistent font system
+
+Preferably Inter, Nunito Sans, or your existing administrative font.
+
+B. Heading hierarchy
+	•	H1: largest, bold (700)
+	•	H2: slightly smaller, medium weight (600)
+	•	H3: regular (500–600)
+
+C. Paragraphs
+	•	Increase line-height for readability
+	•	Reduce oversized paragraphs
+	•	Consistent text size across sections
+
+D. Buttons
+	•	Use ONE visual style for all CTA buttons
+	•	Ensure padding and border-radius are consistent
+
+E. Section spacing
+
+Use consistent padding:
+	•	Desktop: ~80px vertical
+	•	Tablet: ~48px
+	•	Mobile: ~32px
+
+⸻
+
+4. Illustration consistency
+
+You must:
+	•	Keep the current illustration style
+	•	Ensure all illustrations have similar visual size and alignment
+	•	No animations
+	•	No emojis
+	•	Maintain a professional, administrative style
+
+⸻
+
+5. Do NOT change any functional logic
+
+Do not modify:
+	•	Form steps
+	•	Stripe checkout or configuration
+	•	Supabase logic
+	•	Event tracking
+	•	Routing
+	•	Submission process
+
+This task is limited to layout, styling, spacing, and homepage structure.
+
+⸻
+
+6. Final checks
+
+After making the updates, verify that:
+	1.	The homepage flow is structured as:
+Hero → Informational section → Process steps → Connection types → FAQ → Footer
+	2.	There is no second hero section.
+	3.	Illustration placements are clean and consistent.
+	4.	Typography hierarchy is correct and professional.
+	5.	No emojis appear anywhere.
+	6.	The CTA “Démarrer ma demande” remains clearly visible and consistent across sections.
