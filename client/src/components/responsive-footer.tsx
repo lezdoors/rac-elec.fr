@@ -39,19 +39,14 @@ export function ResponsiveFooter() {
           
           {/* Logo et description - aligné avec le style du hero */}
           <div className="space-y-4">
-            {/* Logo en version footer optimisée pour le chargement */}
+            {/* Logo en version footer */}
             <div className="flex items-start">
-              <div className="relative flex items-center">
-                <div className="p-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/10">
-                  <div className="flex flex-col justify-center">
-                    <div className="text-xl font-bold text-white leading-tight tracking-tight">
-                      demande-raccordement.fr
-                    </div>
-                    <div className="text-xs text-white/80 tracking-wide">
-                      Partenaire n°1 pour vos démarches Enedis
-                    </div>
-                  </div>
-                </div>
+              <div className="bg-white rounded-lg p-2">
+                <img 
+                  src="/logo-service-raccordement.png" 
+                  alt="Service Raccordement Electricite - Expert raccordement Enedis" 
+                  className="h-[45px] w-auto object-contain"
+                />
               </div>
             </div>
             <p className="text-sm text-gray-300 max-w-xs mt-1 leading-relaxed">
