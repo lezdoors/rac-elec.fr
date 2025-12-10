@@ -16,6 +16,10 @@ import augmentationPuissanceIcon from "@assets/augmentation_de_puissance_1765333
 import servicesTechniquesIcon from "@assets/services-techniques_1765333395814.webp";
 import raccordementEnedisIcon from "@assets/Raccordement-Enedis_1765333395814.webp";
 import formIntroIllustration from "@assets/form-intro-illustartion_(Website)_1765358383139.webp";
+import appelezNousIllustration from "@assets/Appelez-nous_1765363264301.webp";
+import rappelGratuitIllustration from "@assets/Appelez--nous_1765363489714.webp";
+import chatIllustration from "@assets/Chat_1765363276867.webp";
+import contactFormIllustration from "@assets/Besoin_d'aide_1765363456384.webp";
 
 const useMobileDetection = () => {
   const [isMobile, setIsMobile] = useState(true);
@@ -188,14 +192,14 @@ export default function HomePage() {
                   Commencez votre demande de raccordement Enedis ici
                 </h2>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-5 max-w-lg mx-auto lg:mx-0">
-                  Demarrez votre demande de raccordement electrique Enedis en quelques clics. Formulaire 100% en ligne, traitement rapide, accompagnement expert inclus.
+                  Démarrez votre demande de raccordement électrique Enedis en quelques clics. Formulaire 100% en ligne, traitement rapide, accompagnement expert inclus.
                 </p>
                 <Link href="/raccordement-enedis#formulaire-raccordement">
                   <button 
                     className="bg-[#4F46E5] hover:bg-[#4338CA] text-white font-medium text-sm px-6 py-3 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
                     data-testid="cta-form-intro-button"
                   >
-                    Demarrer ma demande
+                    Démarrer ma demande
                   </button>
                 </Link>
               </div>
@@ -215,10 +219,10 @@ export default function HomePage() {
             {/* Header */}
             <div className="text-center mb-10 md:mb-12">
               <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-[#0066CC] mb-3 leading-tight">
-                Comment Faire sa Demande de Raccordement Electrique en Ligne ?
+                Comment faire sa demande de raccordement électrique en ligne ?
               </h2>
               <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Processus 100% en ligne en 4 etapes simples. Votre demande de raccordement Enedis traitee rapidement avec accompagnement personnalise.
+                Processus 100% en ligne en 4 étapes simples. Votre demande de raccordement Enedis traitée rapidement avec accompagnement personnalisé.
               </p>
             </div>
 
@@ -276,7 +280,7 @@ export default function HomePage() {
                   </h3>
                   {/* Description */}
                   <p className="text-sm text-gray-500 px-2">
-                    Renseignez votre projet en quelques étapes.
+                    Renseignez votre projet en quelques minutes.
                   </p>
                 </div>
               </div>
@@ -361,7 +365,7 @@ export default function HomePage() {
                 Votre Demande de <span className="text-[#0072CE]">Raccordement</span>
               </h2>
               <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto mb-5">
-                Choisissez le type de raccordement adapte a votre projet
+                Choisissez le type de raccordement adapté à votre projet
               </p>
               
               {/* Help section */}
@@ -495,10 +499,10 @@ export default function HomePage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-4xl">
             <div className="text-center mb-10">
               <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-3">
-                Questions frequentes
+                Questions fréquentes
               </h2>
               <p className="text-gray-600 text-base">
-                Retrouvez les reponses aux questions les plus courantes sur nos services
+                Retrouvez les réponses aux questions les plus courantes sur nos services
               </p>
             </div>
 
@@ -506,44 +510,44 @@ export default function HomePage() {
               {/* FAQ Item 1 */}
               <details className="bg-white rounded-lg border border-gray-200 group" data-testid="faq-item-1">
                 <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors">
-                  <span>Quels documents sont necessaires pour une demande de raccordement ?</span>
+                  <span>Quels documents sont nécessaires pour une demande de raccordement ?</span>
                   <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
                 </summary>
                 <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
-                  Les documents requis varient selon le type de raccordement. Generalement, vous aurez besoin d'un justificatif d'identite, d'un plan de situation du terrain, d'un plan de masse, et d'une autorisation d'urbanisme (permis de construire ou declaration prealable).
+                  Les documents requis varient selon le type de raccordement. Généralement, vous aurez besoin d'un justificatif d'identité, d'un plan de situation du terrain, d'un plan de masse, et d'une autorisation d'urbanisme (permis de construire ou déclaration préalable).
                 </div>
               </details>
 
               {/* FAQ Item 2 */}
               <details className="bg-white rounded-lg border border-gray-200 group" data-testid="faq-item-2">
                 <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors">
-                  <span>Quel est le delai moyen de traitement d'un dossier ?</span>
+                  <span>Quel est le délai moyen de traitement d'un dossier ?</span>
                   <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
                 </summary>
                 <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
-                  Le delai de traitement depend du type de raccordement. Pour un raccordement provisoire, comptez 2 a 4 semaines. Pour un raccordement definitif, le delai varie de 2 a 6 mois selon la complexite des travaux a realiser.
+                  Le délai de traitement dépend du type de raccordement. Pour un raccordement provisoire, comptez 2 à 4 semaines. Pour un raccordement définitif, le délai varie de 2 à 6 mois selon la complexité des travaux à réaliser.
                 </div>
               </details>
 
               {/* FAQ Item 3 */}
               <details className="bg-white rounded-lg border border-gray-200 group" data-testid="faq-item-3">
                 <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors">
-                  <span>Gerez-vous les demandes de raccordement provisoire pour les chantiers ?</span>
+                  <span>Gérez-vous les demandes de raccordement provisoire pour les chantiers ?</span>
                   <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
                 </summary>
                 <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
-                  Oui, nous prenons en charge les demandes de raccordement provisoire pour les chantiers de construction. Ce type de raccordement temporaire permet d'alimenter le chantier en electricite pendant la duree des travaux.
+                  Oui, nous prenons en charge les demandes de raccordement provisoire pour les chantiers de construction. Ce type de raccordement temporaire permet d'alimenter le chantier en électricité pendant la durée des travaux.
                 </div>
               </details>
 
               {/* FAQ Item 4 */}
               <details className="bg-white rounded-lg border border-gray-200 group" data-testid="faq-item-4">
                 <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors">
-                  <span>Votre service inclut-il le depot du dossier aupres d'Enedis ?</span>
+                  <span>Votre service inclut-il le dépôt du dossier auprès d'Enedis ?</span>
                   <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
                 </summary>
                 <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
-                  Oui, notre service comprend la constitution complete de votre dossier et son depot officiel aupres d'Enedis. Nous verifions que tous les documents sont conformes avant transmission pour eviter tout rejet ou retard.
+                  Oui, notre service comprend la constitution complète de votre dossier et son dépôt officiel auprès d'Enedis. Nous vérifions que tous les documents sont conformes avant transmission pour éviter tout rejet ou retard.
                 </div>
               </details>
 
@@ -554,7 +558,7 @@ export default function HomePage() {
                   <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
                 </summary>
                 <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
-                  Absolument. Vous recevrez des notifications par email a chaque etape importante de votre dossier. Notre equipe reste disponible pour repondre a vos questions et vous tenir informe de l'avancement.
+                  Absolument. Vous recevrez des notifications par email à chaque étape importante de votre dossier. Notre équipe reste disponible pour répondre à vos questions et vous tenir informé de l'avancement.
                 </div>
               </details>
 
@@ -565,18 +569,18 @@ export default function HomePage() {
                   <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
                 </summary>
                 <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
-                  Non, notre tarif couvre uniquement notre service d'accompagnement et de constitution de dossier. Les frais de raccordement factures par Enedis sont a votre charge et vous seront communiques directement par Enedis apres etude de votre dossier.
+                  Non, notre tarif couvre uniquement notre service d'accompagnement et de constitution de dossier. Les frais de raccordement facturés par Enedis sont à votre charge et vous seront communiqués directement par Enedis après étude de votre dossier.
                 </div>
               </details>
 
               {/* FAQ Item 7 */}
               <details className="bg-white rounded-lg border border-gray-200 group" data-testid="faq-item-7">
                 <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors">
-                  <span>Le paiement en ligne est-il securise ?</span>
+                  <span>Le paiement en ligne est-il sécurisé ?</span>
                   <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
                 </summary>
                 <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
-                  Oui, tous les paiements sont traites via Stripe, une plateforme de paiement certifiee PCI DSS niveau 1. Vos donnees bancaires sont chiffrees et ne sont jamais stockees sur nos serveurs.
+                  Oui, tous les paiements sont traités via Stripe, une plateforme de paiement certifiée PCI DSS niveau 1. Vos données bancaires sont chiffrées et ne sont jamais stockées sur nos serveurs.
                 </div>
               </details>
 
@@ -587,9 +591,102 @@ export default function HomePage() {
                   <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" />
                 </summary>
                 <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed">
-                  Vous pouvez nous contacter par email ou via notre formulaire de contact. Notre equipe repond generalement sous 24 a 48 heures ouvrées. Vous trouverez egalement nos coordonnees telephoniques sur notre page de contact.
+                  Vous pouvez nous contacter par email ou via notre formulaire de contact. Notre équipe répond généralement sous 24 à 48 heures ouvrées. Vous trouverez également nos coordonnées téléphoniques sur notre page de contact.
                 </div>
               </details>
+            </div>
+          </div>
+        </section>
+
+        {/* ASSISTANCE SECTION - Between FAQ and CTA */}
+        <section className="py-16 md:py-20 bg-white" id="assistance" data-animate data-testid="assistance-section">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-6xl">
+            {/* Header */}
+            <div className="text-center mb-12">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-3">
+                Assistance pour votre demande de raccordement Enedis
+              </h2>
+              <p className="text-gray-600 text-base">
+                Nous sommes à votre écoute pour vous accompagner.
+              </p>
+            </div>
+
+            {/* 4 Cards Grid */}
+            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-700 ${isVisible['assistance'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              
+              {/* Card 1 - Appelez-nous */}
+              <a 
+                href="tel:0970709570" 
+                className="group bg-white border border-gray-200 rounded-2xl p-6 text-center hover:shadow-md hover:border-[#0072CE]/40 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                data-testid="assistance-card-call"
+              >
+                <div className="w-24 h-24 mx-auto mb-4">
+                  <img 
+                    src={appelezNousIllustration} 
+                    alt="Appelez-nous" 
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <h3 className="text-base font-semibold text-[#0072CE] mb-2">Appelez-nous</h3>
+                <p className="text-gray-600 text-sm max-w-[240px] mx-auto">Parlez directement avec un conseiller.</p>
+              </a>
+
+              {/* Card 2 - Rappel gratuit */}
+              {/* TODO: Create dedicated /rappel page for callback requests */}
+              <Link 
+                href="/contact"
+                className="group bg-white border border-gray-200 rounded-2xl p-6 text-center hover:shadow-md hover:border-[#0072CE]/40 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                data-testid="assistance-card-callback"
+              >
+                <div className="w-24 h-24 mx-auto mb-4">
+                  <img 
+                    src={rappelGratuitIllustration} 
+                    alt="Rappel gratuit" 
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <h3 className="text-base font-semibold text-[#0072CE] mb-2">Rappel gratuit</h3>
+                <p className="text-gray-600 text-sm max-w-[240px] mx-auto">Laissez votre numéro, nous vous rappelons rapidement.</p>
+              </Link>
+
+              {/* Card 3 - Chat */}
+              {/* TODO: Integrate chat widget when available */}
+              <Link 
+                href="/contact"
+                className="group bg-white border border-gray-200 rounded-2xl p-6 text-center hover:shadow-md hover:border-[#0072CE]/40 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                data-testid="assistance-card-chat"
+              >
+                <div className="w-24 h-24 mx-auto mb-4">
+                  <img 
+                    src={chatIllustration} 
+                    alt="Chat" 
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <h3 className="text-base font-semibold text-[#0072CE] mb-2">Chat</h3>
+                <p className="text-gray-600 text-sm max-w-[240px] mx-auto">Obtenez une réponse en direct.</p>
+              </Link>
+
+              {/* Card 4 - Formulaire de contact */}
+              <Link 
+                href="/contact"
+                className="group bg-white border border-gray-200 rounded-2xl p-6 text-center hover:shadow-md hover:border-[#0072CE]/40 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                data-testid="assistance-card-form"
+              >
+                <div className="w-24 h-24 mx-auto mb-4">
+                  <img 
+                    src={contactFormIllustration} 
+                    alt="Formulaire de contact" 
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <h3 className="text-base font-semibold text-[#0072CE] mb-2">Formulaire de contact</h3>
+                <p className="text-gray-600 text-sm max-w-[240px] mx-auto">Envoyez votre demande, réponse sous 24 heures.</p>
+              </Link>
             </div>
           </div>
         </section>
@@ -603,7 +700,7 @@ export default function HomePage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-3xl text-center">
             {/* Headline */}
             <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-3">
-              Pret a demarrer votre projet ?
+              Prêt à démarrer votre projet ?
             </h2>
 
             {/* Subtext */}
@@ -623,7 +720,7 @@ export default function HomePage() {
 
             {/* Secondary text */}
             <p className="text-white/70 text-sm">
-              Accompagnement personnalise sans engagement
+              Accompagnement personnalisé sans engagement
             </p>
           </div>
         </section>
