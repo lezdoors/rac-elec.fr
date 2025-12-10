@@ -120,7 +120,7 @@ export default function HomePage() {
                 <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4 mb-6 sm:mb-8 md:mb-10">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="w-full sm:w-auto bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+                      className="w-full sm:w-auto bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 rounded-md shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
                       data-testid="cta-hero-button"
                     >
                       Démarrer ma demande
@@ -128,7 +128,7 @@ export default function HomePage() {
                   </Link>
                   <Link href="/contact">
                     <button 
-                      className="w-full sm:w-auto bg-white hover:bg-gray-50 text-gray-700 font-semibold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-gray-300 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2"
+                      className="w-full sm:w-auto bg-white hover:bg-gray-50 text-gray-700 font-semibold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 rounded-md border border-gray-300 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2"
                       data-testid="contact-hero-button"
                     >
                       <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -278,7 +278,7 @@ export default function HomePage() {
             <div className="text-center">
               <Link href="/raccordement-enedis#formulaire-raccordement">
                 <button 
-                  className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+                  className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-md shadow-lg hover:shadow-xl transition-all duration-200"
                   data-testid="cta-process-button"
                 >
                   Commencer maintenant
@@ -363,7 +363,7 @@ export default function HomePage() {
                 <div className="mt-12">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+                      className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-md shadow-lg hover:shadow-xl transition-all duration-200"
                       data-testid="cta-steps-simple-button"
                     >
                       Démarrer ma demande maintenant
@@ -586,13 +586,13 @@ export default function HomePage() {
                 <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-6">
                   <a 
                     href="tel:0970709570" 
-                    className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-full shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-3"
+                    className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-md shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-3"
                   >
                     <Phone className="w-5 h-5" />
                     09 70 70 95 70
                   </a>
                   <Link href="/contact">
-                    <button className="bg-white hover:bg-gray-50 text-gray-700 font-semibold text-base px-8 py-4 rounded-full border border-gray-300 shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-3">
+                    <button className="bg-white hover:bg-gray-50 text-gray-700 font-semibold text-base px-8 py-4 rounded-md border border-gray-300 shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-3">
                       <Mail className="w-5 h-5" />
                       Envoyer un email
                     </button>
@@ -900,7 +900,7 @@ export default function HomePage() {
                 source="faq_callback"
                 trigger={
                   <button 
-                    className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-sm px-6 py-3 rounded-full transition-all duration-200"
+                    className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-sm px-6 py-3 rounded-md transition-all duration-200"
                     data-testid="faq-callback-button"
                   >
                     Être rappelé
