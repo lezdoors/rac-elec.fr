@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import serviceLogo from "@assets/service-logo.png.png_1765371343702.png";
+import logoIllu from "@assets/logo-illu_1765377736929.png";
 
 export function ProfessionalHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -28,16 +28,16 @@ export function ProfessionalHeader() {
             <div className="flex items-center gap-3">
               {/* Logo Icon */}
               <img 
-                src={serviceLogo} 
-                alt="Service Raccordement Electricite" 
-                className="w-8 h-8 object-contain"
+                src={logoIllu} 
+                alt="Service Raccordement Électricité" 
+                className="w-10 h-10 object-contain"
               />
               {/* Separator */}
               <div className="hidden sm:block w-px h-8 bg-gray-300"></div>
               {/* Two-line Brand Text */}
               <div className="hidden sm:flex flex-col">
                 <span className="text-base font-semibold text-gray-900 leading-tight">
-                  Service Raccordement Electricite
+                  Service Raccordement Électricité
                 </span>
                 <span className="text-xs text-gray-500 leading-tight">
                   Expert raccordement Enedis
