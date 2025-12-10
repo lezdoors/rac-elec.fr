@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import logoIllu from "@assets/logo-illu_1765377736929.png";
+import logoIllu from "@assets/logo-illu_1765394920144.png";
 
 export function ProfessionalHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
