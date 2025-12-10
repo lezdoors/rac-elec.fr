@@ -139,7 +139,7 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>Raccordement Électrique Enedis – Demande en Ligne | portail-electricite.com</title>
+        <title>Raccordement Électrique Enedis – Demande en Ligne | demande-raccordement.fr</title>
         <meta name="description" content="Demande de raccordement Enedis simplifiée. Service rapide et sécurisé pour tous projets électriques." />
         <link rel="canonical" href="https://www.raccordement-connect.com/" />
       </Helmet>

@@ -57,7 +57,7 @@ export function EnedisAuthenticMasterpiece({ className, size = 'header', variant
   return (
     <div className={cn("inline-flex items-center gap-3", sizesMap[size], className)}>
       <svg viewBox="0 0 350 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-        <title>Votre partenaire - Raccordement au réseau d'électricité d'Enedis</title>
+        <title>Service Raccordement Électricité - Expert raccordement Enedis</title>
         
         <defs>
           {/* Filtre doux pour l'authentique style Enedis */}
@@ -176,7 +176,7 @@ export function EnedisAuthenticMasterpiece({ className, size = 'header', variant
           <circle cx="0" cy="4" r="1.2" fill="white" opacity="0.4"/>
         </g>
         
-        {/* TEXTE OFFICIEL ENEDIS - Mobile-optimized */}
+        {/* TEXTE OFFICIEL - Mobile-optimized */}
         <g transform="translate(75, 26)">
           <text 
             fontFamily="Arial, Helvetica, sans-serif" 
@@ -185,7 +185,7 @@ export function EnedisAuthenticMasterpiece({ className, size = 'header', variant
             fill={color.textBold} 
             letterSpacing="0.2px"
           >
-            Votre partenaire
+            Service Raccordement
           </text>
           <text 
             fontFamily="Arial, Helvetica, sans-serif" 
@@ -195,7 +195,7 @@ export function EnedisAuthenticMasterpiece({ className, size = 'header', variant
             y={size === 'sm' ? '15' : '18'} 
             letterSpacing="0.1px"
           >
-            Raccordement au réseau
+            Électricité
           </text>
           <text 
             fontFamily="Arial, Helvetica, sans-serif" 
@@ -205,7 +205,7 @@ export function EnedisAuthenticMasterpiece({ className, size = 'header', variant
             y={size === 'sm' ? '27' : '32'} 
             letterSpacing="0.1px"
           >
-            d'électricité d'Enedis
+            Expert raccordement Enedis
           </text>
         </g>
         
@@ -259,7 +259,7 @@ function EnedisAuthenticCompact({ className, size = 'header', variant = 'light' 
   return (
     <div className={cn("inline-flex items-center gap-2", sizesMap[size], className)}>
       <svg viewBox="0 0 280 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-        <title>Votre partenaire - Raccordement Enedis</title>
+        <title>Service Raccordement Électricité - Expert raccordement Enedis</title>
         
         {/* Maison compacte */}
         <g transform="translate(8, 15)">
@@ -286,13 +286,13 @@ function EnedisAuthenticCompact({ className, size = 'header', variant = 'light' 
         {/* Texte compact mobile-optimized */}
         <g transform="translate(50, 20)">
           <text fontFamily="Arial, sans-serif" fontSize="14" fontWeight="700" fill={color.textBold}>
-            Votre partenaire
+            Service Raccordement
           </text>
           <text fontFamily="Arial, sans-serif" fontSize="10" fontWeight="400" fill={color.text} y="12">
-            Raccordement au réseau
+            Électricité
           </text>
           <text fontFamily="Arial, sans-serif" fontSize="10" fontWeight="400" fill={color.text} y="22">
-            d'électricité d'Enedis
+            Expert raccordement Enedis
           </text>
         </g>
       </svg>

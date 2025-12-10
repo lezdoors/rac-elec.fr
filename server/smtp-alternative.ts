@@ -12,14 +12,14 @@ import { eq } from 'drizzle-orm';
 
 // Configuration SMTP pour Replit (utilisant le port 587 TLS)
 const replitSmtpConfig: SmtpConfig = {
-  host: 'mail.portail-electricite.com',
+  host: 'mail.demande-raccordement.fr',
   port: 587,
   secure: false, // false pour TLS
   auth: {
-    user: 'notification@portail-electricite.com',
+    user: 'notification@demande-raccordement.fr',
     pass: 'Kamaka00'
   },
-  defaultFrom: 'notification@portail-electricite.com',
+  defaultFrom: 'notification@demande-raccordement.fr',
   enabled: true
 };
 
@@ -62,7 +62,7 @@ export async function sendEmailWithReplit(options: {
     const transporter = createReplitTransporter();
 
     // Récupérer les emails de notification depuis la base de données
-    let notificationEmails: string[] = ['marina.alves@portail-electricite.com', 'contact@portail-electricite.com'];
+    let notificationEmails: string[] = ['marina.alves@demande-raccordement.fr', 'contact@demande-raccordement.fr'];
     
     try {
       const notificationEmailRows = await db.select()
@@ -148,7 +148,7 @@ export async function sendNewSubmissionNotificationReplit(data: NewSubmissionEma
     
     // Envoi de l'email
     return await sendEmailWithReplit({
-      to: ['marina.alves@portail-electricite.com', 'contact@portail-electricite.com'],
+      to: ['marina.alves@demande-raccordement.fr', 'contact@demande-raccordement.fr'],
       subject: `Nouvelle demande - Ref: ${data.referenceNumber}`,
       html: emailHtml,
       text: `Nouvelle demande de raccordement - Référence: ${data.referenceNumber}\n

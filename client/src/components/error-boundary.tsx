@@ -93,7 +93,7 @@ Message: ${this.state.error?.message || 'Erreur inconnue'}
 Merci de votre attention.
     `);
     
-    window.location.href = `mailto:support@portail-electricite.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:support@demande-raccordement.fr?subject=${subject}&body=${body}`;
   };
 
   render() {

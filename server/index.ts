@@ -190,7 +190,7 @@ app.post("/api/test-template-clean-perfectionne", async (req, res) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        to: 'bonjour@portail-electricite.com',
+        to: 'bonjour@demande-raccordement.fr',
         subject: '[TEMPLATE 1] 🔷 Design Simple et Clean - ' + leadData.prenom + ' ' + leadData.nom,
         html: cleanHtml
       })

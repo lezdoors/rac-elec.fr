@@ -34,7 +34,7 @@ export async function queueEmail(emailData: {
       subject: emailData.subject,
       htmlContent: emailData.html,
       textContent: emailData.text || '',
-      fromAddress: emailData.from || 'notification@portail-electricite.com',
+      fromAddress: emailData.from || 'notification@demande-raccordement.fr',
       replyToAddress: emailData.replyTo || '',
       emailType: emailData.type,
       referenceData: emailData.referenceData ? JSON.stringify(emailData.referenceData) : null,
@@ -55,7 +55,7 @@ export async function queueEmail(emailData: {
 export async function queueNewSubmissionNotification(data: NewSubmissionEmailData): Promise<boolean> {
   try {
     // Préparer les destinataires
-    const recipients = ['marina.alves@portail-electricite.com', 'contact@portail-electricite.com'];
+    const recipients = ['marina.alves@demande-raccordement.fr', 'contact@demande-raccordement.fr'];
     
     // Créer le sujet
     const subject = `Nouvelle demande de raccordement: ${data.referenceNumber}`;
@@ -109,7 +109,7 @@ export async function queueNewSubmissionNotification(data: NewSubmissionEmailDat
       subject,
       html,
       text,
-      from: 'notification@portail-electricite.com',
+      from: 'notification@demande-raccordement.fr',
       replyTo: data.clientEmail,
       type: 'new_submission',
       referenceData: data
@@ -247,7 +247,7 @@ export async function queueContactNotification(data: ContactEmailData): Promise<
     
     // Enregistrer l'email dans la file d'attente pour l'équipe
     const result = await queueEmail({
-      to: ['marina.alves@portail-electricite.com', 'contact@portail-electricite.com'],
+      to: ['marina.alves@demande-raccordement.fr', 'contact@demande-raccordement.fr'],
       subject,
       html,
       text,

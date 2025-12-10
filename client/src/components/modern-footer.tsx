@@ -53,7 +53,7 @@ export function ModernFooter() {
             
             {/* Description courte */}
             <p className="text-gray-300 text-sm mb-6 max-w-xs mx-auto md:mx-0">
-              Votre partenaire expert pour tous vos projets de raccordement électrique en France.
+              Expert raccordement électrique pour tous vos projets en France.
             </p>
             
             {/* Contact téléphone - Ultra visible */}

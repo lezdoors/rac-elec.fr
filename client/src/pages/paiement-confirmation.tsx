@@ -378,7 +378,7 @@ export default function PaiementConfirmationPage() {
                     "provider": {
                       "@type": "Organization",
                       "name": "RaccordementElec",
-                      "url": "https://portail-electricite.com"
+                      "url": "https://demande-raccordement.fr"
                     }
                   },
                   "price": "${finalAmount}",

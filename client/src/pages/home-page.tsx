@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Zap, ArrowRight, Building, Home as HomeIcon, BarChart, Clock, Shield, Phone, CheckCircle, MapPin, FileText, Rocket, ChevronDown, Check, Users, Lock, Mail, Star } from "lucide-react";
+import { Zap, ArrowRight, Building, Home as HomeIcon, BarChart, Clock, Shield, Phone, CheckCircle, MapPin, FileText, Rocket, ChevronDown, Check, Users, Lock, Mail, Star, Plus } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { FloatingCtaButton } from "@/components/floating-cta-button";
@@ -627,118 +627,304 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* TESTIMONIALS SECTION */}
-        <section className="py-16 md:py-20 bg-gray-50" id="testimonials" data-animate data-testid="testimonials-section">
+        {/* TESTIMONIALS SECTION - Professional Design */}
+        <section className="py-16 md:py-24 bg-white" id="testimonials" data-animate data-testid="testimonials-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-16">
-              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-6">
-                Temoignages de nos clients
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-[28px] sm:text-[32px] md:text-[42px] font-bold text-[#0066CC] mb-4">
+                Ce que nos clients disent de nous
               </h2>
-              <p className="text-lg md:text-xl text-gray-600">
-                Ils nous ont fait confiance
+              <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+                Des centaines de particuliers et professionnels nous font confiance pour leurs demarches de raccordement electrique
               </p>
             </div>
 
-            {/* 3 Testimonial Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Testimonial Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               
               {/* Testimonial 1 */}
-              <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div className="flex items-start gap-4 mb-5">
+                  <div className="w-12 h-12 rounded-full bg-[#3B82F6] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                    SB
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Sophie Bertrand</p>
+                    <p className="text-sm text-gray-500">Raccordement maison neuve - Bordeaux</p>
+                  </div>
+                </div>
                 <div className="flex gap-1 mb-4">
                   {[1,2,3,4,5].map((star) => (
-                    <Star key={star} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <p className="text-lg text-gray-700 mb-6 italic">
-                  "Ils m'ont accompagne du debut a la fin, service rapide et clair."
+                <p className="text-gray-700 leading-relaxed">
+                  "Service impeccable du debut a la fin. Mon dossier de raccordement pour ma maison neuve a ete traite en 3 semaines. L'equipe m'a tenu informe a chaque etape. Je recommande vivement."
                 </p>
-                <p className="text-base font-semibold text-gray-900">Karim, Marseille</p>
+                <p className="text-xs text-gray-400 mt-4">Novembre 2024</p>
               </div>
 
               {/* Testimonial 2 */}
-              <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div className="flex items-start gap-4 mb-5">
+                  <div className="w-12 h-12 rounded-full bg-[#10B981] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                    MD
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Marc Dupont</p>
+                    <p className="text-sm text-gray-500">Raccordement provisoire chantier - Lyon</p>
+                  </div>
+                </div>
                 <div className="flex gap-1 mb-4">
                   {[1,2,3,4,5].map((star) => (
-                    <Star key={star} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <p className="text-lg text-gray-700 mb-6 italic">
-                  "Demande faite en quelques minutes, dossier valide rapidement."
+                <p className="text-gray-700 leading-relaxed">
+                  "En tant que chef de chantier, j'ai besoin de reactivite. La demande de raccordement provisoire a ete traitee rapidement et le suivi etait parfait. Tres professionnel."
                 </p>
-                <p className="text-base font-semibold text-gray-900">Julie, Lyon</p>
+                <p className="text-xs text-gray-400 mt-4">Octobre 2024</p>
               </div>
 
               {/* Testimonial 3 */}
-              <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div className="flex items-start gap-4 mb-5">
+                  <div className="w-12 h-12 rounded-full bg-[#8B5CF6] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                    CL
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Claire Laurent</p>
+                    <p className="text-sm text-gray-500">Modification compteur - Nantes</p>
+                  </div>
+                </div>
                 <div className="flex gap-1 mb-4">
                   {[1,2,3,4,5].map((star) => (
-                    <Star key={star} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <p className="text-lg text-gray-700 mb-6 italic">
-                  "Excellent suivi, tout est gere en ligne sans complication."
+                <p className="text-gray-700 leading-relaxed">
+                  "Je ne savais pas par ou commencer pour augmenter la puissance de mon compteur. Tout a ete pris en charge, je n'ai eu qu'a valider. Simple et efficace."
                 </p>
-                <p className="text-base font-semibold text-gray-900">Marc, Paris</p>
+                <p className="text-xs text-gray-400 mt-4">Decembre 2024</p>
+              </div>
+
+              {/* Testimonial 4 */}
+              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div className="flex items-start gap-4 mb-5">
+                  <div className="w-12 h-12 rounded-full bg-[#F59E0B] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                    PG
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Philippe Garcia</p>
+                    <p className="text-sm text-gray-500">Viabilisation terrain - Marseille</p>
+                  </div>
+                </div>
+                <div className="flex gap-1 mb-4">
+                  {[1,2,3,4,5].map((star) => (
+                    <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  "Pour la viabilisation de mon terrain, les demarches administratives etaient complexes. Cette equipe a su gerer tout le processus avec Enedis. Merci !"
+                </p>
+                <p className="text-xs text-gray-400 mt-4">Septembre 2024</p>
+              </div>
+
+              {/* Testimonial 5 */}
+              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div className="flex items-start gap-4 mb-5">
+                  <div className="w-12 h-12 rounded-full bg-[#EC4899] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                    AM
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Amelie Martin</p>
+                    <p className="text-sm text-gray-500">Raccordement definitif - Paris</p>
+                  </div>
+                </div>
+                <div className="flex gap-1 mb-4">
+                  {[1,2,3,4,5].map((star) => (
+                    <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  "Le formulaire en ligne est tres intuitif et l'equipe repond rapidement aux questions. Mon raccordement definitif a ete effectue dans les delais annonces."
+                </p>
+                <p className="text-xs text-gray-400 mt-4">Novembre 2024</p>
+              </div>
+
+              {/* Testimonial 6 */}
+              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div className="flex items-start gap-4 mb-5">
+                  <div className="w-12 h-12 rounded-full bg-[#06B6D4] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                    TR
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Thomas Roux</p>
+                    <p className="text-sm text-gray-500">Raccordement collectif - Lille</p>
+                  </div>
+                </div>
+                <div className="flex gap-1 mb-4">
+                  {[1,2,3,4,5].map((star) => (
+                    <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  "Pour notre projet de lotissement, nous avions besoin d'un partenaire fiable. La coordination avec Enedis a ete parfaitement geree. Tres satisfait du service."
+                </p>
+                <p className="text-xs text-gray-400 mt-4">Octobre 2024</p>
+              </div>
+            </div>
+
+            {/* Trust Indicator */}
+            <div className="text-center mt-12">
+              <div className="inline-flex items-center gap-2 bg-gray-50 px-6 py-3 rounded-full">
+                <div className="flex -space-x-2">
+                  {['SB', 'MD', 'CL', 'PG'].map((initials, idx) => (
+                    <div key={idx} className="w-8 h-8 rounded-full bg-[#3B82F6] border-2 border-white flex items-center justify-center text-white text-xs font-bold">
+                      {initials}
+                    </div>
+                  ))}
+                </div>
+                <span className="text-sm text-gray-600 ml-2">Plus de <strong className="text-gray-900">1 200 clients</strong> satisfaits</span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* FAQ SECTION */}
-        <section className="py-16 md:py-20 bg-white" id="faq" data-animate data-testid="faq-section">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-4xl">
-            <div className="text-center mb-16">
-              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-6">
-                Questions frequentes
+        {/* FAQ SECTION - Professional Multi-Column Design */}
+        <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white" id="faq" data-animate data-testid="faq-section">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
+            {/* Header */}
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-[28px] sm:text-[32px] md:text-[42px] font-bold text-[#0066CC] mb-4 italic">
+                Questions frequemment posees
               </h2>
-              <p className="text-lg md:text-xl text-gray-600">
-                Retrouvez les reponses aux questions les plus courantes
+              <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+                Trouvez rapidement les reponses a vos questions sur le raccordement electrique Enedis
               </p>
             </div>
 
-            <div className={`space-y-4 transition-all duration-700 ${isVisible['faq'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {/* FAQ Items */}
-              {[
-                {
-                  q: "Quels documents sont necessaires pour une demande de raccordement ?",
-                  a: "Les documents requis varient selon le type de raccordement. Generalement, vous aurez besoin d'un justificatif d'identite, d'un plan de situation du terrain, d'un plan de masse, et d'une autorisation d'urbanisme (permis de construire ou declaration prealable)."
-                },
-                {
-                  q: "Quel est le delai moyen de traitement d'un dossier ?",
-                  a: "Le delai de traitement depend du type de raccordement. Pour un raccordement provisoire, comptez 2 a 4 semaines. Pour un raccordement definitif, le delai varie de 2 a 6 mois selon la complexite des travaux a realiser."
-                },
-                {
-                  q: "Gerez-vous les demandes de raccordement provisoire pour les chantiers ?",
-                  a: "Oui, nous prenons en charge les demandes de raccordement provisoire pour les chantiers de construction. Ce type de raccordement temporaire permet d'alimenter le chantier en electricite pendant la duree des travaux."
-                },
-                {
-                  q: "Votre service inclut-il le depot du dossier aupres d'Enedis ?",
-                  a: "Oui, notre service comprend la constitution complete de votre dossier et son depot officiel aupres d'Enedis. Nous verifions que tous les documents sont conformes avant transmission pour eviter tout rejet ou retard."
-                },
-                {
-                  q: "Puis-je suivre l'avancement de ma demande ?",
-                  a: "Absolument. Vous recevrez des notifications par email a chaque etape importante de votre dossier. Notre equipe reste disponible pour repondre a vos questions et vous tenir informe de l'avancement."
-                },
-                {
-                  q: "Le paiement en ligne est-il securise ?",
-                  a: "Oui, tous les paiements sont traites via Stripe, une plateforme de paiement certifiee PCI DSS niveau 1. Vos donnees bancaires sont chiffrees et ne sont jamais stockees sur nos serveurs."
-                }
-              ].map((item, index) => (
-                <details 
-                  key={index}
-                  className="bg-white rounded-2xl group border border-gray-100 shadow-sm"
-                  data-testid={`faq-item-${index + 1}`}
-                >
-                  <summary className="flex items-center justify-between cursor-pointer p-6 text-left text-lg md:text-xl font-medium text-gray-900 hover:bg-gray-50 transition-colors rounded-2xl">
-                    <span>{item.q}</span>
-                    <ChevronDown className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform flex-shrink-0 ml-4" />
-                  </summary>
-                  <div className="px-6 pb-6 text-gray-600 text-base md:text-lg leading-relaxed">
-                    {item.a}
-                  </div>
-                </details>
-              ))}
+            {/* FAQ Categories Grid */}
+            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mb-12 transition-all duration-700 ${isVisible['faq'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              
+              {/* Category 1: Demarches et Documents */}
+              <div>
+                <h3 className="text-lg font-bold text-gray-900 mb-6 pb-2 border-b-2 border-[#3B82F6]">
+                  Demarches et documents
+                </h3>
+                <div className="space-y-3">
+                  {[
+                    { q: "Quels documents fournir pour mon dossier ?", a: "Un justificatif d'identite, plan de situation, plan de masse et autorisation d'urbanisme (permis ou declaration prealable)." },
+                    { q: "Mon dossier est-il depose aupres d'Enedis ?", a: "Oui, nous constituons et deposons votre dossier complet aupres d'Enedis apres verification de conformite." },
+                    { q: "Puis-je modifier ma demande apres envoi ?", a: "Oui, contactez notre equipe pour toute modification. Nous ajusterons votre dossier avant sa transmission finale." }
+                  ].map((item, idx) => (
+                    <details key={idx} className="group" data-testid={`faq-demarches-${idx + 1}`}>
+                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] transition-colors">
+                        <span className="text-sm font-medium pr-4">{item.q}</span>
+                        <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 transition-transform flex-shrink-0" />
+                      </summary>
+                      <div className="pb-3 text-sm text-gray-500 leading-relaxed pl-0">
+                        {item.a}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+
+              {/* Category 2: Delais et Suivi */}
+              <div>
+                <h3 className="text-lg font-bold text-gray-900 mb-6 pb-2 border-b-2 border-[#3B82F6]">
+                  Delais et suivi
+                </h3>
+                <div className="space-y-3">
+                  {[
+                    { q: "Quel est le delai de traitement moyen ?", a: "Raccordement provisoire : 2-4 semaines. Raccordement definitif : 2-6 mois selon la complexite des travaux." },
+                    { q: "Puis-je suivre l'avancement de ma demande ?", a: "Oui, vous recevez des notifications email a chaque etape et notre equipe reste disponible pour vous informer." },
+                    { q: "Quand intervient Enedis sur mon terrain ?", a: "Apres validation du devis et realisation des travaux prealables, Enedis planifie l'intervention sous 2 a 8 semaines." }
+                  ].map((item, idx) => (
+                    <details key={idx} className="group" data-testid={`faq-delais-${idx + 1}`}>
+                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] transition-colors">
+                        <span className="text-sm font-medium pr-4">{item.q}</span>
+                        <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 transition-transform flex-shrink-0" />
+                      </summary>
+                      <div className="pb-3 text-sm text-gray-500 leading-relaxed pl-0">
+                        {item.a}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+
+              {/* Category 3: Tarifs et Paiement */}
+              <div>
+                <h3 className="text-lg font-bold text-gray-900 mb-6 pb-2 border-b-2 border-[#3B82F6]">
+                  Tarifs et paiement
+                </h3>
+                <div className="space-y-3">
+                  {[
+                    { q: "Le paiement en ligne est-il securise ?", a: "Oui, via Stripe certifie PCI DSS niveau 1. Vos donnees bancaires sont chiffrees et jamais stockees." },
+                    { q: "Quels sont les frais de service ?", a: "Nos frais de constitution de dossier sont affiches clairement. Les frais Enedis sont factures separement par le gestionnaire." },
+                    { q: "Puis-je payer en plusieurs fois ?", a: "Actuellement, le paiement s'effectue en une fois lors de la validation de votre demande." }
+                  ].map((item, idx) => (
+                    <details key={idx} className="group" data-testid={`faq-tarifs-${idx + 1}`}>
+                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] transition-colors">
+                        <span className="text-sm font-medium pr-4">{item.q}</span>
+                        <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 transition-transform flex-shrink-0" />
+                      </summary>
+                      <div className="pb-3 text-sm text-gray-500 leading-relaxed pl-0">
+                        {item.a}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+
+              {/* Category 4: Types de Raccordement */}
+              <div>
+                <h3 className="text-lg font-bold text-gray-900 mb-6 pb-2 border-b-2 border-[#3B82F6]">
+                  Types de raccordement
+                </h3>
+                <div className="space-y-3">
+                  {[
+                    { q: "Gerez-vous les raccordements provisoires ?", a: "Oui, pour les chantiers de construction. Ce raccordement temporaire alimente votre chantier pendant les travaux." },
+                    { q: "Quelle difference entre provisoire et definitif ?", a: "Le provisoire est temporaire pour les chantiers. Le definitif est permanent pour l'habitation terminee." },
+                    { q: "Proposez-vous le raccordement collectif ?", a: "Oui, pour les lotissements et immeubles collectifs avec gestion des parties communes." }
+                  ].map((item, idx) => (
+                    <details key={idx} className="group" data-testid={`faq-types-${idx + 1}`}>
+                      <summary className="flex items-center justify-between cursor-pointer py-3 text-gray-700 hover:text-[#3B82F6] transition-colors">
+                        <span className="text-sm font-medium pr-4">{item.q}</span>
+                        <Plus className="w-4 h-4 text-gray-400 group-open:rotate-45 transition-transform flex-shrink-0" />
+                      </summary>
+                      <div className="pb-3 text-sm text-gray-500 leading-relaxed pl-0">
+                        {item.a}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Bar */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
+                <p className="text-base font-semibold text-gray-900">Une question ? Nos conseillers vous repondent.</p>
+                <div className="flex items-center gap-6 text-sm text-gray-600">
+                  <a href="tel:0970709570" className="flex items-center gap-2 hover:text-[#3B82F6] transition-colors">
+                    <Phone className="w-4 h-4" />
+                    09 70 70 95 70
+                  </a>
+                  <a href="mailto:contact@demande-raccordement.fr" className="flex items-center gap-2 hover:text-[#3B82F6] transition-colors">
+                    <Mail className="w-4 h-4" />
+                    contact@demande-raccordement.fr
+                  </a>
+                </div>
+              </div>
+              <Link href="/contact">
+                <button className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-sm px-6 py-3 rounded-full transition-all duration-200">
+                  Etre rappele
+                </button>
+              </Link>
             </div>
           </div>
         </section>

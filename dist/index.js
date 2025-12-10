@@ -1916,7 +1916,7 @@ function setupSmtpService() {
       secure: true,
       // SSL
       auth: {
-        user: "notification@portail-electricite.com",
+        user: "notification@demande-raccordement.fr",
         pass: "xecmug-wakDed-xunje5"
       },
       tls: {
@@ -1924,7 +1924,7 @@ function setupSmtpService() {
       }
     };
     globalTransporter = nodemailer.createTransport(smtpConfig);
-    console.log("\u2705 SMTP STABLESERVER - notification@portail-electricite.com \u2192 bonjour@portail-electricite.com");
+    console.log("\u2705 SMTP STABLESERVER - notification@demande-raccordement.fr \u2192 bonjour@demande-raccordement.fr");
   } catch (error) {
     console.error("\u274C Erreur configuration SMTP:", error);
   }
@@ -1978,8 +1978,8 @@ async function sendPaiementReussiNotification(paiementData) {
       </html>
     `;
     const mailOptions = {
-      from: "notification@portail-electricite.com",
-      to: "bonjour@portail-electricite.com",
+      from: "notification@demande-raccordement.fr",
+      to: "bonjour@demande-raccordement.fr",
       subject: `\u{1F4B0} PAIEMENT CONFIRM\xC9 - ${paiementData.referenceNumber || "N/A"} - ${paiementData.amount ? (parseFloat(paiementData.amount) / 100).toFixed(2) + " \u20AC" : "N/A"}`,
       html: htmlContent,
       text: `\u{1F4B0} PAIEMENT CONFIRM\xC9
@@ -2055,8 +2055,8 @@ async function sendPaiementEchoueNotification(paiementData) {
       </html>
     `;
     const mailOptions = {
-      from: "notification@portail-electricite.com",
-      to: "bonjour@portail-electricite.com",
+      from: "notification@demande-raccordement.fr",
+      to: "bonjour@demande-raccordement.fr",
       subject: `\u{1F6A8} URGENT - PAIEMENT \xC9CHOU\xC9 - ${paiementData.referenceNumber || "N/A"} - ${paiementData.clientName || "Client"}`,
       html: htmlContent,
       text: `\u{1F6A8} URGENT - PAIEMENT \xC9CHOU\xC9
@@ -2131,8 +2131,8 @@ async function sendTentativePaiementNotification(paiementData) {
       </html>
     `;
     const mailOptions = {
-      from: "notification@portail-electricite.com",
-      to: "bonjour@portail-electricite.com",
+      from: "notification@demande-raccordement.fr",
+      to: "bonjour@demande-raccordement.fr",
       subject: `\u{1F504} TENTATIVE PAIEMENT - ${paiementData.referenceNumber || "N/A"} - ${paiementData.clientName || "Client"}`,
       html: htmlContent,
       text: `\u{1F504} TENTATIVE DE PAIEMENT
@@ -2252,8 +2252,8 @@ async function sendLeadNotification(leadData) {
       throw new Error("Transporteur SMTP non configur\xE9");
     }
     const mailOptions = {
-      from: `"Notifications Raccordement" <notification@portail-electricite.com>`,
-      to: "bonjour@portail-electricite.com",
+      from: `"Notifications Raccordement" <notification@demande-raccordement.fr>`,
+      to: "bonjour@demande-raccordement.fr",
       subject: `\u{1F3AF} NOUVEAU PROSPECT - ${leadData.prenom || ""} ${leadData.nom || ""} - R\xE9f\xE9rence ${leadData.referenceNumber || "N/A"}`,
       html: contenuEmail
     };
@@ -2305,8 +2305,8 @@ async function sendSupportMessageNotification(supportData) {
       </div>
     `;
     const mailOptions = {
-      from: `"Support Raccordement" <notification@portail-electricite.com>`,
-      to: "bonjour@portail-electricite.com",
+      from: `"Support Raccordement" <notification@demande-raccordement.fr>`,
+      to: "bonjour@demande-raccordement.fr",
       subject: `\u{1F4AC} NOUVEAU MESSAGE SUPPORT - ${supportData.name || "Contact anonyme"}`,
       html: contenuEmail
     };
@@ -2573,8 +2573,8 @@ async function sendRequestCompletedNotification(requestData) {
       </html>
     `;
     const mailOptions = {
-      from: "notification@portail-electricite.com",
-      to: "bonjour@portail-electricite.com",
+      from: "notification@demande-raccordement.fr",
+      to: "bonjour@demande-raccordement.fr",
       subject: `\u2705 DEMANDE COMPL\xC9T\xC9E - ${requestData.prenom || ""} ${requestData.nom || ""} - ${requestData.referenceNumber}`,
       html: contenuEmail
     };
@@ -2658,8 +2658,8 @@ async function sendContactEmail(contactData) {
       </div>
     `;
     const mailOptions = {
-      from: "notification@portail-electricite.com",
-      to: "bonjour@portail-electricite.com",
+      from: "notification@demande-raccordement.fr",
+      to: "bonjour@demande-raccordement.fr",
       subject: `${priorityEmoji} Nouveau message de contact${priority === "haute" ? " - URGENT" : ""} - ${contactData.subject || "Sans sujet"}`,
       html: contenuEmail
     };
@@ -2901,7 +2901,7 @@ async function sendLeadNotification2(leadData) {
     }
     const mailOptions = {
       from: process.env.SMTP_USER,
-      to: "bonjour@portail-electricite.com",
+      to: "bonjour@demande-raccordement.fr",
       subject: `\u{1F3AF} NOUVEAU LEAD - ${leadData.prenom || ""} ${leadData.nom || ""}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -2938,7 +2938,7 @@ async function sendRequestCompletedNotification2(requestData) {
     }
     const mailOptions = {
       from: process.env.SMTP_USER,
-      to: "bonjour@portail-electricite.com",
+      to: "bonjour@demande-raccordement.fr",
       subject: `\u{1F3AF} Demande Compl\xE9t\xE9e - ${requestData.referenceNumber}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -3005,7 +3005,7 @@ async function sendPaiementReussiNotification2(paiementData) {
     }
     const mailOptions = {
       from: process.env.SMTP_USER,
-      to: "bonjour@portail-electricite.com",
+      to: "bonjour@demande-raccordement.fr",
       subject: `\u{1F4B0} PAIEMENT CONFIRM\xC9 - ${paiementData.referenceNumber || "N/A"} - ${paiementData.amount ? (parseFloat(paiementData.amount) / 100).toFixed(2) + " \u20AC" : "N/A"}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -3064,7 +3064,7 @@ async function sendPaiementEchoueNotification2(paiementData) {
     }
     const mailOptions = {
       from: process.env.SMTP_USER,
-      to: "bonjour@portail-electricite.com",
+      to: "bonjour@demande-raccordement.fr",
       subject: `\u{1F6A8} URGENT - PAIEMENT \xC9CHOU\xC9 - ${paiementData.referenceNumber || "N/A"} - ${paiementData.clientName || "Client"}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -3144,10 +3144,10 @@ function setupSmtpService3(config) {
       secure: true,
       // SSL
       auth: {
-        user: "notification@portail-electricite.com",
+        user: "notification@demande-raccordement.fr",
         pass: "K@maka00@"
       },
-      defaultFrom: "notification@portail-electricite.com",
+      defaultFrom: "notification@demande-raccordement.fr",
       enabled: true
     };
     console.log("\u{1F527} Configuration SMTP:", {
@@ -3258,7 +3258,7 @@ async function sendLeadNotification3(leadData) {
             <!-- Footer -->
             <div style="background: #f1f5f9; padding: 20px; text-align: center; border-top: 1px solid #e2e8f0;">
               <p style="color: #64748b; margin: 0; font-size: 12px;">
-                \u{1F4E7} Notification automatique portail-electricite.com<br>
+                \u{1F4E7} Notification automatique demande-raccordement.fr<br>
                 \u23F0 ${(/* @__PURE__ */ new Date()).toLocaleString("fr-FR")}
               </p>
             </div>
@@ -3268,8 +3268,8 @@ async function sendLeadNotification3(leadData) {
       </html>
     `;
     const mailOptions = {
-      from: "notification@portail-electricite.com",
-      to: "bonjour@portail-electricite.com",
+      from: "notification@demande-raccordement.fr",
+      to: "bonjour@demande-raccordement.fr",
       subject: `\u{1F3AF} NOUVEAU LEAD - ${leadData.prenom || ""} ${leadData.nom || ""} (${leadData.referenceNumber || "N/A"})`,
       html: htmlContent,
       text: `\u{1F3AF} NOUVEAU LEAD G\xC9N\xC9R\xC9
@@ -3382,7 +3382,7 @@ async function sendRequestCompletedNotificationBackup(requestData) {
               <!-- Footer -->
               <div style="background: #f1f5f9; padding: 20px; text-align: center; border-top: 1px solid #e2e8f0;">
                 <p style="color: #64748b; margin: 0; font-size: 12px;">
-                  \u{1F4E7} Notification automatique portail-electricite.com<br>
+                  \u{1F4E7} Notification automatique demande-raccordement.fr<br>
                   \u23F0 ${(/* @__PURE__ */ new Date()).toLocaleString("fr-FR")}
                 </p>
               </div>
@@ -3393,8 +3393,8 @@ async function sendRequestCompletedNotificationBackup(requestData) {
       </html>
     `;
     const mailOptions = {
-      from: "notification@portail-electricite.com",
-      to: "bonjour@portail-electricite.com",
+      from: "notification@demande-raccordement.fr",
+      to: "bonjour@demande-raccordement.fr",
       subject: `\u{1F4CB} Demande compl\xE8te - ${requestData.referenceNumber}`,
       html: htmlContent,
       text: `\u{1F4CB} DEMANDE COMPL\xC8TE
@@ -3430,8 +3430,8 @@ async function sendPaiementReussiNotification3(paiementData) {
     }
     const template = EMAIL_TEMPLATES.paiementReussi;
     const mailOptions = {
-      from: "notification@portail-electricite.com",
-      to: "bonjour@portail-electricite.com",
+      from: "notification@demande-raccordement.fr",
+      to: "bonjour@demande-raccordement.fr",
       subject: template.subject.replace("{reference}", paiementData.referenceNumber || "N/A"),
       html: template.getHtml(paiementData),
       text: `Paiement confirm\xE9 - R\xE9f\xE9rence: ${paiementData.referenceNumber} - Montant: ${paiementData.amount ? (parseFloat(paiementData.amount) / 100).toFixed(2) + " \u20AC" : "N/A"}`
@@ -3456,8 +3456,8 @@ async function sendPaiementEchoueNotification3(paiementData) {
     }
     const template = EMAIL_TEMPLATES.paiementEchoue;
     const mailOptions = {
-      from: "notification@portail-electricite.com",
-      to: "bonjour@portail-electricite.com",
+      from: "notification@demande-raccordement.fr",
+      to: "bonjour@demande-raccordement.fr",
       subject: template.subject.replace("{reference}", paiementData.referenceNumber || "N/A"),
       html: template.getHtml(paiementData),
       text: `URGENT - Paiement \xE9chou\xE9 - R\xE9f\xE9rence: ${paiementData.referenceNumber} - Contact: ${paiementData.clientEmail}`
@@ -3602,7 +3602,7 @@ var init_email_service_backup = __esm({
             <!-- Footer -->
             <div style="background: #f1f5f9; padding: 20px; text-align: center; border-top: 1px solid #e2e8f0;">
               <p style="color: #64748b; margin: 0; font-size: 12px;">
-                \u{1F4E7} Notification automatique portail-electricite.com<br>
+                \u{1F4E7} Notification automatique demande-raccordement.fr<br>
                 \u2705 Paiement s\xE9curis\xE9 \u2022 \u23F0 ${(/* @__PURE__ */ new Date()).toLocaleString("fr-FR")}
               </p>
             </div>
@@ -3679,7 +3679,7 @@ var init_email_service_backup = __esm({
             <!-- Footer -->
             <div style="background: #f1f5f9; padding: 20px; text-align: center; border-top: 1px solid #e2e8f0;">
               <p style="color: #64748b; margin: 0; font-size: 12px;">
-                \u{1F4E7} Alerte automatique portail-electricite.com<br>
+                \u{1F4E7} Alerte automatique demande-raccordement.fr<br>
                 \u{1F6A8} Priorit\xE9 CRITIQUE \u2022 \u23F0 ${(/* @__PURE__ */ new Date()).toLocaleString("fr-FR")}
               </p>
             </div>
@@ -5430,9 +5430,9 @@ async function createImapConfigFromUser(userId) {
   try {
     if (userId === 1) {
       const adminPassword = process.env.IMAP_PASSWORD || "";
-      console.log(`Utilisation de la configuration IMAP contact@portail-electricite.com pour l'administrateur`);
+      console.log(`Utilisation de la configuration IMAP contact@demande-raccordement.fr pour l'administrateur`);
       return {
-        user: "contact@portail-electricite.com",
+        user: "contact@demande-raccordement.fr",
         password: adminPassword,
         host: "s4015.fra1.stableserver.net",
         port: 993,
@@ -5446,7 +5446,7 @@ async function createImapConfigFromUser(userId) {
     if (user && user.smtpHost && user.smtpUser && user.smtpPassword && user.smtpEnabled) {
       let imapHost, imapPort;
       const emailDomain = user.smtpUser.split("@")[1] || "";
-      if (user.smtpHost === "s4015.fra1.stableserver.net" || emailDomain === "portail-electricite.com") {
+      if (user.smtpHost === "s4015.fra1.stableserver.net" || emailDomain === "demande-raccordement.fr") {
         imapHost = "s4015.fra1.stableserver.net";
         imapPort = 993;
       } else {
@@ -5479,9 +5479,9 @@ async function createImapConfigFromUser(userId) {
       };
     }
     if (process.env.IMAP_PASSWORD) {
-      console.log(`Utilisation des identifiants IMAP globaux pour l'utilisateur ${userId} avec compte contact@portail-electricite.com`);
+      console.log(`Utilisation des identifiants IMAP globaux pour l'utilisateur ${userId} avec compte contact@demande-raccordement.fr`);
       return {
-        user: "contact@portail-electricite.com",
+        user: "contact@demande-raccordement.fr",
         password: process.env.IMAP_PASSWORD,
         // Utiliser le mot de passe fourni
         host: "s4015.fra1.stableserver.net",
@@ -5496,7 +5496,7 @@ async function createImapConfigFromUser(userId) {
     }
     console.log(`Pas de configuration d'environnement pour l'utilisateur ${userId}, utilisation du mot de passe sp\xE9cifi\xE9 manuellement`);
     return {
-      user: "contact@portail-electricite.com",
+      user: "contact@demande-raccordement.fr",
       password: "Kamaka00.",
       // Mot de passe fourni  
       host: "s4015.fra1.stableserver.net",
@@ -5544,7 +5544,7 @@ function generateDemoEmails(mailbox) {
           date: new Date(Date.now() - 1e3 * 60 * 30),
           // 30 minutes ago
           from: [{ name: "Support Technique", address: "support@enedis.fr" }],
-          to: [{ name: "Contact", address: "contact@portail-electricite.com" }],
+          to: [{ name: "Contact", address: "contact@demande-raccordement.fr" }],
           subject: "Confirmation de votre demande de raccordement",
           text: "Bonjour,\n\nNous avons bien re\xE7u votre demande de raccordement. Un technicien prendra contact avec vous dans les plus brefs d\xE9lais.\n\nCordialement,\nLe service technique",
           html: "<p>Bonjour,</p><p>Nous avons bien re\xE7u votre demande de raccordement. Un technicien prendra contact avec vous dans les plus brefs d\xE9lais.</p><p>Cordialement,<br>Le service technique</p>",
@@ -5560,7 +5560,7 @@ function generateDemoEmails(mailbox) {
           date: new Date(Date.now() - 1e3 * 60 * 60 * 2),
           // 2 hours ago
           from: [{ name: "Jean Dupont", address: "jean.dupont@gmail.com" }],
-          to: [{ name: "Contact", address: "contact@portail-electricite.com" }],
+          to: [{ name: "Contact", address: "contact@demande-raccordement.fr" }],
           subject: "Question sur ma demande REF-1234-567890",
           text: "Bonjour,\n\nJ'aurais besoin d'informations suppl\xE9mentaires concernant ma demande de raccordement r\xE9f\xE9rence REF-1234-567890.\n\nPouvez-vous me pr\xE9ciser le d\xE9lai d'intervention ?\n\nMerci d'avance,\nJean Dupont",
           html: "<p>Bonjour,</p><p>J'aurais besoin d'informations suppl\xE9mentaires concernant ma demande de raccordement r\xE9f\xE9rence REF-1234-567890.</p><p>Pouvez-vous me pr\xE9ciser le d\xE9lai d'intervention ?</p><p>Merci d'avance,<br>Jean Dupont</p>",
@@ -5576,7 +5576,7 @@ function generateDemoEmails(mailbox) {
           date: new Date(Date.now() - 1e3 * 60 * 60 * 24),
           // 1 day ago
           from: [{ name: "Notification Paiement", address: "paiement@stripe.com" }],
-          to: [{ name: "Contact", address: "contact@portail-electricite.com" }],
+          to: [{ name: "Contact", address: "contact@demande-raccordement.fr" }],
           subject: "Confirmation de paiement pour REF-5678-123456",
           text: "Bonjour,\n\nNous vous confirmons le paiement de 129,80\u20AC pour la demande REF-5678-123456.\n\nLe paiement a \xE9t\xE9 trait\xE9 avec succ\xE8s.\n\nCordialement,\nService des paiements",
           html: "<p>Bonjour,</p><p>Nous vous confirmons le paiement de <strong>129,80\u20AC</strong> pour la demande REF-5678-123456.</p><p>Le paiement a \xE9t\xE9 trait\xE9 avec succ\xE8s.</p><p>Cordialement,<br>Service des paiements</p>",
@@ -5600,7 +5600,7 @@ function generateDemoEmails(mailbox) {
           uid: 101,
           date: new Date(Date.now() - 1e3 * 60 * 15),
           // 15 minutes ago
-          from: [{ name: "Contact", address: "contact@portail-electricite.com" }],
+          from: [{ name: "Contact", address: "contact@demande-raccordement.fr" }],
           to: [{ name: "Jean Dupont", address: "jean.dupont@gmail.com" }],
           subject: "Re: Question sur ma demande REF-1234-567890",
           text: "Bonjour Jean,\n\nNous avons bien re\xE7u votre demande. Le d\xE9lai d'intervention est estim\xE9 \xE0 environ 2 semaines.\n\nN'h\xE9sitez pas si vous avez d'autres questions.\n\nCordialement,\nL'administrateur",
@@ -5617,9 +5617,9 @@ function generateDemoEmails(mailbox) {
           uid: 102,
           date: new Date(Date.now() - 1e3 * 60 * 60 * 8),
           // 8 hours ago
-          from: [{ name: "Contact", address: "contact@portail-electricite.com" }],
+          from: [{ name: "Contact", address: "contact@demande-raccordement.fr" }],
           to: [{ name: "Marie Martin", address: "marie.martin@outlook.fr" }],
-          cc: [{ name: "Service client", address: "service@portail-electricite.com" }],
+          cc: [{ name: "Service client", address: "service@demande-raccordement.fr" }],
           subject: "Instructions pour votre raccordement \xE9lectrique",
           text: "Bonjour Marie,\n\nSuite \xE0 notre conversation t\xE9l\xE9phonique, voici les instructions pour pr\xE9parer votre raccordement.\n\n1. V\xE9rifiez que l'emplacement du compteur est accessible\n2. Assurez-vous que le tableau \xE9lectrique est aux normes\n3. Pr\xE9voyez un espace de 3m\xB2 pour l'installation\n\nCordialement,\nL'administrateur",
           html: "<p>Bonjour Marie,</p><p>Suite \xE0 notre conversation t\xE9l\xE9phonique, voici les instructions pour pr\xE9parer votre raccordement.</p><ol><li>V\xE9rifiez que l'emplacement du compteur est accessible</li><li>Assurez-vous que le tableau \xE9lectrique est aux normes</li><li>Pr\xE9voyez un espace de 3m\xB2 pour l'installation</li></ol><p>Cordialement,<br>L'administrateur</p>",
@@ -5644,7 +5644,7 @@ function generateDemoEmails(mailbox) {
         date: new Date(Date.now() - 1e3 * 60 * 60 * (Math.random() * 24 * 7)),
         // 0-7 jours passés
         from: [{ name: `Spammer ${i + 1}`, address: `spam${i + 1}@spammer.com` }],
-        to: [{ name: "Contact", address: "contact@portail-electricite.com" }],
+        to: [{ name: "Contact", address: "contact@demande-raccordement.fr" }],
         subject: `SPAM: Offre commerciale n\xB0${i + 1}`,
         text: `Ceci est un message de spam #${i + 1}
 
@@ -5674,7 +5674,7 @@ Si ce message n'est pas un spam, d\xE9placez-le vers votre bo\xEEte de r\xE9cept
           date: new Date(Date.now() - 1e3 * 60 * 60 * 12),
           // 12 hours ago
           from: [{ name: "Newsletter", address: "news@electricite-info.fr" }],
-          to: [{ name: "Contact", address: "contact@portail-electricite.com" }],
+          to: [{ name: "Contact", address: "contact@demande-raccordement.fr" }],
           subject: "Newsletter du mois de mai",
           text: "Voici les derni\xE8res actualit\xE9s du secteur de l'installation \xE9lectrique pour le mois de mai.\n\n- Nouvelles normes en vigueur\n- Astuces pour les raccordements complexes\n- Interview du chef des techniciens\n\nBonne lecture !",
           html: "<p>Voici les derni\xE8res actualit\xE9s du secteur de l'installation \xE9lectrique pour le mois de mai.</p><ul><li>Nouvelles normes en vigueur</li><li>Astuces pour les raccordements complexes</li><li>Interview du chef des techniciens</li></ul><p>Bonne lecture !</p>",
@@ -5765,7 +5765,7 @@ async function getUserEmails(userId, options = {}) {
           }];
         } else if (parsed.from && typeof parsed.from === "object") {
           console.log("Debug - parsed.from est un objet de structure non standard:", JSON.stringify(parsed.from));
-          let emailAddress = "contact@portail-electricite.com";
+          let emailAddress = "contact@demande-raccordement.fr";
           if (typeof parsed.from.address === "string") {
             emailAddress = parsed.from.address;
           } else if (typeof parsed.from.value === "string") {
@@ -5787,7 +5787,7 @@ async function getUserEmails(userId, options = {}) {
         } else {
           normalizedFrom = [{
             name: "Exp\xE9diteur",
-            address: "no-reply@portail-electricite.com"
+            address: "no-reply@demande-raccordement.fr"
           }];
         }
         let normalizedSubject = "(Sans objet)";
@@ -5903,11 +5903,11 @@ async function getUserEmails(userId, options = {}) {
               date: message.attributes.date || /* @__PURE__ */ new Date(),
               from: [{
                 name: fromName,
-                address: from || "no-reply@portail-electricite.com"
+                address: from || "no-reply@demande-raccordement.fr"
               }],
               to: [{
                 name: "Contact",
-                address: "contact@portail-electricite.com"
+                address: "contact@demande-raccordement.fr"
               }],
               subject: header.subject ? header.subject[0] : "(Sans objet)",
               text: "Pour voir le contenu complet, ouvrez cet email.",
@@ -5975,7 +5975,7 @@ async function getRecentUserEmails(userId, mailbox = INBOX_FOLDER, limit = 10) {
         if (header.date && header.date[0]) {
           messageDate = new Date(header.date[0]);
         }
-        let from = [{ name: "Exp\xE9diteur inconnu", address: "unknown@portail-electricite.com" }];
+        let from = [{ name: "Exp\xE9diteur inconnu", address: "unknown@demande-raccordement.fr" }];
         if (header.from && header.from[0]) {
           const fromText = header.from[0];
           const match = fromText.match(/(.*)<(.*)>/);
@@ -6061,7 +6061,7 @@ function getOrInitializeEmailCache(userId, mailbox) {
         date: new Date(Date.now() - 1e3 * 60 * 60 * (Math.random() * 24 * 7)),
         // 0-7 jours passés
         from: [{ name: `Spammer ${i + 1}`, address: `spam${i + 1}@spammer.com` }],
-        to: [{ name: "Contact", address: "contact@portail-electricite.com" }],
+        to: [{ name: "Contact", address: "contact@demande-raccordement.fr" }],
         subject: `SPAM: Offre commerciale n\xB0${i + 1}`,
         text: `Ceci est un message de spam #${i + 1}
 
@@ -8629,7 +8629,7 @@ async function registerRoutes(app2) {
   app2.use("/api/user-stats", userStatsRouter);
   setupDashboardRoutes(app2);
   registerPaymentDebugRoutes(app2);
-  console.log("Service SMTP configur\xE9 - notification@portail-electricite.com \u2192 bonjour@portail-electricite.com");
+  console.log("Service SMTP configur\xE9 - notification@demande-raccordement.fr \u2192 bonjour@demande-raccordement.fr");
   app2.get("/api/admin/security-status", requireAuth, requireAdmin, async (req, res) => {
     try {
       const stats = securityMonitor.getSecurityStats();
@@ -8742,14 +8742,14 @@ async function registerRoutes(app2) {
       } catch (e) {
         console.error("Erreur de parsing JSON pour les emails de notification", e);
       }
-      const standardEmails = ["marina.alves@portail-electricite.com", "Bonjour@portail-electricite.com"];
+      const standardEmails = ["marina.alves@demande-raccordement.fr", "Bonjour@demande-raccordement.fr"];
       standardEmails.forEach((email) => {
         if (!notificationEmails.includes(email)) {
           notificationEmails.push(email);
         }
       });
       if (notificationEmails.length === 0) {
-        notificationEmails = ["notification@portail-electricite.com"];
+        notificationEmails = ["notification@demande-raccordement.fr"];
       }
       res.status(200).json({
         success: true,
@@ -8783,7 +8783,7 @@ async function registerRoutes(app2) {
         });
       }
       let emails = Array.isArray(validationResult.data) ? validationResult.data : [validationResult.data];
-      const standardEmails = ["marina.alves@portail-electricite.com", "contact@portail-electricite.com"];
+      const standardEmails = ["marina.alves@demande-raccordement.fr", "contact@demande-raccordement.fr"];
       standardEmails.forEach((email) => {
         if (!emails.includes(email)) {
           emails.push(email);
@@ -9431,11 +9431,11 @@ async function registerRoutes(app2) {
       });
       try {
         const [notificationEmailConfig] = await db.select().from(systemConfigs2).where(eq11(systemConfigs2.configKey, "notification_email"));
-        const notificationEmail = notificationEmailConfig?.configValue || "marina.alves@portail-electricite.com";
+        const notificationEmail = notificationEmailConfig?.configValue || "marina.alves@demande-raccordement.fr";
         const emailRecipients = [
           notificationEmail,
-          "Bonjour@portail-electricite.com",
-          "Bonjour@portail-electricite.com"
+          "Bonjour@demande-raccordement.fr",
+          "Bonjour@demande-raccordement.fr"
         ];
         const emailData = {
           referenceNumber,
@@ -10209,7 +10209,7 @@ ${comments}` : tarifJauneNote;
           // Toutes les données brutes du formulaire
         };
         console.log("\u{1F4E7} ENVOI EMAIL COMPLET - FORMULAIRE FINALIS\xC9");
-        console.log("\u{1F4EC} Destinataire principal: bonjour@portail-electricite.com");
+        console.log("\u{1F4EC} Destinataire principal: bonjour@demande-raccordement.fr");
         console.log("\u{1F4CB} R\xE9f\xE9rence g\xE9n\xE9r\xE9e:", serviceRequest.referenceNumber);
       } catch (emailError) {
         console.error("Erreur lors de la pr\xE9paration de la notification email:", emailError);
@@ -11161,7 +11161,7 @@ ${comments}` : tarifJauneNote;
                 try {
                   const hostHeader = req.get("host") || req.get("x-forwarded-host") || "";
                   const refererHeader = req.get("referer") || "";
-                  const isRaccordementElecDomain = hostHeader.includes("portail-electricite.com") || refererHeader.includes("portail-electricite.com") || hostHeader.includes("replit.dev");
+                  const isRaccordementElecDomain = hostHeader.includes("demande-raccordement.fr") || refererHeader.includes("demande-raccordement.fr") || hostHeader.includes("replit.dev");
                   if (serviceRequest.referenceNumber && serviceRequest.id && serviceRequest.name && serviceRequest.email && isRaccordementElecDomain) {
                     const { sendPaiementReussiNotification: sendPaiementReussiNotification4 } = await Promise.resolve().then(() => (init_email_service(), email_service_exports));
                     await sendPaiementReussiNotification4({
@@ -11180,7 +11180,7 @@ ${comments}` : tarifJauneNote;
                     console.log("\u{1F512} Paiement externe ignor\xE9 - Domaine:", hostHeader, "Ref:", serviceRequest.referenceNumber);
                   }
                 } catch (emailError) {
-                  console.error("\u274C Erreur notification paiement portail-electricite.com:", emailError);
+                  console.error("\u274C Erreur notification paiement demande-raccordement.fr:", emailError);
                 }
                 await storage.updateServiceRequestStatus(
                   serviceRequest.id,
@@ -11242,7 +11242,7 @@ ${comments}` : tarifJauneNote;
                 try {
                   const hostHeader = req.get("host") || req.get("x-forwarded-host") || "";
                   const refererHeader = req.get("referer") || "";
-                  const isRaccordementElecDomain = hostHeader.includes("portail-electricite.com") || refererHeader.includes("portail-electricite.com") || hostHeader.includes("replit.dev");
+                  const isRaccordementElecDomain = hostHeader.includes("demande-raccordement.fr") || refererHeader.includes("demande-raccordement.fr") || hostHeader.includes("replit.dev");
                   if (serviceRequest.referenceNumber && serviceRequest.id && serviceRequest.name && serviceRequest.email && isRaccordementElecDomain) {
                     await sendPaiementEchoueNotification({
                       referenceNumber: serviceRequest.referenceNumber,
@@ -11259,7 +11259,7 @@ ${comments}` : tarifJauneNote;
                     console.log("\u{1F512} Paiement \xE9chou\xE9 externe ignor\xE9 - Domaine:", hostHeader, "Ref:", serviceRequest.referenceNumber);
                   }
                 } catch (emailError) {
-                  console.error("\u274C Erreur lors de l'envoi de la notification de paiement \xE9chou\xE9 portail-electricite.com:", emailError);
+                  console.error("\u274C Erreur lors de l'envoi de la notification de paiement \xE9chou\xE9 demande-raccordement.fr:", emailError);
                 }
               }
               break;
@@ -14349,7 +14349,7 @@ ${comments}` : tarifJauneNote;
               try {
                 const hostHeader = req.get("host") || req.get("x-forwarded-host") || "";
                 const refererHeader = req.get("referer") || "";
-                const isRaccordementElecDomain = hostHeader.includes("portail-electricite.com") || refererHeader.includes("portail-electricite.com") || hostHeader.includes("replit.dev");
+                const isRaccordementElecDomain = hostHeader.includes("demande-raccordement.fr") || refererHeader.includes("demande-raccordement.fr") || hostHeader.includes("replit.dev");
                 if (serviceRequest.referenceNumber && serviceRequest.id && serviceRequest.name && serviceRequest.email && isRaccordementElecDomain) {
                   const { sendPaiementReussiNotification: sendPaiementReussiNotification4 } = await Promise.resolve().then(() => (init_email_service(), email_service_exports));
                   await sendPaiementReussiNotification4({
@@ -14366,7 +14366,7 @@ ${comments}` : tarifJauneNote;
                   console.log("\u{1F512} Paiement externe ignor\xE9 - Domaine:", hostHeader, "Ref:", serviceRequest.referenceNumber);
                 }
               } catch (emailError) {
-                console.error("\u274C Erreur notification paiement portail-electricite.com:", emailError);
+                console.error("\u274C Erreur notification paiement demande-raccordement.fr:", emailError);
               }
               if (serviceRequest.status !== REQUEST_STATUS.PAID) {
                 await storage.updateServiceRequestStatus(
@@ -14716,7 +14716,7 @@ ${comments}` : tarifJauneNote;
         },
         email: {
           provider: "sendgrid",
-          senderEmail: "contact@portail-electricite.com",
+          senderEmail: "contact@demande-raccordement.fr",
           senderName: "Service Raccordement \xC9lectrique"
         },
         general: {
@@ -14896,7 +14896,7 @@ ${comments}` : tarifJauneNote;
           
           <div class="footer">
             <p>Ce re\xE7u a \xE9t\xE9 g\xE9n\xE9r\xE9 automatiquement et ne n\xE9cessite pas de signature.</p>
-            <p>Pour toute question, veuillez nous contacter \xE0 contact@portail-electricite.com</p>
+            <p>Pour toute question, veuillez nous contacter \xE0 contact@demande-raccordement.fr</p>
             <p>\xA9 2025 Raccordement \xC9lectrique en Ligne - SIRET: 12345678900013</p>
           </div>
         </div>
@@ -15657,10 +15657,10 @@ ${comments}` : tarifJauneNote;
           });
         }
         const [notificationEmailRow] = await db.select().from(systemConfigs2).where(eq11(systemConfigs2.configKey, "notification_email"));
-        const recipients = notificationEmailRow ? notificationEmailRow.configValue.split(",") : ["contact@portail-electricite.com"];
+        const recipients = notificationEmailRow ? notificationEmailRow.configValue.split(",") : ["contact@demande-raccordement.fr"];
         const referenceNumber = `REF-${Math.floor(1e3 + Math.random() * 9e3)}-${Math.floor(1e5 + Math.random() * 9e5)}`;
         const info = await transporter.sendMail({
-          from: `"Service Raccordement" <${process.env.SMTP_USER || "notification@portail-electricite.com"}>`,
+          from: `"Service Raccordement" <${process.env.SMTP_USER || "notification@demande-raccordement.fr"}>`,
           to: recipients.join(", "),
           subject: `\u{1F514} Test de notification email - ${referenceNumber}`,
           html: `
@@ -17623,7 +17623,7 @@ app.post("/api/test-template-clean-perfectionne", async (req, res) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        to: "bonjour@portail-electricite.com",
+        to: "bonjour@demande-raccordement.fr",
         subject: "[TEMPLATE 1] \u{1F537} Design Simple et Clean - " + leadData.prenom + " " + leadData.nom,
         html: cleanHtml
       })

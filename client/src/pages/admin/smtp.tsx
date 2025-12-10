@@ -447,9 +447,9 @@ export default function SmtpConfig() {
               // S'assurer que nous avons toujours les emails Namecheap
               let emailsList = [...data.data.emails];
               const primaryEmails = [
-                "bonjour@portail-electricite.com",
-                "contact@portail-electricite.com", 
-                "notification@portail-electricite.com"
+                "bonjour@demande-raccordement.fr",
+                "contact@demande-raccordement.fr", 
+                "notification@demande-raccordement.fr"
               ];
               
               // Ajouter les emails Namecheap manquants
@@ -461,21 +461,21 @@ export default function SmtpConfig() {
               
               setNotificationEmails(emailsList);
               
-              // Identifie l'email principal (marina.alves@portail-electricite.com si présent, sinon le premier)
-              const marinaEmail = "marina.alves@portail-electricite.com";
+              // Identifie l'email principal (marina.alves@demande-raccordement.fr si présent, sinon le premier)
+              const marinaEmail = "marina.alves@demande-raccordement.fr";
               if (emailsList.includes(marinaEmail)) {
                 setNotificationEmail(marinaEmail);
               } else if (emailsList.length > 0 && emailsList[0] !== contactEmail) {
                 setNotificationEmail(emailsList[0]);
               } else if (emailsList.length > 1) {
-                // Si le premier email est contact@portail-electricite.com, prendre le deuxième
+                // Si le premier email est contact@demande-raccordement.fr, prendre le deuxième
                 setNotificationEmail(emailsList[1]);
               }
             } 
             // Ancienne API retrocompatible (un seul email)
             else if (data.data && data.data.email) {
               const mainEmail = data.data.email;
-              const contactEmail = "contact@portail-electricite.com";
+              const contactEmail = "contact@demande-raccordement.fr";
               
               // Créer une liste avec les deux emails
               let emailsList = [mainEmail];
@@ -730,7 +730,7 @@ export default function SmtpConfig() {
                   <Label htmlFor="defaultFrom">Adresse d'expédition par défaut</Label>
                   <Input 
                     id="defaultFrom" 
-                    placeholder="contact@portail-electricite.com"
+                    placeholder="contact@demande-raccordement.fr"
                     value={config.defaultFrom}
                     onChange={(e) => setConfig({...config, defaultFrom: e.target.value})}
                     disabled={!config.enabled}
@@ -860,12 +860,12 @@ export default function SmtpConfig() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {/* Email principal - marina.alves@portail-electricite.com */}
+                  {/* Email principal - marina.alves@demande-raccordement.fr */}
                   <div className="space-y-2">
                     <Label htmlFor="notification-email">Email de notification principal</Label>
                     <Input 
                       id="notification-email" 
-                      placeholder="marina.alves@portail-electricite.com"
+                      placeholder="marina.alves@demande-raccordement.fr"
                       value={notificationEmail}
                       onChange={(e) => setNotificationEmail(e.target.value)}
                       disabled={isLoadingNotificationEmail || saveNotificationEmailMutation.isPending}
@@ -876,7 +876,7 @@ export default function SmtpConfig() {
                     </p>
                   </div>
 
-                  {/* Email de contact spécifique - contact@portail-electricite.com */}
+                  {/* Email de contact spécifique - contact@demande-raccordement.fr */}
                   <div className="space-y-2 border-t pt-4 mt-4">
                     <Label htmlFor="contact-notification-email" className="flex items-center">
                       <span>Email de contact dédié</span>
@@ -884,16 +884,16 @@ export default function SmtpConfig() {
                     </Label>
                     <Input 
                       id="contact-notification-email" 
-                      placeholder="notification@portail-electricite.com"
-                      value={notificationEmails.includes("notification@portail-electricite.com") ? "notification@portail-electricite.com" : ""}
+                      placeholder="notification@demande-raccordement.fr"
+                      value={notificationEmails.includes("notification@demande-raccordement.fr") ? "notification@demande-raccordement.fr" : ""}
                       onChange={(e) => {
-                        // Si l'email est vide, retirer notification@portail-electricite.com de la liste
+                        // Si l'email est vide, retirer notification@demande-raccordement.fr de la liste
                         if (!e.target.value.trim()) {
-                          setNotificationEmails(notificationEmails.filter(email => email !== "notification@portail-electricite.com"));
+                          setNotificationEmails(notificationEmails.filter(email => email !== "notification@demande-raccordement.fr"));
                         } 
-                        // Si l'email est différent de l'actuel, remplacer/ajouter notification@portail-electricite.com
-                        else if (e.target.value.trim() === "notification@portail-electricite.com" && !notificationEmails.includes("notification@portail-electricite.com")) {
-                          setNotificationEmails([...notificationEmails, "notification@portail-electricite.com"]);
+                        // Si l'email est différent de l'actuel, remplacer/ajouter notification@demande-raccordement.fr
+                        else if (e.target.value.trim() === "notification@demande-raccordement.fr" && !notificationEmails.includes("notification@demande-raccordement.fr")) {
+                          setNotificationEmails([...notificationEmails, "notification@demande-raccordement.fr"]);
                         }
                       }}
                       disabled={isLoadingNotificationEmail || saveNotificationEmailMutation.isPending}
@@ -913,7 +913,7 @@ export default function SmtpConfig() {
                         onClick={() => {
                           if (notificationEmail.trim() && 
                               !notificationEmails.includes(notificationEmail.trim()) && 
-                              notificationEmail.trim() !== "contact@portail-electricite.com") {
+                              notificationEmail.trim() !== "contact@demande-raccordement.fr") {
                             setNotificationEmails([...notificationEmails, notificationEmail.trim()]);
                           }
                         }}
@@ -961,14 +961,14 @@ export default function SmtpConfig() {
                     // S'assurer que l'email principal et l'email de contact sont inclus dans la liste
                     let allEmails = [...notificationEmails];
                     const mainEmail = notificationEmail.trim();
-                    const contactEmail = "contact@portail-electricite.com";
+                    const contactEmail = "contact@demande-raccordement.fr";
                     
                     // Ajouter l'email principal s'il n'est pas déjà inclus
                     if (mainEmail && !allEmails.includes(mainEmail)) {
                       allEmails = [mainEmail, ...allEmails];
                     }
                     
-                    // S'assurer que Bonjour@portail-electricite.com est toujours inclus
+                    // S'assurer que Bonjour@demande-raccordement.fr est toujours inclus
                     if (!allEmails.includes(contactEmail)) {
                       allEmails = [...allEmails, contactEmail];
                     }

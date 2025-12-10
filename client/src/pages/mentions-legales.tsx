@@ -34,8 +34,8 @@ export default function MentionsLegalesPage() {
               
               <h2 className="text-xl font-semibold text-blue-700 mt-8 mb-4">1. Éditeur du site</h2>
               <p>
-                Le site portail-electricite.com est édité par une entreprise spécialisée dans les démarches administratives liées au raccordement électrique.
-                <br />Email : contact@portail-electricite.com
+                Le site demande-raccordement.fr est édité par une entreprise spécialisée dans les démarches administratives liées au raccordement électrique.
+                <br />Email : contact@demande-raccordement.fr
               </p>
               <p>
                 Protectassur Ltd – 61 Bridge Street, Kington, HR5 3DJ, Royaume-Uni – N° d'immatriculation 14112679
@@ -48,7 +48,7 @@ export default function MentionsLegalesPage() {
               
               <h2 className="text-xl font-semibold text-blue-700 mt-8 mb-4">3. Hébergement du site</h2>
               <p>
-                Le site portail-electricite.com est hébergé par :
+                Le site demande-raccordement.fr est hébergé par :
                 <br />Nom de l'hébergeur : MochaHost
                 <br />Adresse : MochaHost LLC, 7365 Carnelian St. Suite 203, Rancho Cucamonga, CA 91730, États-Unis
               </p>
@@ -66,7 +66,7 @@ export default function MentionsLegalesPage() {
                 Conformément aux dispositions de la loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés, vous disposez d'un droit d'accès, de modification, de rectification et de suppression des données qui vous concernent.
               </p>
               <p>
-                Pour demander une modification, rectification ou suppression des données vous concernant, il vous suffit d'envoyer un courrier électronique à l'adresse contact@portail-electricite.com.
+                Pour demander une modification, rectification ou suppression des données vous concernant, il vous suffit d'envoyer un courrier électronique à l'adresse contact@demande-raccordement.fr.
               </p>
               <p>
                 Pour plus d'informations concernant la gestion de vos données personnelles, veuillez consulter notre <a href="/confidentialite" className="text-blue-600 hover:text-blue-800 underline">Politique de Confidentialité</a>.
@@ -74,12 +74,12 @@ export default function MentionsLegalesPage() {
               
               <h2 className="text-xl font-semibold text-blue-700 mt-8 mb-4">6. Cookies</h2>
               <p>
-                Le site portail-electricite.com utilise des cookies pour améliorer l'expérience utilisateur. Pour plus d'informations sur notre utilisation des cookies, veuillez consulter notre <a href="/cookies" className="text-blue-600 hover:text-blue-800 underline">Politique des Cookies</a>.
+                Le site demande-raccordement.fr utilise des cookies pour améliorer l'expérience utilisateur. Pour plus d'informations sur notre utilisation des cookies, veuillez consulter notre <a href="/cookies" className="text-blue-600 hover:text-blue-800 underline">Politique des Cookies</a>.
               </p>
               
               <h2 className="text-xl font-semibold text-blue-700 mt-8 mb-4">7. Limitation de responsabilité</h2>
               <p>
-                Les informations contenues sur ce site sont aussi précises que possible et le site est périodiquement mis à jour, mais peut toutefois contenir des inexactitudes, des omissions ou des lacunes. Si vous constatez une erreur ou ce qui peut être une inexactitude, défectuosité ou lacune, merci de bien vouloir le signaler par email à contact@portail-electricite.com.
+                Les informations contenues sur ce site sont aussi précises que possible et le site est périodiquement mis à jour, mais peut toutefois contenir des inexactitudes, des omissions ou des lacunes. Si vous constatez une erreur ou ce qui peut être une inexactitude, défectuosité ou lacune, merci de bien vouloir le signaler par email à contact@demande-raccordement.fr.
               </p>
               <p>
                 Les liens hypertextes mis en place dans le cadre du présent site internet en direction d'autres ressources présentes sur le réseau Internet ne sauraient engager notre responsabilité.
@@ -92,9 +92,9 @@ export default function MentionsLegalesPage() {
               
               <h2 className="text-xl font-semibold text-blue-700 mt-8 mb-4">9. Contact</h2>
               <p>
-                Pour toute question relative au site portail-electricite.com, vous pouvez nous contacter :
+                Pour toute question relative au site demande-raccordement.fr, vous pouvez nous contacter :
                 <br />Par téléphone : +33 (0) 9 70 70 95 70
-                <br />Par email : contact@portail-electricite.com
+                <br />Par email : contact@demande-raccordement.fr
               </p>
               
               <div className="text-sm text-gray-500 mt-12 text-center italic">

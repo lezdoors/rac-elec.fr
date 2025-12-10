@@ -35,7 +35,7 @@ export async function sendLeadNotification(leadData: any) {
 
     const mailOptions = {
       from: process.env.SMTP_USER!,
-      to: 'bonjour@portail-electricite.com',
+      to: 'bonjour@demande-raccordement.fr',
       subject: `🎯 NOUVEAU LEAD - ${leadData.prenom || ''} ${leadData.nom || ''}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -76,7 +76,7 @@ export async function sendRequestCompletedNotification(requestData: any) {
 
     const mailOptions = {
       from: process.env.SMTP_USER!,
-      to: 'bonjour@portail-electricite.com',
+      to: 'bonjour@demande-raccordement.fr',
       subject: `🎯 Demande Complétée - ${requestData.referenceNumber}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -158,7 +158,7 @@ export async function sendPaiementReussiNotification(paiementData: any) {
 
     const mailOptions = {
       from: process.env.SMTP_USER!,
-      to: 'bonjour@portail-electricite.com',
+      to: 'bonjour@demande-raccordement.fr',
       subject: `💰 PAIEMENT CONFIRMÉ - ${paiementData.referenceNumber || 'N/A'} - ${paiementData.amount ? (parseFloat(paiementData.amount) / 100).toFixed(2) + ' €' : 'N/A'}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -221,7 +221,7 @@ export async function sendPaiementEchoueNotification(paiementData: any) {
 
     const mailOptions = {
       from: process.env.SMTP_USER!,
-      to: 'bonjour@portail-electricite.com',
+      to: 'bonjour@demande-raccordement.fr',
       subject: `🚨 URGENT - PAIEMENT ÉCHOUÉ - ${paiementData.referenceNumber || 'N/A'} - ${paiementData.clientName || 'Client'}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

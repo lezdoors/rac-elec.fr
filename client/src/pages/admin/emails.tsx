@@ -1044,8 +1044,8 @@ function EmailPageContent() {
       const params = new URLSearchParams(location.split('?')[1] || '');
       const defaultUser = params.get('defaultUser');
 
-      // Si on vient de la route mail avec defaultUser=contact@portail-electricite.com, s'assurer que c'est bien l'utilisateur admin qu'on utilise
-      if (defaultUser === "contact@portail-electricite.com" && currentUser.username === "admin") {
+      // Si on vient de la route mail avec defaultUser=contact@demande-raccordement.fr, s'assurer que c'est bien l'utilisateur admin qu'on utilise
+      if (defaultUser === "contact@demande-raccordement.fr" && currentUser.username === "admin") {
         setSelectedUser(currentUser.id);
         // Forcer le chargement des emails
         fetchMailboxes(currentUser.id);
