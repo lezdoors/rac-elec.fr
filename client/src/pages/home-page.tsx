@@ -16,6 +16,7 @@ import raccordementCollectifIcon from "@assets/Raccordement-Collectif_1765333395
 import augmentationPuissanceIcon from "@assets/augmentation_de_puissance_1765333395814.webp";
 import servicesTechniquesIcon from "@assets/services-techniques_1765333395814.webp";
 import raccordementEnedisIcon from "@assets/Raccordement-Enedis_1765333395814.webp";
+import formIntroIllustration from "@assets/form-intro-illustartion_(Website)_1765358383139.webp";
 
 const useMobileDetection = () => {
   const [isMobile, setIsMobile] = useState(true);
@@ -165,65 +166,40 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* SERVICE CARDS SECTION */}
-        <section className="py-20 md:py-24 bg-white" id="services" data-animate data-testid="services-section">
+        {/* FORM INTRO SECTION */}
+        <section className="py-16 md:py-20 bg-gradient-to-b from-[#F8FAFC] to-white" id="form-intro" data-animate data-testid="form-intro-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-7xl">
-            <div className={`grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 transition-all duration-700 ${isVisible['services'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {/* Card 1 - Maison neuve */}
-              <Link href="/raccordement-enedis?type=definitif#top" className="group">
-                <div className="bg-white border border-gray-200 rounded-2xl p-5 md:p-8 shadow-md hover:shadow-xl hover:-translate-y-2 hover:border-[#0066CC] transition-all duration-300" data-testid="card-maison-neuve">
-                  <div 
-                    className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
-                    style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+            <div className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-16 transition-all duration-700 ${isVisible['form-intro'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              {/* Left Content */}
+              <div className="w-full lg:w-1/2 text-center lg:text-left">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                  Commencez votre demande de raccordement Enedis ici
+                </h2>
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0">
+                  Demarrez votre demande de raccordement electrique Enedis en quelques clics. Formulaire 100% en ligne, traitement rapide, accompagnement expert inclus.
+                </p>
+                <Link href="/raccordement-enedis#formulaire-raccordement">
+                  <button 
+                    className="bg-[#4F46E5] hover:bg-[#4338CA] text-white font-semibold text-base px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300"
+                    data-testid="cta-form-intro-button"
                   >
-                    <HomeIcon className="w-6 h-6 md:w-7 md:h-7 text-white" />
-                  </div>
-                  <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-1">Maison neuve</h3>
-                  <p className="text-sm text-gray-600">Habitation individuelle</p>
-                </div>
-              </Link>
+                    Demarrer ma demande
+                  </button>
+                </Link>
+              </div>
 
-              {/* Card 2 - Définitif */}
-              <Link href="/raccordement-enedis?type=definitif#top" className="group">
-                <div className="bg-white border border-gray-200 rounded-2xl p-5 md:p-8 shadow-md hover:shadow-xl hover:-translate-y-2 hover:border-[#0066CC] transition-all duration-300" data-testid="card-definitif">
-                  <div 
-                    className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
-                    style={{ background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' }}
-                  >
-                    <Building className="w-6 h-6 md:w-7 md:h-7 text-white" />
-                  </div>
-                  <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-1">Définitif</h3>
-                  <p className="text-sm text-gray-600">Locaux professionnels</p>
+              {/* Right Illustration */}
+              <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+                <div className="relative w-full max-w-md">
+                  <img 
+                    src={formIntroIllustration} 
+                    alt="Femme remplissant un formulaire en ligne pour sa demande de raccordement electrique"
+                    className="w-full h-auto"
+                    loading="lazy"
+                    data-testid="form-intro-illustration"
+                  />
                 </div>
-              </Link>
-
-              {/* Card 3 - Provisoire */}
-              <Link href="/raccordement-enedis?type=provisoire#top" className="group">
-                <div className="bg-white border border-gray-200 rounded-2xl p-5 md:p-8 shadow-md hover:shadow-xl hover:-translate-y-2 hover:border-[#0066CC] transition-all duration-300" data-testid="card-provisoire">
-                  <div 
-                    className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
-                    style={{ background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)' }}
-                  >
-                    <Clock className="w-6 h-6 md:w-7 md:h-7 text-white" />
-                  </div>
-                  <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-1">Provisoire</h3>
-                  <p className="text-sm text-gray-600">Chantiers temporaires</p>
-                </div>
-              </Link>
-
-              {/* Card 4 - Viabilisation */}
-              <Link href="/raccordement-enedis?type=viabilisation#top" className="group">
-                <div className="bg-white border border-gray-200 rounded-2xl p-5 md:p-8 shadow-md hover:shadow-xl hover:-translate-y-2 hover:border-[#0066CC] transition-all duration-300" data-testid="card-viabilisation">
-                  <div 
-                    className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
-                    style={{ background: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)' }}
-                  >
-                    <MapPin className="w-6 h-6 md:w-7 md:h-7 text-white" />
-                  </div>
-                  <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-1">Viabilisation</h3>
-                  <p className="text-sm text-gray-600">Parcelles terrain</p>
-                </div>
-              </Link>
+              </div>
             </div>
           </div>
         </section>
