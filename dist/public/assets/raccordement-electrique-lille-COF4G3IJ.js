@@ -1,1 +1,0 @@
-import{j as t}from"./index-B17SZAWE.js";import{C as e,f as i}from"./french-cities-Bs5tFsGL.js";import"./map-pin-BWLt8f5b.js";import"./building-DXZG54Aa.js";import"./users-DHpjmVbf.js";function n(){return t.jsx(e,{cityData:i.lille})}export{n as default};
