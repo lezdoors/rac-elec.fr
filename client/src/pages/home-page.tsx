@@ -90,9 +90,9 @@ export default function HomePage() {
       </Helmet>
 
       <main id="main-content">
-        {/* HERO SECTION - Premium Design with generous spacing */}
+        {/* HERO SECTION - Premium Design */}
         <section 
-          className="relative overflow-hidden pt-16 md:pt-24 lg:pt-32 pb-24 md:pb-32 lg:pb-40 bg-white"
+          className="relative overflow-hidden pt-12 md:pt-16 lg:pt-20 pb-16 md:pb-20 lg:pb-24 bg-white"
           data-testid="hero-section"
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
@@ -119,7 +119,7 @@ export default function HomePage() {
                 <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-12">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="bg-[#FF6B35] hover:bg-[#E55A2B] text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+                      className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
                       data-testid="cta-hero-button"
                     >
                       Demarrer ma demande
@@ -177,7 +177,7 @@ export default function HomePage() {
 
         {/* 3 STEPS SIMPLE SECTION - Like original site */}
         <section 
-          className="py-24 md:py-32 lg:py-40"
+          className="py-16 md:py-20 lg:py-24"
           style={{ background: 'linear-gradient(180deg, #F8FAFF 0%, #FFFFFF 100%)' }}
           id="steps-simple"
           data-animate
@@ -185,11 +185,11 @@ export default function HomePage() {
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-16 md:mb-20">
-              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-[#0066CC] mb-6 leading-tight">
+            <div className="text-center mb-12 md:mb-14">
+              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-[#0066CC] mb-4 leading-tight">
                 3 Etapes Simples Pour Votre Raccordement Enedis
               </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
                 Remplissez notre formulaire en ligne en quelques minutes. Nous nous occupons du reste.
               </p>
             </div>
@@ -250,7 +250,7 @@ export default function HomePage() {
                 <div className="mt-12">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="bg-[#FF6B35] hover:bg-[#E55A2B] text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+                      className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
                       data-testid="cta-steps-simple-button"
                     >
                       Demarrer ma demande maintenant
@@ -263,14 +263,14 @@ export default function HomePage() {
         </section>
 
         {/* SERVICE TYPES SECTION - Centered Card Layout Like Original */}
-        <section className="py-24 md:py-32 lg:py-40 bg-white" id="types-raccordements" data-animate data-testid="service-types-section">
+        <section className="py-16 md:py-20 lg:py-24 bg-white" id="types-raccordements" data-animate data-testid="service-types-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-16 md:mb-20">
-              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-6">
+            <div className="text-center mb-12 md:mb-14">
+              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-4">
                 Tous les Types de Raccordement Electrique Enedis
               </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
                 Quelle que soit la nature de votre projet, nous vous accompagnons dans votre demande de raccordement electrique
               </p>
             </div>
@@ -286,7 +286,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Raccordement Provisoire</h3>
                   <p className="text-base md:text-lg text-gray-600 mb-6">Pour chantiers, evenements temporaires et installations provisoires</p>
-                  <span className="inline-flex items-center text-[#FF6B35] font-medium text-base group-hover:text-[#E55A2B]">
+                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
                     Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>
@@ -300,7 +300,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Raccordement Definitif</h3>
                   <p className="text-base md:text-lg text-gray-600 mb-6">Maisons neuves, locaux commerciaux et installations permanentes</p>
-                  <span className="inline-flex items-center text-[#FF6B35] font-medium text-base group-hover:text-[#E55A2B]">
+                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
                     Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>
@@ -314,7 +314,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Augmentation de Puissance</h3>
                   <p className="text-base md:text-lg text-gray-600 mb-6">Augmentez la capacite de votre raccordement electrique existant</p>
-                  <span className="inline-flex items-center text-[#FF6B35] font-medium text-base group-hover:text-[#E55A2B]">
+                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
                     Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>
@@ -328,7 +328,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Raccordement Collectif</h3>
                   <p className="text-base md:text-lg text-gray-600 mb-6">Immeubles residentiels, coproprietes et batiments multi-logements</p>
-                  <span className="inline-flex items-center text-[#FF6B35] font-medium text-base group-hover:text-[#E55A2B]">
+                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
                     Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>
@@ -342,7 +342,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Viabilisation Terrain</h3>
                   <p className="text-base md:text-lg text-gray-600 mb-6">Preparation electrique de votre terrain a batir</p>
-                  <span className="inline-flex items-center text-[#FF6B35] font-medium text-base group-hover:text-[#E55A2B]">
+                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
                     Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>
@@ -356,7 +356,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Maison Neuve</h3>
                   <p className="text-base md:text-lg text-gray-600 mb-6">Premier raccordement pour votre construction neuve</p>
-                  <span className="inline-flex items-center text-[#FF6B35] font-medium text-base group-hover:text-[#E55A2B]">
+                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
                     Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>
@@ -373,12 +373,12 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ASSISTANCE SECTION - Icons in Rounded Containers */}
-        <section className="py-24 md:py-32 lg:py-40 bg-gray-50" id="assistance" data-animate data-testid="assistance-section">
+        {/* ASSISTANCE SECTION - Transparent icons like original site */}
+        <section className="py-16 md:py-20 lg:py-24 bg-gray-50" id="assistance" data-animate data-testid="assistance-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-16 md:mb-20">
-              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-6">
+            <div className="text-center mb-10 md:mb-12">
+              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-3">
                 Assistance pour Votre Demande de Raccordement Enedis
               </h2>
               <p className="text-lg md:text-xl text-gray-600">
@@ -386,16 +386,16 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* 4 Assistance Icons - Like Original Site */}
+            {/* 4 Assistance Icons - Transparent backgrounds like original site */}
             <div className={`grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 transition-all duration-700 ${isVisible['assistance'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               
               {/* Appelez-nous */}
               <a href="tel:0970709570" className="group text-center" data-testid="assistance-card-call">
-                <div className="w-24 h-24 md:w-28 md:h-28 mx-auto mb-6 rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-200">
+                <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 flex items-center justify-center group-hover:-translate-y-1 transition-all duration-200">
                   <img 
                     src={appelezNousIllustration} 
                     alt="Appelez-nous" 
-                    className="w-16 h-16 md:w-20 md:h-20 object-contain"
+                    className="w-full h-full object-contain"
                     loading="lazy"
                   />
                 </div>
@@ -404,11 +404,11 @@ export default function HomePage() {
 
               {/* Rappel gratuit */}
               <Link href="/contact" className="group text-center" data-testid="assistance-card-callback">
-                <div className="w-24 h-24 md:w-28 md:h-28 mx-auto mb-6 rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-200">
+                <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 flex items-center justify-center group-hover:-translate-y-1 transition-all duration-200">
                   <img 
                     src={rappelGratuitIllustration} 
                     alt="Rappel gratuit" 
-                    className="w-16 h-16 md:w-20 md:h-20 object-contain"
+                    className="w-full h-full object-contain"
                     loading="lazy"
                   />
                 </div>
@@ -417,11 +417,11 @@ export default function HomePage() {
 
               {/* Chat */}
               <Link href="/contact" className="group text-center" data-testid="assistance-card-chat">
-                <div className="w-24 h-24 md:w-28 md:h-28 mx-auto mb-6 rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-200">
+                <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 flex items-center justify-center group-hover:-translate-y-1 transition-all duration-200">
                   <img 
                     src={chatIllustration} 
                     alt="Chat" 
-                    className="w-16 h-16 md:w-20 md:h-20 object-contain"
+                    className="w-full h-full object-contain"
                     loading="lazy"
                   />
                 </div>
@@ -430,11 +430,11 @@ export default function HomePage() {
 
               {/* Formulaire de contact */}
               <Link href="/contact" className="group text-center" data-testid="assistance-card-form">
-                <div className="w-24 h-24 md:w-28 md:h-28 mx-auto mb-6 rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-200">
+                <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 flex items-center justify-center group-hover:-translate-y-1 transition-all duration-200">
                   <img 
                     src={contactFormIllustration} 
                     alt="Formulaire de contact" 
-                    className="w-16 h-16 md:w-20 md:h-20 object-contain"
+                    className="w-full h-full object-contain"
                     loading="lazy"
                   />
                 </div>
@@ -446,7 +446,7 @@ export default function HomePage() {
 
         {/* 4-STEP PROCESS SECTION - Larger Icons & Numbers */}
         <section 
-          className="py-24 md:py-32 lg:py-40"
+          className="py-16 md:py-20 lg:py-24"
           style={{ background: 'linear-gradient(180deg, #EBF4FF 0%, #F8FAFF 100%)' }}
           id="process"
           data-animate
@@ -454,11 +454,11 @@ export default function HomePage() {
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-16 md:mb-20">
-              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-[#0066CC] mb-6 leading-tight">
+            <div className="text-center mb-12 md:mb-14">
+              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-[#0066CC] mb-4 leading-tight">
                 Comment Faire sa Demande de Raccordement Electrique en Ligne ?
               </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
                 Processus 100% en ligne en 4 etapes simples. Votre demande de raccordement Enedis traitee rapidement avec accompagnement personnalise.
               </p>
             </div>
@@ -567,7 +567,7 @@ export default function HomePage() {
             <div className="text-center">
               <Link href="/raccordement-enedis#formulaire-raccordement">
                 <button 
-                  className="bg-[#FF6B35] hover:bg-[#E55A2B] text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+                  className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
                   data-testid="cta-process-button"
                 >
                   Commencer maintenant
@@ -578,7 +578,7 @@ export default function HomePage() {
         </section>
 
         {/* BESOIN D'AIDE SECTION - Like Original */}
-        <section className="py-24 md:py-32 bg-white" id="besoin-aide" data-animate data-testid="besoin-aide-section">
+        <section className="py-16 md:py-20 bg-white" id="besoin-aide" data-animate data-testid="besoin-aide-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             <div className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 transition-all duration-700 ${isVisible['besoin-aide'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               {/* Left - Illustration */}
@@ -628,7 +628,7 @@ export default function HomePage() {
         </section>
 
         {/* TESTIMONIALS SECTION */}
-        <section className="py-24 md:py-32 bg-gray-50" id="testimonials" data-animate data-testid="testimonials-section">
+        <section className="py-16 md:py-20 bg-gray-50" id="testimonials" data-animate data-testid="testimonials-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
             <div className="text-center mb-16">
@@ -686,7 +686,7 @@ export default function HomePage() {
         </section>
 
         {/* FAQ SECTION */}
-        <section className="py-24 md:py-32 bg-white" id="faq" data-animate data-testid="faq-section">
+        <section className="py-16 md:py-20 bg-white" id="faq" data-animate data-testid="faq-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-4xl">
             <div className="text-center mb-16">
               <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-6">
@@ -743,10 +743,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* CTA BANNER - Orange Gradient */}
+        {/* CTA BANNER - Blue Gradient */}
         <section 
           className="py-16 md:py-20"
-          style={{ background: 'linear-gradient(135deg, #FF6B35 0%, #E55A2B 100%)' }}
+          style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)' }}
           data-testid="cta-banner-section"
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-3xl text-center">
@@ -758,7 +758,7 @@ export default function HomePage() {
             </p>
             <Link href="/raccordement-enedis#formulaire-raccordement">
               <button 
-                className="bg-white text-[#FF6B35] font-semibold text-base px-10 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+                className="bg-white text-[#3B82F6] font-semibold text-base px-10 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
                 data-testid="cta-final-button"
               >
                 Commencer ma demande

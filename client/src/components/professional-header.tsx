@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import serviceLogo from "@assets/service-logo.png.png_1765371343702.png";
 
 export function ProfessionalHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -11,9 +12,9 @@ export function ProfessionalHeader() {
     if (typeof window !== 'undefined' && (window as any).triggerFormStartConversion) {
       try {
         (window as any).triggerFormStartConversion();
-        console.log('✅ Form start conversion triggered from header CTA');
+        console.log('Form start conversion triggered from header CTA');
       } catch (error) {
-        console.error('❌ Error triggering form start conversion:', error);
+        console.error('Error triggering form start conversion:', error);
       }
     }
   };
@@ -22,14 +23,25 @@ export function ProfessionalHeader() {
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+          {/* Logo Lockup: Icon | Separator | Two-line text */}
           <Link href="/" className="flex-shrink-0">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                <div className="w-4 h-4 bg-white" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}></div>
-              </div>
-              <div className="text-lg font-bold text-blue-600 hidden sm:block">
-                Raccordement-Connect.com
+            <div className="flex items-center gap-3">
+              {/* Logo Icon */}
+              <img 
+                src={serviceLogo} 
+                alt="Service Raccordement Electricite" 
+                className="w-8 h-8 object-contain"
+              />
+              {/* Separator */}
+              <div className="hidden sm:block w-px h-8 bg-gray-300"></div>
+              {/* Two-line Brand Text */}
+              <div className="hidden sm:flex flex-col">
+                <span className="text-base font-semibold text-gray-900 leading-tight">
+                  Service Raccordement Electricite
+                </span>
+                <span className="text-xs text-gray-500 leading-tight">
+                  Expert raccordement Enedis
+                </span>
               </div>
             </div>
           </Link>
@@ -61,7 +73,7 @@ export function ProfessionalHeader() {
               onClick={handlePrimaryCta}
             >
               <Button
-                className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 font-semibold rounded-lg min-h-11"
+                className="bg-[#3B82F6] hover:bg-[#2563EB] text-white px-4 py-2 font-semibold rounded-lg min-h-11"
                 aria-label="Faire ma demande de raccordement"
               >
                 Faire ma demande
@@ -90,7 +102,7 @@ export function ProfessionalHeader() {
             >
               <Button
                 size="sm"
-                className="bg-orange-600 hover:bg-orange-700 text-white px-3 py-2 text-sm font-semibold rounded-lg min-h-11"
+                className="bg-[#3B82F6] hover:bg-[#2563EB] text-white px-3 py-2 text-sm font-semibold rounded-lg min-h-11"
                 aria-label="Faire ma demande"
               >
                 Faire ma demande
