@@ -1,0 +1,129 @@
+Your task is only front-end / UI on the homepage:
+	1.	Fix French copy & typography.
+	2.	Add a new “Assistance” section between the FAQ and the purple CTA band.
+
+Do not modify any backend logic, Supabase, Stripe, routes, or tracking.
+
+⸻
+
+1. French copy & typography cleanup
+
+On the homepage:
+	1.	In all titles and paragraphs, ensure French accents are correct. For example (non-exhaustive list – search/replace where relevant):
+	•	Demarrage → Démarrage
+	•	Demarrer ma demande → Démarrer ma demande (button text as well)
+	•	Etapes → Étapes
+	•	electrique → électrique
+	•	Reponses → Réponses
+	•	Questions frequentes → Questions fréquentes
+	•	delai → délai
+	•	secure / securisé → sécurisé
+	2.	Keep headings in sentence case (not all caps), like:
+	•	Questions fréquentes
+	•	Comment faire sa demande de raccordement électrique en ligne ?
+	3.	Make sure line-height and spacing are consistent:
+	•	Hero subtitle: slightly smaller than the title, comfortable line-height.
+	•	Section subtitles (under each H2) should use the same font size and color across the page (soft grey, e.g. #6B7280).
+
+Do not change the actual meaning of the copy, only fix accents/capitalization/spacing.
+
+⸻
+
+2. New “Assistance” section (between FAQ and purple CTA)
+
+Place this new section directly after the FAQ block and before the big purple CTA band (“Prêt à démarrer votre projet ?”).
+
+2.1 Section structure
+Create a new <section> with:
+	•	Title (H2): Assistance pour votre demande de raccordement Enedis
+	•	Subtitle: Nous sommes à votre écoute pour vous accompagner.
+
+Center both. Match the typography style of the other H2 sections.
+
+Background: white or very light grey (#F9FAFB).
+Vertical padding: about py-16 or py-20.
+
+2.2 Assistance options grid
+Under the subtitle, add a responsive grid of 4 cards:
+	•	Desktop: 4 columns
+	•	Tablet: 2 columns x 2 rows
+	•	Mobile: 1 column (cards stacked)
+
+Each card is clickable and contains:
+	•	An illustration (WebP)
+	•	A title
+	•	A short description
+
+Use the following mapping (assume the illustrations are stored in public/illustrations/ and adjust import paths if needed):
+
+⸻
+
+Card 1 – Appelez-nous
+	•	Illustration: /illustrations/Appelez-nous.webp
+	•	Title: Appelez-nous
+	•	Description: Parlez directement avec un conseiller.
+	•	Click action: link to tel:0970709570
+
+⸻
+
+Card 2 – Rappel gratuit
+	•	Illustration: /illustrations/Appelez--nous.webp (the incoming-call/hand-holding-phone image)
+	•	Title: Rappel gratuit
+	•	Description: Laissez votre numéro, nous vous rappelons rapidement.
+	•	Click action:
+	•	If a callback route exists, link to it (e.g. /rappel).
+	•	Otherwise, link to /contact and add a TODO comment in the code for future dedicated callback page.
+
+⸻
+
+Card 3 – Chat
+	•	Illustration: /illustrations/Chat.webp
+	•	Title: Chat
+	•	Description: Obtenez une réponse en direct.
+	•	Click action:
+	•	If a chat widget is implemented, trigger it.
+	•	Otherwise, link to /contact with a TODO comment for chat integration.
+
+⸻
+
+Card 4 – Formulaire de contact
+	•	Illustration: /illustrations/Formulaire-contact.webp (rename the contact-form illustration if necessary)
+	•	Title: Formulaire de contact
+	•	Description: Envoyez votre demande, réponse sous 24 heures.
+	•	Click action: link to the main contact page (e.g. /contact).
+
+⸻
+
+2.3 Card styling
+For all 4 cards:
+	•	Container:
+	•	White background
+	•	Rounded corners (border-radius ~16–20 px)
+	•	Subtle border (1px solid #E5E7EB)
+	•	Light shadow is OK, but keep it discreet and professional
+	•	Internal padding (e.g. p-6 or p-8)
+	•	Layout:
+	•	Content vertically stacked and centered.
+	•	Illustration on top, then title, then description.
+	•	Illustration max-width: ~110–130 px on desktop, ~90–100 px on mobile.
+	•	Text:
+	•	Title: color same as other section titles (blue), medium/semi-bold, centered.
+	•	Description: smaller grey text, centered, max width ~240px.
+	•	Hover (desktop only):
+	•	Small translateY lift (-2px or similar) and slightly stronger shadow or border color.
+	•	Pointer cursor.
+	•	No large animations; keep it subtle and institutional.
+
+No emojis anywhere.
+
+⸻
+
+3. Do not change anything else
+
+Outside of the changes described above:
+	•	Do not touch the hero section logic, process steps, service cards, FAQ accordion behavior, purple CTA content, footer links, or any forms.
+	•	Do not modify any Supabase, Stripe, or tracking/analytics code.
+
+Only:
+	1.	Fix French text/typography on the homepage.
+	2.	Insert the new Assistance section between FAQ and the purple CTA, using the specified illustration mapping and styling.
