@@ -187,7 +187,7 @@ export default function HomePage() {
             {/* Header */}
             <div className="text-center mb-12 md:mb-14">
               <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-[#0066CC] mb-4 leading-tight">
-                Comment Faire sa Demande de Raccordement Electrique en&nbsp;Ligne&nbsp;?
+                Traitement des Demandes de Raccordement Électrique par Enedis
               </h2>
               <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
                 Processus 100% en ligne en 4 etapes simples. Votre demande de raccordement Enedis traitee rapidement avec accompagnement personnalise.
