@@ -653,7 +653,7 @@ export default function HomePage() {
                 <p className="text-gray-700 leading-relaxed">
                   "Service impeccable du début à la fin. Mon dossier de raccordement pour ma maison neuve a été traité en 3 semaines. L'équipe m'a tenu informé à chaque étape. Je recommande vivement."
                 </p>
-                <p className="text-xs text-gray-400 mt-4">Novembre 2024</p>
+                <p className="text-xs text-gray-400 mt-4">Novembre 2025</p>
               </div>
 
               {/* Testimonial 2 */}
@@ -675,7 +675,7 @@ export default function HomePage() {
                 <p className="text-gray-700 leading-relaxed">
                   "En tant que chef de chantier, j'ai besoin de réactivité. La demande de raccordement provisoire a été traitée rapidement et le suivi était parfait. Très professionnel."
                 </p>
-                <p className="text-xs text-gray-400 mt-4">Octobre 2024</p>
+                <p className="text-xs text-gray-400 mt-4">Octobre 2025</p>
               </div>
 
               {/* Testimonial 3 */}
@@ -697,7 +697,7 @@ export default function HomePage() {
                 <p className="text-gray-700 leading-relaxed">
                   "Je ne savais pas par où commencer pour augmenter la puissance de mon compteur. Tout a été pris en charge, je n'ai eu qu'à valider. Simple et efficace."
                 </p>
-                <p className="text-xs text-gray-400 mt-4">Décembre 2024</p>
+                <p className="text-xs text-gray-400 mt-4">Décembre 2025</p>
               </div>
 
               {/* Testimonial 4 */}
@@ -719,7 +719,7 @@ export default function HomePage() {
                 <p className="text-gray-700 leading-relaxed">
                   "Pour la viabilisation de mon terrain, les démarches administratives étaient complexes. Cette équipe a su gérer tout le processus avec Enedis. Merci !"
                 </p>
-                <p className="text-xs text-gray-400 mt-4">Septembre 2024</p>
+                <p className="text-xs text-gray-400 mt-4">Septembre 2025</p>
               </div>
 
               {/* Testimonial 5 */}
@@ -741,7 +741,7 @@ export default function HomePage() {
                 <p className="text-gray-700 leading-relaxed">
                   "Le formulaire en ligne est très intuitif et l'équipe répond rapidement aux questions. Mon raccordement définitif a été effectué dans les délais annoncés."
                 </p>
-                <p className="text-xs text-gray-400 mt-4">Novembre 2024</p>
+                <p className="text-xs text-gray-400 mt-4">Novembre 2025</p>
               </div>
 
               {/* Testimonial 6 */}
@@ -763,7 +763,7 @@ export default function HomePage() {
                 <p className="text-gray-700 leading-relaxed">
                   "Pour notre projet de lotissement, nous avions besoin d'un partenaire fiable. La coordination avec Enedis a été parfaitement gérée. Très satisfait du service."
                 </p>
-                <p className="text-xs text-gray-400 mt-4">Octobre 2024</p>
+                <p className="text-xs text-gray-400 mt-4">Octobre 2025</p>
               </div>
             </div>
 
