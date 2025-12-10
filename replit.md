@@ -34,6 +34,17 @@ Preferred communication style: Simple, everyday language.
 - **Mobile Optimizations**: Floating CTA button with smart show/hide behavior, enhanced mobile form validation with proper keyboard types, lazy loading images, mobile-first loading strategies, and touch-optimized interface elements.
 
 ### Recent Changes (December 2025)
+- **Google Ads & GTM Migration for demande-raccordement.fr**: Complete migration to new tracking configuration:
+  - GTM Container: GTM-K597C4C2
+  - Google Ads Conversion ID: AW-16683623620
+  - GA4 Measurement ID: G-D92SQT9L1P
+  - 3 Conversion Events configured:
+    - form_start (1ère partie du lead): AW-16683623620/xhTDCODCy6gbEMTJr5M-
+    - form_submit (lead complet): AW-16683623620/20wfCK-NyqgbEMTJr5M-
+    - purchase (après paiement): AW-16683623620/b5XPCPfuirYbEMTJr5M-
+  - Enhanced Conversions enabled with email/phone data
+  - Dual tracking: GTM dataLayer + Google Ads gtag direct
+  
 - **Modern Landing Page Redesign**: Complete redesign of home-page.tsx with conversion-focused modern UI:
   - Hero section with gradient background (linear-gradient #0052D4 → #4364F7 → #6FB1FC), glassmorphism partner badge, two-line headline, trust badges (100% en ligne, Réponse 48h, Sécurisé), floating house illustration with animation
   - 4 service cards with colorful gradient icons and hover effects
@@ -85,10 +96,11 @@ Preferred communication style: Simple, everyday language.
 - **Nodemailer**: Email sending library with SSL/TLS encryption.
 - **SMTP Configuration Updated**: December 2025
 
-### Analytics & Marketing
-- **Google Tag Manager**: GTM-T2VZD5DL (sole analytics script - all tracking via dataLayer)
-- **Google Analytics**: GA4 G-VJSY5MXCY7 (loaded by GTM via Google Tag GT-MJKTJGCK)
-- **Google Ads**: Conversion tracking with Enhanced Conversions (email/phone via GTM dataLayer), GCLID capture for attribution
+### Analytics & Marketing (demande-raccordement.fr)
+- **Google Tag Manager**: GTM-K597C4C2
+- **Google Analytics**: GA4 G-D92SQT9L1P
+- **Google Ads**: AW-16683623620 with 3 conversions (form_start, form_submit, purchase)
+- **Enhanced Conversions**: Enabled with email/phone data for improved attribution
 
 ### Other Integrations
 - **Puppeteer**: Server-side PDF generation.
