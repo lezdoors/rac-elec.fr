@@ -137,12 +137,6 @@ export default function HomePage() {
                   </Link>
                 </div>
 
-                {/* Trust Badges - Style professionnel sous les CTA */}
-                <div className="flex justify-center lg:justify-start">
-                  <p className="text-sm sm:text-base text-gray-500 font-normal">
-                    100% en ligne &middot; Réponse immédiate &middot; Sécurisé
-                  </p>
-                </div>
               </div>
 
               {/* Right Illustration - Responsive sizing */}
