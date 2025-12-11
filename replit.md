@@ -2,7 +2,7 @@
 
 ## Overview
 
-Raccordement-Elec.fr (now portail-electricite.com) is a French electrical connection service platform designed to streamline electrical connection requests for individuals, real estate developers, subdividers, and businesses in France. The platform provides a multi-step user experience, secure payment processing, automated notifications, and a comprehensive administration system for managing customer interactions and requests. The project aims to provide an easy and efficient way to manage electrical connection processes.
+demande-raccordement.fr is a French electrical connection service platform designed to streamline electrical connection requests for individuals, real estate developers, subdividers, and businesses in France. The platform provides a multi-step user experience, secure payment processing, automated notifications, and a comprehensive administration system for managing customer interactions and requests. The project aims to provide an easy and efficient way to manage electrical connection processes.
 
 ## User Preferences
 
@@ -92,7 +92,7 @@ Preferred communication style: Simple, everyday language.
 - **SMTP Server**: s3474.fra1.stableserver.net (Stableserver) for reliable email delivery.
 - **SMTP Port**: 465 (SSL/TLS)
 - **Sender**: kevin@monelec.net
-- **Recipient**: notifications@raccordement-connect.com
+- **Recipient**: bonjour@portail-electricite.com
 - **Nodemailer**: Email sending library with SSL/TLS encryption.
 - **SMTP Configuration Updated**: December 2025
 

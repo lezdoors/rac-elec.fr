@@ -21,7 +21,7 @@ const SITES = [
   },
   {
     name: 'Raccordement-Connect',
-    url: 'https://raccordement-connect.com/',
+    url: 'https://demande-raccordement.fr/',
     isCompetitor: true
   }
 ];
