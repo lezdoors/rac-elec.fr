@@ -2360,7 +2360,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
             createTime: new Date().toISOString(), // Ajouter l'horodatage de création
             userSubmitted: createOnly ? 'true' : 'false' // Indiquer si l'utilisateur a soumis le formulaire
           },
-          receipt_email: serviceRequest.email, // Envoyer un reçu par email
           description: `Frais de service - Référence: ${finalReference}`,
           capture_method: 'automatic',
           confirm: false, // La confirmation sera gérée côté client
@@ -8320,7 +8319,6 @@ app.patch("/api/contacts/:id/status", requireAuth, requireAdminOrManager, async 
             agentName: 'agent'
           },
           description: `Accompagnement raccordement électrique Enedis - ${referenceNumber}`,
-          receipt_email: serviceRequest.email,
           return_url: `${req.protocol}://${req.get('host')}/payment-confirmation?ref=${referenceNumber}`,
           // Capturer directement
           capture_method: 'automatic',
@@ -8442,7 +8440,6 @@ app.patch("/api/contacts/:id/status", requireAuth, requireAdminOrManager, async 
             agentProcessed: 'true'
           },
           description: `Accompagnement raccordement électrique Enedis - ${referenceNumber}`,
-          receipt_email: serviceRequest.email,
         }
       });
       
