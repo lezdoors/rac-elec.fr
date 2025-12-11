@@ -25,7 +25,8 @@ import {
   CreditCard,
   MapPin,
   HardHat,
-  MessageSquare
+  MessageSquare,
+  Trash2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -625,6 +626,37 @@ export default function DemandesPage() {
       queryClient.invalidateQueries({ queryKey: ['/api/service-requests'] });
     },
   });
+
+  // Mutation pour supprimer une demande (admin uniquement)
+  const deleteRequestMutation = useMutation({
+    mutationFn: async (id: number) => {
+      const res = await apiRequest("DELETE", `/api/service-requests/${id}`);
+      return await res.json();
+    },
+    onSuccess: (data) => {
+      if (data.success) {
+        toast({
+          title: "Demande supprimée",
+          description: "La demande a été supprimée avec succès",
+        });
+      }
+      queryClient.invalidateQueries({ queryKey: ['/api/service-requests'] });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Erreur",
+        description: error.message || "Un problème est survenu lors de la suppression",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Gérer la suppression d'une demande
+  const handleDeleteRequest = (request: ServiceRequest) => {
+    if (window.confirm(`Êtes-vous sûr de vouloir supprimer la demande ${request.referenceNumber} de ${request.name} ?`)) {
+      deleteRequestMutation.mutate(request.id);
+    }
+  };
   
   // Assurer que les tableaux ne sont jamais undefined
   const safeRequests = serviceRequests || [];
@@ -903,6 +935,13 @@ export default function DemandesPage() {
                               <DropdownMenuItem>
                                 <Pencil className="mr-2 h-4 w-4" />
                                 Modifier
+                              </DropdownMenuItem>
+                              <DropdownMenuItem 
+                                onClick={() => handleDeleteRequest(request)}
+                                className="text-red-600 focus:text-red-600 focus:bg-red-50"
+                              >
+                                <Trash2 className="mr-2 h-4 w-4" />
+                                Supprimer
                               </DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>

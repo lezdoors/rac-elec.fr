@@ -935,6 +935,75 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // Route pour supprimer une demande de service (admin uniquement)
+  app.delete("/api/service-requests/:id", requireAuth, requireAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      
+      if (isNaN(id)) {
+        return res.status(400).json({
+          success: false,
+          message: "ID invalide"
+        });
+      }
+      
+      // Vérifier que la demande existe
+      const existingRequest = await storage.getServiceRequest(id);
+      if (!existingRequest) {
+        return res.status(404).json({
+          success: false,
+          message: "Demande non trouvée"
+        });
+      }
+      
+      // Supprimer la demande
+      await db.delete(serviceRequests).where(eq(serviceRequests.id, id));
+      
+      console.log(`Demande ${id} (${existingRequest.referenceNumber}) supprimée par admin`);
+      
+      res.json({
+        success: true,
+        message: "Demande supprimée avec succès"
+      });
+    } catch (error: any) {
+      console.error("Erreur lors de la suppression de la demande:", error);
+      res.status(500).json({
+        success: false,
+        message: error.message || "Erreur lors de la suppression"
+      });
+    }
+  });
+
+  // Route pour supprimer un lead (admin uniquement)
+  app.delete("/api/leads/:id", requireAuth, requireAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      
+      if (isNaN(id)) {
+        return res.status(400).json({
+          success: false,
+          message: "ID invalide"
+        });
+      }
+      
+      // Supprimer le lead
+      await db.delete(leads).where(eq(leads.id, id));
+      
+      console.log(`Lead ${id} supprimé par admin`);
+      
+      res.json({
+        success: true,
+        message: "Lead supprimé avec succès"
+      });
+    } catch (error: any) {
+      console.error("Erreur lors de la suppression du lead:", error);
+      res.status(500).json({
+        success: false,
+        message: error.message || "Erreur lors de la suppression"
+      });
+    }
+  });
+
   // Protected route to get all service requests (for admin dashboard)
   app.get("/api/service-requests", requireAuth, async (req, res) => {
     try {

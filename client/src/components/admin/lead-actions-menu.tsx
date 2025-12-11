@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import { Phone, Mail, Download, MessageSquare, CheckCircle, XCircle, Clock, AlertTriangle, Share, FileText } from "lucide-react";
+import { Phone, Mail, Download, MessageSquare, CheckCircle, XCircle, Clock, AlertTriangle, Share, FileText, Trash2 } from "lucide-react";
 import { LEAD_STATUS } from "@shared/schema";
 
 import {
@@ -26,9 +26,10 @@ interface LeadActionsMenuProps {
   hasContract?: boolean;
   onRequestAppointment?: () => void;
   onExportPDF?: () => void;
+  onDelete?: () => void;
 }
 
-export function LeadActionsMenu({ leadId, phone, email, firstName, lastName, currentStatus, hasContract, onRequestAppointment, onExportPDF }: LeadActionsMenuProps) {
+export function LeadActionsMenu({ leadId, phone, email, firstName, lastName, currentStatus, hasContract, onRequestAppointment, onExportPDF, onDelete }: LeadActionsMenuProps) {
   const { toast } = useToast();
 
   const updateStatusMutation = useMutation({
@@ -240,6 +241,19 @@ export function LeadActionsMenu({ leadId, phone, email, firstName, lastName, cur
           <FileText className={`mr-2 h-4 w-4 ${hasContract ? "text-green-600" : ""}`} />
           {hasContract ? "Voir contrat" : "Générer contrat"}
         </DropdownMenuItem>
+        
+        {onDelete && (
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem 
+              onClick={onDelete}
+              className="text-red-600 focus:text-red-600 focus:bg-red-50"
+            >
+              <Trash2 className="mr-2 h-4 w-4" />
+              Supprimer
+            </DropdownMenuItem>
+          </>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

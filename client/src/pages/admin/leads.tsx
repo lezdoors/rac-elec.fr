@@ -352,6 +352,46 @@ export default function LeadsPage() {
     assignLeadMutation.mutate({ leadId, userId, priority, note });
   };
 
+  // Mutation pour supprimer un lead
+  const deleteLeadMutation = useMutation({
+    mutationFn: async (leadId: number) => {
+      const response = await apiRequest("DELETE", `/api/leads/${leadId}`);
+      return await response.json();
+    },
+    onSuccess: (data) => {
+      if (data.success) {
+        toast({
+          title: "Lead supprimé",
+          description: "Le lead a été supprimé avec succès",
+        });
+        setIsDetailsDialogOpen(false);
+        queryClient.invalidateQueries({ queryKey: ['/api/leads'] });
+        queryClient.invalidateQueries({ queryKey: ['/api/leads/incomplete'] });
+        queryClient.invalidateQueries({ queryKey: ['/api/leads/new'] });
+      } else {
+        toast({
+          title: "Erreur",
+          description: data.message || "Un problème est survenu lors de la suppression",
+          variant: "destructive",
+        });
+      }
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Erreur",
+        description: error.message || "Un problème est survenu lors de la suppression",
+        variant: "destructive",
+      });
+    }
+  });
+
+  // Fonction pour supprimer un lead avec confirmation
+  const handleDeleteLead = (leadId: number) => {
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer ce lead ? Cette action est irréversible.")) {
+      deleteLeadMutation.mutate(leadId);
+    }
+  };
+
   // Fonction pour exporter un lead en PDF
   const handleExportPDF = async () => {
     if (!leadDetails) return;
@@ -673,6 +713,7 @@ export default function LeadsPage() {
                             hasContract={leadDetails.hasContract || false}
                             onRequestAppointment={() => openAppointmentModal(leadDetails.id)}
                             onExportPDF={handleExportPDF}
+                            onDelete={() => handleDeleteLead(leadDetails.id)}
                           />
                         </div>
                       </CardHeader>
