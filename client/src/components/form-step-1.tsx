@@ -308,7 +308,7 @@ export function FormStep1({ form }: FormStep1Props) {
             control={form.control}
             name="phone"
             label="Téléphone"
-            placeholder="06 12 34 56 78"
+            placeholder="Votre numéro de téléphone"
             type="tel"
             validationRules={createValidationRules([phoneValidationRules], true)}
             required
