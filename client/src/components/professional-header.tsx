@@ -1,11 +1,23 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, X, Home, Briefcase, BookOpen, Phone, Shield, Clock, Users } from "lucide-react";
 import logoIllu from "@assets/logo-illu_1765394920144.png";
 
 export function ProfessionalHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   const handlePrimaryCta = () => {
     // Trigger Google Ads form_start conversion
@@ -111,40 +123,119 @@ export function ProfessionalHeader() {
           </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4 space-y-4">
-            <Link 
-              href="/" 
-              className="block text-gray-700 hover:text-blue-600 font-medium py-2"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Accueil
-            </Link>
-            <Link 
-              href="/nos-services" 
-              className="block text-gray-700 hover:text-blue-600 font-medium py-2"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Nos services
-            </Link>
-            <Link 
-              href="/contact" 
-              className="block text-gray-700 hover:text-blue-600 font-medium py-2"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Contact
-            </Link>
-            <a 
-              href="tel:+33970709570" 
-              className="block text-blue-600 hover:text-blue-800 font-medium py-2"
-              aria-label="Appeler le 09 70 70 95 70"
-            >
-              09 70 70 95 70
-            </a>
-          </div>
-        )}
       </div>
+
+      {/* Mobile Menu Drawer - Stripe Style */}
+      {isMobileMenuOpen && (
+        <>
+          {/* Overlay */}
+          <div 
+            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+          
+          {/* Drawer */}
+          <div className="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-white z-50 md:hidden shadow-xl flex flex-col animate-in slide-in-from-right duration-300">
+            
+            {/* Drawer Header */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+              <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                <img 
+                  src={logoIllu} 
+                  alt="Service Raccordement" 
+                  className="w-9 h-9 object-contain"
+                />
+              </Link>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label="Fermer le menu"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            
+            {/* Navigation Links */}
+            <nav className="flex-1 px-4 py-6">
+              <div className="space-y-1">
+                <Link 
+                  href="/" 
+                  className="flex items-center gap-4 px-4 py-3.5 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <Home className="h-5 w-5 text-gray-400" />
+                  <span className="text-[15px] font-medium">Accueil</span>
+                </Link>
+                <Link 
+                  href="/nos-services" 
+                  className="flex items-center gap-4 px-4 py-3.5 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <Briefcase className="h-5 w-5 text-gray-400" />
+                  <span className="text-[15px] font-medium">Nos Services</span>
+                </Link>
+                <Link 
+                  href="/guide-raccordement" 
+                  className="flex items-center gap-4 px-4 py-3.5 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <BookOpen className="h-5 w-5 text-gray-400" />
+                  <span className="text-[15px] font-medium">Guide</span>
+                </Link>
+              </div>
+            </nav>
+            
+            {/* Divider */}
+            <div className="mx-5 border-t border-gray-100" />
+            
+            {/* Bottom Section */}
+            <div className="px-5 py-6 space-y-5">
+              {/* Primary CTA */}
+              <Link 
+                href="/raccordement-enedis#formulaire-raccordement"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  handlePrimaryCta();
+                }}
+                className="block"
+              >
+                <Button
+                  className="w-full bg-[#3B82F6] hover:bg-[#2563EB] text-white py-3 h-12 text-[15px] font-semibold rounded-lg"
+                >
+                  Faire ma demande
+                </Button>
+              </Link>
+              
+              {/* Phone Contact */}
+              <a 
+                href="tel:+33970709570" 
+                className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                aria-label="Appeler le 09 70 70 95 70"
+              >
+                <Phone className="h-5 w-5 text-blue-500" />
+                <span className="text-[15px] font-medium">09 70 70 95 70</span>
+              </a>
+              
+              {/* Trust Indicators */}
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center gap-3 px-4">
+                  <Shield className="h-4 w-4 text-gray-400" />
+                  <span className="text-[13px] text-gray-500">Paiement 100 % sécurisé</span>
+                </div>
+                <div className="flex items-center gap-3 px-4">
+                  <Clock className="h-4 w-4 text-gray-400" />
+                  <span className="text-[13px] text-gray-500">Dossier traité sous 48 h</span>
+                </div>
+                <div className="flex items-center gap-3 px-4">
+                  <Users className="h-4 w-4 text-gray-400" />
+                  <span className="text-[13px] text-gray-500">Service client en France</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </header>
   );
 }
