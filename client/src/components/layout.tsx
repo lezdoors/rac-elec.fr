@@ -227,32 +227,31 @@ export default function Layout({ children }: LayoutProps) {
                 </button>
               </div>
               
-              {/* Navigation Links */}
-              <nav className="flex-1 px-4 py-6">
-                <div className="space-y-1">
+              {/* Navigation Links - Stripe Style */}
+              <nav className="flex-1 px-5 py-8">
+                <div className="space-y-0">
                   <Link 
                     href="/" 
-                    className="flex items-center gap-4 px-4 py-3.5 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                    className="flex items-center justify-between py-4 text-gray-800 hover:text-[#635bff] transition-colors border-b border-dashed border-gray-200"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Home className="h-5 w-5 text-gray-400" />
-                    <span className="text-[15px] font-medium">Accueil</span>
+                    <span className="text-[17px] font-semibold">Accueil</span>
                   </Link>
                   <Link 
                     href="/nos-services" 
-                    className="flex items-center gap-4 px-4 py-3.5 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                    className="flex items-center justify-between py-4 text-gray-800 hover:text-[#635bff] transition-colors border-b border-dashed border-gray-200"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Briefcase className="h-5 w-5 text-gray-400" />
-                    <span className="text-[15px] font-medium">Nos Services</span>
+                    <span className="text-[17px] font-semibold">Nos Services</span>
+                    <ChevronRight className="h-5 w-5 text-gray-400" />
                   </Link>
                   <Link 
                     href="/guide-raccordement" 
-                    className="flex items-center gap-4 px-4 py-3.5 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                    className="flex items-center justify-between py-4 text-gray-800 hover:text-[#635bff] transition-colors border-b border-dashed border-gray-200"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <BookOpen className="h-5 w-5 text-gray-400" />
-                    <span className="text-[15px] font-medium">Guide</span>
+                    <span className="text-[17px] font-semibold">Guide</span>
+                    <ChevronRight className="h-5 w-5 text-gray-400" />
                   </Link>
                 </div>
               </nav>
