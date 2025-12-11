@@ -23,7 +23,10 @@ import {
   Home, 
   FileText,
   Send,
-  ShieldCheck
+  ShieldCheck,
+  Briefcase,
+  BookOpen,
+  Shield
 } from "lucide-react";
 import {
   Dialog,
@@ -103,6 +106,18 @@ export default function Layout({ children }: LayoutProps) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -181,78 +196,113 @@ export default function Layout({ children }: LayoutProps) {
         </div>
           
         
-        {/* MENU MOBILE PERFECTIONNÉ - Interface optimale */}
+        {/* MOBILE MENU DRAWER - Stripe Style */}
         {mobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-2xl z-40">
-            <div className="px-3 py-5">
+          <>
+            {/* Overlay */}
+            <div 
+              className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-hidden="true"
+            />
+            
+            {/* Drawer */}
+            <div className="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-white z-50 lg:hidden shadow-xl flex flex-col animate-in slide-in-from-right duration-300">
               
-              {/* Navigation mobile simplifiée */}
-              <div className="space-y-1">
-                <Link 
-                  href="/" 
-                  className={`flex items-center px-4 py-4 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-semibold text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/' ? 'bg-blue-50 text-[#0072CE] border-l-4 border-[#0072CE]' : ''}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Home className="h-5 w-5 mr-3 flex-shrink-0" />
-                  Accueil
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+                <Link href="/" onClick={() => setMobileMenuOpen(false)}>
+                  <img 
+                    src="/logo-service-raccordement.png" 
+                    alt="Service Raccordement" 
+                    className="h-9 w-auto object-contain"
+                  />
                 </Link>
-                
-                <Link 
-                  href="/nos-services" 
-                  className={`flex items-center px-4 py-4 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-semibold text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/nos-services' ? 'bg-blue-50 text-[#0072CE] border-l-4 border-[#0072CE]' : ''}`}
+                <button
                   onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+                  aria-label="Fermer le menu"
                 >
-                  <Zap className="h-5 w-5 mr-3 flex-shrink-0" />
-                  Nos Services
-                </Link>
-                
-                <Link 
-                  href="/faq" 
-                  className={`flex items-center px-4 py-4 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-semibold text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/faq' ? 'bg-blue-50 text-[#0072CE] border-l-4 border-[#0072CE]' : ''}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <HelpCircle className="h-5 w-5 mr-3 flex-shrink-0" />
-                  Guide
-                </Link>
-                
-                <Link 
-                  href="/contact" 
-                  className={`flex items-center px-4 py-4 text-gray-700 hover:bg-blue-50 hover:text-[#0072CE] font-semibold text-base rounded-lg transition-all duration-200 touch-manipulation ${location === '/contact' ? 'bg-blue-50 text-[#0072CE] border-l-4 border-[#0072CE]' : ''}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Mail className="h-5 w-5 mr-3 flex-shrink-0" />
-                  Contact
-                </Link>
+                  <X className="h-5 w-5" />
+                </button>
               </div>
               
-              {/* Séparateur */}
-              <div className="border-t border-gray-100 my-5"></div>
+              {/* Navigation Links */}
+              <nav className="flex-1 px-4 py-6">
+                <div className="space-y-1">
+                  <Link 
+                    href="/" 
+                    className="flex items-center gap-4 px-4 py-3.5 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Home className="h-5 w-5 text-gray-400" />
+                    <span className="text-[15px] font-medium">Accueil</span>
+                  </Link>
+                  <Link 
+                    href="/nos-services" 
+                    className="flex items-center gap-4 px-4 py-3.5 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Briefcase className="h-5 w-5 text-gray-400" />
+                    <span className="text-[15px] font-medium">Nos Services</span>
+                  </Link>
+                  <Link 
+                    href="/guide-raccordement" 
+                    className="flex items-center gap-4 px-4 py-3.5 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <BookOpen className="h-5 w-5 text-gray-400" />
+                    <span className="text-[15px] font-medium">Guide</span>
+                  </Link>
+                </div>
+              </nav>
               
-              {/* Actions principales */}
-              <div className="space-y-3">
-                {/* Bouton principal CTA */}
+              {/* Divider */}
+              <div className="mx-5 border-t border-gray-100" />
+              
+              {/* Bottom Section */}
+              <div className="px-5 py-6 space-y-5">
+                {/* Primary CTA */}
                 <Link 
-                  href="/raccordement-enedis#top" 
-                  className="flex items-center justify-center w-full bg-[#0072CE] hover:bg-[#005bb5] text-white py-4 rounded-lg transition-all duration-300 font-semibold text-base shadow-lg hover:shadow-xl active:scale-95 touch-manipulation"
+                  href="/raccordement-enedis#formulaire-raccordement"
                   onClick={() => setMobileMenuOpen(false)}
+                  className="block"
                 >
-                  <Send className="h-5 w-5 mr-3" />
-                  Faire ma demande
+                  <Button
+                    className="w-full bg-[#3B82F6] hover:bg-[#2563EB] text-white py-3 h-12 text-[15px] font-semibold rounded-lg"
+                  >
+                    Faire ma demande
+                  </Button>
                 </Link>
                 
-                {/* Appel téléphonique */}
+                {/* Phone Contact */}
                 <a 
-                  href="tel:0970709570" 
-                  className="flex items-center justify-center w-full p-4 bg-gray-50 hover:bg-gray-100 text-gray-700 hover:text-[#0072CE] rounded-lg transition-all duration-200 group touch-manipulation"
-                  onClick={() => setMobileMenuOpen(false)}
+                  href="tel:+33970709570" 
+                  className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                  aria-label="Appeler le 09 70 70 95 70"
                 >
-                  <Phone className="h-5 w-5 mr-3 text-[#0072CE] group-hover:scale-110 transition-transform" />
-                  <span className="font-semibold text-base">09 70 70 95 70</span>
+                  <Phone className="h-5 w-5 text-blue-500" />
+                  <span className="text-[15px] font-medium">09 70 70 95 70</span>
                 </a>
+                
+                {/* Trust Indicators */}
+                <div className="space-y-3 pt-2">
+                  <div className="flex items-center gap-3 px-4">
+                    <Shield className="h-4 w-4 text-gray-400" />
+                    <span className="text-[13px] text-gray-500">Paiement 100 % sécurisé</span>
+                  </div>
+                  <div className="flex items-center gap-3 px-4">
+                    <Clock className="h-4 w-4 text-gray-400" />
+                    <span className="text-[13px] text-gray-500">Dossier traité sous 48 h</span>
+                  </div>
+                  <div className="flex items-center gap-3 px-4">
+                    <Users className="h-4 w-4 text-gray-400" />
+                    <span className="text-[13px] text-gray-500">Service client en France</span>
+                  </div>
+                </div>
               </div>
-              
             </div>
-          </div>
+          </>
         )}
       </header>
       
