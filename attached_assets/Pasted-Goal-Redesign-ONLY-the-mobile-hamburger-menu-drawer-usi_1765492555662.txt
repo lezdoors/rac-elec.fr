@@ -1,0 +1,105 @@
+Goal:
+Redesign ONLY the mobile hamburger menu (drawer) using a clean structure inspired by Stripe.
+Do not modify the desktop layout or the rest of the site.
+
+⸻
+
+1. HEADER (Mobile)
+
+Do not add the phone icon in the header anymore.
+Keep the current header exactly as it is.
+
+The only change happens inside the menu drawer.
+
+⸻
+
+2. MOBILE MENU DRAWER — NEW STRUCTURE (Stripe-Inspired)
+
+When the hamburger menu opens, apply the following:
+
+⸻
+
+A. Top of the drawer
+
+Use a clean Stripe-style header bar inside the menu:
+	•	Left side: the current logo (small)
+	•	Right side: a clean “X” close icon
+	•	Remove:
+	•	The long company name
+	•	Chevron or dropdown icon
+	•	Style should be minimal, white background, thin bottom border
+
+⸻
+
+B. Main navigation list
+
+Show only these items (each with its existing icon):
+	•	Accueil
+	•	Nos Services
+	•	Guide
+
+Remove Contact from the navigation list because contact will move to the bottom section.
+
+Spacing should be roomy, clean, and aligned exactly like Stripe’s mobile menu.
+
+⸻
+
+C. Divider
+
+After the nav items, add a subtle horizontal divider (light gray, very thin), just like Stripe’s.
+
+⸻
+
+D. Bottom section (CTAs + contact)
+
+This section appears after the divider and must include:
+
+1. Primary CTA button
+
+“Faire ma demande”
+Full-width, strong call-to-action.
+
+2. Phone contact row
+
+Under the CTA button, add a clean row for the phone number:
+	•	Simple phone icon (no emojis)
+	•	Text: 09 70 70 95 70
+	•	Make it clickable (tel: link)
+
+3. Trust indicators (stacked)
+
+Below the phone row, add these three small trust rows:
+	•	Icon + Paiement 100 % sécurisé
+	•	Icon + Dossier traité sous 48 h
+	•	Icon + Service client en France
+
+Style requirements:
+	•	Very small, subtle icons (matching Stripe style)
+	•	Light gray text, small font (≈14px)
+	•	12px vertical spacing between each row
+	•	Left alignment
+
+⸻
+
+3. RULES
+
+Do not modify:
+	•	Desktop layout
+	•	Header spacing
+	•	Form pages
+	•	Routes or URLs
+	•	Hero or footer
+	•	Menu animation behavior
+
+Only modify the inside content of the mobile menu.
+
+⸻
+
+EXPECTED RESULT
+
+The mobile menu should:
+	•	Look modern and clean
+	•	Follow the hierarchy and spacing similar to Stripe
+	•	Provide easy access to services
+	•	Place contact and trust signals at the bottom, not in the header
+	•	Improve conversion and UX with a professional, minimal design
