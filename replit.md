@@ -92,7 +92,7 @@ Preferred communication style: Simple, everyday language.
 - **SMTP Server**: s3474.fra1.stableserver.net (Stableserver) for reliable email delivery.
 - **SMTP Port**: 465 (SSL/TLS)
 - **Sender**: kevin@monelec.net
-- **Recipient**: notifications@raccordement-connect.com
+- **Recipient**: bonjour@demande-raccordement.fr
 - **Nodemailer**: Email sending library with SSL/TLS encryption.
 - **SMTP Configuration Updated**: December 2025
 
