@@ -157,7 +157,7 @@ export default function HomePage() {
 
         {/* 4-STEP PROCESS SECTION - Right after Hero */}
         <section 
-          className="py-10 md:py-14"
+          className="py-12 md:py-16"
           style={{ background: 'linear-gradient(180deg, #EBF4FF 0%, #F8FAFF 100%)' }}
           id="process"
           data-animate
@@ -165,7 +165,7 @@ export default function HomePage() {
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-12 md:mb-14">
+            <div className="text-center mb-10 md:mb-12">
               <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-[#0066CC] mb-4 leading-tight">
                 Traitement des Demandes de Raccordement Électrique par Enedis
               </h2>
@@ -298,7 +298,7 @@ export default function HomePage() {
 
         {/* 3 STEPS SIMPLE SECTION - Like original site */}
         <section 
-          className="py-10 md:py-14"
+          className="py-12 md:py-16"
           style={{ background: 'linear-gradient(180deg, #F8FAFF 0%, #FFFFFF 100%)' }}
           id="steps-simple"
           data-animate
@@ -306,7 +306,7 @@ export default function HomePage() {
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-12 md:mb-14">
+            <div className="text-center mb-10 md:mb-12">
               <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-[#0066CC] mb-4 leading-tight">
                 3 Étapes Simples Pour Votre Raccordement Enedis
               </h2>
@@ -384,10 +384,10 @@ export default function HomePage() {
         </section>
 
         {/* SERVICE TYPES SECTION - Centered Card Layout Like Original */}
-        <section className="py-10 md:py-14 bg-white" id="types-raccordements" data-animate data-testid="service-types-section">
+        <section className="py-12 md:py-16 bg-white" id="types-raccordements" data-animate data-testid="service-types-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-12 md:mb-14">
+            <div className="text-center mb-10 md:mb-12">
               <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-4">
                 Tous les Types de Raccordement Électrique Enedis
               </h2>
@@ -498,7 +498,7 @@ export default function HomePage() {
         </section>
 
         {/* ASSISTANCE SECTION - Transparent icons like original site */}
-        <section className="py-10 md:py-14 bg-gray-50" id="assistance" data-animate data-testid="assistance-section">
+        <section className="py-12 md:py-16 bg-gray-50" id="assistance" data-animate data-testid="assistance-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
             <div className="text-center mb-10 md:mb-12">
@@ -569,7 +569,7 @@ export default function HomePage() {
         </section>
 
         {/* BESOIN D'AIDE SECTION - Like Original */}
-        <section className="py-10 md:py-14 bg-white" id="besoin-aide" data-animate data-testid="besoin-aide-section">
+        <section className="py-12 md:py-16 bg-white" id="besoin-aide" data-animate data-testid="besoin-aide-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             <div className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 transition-all duration-700 ${isVisible['besoin-aide'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               {/* Left - Illustration */}

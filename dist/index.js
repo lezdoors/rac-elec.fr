@@ -10417,8 +10417,6 @@ ${comments}` : tarifJauneNote;
             userSubmitted: createOnly ? "true" : "false"
             // Indiquer si l'utilisateur a soumis le formulaire
           },
-          receipt_email: serviceRequest.email,
-          // Envoyer un reçu par email
           description: `Frais de service - R\xE9f\xE9rence: ${finalReference}`,
           capture_method: "automatic",
           confirm: false,
@@ -15076,7 +15074,6 @@ ${comments}` : tarifJauneNote;
             agentName: "agent"
           },
           description: `Accompagnement raccordement \xE9lectrique Enedis - ${referenceNumber}`,
-          receipt_email: serviceRequest.email,
           return_url: `${req.protocol}://${req.get("host")}/payment-confirmation?ref=${referenceNumber}`,
           // Capturer directement
           capture_method: "automatic",
@@ -15183,8 +15180,7 @@ ${comments}` : tarifJauneNote;
             processedBy: req.user?.id?.toString() || "unknown",
             agentProcessed: "true"
           },
-          description: `Accompagnement raccordement \xE9lectrique Enedis - ${referenceNumber}`,
-          receipt_email: serviceRequest.email
+          description: `Accompagnement raccordement \xE9lectrique Enedis - ${referenceNumber}`
         }
       });
       const paymentIntentId = checkoutSession.payment_intent;
