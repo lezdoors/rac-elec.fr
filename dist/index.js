@@ -1924,7 +1924,7 @@ function setupSmtpService() {
       }
     };
     globalTransporter = nodemailer.createTransport(smtpConfig);
-    console.log("\u2705 SMTP STABLESERVER - kevin@monelec.net \u2192 bonjour@demande-raccordement.fr");
+    console.log("\u2705 SMTP STABLESERVER - kevin@monelec.net \u2192 notifications@raccordement-connect.com");
   } catch (error) {
     console.error("\u274C Erreur configuration SMTP:", error);
   }
@@ -2018,7 +2018,7 @@ async function sendPaiementReussiNotification(paiementData) {
     `;
     const mailOptions = {
       from: "kevin@monelec.net",
-      to: "bonjour@demande-raccordement.fr",
+      to: "notifications@raccordement-connect.com",
       subject: `PAIEMENT - ${clientName} - ${paiementData.referenceNumber || "N/A"} - ${montantFormate}`,
       html: htmlContent,
       text: `PAIEMENT CONFIRME
@@ -2134,7 +2134,7 @@ async function sendPaiementEchoueNotification(paiementData) {
     `;
     const mailOptions = {
       from: "kevin@monelec.net",
-      to: "bonjour@demande-raccordement.fr",
+      to: "notifications@raccordement-connect.com",
       subject: `ECHEC PAIEMENT - ${clientName} - ${paiementData.referenceNumber || "N/A"}`,
       html: htmlContent,
       text: `PAIEMENT ECHOUE
@@ -2208,7 +2208,7 @@ async function sendTentativePaiementNotification(paiementData) {
     `;
     const mailOptions = {
       from: "kevin@monelec.net",
-      to: "bonjour@demande-raccordement.fr",
+      to: "notifications@raccordement-connect.com",
       subject: `\u{1F504} TENTATIVE PAIEMENT - ${paiementData.referenceNumber || "N/A"} - ${paiementData.clientName || "Client"}`,
       html: htmlContent,
       text: `\u{1F504} TENTATIVE DE PAIEMENT
@@ -2329,7 +2329,7 @@ async function sendLeadNotification(leadData) {
     }
     const mailOptions = {
       from: `"Notifications Raccordement" <kevin@monelec.net>`,
-      to: "bonjour@demande-raccordement.fr",
+      to: "notifications@raccordement-connect.com",
       subject: `1st - ${leadData.prenom || ""} ${leadData.nom || ""} - ${leadData.referenceNumber || "N/A"}`,
       html: contenuEmail
     };
@@ -2382,7 +2382,7 @@ async function sendSupportMessageNotification(supportData) {
     `;
     const mailOptions = {
       from: `"Support Raccordement" <kevin@monelec.net>`,
-      to: "bonjour@demande-raccordement.fr",
+      to: "notifications@raccordement-connect.com",
       subject: `\u{1F4AC} NOUVEAU MESSAGE SUPPORT - ${supportData.name || "Contact anonyme"}`,
       html: contenuEmail
     };
@@ -2621,7 +2621,7 @@ async function sendRequestCompletedNotification(requestData) {
     `;
     const mailOptions = {
       from: "kevin@monelec.net",
-      to: "bonjour@demande-raccordement.fr",
+      to: "notifications@raccordement-connect.com",
       subject: `C DDE - ${requestData.prenom || ""} ${requestData.nom || ""} - ${requestData.referenceNumber || "N/A"}`,
       html: contenuEmail
     };
@@ -2706,7 +2706,7 @@ async function sendContactEmail(contactData) {
     `;
     const mailOptions = {
       from: "kevin@monelec.net",
-      to: "bonjour@demande-raccordement.fr",
+      to: "notifications@raccordement-connect.com",
       subject: `${priorityEmoji} Nouveau message de contact${priority === "haute" ? " - URGENT" : ""} - ${contactData.subject || "Sans sujet"}`,
       html: contenuEmail
     };
@@ -8676,7 +8676,7 @@ async function registerRoutes(app2) {
   app2.use("/api/user-stats", userStatsRouter);
   setupDashboardRoutes(app2);
   registerPaymentDebugRoutes(app2);
-  console.log("Service SMTP configur\xE9 - kevin@monelec.net \u2192 bonjour@demande-raccordement.fr");
+  console.log("Service SMTP configur\xE9 - kevin@monelec.net \u2192 notifications@raccordement-connect.com");
   app2.get("/api/admin/security-status", requireAuth, requireAdmin, async (req, res) => {
     try {
       const stats = securityMonitor.getSecurityStats();
@@ -8789,14 +8789,14 @@ async function registerRoutes(app2) {
       } catch (e) {
         console.error("Erreur de parsing JSON pour les emails de notification", e);
       }
-      const standardEmails = ["bonjour@demande-raccordement.fr"];
+      const standardEmails = ["notifications@raccordement-connect.com"];
       standardEmails.forEach((email) => {
         if (!notificationEmails.includes(email)) {
           notificationEmails.push(email);
         }
       });
       if (notificationEmails.length === 0) {
-        notificationEmails = ["bonjour@demande-raccordement.fr"];
+        notificationEmails = ["notifications@raccordement-connect.com"];
       }
       res.status(200).json({
         success: true,
@@ -10309,7 +10309,7 @@ ${comments}` : tarifJauneNote;
           // Toutes les données brutes du formulaire
         };
         console.log("\u{1F4E7} ENVOI EMAIL COMPLET - FORMULAIRE FINALIS\xC9");
-        console.log("\u{1F4EC} Destinataire principal: bonjour@demande-raccordement.fr");
+        console.log("\u{1F4EC} Destinataire principal: notifications@raccordement-connect.com");
         console.log("\u{1F4CB} R\xE9f\xE9rence g\xE9n\xE9r\xE9e:", serviceRequest.referenceNumber);
       } catch (emailError) {
         console.error("Erreur lors de la pr\xE9paration de la notification email:", emailError);

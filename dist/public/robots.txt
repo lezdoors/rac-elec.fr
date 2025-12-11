@@ -19,7 +19,7 @@ Disallow: /payment
 Disallow: /debug
 
 # Sitemap location
-Sitemap: https://www.demande-raccordement.fr/sitemap.xml
+Sitemap: https://www.raccordement-connect.com/sitemap.xml
 
 # Crawl delay to be respectful
 Crawl-delay: 1
