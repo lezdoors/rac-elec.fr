@@ -174,112 +174,84 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* 4 Steps Grid - Parfaitement symétrique */}
-            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 mb-16 transition-all duration-700 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              
-              {/* Step 1 */}
-              <div className="text-center h-full">
-                <div className="flex flex-col items-center h-full">
-                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-5 shadow-lg flex-shrink-0">
-                    1
-                  </div>
-                  <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center mb-5 flex-shrink-0">
-                    <img 
-                      src={step1Illustration}
-                      alt="Définir le type de raccordement"
-                      className="w-full h-full object-contain"
-                      loading="lazy"
-                      data-testid="step1-illustration"
-                    />
-                  </div>
-                  <div className="flex-1 flex flex-col">
-                    <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 leading-snug min-h-[3.5rem] flex items-center justify-center">
-                      Définir le type de raccordement
-                    </h3>
-                    <p className="text-sm md:text-base text-gray-500 leading-relaxed">
-                      Utilisez notre outil pour cadrer votre demande.
-                    </p>
+            {/* 4 Steps - Mobile Carousel / Desktop Grid */}
+            {/* Desktop Grid - Hidden on mobile */}
+            <div className={`hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 mb-16 transition-all duration-700 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              {[
+                { num: 1, img: step1Illustration, alt: "Définir le type de raccordement", title: "Définir le type de raccordement", desc: "Utilisez notre outil pour cadrer votre demande." },
+                { num: 2, img: step2Illustration, alt: "Compléter un formulaire simple", title: "Compléter le formulaire en ligne", desc: "Renseignez votre projet en quelques minutes." },
+                { num: 3, img: step3Illustration, alt: "Dépôt du dossier chez Enedis", title: "Dépôt du dossier chez Enedis", desc: "Constitution et envoi de votre dossier complet." },
+                { num: 4, img: step4Illustration, alt: "Suivi jusqu'à la mise en service", title: "Suivi jusqu'à la mise en service", desc: "Accompagnement personnalisé de A à Z." }
+              ].map((step) => (
+                <div key={step.num} className="text-center h-full">
+                  <div className="flex flex-col items-center h-full">
+                    <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-5 shadow-lg flex-shrink-0">
+                      {step.num}
+                    </div>
+                    <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center mb-5 flex-shrink-0">
+                      <img src={step.img} alt={step.alt} className="w-full h-full object-contain" loading="lazy" data-testid={`step${step.num}-illustration`} />
+                    </div>
+                    <div className="flex-1 flex flex-col">
+                      <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 leading-snug min-h-[3.5rem] flex items-center justify-center">{step.title}</h3>
+                      <p className="text-sm md:text-base text-gray-500 leading-relaxed">{step.desc}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
+            </div>
 
-              {/* Step 2 */}
-              <div className="text-center h-full">
-                <div className="flex flex-col items-center h-full">
-                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-5 shadow-lg flex-shrink-0">
-                    2
+            {/* Mobile Carousel - Visible only on mobile */}
+            <div className="sm:hidden mb-12 overflow-hidden">
+              <div 
+                className="flex gap-4"
+                style={{
+                  width: 'max-content',
+                  animation: 'scrollSteps 20s linear infinite'
+                }}
+              >
+                {/* First set */}
+                {[
+                  { num: 1, img: step1Illustration, alt: "Définir le type de raccordement", title: "Définir le type de raccordement", desc: "Utilisez notre outil pour cadrer votre demande." },
+                  { num: 2, img: step2Illustration, alt: "Compléter un formulaire simple", title: "Compléter le formulaire en ligne", desc: "Renseignez votre projet en quelques minutes." },
+                  { num: 3, img: step3Illustration, alt: "Dépôt du dossier chez Enedis", title: "Dépôt du dossier chez Enedis", desc: "Constitution et envoi de votre dossier complet." },
+                  { num: 4, img: step4Illustration, alt: "Suivi jusqu'à la mise en service", title: "Suivi jusqu'à la mise en service", desc: "Accompagnement personnalisé de A à Z." }
+                ].map((step, idx) => (
+                  <div key={`first-${idx}`} className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 min-w-[260px] max-w-[260px] flex-shrink-0 text-center">
+                    <div className="w-10 h-10 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg mb-4 shadow-md mx-auto">
+                      {step.num}
+                    </div>
+                    <div className="w-28 h-28 flex items-center justify-center mb-4 mx-auto">
+                      <img src={step.img} alt={step.alt} className="w-full h-full object-contain" loading="lazy" />
+                    </div>
+                    <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-snug">{step.title}</h3>
+                    <p className="text-xs text-gray-500 leading-relaxed">{step.desc}</p>
                   </div>
-                  <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center mb-5 flex-shrink-0">
-                    <img 
-                      src={step2Illustration}
-                      alt="Compléter un formulaire simple"
-                      className="w-full h-full object-contain"
-                      loading="lazy"
-                      data-testid="step2-illustration"
-                    />
+                ))}
+                {/* Duplicate for seamless loop */}
+                {[
+                  { num: 1, img: step1Illustration, alt: "Définir le type de raccordement", title: "Définir le type de raccordement", desc: "Utilisez notre outil pour cadrer votre demande." },
+                  { num: 2, img: step2Illustration, alt: "Compléter un formulaire simple", title: "Compléter le formulaire en ligne", desc: "Renseignez votre projet en quelques minutes." },
+                  { num: 3, img: step3Illustration, alt: "Dépôt du dossier chez Enedis", title: "Dépôt du dossier chez Enedis", desc: "Constitution et envoi de votre dossier complet." },
+                  { num: 4, img: step4Illustration, alt: "Suivi jusqu'à la mise en service", title: "Suivi jusqu'à la mise en service", desc: "Accompagnement personnalisé de A à Z." }
+                ].map((step, idx) => (
+                  <div key={`second-${idx}`} className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 min-w-[260px] max-w-[260px] flex-shrink-0 text-center">
+                    <div className="w-10 h-10 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg mb-4 shadow-md mx-auto">
+                      {step.num}
+                    </div>
+                    <div className="w-28 h-28 flex items-center justify-center mb-4 mx-auto">
+                      <img src={step.img} alt={step.alt} className="w-full h-full object-contain" loading="lazy" />
+                    </div>
+                    <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-snug">{step.title}</h3>
+                    <p className="text-xs text-gray-500 leading-relaxed">{step.desc}</p>
                   </div>
-                  <div className="flex-1 flex flex-col">
-                    <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 leading-snug min-h-[3.5rem] flex items-center justify-center">
-                      Compléter le formulaire en ligne
-                    </h3>
-                    <p className="text-sm md:text-base text-gray-500 leading-relaxed">
-                      Renseignez votre projet en quelques minutes.
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
-
-              {/* Step 3 */}
-              <div className="text-center h-full">
-                <div className="flex flex-col items-center h-full">
-                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-5 shadow-lg flex-shrink-0">
-                    3
-                  </div>
-                  <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center mb-5 flex-shrink-0">
-                    <img 
-                      src={step3Illustration}
-                      alt="Dépôt du dossier chez Enedis"
-                      className="w-full h-full object-contain"
-                      loading="lazy"
-                      data-testid="step3-illustration"
-                    />
-                  </div>
-                  <div className="flex-1 flex flex-col">
-                    <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 leading-snug min-h-[3.5rem] flex items-center justify-center">
-                      Dépôt du dossier chez Enedis
-                    </h3>
-                    <p className="text-sm md:text-base text-gray-500 leading-relaxed">
-                      Constitution et envoi de votre dossier complet.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 4 */}
-              <div className="text-center h-full">
-                <div className="flex flex-col items-center h-full">
-                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-5 shadow-lg flex-shrink-0">
-                    4
-                  </div>
-                  <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center mb-5 flex-shrink-0">
-                    <img 
-                      src={step4Illustration}
-                      alt="Suivi jusqu'à la mise en service"
-                      className="w-full h-full object-contain"
-                      loading="lazy"
-                      data-testid="step4-illustration"
-                    />
-                  </div>
-                  <div className="flex-1 flex flex-col">
-                    <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 leading-snug min-h-[3.5rem] flex items-center justify-center">
-                      Suivi jusqu'à la mise en service
-                    </h3>
-                    <p className="text-sm md:text-base text-gray-500 leading-relaxed">
-                      Accompagnement personnalisé de A à Z.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <style>{`
+                @keyframes scrollSteps {
+                  0% { transform: translateX(0); }
+                  100% { transform: translateX(-50%); }
+                }
+              `}</style>
             </div>
 
             {/* CTA Button */}
