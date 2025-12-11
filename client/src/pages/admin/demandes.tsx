@@ -50,6 +50,7 @@ import {
 } from "@/components/ui/dialog";
 import { Link } from "wouter";
 import { ServiceRequest } from "@shared/schema";
+import { useToast } from "@/hooks/use-toast";
 import { PaymentLinksGenerator } from "@/components/payment-links-generator";
 
 // Formatter pour les dates
@@ -587,6 +588,8 @@ function RequestDetails({ request, onClose }: { request: ServiceRequest, onClose
 }
 
 export default function DemandesPage() {
+  const { toast } = useToast();
+  
   // États pour les filtres et les données
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string | null>(null);

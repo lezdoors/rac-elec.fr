@@ -9325,6 +9325,59 @@ async function registerRoutes(app2) {
       });
     }
   });
+  app2.delete("/api/service-requests/:id", requireAuth, requireAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({
+          success: false,
+          message: "ID invalide"
+        });
+      }
+      const existingRequest = await storage.getServiceRequest(id);
+      if (!existingRequest) {
+        return res.status(404).json({
+          success: false,
+          message: "Demande non trouv\xE9e"
+        });
+      }
+      await db.delete(serviceRequests).where(eq11(serviceRequests.id, id));
+      console.log(`Demande ${id} (${existingRequest.referenceNumber}) supprim\xE9e par admin`);
+      res.json({
+        success: true,
+        message: "Demande supprim\xE9e avec succ\xE8s"
+      });
+    } catch (error) {
+      console.error("Erreur lors de la suppression de la demande:", error);
+      res.status(500).json({
+        success: false,
+        message: error.message || "Erreur lors de la suppression"
+      });
+    }
+  });
+  app2.delete("/api/leads/:id", requireAuth, requireAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({
+          success: false,
+          message: "ID invalide"
+        });
+      }
+      await db.delete(leads).where(eq11(leads.id, id));
+      console.log(`Lead ${id} supprim\xE9 par admin`);
+      res.json({
+        success: true,
+        message: "Lead supprim\xE9 avec succ\xE8s"
+      });
+    } catch (error) {
+      console.error("Erreur lors de la suppression du lead:", error);
+      res.status(500).json({
+        success: false,
+        message: error.message || "Erreur lors de la suppression"
+      });
+    }
+  });
   app2.get("/api/service-requests", requireAuth, async (req, res) => {
     try {
       const userRole = req.user?.role || "";

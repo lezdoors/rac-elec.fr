@@ -17,9 +17,10 @@ export interface InputWithValidationProps
 }
 
 const InputWithValidation = React.forwardRef<HTMLInputElement, InputWithValidationProps>(
-  ({ className, type, validationRules = [], showValidation = true, debounceMs = 300, onValidationChange, ...props }, ref) => {
+  ({ className, type, validationRules = [], showValidation = true, debounceMs = 300, onValidationChange, placeholder, ...props }, ref) => {
     const [value, setValue] = React.useState(props.value || "");
     const [isValidating, setIsValidating] = React.useState(false);
+    const [isFocused, setIsFocused] = React.useState(false);
     const [validationState, setValidationState] = React.useState<{
       isValid: boolean;
       errors: string[];
@@ -168,15 +169,27 @@ const InputWithValidation = React.forwardRef<HTMLInputElement, InputWithValidati
       return cn(baseClasses, className);
     };
 
+    // Exclure les handlers de focus/blur du spread pour éviter les conflits
+    const { onFocus: propsOnFocus, onBlur: propsOnBlur, value: propsValue, onChange: propsOnChange, ...restProps } = props;
+    
     return (
       <div className="relative">
         <input
+          {...restProps}
           type={type}
           className={getInputClassName()}
           ref={ref}
           value={value}
           onChange={handleChange}
-          {...props}
+          placeholder={isFocused ? "" : placeholder}
+          onFocus={(e) => {
+            setIsFocused(true);
+            propsOnFocus?.(e);
+          }}
+          onBlur={(e) => {
+            setIsFocused(false);
+            propsOnBlur?.(e);
+          }}
         />
         
         {showValidation && validationRules.length > 0 && (
