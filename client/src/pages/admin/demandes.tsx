@@ -48,6 +48,16 @@ import {
   DialogTitle,
   DialogDescription
 } from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Link } from "wouter";
 import { ServiceRequest } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
@@ -599,6 +609,8 @@ export default function DemandesPage() {
   const [selectedRequest, setSelectedRequest] = useState<ServiceRequest | null>(null);
   const [showDetailsDialog, setShowDetailsDialog] = useState(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [requestToDelete, setRequestToDelete] = useState<ServiceRequest | null>(null);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   
   // Constante pour définir le nombre d'éléments par page
   const ITEMS_PER_PAGE = 20;
@@ -656,8 +668,16 @@ export default function DemandesPage() {
 
   // Gérer la suppression d'une demande
   const handleDeleteRequest = (request: ServiceRequest) => {
-    if (window.confirm(`Êtes-vous sûr de vouloir supprimer la demande ${request.referenceNumber} de ${request.name} ?`)) {
-      deleteRequestMutation.mutate(request.id);
+    setRequestToDelete(request);
+    setShowDeleteDialog(true);
+  };
+  
+  // Confirmer la suppression
+  const confirmDeleteRequest = () => {
+    if (requestToDelete) {
+      deleteRequestMutation.mutate(requestToDelete.id);
+      setShowDeleteDialog(false);
+      setRequestToDelete(null);
     }
   };
   
@@ -1002,6 +1022,29 @@ export default function DemandesPage() {
           )}
         </DialogContent>
       </Dialog>
+      
+      {/* Dialog de confirmation de suppression */}
+      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Confirmer la suppression</AlertDialogTitle>
+            <AlertDialogDescription>
+              Êtes-vous sûr de vouloir supprimer la demande {requestToDelete?.referenceNumber} de {requestToDelete?.name} ?
+              <br /><br />
+              <span className="text-red-600 font-medium">Cette action est irréversible.</span>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setRequestToDelete(null)}>Annuler</AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={confirmDeleteRequest}
+              className="bg-red-600 hover:bg-red-700 text-white"
+            >
+              Supprimer
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </AdminLayout>
   );
 }

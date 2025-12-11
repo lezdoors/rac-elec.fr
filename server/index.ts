@@ -50,7 +50,7 @@ app.use(express.json({ limit: '10mb' })); // Increased limit for PDF generation
 app.use(express.urlencoded({ extended: false, limit: '10mb' }));
 
 // Enhanced rate limiting for business-critical endpoints
-const formRateLimit = createBusinessRateLimit(10, 60 * 1000); // 10 requests per minute for forms
+const formRateLimit = createBusinessRateLimit(10, 60 * 1000, false, { excludeMethods: ['DELETE', 'GET'] }); // 10 requests per minute for forms, exclude DELETE/GET for admin operations
 const paymentRateLimit = createBusinessRateLimit(5, 60 * 1000); // 5 requests per minute for payments
 const generalRateLimit = createBusinessRateLimit(100, 60 * 1000); // 100 requests per minute general
 

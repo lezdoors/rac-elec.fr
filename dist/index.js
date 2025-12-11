@@ -17517,9 +17517,13 @@ var securityHeaders = (req, res, next) => {
   res.setHeader("X-Download-Options", "noopen");
   next();
 };
-var createBusinessRateLimit = (maxRequests, windowMs, skipSuccessfulRequests = false) => {
+var createBusinessRateLimit = (maxRequests, windowMs, skipSuccessfulRequests = false, options) => {
   const rateLimitMap = /* @__PURE__ */ new Map();
+  const excludeMethods = options?.excludeMethods || [];
   return (req, res, next) => {
+    if (excludeMethods.includes(req.method)) {
+      return next();
+    }
     const key = req.ip || req.socket.remoteAddress || "unknown";
     const now = Date.now();
     const windowStart = now - windowMs;
@@ -17627,7 +17631,7 @@ app.use(compression({
 }));
 app.use(express2.json({ limit: "10mb" }));
 app.use(express2.urlencoded({ extended: false, limit: "10mb" }));
-var formRateLimit = createBusinessRateLimit(10, 60 * 1e3);
+var formRateLimit = createBusinessRateLimit(10, 60 * 1e3, false, { excludeMethods: ["DELETE", "GET"] });
 var paymentRateLimit = createBusinessRateLimit(5, 60 * 1e3);
 var generalRateLimit = createBusinessRateLimit(100, 60 * 1e3);
 app.use("/api/leads", formRateLimit);

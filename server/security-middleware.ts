@@ -49,10 +49,16 @@ export const securityHeaders = (req: Request, res: Response, next: NextFunction)
 /**
  * Enhanced rate limiting for critical business endpoints
  */
-export const createBusinessRateLimit = (maxRequests: number, windowMs: number, skipSuccessfulRequests = false) => {
+export const createBusinessRateLimit = (maxRequests: number, windowMs: number, skipSuccessfulRequests = false, options?: { excludeMethods?: string[] }) => {
   const rateLimitMap = new Map();
+  const excludeMethods = options?.excludeMethods || [];
   
   return (req: Request, res: Response, next: NextFunction) => {
+    // Skip rate limiting for excluded methods (like DELETE for admin operations)
+    if (excludeMethods.includes(req.method)) {
+      return next();
+    }
+    
     const key = req.ip || req.socket.remoteAddress || 'unknown';
     const now = Date.now();
     const windowStart = now - windowMs;

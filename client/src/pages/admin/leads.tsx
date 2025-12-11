@@ -24,6 +24,16 @@ import { LeadActionsMenu } from "@/components/admin/lead-actions-menu";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { exportLeadToPDF, exportLeadsToCSV } from "@/services/lead-pdf-service";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export default function LeadsPage() {
   const { toast } = useToast();
@@ -208,6 +218,8 @@ export default function LeadsPage() {
   // États pour les actions du lead
   const [isActionLoading, setIsActionLoading] = useState(false);
   const [isPdfExporting, setIsPdfExporting] = useState(false);
+  const [leadToDelete, setLeadToDelete] = useState<number | null>(null);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   
   // Effet pour charger les détails du lead lorsqu'on ouvre le dialogue
   useEffect(() => {
@@ -387,8 +399,16 @@ export default function LeadsPage() {
 
   // Fonction pour supprimer un lead avec confirmation
   const handleDeleteLead = (leadId: number) => {
-    if (window.confirm("Êtes-vous sûr de vouloir supprimer ce lead ? Cette action est irréversible.")) {
-      deleteLeadMutation.mutate(leadId);
+    setLeadToDelete(leadId);
+    setShowDeleteDialog(true);
+  };
+  
+  // Confirmer la suppression du lead
+  const confirmDeleteLead = () => {
+    if (leadToDelete) {
+      deleteLeadMutation.mutate(leadToDelete);
+      setShowDeleteDialog(false);
+      setLeadToDelete(null);
     }
   };
 
@@ -898,6 +918,29 @@ export default function LeadsPage() {
           email: leadDetails.email
         } : undefined}
       />
+      
+      {/* Dialog de confirmation de suppression */}
+      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Confirmer la suppression</AlertDialogTitle>
+            <AlertDialogDescription>
+              Êtes-vous sûr de vouloir supprimer ce lead ?
+              <br /><br />
+              <span className="text-red-600 font-medium">Cette action est irréversible.</span>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setLeadToDelete(null)}>Annuler</AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={confirmDeleteLead}
+              className="bg-red-600 hover:bg-red-700 text-white"
+            >
+              Supprimer
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </AdminLayout>
   );
 }
