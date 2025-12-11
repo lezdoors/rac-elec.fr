@@ -1,75 +1,12 @@
 /**
  * Optimisations CSS spécifiques pour le Largest Contentful Paint (LCP)
- * 
- * Ces styles sont appliqués directement au titre principal pour améliorer
- * son temps de rendu sur mobile, ciblant spécifiquement le problème
- * identifié dans PageSpeed Insights
+ * Version 3.0 - Nettoyé pour éviter les flashs visuels
  */
 
-/* Styles prioritaires pour le titre principal (LCP) */
-h1.text-5xl, 
-h1.sm\:text-6xl,
-h1.text-white,
-h1.font-bold,
-.text-5xl.sm\:text-6xl.text-white.font-bold,
-.text-5xl.text-white.font-bold {
-  /* Améliorer la visibilité et le rendu prioritaire */
-  content-visibility: auto;
-  contain-intrinsic-size: auto 120px;
-  
-  /* Garantir l'affichage même pendant le chargement */
-  display: block !important;
-  visibility: visible !important;
-  
-  /* Optimisation du rendu des polices */
-  font-display: swap !important;
-  
-  /* Accélérer le rendu en informant le navigateur des changements */
-  will-change: contents;
-  
-  /* Priorité de rendu élevée */
-  translate: 0;
-
-  /* Réduire la taille de police initiale sur mobile pour un rendu plus rapide */
-  font-size: calc(2rem + 1vw) !important;
-  line-height: 1.2 !important;
-  
-  /* S'assurer que la couleur est bien définie même avant le chargement complet du CSS */
-  color: white !important;
-  
-  /* Optimiser pour mobile */
-  margin: 0 auto !important;
-  padding: 0.5rem 1rem !important;
-  text-align: center !important;
-  max-width: 100% !important;
-  overflow-wrap: break-word !important;
-  
-  /* Ajouter un fond de secours au cas où le fond principal est lent à charger */
-  background-color: #1e3a8a !important;
-}
-
-/* Optimisation pour le conteneur du titre */
-.hero-section, 
-.header-section,
-.bg-blue-900,
-section:first-of-type {
-  /* Définir une taille minimale pour éviter le CLS */
-  min-height: 250px !important;
-  
-  /* Garantir que le fond sera toujours bleu même en cas de problème de chargement */
-  background-color: #1e3a8a !important;
-  
-  /* Assurer la visibilité */
-  display: block !important;
-  visibility: visible !important;
-}
-
-/* Style pour la section principale qui contient habituellement le LCP */
+/* Priorité de rendu pour le contenu principal */
 .main-section,
 .main-content,
-main,
-.hero-section {
-  /* Priorité de rendu élevée */
+main {
   content-visibility: auto;
   contain-intrinsic-size: auto 800px;
 }
@@ -79,19 +16,4 @@ main,
 .btn-primary {
   cursor: pointer;
   text-align: center;
-}
-
-@media screen and (max-width: 768px) {
-  /* Optimisations supplémentaires pour mobile - titres uniquement */
-  h1.text-5xl, 
-  h1.sm\:text-6xl,
-  h1.text-white,
-  h1.font-bold,
-  .text-5xl.text-white.font-bold {
-    font-size: 1.75rem !important;
-    padding: 0.5rem !important;
-    margin-top: 1rem !important;
-    margin-bottom: 1rem !important;
-    line-height: 1.3 !important;
-  }
 }

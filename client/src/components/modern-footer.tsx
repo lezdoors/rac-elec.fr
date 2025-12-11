@@ -86,35 +86,35 @@ export function ModernFooter() {
             <h3 className="text-white font-semibold text-base mb-4">Services spécialisés</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-1">
               <ScrollToTopLink 
-                href="/raccordement-maison-neuve" 
+                href="/raccordement-enedis" 
                 className="text-gray-300 hover:text-white text-sm transition-all duration-200 hover:bg-white/10 rounded px-3 py-2 flex items-center justify-center md:justify-start group"
               >
                 <ArrowRight className="w-3 h-3 mr-2 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200" />
                 Maison neuve
               </ScrollToTopLink>
               <ScrollToTopLink 
-                href="/raccordement-definitif" 
+                href="/raccordement-enedis" 
                 className="text-gray-300 hover:text-white text-sm transition-all duration-200 hover:bg-white/10 rounded px-3 py-2 flex items-center justify-center md:justify-start group"
               >
                 <ArrowRight className="w-3 h-3 mr-2 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200" />
                 Raccordement définitif
               </ScrollToTopLink>
               <ScrollToTopLink 
-                href="/raccordement-provisoire" 
+                href="/raccordement-enedis" 
                 className="text-gray-300 hover:text-white text-sm transition-all duration-200 hover:bg-white/10 rounded px-3 py-2 flex items-center justify-center md:justify-start group"
               >
                 <ArrowRight className="w-3 h-3 mr-2 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200" />
                 Raccordement provisoire
               </ScrollToTopLink>
               <ScrollToTopLink 
-                href="/viabilisation-terrain" 
+                href="/raccordement-enedis" 
                 className="text-gray-300 hover:text-white text-sm transition-all duration-200 hover:bg-white/10 rounded px-3 py-2 flex items-center justify-center md:justify-start group"
               >
                 <ArrowRight className="w-3 h-3 mr-2 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200" />
                 Viabilisation terrain
               </ScrollToTopLink>
               <ScrollToTopLink 
-                href="/modification-compteur" 
+                href="/raccordement-enedis" 
                 className="text-gray-300 hover:text-white text-sm transition-all duration-200 hover:bg-white/10 rounded px-3 py-2 flex items-center justify-center md:justify-start group"
               >
                 <ArrowRight className="w-3 h-3 mr-2 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200" />
