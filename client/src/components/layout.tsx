@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { apiRequest } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
-// REMOVED: Heavy framer-motion import from shared layout component
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import EnedisAuthenticMasterpiece from "@/components/ui/enedis-authentic-logo";
 import { 
   Bolt, 
@@ -196,113 +196,102 @@ export default function Layout({ children }: LayoutProps) {
         </div>
           
         
-        {/* MOBILE MENU DRAWER - Stripe Style */}
-        {mobileMenuOpen && (
-          <>
-            {/* Overlay */}
-            <div 
-              className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-              onClick={() => setMobileMenuOpen(false)}
-              aria-hidden="true"
-            />
+        {/* MOBILE MENU DRAWER - Using Shadcn Sheet for reliable solid background */}
+        <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+          <SheetContent side="right" className="w-[85%] max-w-sm p-0 bg-white border-l border-gray-200 [&>button]:hidden">
+            {/* Custom Header with Logo */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-white">
+              <Link href="/" onClick={() => setMobileMenuOpen(false)}>
+                <img 
+                  src="/logo-service-raccordement.png" 
+                  alt="Service Raccordement" 
+                  className="h-9 w-auto object-contain"
+                />
+              </Link>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label="Fermer le menu"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
             
-            {/* Drawer */}
-            <div className="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-white z-50 lg:hidden shadow-xl flex flex-col animate-in slide-in-from-right duration-300">
-              
-              {/* Drawer Header */}
-              <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-                <Link href="/" onClick={() => setMobileMenuOpen(false)}>
-                  <img 
-                    src="/logo-service-raccordement.png" 
-                    alt="Service Raccordement" 
-                    className="h-9 w-auto object-contain"
-                  />
-                </Link>
-                <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
-                  aria-label="Fermer le menu"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-              
-              {/* Navigation Links - Stripe Style */}
-              <nav className="flex-1 px-5 py-8">
-                <div className="space-y-0">
-                  <Link 
-                    href="/" 
-                    className="flex items-center justify-between py-4 text-gray-800 hover:text-[#635bff] transition-colors border-b border-dashed border-gray-200"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <span className="text-[17px] font-semibold">Accueil</span>
-                  </Link>
-                  <Link 
-                    href="/nos-services" 
-                    className="flex items-center justify-between py-4 text-gray-800 hover:text-[#635bff] transition-colors border-b border-dashed border-gray-200"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <span className="text-[17px] font-semibold">Nos Services</span>
-                    <ChevronRight className="h-5 w-5 text-gray-400" />
-                  </Link>
-                  <Link 
-                    href="/guide-raccordement" 
-                    className="flex items-center justify-between py-4 text-gray-800 hover:text-[#635bff] transition-colors border-b border-dashed border-gray-200"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <span className="text-[17px] font-semibold">Guide</span>
-                    <ChevronRight className="h-5 w-5 text-gray-400" />
-                  </Link>
-                </div>
-              </nav>
-              
-              {/* Divider */}
-              <div className="mx-5 border-t border-gray-100" />
-              
-              {/* Bottom Section */}
-              <div className="px-5 py-6 space-y-5">
-                {/* Primary CTA */}
+            {/* Navigation Links - Stripe Style */}
+            <nav className="flex-1 px-5 py-8 bg-white">
+              <div className="space-y-0">
                 <Link 
-                  href="/raccordement-enedis#formulaire-raccordement"
+                  href="/" 
+                  className="flex items-center justify-between py-4 text-gray-800 hover:text-[#635bff] transition-colors border-b border-dashed border-gray-200"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block"
                 >
-                  <Button
-                    className="w-full bg-[#3B82F6] hover:bg-[#2563EB] text-white py-3 h-12 text-[15px] font-semibold rounded-lg"
-                  >
-                    Faire ma demande
-                  </Button>
+                  <span className="text-[17px] font-semibold">Accueil</span>
                 </Link>
-                
-                {/* Phone Contact */}
-                <a 
-                  href="tel:+33970709570" 
-                  className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
-                  aria-label="Appeler le 09 70 70 95 70"
+                <Link 
+                  href="/nos-services" 
+                  className="flex items-center justify-between py-4 text-gray-800 hover:text-[#635bff] transition-colors border-b border-dashed border-gray-200"
+                  onClick={() => setMobileMenuOpen(false)}
                 >
-                  <Phone className="h-5 w-5 text-blue-500" />
-                  <span className="text-[15px] font-medium">09 70 70 95 70</span>
-                </a>
-                
-                {/* Trust Indicators */}
-                <div className="space-y-3 pt-2">
-                  <div className="flex items-center gap-3 px-4">
-                    <Shield className="h-4 w-4 text-gray-400" />
-                    <span className="text-[13px] text-gray-500">Paiement 100 % sécurisé</span>
-                  </div>
-                  <div className="flex items-center gap-3 px-4">
-                    <Clock className="h-4 w-4 text-gray-400" />
-                    <span className="text-[13px] text-gray-500">Dossier traité sous 48 h</span>
-                  </div>
-                  <div className="flex items-center gap-3 px-4">
-                    <Users className="h-4 w-4 text-gray-400" />
-                    <span className="text-[13px] text-gray-500">Service client en France</span>
-                  </div>
+                  <span className="text-[17px] font-semibold">Nos Services</span>
+                  <ChevronRight className="h-5 w-5 text-gray-400" />
+                </Link>
+                <Link 
+                  href="/guide-raccordement" 
+                  className="flex items-center justify-between py-4 text-gray-800 hover:text-[#635bff] transition-colors border-b border-dashed border-gray-200"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <span className="text-[17px] font-semibold">Guide</span>
+                  <ChevronRight className="h-5 w-5 text-gray-400" />
+                </Link>
+              </div>
+            </nav>
+            
+            {/* Divider */}
+            <div className="mx-5 border-t border-gray-100 bg-white" />
+            
+            {/* Bottom Section */}
+            <div className="px-5 py-6 space-y-5 bg-white">
+              {/* Primary CTA */}
+              <Link 
+                href="/raccordement-enedis#formulaire-raccordement"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block"
+              >
+                <Button
+                  className="w-full bg-[#3B82F6] hover:bg-[#2563EB] text-white py-3 h-12 text-[15px] font-semibold rounded-lg"
+                >
+                  Faire ma demande
+                </Button>
+              </Link>
+              
+              {/* Phone Contact */}
+              <a 
+                href="tel:+33970709570" 
+                className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                aria-label="Appeler le 09 70 70 95 70"
+              >
+                <Phone className="h-5 w-5 text-blue-500" />
+                <span className="text-[15px] font-medium">09 70 70 95 70</span>
+              </a>
+              
+              {/* Trust Indicators */}
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center gap-3 px-4">
+                  <Shield className="h-4 w-4 text-gray-400" />
+                  <span className="text-[13px] text-gray-500">Paiement 100 % sécurisé</span>
+                </div>
+                <div className="flex items-center gap-3 px-4">
+                  <Clock className="h-4 w-4 text-gray-400" />
+                  <span className="text-[13px] text-gray-500">Dossier traité sous 48 h</span>
+                </div>
+                <div className="flex items-center gap-3 px-4">
+                  <Users className="h-4 w-4 text-gray-400" />
+                  <span className="text-[13px] text-gray-500">Service client en France</span>
                 </div>
               </div>
             </div>
-          </>
-        )}
+          </SheetContent>
+        </Sheet>
       </header>
       
       {/* Main Content */}
