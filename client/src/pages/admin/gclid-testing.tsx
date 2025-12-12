@@ -30,7 +30,7 @@ export default function GclidTestingPage() {
   const testConversion = async () => {
     setIsTestingConversion(true);
     try {
-      const success = await testGclidConversion('AW-16698052873/test-conversion');
+      const success = await testGclidConversion('AW-16683623620/test-conversion');
       toast({
         title: success ? "Test réussi" : "Test échoué",
         description: success ? "La conversion test a été envoyée avec succès" : "Erreur lors du test de conversion",
