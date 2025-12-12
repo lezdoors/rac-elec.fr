@@ -151,10 +151,11 @@ export function setupDashboardRoutes(app: Application) {
 
       res.json({
         payments: {
-          count: totalPayments,
+          count: successfulPayments,
           revenue: totalRevenue,
           successRate: Math.round(successRate),
-          successful: successfulPayments
+          successful: successfulPayments,
+          total: totalPayments
         },
         leads: {
           count: leadsData.length
