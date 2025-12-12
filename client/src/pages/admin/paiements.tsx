@@ -799,7 +799,8 @@ export default function PaymentDashboard() {
   // États locaux pour les filtres et l'affichage
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
-  const [dateRange, setDateRange] = useState<string>("today"); // Affiche uniquement les données d'aujourd'hui par défaut (remise à 0 à minuit)
+  const [cardDateRange, setCardDateRange] = useState<string>("today"); // Cartes: données du jour uniquement
+  const [listDateRange, setListDateRange] = useState<string>("month"); // Liste: mois entier par défaut
   const [selectedPayment, setSelectedPayment] = useState<PaymentRecord | null>(null);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -823,9 +824,8 @@ export default function PaymentDashboard() {
     syncStripePayments();
   }, []);
   
-  // MISE A JOUR: Affichage de tous les paiements depuis le 10/12/2025
-  // Les anciens paiements sont filtres cote serveur, pagination conservee pour performance
-  const ITEMS_PER_PAGE = 50; // Pagination de 50 elements pour performance optimale
+  // Pagination: 20 paiements par page
+  const ITEMS_PER_PAGE = 20;
   
   // Récupérer tous les paiements RAC- authentiques depuis Stripe
   const { 
@@ -840,47 +840,60 @@ export default function PaymentDashboard() {
     staleTime: 30000, // Données fraîches pendant 30 secondes
   });
 
-  // Fonction helper pour filtrer par date
-  const filterByDate = (paymentList: PaymentRecord[]) => {
-    if (dateRange === "all") return paymentList;
+  // Fonction helper pour filtrer par date (pour les cartes - aujourd'hui uniquement)
+  const filterByDateForCards = (paymentList: PaymentRecord[]) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return paymentList.filter(payment => {
+      const paymentDate = new Date(payment.createdAt);
+      return paymentDate >= today;
+    });
+  };
+  
+  // Fonction helper pour filtrer par date (pour la liste)
+  const filterByDateForList = (paymentList: PaymentRecord[], range: string) => {
+    if (range === "all") return paymentList;
     
     const now = new Date();
     return paymentList.filter(payment => {
       const paymentDate = new Date(payment.createdAt);
       
-      if (dateRange === "today") {
+      if (range === "today") {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         return paymentDate >= today;
-      } else if (dateRange === "week") {
+      } else if (range === "week") {
         const weekAgo = new Date(now);
         weekAgo.setDate(now.getDate() - 7);
         return paymentDate >= weekAgo;
-      } else if (dateRange === "month") {
-        const monthAgo = new Date(now);
-        monthAgo.setMonth(now.getMonth() - 1);
-        return paymentDate >= monthAgo;
+      } else if (range === "month") {
+        const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+        return paymentDate >= monthStart;
       }
       return true;
     });
   };
   
-  // Paiements filtrés par date pour les statistiques des cartes
-  const dateFilteredPayments = filterByDate(payments);
+  // Paiements filtrés pour les statistiques des cartes (AUJOURD'HUI UNIQUEMENT)
+  const cardFilteredPayments = filterByDateForCards(payments);
   
-  // Statistiques des paiements (basées sur le filtre de date)
-  const totalSuccessful = dateFilteredPayments.filter(p => p.status === "succeeded" || p.status === "paid").length;
-  const totalFailed = dateFilteredPayments.filter(p => p.status === "failed" || p.status === "canceled" || p.status === "requires_payment_method").length;
-  const totalAbandoned = dateFilteredPayments.filter(p => p.status === "abandoned").length;
-  const totalProcessing = dateFilteredPayments.filter(p => p.status === "processing" || p.status === "pending").length;
-  const totalRefunded = dateFilteredPayments.filter(p => p.status === "refunded").length;
+  // Statistiques des paiements (basées sur les données du jour uniquement)
+  const totalSuccessful = cardFilteredPayments.filter(p => p.status === "succeeded" || p.status === "paid").length;
+  const totalFailed = cardFilteredPayments.filter(p => p.status === "failed" || p.status === "canceled" || p.status === "requires_payment_method").length;
+  const totalAbandoned = cardFilteredPayments.filter(p => p.status === "abandoned").length;
+  const totalProcessing = cardFilteredPayments.filter(p => p.status === "processing" || p.status === "pending").length;
+  const totalRefunded = cardFilteredPayments.filter(p => p.status === "refunded").length;
   
-  const totalAmount = dateFilteredPayments
+  const totalAmount = cardFilteredPayments
     .filter(p => p.status === "succeeded" || p.status === "paid")
     .reduce((sum, p) => sum + p.amount, 0);
     
-  // Filtrer les paiements
-  const filteredPayments = payments.filter(payment => {
+  // Filtrer les paiements pour la liste (MOIS ENTIER par défaut)
+  const filteredPayments = filterByDateForList(payments, listDateRange).filter(payment => {
+    // Filtre RAC- uniquement
+    const isRacPayment = payment.referenceNumber?.startsWith('RAC-');
+    if (!isRacPayment) return false;
+    
     const matchesSearch = 
       !searchTerm || 
       payment.referenceNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -889,26 +902,13 @@ export default function PaymentDashboard() {
     
     const matchesStatus = !statusFilter || payment.status === statusFilter;
     
-    let matchesDate = true;
-    const paymentDate = new Date(payment.createdAt);
-    const now = new Date();
-    
-    if (dateRange === "today") {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      matchesDate = paymentDate >= today;
-    } else if (dateRange === "week") {
-      const weekAgo = new Date(now);
-      weekAgo.setDate(now.getDate() - 7);
-      matchesDate = paymentDate >= weekAgo;
-    } else if (dateRange === "month") {
-      const monthAgo = new Date(now);
-      monthAgo.setMonth(now.getMonth() - 1);
-      matchesDate = paymentDate >= monthAgo;
-    }
-    
-    return matchesSearch && matchesStatus && matchesDate;
+    return matchesSearch && matchesStatus;
   });
+  
+  // Reset page quand le filtre change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [listDateRange, searchTerm, statusFilter]);
 
   // Ouvrir les détails d'un paiement
   const handleOpenDetails = (payment: PaymentRecord) => {
@@ -1044,15 +1044,15 @@ export default function PaymentDashboard() {
                   </SelectContent>
                 </Select>
                 
-                <Select value={dateRange} onValueChange={setDateRange}>
+                <Select value={listDateRange} onValueChange={setListDateRange}>
                   <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Toutes les dates" />
+                    <SelectValue placeholder="Période" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">Toutes les dates</SelectItem>
-                    <SelectItem value="today">Aujourd'hui</SelectItem>
+                    <SelectItem value="all">Tout l'historique</SelectItem>
+                    <SelectItem value="month">Ce mois</SelectItem>
                     <SelectItem value="week">7 derniers jours</SelectItem>
-                    <SelectItem value="month">30 derniers jours</SelectItem>
+                    <SelectItem value="today">Aujourd'hui</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
