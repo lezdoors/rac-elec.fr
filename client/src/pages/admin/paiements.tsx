@@ -800,7 +800,7 @@ export default function PaymentDashboard() {
   // États locaux pour les filtres et l'affichage
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
-  const [dateRange, setDateRange] = useState<string>("all");
+  const [dateRange, setDateRange] = useState<string>("today"); // Affiche uniquement les données d'aujourd'hui par défaut (remise à 0 à minuit)
   const [selectedPayment, setSelectedPayment] = useState<PaymentRecord | null>(null);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
