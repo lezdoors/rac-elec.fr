@@ -141,7 +141,7 @@ export async function sendPaiementReussiNotification(paiementData: any) {
     const mailOptions = {
       from: 'kevin@monelec.net',
       to: 'notifications@raccordement-connect.com',
-      subject: `PAIEMENT - ${clientName} - ${paiementData.referenceNumber || 'N/A'} - ${montantFormate}`,
+      subject: `✅ PAIEMENT RÉUSSI - ${clientName} - ${paiementData.referenceNumber || 'N/A'} - ${montantFormate}`,
       html: htmlContent,
       text: `PAIEMENT CONFIRME
 Reference: ${paiementData.referenceNumber || 'N/A'}
@@ -264,7 +264,7 @@ export async function sendPaiementEchoueNotification(paiementData: any) {
     const mailOptions = {
       from: 'kevin@monelec.net',
       to: 'notifications@raccordement-connect.com',
-      subject: `ECHEC PAIEMENT - ${clientName} - ${paiementData.referenceNumber || 'N/A'}`,
+      subject: `🚨 ÉCHEC PAIEMENT - ${clientName} - ${paiementData.referenceNumber || 'N/A'}`,
       html: htmlContent,
       text: `PAIEMENT ECHOUE
 Reference: ${paiementData.referenceNumber || 'N/A'}
