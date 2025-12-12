@@ -3310,6 +3310,55 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // Récupérer les détails d'une session Stripe Checkout par son ID
+  app.get("/api/stripe-session/:sessionId", async (req, res) => {
+    try {
+      const { sessionId } = req.params;
+      
+      if (!sessionId) {
+        return res.status(400).json({ 
+          success: false, 
+          message: "L'ID de session est requis" 
+        });
+      }
+      
+      if (!stripe) {
+        return res.status(500).json({ 
+          success: false, 
+          message: "Stripe n'est pas configuré" 
+        });
+      }
+      
+      // Récupérer les détails de la session Checkout
+      const session = await stripe.checkout.sessions.retrieve(sessionId);
+      
+      // Extraire la référence (client_reference_id ou metadata)
+      const referenceNumber = session.client_reference_id || session.metadata?.reference;
+      const paymentStatus = session.payment_status; // 'paid' | 'unpaid' | 'no_payment_required'
+      const paymentIntentId = typeof session.payment_intent === 'string' 
+        ? session.payment_intent 
+        : session.payment_intent?.id;
+      
+      res.json({
+        success: true,
+        referenceNumber,
+        paymentStatus,
+        paymentIntentId,
+        customerEmail: session.customer_email || session.customer_details?.email,
+        amount: session.amount_total ? session.amount_total / 100 : null,
+        currency: session.currency
+      });
+      
+    } catch (error) {
+      console.error("Erreur lors de la récupération de la session Stripe:", error);
+      res.status(500).json({ 
+        success: false, 
+        message: "Impossible de récupérer les détails de la session",
+        error: error instanceof Error ? error.message : "Erreur inconnue"
+      });
+    }
+  });
+  
   // Vérifier le statut du paiement
   app.get("/api/payment-status/:referenceNumber", async (req, res) => {
     try {
