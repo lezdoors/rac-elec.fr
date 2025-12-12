@@ -694,6 +694,14 @@ export default function RaccordementEnedisPage() {
         console.error('❌ Final form submit conversion failed - no tracking method available');
       }
       
+      // SAVE EMAIL AND PHONE FOR ENHANCED CONVERSIONS
+      // These will be retrieved on the payment confirmation page for Google Ads tracking
+      if (typeof sessionStorage !== 'undefined') {
+        sessionStorage.setItem('ec_email', mappedData.email || '');
+        sessionStorage.setItem('ec_phone', mappedData.phone || '');
+        console.log('📧 Enhanced Conversions data saved for purchase tracking');
+      }
+      
       // Redirection vers la page de confirmation/paiement
       window.location.href = `/confirmation/${reference}`;
       

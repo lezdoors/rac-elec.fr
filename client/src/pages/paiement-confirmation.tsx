@@ -61,8 +61,31 @@ export default function PaiementConfirmationPage() {
           setPaymentStatus("success");
           console.log("Paiement CONFIRMÉ comme réussi par l'API");
           
-          // Note: Google Ads Purchase conversion is tracked on /merci page via window.gads_purchase()
-          // No need to fire conversion here to avoid duplicates
+          // FIRE PURCHASE CONVERSION HERE - this is where users land after successful payment
+          // Use sessionStorage to prevent duplicate conversions on page refresh
+          const storageKey = `purchase_conversion_${referenceNumber}`;
+          if (typeof sessionStorage !== 'undefined' && !sessionStorage.getItem(storageKey)) {
+            // Retrieve email/phone from sessionStorage for Enhanced Conversions
+            const email = sessionStorage.getItem('ec_email') || '';
+            const phone = sessionStorage.getItem('ec_phone') || '';
+            
+            // Fire GTM + Google Ads purchase conversion
+            if (typeof window !== 'undefined' && (window as any).trackPurchase) {
+              (window as any).trackPurchase(referenceNumber, email, phone);
+              console.log('🎯 Google Ads: purchase conversion fired for', referenceNumber);
+              
+              // Mark as fired to prevent duplicates
+              sessionStorage.setItem(storageKey, 'true');
+              
+              // Clean up EC data
+              sessionStorage.removeItem('ec_email');
+              sessionStorage.removeItem('ec_phone');
+            } else {
+              console.warn('⚠️ trackPurchase function not available');
+            }
+          } else {
+            console.log('ℹ️ Purchase conversion already fired for', referenceNumber);
+          }
         } else if (data.status === "failed" || data.status === "canceled") {
           setPaymentStatus("failed");
           console.log("Paiement CONFIRMÉ comme échoué par l'API");
