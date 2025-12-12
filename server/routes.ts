@@ -3884,6 +3884,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 paymentDetails
               );
               
+              // IMPORTANT: Mettre à jour le statut dans la table payments aussi
+              await storage.updatePaymentStatus(paymentIntent.id, 'succeeded');
+              console.log(`✅ Table payments mise à jour pour ${paymentIntent.id} -> succeeded`);
+              
               // Mettre à jour le statut de la demande
               await storage.updateServiceRequestStatus(
                 serviceRequest.id,

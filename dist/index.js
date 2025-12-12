@@ -11590,6 +11590,8 @@ ${comments}` : tarifJauneNote;
                 paymentIntent.amount / 100,
                 paymentDetails
               );
+              await storage.updatePaymentStatus(paymentIntent.id, "succeeded");
+              console.log(`\u2705 Table payments mise \xE0 jour pour ${paymentIntent.id} -> succeeded`);
               await storage.updateServiceRequestStatus(
                 serviceRequest.id,
                 REQUEST_STATUS.PAID,
