@@ -366,8 +366,8 @@ export function SideNav({ className, activePath }: SideNavProps) {
       <div className="space-y-4 py-4 flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
         <div className="px-4 py-2">
           <div className="flex items-center justify-between space-x-2">
-            <h2 className="text-lg font-semibold tracking-tight">
-              <span className="text-[#33b060]">Services</span> <span className="text-[#2e3d96]">Enedis</span>
+            <h2 className="text-lg font-semibold tracking-tight text-gray-800">
+              Administration
             </h2>
           </div>
         </div>

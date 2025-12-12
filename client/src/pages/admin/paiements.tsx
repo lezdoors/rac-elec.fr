@@ -37,7 +37,7 @@ interface PaymentRecord {
   id: string;
   referenceNumber: string;
   amount: number;
-  status: "succeeded" | "paid" | "processing" | "failed" | "abandoned" | "refunded";
+  status: "succeeded" | "paid" | "processing" | "failed" | "abandoned" | "refunded" | "pending" | "canceled" | "requires_payment_method";
   createdAt: string;
   customerEmail?: string;
   customerName?: string;
@@ -822,14 +822,42 @@ export default function PaymentDashboard() {
     staleTime: 30000, // Données fraîches pendant 30 secondes
   });
 
-  // Statistiques des paiements
-  const totalSuccessful = payments.filter(p => p.status === "succeeded" || p.status === "paid").length;
-  const totalFailed = payments.filter(p => p.status === "failed").length;
-  const totalAbandoned = payments.filter(p => p.status === "abandoned").length;
-  const totalProcessing = payments.filter(p => p.status === "processing").length;
-  const totalRefunded = payments.filter(p => p.status === "refunded").length;
+  // Fonction helper pour filtrer par date
+  const filterByDate = (paymentList: PaymentRecord[]) => {
+    if (dateRange === "all") return paymentList;
+    
+    const now = new Date();
+    return paymentList.filter(payment => {
+      const paymentDate = new Date(payment.createdAt);
+      
+      if (dateRange === "today") {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        return paymentDate >= today;
+      } else if (dateRange === "week") {
+        const weekAgo = new Date(now);
+        weekAgo.setDate(now.getDate() - 7);
+        return paymentDate >= weekAgo;
+      } else if (dateRange === "month") {
+        const monthAgo = new Date(now);
+        monthAgo.setMonth(now.getMonth() - 1);
+        return paymentDate >= monthAgo;
+      }
+      return true;
+    });
+  };
   
-  const totalAmount = payments
+  // Paiements filtrés par date pour les statistiques des cartes
+  const dateFilteredPayments = filterByDate(payments);
+  
+  // Statistiques des paiements (basées sur le filtre de date)
+  const totalSuccessful = dateFilteredPayments.filter(p => p.status === "succeeded" || p.status === "paid").length;
+  const totalFailed = dateFilteredPayments.filter(p => p.status === "failed" || p.status === "canceled" || p.status === "requires_payment_method").length;
+  const totalAbandoned = dateFilteredPayments.filter(p => p.status === "abandoned").length;
+  const totalProcessing = dateFilteredPayments.filter(p => p.status === "processing" || p.status === "pending").length;
+  const totalRefunded = dateFilteredPayments.filter(p => p.status === "refunded").length;
+  
+  const totalAmount = dateFilteredPayments
     .filter(p => p.status === "succeeded" || p.status === "paid")
     .reduce((sum, p) => sum + p.amount, 0);
     
