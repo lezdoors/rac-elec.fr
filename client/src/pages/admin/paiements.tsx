@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { apiRequest, queryClient } from "@/lib/queryClient";
-import { getQueryFn } from "@/lib/queryClient";
+import { apiRequest, queryClient, getQueryFn } from "@/lib/queryClient";
 import { AdminLayout } from "@/components/admin/admin-layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
@@ -804,6 +803,25 @@ export default function PaymentDashboard() {
   const [selectedPayment, setSelectedPayment] = useState<PaymentRecord | null>(null);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [isSyncing, setIsSyncing] = useState(false);
+  
+  // Synchronisation automatique avec Stripe au chargement (références RAC- uniquement)
+  useEffect(() => {
+    const syncStripePayments = async () => {
+      try {
+        setIsSyncing(true);
+        await apiRequest('GET', '/api/stripe/sync-today');
+        // Rafraîchir les données après synchronisation
+        queryClient.invalidateQueries({ queryKey: ['/api/stripe/rac-payments'] });
+      } catch (error) {
+        console.log('Sync Stripe silencieux:', error);
+      } finally {
+        setIsSyncing(false);
+      }
+    };
+    
+    syncStripePayments();
+  }, []);
   
   // MISE A JOUR: Affichage de tous les paiements depuis le 10/12/2025
   // Les anciens paiements sont filtres cote serveur, pagination conservee pour performance

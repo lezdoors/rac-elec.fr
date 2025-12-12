@@ -68,6 +68,8 @@ export async function fetchStripePayments(
 export async function syncStripePayments(startDate: Date, endDate: Date) {
   try {
     const stripePayments = await fetchStripePayments(startDate, endDate);
+    let inserted = 0;
+    let updated = 0;
     
     for (const payment of stripePayments) {
       // Extract reference from description or metadata
@@ -99,10 +101,25 @@ export async function syncStripePayments(startDate: Date, endDate: Date) {
           createdAt: new Date(payment.created * 1000),
           updatedAt: new Date(),
         });
+        inserted++;
+      } else {
+        // Update existing payment status and amount if different
+        const existing = existingPayment[0];
+        if (existing.status !== payment.status || parseFloat(existing.amount) !== payment.amount) {
+          await db.execute(sql`
+            UPDATE payments 
+            SET status = ${payment.status}, 
+                amount = ${payment.amount.toString()},
+                updated_at = NOW()
+            WHERE payment_id = ${payment.id}
+          `);
+          updated++;
+        }
       }
     }
 
-    return stripePayments.length;
+    console.log(`Stripe sync complete: ${inserted} inserted, ${updated} updated from ${stripePayments.length} payments`);
+    return { total: stripePayments.length, inserted, updated };
   } catch (error) {
     console.error('Error syncing Stripe payments:', error);
     throw error;

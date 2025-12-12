@@ -3784,7 +3784,7 @@ var GlobalContext2 = GlobalContextClass.getInstance();
 var global_context_default = GlobalContext2;
 
 // server/routes.ts
-import Stripe2 from "stripe";
+import Stripe3 from "stripe";
 import { WebSocket } from "ws";
 
 // server/notification-router.ts
@@ -5229,7 +5229,7 @@ var securityMonitoringMiddleware = (req, res, next) => {
 
 // server/routes.ts
 init_schema();
-import { eq as eq11, desc as desc6, sql as sql5, and as and7, gte as gte6, lte as lte5 } from "drizzle-orm";
+import { eq as eq11, desc as desc6, sql as sql6, and as and7, gte as gte6, lte as lte5 } from "drizzle-orm";
 import { fromZodError as fromZodError2 } from "zod-validation-error";
 import { hash as hash2 } from "bcrypt";
 
@@ -8341,7 +8341,129 @@ userStatsRouter.post("/increment-payments/:userId", requireAdmin, async (req, re
 // server/routes-dashboard.ts
 init_db();
 init_schema();
-import { sql as sql4, desc as desc5, and as and6, gte as gte5, lte as lte4 } from "drizzle-orm";
+import { sql as sql5, desc as desc5, and as and6, gte as gte5, lte as lte4 } from "drizzle-orm";
+
+// server/stripe-integration.ts
+init_db();
+init_schema();
+import Stripe2 from "stripe";
+import { sql as sql4 } from "drizzle-orm";
+if (!process.env.STRIPE_SECRET_KEY) {
+  throw new Error("STRIPE_SECRET_KEY environment variable is required");
+}
+var stripe2 = new Stripe2(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: "2023-10-16"
+});
+async function fetchStripePayments(startDate, endDate, limit = 100) {
+  try {
+    const paymentIntents = await stripe2.paymentIntents.list({
+      created: {
+        gte: Math.floor(startDate.getTime() / 1e3),
+        lte: Math.floor(endDate.getTime() / 1e3)
+      },
+      limit,
+      expand: ["data.payment_method", "data.charges"]
+    });
+    const racPayments = paymentIntents.data.filter((payment) => {
+      const description = payment.description || "";
+      const metadata = payment.metadata || {};
+      return description.includes("RAC-") || Object.values(metadata).some((value) => value.includes("RAC-"));
+    });
+    return racPayments.map((payment) => ({
+      id: payment.id,
+      amount: payment.amount / 100,
+      // Convert from cents
+      currency: payment.currency,
+      status: payment.status,
+      created: payment.created,
+      customer: payment.customer,
+      description: payment.description,
+      metadata: payment.metadata,
+      payment_method: payment.payment_method,
+      charges: payment.charges
+    }));
+  } catch (error) {
+    console.error("Error fetching Stripe payments:", error);
+    throw error;
+  }
+}
+async function syncStripePayments(startDate, endDate) {
+  try {
+    const stripePayments = await fetchStripePayments(startDate, endDate);
+    let inserted = 0;
+    let updated = 0;
+    for (const payment of stripePayments) {
+      const reference = extractRacReference(payment.description, payment.metadata);
+      if (!reference) continue;
+      const existingPayment = await db.select().from(payments).where(sql4`payment_id = ${payment.id}`).limit(1);
+      if (existingPayment.length === 0) {
+        await db.insert(payments).values({
+          paymentId: payment.id,
+          referenceNumber: reference,
+          amount: payment.amount.toString(),
+          status: payment.status,
+          method: "card",
+          customerName: extractCustomerName(payment),
+          customerEmail: extractCustomerEmail(payment),
+          cardBrand: payment.payment_method?.card?.brand || null,
+          cardLast4: payment.payment_method?.card?.last4 || null,
+          cardExpMonth: payment.payment_method?.card?.exp_month || null,
+          cardExpYear: payment.payment_method?.card?.exp_year || null,
+          metadata: JSON.stringify(payment.metadata),
+          createdAt: new Date(payment.created * 1e3),
+          updatedAt: /* @__PURE__ */ new Date()
+        });
+        inserted++;
+      } else {
+        const existing = existingPayment[0];
+        if (existing.status !== payment.status || parseFloat(existing.amount) !== payment.amount) {
+          await db.execute(sql4`
+            UPDATE payments 
+            SET status = ${payment.status}, 
+                amount = ${payment.amount.toString()},
+                updated_at = NOW()
+            WHERE payment_id = ${payment.id}
+          `);
+          updated++;
+        }
+      }
+    }
+    console.log(`Stripe sync complete: ${inserted} inserted, ${updated} updated from ${stripePayments.length} payments`);
+    return { total: stripePayments.length, inserted, updated };
+  } catch (error) {
+    console.error("Error syncing Stripe payments:", error);
+    throw error;
+  }
+}
+function extractRacReference(description, metadata) {
+  if (description && description.includes("RAC-")) {
+    const match = description.match(/RAC-[\w-]+/);
+    if (match) return match[0];
+  }
+  if (metadata) {
+    for (const value of Object.values(metadata)) {
+      if (value.includes("RAC-")) {
+        const match = value.match(/RAC-[\w-]+/);
+        if (match) return match[0];
+      }
+    }
+  }
+  return null;
+}
+function extractCustomerName(payment) {
+  if (payment.charges?.data?.[0]?.billing_details?.name) {
+    return payment.charges.data[0].billing_details.name;
+  }
+  return null;
+}
+function extractCustomerEmail(payment) {
+  if (payment.charges?.data?.[0]?.billing_details?.email) {
+    return payment.charges.data[0].billing_details.email;
+  }
+  return null;
+}
+
+// server/routes-dashboard.ts
 function setupDashboardRoutes(app2) {
   app2.get("/api/stripe/payments", requireAuth, async (req, res) => {
     try {
@@ -8356,7 +8478,7 @@ function setupDashboardRoutes(app2) {
       const endDateTime = new Date(endDate);
       const racPayments = await db.select().from(payments).where(
         and6(
-          sql4`reference_number LIKE 'RAC-%'`,
+          sql5`reference_number LIKE 'RAC-%'`,
           gte5(payments.createdAt, startDateTime),
           lte4(payments.createdAt, endDateTime)
         )
@@ -8413,7 +8535,7 @@ function setupDashboardRoutes(app2) {
       console.log("Dashboard API - Date range:", { startDateTime, endDateTime });
       const racPayments = await db.select().from(payments).where(
         and6(
-          sql4`reference_number LIKE 'RAC-%'`,
+          sql5`reference_number LIKE 'RAC-%'`,
           gte5(payments.createdAt, startDateTime),
           lte4(payments.createdAt, endDateTime)
         )
@@ -8484,32 +8606,32 @@ function setupDashboardRoutes(app2) {
       const startDateTime = new Date(startDate);
       const endDateTime = new Date(endDate);
       const currentPayments = await db.select({
-        count: sql4`count(*)::int`,
-        revenue: sql4`COALESCE(sum(CAST(amount AS DECIMAL)), 0)`
+        count: sql5`count(*)::int`,
+        revenue: sql5`COALESCE(sum(CAST(amount AS DECIMAL)), 0)`
       }).from(payments).where(and6(
         gte5(payments.createdAt, startDateTime),
         lte4(payments.createdAt, endDateTime),
-        sql4`status IN ('paid', 'succeeded')`,
-        sql4`reference_number LIKE 'RAC-%'`
+        sql5`status IN ('paid', 'succeeded')`,
+        sql5`reference_number LIKE 'RAC-%'`
       ));
       const periodDiff = endDateTime.getTime() - startDateTime.getTime();
       const prevStartDate = new Date(startDateTime.getTime() - periodDiff);
       const prevEndDate = new Date(startDateTime.getTime());
       const previousPayments = await db.select({
-        count: sql4`count(*)::int`,
-        revenue: sql4`COALESCE(sum(CAST(amount AS DECIMAL)), 0)`
+        count: sql5`count(*)::int`,
+        revenue: sql5`COALESCE(sum(CAST(amount AS DECIMAL)), 0)`
       }).from(payments).where(and6(
         gte5(payments.createdAt, prevStartDate),
         lte4(payments.createdAt, prevEndDate),
-        sql4`status IN ('paid', 'succeeded')`,
-        sql4`reference_number LIKE 'RAC-%'`
+        sql5`status IN ('paid', 'succeeded')`,
+        sql5`reference_number LIKE 'RAC-%'`
       ));
       const current = currentPayments[0] || { count: 0, revenue: 0 };
       const previous = previousPayments[0] || { count: 0, revenue: 0 };
       const countTrend = previous.count === 0 ? "stable" : current.count > previous.count ? "up" : current.count < previous.count ? "down" : "stable";
       const countTrendPercentage = previous.count === 0 ? 0 : Math.round((current.count - previous.count) / previous.count * 100);
       const totalAttempts = await db.select({
-        count: sql4`count(*)::int`
+        count: sql5`count(*)::int`
       }).from(payments).where(and6(
         gte5(payments.createdAt, startDateTime),
         lte4(payments.createdAt, endDateTime)
@@ -8518,7 +8640,7 @@ function setupDashboardRoutes(app2) {
       const recentPayments = await db.select().from(payments).where(and6(
         gte5(payments.createdAt, startDateTime),
         lte4(payments.createdAt, endDateTime),
-        sql4`reference_number LIKE 'RAC-%'`
+        sql5`reference_number LIKE 'RAC-%'`
       )).orderBy(desc5(payments.createdAt)).limit(5);
       res.json({
         count: current.count,
@@ -8548,7 +8670,7 @@ function setupDashboardRoutes(app2) {
       const startDateTime = new Date(startDate);
       const endDateTime = new Date(endDate);
       const currentLeads = await db.select({
-        count: sql4`count(*)::int`
+        count: sql5`count(*)::int`
       }).from(leads).where(and6(
         gte5(leads.createdAt, startDateTime),
         lte4(leads.createdAt, endDateTime)
@@ -8557,7 +8679,7 @@ function setupDashboardRoutes(app2) {
       const prevStartDate = new Date(startDateTime.getTime() - periodDiff);
       const prevEndDate = new Date(startDateTime.getTime());
       const previousLeads = await db.select({
-        count: sql4`count(*)::int`
+        count: sql5`count(*)::int`
       }).from(leads).where(and6(
         gte5(leads.createdAt, prevStartDate),
         lte4(leads.createdAt, prevEndDate)
@@ -8596,7 +8718,7 @@ function setupDashboardRoutes(app2) {
       const startDateTime = new Date(startDate);
       const endDateTime = new Date(endDate);
       const currentRequests = await db.select({
-        count: sql4`count(*)::int`
+        count: sql5`count(*)::int`
       }).from(serviceRequests).where(and6(
         gte5(serviceRequests.createdAt, startDateTime),
         lte4(serviceRequests.createdAt, endDateTime)
@@ -8605,7 +8727,7 @@ function setupDashboardRoutes(app2) {
       const prevStartDate = new Date(startDateTime.getTime() - periodDiff);
       const prevEndDate = new Date(startDateTime.getTime());
       const previousRequests = await db.select({
-        count: sql4`count(*)::int`
+        count: sql5`count(*)::int`
       }).from(serviceRequests).where(and6(
         gte5(serviceRequests.createdAt, prevStartDate),
         lte4(serviceRequests.createdAt, prevEndDate)
@@ -8632,6 +8754,46 @@ function setupDashboardRoutes(app2) {
       });
     }
   });
+  app2.post("/api/stripe/sync", requireAuth, async (req, res) => {
+    try {
+      const endDate = /* @__PURE__ */ new Date();
+      const startDate = /* @__PURE__ */ new Date();
+      startDate.setDate(startDate.getDate() - 7);
+      console.log(`\u{1F504} Synchronisation Stripe RAC- du ${startDate.toISOString()} au ${endDate.toISOString()}`);
+      const result = await syncStripePayments(startDate, endDate);
+      res.json({
+        success: true,
+        message: `Synchronisation termin\xE9e: ${result.inserted} nouveaux, ${result.updated} mis \xE0 jour`,
+        ...result
+      });
+    } catch (error) {
+      console.error("Error syncing Stripe payments:", error);
+      res.status(500).json({
+        success: false,
+        message: `Erreur lors de la synchronisation: ${error.message}`
+      });
+    }
+  });
+  app2.get("/api/stripe/sync-today", requireAuth, async (req, res) => {
+    try {
+      const today = /* @__PURE__ */ new Date();
+      const startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
+      const endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59);
+      console.log(`\u{1F504} Synchronisation Stripe RAC- aujourd'hui: ${startDate.toISOString()} \u2192 ${endDate.toISOString()}`);
+      const result = await syncStripePayments(startDate, endDate);
+      res.json({
+        success: true,
+        synced: true,
+        ...result
+      });
+    } catch (error) {
+      console.error("Error syncing today Stripe payments:", error);
+      res.status(500).json({
+        success: false,
+        message: `Erreur lors de la synchronisation: ${error.message}`
+      });
+    }
+  });
 }
 
 // server/routes.ts
@@ -8645,9 +8807,9 @@ var contactFormSchema = z4.object({
 });
 var STRIPE_SIGNATURE_HEADER = "stripe-signature";
 var stripeSecretKey = process.env.STRIPE_SECRET_KEY;
-var stripe2 = null;
+var stripe3 = null;
 if (stripeSecretKey) {
-  stripe2 = new Stripe2(stripeSecretKey, {
+  stripe3 = new Stripe3(stripeSecretKey, {
     apiVersion: "2025-05-28.basil"
   });
   console.log("Stripe API initialis\xE9e");
@@ -9743,7 +9905,7 @@ async function registerRoutes(app2) {
       }
       if (term.startsWith("LEAD-") || term.toUpperCase().startsWith("LEAD-")) {
         console.log("Recherche de la r\xE9f\xE9rence exacte LEAD-:", term);
-        const exactRefResults = await db.select().from(leads).where(sql5`${leads.referenceNumber} = ${term}`).limit(1);
+        const exactRefResults = await db.select().from(leads).where(sql6`${leads.referenceNumber} = ${term}`).limit(1);
         if (exactRefResults.length > 0) {
           return res.status(200).json({ success: true, results: exactRefResults });
         }
@@ -9751,19 +9913,19 @@ async function registerRoutes(app2) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (emailRegex.test(term)) {
         console.log("Recherche de l'email exact:", term);
-        const exactEmailResults = await db.select().from(leads).where(sql5`${leads.email} = ${term}`).limit(1);
+        const exactEmailResults = await db.select().from(leads).where(sql6`${leads.email} = ${term}`).limit(1);
         if (exactEmailResults.length > 0) {
           return res.status(200).json({ success: true, results: exactEmailResults });
         }
       }
       const searchTerm = `%${term}%`;
-      const results = await db.select().from(leads).where(sql5`
+      const results = await db.select().from(leads).where(sql6`
           ${leads.firstName} ILIKE ${searchTerm} OR
           ${leads.lastName} ILIKE ${searchTerm} OR
           ${leads.email} ILIKE ${searchTerm} OR
           ${leads.referenceNumber} ILIKE ${searchTerm} OR
           ${leads.phone} ILIKE ${searchTerm}
-        `).orderBy(sql5`
+        `).orderBy(sql6`
           CASE 
             WHEN ${leads.referenceNumber} ILIKE ${term} THEN 1
             WHEN ${leads.email} ILIKE ${term} THEN 2
@@ -9886,8 +10048,8 @@ async function registerRoutes(app2) {
         const serviceRequest = await storage.getServiceRequest(lead.convertedRequestId);
         if (serviceRequest && serviceRequest.paymentId) {
           try {
-            if (stripe2) {
-              const payment = await stripe2.paymentIntents.retrieve(serviceRequest.paymentId);
+            if (stripe3) {
+              const payment = await stripe3.paymentIntents.retrieve(serviceRequest.paymentId);
               paymentData = payment;
             }
           } catch (stripeError) {
@@ -10413,9 +10575,9 @@ ${comments}` : tarifJauneNote;
         });
       }
       let existingPaymentIntent;
-      if (serviceRequest.paymentId && stripe2) {
+      if (serviceRequest.paymentId && stripe3) {
         try {
-          existingPaymentIntent = await stripe2.paymentIntents.retrieve(serviceRequest.paymentId);
+          existingPaymentIntent = await stripe3.paymentIntents.retrieve(serviceRequest.paymentId);
           console.log(`PaymentIntent existant trouv\xE9 pour ${finalReference}: ${existingPaymentIntent.id} (${existingPaymentIntent.status})`);
           if (existingPaymentIntent.status === "processing") {
             return res.status(400).json({
@@ -10436,7 +10598,7 @@ ${comments}` : tarifJauneNote;
           console.warn(`Impossible de r\xE9cup\xE9rer le PaymentIntent existant: ${error instanceof Error ? error.message : "Erreur inconnue"}`);
         }
       }
-      if (!stripe2) {
+      if (!stripe3) {
         return res.status(500).json({
           success: false,
           message: "Stripe n'est pas configur\xE9 sur le serveur"
@@ -10444,7 +10606,7 @@ ${comments}` : tarifJauneNote;
       }
       const amountInCents = 12980;
       try {
-        const paymentIntent = await stripe2.paymentIntents.create({
+        const paymentIntent = await stripe3.paymentIntents.create({
           amount: amountInCents,
           currency: "eur",
           metadata: {
@@ -10550,7 +10712,7 @@ ${comments}` : tarifJauneNote;
       const finalReference = referenceNumber;
       if (serviceRequest.paymentId && !createOnly) {
         try {
-          const existingPaymentIntent = await stripe2.paymentIntents.retrieve(serviceRequest.paymentId);
+          const existingPaymentIntent = await stripe3.paymentIntents.retrieve(serviceRequest.paymentId);
           if (existingPaymentIntent.status !== "succeeded" && existingPaymentIntent.status !== "canceled") {
             console.log(`R\xE9utilisation du PaymentIntent existant: ${existingPaymentIntent.id} pour la demande ${finalReference}`);
             return res.json({
@@ -10564,7 +10726,7 @@ ${comments}` : tarifJauneNote;
           console.warn(`Impossible de r\xE9cup\xE9rer le PaymentIntent existant: ${error instanceof Error ? error.message : "Erreur inconnue"}`);
         }
       }
-      if (!stripe2) {
+      if (!stripe3) {
         return res.status(500).json({
           success: false,
           message: "Stripe n'est pas configur\xE9 sur le serveur"
@@ -10573,18 +10735,32 @@ ${comments}` : tarifJauneNote;
       const baseAmountInCents = 12980;
       const amountInCents = baseAmountInCents * multiplier;
       try {
-        const paymentIntent = await stripe2.paymentIntents.create({
+        const paymentIntent = await stripe3.paymentIntents.create({
           amount: amountInCents,
           currency: "eur",
+          description: `Frais de service - R\xE9f\xE9rence: ${finalReference}`,
           metadata: {
+            reference_number: finalReference,
             referenceNumber: finalReference,
             customerName: serviceRequest.name,
             customerEmail: serviceRequest.email,
+            customerPhone: serviceRequest.phone || "",
             requestType: serviceRequest.requestType,
             createTime: (/* @__PURE__ */ new Date()).toISOString(),
             userSubmitted: createOnly ? "true" : "false",
             multiplier: multiplier.toString(),
             isMultiplePayment: "true"
+          },
+          receipt_email: serviceRequest.email,
+          shipping: {
+            name: serviceRequest.name,
+            phone: serviceRequest.phone || "",
+            address: {
+              line1: serviceRequest.address || "Non renseign\xE9",
+              city: serviceRequest.city || "Non renseign\xE9",
+              postal_code: serviceRequest.postalCode || "00000",
+              country: "FR"
+            }
           }
         });
         if (!createOnly) {
@@ -10845,9 +11021,9 @@ ${comments}` : tarifJauneNote;
         });
       }
       let cardDetails = null;
-      if (stripe2 && paymentId) {
+      if (stripe3 && paymentId) {
         try {
-          const paymentIntent = await stripe2.paymentIntents.retrieve(paymentId, {
+          const paymentIntent = await stripe3.paymentIntents.retrieve(paymentId, {
             expand: ["charges.data.payment_method_details", "charges.data.billing_details"]
           });
           if (paymentIntent.status !== "succeeded") {
@@ -11042,13 +11218,13 @@ ${comments}` : tarifJauneNote;
           message: "Paiement d\xE9j\xE0 enregistr\xE9 comme r\xE9ussi"
         });
       }
-      if (!stripe2) {
+      if (!stripe3) {
         return res.status(500).json({
           success: false,
           message: "Stripe n'est pas configur\xE9 sur le serveur"
         });
       }
-      const paymentIntent = await stripe2.paymentIntents.retrieve(paymentIntentId, {
+      const paymentIntent = await stripe3.paymentIntents.retrieve(paymentIntentId, {
         expand: ["charges.data.payment_method_details", "charges.data.billing_details"]
       });
       if (paymentIntent.status !== "succeeded") {
@@ -11157,13 +11333,13 @@ ${comments}` : tarifJauneNote;
           message: "L'ID de session est requis"
         });
       }
-      if (!stripe2) {
+      if (!stripe3) {
         return res.status(500).json({
           success: false,
           message: "Stripe n'est pas configur\xE9"
         });
       }
-      const session = await stripe2.checkout.sessions.retrieve(sessionId);
+      const session = await stripe3.checkout.sessions.retrieve(sessionId);
       const referenceNumber = session.client_reference_id || session.metadata?.reference;
       const paymentStatus = session.payment_status;
       const paymentIntentId = typeof session.payment_intent === "string" ? session.payment_intent : session.payment_intent?.id;
@@ -11219,9 +11395,9 @@ ${comments}` : tarifJauneNote;
           message: "Ce paiement a d\xE9j\xE0 \xE9t\xE9 confirm\xE9 et trait\xE9 avec succ\xE8s"
         });
       }
-      if (stripe2 && serviceRequest.paymentId) {
+      if (stripe3 && serviceRequest.paymentId) {
         try {
-          const paymentIntent = await stripe2.paymentIntents.retrieve(serviceRequest.paymentId, {
+          const paymentIntent = await stripe3.paymentIntents.retrieve(serviceRequest.paymentId, {
             expand: ["charges.data.payment_method_details", "charges.data.billing_details"]
           });
           console.log("Statut du paiement Stripe:", {
@@ -11433,7 +11609,7 @@ ${comments}` : tarifJauneNote;
             let errorMessage2 = "Erreur lors de la v\xE9rification du paiement";
             let errorCode2 = "unknown_error";
             let errorDetails = {};
-            if (error instanceof Stripe2.errors.StripeError) {
+            if (error instanceof Stripe3.errors.StripeError) {
               switch (error.type) {
                 case "StripeCardError":
                   errorMessage2 = "Probl\xE8me avec la carte bancaire";
@@ -11526,7 +11702,7 @@ ${comments}` : tarifJauneNote;
   });
   app2.post("/api/stripe-webhook", async (req, res) => {
     try {
-      if (!stripe2) {
+      if (!stripe3) {
         return res.status(500).json({
           success: false,
           message: "Stripe n'est pas configur\xE9 sur le serveur"
@@ -11542,7 +11718,7 @@ ${comments}` : tarifJauneNote;
         if (!req.rawBody) {
           throw new Error("Missing rawBody");
         }
-        event = stripe2.webhooks.constructEvent(req.rawBody, sig, endpointSecret);
+        event = stripe3.webhooks.constructEvent(req.rawBody, sig, endpointSecret);
       } catch (err) {
         console.error(`Webhook Error: ${err.message}`);
         return res.status(400).send(`Webhook Error: ${err.message}`);
@@ -11560,7 +11736,7 @@ ${comments}` : tarifJauneNote;
               let paymentDetails = {};
               try {
                 if (paymentIntent.latest_charge && typeof paymentIntent.latest_charge === "string") {
-                  const charge = await stripe2.charges.retrieve(paymentIntent.latest_charge);
+                  const charge = await stripe3.charges.retrieve(paymentIntent.latest_charge);
                   if (charge.payment_method_details?.card) {
                     const card = charge.payment_method_details.card;
                     paymentDetails = {
@@ -11581,7 +11757,7 @@ ${comments}` : tarifJauneNote;
                     }
                   }
                 } else if (paymentIntent.payment_method && typeof paymentIntent.payment_method === "string") {
-                  const paymentMethod = await stripe2.paymentMethods.retrieve(paymentIntent.payment_method);
+                  const paymentMethod = await stripe3.paymentMethods.retrieve(paymentIntent.payment_method);
                   if (paymentMethod.type === "card" && paymentMethod.card) {
                     paymentDetails = {
                       cardBrand: paymentMethod.card.brand || "",
@@ -11707,7 +11883,7 @@ ${comments}` : tarifJauneNote;
             let paymentDetails = {};
             try {
               if (failedPaymentIntent.latest_charge && typeof failedPaymentIntent.latest_charge === "string") {
-                const charge = await stripe2.charges.retrieve(failedPaymentIntent.latest_charge);
+                const charge = await stripe3.charges.retrieve(failedPaymentIntent.latest_charge);
                 if (charge.payment_method_details?.card) {
                   const card = charge.payment_method_details.card;
                   paymentDetails = {
@@ -11721,7 +11897,7 @@ ${comments}` : tarifJauneNote;
                   };
                 }
               } else if (failedPaymentIntent.payment_method && typeof failedPaymentIntent.payment_method === "string") {
-                const paymentMethod = await stripe2.paymentMethods.retrieve(failedPaymentIntent.payment_method);
+                const paymentMethod = await stripe3.paymentMethods.retrieve(failedPaymentIntent.payment_method);
                 if (paymentMethod.type === "card" && paymentMethod.card) {
                   paymentDetails = {
                     cardBrand: paymentMethod.card.brand || "",
@@ -13556,14 +13732,14 @@ ${comments}` : tarifJauneNote;
   });
   app2.get("/api/stripe/payments", async (req, res) => {
     try {
-      if (!stripe2) {
+      if (!stripe3) {
         return res.status(503).json({
           success: false,
           message: "L'API Stripe n'est pas configur\xE9e. Veuillez d\xE9finir STRIPE_SECRET_KEY."
         });
       }
       const limit = parseInt(req.query.limit) || 100;
-      const payments3 = await stripe2.paymentIntents.list({
+      const payments3 = await stripe3.paymentIntents.list({
         limit: Math.min(limit, 100),
         // Maximum 100 pour éviter les problèmes de performance
         expand: ["data.customer"]
@@ -13589,7 +13765,7 @@ ${comments}` : tarifJauneNote;
           }
           if (!bankingInfo.cardBrand && intent.payment_method) {
             if (typeof intent.payment_method === "string") {
-              const paymentMethod = await stripe2.paymentMethods.retrieve(intent.payment_method);
+              const paymentMethod = await stripe3.paymentMethods.retrieve(intent.payment_method);
               if (paymentMethod.type === "card" && paymentMethod.card) {
                 bankingInfo = {
                   cardBrand: paymentMethod.card.brand || null,
@@ -13825,9 +14001,9 @@ ${comments}` : tarifJauneNote;
       } catch (logError) {
         console.error("Erreur lors de l'enregistrement de l'activit\xE9 d'annulation:", logError);
       }
-      if (stripe2 && !paymentId.startsWith("manual_")) {
+      if (stripe3 && !paymentId.startsWith("manual_")) {
         try {
-          await stripe2.paymentIntents.retrieve(paymentId);
+          await stripe3.paymentIntents.retrieve(paymentId);
           console.log(`Paiement Stripe ${paymentId} marqu\xE9 comme annul\xE9 dans notre syst\xE8me. Pas d'action sur Stripe.`);
         } catch (stripeError) {
           console.error("Erreur lors de la v\xE9rification du paiement Stripe:", stripeError);
@@ -14276,13 +14452,13 @@ ${comments}` : tarifJauneNote;
   app2.post("/api/send-payment-reminder/:paymentId", requireAuth, requireAdmin, async (req, res) => {
     try {
       const { paymentId } = req.params;
-      if (!stripe2) {
+      if (!stripe3) {
         return res.status(503).json({
           success: false,
           message: "L'API Stripe n'est pas configur\xE9e. Veuillez d\xE9finir STRIPE_SECRET_KEY."
         });
       }
-      const payment = await stripe2.paymentIntents.retrieve(paymentId);
+      const payment = await stripe3.paymentIntents.retrieve(paymentId);
       if (!payment) {
         return res.status(404).json({
           success: false,
@@ -14334,8 +14510,8 @@ ${comments}` : tarifJauneNote;
   app2.get("/api/stripe/config", requireAuth, requireAdmin, async (req, res) => {
     try {
       res.json({
-        configured: !!stripe2,
-        version: stripe2 ? "2025-03-31.basil" : null
+        configured: !!stripe3,
+        version: stripe3 ? "2025-03-31.basil" : null
       });
     } catch (error) {
       console.error("Error checking Stripe config:", error);
@@ -14344,13 +14520,13 @@ ${comments}` : tarifJauneNote;
   });
   app2.post("/api/stripe/sync-payments", requireAuth, requireAdmin, async (req, res) => {
     try {
-      if (!stripe2) {
+      if (!stripe3) {
         return res.status(503).json({
           success: false,
           message: "L'API Stripe n'est pas configur\xE9e. Veuillez d\xE9finir STRIPE_SECRET_KEY."
         });
       }
-      const payments3 = await stripe2.paymentIntents.list({
+      const payments3 = await stripe3.paymentIntents.list({
         limit: 100,
         expand: ["data.latest_charge"]
       });
@@ -14450,9 +14626,9 @@ ${comments}` : tarifJauneNote;
         paymentId: serviceRequest.paymentId,
         paymentStatus: serviceRequest.paymentStatus
       });
-      if (stripe2 && serviceRequest.paymentId) {
+      if (stripe3 && serviceRequest.paymentId) {
         try {
-          const paymentIntent = await stripe2.paymentIntents.retrieve(serviceRequest.paymentId);
+          const paymentIntent = await stripe3.paymentIntents.retrieve(serviceRequest.paymentId);
           console.log("Statut du paiement Stripe pour GET:", {
             paymentId: serviceRequest.paymentId,
             stripeStatus: paymentIntent.status,
@@ -14600,11 +14776,11 @@ ${comments}` : tarifJauneNote;
           paymentIntentToUse = serviceRequest.paymentId;
         }
       }
-      if (stripe2 && paymentIntentId) {
+      if (stripe3 && paymentIntentId) {
         const paymentIntentToCheck = paymentIntentId;
         try {
           console.log("V\xE9rification avec l'API Stripe pour l'ID de paiement:", paymentIntentToCheck);
-          const paymentIntent = await stripe2.paymentIntents.retrieve(paymentIntentToCheck);
+          const paymentIntent = await stripe3.paymentIntents.retrieve(paymentIntentToCheck);
           console.log("D\xE9tails du PaymentIntent Stripe:", {
             id: paymentIntent.id,
             status: paymentIntent.status,
@@ -14741,14 +14917,14 @@ ${comments}` : tarifJauneNote;
           message: "Informations de carte incompl\xE8tes"
         });
       }
-      if (!stripe2) {
+      if (!stripe3) {
         return res.status(500).json({
           success: false,
           message: "Stripe n'est pas configur\xE9 sur le serveur"
         });
       }
       try {
-        const paymentMethod = await stripe2.paymentMethods.create({
+        const paymentMethod = await stripe3.paymentMethods.create({
           type: "card",
           card: {
             number: cardNumber,
@@ -14788,7 +14964,7 @@ ${comments}` : tarifJauneNote;
         console.error("Erreur lors de la validation de la carte:", stripeError);
         let errorMessage = "Carte invalide";
         let errorCode = "card_error";
-        if (stripeError instanceof Stripe2.errors.StripeCardError) {
+        if (stripeError instanceof Stripe3.errors.StripeCardError) {
           errorCode = stripeError.code || "card_error";
           switch (errorCode) {
             case "card_declined":
@@ -14864,13 +15040,13 @@ ${comments}` : tarifJauneNote;
     console.log("Main receipt route reached - User:", req.user?.username, "Role:", req.user?.role);
     try {
       const { paymentId } = req.params;
-      if (!stripe2) {
+      if (!stripe3) {
         return res.status(503).json({
           success: false,
           message: "L'API Stripe n'est pas configur\xE9e. Veuillez d\xE9finir STRIPE_SECRET_KEY."
         });
       }
-      const payment = await stripe2.paymentIntents.retrieve(paymentId, {
+      const payment = await stripe3.paymentIntents.retrieve(paymentId, {
         expand: ["latest_charge"]
       });
       if (!payment) {
@@ -15103,7 +15279,7 @@ ${comments}` : tarifJauneNote;
         amount,
         serviceRequestId
       } = req.body;
-      if (!stripe2) {
+      if (!stripe3) {
         return res.status(503).json({
           success: false,
           message: "L'API Stripe n'est pas configur\xE9e. Veuillez d\xE9finir STRIPE_SECRET_KEY."
@@ -15118,7 +15294,7 @@ ${comments}` : tarifJauneNote;
       }
       let paymentMethod;
       try {
-        paymentMethod = await stripe2.paymentMethods.create({
+        paymentMethod = await stripe3.paymentMethods.create({
           type: "card",
           card: {
             number: cardNumber,
@@ -15140,7 +15316,7 @@ ${comments}` : tarifJauneNote;
       }
       let paymentIntent;
       try {
-        paymentIntent = await stripe2.paymentIntents.create({
+        paymentIntent = await stripe3.paymentIntents.create({
           amount: Math.round(amount * 100),
           // Convertir en centimes
           currency: "eur",
@@ -15228,13 +15404,13 @@ ${comments}` : tarifJauneNote;
           message: "Demande non trouv\xE9e"
         });
       }
-      if (!stripe2) {
+      if (!stripe3) {
         return res.status(503).json({
           success: false,
           message: "L'API Stripe n'est pas configur\xE9e. Veuillez d\xE9finir STRIPE_SECRET_KEY."
         });
       }
-      const checkoutSession = await stripe2.checkout.sessions.create({
+      const checkoutSession = await stripe3.checkout.sessions.create({
         line_items: [
           {
             price_data: {
@@ -15296,13 +15472,13 @@ ${comments}` : tarifJauneNote;
   app2.get("/api/payment-terminal-status/:paymentId", requireAuth, requireAdmin, async (req, res) => {
     try {
       const { paymentId } = req.params;
-      if (!stripe2) {
+      if (!stripe3) {
         return res.status(503).json({
           success: false,
           message: "L'API Stripe n'est pas configur\xE9e. Veuillez d\xE9finir STRIPE_SECRET_KEY."
         });
       }
-      const paymentIntent = await stripe2.paymentIntents.retrieve(paymentId);
+      const paymentIntent = await stripe3.paymentIntents.retrieve(paymentId);
       if (paymentIntent.status === "succeeded" && paymentIntent.metadata?.serviceRequestId) {
         const serviceRequestId = parseInt(paymentIntent.metadata.serviceRequestId);
         console.log(`V\xE9rification du paiement terminal ${paymentId}: V\xE9rification de liaison lead-demande pour la demande ${serviceRequestId}`);
@@ -15610,7 +15786,7 @@ ${comments}` : tarifJauneNote;
   app2.get("/api/stripe/rac-payments", requireAuth, async (req, res) => {
     try {
       console.log("Recuperation des paiements RAC- depuis la base de donn\xE9es...");
-      const dbPayments = await db.select().from(payments).where(sql5`reference_number LIKE 'RAC-%'`).orderBy(desc6(payments.createdAt));
+      const dbPayments = await db.select().from(payments).where(sql6`reference_number LIKE 'RAC-%'`).orderBy(desc6(payments.createdAt));
       const racPayments = dbPayments.map((payment) => {
         let metadata = {};
         try {
@@ -15653,7 +15829,7 @@ ${comments}` : tarifJauneNote;
   app2.post("/api/test/stripe-all-payments", async (req, res) => {
     try {
       const { startDate, endDate } = req.body;
-      const paymentIntents = await stripe2.paymentIntents.list({
+      const paymentIntents = await stripe3.paymentIntents.list({
         created: {
           gte: Math.floor(new Date(startDate).getTime() / 1e3),
           lte: Math.floor(new Date(endDate).getTime() / 1e3)
@@ -15687,7 +15863,7 @@ ${comments}` : tarifJauneNote;
   app2.post("/api/test/db-payments-rac", async (req, res) => {
     try {
       const { dateFrom, dateTo } = req.body;
-      const dbPayments = await db.select().from(payments).where(sql5`created_at >= ${dateFrom} AND created_at <= ${dateTo}`).orderBy(sql5`created_at DESC`);
+      const dbPayments = await db.select().from(payments).where(sql6`created_at >= ${dateFrom} AND created_at <= ${dateTo}`).orderBy(sql6`created_at DESC`);
       const racPayments = dbPayments.filter(
         (p) => p.referenceNumber && p.referenceNumber.includes("RAC-")
       );
@@ -16655,7 +16831,7 @@ ${comments}` : tarifJauneNote;
         referenceNumber: leads.referenceNumber,
         status: leads.status
       }).from(leads).where(
-        sql5`(${leads.referenceNumber} LIKE ${"%" + searchTerm + "%"} 
+        sql6`(${leads.referenceNumber} LIKE ${"%" + searchTerm + "%"} 
           OR ${leads.email} LIKE ${"%" + searchTerm + "%"} 
           OR ${leads.firstName} LIKE ${"%" + searchTerm + "%"} 
           OR ${leads.lastName} LIKE ${"%" + searchTerm + "%"})`

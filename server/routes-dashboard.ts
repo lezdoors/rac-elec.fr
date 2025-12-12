@@ -425,4 +425,55 @@ export function setupDashboardRoutes(app: Application) {
       });
     }
   });
+
+  // API de synchronisation automatique avec Stripe (références RAC- uniquement)
+  app.post('/api/stripe/sync', requireAuth, async (req, res) => {
+    try {
+      // Par défaut, synchroniser les 7 derniers jours
+      const endDate = new Date();
+      const startDate = new Date();
+      startDate.setDate(startDate.getDate() - 7);
+      
+      console.log(`🔄 Synchronisation Stripe RAC- du ${startDate.toISOString()} au ${endDate.toISOString()}`);
+      
+      const result = await syncStripePayments(startDate, endDate);
+      
+      res.json({
+        success: true,
+        message: `Synchronisation terminée: ${result.inserted} nouveaux, ${result.updated} mis à jour`,
+        ...result
+      });
+    } catch (error: any) {
+      console.error('Error syncing Stripe payments:', error);
+      res.status(500).json({
+        success: false,
+        message: `Erreur lors de la synchronisation: ${error.message}`
+      });
+    }
+  });
+
+  // API de synchronisation pour aujourd'hui uniquement (appelée automatiquement par le frontend)
+  app.get('/api/stripe/sync-today', requireAuth, async (req, res) => {
+    try {
+      const today = new Date();
+      const startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
+      const endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59);
+      
+      console.log(`🔄 Synchronisation Stripe RAC- aujourd'hui: ${startDate.toISOString()} → ${endDate.toISOString()}`);
+      
+      const result = await syncStripePayments(startDate, endDate);
+      
+      res.json({
+        success: true,
+        synced: true,
+        ...result
+      });
+    } catch (error: any) {
+      console.error('Error syncing today Stripe payments:', error);
+      res.status(500).json({
+        success: false,
+        message: `Erreur lors de la synchronisation: ${error.message}`
+      });
+    }
+  });
 }

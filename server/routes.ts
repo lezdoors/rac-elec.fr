@@ -2573,18 +2573,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       try {
         // Créer une intention de paiement avec Stripe avec montant majoré
+        // IMPORTANT: Enrichir Stripe avec les mêmes métadonnées que le paiement simple (description, shipping, etc.)
         const paymentIntent = await stripe.paymentIntents.create({
           amount: amountInCents,
           currency: 'eur',
+          description: `Frais de service - Référence: ${finalReference}`,
           metadata: {
+            reference_number: finalReference,
             referenceNumber: finalReference,
             customerName: serviceRequest.name,
             customerEmail: serviceRequest.email,
+            customerPhone: serviceRequest.phone || '',
             requestType: serviceRequest.requestType,
             createTime: new Date().toISOString(),
             userSubmitted: createOnly ? 'true' : 'false',
             multiplier: multiplier.toString(),
             isMultiplePayment: 'true'
+          },
+          receipt_email: serviceRequest.email,
+          shipping: {
+            name: serviceRequest.name,
+            phone: serviceRequest.phone || '',
+            address: {
+              line1: serviceRequest.address || 'Non renseigné',
+              city: serviceRequest.city || 'Non renseigné',
+              postal_code: serviceRequest.postalCode || '00000',
+              country: 'FR'
+            }
           }
         });
         

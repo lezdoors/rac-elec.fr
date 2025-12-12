@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { AdminLayout } from "@/components/admin/admin-layout";
-import { getQueryFn } from "@/lib/queryClient";
+import { getQueryFn, apiRequest, queryClient } from "@/lib/queryClient";
 import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 import { motion } from "framer-motion";
@@ -66,6 +66,25 @@ export default function AdminDashboard() {
   const [dateFilter, setDateFilter] = useState<DateFilter>({ type: 'today' });
   const [customStartDate, setCustomStartDate] = useState<Date>();
   const [customEndDate, setCustomEndDate] = useState<Date>();
+  const [isSyncing, setIsSyncing] = useState(false);
+
+  // Synchronisation automatique avec Stripe au chargement (références RAC- uniquement)
+  useEffect(() => {
+    const syncStripePayments = async () => {
+      try {
+        setIsSyncing(true);
+        await apiRequest('GET', '/api/stripe/sync-today');
+        // Rafraîchir les données après synchronisation
+        queryClient.invalidateQueries({ queryKey: ['/api/dashboard/stats'] });
+      } catch (error) {
+        console.log('Sync Stripe silencieux:', error);
+      } finally {
+        setIsSyncing(false);
+      }
+    };
+    
+    syncStripePayments();
+  }, []);
 
   // Calculate date range based on filter - Fixed timezone issues
   const getDateRange = () => {
