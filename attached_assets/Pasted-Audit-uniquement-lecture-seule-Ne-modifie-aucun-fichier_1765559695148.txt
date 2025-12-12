@@ -1,0 +1,37 @@
+Audit uniquement (lecture seule). Ne modifie aucun fichier, ne propose pas de refactor, ne change aucune config. Je veux uniquement une vérification factuelle.
+
+Objectif : confirmer 1) la vraie page de “thank you” après paiement Stripe réussi, 2) où se fait le redirect, 3) quels événements Google Ads/GA4 sont réellement déclenchés sur ce parcours, et 4) vérifier que les IDs/labels utilisés correspondent à nos conversions Google Ads.
+
+Contexte :
+	•	Domaine : demande-raccordement.fr
+	•	GTM : GTM-K597C4C2 (OK)
+	•	GA4 : G-D92SQT9L1P (OK)
+	•	Google Ads conversion ID correct : 16683623620
+	•	Conversions attendues (ID/label) :
+	•	Purchase (event-based) : 16683623620 / b5XPCPfuirYbEMTJr5M-
+	•	Form Submit : 16683623620 / 20wfCK-NyqgbEMTJr5M-
+	•	Form Start : 16683623620 / xhTDCODCy6gbEMTJr5M-
+	•	Problème suspecté : présence d’un ancien Google Ads ID (AW-16698052873) dans des fichiers JS, qui pourrait fragmenter/empêcher le bon tracking.
+
+Tâches (audit factuel) :
+	1.	Trouver exactement où Stripe renvoie l’utilisateur après paiement réussi :
+	•	Cherche la création de session checkout + success_url/cancel_url.
+	•	Indique l’URL exacte de success_url (pathname + query params éventuels).
+	•	Indique si le retour passe par /paiement-confirmation, /confirmation, ou autre route.
+	•	Indique si c’est un redirect client-side (router navigate) ou server-side.
+	2.	Confirmer la “thank you page” réellement utilisée en production :
+	•	Liste les routes/pages candidates liées au succès paiement.
+	•	Montre (avec références fichier + fonction) laquelle est réellement appelée dans le flux.
+	3.	Vérifier les événements réellement déclenchés sur le flux réel :
+	•	form_start : où est appelé trackFormStart (ou dataLayer.push event=“form_start”) ?
+	•	form_submit : où est appelé trackFormSubmit (ou équivalent) ?
+	•	purchase : où est appelé trackPurchase (ou équivalent) ?
+	•	Pour chacun : fichier + ligne + condition d’exécution (ex: au click, au submit, au mount de page).
+	4.	Vérifier que ces événements utilisent bien les bons IDs/labels Google Ads :
+	•	Confirmer que Purchase/Form Submit/Form Start pointent tous vers 16683623620 avec les labels ci-dessus.
+	•	Lister toute occurrence de AW-16698052873 dans le codebase et préciser si elle est encore utilisée dans le flux live (sans rien modifier).
+	5.	Résultat attendu :
+	•	Un tableau “Parcours Paiement Réussi” : page/route → events déclenchés → IDs/labels utilisés.
+	•	Une conclusion claire : “La thank you page effective est X” + “Purchase se déclenche ici/ ne se déclenche pas” + “les labels sont corrects/incorrects”.
+
+Important : ne change rien. Donne uniquement les preuves (fichiers, fonctions, routes) et la conclusion.

@@ -1,0 +1,67 @@
+Audit the tracking/tag configuration currently implemented on demande-raccordement.fr.
+
+Hard rules
+	•	Do not modify any code.
+	•	Do not change Google Tag Manager, GA4, Google Ads, UET, or any settings.
+	•	Do not run migrations, installs, or deploys.
+	•	Do not open PRs or commit anything.
+	•	Output analysis only.
+
+What I need from you
+
+Provide a neutral, factual inventory of what tracking is currently present in the codebase and how it behaves.
+
+1) Tag/Script Inventory
+
+Identify all tracking-related scripts and integrations currently loaded by the site, including but not limited to:
+	•	Google Tag Manager
+	•	GA4 / gtag
+	•	Google Ads tags
+	•	Microsoft UET
+	•	Clarity
+	•	Any other analytics / pixels / CDP / consent tooling
+
+For each, report:
+	•	Where it is injected (file path / component / layout)
+	•	The IDs present (container IDs, measurement IDs, etc.)
+	•	Whether it appears more than once (duplicate loads)
+
+2) Event Inventory (Data Layer + gtag)
+
+Find and list every place in the code where tracking events are sent, including:
+	•	dataLayer.push(...)
+	•	gtag(...)
+	•	any custom analytics wrappers/helpers
+
+For each event, report:
+	•	Event name
+	•	File path(s)
+	•	What user action or lifecycle triggers it (click, submit, route change, page load, etc.)
+	•	Whether it can fire multiple times (and why, based on the code)
+
+3) Form Tracking Behavior
+
+Identify how the form is implemented (including any multi-step logic) and document:
+	•	Where step navigation happens
+	•	Where submission happens
+	•	Whether completion/confirmation triggers any tracking events
+	•	What “success” looks like in code (route/page/state/API response)
+
+4) Output Format
+
+Return a structured report:
+
+A) Tracking Systems Detected
+(list each system + where loaded + IDs + duplicates)
+
+B) Event Map
+(event name → file path → trigger condition → notes on repeat firing)
+
+C) Form Funnel Behavior
+(step changes, submit, confirmation, and what is tracked at each point)
+
+D) Risk Flags (observed only)
+(duplicates, SPA rerender issues, missing completion event, etc.)
+
+E) Suggested Next Checks (no changes)
+(what to verify next, but do not implement anything)
