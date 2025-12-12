@@ -3980,7 +3980,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
               
               // NOTIFICATION EMAIL PAIEMENT RÉUSSI ACTIVÉE
               try {
-                const { sendPaiementReussiNotification } = await import('./email-service-clean');
+                const { sendPaiementReussiNotification } = await import('./email-service');
                 
                 // Préparer les données pour l'email de notification
                 const paymentNotificationData = {

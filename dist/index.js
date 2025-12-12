@@ -11816,7 +11816,7 @@ ${comments}` : tarifJauneNote;
                 console.error("Erreur lors de la g\xE9n\xE9ration du certificat:", certError);
               }
               try {
-                const { sendPaiementReussiNotification: sendPaiementReussiNotification4 } = await Promise.resolve().then(() => (init_email_service_clean(), email_service_clean_exports));
+                const { sendPaiementReussiNotification: sendPaiementReussiNotification4 } = await Promise.resolve().then(() => (init_email_service(), email_service_exports));
                 const paymentNotificationData = {
                   referenceNumber: serviceRequest.referenceNumber,
                   amount: paymentIntent.amount,
