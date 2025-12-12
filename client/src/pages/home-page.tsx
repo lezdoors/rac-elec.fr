@@ -21,6 +21,7 @@ import appelezNousIllustration from "@assets/Appelez-nous_1765363264301.webp";
 import rappelGratuitIllustration from "@assets/Appelez--nous_1765363489714.webp";
 import chatIllustration from "@assets/Chat_1765363276867.webp";
 import contactFormIllustration from "@assets/Besoin_d'aide_1765363456384.webp";
+import besoinAideIllustration from "@assets/Appelez-nous-connect_1765561469050.webp";
 
 const useMobileDetection = () => {
   const [isMobile, setIsMobile] = useState(true);
@@ -548,7 +549,7 @@ export default function HomePage() {
               <div className="w-full lg:w-2/5 flex justify-center">
                 <div className="w-full max-w-[350px]">
                   <img 
-                    src={contactFormIllustration} 
+                    src={besoinAideIllustration} 
                     alt="Support client disponible"
                     className="w-full h-auto"
                     loading="lazy"
