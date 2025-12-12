@@ -366,10 +366,10 @@ export default function RaccordementEnedisPage() {
           if (!conversionSent && typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
             try {
               (window as any).dataLayer.push({
-                event: 'ads_conversion',
-                conversion_id: 'AW-16698052873/5o3ICMLjpMUaEImioJo-'
+                event: 'form_start',
+                send_to: 'AW-16683623620/xhTDCODCy6gbEMTJr5M-'
               });
-              console.log('✅ Form start conversion via GTM dataLayer');
+              console.log('✅ Form start conversion via GTM dataLayer (AW-16683623620)');
               conversionSent = true;
             } catch (e) {
               console.warn('GTM dataLayer push failed:', e);
@@ -615,10 +615,10 @@ export default function RaccordementEnedisPage() {
         if (!conversionSent && typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
           try {
             (window as any).dataLayer.push({
-              event: 'ads_conversion',
-              conversion_id: 'AW-16698052873/PqZMCJW-tMUaEImioJo-'
+              event: 'form_submit',
+              send_to: 'AW-16683623620/20wfCK-NyqgbEMTJr5M-'
             });
-            console.log('✅ Form submit conversion via GTM dataLayer');
+            console.log('✅ Form submit conversion via GTM dataLayer (AW-16683623620)');
             conversionSent = true;
           } catch (e) {
             console.warn('GTM dataLayer push failed:', e);
@@ -686,10 +686,10 @@ export default function RaccordementEnedisPage() {
       } else if (typeof window !== 'undefined' && Array.isArray(window.dataLayer)) {
         // Fallback: GTM dataLayer push (GTM-only setup)
         window.dataLayer.push({
-          event: 'ads_conversion',
-          conversion_id: 'AW-16698052873/PqZMCJW-tMUaEtmioJo-'
+          event: 'form_submit',
+          send_to: 'AW-16683623620/20wfCK-NyqgbEMTJr5M-'
         });
-        console.log('✅ Final form submit conversion sent via GTM dataLayer');
+        console.log('✅ Final form submit conversion sent via GTM dataLayer (AW-16683623620)');
       } else {
         console.error('❌ Final form submit conversion failed - no tracking method available');
       }
