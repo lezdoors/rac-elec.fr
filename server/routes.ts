@@ -9040,160 +9040,50 @@ app.patch("/api/contacts/:id/status", requireAuth, requireAdminOrManager, async 
     }
   });
   
-  // Route pour récupérer tous les paiements RAC- authentiques depuis Stripe
-  // MISE A JOUR: Affiche tous les paiements a partir du 10 decembre 2025 (date de nettoyage)
-  // Les anciens paiements avant cette date ne s'affichent plus, mais tous les nouveaux sont visibles
+  // Route pour récupérer tous les paiements RAC- depuis la base de données
+  // Récupère TOUS les paiements historiques, pas seulement depuis une date
   app.get('/api/stripe/rac-payments', requireAuth, async (req, res) => {
     try {
-      if (!stripe) {
-        return res.status(500).json({ 
-          success: false, 
-          message: "Stripe non configure" 
-        });
-      }
-
-      console.log("Recuperation des paiements RAC- depuis Stripe (a partir du 10/12/2025)...");
+      console.log("Recuperation des paiements RAC- depuis la base de données...");
       
-      // Date de coupure fixe: 10 decembre 2025 a minuit (heure de Paris)
-      // Tous les paiements a partir de cette date sont affiches (passes et futurs)
-      // Seuls les paiements AVANT cette date sont masques
-      const cleanupDate = new Date('2025-12-10T00:00:00+01:00');
+      // Récupérer tous les paiements RAC- depuis la base de données
+      const dbPayments = await db.select()
+        .from(payments)
+        .where(sql`reference_number LIKE 'RAC-%'`)
+        .orderBy(desc(payments.createdAt));
       
-      // Recuperer TOUS les paiements sans limite depuis la date de nettoyage
-      let allPaymentIntents: any[] = [];
-      let hasMore = true;
-      let startingAfter: string | undefined = undefined;
-      
-      while (hasMore) {
-        const params: any = {
-          created: {
-            gte: Math.floor(cleanupDate.getTime() / 1000),
-          },
-          limit: 100, // Maximum par requete Stripe
-          expand: ['data.payment_method', 'data.customer'],
+      // Transformer pour correspondre au format attendu par le frontend
+      const racPayments = dbPayments.map(payment => {
+        let metadata = {};
+        try {
+          if (payment.metadata && typeof payment.metadata === 'string') {
+            metadata = JSON.parse(payment.metadata);
+          } else if (payment.metadata && typeof payment.metadata === 'object') {
+            metadata = payment.metadata;
+          }
+        } catch (e) {
+          metadata = {};
+        }
+        
+        return {
+          id: payment.paymentId || payment.id.toString(),
+          referenceNumber: payment.referenceNumber,
+          amount: parseFloat(payment.amount),
+          status: payment.status,
+          createdAt: payment.createdAt.toISOString(),
+          customerEmail: payment.customerEmail || '',
+          customerName: payment.customerName || '',
+          billingName: payment.billingName || payment.customerName || '',
+          paymentMethod: payment.method || 'card',
+          cardBrand: payment.cardBrand,
+          cardLast4: payment.cardLast4,
+          cardExpMonth: payment.cardExpMonth,
+          cardExpYear: payment.cardExpYear,
+          metadata: metadata
         };
-        
-        if (startingAfter) {
-          params.starting_after = startingAfter;
-        }
-        
-        const response = await stripe.paymentIntents.list(params);
-        allPaymentIntents = allPaymentIntents.concat(response.data);
-        hasMore = response.has_more;
-        
-        if (response.data.length > 0) {
-          startingAfter = response.data[response.data.length - 1].id;
-        } else {
-          hasMore = false;
-        }
-      }
-      
-      const paymentIntents = { data: allPaymentIntents };
+      });
 
-      // Filtrer les paiements RAC-
-      const filteredPayments = paymentIntents.data
-        .filter(payment => {
-          // Vérifier si le paiement contient une référence RAC-
-          const hasRacReference = 
-            (payment.description && payment.description.includes('RAC-')) ||
-            (payment.metadata && Object.values(payment.metadata).some(v => 
-              typeof v === 'string' && v.includes('RAC-')
-            ));
-          return hasRacReference;
-        });
-
-      // Traiter chaque paiement de manière asynchrone
-      const racPayments = await Promise.all(filteredPayments.map(async payment => {
-          // Extraire la référence RAC- des métadonnées ou de la description
-          let referenceNumber = '';
-          if (payment.metadata && payment.metadata.referenceNumber) {
-            referenceNumber = payment.metadata.referenceNumber;
-          } else if (payment.metadata && payment.metadata.reference) {
-            referenceNumber = payment.metadata.reference;
-          } else if (payment.description && payment.description.includes('RAC-')) {
-            const match = payment.description.match(/RAC-[A-Z0-9-]+/);
-            referenceNumber = match ? match[0] : payment.description;
-          } else if (payment.metadata) {
-            // Chercher dans toutes les métadonnées une référence RAC-
-            for (const [key, value] of Object.entries(payment.metadata)) {
-              if (typeof value === 'string' && value.includes('RAC-')) {
-                const match = value.match(/RAC-[A-Z0-9-]+/);
-                if (match) {
-                  referenceNumber = match[0];
-                  break;
-                }
-              }
-            }
-          }
-
-          // Construire le nom complet du client à partir de toutes les sources disponibles
-          let customerName = '';
-          let customerEmail = '';
-          
-          // D'abord essayer depuis Stripe metadata
-          if (payment.metadata) {
-            const prenom = payment.metadata.prenom || payment.metadata.firstName || '';
-            const nom = payment.metadata.nom || payment.metadata.lastName || '';
-            
-            if (prenom && nom) {
-              customerName = `${prenom} ${nom}`;
-            } else if (payment.metadata.customerName) {
-              customerName = payment.metadata.customerName;
-            } else if (payment.metadata.name) {
-              customerName = payment.metadata.name;
-            } else if (prenom || nom) {
-              customerName = `${prenom}${nom}`.trim();
-            }
-            
-            customerEmail = payment.metadata?.email || 
-                           payment.metadata?.customerEmail || 
-                           payment.receipt_email || 
-                           '';
-          }
-
-          // Si pas d'infos dans Stripe ET qu'on a une référence, chercher dans la DB locale
-          if ((!customerName || !customerEmail) && referenceNumber) {
-            try {
-              const dbRequest = await db.select()
-                .from(serviceRequests)
-                .where(or(
-                  eq(serviceRequests.paymentId, payment.id),
-                  like(serviceRequests.referenceNumber, `%${referenceNumber}%`)
-                ))
-                .limit(1);
-
-              if (dbRequest.length > 0) {
-                const request = dbRequest[0];
-                if (!customerName && request.name) {
-                  customerName = request.name;
-                }
-                if (!customerEmail && request.email) {
-                  customerEmail = request.email;
-                }
-              }
-            } catch (dbError: any) {
-              console.log(`Erreur DB pour référence ${referenceNumber}:`, dbError?.message || 'Erreur inconnue');
-            }
-          }
-
-          return {
-            id: payment.id,
-            referenceNumber: referenceNumber,
-            amount: payment.amount / 100, // Convertir centimes en euros
-            status: payment.status,
-            createdAt: new Date(payment.created * 1000).toISOString(),
-            customerEmail: customerEmail,
-            customerName: customerName,
-            billingName: customerName, // Assurer la compatibilité avec l'affichage frontend
-            paymentMethod: payment.payment_method?.type || 'card',
-            metadata: payment.metadata,
-            clientIp: payment.metadata?.clientIp || payment.metadata?.client_ip || '',
-            userAgent: payment.metadata?.userAgent || payment.metadata?.user_agent || ''
-          };
-        }))
-        .then(payments => payments.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
-
-      console.log(`${racPayments.length} paiements RAC- trouvés dans Stripe`);
+      console.log(`${racPayments.length} paiements RAC- trouvés dans la base de données`);
       
       res.json(racPayments);
     } catch (error) {

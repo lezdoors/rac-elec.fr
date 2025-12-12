@@ -1,1 +1,0 @@
-import{j as t}from"./index-DqsmBXEx.js";import{C as r,f as a}from"./french-cities-DDicerXa.js";import"./map-pin-DNXiXSD0.js";import"./zap-C1IS8HD6.js";import"./building-DW8dBOoq.js";function n(){return t.jsx(r,{cityData:a.strasbourg})}export{n as default};

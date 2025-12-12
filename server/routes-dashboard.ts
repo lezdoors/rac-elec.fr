@@ -117,35 +117,17 @@ export function setupDashboardRoutes(app: Application) {
         });
       }
 
-      // Dédupliquer les paiements par référence (garder SEULEMENT UN par référence unique)
-      const paymentsParReference = new Map();
-      racPayments.forEach(payment => {
-        const ref = payment.referenceNumber;
-        // Seulement garder le premier paiement réussi par référence
-        if (!paymentsParReference.has(ref) && 
-            (payment.status === 'succeeded' || payment.status === 'paid')) {
-          paymentsParReference.set(ref, payment);
-        }
-      });
-
-      const uniquePayments = Array.from(paymentsParReference.values());
+      // Compter TOUS les paiements sans déduplication incorrecte
+      // Un paiement est "réussi" s'il a un des statuts suivants
+      const successStatuses = ['succeeded', 'paid'];
+      const successfulPaymentsList = racPayments.filter(p => successStatuses.includes(p.status));
       
-      // Calculate stats avec paiements uniques seulement
-      const totalPayments = uniquePayments.length;
-      const totalRevenue = uniquePayments.reduce((sum, p) => sum + parseFloat(p.amount), 0);
-      const successfulPayments = uniquePayments.length; // Tous sont réussis par définition
-      const successRate = 100; // 100% car on ne garde que les réussis
+      const totalPayments = racPayments.length;
+      const totalRevenue = successfulPaymentsList.reduce((sum, p) => sum + parseFloat(p.amount), 0);
+      const successfulPayments = successfulPaymentsList.length;
+      const successRate = totalPayments > 0 ? Math.round((successfulPayments / totalPayments) * 100) : 0;
       
-      console.log('Dashboard API - Paiements bruts trouvés:', racPayments.length);
-      console.log('Dashboard API - Paiements uniques après déduplication:', uniquePayments.length);
       console.log('Dashboard API - Stats calculated:', { totalPayments, totalRevenue, successfulPayments, successRate });
-      
-      // Debug: afficher les références uniques
-      console.log('Dashboard API - Références uniques:', uniquePayments.map(p => ({
-        ref: p.referenceNumber,
-        amount: p.amount,
-        date: p.createdAt.toISOString().split('T')[0]
-      })));
 
       // Get leads for the same period
       const leadsData = await db.select()

@@ -5229,7 +5229,7 @@ var securityMonitoringMiddleware = (req, res, next) => {
 
 // server/routes.ts
 init_schema();
-import { eq as eq11, desc as desc6, sql as sql5, and as and7, like, or, gte as gte6, lte as lte5 } from "drizzle-orm";
+import { eq as eq11, desc as desc6, sql as sql5, and as and7, gte as gte6, lte as lte5 } from "drizzle-orm";
 import { fromZodError as fromZodError2 } from "zod-validation-error";
 import { hash as hash2 } from "bcrypt";
 
@@ -8427,26 +8427,13 @@ function setupDashboardRoutes(app2) {
           created: racPayments[0].createdAt
         });
       }
-      const paymentsParReference = /* @__PURE__ */ new Map();
-      racPayments.forEach((payment) => {
-        const ref = payment.referenceNumber;
-        if (!paymentsParReference.has(ref) && (payment.status === "succeeded" || payment.status === "paid")) {
-          paymentsParReference.set(ref, payment);
-        }
-      });
-      const uniquePayments = Array.from(paymentsParReference.values());
-      const totalPayments = uniquePayments.length;
-      const totalRevenue = uniquePayments.reduce((sum, p) => sum + parseFloat(p.amount), 0);
-      const successfulPayments = uniquePayments.length;
-      const successRate = 100;
-      console.log("Dashboard API - Paiements bruts trouv\xE9s:", racPayments.length);
-      console.log("Dashboard API - Paiements uniques apr\xE8s d\xE9duplication:", uniquePayments.length);
+      const successStatuses = ["succeeded", "paid"];
+      const successfulPaymentsList = racPayments.filter((p) => successStatuses.includes(p.status));
+      const totalPayments = racPayments.length;
+      const totalRevenue = successfulPaymentsList.reduce((sum, p) => sum + parseFloat(p.amount), 0);
+      const successfulPayments = successfulPaymentsList.length;
+      const successRate = totalPayments > 0 ? Math.round(successfulPayments / totalPayments * 100) : 0;
       console.log("Dashboard API - Stats calculated:", { totalPayments, totalRevenue, successfulPayments, successRate });
-      console.log("Dashboard API - R\xE9f\xE9rences uniques:", uniquePayments.map((p) => ({
-        ref: p.referenceNumber,
-        amount: p.amount,
-        date: p.createdAt.toISOString().split("T")[0]
-      })));
       const leadsData = await db.select().from(leads).where(
         and6(
           gte5(leads.createdAt, startDateTime),
@@ -11157,6 +11144,43 @@ ${comments}` : tarifJauneNote;
       res.status(500).json({
         success: false,
         message: "Une erreur est survenue lors de la confirmation du paiement",
+        error: error instanceof Error ? error.message : "Erreur inconnue"
+      });
+    }
+  });
+  app2.get("/api/stripe-session/:sessionId", async (req, res) => {
+    try {
+      const { sessionId } = req.params;
+      if (!sessionId) {
+        return res.status(400).json({
+          success: false,
+          message: "L'ID de session est requis"
+        });
+      }
+      if (!stripe2) {
+        return res.status(500).json({
+          success: false,
+          message: "Stripe n'est pas configur\xE9"
+        });
+      }
+      const session = await stripe2.checkout.sessions.retrieve(sessionId);
+      const referenceNumber = session.client_reference_id || session.metadata?.reference;
+      const paymentStatus = session.payment_status;
+      const paymentIntentId = typeof session.payment_intent === "string" ? session.payment_intent : session.payment_intent?.id;
+      res.json({
+        success: true,
+        referenceNumber,
+        paymentStatus,
+        paymentIntentId,
+        customerEmail: session.customer_email || session.customer_details?.email,
+        amount: session.amount_total ? session.amount_total / 100 : null,
+        currency: session.currency
+      });
+    } catch (error) {
+      console.error("Erreur lors de la r\xE9cup\xE9ration de la session Stripe:", error);
+      res.status(500).json({
+        success: false,
+        message: "Impossible de r\xE9cup\xE9rer les d\xE9tails de la session",
         error: error instanceof Error ? error.message : "Erreur inconnue"
       });
     }
@@ -15585,118 +15609,37 @@ ${comments}` : tarifJauneNote;
   });
   app2.get("/api/stripe/rac-payments", requireAuth, async (req, res) => {
     try {
-      if (!stripe2) {
-        return res.status(500).json({
-          success: false,
-          message: "Stripe non configure"
-        });
-      }
-      console.log("Recuperation des paiements RAC- depuis Stripe (a partir du 10/12/2025)...");
-      const cleanupDate = /* @__PURE__ */ new Date("2025-12-10T00:00:00+01:00");
-      let allPaymentIntents = [];
-      let hasMore = true;
-      let startingAfter = void 0;
-      while (hasMore) {
-        const params = {
-          created: {
-            gte: Math.floor(cleanupDate.getTime() / 1e3)
-          },
-          limit: 100,
-          // Maximum par requete Stripe
-          expand: ["data.payment_method", "data.customer"]
-        };
-        if (startingAfter) {
-          params.starting_after = startingAfter;
-        }
-        const response = await stripe2.paymentIntents.list(params);
-        allPaymentIntents = allPaymentIntents.concat(response.data);
-        hasMore = response.has_more;
-        if (response.data.length > 0) {
-          startingAfter = response.data[response.data.length - 1].id;
-        } else {
-          hasMore = false;
-        }
-      }
-      const paymentIntents = { data: allPaymentIntents };
-      const filteredPayments = paymentIntents.data.filter((payment) => {
-        const hasRacReference = payment.description && payment.description.includes("RAC-") || payment.metadata && Object.values(payment.metadata).some(
-          (v) => typeof v === "string" && v.includes("RAC-")
-        );
-        return hasRacReference;
-      });
-      const racPayments = await Promise.all(filteredPayments.map(async (payment) => {
-        let referenceNumber = "";
-        if (payment.metadata && payment.metadata.referenceNumber) {
-          referenceNumber = payment.metadata.referenceNumber;
-        } else if (payment.metadata && payment.metadata.reference) {
-          referenceNumber = payment.metadata.reference;
-        } else if (payment.description && payment.description.includes("RAC-")) {
-          const match = payment.description.match(/RAC-[A-Z0-9-]+/);
-          referenceNumber = match ? match[0] : payment.description;
-        } else if (payment.metadata) {
-          for (const [key, value] of Object.entries(payment.metadata)) {
-            if (typeof value === "string" && value.includes("RAC-")) {
-              const match = value.match(/RAC-[A-Z0-9-]+/);
-              if (match) {
-                referenceNumber = match[0];
-                break;
-              }
-            }
+      console.log("Recuperation des paiements RAC- depuis la base de donn\xE9es...");
+      const dbPayments = await db.select().from(payments).where(sql5`reference_number LIKE 'RAC-%'`).orderBy(desc6(payments.createdAt));
+      const racPayments = dbPayments.map((payment) => {
+        let metadata = {};
+        try {
+          if (payment.metadata && typeof payment.metadata === "string") {
+            metadata = JSON.parse(payment.metadata);
+          } else if (payment.metadata && typeof payment.metadata === "object") {
+            metadata = payment.metadata;
           }
-        }
-        let customerName = "";
-        let customerEmail = "";
-        if (payment.metadata) {
-          const prenom = payment.metadata.prenom || payment.metadata.firstName || "";
-          const nom = payment.metadata.nom || payment.metadata.lastName || "";
-          if (prenom && nom) {
-            customerName = `${prenom} ${nom}`;
-          } else if (payment.metadata.customerName) {
-            customerName = payment.metadata.customerName;
-          } else if (payment.metadata.name) {
-            customerName = payment.metadata.name;
-          } else if (prenom || nom) {
-            customerName = `${prenom}${nom}`.trim();
-          }
-          customerEmail = payment.metadata?.email || payment.metadata?.customerEmail || payment.receipt_email || "";
-        }
-        if ((!customerName || !customerEmail) && referenceNumber) {
-          try {
-            const dbRequest = await db.select().from(serviceRequests).where(or(
-              eq11(serviceRequests.paymentId, payment.id),
-              like(serviceRequests.referenceNumber, `%${referenceNumber}%`)
-            )).limit(1);
-            if (dbRequest.length > 0) {
-              const request = dbRequest[0];
-              if (!customerName && request.name) {
-                customerName = request.name;
-              }
-              if (!customerEmail && request.email) {
-                customerEmail = request.email;
-              }
-            }
-          } catch (dbError) {
-            console.log(`Erreur DB pour r\xE9f\xE9rence ${referenceNumber}:`, dbError?.message || "Erreur inconnue");
-          }
+        } catch (e) {
+          metadata = {};
         }
         return {
-          id: payment.id,
-          referenceNumber,
-          amount: payment.amount / 100,
-          // Convertir centimes en euros
+          id: payment.paymentId || payment.id.toString(),
+          referenceNumber: payment.referenceNumber,
+          amount: parseFloat(payment.amount),
           status: payment.status,
-          createdAt: new Date(payment.created * 1e3).toISOString(),
-          customerEmail,
-          customerName,
-          billingName: customerName,
-          // Assurer la compatibilité avec l'affichage frontend
-          paymentMethod: payment.payment_method?.type || "card",
-          metadata: payment.metadata,
-          clientIp: payment.metadata?.clientIp || payment.metadata?.client_ip || "",
-          userAgent: payment.metadata?.userAgent || payment.metadata?.user_agent || ""
+          createdAt: payment.createdAt.toISOString(),
+          customerEmail: payment.customerEmail || "",
+          customerName: payment.customerName || "",
+          billingName: payment.billingName || payment.customerName || "",
+          paymentMethod: payment.method || "card",
+          cardBrand: payment.cardBrand,
+          cardLast4: payment.cardLast4,
+          cardExpMonth: payment.cardExpMonth,
+          cardExpYear: payment.cardExpYear,
+          metadata
         };
-      })).then((payments3) => payments3.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
-      console.log(`${racPayments.length} paiements RAC- trouv\xE9s dans Stripe`);
+      });
+      console.log(`${racPayments.length} paiements RAC- trouv\xE9s dans la base de donn\xE9es`);
       res.json(racPayments);
     } catch (error) {
       console.error("Erreur lors de la r\xE9cup\xE9ration des paiements RAC-:", error);
@@ -16985,74 +16928,6 @@ ${comments}` : tarifJauneNote;
       return res.status(500).json({
         success: false,
         message: "Une erreur est survenue lors de la r\xE9cup\xE9ration de l'aper\xE7u des statistiques"
-      });
-    }
-  });
-  app2.get("/api/dashboard/stats", requireAuth, async (req, res) => {
-    try {
-      const { startDate, endDate } = req.query;
-      if (!startDate || !endDate) {
-        return res.status(400).json({
-          success: false,
-          message: "Dates de d\xE9but et de fin requises"
-        });
-      }
-      const paymentsResult = await db.select().from(payments).where(
-        and7(
-          like(payments.referenceNumber, "RAC-%"),
-          gte6(payments.createdAt, new Date(startDate)),
-          lte5(payments.createdAt, /* @__PURE__ */ new Date(endDate + "T23:59:59"))
-        )
-      );
-      const paymentCount = paymentsResult.length;
-      const paymentRevenue = paymentsResult.reduce((sum, payment) => sum + parseFloat(payment.amount.toString()), 0);
-      const successfulPayments = paymentsResult.filter((p) => p.status === "succeeded" || p.status === "paid").length;
-      const paymentSuccessRate = paymentCount > 0 ? Math.round(successfulPayments / paymentCount * 100) : 0;
-      const leadsResult = await db.select().from(leads).where(
-        and7(
-          like(leads.referenceNumber, "LEAD-%"),
-          gte6(leads.createdAt, new Date(startDate)),
-          lte5(leads.createdAt, /* @__PURE__ */ new Date(endDate + "T23:59:59"))
-        )
-      );
-      const leadCount = leadsResult.length;
-      const requestsResult = await db.select().from(serviceRequests).where(
-        and7(
-          like(serviceRequests.referenceNumber, "RAC-%"),
-          gte6(serviceRequests.createdAt, new Date(startDate)),
-          lte5(serviceRequests.createdAt, /* @__PURE__ */ new Date(endDate + "T23:59:59"))
-        )
-      );
-      const requestCount = requestsResult.length;
-      const dashboardStats = {
-        payments: {
-          count: paymentCount,
-          revenue: paymentRevenue,
-          successRate: paymentSuccessRate,
-          successful: successfulPayments
-        },
-        leads: {
-          count: leadCount
-        },
-        requests: {
-          count: requestCount
-        },
-        period: {
-          startDate,
-          endDate
-        }
-      };
-      console.log(`\u{1F4CA} DASHBOARD STATS - P\xE9riode ${startDate} \xE0 ${endDate}:`, {
-        paiements: `${paymentCount} (${paymentRevenue}\u20AC)`,
-        leads: leadCount,
-        demandes: requestCount
-      });
-      return res.status(200).json(dashboardStats);
-    } catch (error) {
-      console.error("Erreur lors de la r\xE9cup\xE9ration des statistiques du tableau de bord:", error);
-      return res.status(500).json({
-        success: false,
-        message: "Erreur lors de la r\xE9cup\xE9ration des statistiques"
       });
     }
   });
