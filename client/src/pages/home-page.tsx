@@ -20,7 +20,7 @@ import formIntroIllustration from "@assets/form-intro-illustartion_(Website)_176
 import appelezNousIllustration from "@assets/Appelez-nous_1765363264301.webp";
 import rappelGratuitIllustration from "@assets/Appelez--nous_1765363489714.webp";
 import chatIllustration from "@assets/Chat_1765363276867.webp";
-import contactFormIllustration from "@assets/Appelez-nous-connect_1765561770308.webp";
+import contactFormIllustration from "@assets/Appelez-nous_1765585355594.webp";
 
 const useMobileDetection = () => {
   const [isMobile, setIsMobile] = useState(true);
