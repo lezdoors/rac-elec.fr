@@ -114,7 +114,6 @@ export const deferNonCriticalMobile = () => {
   // Move analytics and tracking to load after user interaction
   const deferredScripts = [
     'gtag',
-    'statcounter',
     'analytics',
     'facebook',
     'twitter'

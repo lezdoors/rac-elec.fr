@@ -205,7 +205,6 @@
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="//unpkg.com">
     <link rel="dns-prefetch" href="//geo.api.gouv.fr">
-    <link rel="dns-prefetch" href="//www.statcounter.com">
     
     <!-- Security headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -440,50 +439,6 @@
     <!-- Root element for React - no static content to prevent flash -->
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    
-    <!-- PHASE 3A: Statcounter - Further optimized deferred loading -->
-    <script>
-      function loadStatcounter() {
-        if (!window.statcounterLoaded) {
-          window.statcounterLoaded = true;
-          window.sc_project=13140920; 
-          window.sc_invisible=1; 
-          window.sc_security="3cd76429";
-          
-          const script = document.createElement('script');
-          script.async = true;
-          script.src = 'https://www.statcounter.com/counter/counter.js';
-          script.onload = () => console.log('✅ StatCounter loaded after user interaction');
-          document.head.appendChild(script);
-        }
-      }
-      
-      // PHASE 3A: Load after user interaction or 5 seconds (aligned with other deferred scripts)
-      let statLoaded = false;
-      const triggerStat = () => {
-        if (!statLoaded) {
-          statLoaded = true;
-          loadStatcounter();
-          ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
-            document.removeEventListener(event, triggerStat, { passive: true });
-          });
-        }
-      };
-      
-      ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
-        document.addEventListener(event, triggerStat, { passive: true, once: true });
-      });
-      
-      // Fallback: Load after 5 seconds if no interaction
-      setTimeout(() => {
-        if (!statLoaded) triggerStat();
-      }, 5000);
-    </script>
-    <noscript><div class="statcounter"><a title="real time web analytics"
-    href="https://statcounter.com/" target="_blank"><img class="statcounter"
-    src="https://c.statcounter.com/13140920/0/3cd76429/1/" alt="real time web
-    analytics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
-    <!-- End of Statcounter Code -->
     
     <!-- PERFORMANCE FIX: Non-critical Replit cleanup moved to body end -->
     <script>
