@@ -1,0 +1,68 @@
+{
+  "name": "Boulogne-Billancourt",
+  "slug": "boulogne-billancourt",
+  "region": "ile-de-france",
+  "region_name": "Île-de-France",
+  "postal_codes": ["92100"],
+  "meta_title": "Raccordement Électrique Boulogne-Billancourt | Enedis 92",
+  "meta_description": "Raccordement électrique Boulogne-Billancourt ⚡ Service Enedis expert Hauts-de-Seine. Devis gratuit, accompagnement personnalisé, délais optimisés.",
+  "canonical": "/raccordement/boulogne-billancourt/",
+  "nap": {
+    "business_name": "Portail Électricité Boulogne-Billancourt",
+    "address": "58 Route de la Reine, 92100 Boulogne-Billancourt",
+    "phone": "01 83 62 41 34",
+    "email": "boulogne@portail-electricite.com",
+    "hours": {
+      "monday": "08:00-19:00",
+      "tuesday": "08:00-19:00",
+      "wednesday": "08:00-19:00", 
+      "thursday": "08:00-19:00",
+      "friday": "08:00-19:00",
+      "saturday": "09:00-17:00",
+      "sunday": "Fermé"
+    }
+  },
+  "adjacent_cities": ["paris", "saint-denis", "nanterre"],
+  "hero": {
+    "h1": "Raccordement Électrique Boulogne-Billancourt",
+    "subtitle": "Expert en raccordement électrique à Boulogne-Billancourt. Service Enedis professionnel pour particuliers et entreprises dans les Hauts-de-Seine.",
+    "trust_indicators": [
+      "✅ Spécialiste Hauts-de-Seine",
+      "✅ Devis sous 24h",
+      "✅ Expert local agréé",
+      "✅ Accompagnement complet"
+    ]
+  },
+  "content": {
+    "intro": "Boulogne-Billancourt, ville dynamique des Hauts-de-Seine, attire de nombreux projets résidentiels et tertiaires nécessitant des raccordements électriques. Située aux portes de Paris, cette commune bénéficie d'un développement urbain soutenu qui génère une forte demande en raccordements électriques. Notre service expert vous accompagne dans toutes vos démarches de raccordement Enedis à Boulogne-Billancourt.",
+    "process": "Le raccordement électrique à Boulogne-Billancourt suit les procédures Enedis spécifiques aux Hauts-de-Seine. Notre équipe locale maîtrise parfaitement les spécificités communales, les contraintes d'urbanisme et les délais d'intervention. Nous gérons votre projet de A à Z : constitution du dossier, dépôt de la demande, suivi des études techniques et coordination des travaux jusqu'à la mise en service.",
+    "benefits": "Choisir notre service de raccordement électrique à Boulogne-Billancourt, c'est bénéficier d'une expertise locale reconnue. Nous connaissons les spécificités de la commune, entretenons des relations privilégiées avec les services techniques municipaux et Enedis Hauts-de-Seine. Notre proximité géographique nous permet d'assurer un suivi personnalisé et de réagir rapidement à vos besoins.",
+    "local_expertise": "Boulogne-Billancourt présente des caractéristiques particulières : mix urbain entre quartiers résidentiels et zones d'activités, contraintes liées aux grands projets d'aménagement (Île Seguin, Trapèze) et densification du tissu urbain. Notre équipe locale connaît parfaitement ces enjeux et vous propose des solutions adaptées à chaque contexte."
+  },
+  "faqs": [
+    {
+      "question": "Quels sont les délais pour un raccordement à Boulogne-Billancourt ?",
+      "answer": "À Boulogne-Billancourt, les délais de raccordement électrique sont généralement de 2 à 3 mois pour un projet standard. La proximité avec Paris et la qualité du réseau Enedis local permettent souvent d'optimiser ces délais. Notre équipe vous accompagne pour accélérer les procédures."
+    },
+    {
+      "question": "Le raccordement est-il plus rapide qu'à Paris ?",
+      "answer": "Oui, Boulogne-Billancourt bénéficie généralement de délais plus courts qu'à Paris grâce à une moindre saturation du réseau et des procédures administratives communales plus fluides. Comptez 15 à 20% de temps en moins par rapport à la capitale."
+    },
+    {
+      "question": "Quelles sont les spécificités pour les nouveaux quartiers ?",
+      "answer": "Les nouveaux quartiers de Boulogne-Billancourt (Île Seguin, Trapèze) bénéficient d'infrastructures électriques modernes. Le raccordement y est souvent plus simple et plus rapide. Notre équipe connaît parfaitement ces zones et leurs spécificités techniques."
+    },
+    {
+      "question": "Quel budget prévoir pour un raccordement dans le 92 ?",
+      "answer": "Dans les Hauts-de-Seine, le coût d'un raccordement électrique varie entre 1 200€ et 2 500€ selon la puissance et la complexité. Boulogne-Billancourt bénéficie d'un réseau dense qui limite souvent les coûts d'extension. Devis gratuit sous 24h."
+    }
+  ],
+  "schema_data": {
+    "local_business_id": "https://www.demande-raccordement.fr/boulogne-billancourt",
+    "service_area": "Boulogne-Billancourt, Hauts-de-Seine, Île-de-France",
+    "geo_coordinates": {
+      "latitude": "48.8367",
+      "longitude": "2.2407"
+    }
+  }
+}

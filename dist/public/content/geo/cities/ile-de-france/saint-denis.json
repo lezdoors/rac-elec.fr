@@ -1,0 +1,68 @@
+{
+  "name": "Saint-Denis",
+  "slug": "saint-denis",
+  "region": "ile-de-france",
+  "region_name": "Île-de-France",
+  "postal_codes": ["93200"],
+  "meta_title": "Raccordement Électrique Saint-Denis | Enedis 93",
+  "meta_description": "Raccordement électrique Saint-Denis ⚡ Expert Enedis Seine-Saint-Denis. Devis gratuit, service professionnel 93200, accompagnement complet.",
+  "canonical": "/raccordement/saint-denis/",
+  "nap": {
+    "business_name": "Portail Électricité Saint-Denis",
+    "address": "12 Avenue du Président Wilson, 93200 Saint-Denis",
+    "phone": "01 83 62 41 35",
+    "email": "saint-denis@portail-electricite.com",
+    "hours": {
+      "monday": "08:00-19:00",
+      "tuesday": "08:00-19:00",
+      "wednesday": "08:00-19:00",
+      "thursday": "08:00-19:00",
+      "friday": "08:00-19:00",
+      "saturday": "09:00-17:00",
+      "sunday": "Fermé"
+    }
+  },
+  "adjacent_cities": ["paris", "boulogne-billancourt", "montreuil"],
+  "hero": {
+    "h1": "Raccordement Électrique Saint-Denis",
+    "subtitle": "Service expert de raccordement électrique Enedis à Saint-Denis. Accompagnement professionnel en Seine-Saint-Denis, devis sous 24h.",
+    "trust_indicators": [
+      "✅ Spécialiste 93",
+      "✅ Devis sous 24h",
+      "✅ Expert local",
+      "✅ Service rapide"
+    ]
+  },
+  "content": {
+    "intro": "Saint-Denis, ville emblématique de Seine-Saint-Denis, connaît une transformation urbaine majeure qui génère de nombreux besoins en raccordement électrique. Située au cœur du Grand Paris, cette commune dynamique attire résidents et entreprises nécessitant des raccordements électriques performants. Notre service expert vous accompagne dans tous vos projets de raccordement Enedis à Saint-Denis.",
+    "process": "Le raccordement électrique à Saint-Denis bénéficie des investissements du Grand Paris qui modernisent les infrastructures locales. Notre équipe connaît parfaitement les spécificités de la commune, les projets d'aménagement en cours et les procédures Enedis spécifiques à la Seine-Saint-Denis. Nous gérons votre dossier complet : études techniques, démarches administratives et coordination des travaux.",
+    "benefits": "Choisir notre service de raccordement électrique à Saint-Denis, c'est bénéficier d'une expertise locale reconnue. Nous connaissons les enjeux du développement urbain dionysien, les contraintes liées aux grands projets et entretenons d'excellentes relations avec Enedis Seine-Saint-Denis. Notre proximité nous permet d'assurer un suivi personnalisé et des délais optimisés.",
+    "local_expertise": "Saint-Denis présente des opportunités uniques : projets de rénovation urbaine, développement autour du Stade de France, nouvelles infrastructures de transport et zones d'activités économiques. Notre équipe locale maîtrise ces enjeux et vous propose des solutions de raccordement adaptées à chaque contexte, du centre historique aux nouveaux quartiers."
+  },
+  "faqs": [
+    {
+      "question": "Quels sont les délais de raccordement à Saint-Denis ?",
+      "answer": "À Saint-Denis, les délais de raccordement électrique sont généralement de 2 à 3 mois pour un projet standard. La modernisation du réseau dans le cadre du Grand Paris permet souvent d'optimiser ces délais. Notre expertise locale accélère significativement les procédures."
+    },
+    {
+      "question": "Y a-t-il des avantages liés aux projets Grand Paris ?",
+      "answer": "Oui, Saint-Denis bénéficie des investissements du Grand Paris qui incluent la modernisation du réseau électrique. Ces améliorations facilitent les raccordements et peuvent réduire les coûts. Notre équipe connaît parfaitement ces dispositifs spécifiques."
+    },
+    {
+      "question": "Quel budget pour un raccordement en Seine-Saint-Denis ?",
+      "answer": "En Seine-Saint-Denis, le coût d'un raccordement électrique varie entre 1 100€ et 2 800€ selon la puissance et la localisation. Saint-Denis bénéficie d'un réseau en modernisation qui optimise souvent les tarifs. Devis personnalisé gratuit sous 24h."
+    },
+    {
+      "question": "Comment raccorder près du Stade de France ?",
+      "answer": "Les raccordements près du Stade de France bénéficient d'infrastructures électriques renforcées pour les événements. Cette zone dispose d'un réseau particulièrement performant. Notre équipe connaît parfaitement ces spécificités techniques et réglementaires."
+    }
+  ],
+  "schema_data": {
+    "local_business_id": "https://www.demande-raccordement.fr/saint-denis",
+    "service_area": "Saint-Denis, Seine-Saint-Denis, Île-de-France",
+    "geo_coordinates": {
+      "latitude": "48.9362",
+      "longitude": "2.3574"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "name": "Lyon",
+  "slug": "lyon",
+  "region": "auvergne-rhone-alpes",
+  "region_name": "Auvergne-Rhône-Alpes",
+  "postal_codes": ["69001", "69002", "69003", "69004", "69005", "69006", "69007", "69008", "69009"],
+  "meta_title": "Raccordement Électrique Lyon | Expert Enedis Rhône 69",
+  "meta_description": "Raccordement électrique Lyon ⚡ Service Enedis professionnel Grand Lyon. Devis gratuit sous 24h, expert agréé Auvergne-Rhône-Alpes.",
+  "canonical": "/raccordement/lyon/",
+  "nap": {
+    "business_name": "Portail Électricité Lyon",
+    "address": "15 Rue de la République, 69002 Lyon",
+    "phone": "04 78 42 33 21",
+    "email": "lyon@portail-electricite.com",
+    "hours": {
+      "monday": "08:00-19:00",
+      "tuesday": "08:00-19:00",
+      "wednesday": "08:00-19:00",
+      "thursday": "08:00-19:00",
+      "friday": "08:00-19:00",
+      "saturday": "09:00-17:00",
+      "sunday": "Fermé"
+    }
+  },
+  "adjacent_cities": ["villeurbanne", "grenoble", "saint-etienne"],
+  "hero": {
+    "h1": "Raccordement Électrique à Lyon",
+    "subtitle": "Expert en raccordement électrique Enedis à Lyon. Service professionnel Grand Lyon, accompagnement personnalisé et devis sous 24h.",
+    "trust_indicators": [
+      "✅ Expert Grand Lyon", 
+      "✅ Agréé Enedis Rhône",
+      "✅ Devis sous 24h",
+      "✅ Service tous arrondissements"
+    ]
+  },
+  "content": {
+    "intro": "Lyon, capitale économique de la région Auvergne-Rhône-Alpes, connaît un développement urbain remarquable qui génère de nombreux projets de raccordement électrique. Troisième ville de France, Lyon attire entreprises, promoteurs et particuliers nécessitant des raccordements électriques performants. De la Presqu'île historique aux nouveaux quartiers de la Confluence, en passant par les zones d'activités de Gerland et Part-Dieu, notre service expert vous accompagne dans tous vos projets de raccordement électrique Enedis à Lyon.",
+    "process": "Le raccordement électrique à Lyon nécessite une parfaite connaissance des spécificités locales : réseau dense du centre historique, grands projets d'aménagement (Confluence, Part-Dieu), contraintes liées au patrimoine UNESCO et coordination avec la Métropole de Lyon. Notre équipe lyonnaise maîtrise ces enjeux complexes et gère votre projet intégralement : analyse technique, constitution du dossier Enedis, obtention des autorisations métropolitaines et suivi des travaux.",
+    "benefits": "Faire appel à notre service de raccordement électrique à Lyon vous garantit une expertise locale de premier plan. Nous connaissons intimement les 9 arrondissements lyonnais, leurs spécificités techniques et réglementaires. Nos relations privilégiées avec Enedis Rhône et les services de la Métropole nous permettent d'optimiser les délais et de vous proposer les solutions les plus innovantes pour votre projet électrique.",
+    "local_expertise": "Lyon présente des défis techniques particuliers : confluence de deux fleuves, relief vallonné, centre historique classé UNESCO, grands projets métropolitains et zones d'activités économiques majeures. Notre équipe lyonnaise possède l'expertise nécessaire pour naviguer dans cet environnement complexe et vous proposer des solutions de raccordement adaptées à chaque contexte spécifique."
+  },
+  "faqs": [
+    {
+      "question": "Quels sont les délais de raccordement électrique à Lyon ?",
+      "answer": "À Lyon, les délais de raccordement électrique sont généralement de 2 à 4 mois pour un projet standard. Les nouveaux quartiers comme la Confluence bénéficient d'infrastructures modernes permettant des délais optimisés. Notre expertise locale accélère significativement les procédures."
+    },
+    {
+      "question": "Comment raccorder dans le Vieux Lyon classé UNESCO ?",
+      "answer": "Le raccordement électrique dans le Vieux Lyon nécessite des autorisations spéciales en raison du classement UNESCO. Notre équipe maîtrise ces procédures complexes et vous accompagne dans toutes les démarches patrimoniales et architecturales spécifiques à ce secteur protégé."
+    },
+    {
+      "question": "Quel est le coût d'un raccordement dans le Grand Lyon ?",
+      "answer": "Dans la Métropole de Lyon, le coût d'un raccordement électrique varie entre 1 400€ et 3 200€ selon la puissance et la localisation. Lyon bénéficie d'un excellent réseau Enedis qui optimise souvent les coûts. Devis détaillé gratuit sous 24h."
+    },
+    {
+      "question": "Y a-t-il des avantages pour les projets Part-Dieu/Confluence ?",
+      "answer": "Les quartiers Part-Dieu et Confluence bénéficient d'infrastructures électriques de dernière génération dans le cadre des grands projets métropolitains. Ces zones offrent des conditions de raccordement optimales avec des délais réduits. Notre équipe connaît parfaitement ces spécificités."
+    }
+  ],
+  "schema_data": {
+    "local_business_id": "https://www.demande-raccordement.fr/lyon",
+    "service_area": "Lyon, Métropole de Lyon, Auvergne-Rhône-Alpes",
+    "geo_coordinates": {
+      "latitude": "45.7640",
+      "longitude": "4.8357"
+    }
+  }
+}
