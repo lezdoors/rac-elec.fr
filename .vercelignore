@@ -7,7 +7,6 @@ node_modules
 temp/
 certificates/
 analysis-reports/
-attached_assets/
 *.md
 *.log
 .DS_Store
