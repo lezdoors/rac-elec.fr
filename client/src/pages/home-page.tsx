@@ -67,7 +67,7 @@ export default function HomePage() {
       <a href="#main-content" className="sr-only focus:not-sr-only">Aller au contenu principal</a>
       <Helmet>
         <title>Demande de Raccordement Enedis en Ligne | Raccordement Électrique</title>
-        <meta name="description" content="Faites votre demande de raccordement Enedis. Provisoire, définitif, collectif ou augmentation de puissance. Procédure simplifiée et sécurisée." />
+        <meta name="description" content="Demande de raccordement Enedis en ligne : formulaire simple, assistance dédiée, réponse rapide. Déposez votre dossier en quelques minutes." />
         <meta name="keywords" content="demande de raccordement enedis, raccordement électrique, compteur Linky, branchement EDF" />
         <link rel="canonical" href="https://www.demande-raccordement.fr/" />
         <meta property="og:title" content="Demande de Raccordement Enedis en Ligne" />
