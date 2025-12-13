@@ -21,6 +21,7 @@ import appelezNousIllustration from "@assets/Appelez-nous_1765363264301.webp";
 import rappelGratuitIllustration from "@assets/Appelez--nous_1765363489714.webp";
 import chatIllustration from "@assets/Chat_1765363276867.webp";
 import contactFormIllustration from "@assets/Besoin_d'aide_1765363456384.webp";
+import formulaireContactIllustration from "@assets/Rappel_gratuit0_1765589394802.webp";
 
 const useMobileDetection = () => {
   const [isMobile, setIsMobile] = useState(true);
@@ -528,7 +529,7 @@ export default function HomePage() {
               <Link href="/contact" className="group text-center" data-testid="assistance-card-form">
                 <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 flex items-center justify-center group-hover:-translate-y-1 transition-all duration-200">
                   <img 
-                    src={contactFormIllustration} 
+                    src={formulaireContactIllustration} 
                     alt="Formulaire de contact" 
                     className="w-full h-full object-contain"
                     loading="lazy"
