@@ -335,51 +335,34 @@ export default function RaccordementEnedisPage() {
       
       if (isStepValid) {
         // Form Start Conversion Tracking - CRITICAL FOR GOOGLE ADS
-        setTimeout(() => {
-          console.log('🎯 Attempting form start conversion...');
+        // Session guard: only fire once per session
+        const formStartKey = 'gtm_form_start_fired';
+        if (typeof sessionStorage !== 'undefined' && !sessionStorage.getItem(formStartKey)) {
+          sessionStorage.setItem(formStartKey, 'true');
           
-          // Try multiple methods to ensure conversion fires
-          let conversionSent = false;
-          
-          // Method 1: Global trigger function
-          if (typeof window !== 'undefined' && (window as any).triggerFormStartConversion) {
-            try {
-              (window as any).triggerFormStartConversion();
-              console.log('✅ Form start conversion via global trigger');
-              conversionSent = true;
-            } catch (e) {
-              console.warn('Global trigger failed:', e);
+          setTimeout(() => {
+            console.log('🎯 Attempting form start conversion...');
+            
+            // Use global trackFormStart which fires both GTM dataLayer + Google Ads gtag
+            if (typeof window !== 'undefined' && (window as any).trackFormStart) {
+              const email = form.getValues().email || '';
+              const phone = form.getValues().phone || '';
+              (window as any).trackFormStart(email, phone);
+              console.log('✅ Form start conversion fired via trackFormStart (AW-16683623620/xhTDCODCy6gbEMTJr5M-)');
+            } else {
+              // Fallback: Direct dataLayer push
+              if (typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
+                (window as any).dataLayer.push({
+                  event: 'form_start',
+                  send_to: 'AW-16683623620/xhTDCODCy6gbEMTJr5M-'
+                });
+                console.log('✅ Form start fallback via dataLayer');
+              }
             }
-          }
-          
-          // Method 2: Direct backup function
-          if (!conversionSent && typeof window !== 'undefined' && (window as any).directFormStartConversion) {
-            try {
-              conversionSent = (window as any).directFormStartConversion();
-              console.log('✅ Form start conversion via direct function');
-            } catch (e) {
-              console.warn('Direct function failed:', e);
-            }
-          }
-          
-          // Method 3: GTM dataLayer push (GTM-only setup)
-          if (!conversionSent && typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
-            try {
-              (window as any).dataLayer.push({
-                event: 'form_start',
-                send_to: 'AW-16683623620/xhTDCODCy6gbEMTJr5M-'
-              });
-              console.log('✅ Form start conversion via GTM dataLayer (AW-16683623620)');
-              conversionSent = true;
-            } catch (e) {
-              console.warn('GTM dataLayer push failed:', e);
-            }
-          }
-          
-          if (!conversionSent) {
-            console.error('❌ All form start conversion methods failed');
-          }
-        }, 300);
+          }, 300);
+        } else {
+          console.log('ℹ️ Form start conversion already fired this session');
+        }
         
         // Immediate transition to step 2
         setCurrentStep(currentStep + 1);
@@ -584,51 +567,31 @@ export default function RaccordementEnedisPage() {
 
       const result = await response.json();
       
-      // Form Submit Conversion Tracking (before Stripe redirect) - CRITICAL FOR GOOGLE ADS
-      setTimeout(() => {
-        console.log('🎯 Attempting form submit conversion...');
+      // Form Submit Conversion Tracking - CRITICAL FOR GOOGLE ADS
+      // Session guard: only fire once per session
+      const formSubmitKey = 'gtm_form_submit_fired';
+      if (typeof sessionStorage !== 'undefined' && !sessionStorage.getItem(formSubmitKey)) {
+        sessionStorage.setItem(formSubmitKey, 'true');
         
-        let conversionSent = false;
+        console.log('🎯 Firing form submit conversion...');
         
-        // Method 1: Global trigger function
-        if (typeof window !== 'undefined' && (window as any).triggerFormSubmitConversion) {
-          try {
-            (window as any).triggerFormSubmitConversion();
-            console.log('✅ Form submit conversion via global trigger');
-            conversionSent = true;
-          } catch (e) {
-            console.warn('Global submit trigger failed:', e);
-          }
-        }
-        
-        // Method 2: Direct backup function
-        if (!conversionSent && typeof window !== 'undefined' && (window as any).directFormSubmitConversion) {
-          try {
-            conversionSent = (window as any).directFormSubmitConversion();
-            console.log('✅ Form submit conversion via direct function');
-          } catch (e) {
-            console.warn('Direct submit function failed:', e);
-          }
-        }
-        
-        // Method 3: GTM dataLayer push (GTM-only setup)
-        if (!conversionSent && typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
-          try {
+        // Use global trackFormSubmit which fires both GTM dataLayer + Google Ads gtag
+        if (typeof window !== 'undefined' && (window as any).trackFormSubmit) {
+          (window as any).trackFormSubmit(mappedData.email, mappedData.phone);
+          console.log('✅ Form submit conversion fired via trackFormSubmit (AW-16683623620/20wfCK-NyqgbEMTJr5M-)');
+        } else {
+          // Fallback: Direct dataLayer push
+          if (typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
             (window as any).dataLayer.push({
               event: 'form_submit',
               send_to: 'AW-16683623620/20wfCK-NyqgbEMTJr5M-'
             });
-            console.log('✅ Form submit conversion via GTM dataLayer (AW-16683623620)');
-            conversionSent = true;
-          } catch (e) {
-            console.warn('GTM dataLayer push failed:', e);
+            console.log('✅ Form submit fallback via dataLayer');
           }
         }
-        
-        if (!conversionSent) {
-          console.error('❌ All form submit conversion methods failed');
-        }
-      }, 100);
+      } else {
+        console.log('ℹ️ Form submit conversion already fired this session');
+      }
       
       // Notification demande complète via nouvelle route
       await fetch("/api/notifications/request-completed", {
@@ -676,23 +639,8 @@ export default function RaccordementEnedisPage() {
         }),
       });
       
-      // Final Form Submit Conversion Tracking - CRITICAL FOR GOOGLE ADS
-      console.log('🎯 Attempting final form submit conversion...');
-      
-      // Primary: Use global trigger function
-      if (typeof window !== 'undefined' && window.triggerFormSubmitConversion) {
-        window.triggerFormSubmitConversion();
-        console.log('✅ Final form submit conversion triggered via global function');
-      } else if (typeof window !== 'undefined' && Array.isArray(window.dataLayer)) {
-        // Fallback: GTM dataLayer push (GTM-only setup)
-        window.dataLayer.push({
-          event: 'form_submit',
-          send_to: 'AW-16683623620/20wfCK-NyqgbEMTJr5M-'
-        });
-        console.log('✅ Final form submit conversion sent via GTM dataLayer (AW-16683623620)');
-      } else {
-        console.error('❌ Final form submit conversion failed - no tracking method available');
-      }
+      // Note: Form submit conversion is already fired above with session guard
+      // No duplicate firing needed here
       
       // SAVE EMAIL AND PHONE FOR ENHANCED CONVERSIONS
       // These will be retrieved on the payment confirmation page for Google Ads tracking
