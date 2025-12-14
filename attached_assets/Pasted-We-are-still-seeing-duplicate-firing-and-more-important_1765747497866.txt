@@ -1,0 +1,59 @@
+We are still seeing duplicate firing and, more importantly, GTM/GA/Ads requests are being BLOCKED by our site’s CSP.
+
+1) CRITICAL: CSP is blocking tracking requests (conversions may not be sent)
+
+In Tag Assistant → Console, we consistently see errors like:
+	•	Content Security Policy blocked a request to https://analytics.google.com/g/collect
+	•	blocked a request to https://www.google.com/pagead/form-data/16683623620
+	•	blocked a request to https://www.google.com/ccm/collect
+Also earlier we saw:
+	•	Refused to load https://www.googletagmanager.com/debug/badge.css (style-src CSP)
+	•	Refused to load https://bat.bing.com/bat.js (script-src CSP)
+	•	Refused to load https://www.clarity.ms/tag/... (script-src CSP)
+
+Impact: Tag Assistant can show “Tag fired”, but the actual network calls to Google/Ads/GA can be blocked, meaning conversions/remarketing may not leave the browser reliably.
+
+Request: Identify where CSP is set (meta tag in HTML, Vercel headers, middleware, server config) and update it so GTM/GA/Google Ads and Microsoft tags can load and send requests.
+
+At minimum, CSP must allow:
+	•	script-src / style-src for GTM (including preview debug CSS)
+	•	connect-src to GA + Google Ads endpoints:
+	•	https://www.googletagmanager.com
+	•	https://www.google-analytics.com
+	•	https://analytics.google.com
+	•	https://www.google.com (needed for ccm/collect + pagead/form-data)
+	•	https://googleads.g.doubleclick.net / https://stats.g.doubleclick.net (if used)
+	•	if we keep Microsoft tracking:
+	•	https://bat.bing.com
+	•	https://www.clarity.ms
+
+After the CSP change, re-test: Tag Assistant console must have zero CSP blocking for these endpoints.
+
+⸻
+
+2) form_start is STILL firing multiple times even though GTM trigger is correct
+
+In GTM UI, AW – Form_Start fires on CE – form_start only (no History Change trigger attached). Screenshot confirms that.
+
+Yet in Tag Assistant Preview, AW – Form_Start still shows “Fired 2 times / 3 times”, and the left timeline shows multiple form_start occurrences after only completing Step 1.
+
+Conclusion: This is not GTM config — it means our app is still emitting dataLayer.push({ event: 'form_start' }) more than once per session/visit (likely due to component re-mount, duplicated call path, or guard not persisting).
+
+Request: In the deployed code, search the entire codebase for every emission of form_start (not just one file) and confirm only ONE path can run:
+	•	grep/search: event: 'form_start', "form_start", trackFormStart, dataLayer.push(, gtag('event','form_start')
+	•	ensure the sessionStorage guard is applied at the lowest-level emitter (the one place that actually pushes to dataLayer), not only at wrapper functions
+	•	add a temporary debug log with a unique marker and stack/source so we can see exactly which code path fires it (include current URL + step + timestamp)
+
+Acceptance criteria:
+	•	In Tag Assistant Preview, AW – Form_Start must show Fired 1 time for a full session through the form.
+	•	No additional form_start on step navigation.
+
+⸻
+
+3) Secondary: Purchase tag has two triggers in GTM (potential double counting)
+
+In GTM UI, “Purchase (event-based)” currently shows two triggers:
+	•	Purchase – Page Path (legacy)
+	•	Purchase Event
+
+This can create duplicates depending on flow. Not the main blocker right now, but flagging it.
