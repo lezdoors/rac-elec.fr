@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { BreadcrumbNavigation } from "@/components/breadcrumb-navigation";
 import { Sun, Zap, CheckCircle, ArrowRight, Calculator, Shield, Clock } from "lucide-react";
 import Layout from "@/components/layout";
-import { trackFormStart } from "@/lib/analytics";
 import { FaqSection } from "@/components/faq-section";
 import { TrustSection } from "@/components/trust-section";
 
@@ -98,7 +97,7 @@ export default function SolairePage() {
               Installation et raccordement de vos panneaux solaires photovoltaïques au réseau Enedis. 
               Autoconsommation, revente d'électricité et démarches administratives simplifiées.
             </p>
-            <Link href="/raccordement-enedis#formulaire-raccordement" onClick={trackFormStart}>
+            <Link href="/raccordement-enedis#formulaire-raccordement" >
               <Button className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white px-8 py-3 text-lg">
                 Démarrer ma demande
                 <ArrowRight className="ml-2 w-5 h-5" />
@@ -199,7 +198,7 @@ export default function SolairePage() {
               </div>
 
               <div className="mt-8 text-center">
-                <Link href="/raccordement-enedis#formulaire-raccordement" onClick={trackFormStart}>
+                <Link href="/raccordement-enedis#formulaire-raccordement" >
                   <Button className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white px-8 py-4 rounded-lg text-lg font-semibold">
                     Lancer mon projet photovoltaïque
                   </Button>

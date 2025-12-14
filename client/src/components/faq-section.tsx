@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { Link } from "wouter";
-import { trackFormStart } from "@/lib/analytics";
 
 interface FaqItem {
   question: string;
@@ -75,7 +74,6 @@ export function FaqSection({ items, pageTitle }: FaqSectionProps) {
                     <div className="mt-4">
                       <Link
                         href="/raccordement-enedis#formulaire-raccordement"
-                        onClick={trackFormStart}
                         className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold"
                         data-testid="faq-cta-link"
                       >

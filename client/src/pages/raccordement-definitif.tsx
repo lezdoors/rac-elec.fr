@@ -3,7 +3,6 @@ import Layout from "../components/layout";
 import { Button } from "../components/ui/button";
 import { ArrowRight, Zap, CheckCircle } from "lucide-react";
 import { Link } from "wouter";
-import { trackFormStart } from "@/lib/analytics";
 import { FaqSection } from "@/components/faq-section";
 import { TrustSection } from "@/components/trust-section";
 
@@ -127,7 +126,7 @@ export default function RaccordementDefinitifPage() {
                   Demandez votre raccordement
                 </h2>
                 
-                <Link href="/raccordement-enedis#formulaire-raccordement" onClick={trackFormStart}>
+                <Link href="/raccordement-enedis#formulaire-raccordement" >
                   <Button className="w-full bg-green-600 hover:bg-green-700 text-white py-3 mb-4">
                     <ArrowRight className="h-4 w-4 mr-2" />
                     Faire ma demande
@@ -210,7 +209,7 @@ export default function RaccordementDefinitifPage() {
                 </div>
 
                 <div className="mt-8 text-center">
-                  <Link href="/raccordement-enedis#formulaire-raccordement" onClick={trackFormStart}>
+                  <Link href="/raccordement-enedis#formulaire-raccordement" >
                     <Button className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg text-lg font-semibold">
                       Commencer ma demande de raccordement
                     </Button>

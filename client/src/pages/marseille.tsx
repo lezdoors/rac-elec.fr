@@ -3,7 +3,6 @@ import Layout from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, Zap, CheckCircle } from "lucide-react";
 import { Link } from "wouter";
-import { trackFormStart } from "@/lib/analytics";
 import { TrustSection } from "@/components/trust-section";
 
 export default function MarseillePage() {
@@ -123,7 +122,7 @@ export default function MarseillePage() {
               </div>
 
               <div className="text-center">
-                <Link href="/raccordement-enedis#formulaire-raccordement" onClick={trackFormStart}>
+                <Link href="/raccordement-enedis#formulaire-raccordement" >
                   <Button 
                     className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 text-lg rounded-lg shadow-lg"
                     data-testid="button-cta-marseille"

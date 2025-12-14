@@ -156,14 +156,22 @@ export function ServiceRequestForm() {
   const useDifferentBillingAddress = Boolean(watchedValues.useDifferentBillingAddress);
   
   // Track form_start event with Enhanced Conversions when email AND phone are filled
+  // Uses sessionStorage guard to prevent duplicate fires
   useEffect(() => {
     const email = watchedValues.email;
     const phone = watchedValues.phone;
     
     // Track form_start once user has provided email AND phone (Enhanced Conversions ready)
+    // sessionStorage guard is handled inside trackFormStart from analytics.ts
     if (!formStartTracked && email && phone && email.includes('@') && phone.length >= 10) {
-      if (typeof window !== 'undefined' && (window as any).trackFormStart) {
-        (window as any).trackFormStart(email, phone);
+      if (typeof sessionStorage !== 'undefined' && !sessionStorage.getItem('gtm_form_start_fired')) {
+        if (typeof window !== 'undefined' && (window as any).trackFormStart) {
+          sessionStorage.setItem('gtm_form_start_fired', 'true');
+          (window as any).trackFormStart(email, phone);
+          setFormStartTracked(true);
+        }
+      } else {
+        // Already fired this session, just update local state
         setFormStartTracked(true);
       }
     }
@@ -229,8 +237,12 @@ export function ServiceRequestForm() {
           }
           
           // Fire GTM form submit event with Enhanced Conversions data
-          if (typeof window !== 'undefined' && (window as any).trackFormSubmit) {
-            (window as any).trackFormSubmit(formData.email, formData.phone);
+          // sessionStorage guard to prevent duplicate fires
+          if (typeof sessionStorage !== 'undefined' && !sessionStorage.getItem('gtm_form_submit_fired')) {
+            if (typeof window !== 'undefined' && (window as any).trackFormSubmit) {
+              sessionStorage.setItem('gtm_form_submit_fired', 'true');
+              (window as any).trackFormSubmit(formData.email, formData.phone);
+            }
           }
           
           // Après la soumission réussie, rediriger directement vers la page de paiement

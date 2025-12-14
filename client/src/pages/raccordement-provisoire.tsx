@@ -1,6 +1,5 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { trackFormStart } from "@/lib/analytics";
 import { Helmet } from "react-helmet";
 import { BreadcrumbNavigation } from "@/components/breadcrumb-navigation";
 import Layout from "@/components/layout";
@@ -111,7 +110,6 @@ export default function RaccordementProvisoirePage() {
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link 
                 href="/raccordement-enedis#formulaire-raccordement"
-                onClick={trackFormStart}
               >
                 <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg">
                   Faire ma demande
@@ -232,7 +230,7 @@ export default function RaccordementProvisoirePage() {
               </div>
             </div>
             <div className="text-center">
-              <Link href="/raccordement-enedis#formulaire-raccordement" onClick={trackFormStart}>
+              <Link href="/raccordement-enedis#formulaire-raccordement">
                 <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg">
                   Démarrer ma demande maintenant
                 </Button>

@@ -3,7 +3,6 @@ import Layout from "../components/layout";
 import { Button } from "../components/ui/button";
 import { ArrowRight, Building2, CheckCircle } from "lucide-react";
 import { Link } from "wouter";
-import { trackFormStart } from "@/lib/analytics";
 import { FaqSection } from "@/components/faq-section";
 import { TrustSection } from "@/components/trust-section";
 
@@ -86,7 +85,7 @@ export default function RaccordementCollectifPage() {
               Étude technique, dossier complet et coordination avec Enedis.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Link href="/raccordement-enedis#formulaire-raccordement" onClick={trackFormStart}>
+              <Link href="/raccordement-enedis#formulaire-raccordement" >
                 <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg">
                   Faire ma demande
                 </Button>
@@ -214,7 +213,7 @@ export default function RaccordementCollectifPage() {
             </div>
 
             <div className="mt-12 text-center">
-              <Link href="/raccordement-enedis#formulaire-raccordement" onClick={trackFormStart}>
+              <Link href="/raccordement-enedis#formulaire-raccordement" >
                 <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg">
                   Lancer mon projet de raccordement collectif
                 </Button>
