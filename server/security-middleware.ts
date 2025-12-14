@@ -7,14 +7,15 @@ import { Request, Response, NextFunction } from 'express';
 
 export const securityHeaders = (req: Request, res: Response, next: NextFunction) => {
   // Content Security Policy - Carefully crafted to not break existing functionality
+  // Updated December 2025: Added full GTM/GA/Google Ads/Microsoft endpoints
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://js.stripe.com https://*.stripe.com",
-    "style-src 'self' 'unsafe-inline' https://*.googleapis.com https://fonts.googleapis.com",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://js.stripe.com https://*.stripe.com https://www.google.com https://bat.bing.com https://www.clarity.ms https://*.clarity.ms",
+    "style-src 'self' 'unsafe-inline' https://*.googleapis.com https://fonts.googleapis.com https://www.googletagmanager.com",
     "font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com data:",
     "img-src 'self' data: https: blob:",
-    "connect-src 'self' https://*.google-analytics.com https://stats.g.doubleclick.net https://www.googleadservices.com https://api.stripe.com https://*.stripe.com wss:",
-    "frame-src 'self' https://www.googletagmanager.com https://www.google.com https://js.stripe.com https://*.stripe.com",
+    "connect-src 'self' https://*.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googleadservices.com https://www.google.com https://googleads.g.doubleclick.net https://api.stripe.com https://*.stripe.com https://bat.bing.com https://www.clarity.ms https://*.clarity.ms wss:",
+    "frame-src 'self' https://www.googletagmanager.com https://www.google.com https://js.stripe.com https://*.stripe.com https://td.doubleclick.net",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
