@@ -1,0 +1,187 @@
+CRITICAL: Test and verify GTM tracking fix with detailed evidence
+
+You just implemented GTM event deduplication. Now you MUST test it thoroughly and provide PROOF that it works correctly.
+
+DO NOT just say "it works" - provide actual evidence with screenshots, logs, and data.
+
+TESTING REQUIREMENTS:
+
+Test 1: Verify Session Storage Protection
+
+Run this test in browser console and show me the EXACT output:
+```javascript
+// Clear session
+sessionStorage.clear();
+console.log('=== SESSION CLEARED ===');
+
+// Check what's in sessionStorage
+console.log('Current sessionStorage keys:', Object.keys(sessionStorage));
+
+// Navigate through form and trigger form_start
+// Then check:
+console.log('After form_start:');
+console.log('- gtm_form_start_fired:', sessionStorage.getItem('gtm_form_start_fired'));
+console.log('- dataLayer events:', window.dataLayer.filter(e => e.event === 'form_start'));
+
+// Try to trigger form_start again
+// Then check:
+console.log('After attempting duplicate form_start:');
+console.log('- gtm_form_start_fired:', sessionStorage.getItem('gtm_form_start_fired'));
+console.log('- dataLayer count:', window.dataLayer.filter(e => e.event === 'form_start').length);
+```
+
+EXPECTED RESULT: 
+- First trigger: sessionStorage sets 'gtm_form_start_fired' = 'true'
+- First trigger: 1 event in dataLayer
+- Second trigger: Console shows "Skipped duplicate"
+- Second trigger: STILL only 1 event in dataLayer
+
+PROVIDE: Copy/paste the EXACT console output
+
+Test 2: Verify Conversion Labels
+
+Check the actual dataLayer content and show me the EXACT data:
+```javascript
+// After triggering form_start
+const formStartEvent = window.dataLayer.find(e => e.event === 'form_start');
+console.log('form_start event data:', JSON.stringify(formStartEvent, null, 2));
+console.log('Expected send_to:', 'AW-16683623620/xhTDCODCy6gbEMTJr5M-');
+console.log('Actual send_to:', formStartEvent?.send_to);
+console.log('MATCH:', formStartEvent?.send_to === 'AW-16683623620/xhTDCODCy6gbEMTJr5M-');
+
+// After triggering form_submit
+const formSubmitEvent = window.dataLayer.find(e => e.event === 'form_submit');
+console.log('form_submit event data:', JSON.stringify(formSubmitEvent, null, 2));
+console.log('Expected send_to:', 'AW-16683623620/20wfCK-NyqgbEMTJr5M-');
+console.log('Actual send_to:', formSubmitEvent?.send_to);
+console.log('MATCH:', formSubmitEvent?.send_to === 'AW-16683623620/20wfCK-NyqgbEMTJr5M-');
+
+// After triggering purchase
+const purchaseEvent = window.dataLayer.find(e => e.event === 'purchase');
+console.log('purchase event data:', JSON.stringify(purchaseEvent, null, 2));
+console.log('Expected send_to:', 'AW-16683623620/b5XPCPfuirYbEMTJr5M-');
+console.log('Actual send_to:', purchaseEvent?.send_to);
+console.log('MATCH:', purchaseEvent?.send_to === 'AW-16683623620/b5XPCPfuirYbEMTJr5M-');
+```
+
+EXPECTED RESULT:
+- All 3 events have correct send_to values
+- All 3 MATCH checks return: true
+
+PROVIDE: Copy/paste the EXACT console output showing all send_to values
+
+Test 3: Verify No Duplicates from Dual Triggers
+
+Test the form_submit which had 2 firing locations (lines 618 and 689):
+```javascript
+sessionStorage.clear();
+console.log('=== Testing form_submit duplicate prevention ===');
+
+// Trigger form submission (which hits both code paths)
+// After submission completes:
+console.log('form_submit events in dataLayer:', 
+  window.dataLayer.filter(e => e.event === 'form_submit').length
+);
+console.log('Expected: 1 (not 2)');
+console.log('Session flag:', sessionStorage.getItem('gtm_form_submit_fired'));
+
+// Check if both locations tried to fire
+console.log('All form_submit events:', 
+  window.dataLayer.filter(e => e.event === 'form_submit')
+);
+```
+
+EXPECTED RESULT:
+- Only 1 form_submit event in dataLayer
+- Even though code has 2 trigger points
+- sessionStorage flag is 'true'
+
+PROVIDE: Copy/paste showing count is 1, not 2
+
+Test 4: Verify Purchase Deduplication on Refresh
+
+Test the purchase event protection:
+```javascript
+// On /merci page after payment
+console.log('=== First page load ===');
+console.log('purchase events:', window.dataLayer.filter(e => e.event === 'purchase').length);
+console.log('Session storage check:', 
+  sessionStorage.getItem('purchase_conversion_' + new URLSearchParams(window.location.search).get('demande_id'))
+);
+
+// Refresh the page
+// Then run:
+console.log('=== After page refresh ===');
+console.log('purchase events:', window.dataLayer.filter(e => e.event === 'purchase').length);
+console.log('Should STILL be 1 (not 2)');
+```
+
+EXPECTED RESULT:
+- First load: 1 purchase event
+- After refresh: STILL 1 purchase event (no duplicate)
+
+PROVIDE: Console output showing both states
+
+Test 5: Code Review Evidence
+
+Show me the ACTUAL code changes you made:
+
+For form_start (line ~369 in raccordement-enedis.tsx):
+BEFORE:
+[paste the old code here]
+AFTER:
+[paste the new code here]
+
+For form_submit (line ~618 in raccordement-enedis.tsx):
+BEFORE:
+[paste the old code here]
+AFTER:
+[paste the new code here]
+
+For form_submit fallback (line ~689 in raccordement-enedis.tsx):
+BEFORE:
+[paste the old code here]
+AFTER:
+[paste the new code here]
+
+Test 6: File Verification
+
+Show me the GTMEventGuard implementation:
+
+Full GTMEventGuard class code (paste entire class)
+All locations where GTMEventGuard.fireOnce is called:
+
+Location 1: form_start (line number + code)
+Location 2: form_submit main (line number + code)
+Location 3: form_submit fallback (line number + code)
+
+
+
+
+CRITICAL REQUIREMENTS:
+
+1. DO NOT just say "tests passed" - show me ACTUAL console output
+2. DO NOT skip any tests - complete ALL 6 tests
+3. DO NOT assume - verify with REAL data from browser
+4. PROVIDE copy/paste evidence, not descriptions
+5. If ANY test fails, report the failure with details
+
+TESTING CHECKLIST:
+
+□ Test 1: Session storage protection works
+□ Test 2: All conversion labels correct
+□ Test 3: form_submit fires only once (not twice)
+□ Test 4: Purchase doesn't duplicate on refresh
+□ Test 5: Code changes shown with before/after
+□ Test 6: File verification with actual code
+
+ONLY report success if ALL 6 tests pass with evidence.
+
+If any test fails, report:
+- Which test failed
+- What the expected result was
+- What the actual result was
+- Why it failed
+- How to fix it
+
+Begin testing NOW and provide complete results with actual console output, code snippets, and data.

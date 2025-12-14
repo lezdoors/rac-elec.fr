@@ -1,0 +1,48 @@
+We are seeing measurement integrity issues inside Google Tag Manager, not in the application logic.
+
+What is broken (confirmed in GTM Preview)
+	1.	Event lifecycle is not clean inside GTM
+	•	GTM Preview shows multiple form_start and form_submit events for a single user journey.
+	•	Corresponding Google Ads tags (AW – Form_Start, AW – Form_Submit) show “Fired X times” in Preview.
+	•	This means GTM is processing the same logical user action more than once.
+	2.	Triggers are too permissive
+	•	Current Custom Event triggers are firing whenever the event name appears, without sufficient conditions to ensure:
+	•	once per session
+	•	once per submission
+	•	As a result, GTM treats step navigation / repeated events as new conversions.
+	3.	Tag Assistant debug overlay is degraded
+	•	Browser console shows CSP blocking:
+	•	googletagmanager.com/debug/badge.css
+	•	This causes the Tag Assistant mini overlay to render in a broken state.
+	•	While this is mostly visual, it confirms GTM debug resources are partially blocked and makes diagnosis harder.
+	4.	Microsoft / Clarity tags failing confirms CSP + GTM noise
+	•	CSP blocks bat.bing.com and clarity.ms.
+	•	These failures are not the Google Ads issue, but they confirm GTM is operating in a constrained / noisy environment.
+
+Why this matters
+	•	Google Ads optimization relies on clean, singular conversion signals.
+	•	When GTM fires conversion tags multiple times for one logical action, Smart Bidding learns from polluted data.
+	•	This directly affects CPA, learning stability, and scaling decisions.
+
+What needs to be fixed in GTM (outcome-based)
+	1.	Tighten triggers
+	•	Ensure form_start and form_submit triggers fire only under strict conditions that represent the true lifecycle event.
+	•	They must not fire repeatedly for the same session or same submission.
+	2.	Ensure one-to-one mapping
+	•	One user action → one GTM event → one Google Ads conversion fire.
+	•	No duplicates visible in GTM Preview timeline.
+	3.	Restore clean GTM Preview behavior
+	•	Once triggers are corrected, GTM Preview should show:
+	•	exactly one form_start
+	•	exactly one form_submit
+	•	clean tag firing counts (no “Fired 3 times”)
+
+Acceptance criteria
+
+In GTM Preview, for a single complete form journey:
+	•	form_start appears once
+	•	form_submit appears once
+	•	Corresponding Google Ads tags fire once
+	•	No repeated conversion events when navigating steps
+
+Once this is fixed, we can correctly track the funnel and make informed Google Ads optimization decisions.
