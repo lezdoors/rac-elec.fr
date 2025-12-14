@@ -1,0 +1,60 @@
+We agree with Option A (manual copy/paste).
+
+However, we already located the chatbot files in the source project elec-vercel-raccordement.
+So instead of guessing “ChatWidget.tsx”, we will transfer the chatbot using this exact set.
+
+Source files we will copy from elec-vercel-raccordement
+
+Frontend
+	•	client/src/components/chatbot.tsx
+	•	attached_assets/src/components/ChatInput.tsx
+	•	attached_assets/src/components/ChatHeader.tsx
+	•	attached_assets/src/components/ChatMessages.tsx
+	•	client/src/components/admin/chatbot-contact-card.tsx (if used)
+	•	client/src/components/admin/chatbot-contact-notification.tsx (if used)
+	•	client/src/components/ui/chart.tsx (confirm whether this one is imported vs the attached_assets one)
+	•	public/chatbot-loader.js (confirm if required for mounting)
+
+Backend
+	•	server/routes/chatbot.ts
+	•	server/routes/chatbot-backup.ts (only if referenced)
+	•	server/chatbot-notification.ts (only if referenced)
+	•	server/chatbot-email-service.ts (only if referenced)
+
+DB
+	•	migrations/add-chatbot-fields.ts (only if the chatbot persists leads/history in DB)
+
+Rules (strict)
+	1.	Do not rename components. Keep file names + exports exactly the same unless there is a hard conflict.
+	2.	Do not “isolate CSS” or change styling. We want identical behavior first.
+	3.	Wire only what is required: add new files + register routes + mount widget.
+	4.	Do not touch any existing form/CRM logic.
+
+Your job
+	1.	Tell us the exact destination paths in THIS repo for each file above.
+	2.	Tell us exactly what order you want the pastes in (front first vs backend first).
+	3.	After we paste files, you will:
+	•	Register routes in server/routes.ts
+	•	Confirm the API path used by the frontend (ex /api/chatbot or /api/chat)
+	•	List required env var names (no values)
+	•	Validate end-to-end (send/receive message)
+
+First action
+
+Before we paste anything, please confirm:
+	•	Which chart.tsx is actually imported by client/src/components/chatbot.tsx (the UI one or attached_assets one)
+	•	Whether public/chatbot-loader.js is required or the chatbot is mounted purely via React component inclusion
+	•	Whether the backend route is /api/chat or a different endpoint
+
+Once you confirm, we will paste the frontend code first.
+
+⸻
+
+Why this matters
+
+Your previous answer said “no migrations / no assets unless needed”, but our source project does include:
+	•	loader
+	•	migrations
+	•	notification + email services
+
+We need you to confirm what is actually used vs dead code so we port correctly.

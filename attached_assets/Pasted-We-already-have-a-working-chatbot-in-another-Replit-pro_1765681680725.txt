@@ -1,0 +1,86 @@
+We already have a working chatbot in another Replit project named elec-vercel-raccordement.
+I want to reuse the exact same chatbot (same UI, same backend logic) in this project:
+rac-elec.fr, which is the production site for www.demande-raccordement.fr.
+
+This is a copy/reuse task, not a redesign.
+
+⸻
+
+Rules (critical)
+	1.	Do not redesign, refactor, or optimize anything.
+	2.	Only copy what is strictly required for the chatbot to work.
+	3.	Do not modify any existing form, CRM, or routing logic.
+	4.	If something is missing (API route, env var), add it without touching unrelated code.
+	5.	If reuse is not possible, explain exactly why (technical limitation).
+
+⸻
+
+Step 1 — Identify chatbot architecture in elec-vercel-raccordement
+
+Please identify and document clearly:
+	•	Chat UI component:
+	•	File path
+	•	How it is mounted in the UI
+	•	Backend chat logic:
+	•	API route path (example: /api/chat)
+	•	File path
+	•	Whether it uses:
+	•	Vercel AI SDK
+	•	Direct OpenAI calls
+	•	Another provider
+	•	Required environment variables:
+	•	Variable names only (no values)
+	•	Any auth, middleware, or rate limiting involved
+
+⸻
+
+Step 2 — Replit chatbot capability check
+
+Before copying anything, confirm:
+	•	Does Replit provide a “preferred/default chatbot” setting for websites?
+	•	If yes:
+	•	Can we configure the project to use an existing chatbot implementation?
+	•	If no:
+	•	Confirm that manual reuse (copying UI + API route) is the correct approach
+
+Be explicit — no assumptions.
+
+⸻
+
+Step 3 — Compatibility check with rac-elec.fr
+
+Confirm for this project:
+	•	Framework used (Next.js / Vite / Express / other)
+	•	Whether API routes are supported in the same way
+	•	Whether an existing chatbot already exists (partial or unused)
+
+⸻
+
+Step 4 — Implement chatbot reuse in rac-elec.fr
+
+If compatible:
+	•	Copy the chatbot UI component exactly as-is
+	•	Copy or recreate the backend route using the same structure
+	•	Add required environment variables (names only)
+	•	Mount the chatbot on www.demande-raccordement.fr in the same location as the working project
+
+⸻
+
+Step 5 — Validation checklist
+
+Confirm:
+	•	Chat widget renders correctly
+	•	Messages send and receive successfully
+	•	No console or server errors
+	•	No conflicts with existing routes
+	•	Works on mobile
+
+⸻
+
+Final Deliverables
+
+Provide:
+	1.	List of files added or modified
+	2.	Required environment variable names
+	3.	Chat API endpoint URL
+	4.	Confirmation whether Replit supports a preferred/default chatbot or not
