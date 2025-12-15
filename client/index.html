@@ -296,14 +296,19 @@
     </script>
     <!-- End Google Tag Manager -->
 
-    <!-- Google Ads Global Site Tag - AW-16683623620 -->
-    <!-- NOTE: GA4 (G-D92SQT9L1P) is managed by GTM container GTM-K597C4C2 -->
-    <!-- DO NOT add gtag('config', 'G-...') here - it causes dual loading conflicts -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16683623620"></script>
+    <!-- GA4 Direct Tracking - G-D92SQT9L1P -->
+    <!-- Required because GTM container GTM-K597C4C2 lacks GA4 Configuration tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D92SQT9L1P"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
+      gtag('config', 'G-D92SQT9L1P', { 'send_page_view': true });
+    </script>
+
+    <!-- Google Ads Global Site Tag - AW-16683623620 -->
+    <!-- Separate from GA4 - manages Google Ads conversions only -->
+    <script>
       gtag('config', 'AW-16683623620');
     </script>
 
