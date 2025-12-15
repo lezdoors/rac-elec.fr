@@ -1,0 +1,222 @@
+I need a comprehensive technical audit of this codebase for demande-raccordement.fr. This is a French electrical connection service business that uses a multi-step form to collect customer information and processes payments via Stripe for €129.80 per request.
+CRITICAL ISSUES TO INVESTIGATE
+We're experiencing duplicate event firing in Google Tag Manager that's polluting our Google Ads Smart Bidding data and wasting ad spend. I need you to analyze the ENTIRE codebase and give me concrete answers.
+ANALYSIS REQUIRED
+1. SITE ARCHITECTURE
+
+What framework/platform is this built on? (React, Next.js, vanilla JS, etc.)
+What's the complete file structure?
+Where are the main components located?
+How is routing handled?
+What's the deployment configuration?
+
+2. FORM FLOW ANALYSIS
+Map out the EXACT user journey:
+
+How many steps are in the form?
+What component handles each step?
+What triggers progression between steps?
+Where in the code does each step transition happen?
+Is it a single-page app or multi-page?
+Show me the file paths for each form component
+
+3. GOOGLE TAG MANAGER IMPLEMENTATION
+Search the ENTIRE codebase for:
+
+GTM container snippet (GTM-K597C4C2)
+Where is it loaded? (index.html, _document.tsx, layout component?)
+Is it loaded more than once?
+Are there multiple GTM containers?
+Show me every file that contains "GTM" or "googletagmanager"
+
+4. EVENT TRACKING CODE
+Find and show me ALL instances of:
+javascriptwindow.dataLayer.push()
+gtag()
+For each tracking call, I need to know:
+
+Which file contains it?
+What line number?
+What triggers it to fire?
+Is there deduplication logic? (sessionStorage checks, flags, etc.)
+Show me the exact code snippet
+
+Specifically find the code for these events:
+
+form_start (€1 value) - WHERE and WHEN does this fire?
+form_submit (€40 value) - WHERE and WHEN does this fire?
+purchase (€110 value) - WHERE and WHEN does this fire?
+
+5. STRIPE PAYMENT INTEGRATION
+Show me:
+
+Which file handles Stripe initialization?
+How is the payment flow structured?
+What happens on payment success?
+Where is the purchase event fired?
+Is it client-side or server-side?
+Show me the exact success callback code
+
+6. POTENTIAL DUPLICATE SOURCES
+Check for:
+
+Multiple GTM snippets in different files
+Hardcoded gtag() config calls separate from GTM
+Event listeners firing multiple times (not removed properly)
+Component re-renders causing duplicate events
+Multiple imports of tracking utilities
+Race conditions in async code
+
+7. DEDUPLICATION MECHANISMS
+Search for:
+
+sessionStorage usage for tracking flags
+localStorage usage for tracking flags
+State variables preventing duplicate fires
+Event listener cleanup (useEffect return functions)
+Debouncing or throttling on events
+
+Example patterns to look for:
+javascriptif (sessionStorage.getItem('form_start_fired')) return;
+sessionStorage.setItem('form_start_fired', 'true');
+8. GOOGLE ANALYTICS & GTAG
+Find all instances of:
+
+G-D92SQT9L1P (Analytics ID)
+AW-16683623620 (Google Ads Conversion ID)
+Conversion labels: X6caCJq6kLkZEPrxjY49, Y7daCJu6kLkZEPrxjY49, Z8eaCJy6kLkZEPrxjY49
+Show me every file that references these IDs
+
+9. CONFIGURATION FILES
+Show me the contents of:
+
+package.json (dependencies)
+next.config.js or vite.config.js or similar
+.env files (redact sensitive values but show structure)
+Any tracking config files
+Deployment configuration
+
+10. SUPABASE INTEGRATION
+Show me:
+
+Where Supabase is initialized
+What data gets saved on form completion
+Are there any Supabase triggers or functions that might fire events?
+Row Level Security policies that could affect data flow
+
+OUTPUT FORMAT
+Please structure your response like this:
+EXECUTIVE SUMMARY
+[2-3 paragraphs explaining what you found at a high level]
+SITE ARCHITECTURE
+[Framework, structure, routing]
+FORM FLOW MAP
+Step 1: [Component Name] at [file path]
+  ↓ [What triggers next step]
+Step 2: [Component Name] at [file path]
+  ↓ [What triggers next step]
+...
+Payment: [Stripe integration at file path]
+  ↓
+Thank You Page: [Component at file path]
+TRACKING IMPLEMENTATION
+GTM Container Location:
+
+File: [path]
+Line: [number]
+Code snippet: [show it]
+
+form_start Event:
+
+File: [path]
+Line: [number]
+Trigger: [what causes it]
+Code snippet: [show it]
+Deduplication: YES/NO [show mechanism if exists]
+
+form_submit Event:
+
+File: [path]
+Line: [number]
+Trigger: [what causes it]
+Code snippet: [show it]
+Deduplication: YES/NO [show mechanism if exists]
+
+purchase Event:
+
+File: [path]
+Line: [number]
+Trigger: [what causes it]
+Code snippet: [show it]
+Deduplication: YES/NO [show mechanism if exists]
+
+IDENTIFIED ISSUES
+
+[Issue Name]
+
+Problem: [what's wrong]
+Location: [file and line]
+Impact: [how it affects tracking]
+Evidence: [code snippet]
+
+
+[Next Issue]
+
+[same format]
+
+
+
+ROOT CAUSE OF DUPLICATE EVENTS
+[Your diagnosis based on the code evidence]
+RECOMMENDED FIXES
+Fix 1: [Description]
+
+File to modify: [path]
+Current code:
+
+javascript[show current problematic code]
+
+Replacement code:
+
+javascript[show fixed code]
+
+Why this fixes it: [explanation]
+
+Fix 2: [Description]
+[same format]
+VERIFICATION STEPS
+[After fixes are applied, how to test that it works]
+IMPORTANT
+
+Show me ACTUAL CODE, not descriptions
+Give me FILE PATHS and LINE NUMBERS
+If you find multiple issues, prioritize by impact
+Be specific about what's causing duplicates
+Don't guess - base everything on what you actually see in the code
+
+
+MY CURRENT UNDERSTANDING (may be wrong - verify against code)
+Expected Events:
+
+form_start: €1 value, conversion label X6caCJq6kLkZEPrxjY49
+form_submit: €40 value, conversion label Y7daCJu6kLkZEPrxjY49 (PRIMARY OPTIMIZATION TARGET)
+purchase: €110 value, conversion label Z8eaCJy6kLkZEPrxjY49
+
+Google Tag Manager:
+
+Container: GTM-K597C4C2
+Google Analytics: G-D92SQT9L1P
+Google Ads: AW-16683623620
+
+Problem:
+Events firing multiple times, especially form_submit, causing wasted ad spend and polluting Smart Bidding data.
+Question:
+Is the duplication from:
+
+Multiple GTM container loads?
+Missing deduplication guards?
+Component re-renders?
+Event listeners not cleaned up?
+Something else?
+
+PLEASE ANALYZE THE CODE AND TELL ME.
