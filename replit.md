@@ -34,12 +34,13 @@ Preferred communication style: Simple, everyday language.
 - **Mobile Optimizations**: Floating CTA button with smart show/hide behavior, enhanced mobile form validation with proper keyboard types, lazy loading images, mobile-first loading strategies, and touch-optimized interface elements.
 
 ### Recent Changes (December 2025)
-- **GA4 Dual Loading Fix (Dec 15, 2025)**: Fixed GA4 Realtime tracking by removing dual loading conflict:
-  - REMOVED: Direct `gtag('config', 'G-D92SQT9L1P')` from index.html (was causing duplicate page_view)
-  - GTM container GTM-K597C4C2 now solely manages GA4 tracking
-  - Direct gtag.js retained ONLY for Google Ads conversions (AW-16683623620)
-  - Architecture: GTM = GA4 page_view + events | Direct gtag = Google Ads conversions only
+- **GA4 Tracking Fix (Dec 15, 2025)**: Restored GA4 Realtime tracking with proper architecture:
+  - Added: Direct `gtag('config', 'G-D92SQT9L1P', { send_page_view: true })` in index.html
+  - Reason: GTM container GTM-K597C4C2 lacks GA4 Configuration tag, so direct gtag is required
+  - Architecture: Direct gtag.js manages both GA4 (G-D92SQT9L1P) AND Google Ads (AW-16683623620)
+  - GTM: Used for dataLayer events (form_start, form_submit, purchase) but NOT for GA4 config
   - This is a MULTI-PAGE site (full page reloads), NOT a SPA - no route tracking needed
+  - Deduplication: All conversion events guarded by sessionStorage keys at index.html level
 
 - **Google Ads & GTM Migration for demande-raccordement.fr**: Complete migration to new tracking configuration:
   - GTM Container: GTM-K597C4C2
