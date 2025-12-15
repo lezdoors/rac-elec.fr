@@ -34,6 +34,13 @@ Preferred communication style: Simple, everyday language.
 - **Mobile Optimizations**: Floating CTA button with smart show/hide behavior, enhanced mobile form validation with proper keyboard types, lazy loading images, mobile-first loading strategies, and touch-optimized interface elements.
 
 ### Recent Changes (December 2025)
+- **GA4 Dual Loading Fix (Dec 15, 2025)**: Fixed GA4 Realtime tracking by removing dual loading conflict:
+  - REMOVED: Direct `gtag('config', 'G-D92SQT9L1P')` from index.html (was causing duplicate page_view)
+  - GTM container GTM-K597C4C2 now solely manages GA4 tracking
+  - Direct gtag.js retained ONLY for Google Ads conversions (AW-16683623620)
+  - Architecture: GTM = GA4 page_view + events | Direct gtag = Google Ads conversions only
+  - This is a MULTI-PAGE site (full page reloads), NOT a SPA - no route tracking needed
+
 - **Google Ads & GTM Migration for demande-raccordement.fr**: Complete migration to new tracking configuration:
   - GTM Container: GTM-K597C4C2
   - Google Ads Conversion ID: AW-16683623620
@@ -43,7 +50,7 @@ Preferred communication style: Simple, everyday language.
     - form_submit (lead complet): AW-16683623620/20wfCK-NyqgbEMTJr5M-
     - purchase (après paiement): AW-16683623620/b5XPCPfuirYbEMTJr5M-
   - Enhanced Conversions enabled with email/phone data
-  - Dual tracking: GTM dataLayer + Google Ads gtag direct
+  - Tracking architecture: GTM manages GA4, direct gtag for Google Ads conversions only
   
 - **Modern Landing Page Redesign**: Complete redesign of home-page.tsx with conversion-focused modern UI:
   - Hero section with gradient background (linear-gradient #0052D4 → #4364F7 → #6FB1FC), glassmorphism partner badge, two-line headline, trust badges (100% en ligne, Réponse 48h, Sécurisé), floating house illustration with animation
