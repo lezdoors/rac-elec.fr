@@ -12,6 +12,7 @@ import { ContactModal } from "@/components/contact-modal";
 import { GoogleSnippetsInitializer } from "@/components/google-snippets-initializer";
 import { Helmet } from "react-helmet";
 import BankingSecuritySection from "@/components/banking-security-section";
+import { trackPurchase } from "@/lib/analytics";
 
 export default function PaiementConfirmationPage() {
   const [, params] = useLocation();
@@ -41,31 +42,10 @@ export default function PaiementConfirmationPage() {
   const finalAmount = isMultiplePayment ? baseAmount * parseInt(multiplier) : (urlAmount ? parseFloat(urlAmount) : baseAmount);
   const formattedAmount = finalAmount.toFixed(2).replace('.', ',');
   
-  // Helper function to fire purchase conversion tag
-  const firePurchaseConversion = (ref: string) => {
-    const storageKey = `purchase_conversion_${ref}`;
-    if (typeof sessionStorage !== 'undefined' && !sessionStorage.getItem(storageKey)) {
-      // Retrieve email/phone from sessionStorage for Enhanced Conversions
-      const email = sessionStorage.getItem('ec_email') || '';
-      const phone = sessionStorage.getItem('ec_phone') || '';
-      
-      // Fire GTM + Google Ads purchase conversion
-      if (typeof window !== 'undefined' && (window as any).trackPurchase) {
-        (window as any).trackPurchase(ref, email, phone);
-        console.log('🎯 Google Ads: purchase conversion fired for', ref);
-        
-        // Mark as fired to prevent duplicates
-        sessionStorage.setItem(storageKey, 'true');
-        
-        // Clean up EC data
-        sessionStorage.removeItem('ec_email');
-        sessionStorage.removeItem('ec_phone');
-      } else {
-        console.warn('⚠️ trackPurchase function not available');
-      }
-    } else {
-      console.log('ℹ️ Purchase conversion already fired for', ref);
-    }
+  // CENTRALIZED: Purchase conversion via analytics.ts (dedupe by reference)
+  // Returns true if actually fired, false if already fired (dedupe)
+  const firePurchaseConversion = (ref: string, amount: number = 129.80): boolean => {
+    return trackPurchase(ref, amount);
   };
 
   // IMMEDIATE: If URL says success, fire conversion tag right away (don't wait for API)
@@ -73,10 +53,10 @@ export default function PaiementConfirmationPage() {
     if (status === "success" && referenceNumber) {
       console.log("✅ URL indique paiement réussi - tag déclenché immédiatement");
       setPaymentStatus("success");
-      firePurchaseConversion(referenceNumber);
+      firePurchaseConversion(referenceNumber, finalAmount);
       setIsVerifying(false);
     }
-  }, [status, referenceNumber]);
+  }, [status, referenceNumber, finalAmount]);
 
   // 1. Vérifier le statut du paiement via API (ONLY if URL doesn't already say success)
   useEffect(() => {
@@ -103,7 +83,7 @@ export default function PaiementConfirmationPage() {
         if (data.status === "paid" || data.status === "succeeded") {
           setPaymentStatus("success");
           console.log("Paiement CONFIRMÉ comme réussi par l'API");
-          firePurchaseConversion(referenceNumber);
+          firePurchaseConversion(referenceNumber, finalAmount);
         } else if (data.status === "failed" || data.status === "canceled") {
           setPaymentStatus("failed");
           console.log("Paiement CONFIRMÉ comme échoué par l'API");

@@ -1,73 +1,167 @@
 declare global {
   interface Window {
     dataLayer: any[];
-    trackFormStart?: (email?: string, phone?: string) => void;
-    trackFormSubmit?: (email?: string, phone?: string) => void;
-    trackPurchase?: (transactionId?: string, email?: string, phone?: string) => void;
   }
 }
 
-// Session storage keys for deduplication
-const SESSION_KEYS = {
-  FORM_START: 'gtm_form_start_fired',
-  FORM_SUBMIT: 'gtm_form_submit_fired',
+const GOOGLE_ADS_ID = 'AW-16683623620';
+const CONVERSION_LABELS = {
+  FORM_START: 'xhTDCODCy6gbEMTJr5M-',
+  FORM_SUBMIT: '20wfCK-NyqgbEMTJr5M-',
+  PURCHASE: 'b5XPCPfuirYbEMTJr5M-',
 } as const;
 
-// Wrapper functions that call the GTM dataLayer functions defined in index.html
-// WITH sessionStorage guards to prevent duplicate fires
-
-export const trackFormStart = (email?: string, phone?: string) => {
-  if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') return;
-  
-  // Guard: only fire once per session
-  if (sessionStorage.getItem(SESSION_KEYS.FORM_START)) {
-    console.log('ℹ️ trackFormStart already fired this session (skipped)');
-    return;
+const hashEmail = (email: string): string => {
+  const normalized = email.toLowerCase().trim();
+  let hash = 0;
+  for (let i = 0; i < normalized.length; i++) {
+    const char = normalized.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
   }
-  
-  if (window.trackFormStart) {
-    sessionStorage.setItem(SESSION_KEYS.FORM_START, 'true');
-    window.trackFormStart(email, phone);
-    console.log('✅ trackFormStart fired (session guard active)');
+  return Math.abs(hash).toString(36);
+};
+
+const getDedupeKey = (event: string, identifier: string): string => {
+  return `tracking_${event}_${identifier}`;
+};
+
+const isDuplicate = (key: string): boolean => {
+  if (typeof sessionStorage === 'undefined') return false;
+  return sessionStorage.getItem(key) === 'true';
+};
+
+const markFired = (key: string): void => {
+  if (typeof sessionStorage !== 'undefined') {
+    sessionStorage.setItem(key, 'true');
   }
 };
 
-export const trackFormSubmit = (email?: string, phone?: string) => {
-  if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') return;
+const fireGtagConversion = (conversionLabel: string, data: Record<string, any> = {}) => {
+  if (typeof window === 'undefined') return;
   
-  // Guard: only fire once per session
-  if (sessionStorage.getItem(SESSION_KEYS.FORM_SUBMIT)) {
-    console.log('ℹ️ trackFormSubmit already fired this session (skipped)');
-    return;
+  if ((window as any).gtag) {
+    (window as any).gtag('event', 'conversion', {
+      send_to: `${GOOGLE_ADS_ID}/${conversionLabel}`,
+      ...data,
+    });
   }
   
-  if (window.trackFormSubmit) {
-    sessionStorage.setItem(SESSION_KEYS.FORM_SUBMIT, 'true');
-    window.trackFormSubmit(email, phone);
-    console.log('✅ trackFormSubmit fired (session guard active)');
-  }
-};
-
-export const trackPurchase = (transactionId?: string, email?: string, phone?: string) => {
-  if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') return;
-  
-  // Guard: only fire once per transaction
-  const purchaseKey = `purchase_conversion_${transactionId || 'unknown'}`;
-  if (sessionStorage.getItem(purchaseKey)) {
-    console.log('ℹ️ trackPurchase already fired for this transaction (skipped)');
-    return;
-  }
-  
-  if (window.trackPurchase) {
-    sessionStorage.setItem(purchaseKey, 'true');
-    window.trackPurchase(transactionId, email, phone);
-    console.log('✅ trackPurchase fired (session guard active)');
+  if (Array.isArray(window.dataLayer)) {
+    window.dataLayer.push({
+      event: data.event_name || 'conversion',
+      send_to: `${GOOGLE_ADS_ID}/${conversionLabel}`,
+      ...data,
+    });
   }
 };
 
-// Generic event tracking (for backward compatibility - events now flow through GTM)
+export const trackFormStart = (email: string, phone?: string): boolean => {
+  if (typeof window === 'undefined') return false;
+  if (!email || !email.includes('@')) {
+    console.warn('⚠️ trackFormStart: valid email required');
+    return false;
+  }
+
+  const emailHash = hashEmail(email);
+  const dedupeKey = getDedupeKey('form_start', emailHash);
+
+  if (isDuplicate(dedupeKey)) {
+    console.log(`ℹ️ form_start already fired for ${emailHash} (skipped)`);
+    return false;
+  }
+
+  markFired(dedupeKey);
+
+  fireGtagConversion(CONVERSION_LABELS.FORM_START, {
+    event_name: 'form_start',
+    user_data: {
+      email: email.toLowerCase().trim(),
+      phone_number: phone?.replace(/\s/g, '') || undefined,
+    },
+  });
+
+  console.log(`✅ form_start fired [dedupe: ${emailHash}]`);
+  return true;
+};
+
+export const trackFormSubmit = (reference: string, email?: string, phone?: string): boolean => {
+  if (typeof window === 'undefined') return false;
+  if (!reference) {
+    console.warn('⚠️ trackFormSubmit: reference required');
+    return false;
+  }
+
+  const dedupeKey = getDedupeKey('form_submit', reference);
+
+  if (isDuplicate(dedupeKey)) {
+    console.log(`ℹ️ form_submit already fired for ${reference} (skipped)`);
+    return false;
+  }
+
+  markFired(dedupeKey);
+
+  if (email) {
+    sessionStorage.setItem('ec_email', email.toLowerCase().trim());
+  }
+  if (phone) {
+    sessionStorage.setItem('ec_phone', phone.replace(/\s/g, ''));
+  }
+
+  fireGtagConversion(CONVERSION_LABELS.FORM_SUBMIT, {
+    event_name: 'form_submit',
+    transaction_id: reference,
+    user_data: {
+      email: email?.toLowerCase().trim() || undefined,
+      phone_number: phone?.replace(/\s/g, '') || undefined,
+    },
+  });
+
+  console.log(`✅ form_submit fired [ref: ${reference}]`);
+  return true;
+};
+
+export const trackPurchase = (reference: string, amount: number = 129.80, email?: string, phone?: string): boolean => {
+  if (typeof window === 'undefined') return false;
+  if (!reference) {
+    console.warn('⚠️ trackPurchase: reference required');
+    return false;
+  }
+
+  const dedupeKey = getDedupeKey('purchase', reference);
+
+  if (isDuplicate(dedupeKey)) {
+    console.log(`ℹ️ purchase already fired for ${reference} (skipped)`);
+    return false;
+  }
+
+  markFired(dedupeKey);
+
+  let userEmail = email;
+  let userPhone = phone;
+  if (typeof sessionStorage !== 'undefined') {
+    if (!userEmail) userEmail = sessionStorage.getItem('ec_email') || undefined;
+    if (!userPhone) userPhone = sessionStorage.getItem('ec_phone') || undefined;
+    sessionStorage.removeItem('ec_email');
+    sessionStorage.removeItem('ec_phone');
+  }
+
+  fireGtagConversion(CONVERSION_LABELS.PURCHASE, {
+    event_name: 'purchase',
+    transaction_id: reference,
+    value: amount,
+    currency: 'EUR',
+    user_data: {
+      email: userEmail?.toLowerCase().trim() || undefined,
+      phone_number: userPhone?.replace(/\s/g, '') || undefined,
+    },
+  });
+
+  console.log(`✅ purchase fired [ref: ${reference}, €${amount}]`);
+  return true;
+};
+
 export const trackEvent = (action: string, category?: string, label?: string, value?: number) => {
-  // Events now tracked via GTM dataLayer - this is a no-op for backward compatibility
   if (typeof window !== 'undefined' && window.dataLayer) {
     window.dataLayer.push({
       event: 'custom_event',

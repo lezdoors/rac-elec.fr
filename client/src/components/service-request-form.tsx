@@ -91,7 +91,6 @@ function Section({ title, icon, children, defaultOpen = true }: SectionProps) {
 export function ServiceRequestForm() {
   const { toast } = useToast();
   const [referenceNumber, setReferenceNumber] = useState<string | null>(null);
-  const [formStartTracked, setFormStartTracked] = useState(false);
   
   // Get tomorrow's date for min date input
   const tomorrow = new Date();
@@ -155,27 +154,8 @@ export function ServiceRequestForm() {
   const hasArchitect = watchedValues.hasArchitect;
   const useDifferentBillingAddress = Boolean(watchedValues.useDifferentBillingAddress);
   
-  // Track form_start event with Enhanced Conversions when email AND phone are filled
-  // Uses sessionStorage guard to prevent duplicate fires
-  useEffect(() => {
-    const email = watchedValues.email;
-    const phone = watchedValues.phone;
-    
-    // Track form_start once user has provided email AND phone (Enhanced Conversions ready)
-    // sessionStorage guard is handled inside trackFormStart from analytics.ts
-    if (!formStartTracked && email && phone && email.includes('@') && phone.length >= 10) {
-      if (typeof sessionStorage !== 'undefined' && !sessionStorage.getItem('gtm_form_start_fired')) {
-        if (typeof window !== 'undefined' && (window as any).trackFormStart) {
-          sessionStorage.setItem('gtm_form_start_fired', 'true');
-          (window as any).trackFormStart(email, phone);
-          setFormStartTracked(true);
-        }
-      } else {
-        // Already fired this session, just update local state
-        setFormStartTracked(true);
-      }
-    }
-  }, [watchedValues.email, watchedValues.phone, formStartTracked]);
+  // NOTE: form_start tracking REMOVED - legacy /home path
+  // ALL tracking is centralized in /raccordement-enedis via analytics.ts
   
   // Handle API submission
   const submitMutation = useMutation({
@@ -230,49 +210,16 @@ export function ServiceRequestForm() {
       // Envoyer les données à l'API
       submitMutation.mutate(formData, {
         onSuccess: (data) => {
-          // Store email/phone securely in sessionStorage for Enhanced Conversions on thank-you page
-          if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
-            sessionStorage.setItem('ec_email', formData.email || '');
-            sessionStorage.setItem('ec_phone', formData.phone || '');
-          }
+          // NOTE: form_submit tracking REMOVED from this legacy path
+          // ALL tracking is centralized in /raccordement-enedis via analytics.ts
           
-          // Fire GTM form submit event with Enhanced Conversions data
-          // sessionStorage guard to prevent duplicate fires
-          if (typeof sessionStorage !== 'undefined' && !sessionStorage.getItem('gtm_form_submit_fired')) {
-            if (typeof window !== 'undefined' && (window as any).trackFormSubmit) {
-              sessionStorage.setItem('gtm_form_submit_fired', 'true');
-              (window as any).trackFormSubmit(formData.email, formData.phone);
-            }
-          }
-          
-          // Après la soumission réussie, rediriger directement vers la page de paiement
+          // Redirect to confirmation page
           setTimeout(() => {
-            // Ajout de logs pour débogage
-            console.log('Référence générée:', data.referenceNumber);
-            console.log('Données complètes:', data);
-            
             const ref = data.referenceNumber || '';
             const nom = formData.name || '';
-            
-            // Construction de l'URL de redirection avec le format REF-reference
-            // S'assurer que la référence est correctement formatée
             const refFormatted = ref.startsWith('REF-') ? ref : `REF-${ref}`;
             const redirectUrl = `/confirmation/${refFormatted}?nom=${encodeURIComponent(nom)}`;
-            console.log('Redirection post-soumission vers:', redirectUrl);
-            
-            // Trigger Google Ads recap page conversion before redirect
-            try {
-              if (typeof window !== 'undefined' && (window as any).gtag_report_recap_conversion) {
-                (window as any).gtag_report_recap_conversion(redirectUrl);
-              } else {
-                // Fallback if gtag is not available
-                window.location.href = redirectUrl;
-              }
-            } catch (e) {
-              console.error('Erreur lors de la conversion tracking:', e);
-              // Fallback simple en cas d'erreur
-              window.location.href = redirectUrl;
-            }
+            window.location.href = redirectUrl;
           }, 200);
         }
       });

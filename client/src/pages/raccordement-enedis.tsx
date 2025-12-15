@@ -36,6 +36,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { ChevronLeft, ChevronRight, CheckCircle, MessageCircle, X, Clock, Shield, Star, Phone, Mail, ArrowRight, Send } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getGclid } from "@/lib/clean-gclid";
+import { trackFormStart, trackFormSubmit } from "@/lib/analytics";
 import { EnhancedMobileFormOptimizer } from "@/components/enhanced-mobile-form-optimizer";
 import { FormStep1 } from "@/components/form-step-1";
 import { Helmet } from "react-helmet";
@@ -334,35 +335,10 @@ export default function RaccordementEnedisPage() {
       const isStepValid = await form.trigger(fieldsToValidate);
       
       if (isStepValid) {
-        // Form Start Conversion Tracking - CRITICAL FOR GOOGLE ADS
-        // Session guard: only fire once per session
-        const formStartKey = 'gtm_form_start_fired';
-        if (typeof sessionStorage !== 'undefined' && !sessionStorage.getItem(formStartKey)) {
-          sessionStorage.setItem(formStartKey, 'true');
-          
-          setTimeout(() => {
-            console.log('🎯 Attempting form start conversion...');
-            
-            // Use global trackFormStart which fires both GTM dataLayer + Google Ads gtag
-            if (typeof window !== 'undefined' && (window as any).trackFormStart) {
-              const email = form.getValues().email || '';
-              const phone = form.getValues().phone || '';
-              (window as any).trackFormStart(email, phone);
-              console.log('✅ Form start conversion fired via trackFormStart (AW-16683623620/xhTDCODCy6gbEMTJr5M-)');
-            } else {
-              // Fallback: Direct dataLayer push
-              if (typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
-                (window as any).dataLayer.push({
-                  event: 'form_start',
-                  send_to: 'AW-16683623620/xhTDCODCy6gbEMTJr5M-'
-                });
-                console.log('✅ Form start fallback via dataLayer');
-              }
-            }
-          }, 300);
-        } else {
-          console.log('ℹ️ Form start conversion already fired this session');
-        }
+        // CENTRALIZED: form_start via analytics.ts (dedupe by email hash)
+        const email = form.getValues().email || '';
+        const phone = form.getValues().phone || '';
+        trackFormStart(email, phone);
         
         // Immediate transition to step 2
         setCurrentStep(currentStep + 1);
@@ -567,31 +543,8 @@ export default function RaccordementEnedisPage() {
 
       const result = await response.json();
       
-      // Form Submit Conversion Tracking - CRITICAL FOR GOOGLE ADS
-      // Session guard: only fire once per session
-      const formSubmitKey = 'gtm_form_submit_fired';
-      if (typeof sessionStorage !== 'undefined' && !sessionStorage.getItem(formSubmitKey)) {
-        sessionStorage.setItem(formSubmitKey, 'true');
-        
-        console.log('🎯 Firing form submit conversion...');
-        
-        // Use global trackFormSubmit which fires both GTM dataLayer + Google Ads gtag
-        if (typeof window !== 'undefined' && (window as any).trackFormSubmit) {
-          (window as any).trackFormSubmit(mappedData.email, mappedData.phone);
-          console.log('✅ Form submit conversion fired via trackFormSubmit (AW-16683623620/20wfCK-NyqgbEMTJr5M-)');
-        } else {
-          // Fallback: Direct dataLayer push
-          if (typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
-            (window as any).dataLayer.push({
-              event: 'form_submit',
-              send_to: 'AW-16683623620/20wfCK-NyqgbEMTJr5M-'
-            });
-            console.log('✅ Form submit fallback via dataLayer');
-          }
-        }
-      } else {
-        console.log('ℹ️ Form submit conversion already fired this session');
-      }
+      // CENTRALIZED: form_submit via analytics.ts (dedupe by reference)
+      trackFormSubmit(reference, mappedData.email, mappedData.phone);
       
       // Notification demande complète via nouvelle route
       await fetch("/api/notifications/request-completed", {
@@ -639,19 +592,10 @@ export default function RaccordementEnedisPage() {
         }),
       });
       
-      // Note: Form submit conversion is already fired above with session guard
-      // No duplicate firing needed here
-      
-      // SAVE EMAIL AND PHONE FOR ENHANCED CONVERSIONS
-      // These will be retrieved on the payment confirmation page for Google Ads tracking
-      if (typeof sessionStorage !== 'undefined') {
-        sessionStorage.setItem('ec_email', mappedData.email || '');
-        sessionStorage.setItem('ec_phone', mappedData.phone || '');
-        console.log('📧 Enhanced Conversions data saved for purchase tracking');
-      }
-      
-      // Redirection vers la page de confirmation/paiement
-      window.location.href = `/confirmation/${reference}`;
+      // Ensure conversion fires before navigation using queueMicrotask
+      queueMicrotask(() => {
+        window.location.href = `/confirmation/${reference}`;
+      });
       
     } catch (error) {
       console.error("Erreur:", error);

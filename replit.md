@@ -34,13 +34,20 @@ Preferred communication style: Simple, everyday language.
 - **Mobile Optimizations**: Floating CTA button with smart show/hide behavior, enhanced mobile form validation with proper keyboard types, lazy loading images, mobile-first loading strategies, and touch-optimized interface elements.
 
 ### Recent Changes (December 2025)
-- **GA4 Tracking Fix (Dec 15, 2025)**: Restored GA4 Realtime tracking with proper architecture:
-  - Added: Direct `gtag('config', 'G-D92SQT9L1P', { send_page_view: true })` in index.html
-  - Reason: GTM container GTM-K597C4C2 lacks GA4 Configuration tag, so direct gtag is required
-  - Architecture: Direct gtag.js manages both GA4 (G-D92SQT9L1P) AND Google Ads (AW-16683623620)
-  - GTM: Used for dataLayer events (form_start, form_submit, purchase) but NOT for GA4 config
-  - This is a MULTI-PAGE site (full page reloads), NOT a SPA - no route tracking needed
-  - Deduplication: All conversion events guarded by sessionStorage keys at index.html level
+- **Centralized Tracking Architecture (Dec 15, 2025)**: Complete refactor for stable, permanent tracking:
+  - **Single Source of Truth**: All tracking logic in `client/src/lib/analytics.ts`
+  - **Journey-Based Deduplication**:
+    - `form_start`: Dedupe by email hash (`tracking_form_start_{hash}`)
+    - `form_submit`: Dedupe by reference (`tracking_form_submit_{ref}`)
+    - `purchase`: Dedupe by reference (`tracking_purchase_{ref}`)
+  - **Authoritative Firing Points**:
+    - `form_start`: ONLY in `/raccordement-enedis` (Step 1 → Step 2)
+    - `form_submit`: ONLY in `/raccordement-enedis` (after API success)
+    - `purchase`: ONLY in `/paiement-confirmation` (on payment success)
+  - **Removed Duplicates**: Stripped tracking from `service-request-form.tsx` (legacy) and `thank-you.tsx`
+  - **Conversion IDs**: AW-16683623620 with labels xhTDCODCy6gbEMTJr5M-, 20wfCK-NyqgbEMTJr5M-, b5XPCPfuirYbEMTJr5M-
+  - **GA4**: Direct gtag config G-D92SQT9L1P with send_page_view:true (GTM lacks GA4 Configuration tag)
+  - **Multi-page site**: Full page reloads, no SPA route tracking needed
 
 - **Google Ads & GTM Migration for demande-raccordement.fr**: Complete migration to new tracking configuration:
   - GTM Container: GTM-K597C4C2

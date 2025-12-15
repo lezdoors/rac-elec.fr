@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useLocation } from 'wouter';
 import { CheckCircle, Download, Phone, Mail, Calendar, ArrowRight } from 'lucide-react';
@@ -14,102 +14,59 @@ export default function ThankYouPage({}: ThankYouPageProps) {
   const [referenceNumber, setReferenceNumber] = useState<string>('');
   const [purchaseData, setPurchaseData] = useState<any>(null);
   
-  // Track if conversion already fired (prevent duplicates on re-renders or back/forward navigation)
-  const conversionFired = useRef(false);
-
   // Scroll to top on page load
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Helper function to fire purchase conversion
-  const firePurchaseConversion = (ref: string, amount?: number) => {
-    const storageKey = `purchase_conversion_${ref}`;
-    
-    // Check if already fired
-    if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(storageKey)) {
-      console.log('ℹ️ Purchase conversion already fired for', ref);
-      return;
-    }
-    
-    // Retrieve email/phone from sessionStorage for Enhanced Conversions (if available)
-    let email = '';
-    let phone = '';
-    if (typeof sessionStorage !== 'undefined') {
-      email = sessionStorage.getItem('ec_email') || '';
-      phone = sessionStorage.getItem('ec_phone') || '';
-      // Clean up after retrieval
-      sessionStorage.removeItem('ec_email');
-      sessionStorage.removeItem('ec_phone');
-    }
-    
-    // Fire GTM Purchase event with Enhanced Conversions data
-    if (typeof window !== 'undefined' && (window as any).trackPurchase) {
-      (window as any).trackPurchase(ref, email, phone);
-      console.log('🎯 Google Ads: purchase conversion fired for', ref);
-      
-      // Mark as fired in sessionStorage to prevent duplicates on refresh/back/forward
-      if (typeof sessionStorage !== 'undefined') {
-        sessionStorage.setItem(storageKey, 'true');
-      }
-    }
-    
-    // Prepare purchase data for display
-    const purchaseInfo = {
-      transaction_id: ref,
-      value: amount || 129.80,
-      currency: 'EUR',
-      items: [{
-        item_id: 'raccordement-enedis',
-        item_name: 'Service de raccordement Enedis',
-        category: 'Services',
-        quantity: 1,
-        price: amount || 129.80
-      }]
-    };
-    setPurchaseData(purchaseInfo);
-  };
-
-  // Extract reference from URL params OR session_id and fire Purchase conversion
+  // NOTE: Purchase tracking REMOVED from thank-you.tsx
+  // ALL purchase tracking is centralized in paiement-confirmation.tsx via analytics.ts
+  // This page is only reached AFTER payment success, so the conversion was already fired
+  
+  // Extract reference from URL params for display only (no tracking)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const ref = params.get('reference') || params.get('ref');
     const sessionId = params.get('session_id');
     const amount = params.get('amount');
     
-    // Prevent duplicate firing in this render cycle
-    if (conversionFired.current) {
-      return;
-    }
-    
-    // If we have a direct reference, use it
     if (ref) {
-      conversionFired.current = true;
       setReferenceNumber(ref);
-      firePurchaseConversion(ref, amount ? parseFloat(amount) : undefined);
+      setPurchaseData({
+        transaction_id: ref,
+        value: amount ? parseFloat(amount) : 129.80,
+        currency: 'EUR',
+        items: [{
+          item_id: 'raccordement-enedis',
+          item_name: 'Service de raccordement Enedis',
+          category: 'Services',
+          quantity: 1,
+          price: amount ? parseFloat(amount) : 129.80
+        }]
+      });
       return;
     }
     
-    // If we have a session_id (from Stripe Checkout), fetch reference from API
     if (sessionId) {
-      conversionFired.current = true;
-      
       const fetchSessionDetails = async () => {
         try {
-          console.log('🔍 Récupération des détails de la session Stripe:', sessionId);
           const response = await fetch(`/api/stripe-session/${sessionId}`);
           const data = await response.json();
           
           if (response.ok && data.success && data.referenceNumber) {
-            console.log('✅ Référence trouvée via session_id:', data.referenceNumber);
             setReferenceNumber(data.referenceNumber);
-            
-            // Fire conversion if payment was successful
-            if (data.paymentStatus === 'paid') {
-              firePurchaseConversion(data.referenceNumber, data.amount);
-            }
-          } else {
-            console.error('❌ Impossible de récupérer la référence depuis la session:', data.message);
+            setPurchaseData({
+              transaction_id: data.referenceNumber,
+              value: data.amount || 129.80,
+              currency: 'EUR',
+              items: [{
+                item_id: 'raccordement-enedis',
+                item_name: 'Service de raccordement Enedis',
+                category: 'Services',
+                quantity: 1,
+                price: data.amount || 129.80
+              }]
+            });
           }
         } catch (error) {
           console.error('❌ Erreur lors de la récupération de la session Stripe:', error);
