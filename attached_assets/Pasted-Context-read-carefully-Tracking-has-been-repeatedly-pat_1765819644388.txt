@@ -1,0 +1,96 @@
+Context (read carefully)
+
+Tracking has been repeatedly “patched” in isolation. Each patch fixes one symptom and breaks another. This indicates a structural tracking design failure, not a single bug.
+
+The site is a React / SPA and has undergone multiple migrations.
+
+⸻
+
+What Is Broken (facts, not guesses)
+	1.	Tracking behavior is inconsistent
+
+	•	GA4 shows historical data
+	•	GA4 Realtime is often near-zero despite active usage
+	•	Other sites in the same ecosystem track correctly
+
+	2.	Tracking architecture is not clearly defined
+
+	•	Multiple Google tracking mechanisms are present
+	•	Responsibility between app code vs GTM is unclear
+	•	Changes are being made without regression validation
+
+	3.	SPA navigation is not reliably tracked
+
+	•	Route changes do not consistently result in GA4 activity
+	•	This causes Realtime to appear “dead” after initial load
+
+	4.	Changes are causing regressions
+
+	•	Fixing one issue breaks another
+	•	This means tracking is not centralized, not standardized, and not validated on production
+
+⸻
+
+What This Is NOT
+	•	❌ Not low traffic
+	•	❌ Not GA4 delay
+	•	❌ Not GA4 UI bug
+	•	❌ Not a Google outage
+
+⸻
+
+What Must Be Done (requirements, not implementation)
+
+1) Establish a SINGLE, STABLE tracking architecture
+	•	There must be one source of truth for analytics
+	•	The app must not partially track events in multiple ways
+	•	Tracking ownership must be clearly defined and consistent
+
+2) Ensure SPA behavior is fully tracked
+	•	Initial load and
+	•	Internal route changes and
+	•	Key user actions (form start / submit)
+
+All must be visible in GA4.
+
+3) Eliminate instability
+	•	No duplicate events
+	•	No missing events
+	•	No race conditions
+	•	No “works on reload but not on navigation”
+
+4) Validate ONLY on production
+	•	Do not assume anything based on code alone
+	•	Every claim must be validated on:
+	•	Network requests to Google endpoints
+	•	GA4 Realtime or DebugView
+
+5) Add a regression guarantee
+
+After the fix:
+	•	Future changes must not silently break tracking
+	•	There must be a clear way to verify tracking health in minutes
+
+⸻
+
+Definition of “Fixed” (non-negotiable)
+
+In Incognito on production:
+	1.	Open demande-raccordement.fr
+	2.	Navigate to at least 2 internal pages
+	3.	Start the form
+
+GA4 Realtime shows activity immediately
+Events fire once and only once
+No console errors, no blocked requests
+
+⸻
+
+Deliverable Expected
+
+A short report explaining:
+	•	What was structurally wrong
+	•	What was stabilized
+	•	Proof that tracking works end-to-end on production
+
+No partial fixes. No shortcuts. No assumptions.

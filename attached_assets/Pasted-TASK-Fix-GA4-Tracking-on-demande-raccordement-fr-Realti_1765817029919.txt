@@ -1,0 +1,58 @@
+TASK: Fix GA4 / Tracking on demande-raccordement.fr (Realtime dead)
+
+Context
+	•	GA4 shows historical events, but Realtime is near-zero.
+	•	This is not traffic volume and not GA4 delay. It’s a misconfiguration from migrations.
+
+1) Identify what’s actually loaded (hard evidence)
+
+On production https://demande-raccordement.fr:
+	•	Open DevTools → Network
+	•	Filter: collect, g/collect, gtm.js, gtag/js
+	•	Confirm and report:
+	•	The GA4 Measurement ID actually used (G-XXXXXXXXXX)
+	•	The GTM Container ID actually loaded (GTM-XXXXXXX)
+	•	Whether requests to Google endpoints are 200 or blocked
+
+2) Verify IDs match the intended setup
+	•	In codebase / env:
+	•	Find any G- and GTM- references (including .env, index.html, layout/root components)
+	•	Ensure ONLY the intended IDs are present:
+	•	Correct GA4 Web Data Stream for demande-raccordement.fr
+	•	Correct GTM container for this site
+	•	Remove/replace any leftover IDs from old sites/properties.
+
+3) GTM firing audit (must use Preview)
+	•	Use GTM Preview on demande-raccordement.fr
+	•	Confirm:
+	•	GA4 Configuration tag fires on All Pages
+	•	No blocking conditions (consent checks, hostname filters, dev-only flags)
+	•	On SPA navigation, GA4 still fires (either auto page_view or manual)
+
+4) SPA routing tracking check (React/Vite likely)
+
+If SPA:
+	•	Confirm page_view on route change, not only first load.
+	•	If needed, implement a route-change listener that sends page_view via:
+	•	GTM dataLayer event (page_view) OR
+	•	gtag('event','page_view', { page_location, page_path, page_title })
+
+5) Consent/CSP blocking check
+	•	Inspect CSP headers / meta CSP:
+	•	Must allow https://www.googletagmanager.com and https://www.google-analytics.com
+	•	Check console for blocked scripts.
+
+6) Definition of “fixed” (no debate)
+	•	Incognito → load site → navigate + start form
+	•	GA4 → Realtime shows activity immediately
+	•	Provide screenshots/logs proving:
+	•	Correct IDs loaded
+	•	collect requests fired successfully
+	•	Realtime shows events
+
+Deliverable
+Reply with:
+	•	Final GA4 ID + GTM ID used
+	•	What was wrong
+	•	What code/config changes were made
+	•	Proof (Realtime + Network)

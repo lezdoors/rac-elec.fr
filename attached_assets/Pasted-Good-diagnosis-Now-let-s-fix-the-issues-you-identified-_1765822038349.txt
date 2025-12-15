@@ -1,0 +1,78 @@
+Good diagnosis! Now let's fix the issues you identified.
+
+PRIORITY ORDER:
+
+Priority 1: Fix Dual Loading (CRITICAL)
+You found GTM AND direct gtag.js both loading GA4 - this is the problem.
+
+Decision needed:
+- EITHER use GTM to manage GA4
+- OR use direct gtag.js
+- NEVER both at the same time
+
+Recommendation: Use GTM ONLY
+- Remove direct gtag.js (line 306)
+- Let GTM handle GA4 via config tag
+- Cleaner, more manageable
+
+Action:
+1. Remove or comment out direct gtag.js script (line 306)
+2. Verify GTM has GA4 Configuration tag
+3. Verify GA4 config tag has:
+   - Measurement ID: G-D92SQT9L1P
+   - Trigger: All Pages
+   - send_page_view: true
+
+Priority 2: Verify GA4 Measurement ID
+Check if G-D92SQT9L1P is the correct stream for demande-raccordement.fr
+
+In GA4 Admin:
+- Data Streams → Web
+- Find demande-raccordement.fr stream
+- Confirm Measurement ID matches G-D92SQT9L1P
+
+If wrong:
+- Update to correct ID in both GTM and code
+
+Priority 3: Test CSP Blocking
+Check browser console for:
+- CSP errors blocking googletagmanager.com
+- CSP errors blocking google-analytics.com
+- Network requests failing with CSP errors
+
+If blocked:
+- Update CSP headers to allow analytics domains
+
+Priority 4: Verify GTM Tag Configuration
+In GTM container GTM-K597C4C2:
+- GA4 Configuration tag should:
+  - Type: Google Analytics: GA4 Configuration
+  - Measurement ID: G-D92SQT9L1P
+  - Trigger: All Pages (not some pages, not pageview)
+  - No blocking triggers
+  - send_page_view: true (or not set, defaults to true)
+
+TESTING PLAN:
+
+After fixes:
+1. Open site in Incognito
+2. Open browser console
+3. Navigate through 3-4 pages
+4. Check console for:
+   - No CSP errors
+   - No "gtag is not defined" errors
+   - Network tab shows requests to google-analytics.com/g/collect
+5. Open GA4 → Realtime
+   - Should show 1 active user immediately
+   - Should show page_view events for each page
+
+Do NOT add:
+- SPA routing logic
+- History listeners
+- Manual page_view triggers
+- Route change handlers
+
+These are not needed for multi-page sites.
+
+Implement Priority 1 (remove dual loading) first, then test.
+Show me what you remove/change.
