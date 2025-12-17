@@ -284,6 +284,12 @@ export const serviceRequests = pgTable("service_requests", {
   // Détails des erreurs de paiement (pour la récupération des paiements échoués)
   paymentError: text("payment_error"), // JSON sous forme de texte contenant les détails de l'erreur de paiement
   
+  // Attribution et identifiants Stripe (Phase 1 - tracking server-side)
+  gclid: text("gclid"), // Google Click ID pour l'attribution Google Ads
+  stripePaymentIntentId: text("stripe_payment_intent_id"), // ID du PaymentIntent Stripe
+  stripeCheckoutSessionId: text("stripe_checkout_session_id"), // ID de la session Checkout Stripe
+  orderId: text("order_id"), // ID canonique pour la déduplication (= checkout session ID ou payment intent ID)
+  
   // Informations de connexion
   ipAddress: text("ip_address"), // Adresse IP de l'utilisateur
   userAgent: text("user_agent"), // User agent du navigateur
@@ -342,6 +348,10 @@ export const insertServiceRequestSchema = createInsertSchema(serviceRequests).om
   billingName: true,
   bankName: true,
   paymentError: true,
+  gclid: true,
+  stripePaymentIntentId: true,
+  stripeCheckoutSessionId: true,
+  orderId: true,
 });
 
 // Extended for client-side validation
