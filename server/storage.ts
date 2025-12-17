@@ -273,6 +273,9 @@ export interface IStorageLegacy {
       billingName?: string;
       bankName?: string;
       paymentMethod?: string;
+      stripePaymentIntentId?: string;
+      stripeCheckoutSessionId?: string;
+      orderId?: string;
     }
   ): Promise<ServiceRequest>;
 
@@ -1216,6 +1219,9 @@ export class DatabaseStorage implements IStorage {
       billingName?: string;
       bankName?: string;
       paymentMethod?: string;
+      stripePaymentIntentId?: string;
+      stripeCheckoutSessionId?: string;
+      orderId?: string;
     }
   ): Promise<ServiceRequest> {
     const now = new Date();
@@ -1240,6 +1246,10 @@ export class DatabaseStorage implements IStorage {
         ...(paymentDetails?.billingName && { billingName: paymentDetails.billingName }),
         ...(paymentDetails?.bankName && { bankName: paymentDetails.bankName }),
         ...(paymentDetails?.paymentMethod && { paymentMethod: paymentDetails.paymentMethod }),
+        // Nouveaux champs pour Phase 1 - Attribution tracking
+        ...(paymentDetails?.stripePaymentIntentId && { stripePaymentIntentId: paymentDetails.stripePaymentIntentId }),
+        ...(paymentDetails?.stripeCheckoutSessionId && { stripeCheckoutSessionId: paymentDetails.stripeCheckoutSessionId }),
+        ...(paymentDetails?.orderId && { orderId: paymentDetails.orderId }),
       })
       .where(eq(serviceRequests.id, requestId))
       .returning();

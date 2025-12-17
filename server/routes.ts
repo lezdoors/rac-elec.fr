@@ -2108,17 +2108,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       // ENREGISTREMENT PERFECTIONNÉ DE LA DEMANDE COMPLÈTE AVEC RÉFÉRENCE UNIQUE
+      // Extract gclid from request body (sent by frontend for Google Ads attribution)
+      const gclid = req.body.gclid || null;
+      
       console.log('🎯 CRÉATION DEMANDE COMPLÈTE - Données validées:', {
         referenceNumber,
         clientName: dataToStore.name,
         email: dataToStore.email,
-        serviceType: dataToStore.serviceType
+        serviceType: dataToStore.serviceType,
+        gclid: gclid || 'non disponible'
       });
       
       const serviceRequest = await storage.createServiceRequest({
         ...dataToStore,
         comments,
-        referenceNumber
+        referenceNumber,
+        gclid: gclid || undefined
       });
       
       // ENSURE DATABASE TRANSACTION COMPLETES
@@ -2267,11 +2272,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         comments = comments ? `${tarifJauneNote}\n\n${comments}` : tarifJauneNote;
       }
       
+      // Extract gclid from request body (sent by frontend for Google Ads attribution)
+      const gclid = req.body.gclid || null;
+      
+      console.log('🎯 CRÉATION DEMANDE SPÉCIALISÉE - gclid:', gclid || 'non disponible');
+      
       // Store the service request
       const serviceRequest = await storage.createServiceRequest({
         ...dataToStore,
         comments,
-        referenceNumber
+        referenceNumber,
+        gclid: gclid || undefined
       });
       
       // Envoi d'une notification par email pour la nouvelle demande
@@ -2449,12 +2460,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
           0 // 0 = système
         );
         
-        // Stocker l'ID de paiement dans la demande
+        // Phase 1: Stocker l'ID de paiement et stripePaymentIntentId dans la demande
         await storage.updateServiceRequestPayment(
           serviceRequest.id,
           paymentIntent.id,
           'pending',
-          amountInCents / 100
+          amountInCents / 100,
+          {
+            stripePaymentIntentId: paymentIntent.id,
+            orderId: paymentIntent.id // orderId = PaymentIntent ID pour ce flow
+          }
         );
         
         // Créer une entrée dans la table des paiements
@@ -2603,13 +2618,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
           }
         });
         
-        // Mettre à jour la demande de service avec l'ID de l'intention de paiement
+        // Phase 1: Mettre à jour la demande de service avec l'ID de l'intention de paiement
         if (!createOnly) {
           await storage.updateServiceRequestPayment(
             serviceRequest.id,
             paymentIntent.id,
             "pending",
-            amountInCents / 100 // Convertir en euros
+            amountInCents / 100, // Convertir en euros
+            {
+              stripePaymentIntentId: paymentIntent.id,
+              orderId: paymentIntent.id // orderId = PaymentIntent ID pour ce flow
+            }
           );
         }
         
@@ -3235,12 +3254,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       // Mettre à jour le statut de paiement avec les détails de carte si disponibles
+      // Phase 1: Sauvegarder stripePaymentIntentId et orderId pour attribution tracking
       await storage.updateServiceRequestPayment(
         serviceRequest.id,
         paymentIntentId,
         "paid", // Paiement réussi
         paymentIntent.amount / 100,
-        cardDetails || undefined // Passer null comme undefined pour éviter l'erreur de type
+        {
+          ...cardDetails,
+          stripePaymentIntentId: paymentIntentId,
+          orderId: paymentIntentId // orderId = PaymentIntent ID (fallback si pas de checkout session)
+        }
       );
       
       // Mettre à jour le statut de la demande
@@ -8582,15 +8606,20 @@ app.patch("/api/contacts/:id/status", requireAuth, requireAdminOrManager, async 
       
       // Obtenir l'ID de PaymentIntent depuis la session de checkout
       const paymentIntentId = checkoutSession.payment_intent as string;
+      const checkoutSessionId = checkoutSession.id;
       
-      // Enregistrer les informations de paiement dans la base de données
+      // Phase 1: Enregistrer les informations de paiement avec les IDs Stripe pour attribution tracking
+      // orderId = checkout session ID (préféré) pour la déduplication future
       await storage.updateServiceRequestPayment(
         serviceRequestId, 
         paymentIntentId, 
         'pending',
         amount,
         {
-          paymentMethod: 'terminal_virtuel'
+          paymentMethod: 'terminal_virtuel',
+          stripePaymentIntentId: paymentIntentId,
+          stripeCheckoutSessionId: checkoutSessionId,
+          orderId: checkoutSessionId // orderId = Checkout Session ID (canonical)
         }
       );
       
