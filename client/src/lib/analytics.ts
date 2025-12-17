@@ -121,6 +121,14 @@ export const trackFormSubmit = (reference: string, email?: string, phone?: strin
   return true;
 };
 
+const getGclidValue = (): string | null => {
+  if (typeof window === 'undefined') return null;
+  const storedGclid = localStorage.getItem('gclid');
+  if (storedGclid) return storedGclid;
+  const urlGclid = new URLSearchParams(window.location.search).get('gclid');
+  return urlGclid;
+};
+
 export const trackPurchase = (reference: string, amount: number = 129.80, email?: string, phone?: string): boolean => {
   if (typeof window === 'undefined') return false;
   if (!reference) {
@@ -146,18 +154,28 @@ export const trackPurchase = (reference: string, amount: number = 129.80, email?
     sessionStorage.removeItem('ec_phone');
   }
 
+  const gclid = getGclidValue();
+
+  console.log('🔍 PURCHASE CONVERSION:', {
+    reference,
+    value: amount,
+    gclid: gclid,
+    timestamp: new Date().toISOString(),
+  });
+
   fireGtagConversion(CONVERSION_LABELS.PURCHASE, {
     event_name: 'purchase',
     transaction_id: reference,
     value: amount,
     currency: 'EUR',
+    gclid: gclid || undefined,
     user_data: {
       email: userEmail?.toLowerCase().trim() || undefined,
       phone_number: userPhone?.replace(/\s/g, '') || undefined,
     },
   });
 
-  console.log(`✅ purchase fired [ref: ${reference}, €${amount}]`);
+  console.log(`✅ purchase fired [ref: ${reference}, €${amount}, gclid: ${gclid || 'none'}]`);
   return true;
 };
 
