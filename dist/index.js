@@ -8835,11 +8835,14 @@ function normalizeEmail(email) {
 }
 function normalizePhone(phone) {
   let cleaned = phone.replace(/[\s\-\.\(\)]/g, "");
-  if (cleaned.startsWith("0") && cleaned.length === 10) {
+  if (cleaned.startsWith("0033")) {
+    cleaned = "+33" + cleaned.substring(4);
+  } else if (cleaned.startsWith("0") && cleaned.length === 10) {
     cleaned = "+33" + cleaned.substring(1);
-  } else if (cleaned.startsWith("33") && !cleaned.startsWith("+")) {
+  } else if (cleaned.startsWith("33") && !cleaned.startsWith("+") && cleaned.length >= 11) {
     cleaned = "+" + cleaned;
-  } else if (!cleaned.startsWith("+")) {
+  } else if (cleaned.startsWith("+")) {
+  } else if (cleaned.length === 9) {
     cleaned = "+33" + cleaned;
   }
   return cleaned;
@@ -8936,7 +8939,8 @@ async function sendGoogleAdsConversion(data) {
       validate_only: false
     });
     if (response.partial_failure_error) {
-      console.error("\u26A0\uFE0F Partial failure in conversion upload:", JSON.stringify(response.partial_failure_error));
+      console.error(`\u274C Google Ads conversion FAILED for ${data.reference}:`, JSON.stringify(response.partial_failure_error));
+      return false;
     }
     if (response.results && response.results.length > 0) {
       const result = response.results[0];
@@ -8949,8 +8953,8 @@ async function sendGoogleAdsConversion(data) {
         return true;
       }
     }
-    console.log(`\u2705 Google Ads conversion request completed for ${data.reference}`);
-    return true;
+    console.warn(`\u26A0\uFE0F Google Ads conversion returned no results for ${data.reference}`);
+    return false;
   } catch (error) {
     console.error(`\u274C Error sending Google Ads conversion for ${data.reference}:`, error.message);
     if (error.errors) {
@@ -12059,10 +12063,26 @@ ${comments}` : tarifJauneNote;
                     ipAddress: req.ip
                   });
                 } else {
-                  console.log(`\u26A0\uFE0F Google Ads conversion non envoy\xE9e pour ${referenceNumber} (pas de donn\xE9es suffisantes)`);
+                  console.warn(`\u26A0\uFE0F Google Ads conversion FAILED pour ${referenceNumber}`);
+                  await storage.logActivity({
+                    userId: 0,
+                    entityType: "service_request",
+                    entityId: serviceRequest.id,
+                    action: "google_ads_conversion_failed",
+                    details: `Conversion Google Ads server-side \xE9chou\xE9e${serviceRequest.gclid ? " (avec gclid)" : " (Enhanced Conversions uniquement)"} - v\xE9rifier les logs`,
+                    ipAddress: req.ip
+                  });
                 }
               } catch (gadsError) {
                 console.error(`\u274C Erreur envoi conversion Google Ads pour ${referenceNumber}:`, gadsError.message);
+                await storage.logActivity({
+                  userId: 0,
+                  entityType: "service_request",
+                  entityId: serviceRequest.id,
+                  action: "google_ads_conversion_error",
+                  details: `Erreur conversion Google Ads: ${gadsError.message}`,
+                  ipAddress: req.ip
+                });
               }
               console.log(`Email de confirmation non envoy\xE9 automatiquement pour ${referenceNumber} (d\xE9sactiv\xE9 selon la configuration client)`);
               if (!serviceRequest.leadId) {

@@ -20,11 +20,24 @@ function normalizeEmail(email: string): string {
 function normalizePhone(phone: string): string {
   let cleaned = phone.replace(/[\s\-\.\(\)]/g, '');
   
-  if (cleaned.startsWith('0') && cleaned.length === 10) {
+  // Handle international prefix 0033
+  if (cleaned.startsWith('0033')) {
+    cleaned = '+33' + cleaned.substring(4);
+  }
+  // Handle French national format starting with 0
+  else if (cleaned.startsWith('0') && cleaned.length === 10) {
     cleaned = '+33' + cleaned.substring(1);
-  } else if (cleaned.startsWith('33') && !cleaned.startsWith('+')) {
+  }
+  // Handle 33 without + prefix
+  else if (cleaned.startsWith('33') && !cleaned.startsWith('+') && cleaned.length >= 11) {
     cleaned = '+' + cleaned;
-  } else if (!cleaned.startsWith('+')) {
+  }
+  // Already has + prefix, keep as is
+  else if (cleaned.startsWith('+')) {
+    // Already in E.164 format
+  }
+  // Default: assume French national and add +33
+  else if (cleaned.length === 9) {
     cleaned = '+33' + cleaned;
   }
   
@@ -155,10 +168,13 @@ export async function sendGoogleAdsConversion(data: ConversionData): Promise<boo
       validate_only: false,
     } as any);
 
+    // Check for partial failure - this means the conversion was rejected
     if (response.partial_failure_error) {
-      console.error('⚠️ Partial failure in conversion upload:', JSON.stringify(response.partial_failure_error));
+      console.error(`❌ Google Ads conversion FAILED for ${data.reference}:`, JSON.stringify(response.partial_failure_error));
+      return false;
     }
 
+    // Check if we got valid results
     if (response.results && response.results.length > 0) {
       const result = response.results[0] as any;
       if (result.gclid || result.conversion_action) {
@@ -171,8 +187,9 @@ export async function sendGoogleAdsConversion(data: ConversionData): Promise<boo
       }
     }
 
-    console.log(`✅ Google Ads conversion request completed for ${data.reference}`);
-    return true;
+    // No results returned - consider this a failure
+    console.warn(`⚠️ Google Ads conversion returned no results for ${data.reference}`);
+    return false;
 
   } catch (error: any) {
     console.error(`❌ Error sending Google Ads conversion for ${data.reference}:`, error.message);

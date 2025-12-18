@@ -4079,10 +4079,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
                     ipAddress: req.ip
                   });
                 } else {
-                  console.log(`⚠️ Google Ads conversion non envoyée pour ${referenceNumber} (pas de données suffisantes)`);
+                  console.warn(`⚠️ Google Ads conversion FAILED pour ${referenceNumber}`);
+                  
+                  await storage.logActivity({
+                    userId: 0,
+                    entityType: "service_request",
+                    entityId: serviceRequest.id,
+                    action: "google_ads_conversion_failed",
+                    details: `Conversion Google Ads server-side échouée${serviceRequest.gclid ? ' (avec gclid)' : ' (Enhanced Conversions uniquement)'} - vérifier les logs`,
+                    ipAddress: req.ip
+                  });
                 }
               } catch (gadsError: any) {
                 console.error(`❌ Erreur envoi conversion Google Ads pour ${referenceNumber}:`, gadsError.message);
+                
+                await storage.logActivity({
+                  userId: 0,
+                  entityType: "service_request",
+                  entityId: serviceRequest.id,
+                  action: "google_ads_conversion_error",
+                  details: `Erreur conversion Google Ads: ${gadsError.message}`,
+                  ipAddress: req.ip
+                });
               }
               
               // Log pour la journalisation système
