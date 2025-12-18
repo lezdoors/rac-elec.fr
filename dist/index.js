@@ -345,6 +345,15 @@ var init_schema = __esm({
       // Détails des erreurs de paiement (pour la récupération des paiements échoués)
       paymentError: text("payment_error"),
       // JSON sous forme de texte contenant les détails de l'erreur de paiement
+      // Attribution et identifiants Stripe (Phase 1 - tracking server-side)
+      gclid: text("gclid"),
+      // Google Click ID pour l'attribution Google Ads
+      stripePaymentIntentId: text("stripe_payment_intent_id"),
+      // ID du PaymentIntent Stripe
+      stripeCheckoutSessionId: text("stripe_checkout_session_id"),
+      // ID de la session Checkout Stripe
+      orderId: text("order_id"),
+      // ID canonique pour la déduplication (= checkout session ID ou payment intent ID)
       // Informations de connexion
       ipAddress: text("ip_address"),
       // Adresse IP de l'utilisateur
@@ -413,7 +422,11 @@ var init_schema = __esm({
       cardExpYear: true,
       billingName: true,
       bankName: true,
-      paymentError: true
+      paymentError: true,
+      gclid: true,
+      stripePaymentIntentId: true,
+      stripeCheckoutSessionId: true,
+      orderId: true
     });
     serviceRequestValidationSchema = insertServiceRequestSchema.extend({
       // Informations du demandeur
@@ -1499,7 +1512,11 @@ var init_storage = __esm({
           ...paymentDetails?.cardExpYear && { cardExpYear: paymentDetails.cardExpYear },
           ...paymentDetails?.billingName && { billingName: paymentDetails.billingName },
           ...paymentDetails?.bankName && { bankName: paymentDetails.bankName },
-          ...paymentDetails?.paymentMethod && { paymentMethod: paymentDetails.paymentMethod }
+          ...paymentDetails?.paymentMethod && { paymentMethod: paymentDetails.paymentMethod },
+          // Nouveaux champs pour Phase 1 - Attribution tracking
+          ...paymentDetails?.stripePaymentIntentId && { stripePaymentIntentId: paymentDetails.stripePaymentIntentId },
+          ...paymentDetails?.stripeCheckoutSessionId && { stripeCheckoutSessionId: paymentDetails.stripeCheckoutSessionId },
+          ...paymentDetails?.orderId && { orderId: paymentDetails.orderId }
         }).where(eq(serviceRequests.id, requestId)).returning();
         return serviceRequest;
       }
@@ -10386,16 +10403,19 @@ async function registerRoutes(app2) {
 
 ${comments}` : tarifJauneNote;
       }
+      const gclid = req.body.gclid || null;
       console.log("\u{1F3AF} CR\xC9ATION DEMANDE COMPL\xC8TE - Donn\xE9es valid\xE9es:", {
         referenceNumber,
         clientName: dataToStore.name,
         email: dataToStore.email,
-        serviceType: dataToStore.serviceType
+        serviceType: dataToStore.serviceType,
+        gclid: gclid || "non disponible"
       });
       const serviceRequest = await storage.createServiceRequest({
         ...dataToStore,
         comments,
-        referenceNumber
+        referenceNumber,
+        gclid: gclid || void 0
       });
       await new Promise((resolve) => setTimeout(resolve, 100));
       const verifyRequest = await storage.getServiceRequestByReference(referenceNumber);
@@ -10501,10 +10521,13 @@ ${comments}` : tarifJauneNote;
 
 ${comments}` : tarifJauneNote;
       }
+      const gclid = req.body.gclid || null;
+      console.log("\u{1F3AF} CR\xC9ATION DEMANDE SP\xC9CIALIS\xC9E - gclid:", gclid || "non disponible");
       const serviceRequest = await storage.createServiceRequest({
         ...dataToStore,
         comments,
-        referenceNumber
+        referenceNumber,
+        gclid: gclid || void 0
       });
       try {
         const { sendNewSubmissionNotification } = await Promise.resolve().then(() => (init_email_service(), email_service_exports));
@@ -10643,7 +10666,12 @@ ${comments}` : tarifJauneNote;
           serviceRequest.id,
           paymentIntent.id,
           "pending",
-          amountInCents / 100
+          amountInCents / 100,
+          {
+            stripePaymentIntentId: paymentIntent.id,
+            orderId: paymentIntent.id
+            // orderId = PaymentIntent ID pour ce flow
+          }
         );
         await storage.createPayment({
           paymentId: paymentIntent.id,
@@ -10769,8 +10797,13 @@ ${comments}` : tarifJauneNote;
             serviceRequest.id,
             paymentIntent.id,
             "pending",
-            amountInCents / 100
+            amountInCents / 100,
             // Convertir en euros
+            {
+              stripePaymentIntentId: paymentIntent.id,
+              orderId: paymentIntent.id
+              // orderId = PaymentIntent ID pour ce flow
+            }
           );
         }
         console.log(`PaymentIntent cr\xE9\xE9 avec succ\xE8s: ${paymentIntent.id} pour ${finalReference} (x${multiplier})`);
@@ -11258,8 +11291,12 @@ ${comments}` : tarifJauneNote;
         "paid",
         // Paiement réussi
         paymentIntent.amount / 100,
-        cardDetails || void 0
-        // Passer null comme undefined pour éviter l'erreur de type
+        {
+          ...cardDetails,
+          stripePaymentIntentId: paymentIntentId,
+          orderId: paymentIntentId
+          // orderId = PaymentIntent ID (fallback si pas de checkout session)
+        }
       );
       await storage.updateServiceRequestStatus(
         serviceRequest.id,
@@ -15440,13 +15477,18 @@ ${comments}` : tarifJauneNote;
         }
       });
       const paymentIntentId = checkoutSession.payment_intent;
+      const checkoutSessionId = checkoutSession.id;
       await storage.updateServiceRequestPayment(
         serviceRequestId,
         paymentIntentId,
         "pending",
         amount,
         {
-          paymentMethod: "terminal_virtuel"
+          paymentMethod: "terminal_virtuel",
+          stripePaymentIntentId: paymentIntentId,
+          stripeCheckoutSessionId: checkoutSessionId,
+          orderId: checkoutSessionId
+          // orderId = Checkout Session ID (canonical)
         }
       );
       await storage.logActivity({
@@ -17549,12 +17591,12 @@ init_email_service();
 var securityHeaders = (req, res, next) => {
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://js.stripe.com https://*.stripe.com",
-    "style-src 'self' 'unsafe-inline' https://*.googleapis.com https://fonts.googleapis.com",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://js.stripe.com https://*.stripe.com https://www.google.com https://bat.bing.com https://www.clarity.ms https://*.clarity.ms",
+    "style-src 'self' 'unsafe-inline' https://*.googleapis.com https://fonts.googleapis.com https://www.googletagmanager.com",
     "font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com data:",
     "img-src 'self' data: https: blob:",
-    "connect-src 'self' https://*.google-analytics.com https://stats.g.doubleclick.net https://www.googleadservices.com https://api.stripe.com https://*.stripe.com wss:",
-    "frame-src 'self' https://www.googletagmanager.com https://www.google.com https://js.stripe.com https://*.stripe.com",
+    "connect-src 'self' https://*.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googleadservices.com https://www.google.com https://googleads.g.doubleclick.net https://api.stripe.com https://*.stripe.com https://bat.bing.com https://www.clarity.ms https://*.clarity.ms wss:",
+    "frame-src 'self' https://www.googletagmanager.com https://www.google.com https://js.stripe.com https://*.stripe.com https://td.doubleclick.net",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",

@@ -297,14 +297,20 @@
     </script>
     <!-- End Google Tag Manager -->
 
-    <!-- Google Ads Global Site Tag - AW-16683623620 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16683623620"></script>
+    <!-- GA4 Direct Tracking - G-D92SQT9L1P -->
+    <!-- Required because GTM container GTM-K597C4C2 lacks GA4 Configuration tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D92SQT9L1P"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
+      gtag('config', 'G-D92SQT9L1P', { 'send_page_view': true });
+    </script>
+
+    <!-- Google Ads Global Site Tag - AW-16683623620 -->
+    <!-- Separate from GA4 - manages Google Ads conversions only -->
+    <script>
       gtag('config', 'AW-16683623620');
-      gtag('config', 'G-D92SQT9L1P');
     </script>
 
     <!-- Google Ads Conversion Functions -->
@@ -350,36 +356,80 @@
     </script>
 
     <!-- DataLayer Tracking Helpers for GTM Enhanced Conversions -->
+    <!-- CRITICAL: Session storage guards at the LOWEST LEVEL to prevent duplicate fires -->
     <script>
+      // Session storage keys for deduplication
+      var GTM_GUARD_KEYS = {
+        FORM_START: 'gtm_form_start_fired',
+        FORM_SUBMIT: 'gtm_form_submit_fired'
+      };
+
       // Track form start with Enhanced Conversions data
+      // GUARDED: Only fires ONCE per session
       window.trackFormStart = function(email, phone) {
-        const eventData = {
+        // Session guard: prevent duplicate fires
+        if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(GTM_GUARD_KEYS.FORM_START)) {
+          console.log('ℹ️ GTM form_start already fired this session (blocked at lowest level)');
+          return;
+        }
+        
+        // Set guard BEFORE firing to prevent race conditions
+        if (typeof sessionStorage !== 'undefined') {
+          sessionStorage.setItem(GTM_GUARD_KEYS.FORM_START, 'true');
+        }
+        
+        var eventData = {
           event: 'form_start',
           email: email || undefined,
           phone: phone || undefined
         };
-        console.log('GTM: form_start event pushed to dataLayer', eventData);
+        console.log('✅ GTM: form_start event pushed to dataLayer (ONCE)', eventData);
         dataLayer.push(eventData);
         // Also fire Google Ads conversion
         if (window.gads_form_start) window.gads_form_start(email, phone);
       };
       
       // Track form submit with Enhanced Conversions data
+      // GUARDED: Only fires ONCE per session
       window.trackFormSubmit = function(email, phone) {
-        const eventData = {
+        // Session guard: prevent duplicate fires
+        if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(GTM_GUARD_KEYS.FORM_SUBMIT)) {
+          console.log('ℹ️ GTM form_submit already fired this session (blocked at lowest level)');
+          return;
+        }
+        
+        // Set guard BEFORE firing to prevent race conditions
+        if (typeof sessionStorage !== 'undefined') {
+          sessionStorage.setItem(GTM_GUARD_KEYS.FORM_SUBMIT, 'true');
+        }
+        
+        var eventData = {
           event: 'form_submit',
           email: email || undefined,
           phone: phone || undefined
         };
-        console.log('GTM: form_submit event pushed to dataLayer', eventData);
+        console.log('✅ GTM: form_submit event pushed to dataLayer (ONCE)', eventData);
         dataLayer.push(eventData);
         // Also fire Google Ads conversion
         if (window.gads_form_submit) window.gads_form_submit(email, phone);
       };
       
       // Track purchase with transaction details and Enhanced Conversions data
+      // GUARDED: Only fires ONCE per transaction ID
       window.trackPurchase = function(transactionId, email, phone) {
-        const eventData = {
+        var purchaseKey = 'purchase_conversion_' + (transactionId || 'unknown');
+        // Session guard: prevent duplicate fires for same transaction
+        if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(purchaseKey)) {
+          console.log('ℹ️ GTM purchase already fired for this transaction (blocked at lowest level)');
+          return;
+        }
+        
+        // Set guard BEFORE firing
+        if (typeof sessionStorage !== 'undefined') {
+          sessionStorage.setItem(purchaseKey, 'true');
+        }
+        
+        var eventData = {
           event: 'purchase',
           transaction_id: transactionId || '',
           value: 129.80,
@@ -387,13 +437,13 @@
           email: email || undefined,
           phone: phone || undefined
         };
-        console.log('GTM: purchase event pushed to dataLayer', eventData);
+        console.log('✅ GTM: purchase event pushed to dataLayer (ONCE)', eventData);
         dataLayer.push(eventData);
         // Also fire Google Ads conversion
         if (window.gads_purchase) window.gads_purchase(transactionId, 129.80, email, phone);
       };
       
-      console.log('GTM + Google Ads: Tracking helpers loaded for demande-raccordement.fr');
+      console.log('GTM + Google Ads: Tracking helpers loaded with SESSION GUARDS for demande-raccordement.fr');
     </script>
 
     <!-- PERFORMANCE FIX: Fixed preloads - removed invalid /src/main.tsx and duplicates -->
@@ -430,7 +480,7 @@
     <meta name="format-detection" content="telephone=no">
     
     <!-- PERFORMANCE FIX: Removed render-blocking MutationObserver script for faster LCP -->
-    <script type="module" crossorigin src="/assets/index-DIWzPlq1.js"></script>
+    <script type="module" crossorigin src="/assets/index-Bq03kten.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CZTsUPTT.css">
   </head>
   <body>
