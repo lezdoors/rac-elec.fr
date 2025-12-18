@@ -12,7 +12,7 @@ import { ContactModal } from "@/components/contact-modal";
 import { GoogleSnippetsInitializer } from "@/components/google-snippets-initializer";
 import { Helmet } from "react-helmet";
 import BankingSecuritySection from "@/components/banking-security-section";
-import { trackPurchase } from "@/lib/analytics";
+import { trackPurchase, PurchaseUserData } from "@/lib/analytics";
 
 export default function PaiementConfirmationPage() {
   const [, params] = useLocation();
@@ -42,21 +42,48 @@ export default function PaiementConfirmationPage() {
   const finalAmount = isMultiplePayment ? baseAmount * parseInt(multiplier) : (urlAmount ? parseFloat(urlAmount) : baseAmount);
   const formattedAmount = finalAmount.toFixed(2).replace('.', ',');
   
+  // Track if purchase conversion was already fired (to avoid duplicate when serviceRequest loads)
+  const [purchaseFired, setPurchaseFired] = useState(false);
+  
   // CENTRALIZED: Purchase conversion via analytics.ts (dedupe by reference)
   // Returns true if actually fired, false if already fired (dedupe)
-  const firePurchaseConversion = (ref: string, amount: number = 129.80): boolean => {
-    return trackPurchase(ref, amount);
+  const firePurchaseConversion = (ref: string, amount: number = 129.80, userData?: PurchaseUserData): boolean => {
+    if (purchaseFired) return false;
+    const result = trackPurchase(ref, amount, userData);
+    if (result) setPurchaseFired(true);
+    return result;
   };
 
-  // IMMEDIATE: If URL says success, fire conversion tag right away (don't wait for API)
+  // Fire purchase conversion when serviceRequest is loaded (to get user data)
+  // OR immediately if URL says success (fallback without user data)
   useEffect(() => {
-    if (status === "success" && referenceNumber) {
-      console.log("✅ URL indique paiement réussi - tag déclenché immédiatement");
+    if (status === "success" && referenceNumber && !purchaseFired) {
       setPaymentStatus("success");
-      firePurchaseConversion(referenceNumber, finalAmount);
       setIsVerifying(false);
+      
+      // If serviceRequest is already loaded, use full user data
+      if (serviceRequest) {
+        console.log("✅ Paiement réussi - tag déclenché avec données utilisateur complètes");
+        const nameParts = (serviceRequest.name || '').split(' ');
+        const firstName = nameParts[0] || '';
+        const lastName = nameParts.slice(1).join(' ') || '';
+        
+        firePurchaseConversion(referenceNumber, finalAmount, {
+          email: serviceRequest.email,
+          phone: serviceRequest.phone,
+          firstName,
+          lastName,
+          city: serviceRequest.city,
+          postalCode: serviceRequest.postalCode,
+          country: 'FR'
+        });
+      } else {
+        // Fallback: fire immediately without full user data (will be enriched if possible)
+        console.log("✅ URL indique paiement réussi - tag déclenché (sans données utilisateur)");
+        firePurchaseConversion(referenceNumber, finalAmount);
+      }
     }
-  }, [status, referenceNumber, finalAmount]);
+  }, [status, referenceNumber, finalAmount, serviceRequest, purchaseFired]);
 
   // 1. Vérifier le statut du paiement via API (ONLY if URL doesn't already say success)
   useEffect(() => {

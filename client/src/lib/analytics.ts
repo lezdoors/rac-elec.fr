@@ -129,7 +129,21 @@ const getGclidValue = (): string | null => {
   return urlGclid;
 };
 
-export const trackPurchase = (reference: string, amount: number = 129.80, email?: string, phone?: string): boolean => {
+export interface PurchaseUserData {
+  email?: string;
+  phone?: string;
+  firstName?: string;
+  lastName?: string;
+  city?: string;
+  postalCode?: string;
+  country?: string;
+}
+
+export const trackPurchase = (
+  reference: string, 
+  amount: number = 129.80, 
+  userData?: PurchaseUserData
+): boolean => {
   if (typeof window === 'undefined') return false;
   if (!reference) {
     console.warn('⚠️ trackPurchase: reference required');
@@ -145,8 +159,8 @@ export const trackPurchase = (reference: string, amount: number = 129.80, email?
 
   markFired(dedupeKey);
 
-  let userEmail = email;
-  let userPhone = phone;
+  let userEmail = userData?.email;
+  let userPhone = userData?.phone;
   if (typeof sessionStorage !== 'undefined') {
     if (!userEmail) userEmail = sessionStorage.getItem('ec_email') || undefined;
     if (!userPhone) userPhone = sessionStorage.getItem('ec_phone') || undefined;
@@ -160,9 +174,11 @@ export const trackPurchase = (reference: string, amount: number = 129.80, email?
     reference,
     value: amount,
     gclid: gclid,
+    userData: userData,
     timestamp: new Date().toISOString(),
   });
 
+  // 1. Fire Google Ads conversion via gtag
   fireGtagConversion(CONVERSION_LABELS.PURCHASE, {
     event_name: 'purchase',
     transaction_id: reference,
@@ -174,6 +190,33 @@ export const trackPurchase = (reference: string, amount: number = 129.80, email?
       phone_number: userPhone?.replace(/\s/g, '') || undefined,
     },
   });
+
+  // 2. Push DIRECT purchase event to dataLayer for GTM (exact format expected)
+  if (Array.isArray(window.dataLayer)) {
+    const purchaseEvent: Record<string, any> = {
+      event: 'purchase',
+      transaction_id: reference,
+      value: amount,
+      currency: 'EUR',
+    };
+    
+    // Add user_data with Enhanced Conversions format
+    const userDataPayload: Record<string, any> = {};
+    if (userEmail) userDataPayload.email = userEmail.toLowerCase().trim();
+    if (userPhone) userDataPayload.phone_number = userPhone.replace(/\s/g, '');
+    if (userData?.firstName) userDataPayload.address_first_name = userData.firstName;
+    if (userData?.lastName) userDataPayload.address_last_name = userData.lastName;
+    if (userData?.city) userDataPayload.address_city = userData.city;
+    if (userData?.postalCode) userDataPayload.address_postal_code = userData.postalCode;
+    if (userData?.country) userDataPayload.address_country = userData.country || 'FR';
+    
+    if (Object.keys(userDataPayload).length > 0) {
+      purchaseEvent.user_data = userDataPayload;
+    }
+    
+    window.dataLayer.push(purchaseEvent);
+    console.log('🎯 GTM dataLayer.push:', purchaseEvent);
+  }
 
   console.log(`✅ purchase fired [ref: ${reference}, €${amount}, gclid: ${gclid || 'none'}]`);
   return true;
