@@ -7,8 +7,7 @@ const GOOGLE_ADS_REFRESH_TOKEN = process.env.GOOGLE_ADS_REFRESH_TOKEN;
 const GOOGLE_ADS_DEVELOPER_TOKEN = process.env.GOOGLE_ADS_DEVELOPER_TOKEN;
 const GOOGLE_ADS_CUSTOMER_ID = process.env.GOOGLE_ADS_CUSTOMER_ID;
 const GOOGLE_ADS_LOGIN_CUSTOMER_ID = process.env.GOOGLE_ADS_LOGIN_CUSTOMER_ID;
-
-const CONVERSION_ACTION_ID = '16683623620';
+const GOOGLE_ADS_CONVERSION_ACTION_ID = process.env.GOOGLE_ADS_CONVERSION_ACTION_ID || '16683623620';
 
 function hashSHA256(value: string): string {
   return crypto.createHash('sha256').update(value).digest('hex');
@@ -121,7 +120,7 @@ export async function sendGoogleAdsConversion(data: ConversionData): Promise<boo
 
     const conversionDateTime = new Date().toISOString().replace('T', ' ').split('.')[0] + '+00:00';
     
-    const conversionAction = `customers/${GOOGLE_ADS_CUSTOMER_ID}/conversionActions/${CONVERSION_ACTION_ID}`;
+    const conversionAction = `customers/${GOOGLE_ADS_CUSTOMER_ID}/conversionActions/${GOOGLE_ADS_CONVERSION_ACTION_ID}`;
 
     const clickConversion: any = {
       conversion_action: conversionAction,
@@ -153,18 +152,18 @@ export async function sendGoogleAdsConversion(data: ConversionData): Promise<boo
       customer_id: GOOGLE_ADS_CUSTOMER_ID!,
       conversions: [clickConversion],
       partial_failure: true,
-    });
+      validate_only: false,
+    } as any);
 
     if (response.partial_failure_error) {
       console.error('⚠️ Partial failure in conversion upload:', JSON.stringify(response.partial_failure_error));
     }
 
     if (response.results && response.results.length > 0) {
-      const result = response.results[0];
-      if (result.gclid || result.order_id) {
+      const result = response.results[0] as any;
+      if (result.gclid || result.conversion_action) {
         console.log(`✅ Google Ads conversion sent successfully for ${data.reference}`, {
           gclid: result.gclid,
-          order_id: result.order_id,
           conversion_action: result.conversion_action,
           conversion_date_time: result.conversion_date_time
         });

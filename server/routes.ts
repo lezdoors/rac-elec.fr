@@ -33,6 +33,7 @@ import { userStatsService } from "./user-stats-service";
 import { userStatsRouter } from "./routes-user-stats";
 import { setupDashboardRoutes } from "./routes-dashboard";
 import { z } from "zod";
+import { sendGoogleAdsConversion } from "./services/googleAdsConversion";
 import { ulid } from "ulid";
 
 // Schema de validation pour le formulaire de contact
@@ -4045,6 +4046,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
               
               // Continue avec le reste du processus
               console.log(`✅ Paiement traité avec succès pour ${referenceNumber}`);
+              
+              // GOOGLE ADS SERVER-SIDE CONVERSION TRACKING
+              try {
+                console.log('📊 Envoi conversion Google Ads server-side...');
+                
+                const nameParts = `${serviceRequest.firstName || ''} ${serviceRequest.lastName || ''}`.trim().split(' ');
+                const firstName = nameParts[0] || serviceRequest.name?.split(' ')[0] || '';
+                const lastName = nameParts.slice(1).join(' ') || serviceRequest.name?.split(' ').slice(1).join(' ') || '';
+                
+                const conversionSent = await sendGoogleAdsConversion({
+                  gclid: serviceRequest.gclid || undefined,
+                  reference: referenceNumber,
+                  email: serviceRequest.email || undefined,
+                  phone: serviceRequest.phone || undefined,
+                  firstName: firstName,
+                  lastName: lastName,
+                  city: serviceRequest.city || undefined,
+                  postalCode: serviceRequest.postalCode || undefined,
+                  amount: paymentIntent.amount / 100
+                });
+                
+                if (conversionSent) {
+                  console.log(`✅ Google Ads conversion envoyée avec succès pour ${referenceNumber}`);
+                  
+                  await storage.logActivity({
+                    userId: 0,
+                    entityType: "service_request",
+                    entityId: serviceRequest.id,
+                    action: "google_ads_conversion_sent",
+                    details: `Conversion Google Ads server-side envoyée${serviceRequest.gclid ? ' (avec gclid)' : ' (Enhanced Conversions)'}`,
+                    ipAddress: req.ip
+                  });
+                } else {
+                  console.log(`⚠️ Google Ads conversion non envoyée pour ${referenceNumber} (pas de données suffisantes)`);
+                }
+              } catch (gadsError: any) {
+                console.error(`❌ Erreur envoi conversion Google Ads pour ${referenceNumber}:`, gadsError.message);
+              }
               
               // Log pour la journalisation système
               console.log(`Email de confirmation non envoyé automatiquement pour ${referenceNumber} (désactivé selon la configuration client)`);
