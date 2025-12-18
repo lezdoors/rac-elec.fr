@@ -8816,6 +8816,151 @@ function setupDashboardRoutes(app2) {
 
 // server/routes.ts
 import { z as z4 } from "zod";
+
+// server/services/googleAdsConversion.ts
+import { GoogleAdsApi } from "google-ads-api";
+import crypto2 from "crypto";
+var GOOGLE_ADS_CLIENT_ID = process.env.GOOGLE_ADS_CLIENT_ID;
+var GOOGLE_ADS_CLIENT_SECRET = process.env.GOOGLE_ADS_CLIENT_SECRET;
+var GOOGLE_ADS_REFRESH_TOKEN = process.env.GOOGLE_ADS_REFRESH_TOKEN;
+var GOOGLE_ADS_DEVELOPER_TOKEN = process.env.GOOGLE_ADS_DEVELOPER_TOKEN;
+var GOOGLE_ADS_CUSTOMER_ID = process.env.GOOGLE_ADS_CUSTOMER_ID;
+var GOOGLE_ADS_LOGIN_CUSTOMER_ID = process.env.GOOGLE_ADS_LOGIN_CUSTOMER_ID;
+var GOOGLE_ADS_CONVERSION_ACTION_ID = process.env.GOOGLE_ADS_CONVERSION_ACTION_ID || "16683623620";
+function hashSHA256(value) {
+  return crypto2.createHash("sha256").update(value).digest("hex");
+}
+function normalizeEmail(email) {
+  return email.toLowerCase().trim();
+}
+function normalizePhone(phone) {
+  let cleaned = phone.replace(/[\s\-\.\(\)]/g, "");
+  if (cleaned.startsWith("0") && cleaned.length === 10) {
+    cleaned = "+33" + cleaned.substring(1);
+  } else if (cleaned.startsWith("33") && !cleaned.startsWith("+")) {
+    cleaned = "+" + cleaned;
+  } else if (!cleaned.startsWith("+")) {
+    cleaned = "+33" + cleaned;
+  }
+  return cleaned;
+}
+function normalizeName(name) {
+  return name.toLowerCase().trim();
+}
+async function sendGoogleAdsConversion(data) {
+  console.log("\u{1F504} Initializing Google Ads conversion...", {
+    reference: data.reference,
+    hasGclid: !!data.gclid,
+    hasEmail: !!data.email,
+    hasPhone: !!data.phone
+  });
+  if (!GOOGLE_ADS_CLIENT_ID || !GOOGLE_ADS_CLIENT_SECRET || !GOOGLE_ADS_REFRESH_TOKEN || !GOOGLE_ADS_DEVELOPER_TOKEN || !GOOGLE_ADS_CUSTOMER_ID) {
+    console.error("\u274C Google Ads API credentials missing");
+    return false;
+  }
+  if (!data.gclid && !data.email && !data.phone) {
+    console.warn("\u26A0\uFE0F No gclid or user identifiers provided - cannot send conversion");
+    return false;
+  }
+  try {
+    const client = new GoogleAdsApi({
+      client_id: GOOGLE_ADS_CLIENT_ID,
+      client_secret: GOOGLE_ADS_CLIENT_SECRET,
+      developer_token: GOOGLE_ADS_DEVELOPER_TOKEN
+    });
+    const customer = client.Customer({
+      customer_id: GOOGLE_ADS_CUSTOMER_ID,
+      login_customer_id: GOOGLE_ADS_LOGIN_CUSTOMER_ID,
+      refresh_token: GOOGLE_ADS_REFRESH_TOKEN
+    });
+    console.log("\u{1F510} Hashing user data...");
+    const userIdentifiers = [];
+    if (data.email) {
+      userIdentifiers.push({
+        hashed_email: hashSHA256(normalizeEmail(data.email))
+      });
+    }
+    if (data.phone) {
+      userIdentifiers.push({
+        hashed_phone_number: hashSHA256(normalizePhone(data.phone))
+      });
+    }
+    if (data.firstName || data.lastName || data.city || data.postalCode) {
+      const addressInfo = {
+        country_code: "FR"
+      };
+      if (data.firstName) {
+        addressInfo.hashed_first_name = hashSHA256(normalizeName(data.firstName));
+      }
+      if (data.lastName) {
+        addressInfo.hashed_last_name = hashSHA256(normalizeName(data.lastName));
+      }
+      if (data.city) {
+        addressInfo.city = data.city;
+      }
+      if (data.postalCode) {
+        addressInfo.postal_code = data.postalCode;
+      }
+      userIdentifiers.push({
+        address_info: addressInfo
+      });
+    }
+    const conversionDateTime = (/* @__PURE__ */ new Date()).toISOString().replace("T", " ").split(".")[0] + "+00:00";
+    const conversionAction = `customers/${GOOGLE_ADS_CUSTOMER_ID}/conversionActions/${GOOGLE_ADS_CONVERSION_ACTION_ID}`;
+    const clickConversion = {
+      conversion_action: conversionAction,
+      conversion_date_time: conversionDateTime,
+      conversion_value: data.amount || 129.8,
+      currency_code: "EUR",
+      order_id: data.reference
+    };
+    if (data.gclid) {
+      clickConversion.gclid = data.gclid;
+      console.log("\u{1F4CC} Using GCLID for attribution");
+    }
+    if (userIdentifiers.length > 0) {
+      clickConversion.user_identifiers = userIdentifiers;
+      console.log(`\u{1F4CC} Using ${userIdentifiers.length} user identifier(s) for Enhanced Conversions`);
+    }
+    console.log("\u{1F4E4} Sending conversion to Google Ads API...", {
+      conversion_action: conversionAction,
+      order_id: data.reference,
+      value: clickConversion.conversion_value,
+      hasGclid: !!clickConversion.gclid,
+      userIdentifiersCount: userIdentifiers.length
+    });
+    const response = await customer.conversionUploads.uploadClickConversions({
+      customer_id: GOOGLE_ADS_CUSTOMER_ID,
+      conversions: [clickConversion],
+      partial_failure: true,
+      validate_only: false
+    });
+    if (response.partial_failure_error) {
+      console.error("\u26A0\uFE0F Partial failure in conversion upload:", JSON.stringify(response.partial_failure_error));
+    }
+    if (response.results && response.results.length > 0) {
+      const result = response.results[0];
+      if (result.gclid || result.conversion_action) {
+        console.log(`\u2705 Google Ads conversion sent successfully for ${data.reference}`, {
+          gclid: result.gclid,
+          conversion_action: result.conversion_action,
+          conversion_date_time: result.conversion_date_time
+        });
+        return true;
+      }
+    }
+    console.log(`\u2705 Google Ads conversion request completed for ${data.reference}`);
+    return true;
+  } catch (error) {
+    console.error(`\u274C Error sending Google Ads conversion for ${data.reference}:`, error.message);
+    if (error.errors) {
+      console.error("API Errors:", JSON.stringify(error.errors, null, 2));
+    }
+    return false;
+  }
+}
+
+// server/routes.ts
 import { ulid } from "ulid";
 var contactFormSchema = z4.object({
   name: z4.string().min(2, "Le nom doit contenir au moins 2 caract\xE8res"),
@@ -11887,6 +12032,38 @@ ${comments}` : tarifJauneNote;
                 });
               }
               console.log(`\u2705 Paiement trait\xE9 avec succ\xE8s pour ${referenceNumber}`);
+              try {
+                console.log("\u{1F4CA} Envoi conversion Google Ads server-side...");
+                const nameParts = `${serviceRequest.firstName || ""} ${serviceRequest.lastName || ""}`.trim().split(" ");
+                const firstName = nameParts[0] || serviceRequest.name?.split(" ")[0] || "";
+                const lastName = nameParts.slice(1).join(" ") || serviceRequest.name?.split(" ").slice(1).join(" ") || "";
+                const conversionSent = await sendGoogleAdsConversion({
+                  gclid: serviceRequest.gclid || void 0,
+                  reference: referenceNumber,
+                  email: serviceRequest.email || void 0,
+                  phone: serviceRequest.phone || void 0,
+                  firstName,
+                  lastName,
+                  city: serviceRequest.city || void 0,
+                  postalCode: serviceRequest.postalCode || void 0,
+                  amount: paymentIntent.amount / 100
+                });
+                if (conversionSent) {
+                  console.log(`\u2705 Google Ads conversion envoy\xE9e avec succ\xE8s pour ${referenceNumber}`);
+                  await storage.logActivity({
+                    userId: 0,
+                    entityType: "service_request",
+                    entityId: serviceRequest.id,
+                    action: "google_ads_conversion_sent",
+                    details: `Conversion Google Ads server-side envoy\xE9e${serviceRequest.gclid ? " (avec gclid)" : " (Enhanced Conversions)"}`,
+                    ipAddress: req.ip
+                  });
+                } else {
+                  console.log(`\u26A0\uFE0F Google Ads conversion non envoy\xE9e pour ${referenceNumber} (pas de donn\xE9es suffisantes)`);
+                }
+              } catch (gadsError) {
+                console.error(`\u274C Erreur envoi conversion Google Ads pour ${referenceNumber}:`, gadsError.message);
+              }
               console.log(`Email de confirmation non envoy\xE9 automatiquement pour ${referenceNumber} (d\xE9sactiv\xE9 selon la configuration client)`);
               if (!serviceRequest.leadId) {
                 console.log(`Webhook Stripe: Aucun lead li\xE9 \xE0 la demande ${serviceRequest.id}. Tentative de liaison automatique...`);
