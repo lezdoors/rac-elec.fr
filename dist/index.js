@@ -17725,7 +17725,14 @@ app.use(compression({
   chunkSize: 16 * 1024
   // Chunks de 16KB pour mobile
 }));
-app.use(express2.json({ limit: "10mb" }));
+app.use(express2.json({
+  limit: "10mb",
+  verify: (req, res, buf) => {
+    if (req.url === "/api/stripe-webhook") {
+      req.rawBody = buf;
+    }
+  }
+}));
 app.use(express2.urlencoded({ extended: false, limit: "10mb" }));
 var formRateLimit = createBusinessRateLimit(10, 60 * 1e3, false, { excludeMethods: ["DELETE", "GET"] });
 var paymentRateLimit = createBusinessRateLimit(5, 60 * 1e3);

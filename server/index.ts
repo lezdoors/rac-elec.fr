@@ -46,7 +46,16 @@ app.use(compression({
 }));
 
 // Parse body FIRST - required for input sanitization and security checks
-app.use(express.json({ limit: '10mb' })); // Increased limit for PDF generation
+// IMPORTANT: Capture rawBody for Stripe webhook signature verification
+app.use(express.json({ 
+  limit: '10mb',
+  verify: (req: Request, res, buf) => {
+    // Store raw body for Stripe webhook verification
+    if (req.url === '/api/stripe-webhook') {
+      (req as any).rawBody = buf;
+    }
+  }
+}));
 app.use(express.urlencoded({ extended: false, limit: '10mb' }));
 
 // Enhanced rate limiting for business-critical endpoints
