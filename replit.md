@@ -34,6 +34,18 @@ Preferred communication style: Simple, everyday language.
 - **Mobile Optimizations**: Floating CTA button with smart show/hide behavior, enhanced mobile form validation with proper keyboard types, lazy loading images, mobile-first loading strategies, and touch-optimized interface elements.
 
 ### Recent Changes (December 2025)
+- **Enterprise Mobile Design System (Dec 19, 2025)**: Complete mobile conversion optimization with professional B2B design:
+  - **Performance Phase 1**: Critical CSS inline in <head>, system fonts on mobile (<769px) for instant LCP, Inter font on desktop, hero min-height (420px mobile/480px desktop) to prevent CLS, deferred non-critical resources
+  - **Enterprise Design System Phase 2**:
+    - Color Palette: Primary #2563EB (step numbers, secondary buttons), Accent #EA580C (all CTAs), Success #059669 (trust checkmarks)
+    - Typography: 32px h1 mobile/48px desktop, 16px minimum body text, left-aligned paragraphs
+    - Enterprise CTA Buttons: 56px height, shadow-md hover:shadow-lg, transform effects on hover/active
+    - Sticky Header: Glassmorphism (bg-white/98 backdrop-blur-md), shadow on scroll (isScrolled state)
+    - Trust Bar: SVG checkmark icons (no emojis), 3 signals (Paiement sécurisé, 2000+ clients, Réponse 48h)
+    - Testimonials: White cards with left border accent (#EA580C), blue avatars (#2563EB), gold stars
+  - **Key Files**: client/index.html (critical CSS), client/src/pages/home-page.tsx, client/src/components/professional-header.tsx
+  - **Design Philosophy**: NO emojis or childish designs - enterprise professional only, B2B conversion focus
+
 - **Centralized Tracking Architecture (Dec 15, 2025)**: Complete refactor for stable, permanent tracking:
   - **Single Source of Truth**: All tracking logic in `client/src/lib/analytics.ts`
   - **Journey-Based Deduplication**:
