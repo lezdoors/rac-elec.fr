@@ -1,0 +1,641 @@
+URGENT MOBILE OPTIMIZATION - Performance + Professional Design:
+
+CONTEXT:
+- Site receives paid Google Ads traffic from France
+- Desktop conversions work fine
+- Mobile conversions are ZERO (crisis)
+- PageSpeed mobile score: 42/100 (FAILING)
+- Current issues: LCP 13.5s, FCP 6.4s, CLS 0.161
+- Recent fixes applied: carousel fixed, hero illustration hidden on mobile
+- DO NOT change or add illustrations - keep current approach
+- NO emojis or childish designs - enterprise professional only
+
+GOAL: 
+Transform mobile experience to professional, fast-loading, high-converting B2B site within 48 hours.
+
+═══════════════════════════════════════════════════════════
+
+PHASE 1: CRITICAL PERFORMANCE FIXES (DO FIRST)
+
+1. ELIMINATE RENDER-BLOCKING RESOURCES:
+   - Extract ALL CSS for above-the-fold content (hero section)
+   - Inline it directly in <head> using <style> tags
+   - Load remaining CSS asynchronously:
+     <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+     <noscript><link rel="stylesheet" href="styles.css"></noscript>
+   - Move ALL <script> tags to end of <body> with defer attribute
+   - If using Google Fonts, preconnect:
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+2. FIX LARGEST CONTENTFUL PAINT (13.5s → <2.5s):
+   - Use system fonts for hero heading on mobile (instant rendering):
+     @media (max-width: 768px) {
+       h1 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+     }
+   - If using web fonts, add font-display: swap in @font-face
+   - Ensure hero heading is in initial HTML (not JavaScript-injected)
+   - Preload critical font if used:
+     <link rel="preload" href="/fonts/font.woff2" as="font" type="font/woff2" crossorigin>
+   - Hero background must be CSS gradient only (no images)
+
+3. FIX CUMULATIVE LAYOUT SHIFT (0.161 → <0.1):
+   - Add explicit width/height to ALL images (even icons):
+     <img src="icon.webp" width="64" height="64" alt="...">
+   - Reserve space for dynamic content with min-height
+   - Use font-display: optional for web fonts on mobile
+   - Set explicit min-height on hero section:
+     @media (max-width: 768px) {
+       .hero-section { min-height: 500px; }
+     }
+
+4. OPTIMIZE JAVASCRIPT:
+   - Remove unused JavaScript (currently 436 KB unused)
+   - Code split by route if possible
+   - Defer non-critical JS (analytics, tracking)
+   - Ensure production build is minified
+
+5. IMPROVE CACHING:
+   - Verify static assets have proper cache headers
+   - Use content hashing in filenames (app.abc123.js)
+   - Consider Cloudflare free tier if no control over Replit headers
+
+═══════════════════════════════════════════════════════════
+
+PHASE 2: PROFESSIONAL MOBILE DESIGN (AFTER PERFORMANCE HITS 70+)
+
+6. PROFESSIONAL TYPOGRAPHY SYSTEM:
+   
+   Mobile-first font stack (fast loading):
+   ```css
+   body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+   }
+Mobile typography scale:
+
+Copyh1 { font-size: 32px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: #111827; }
+h2 { font-size: 24px; font-weight: 700; line-height: 1.3; color: #111827; }
+h3 { font-size: 20px; font-weight: 600; line-height: 1.4; color: #1F2937; }
+body { font-size: 16px; font-weight: 400; line-height: 1.6; color: #374151; }
+small { font-size: 14px; line-height: 1.5; color: #6B7280; }
+Text alignment on mobile:
+
+Headings: Center-aligned OK
+Body paragraphs (>2 lines): LEFT-ALIGN always
+Short descriptions under numbers: Center OK
+Professional color hierarchy:
+
+Primary text: #111827 (near-black)
+Secondary text: #4B5563 (dark gray)
+Tertiary text: #6B7280 (medium gray)
+Links: #1E40AF (professional blue)
+SOPHISTICATED COLOR SYSTEM:
+Define CSS variables:
+Copy:root {
+  /* Primary palette - Professional navy/blue */
+  --primary-dark: #1E3A8A;
+  --primary: #2563EB;
+  --primary-light: #DBEAFE;
+  
+  /* Accent - Choose professional option */
+  --accent: #EA580C; /* Professional orange */
+  /* OR --accent: #059669; /* Professional green */
+  /* OR --accent: #7C3AED; /* Professional purple */
+  
+  /* Enterprise neutrals */
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-600: #4B5563;
+  --gray-900: #111827;
+  
+  /* Functional colors */
+  --success: #059669;
+  --error: #DC2626;
+}
+Apply to sections (mobile):
+Hero: linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%)
+"Traitement" section: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #F9FAFB 100%)
+"Tous les Types" section: #F9FAFB solid
+Cards: White (#FFFFFF) on section backgrounds
+Buttons: Use --accent for primary CTA
+PROFESSIONAL BUTTON DESIGN:
+Primary CTA (Enterprise grade):
+Copy.btn-primary {
+  padding: 16px 32px;
+  min-height: 56px;
+  width: 100%;
+  max-width: 400px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  background: var(--accent);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+Secondary button:
+Copy.btn-secondary {
+  padding: 14px 28px;
+  min-height: 52px;
+  width: 100%;
+  max-width: 400px;
+  font-size: 18px;
+  font-weight: 600;
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+.btn-secondary:active {
+  background: var(--primary);
+  color: #FFFFFF;
+}
+Phone CTA button:
+Copy.btn-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  text-decoration: none;
+}
+Ensure all buttons minimum 48px height (accessibility)
+PROFESSIONAL SPACING SYSTEM:
+Define spacing scale:
+Copy:root {
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-2xl: 80px;
+  --space-3xl: 96px;
+}
+Apply to mobile sections:
+Copy@media (max-width: 768px) {
+  section { 
+    padding: var(--space-xl) var(--space-md);
+  }
+  .hero-section { 
+    padding: var(--space-2xl) var(--space-md);
+    padding-bottom: var(--space-xl);
+  }
+  .cta-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+Fix "false floor" effect:
+Maximum 40px spacing after "4 Étapes" section
+Consistent 40-64px between major sections
+No gaps larger than 80px
+ENTERPRISE CARD DESIGN:
+Copy@media (max-width: 768px) {
+  .card {
+    padding: 24px;
+    margin-bottom: 16px;
+    background: #FFFFFF;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+  }
+}
+Step cards content layout:
+Copy.step-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0;
+  text-align: left;
+}
+
+.step-description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--gray-600);
+  text-align: left;
+  margin: 0;
+}
+Stack vertically with 16px gap NO icons - use numbered circles only (professional, fast-loading)
+PROFESSIONAL STICKY HEADER:
+Copy@media (max-width: 768px) {
+  .mobile-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 64px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .mobile-header.scrolled {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+}
+Logo styling:
+Copy.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--gray-900);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.header-logo img {
+  width: 36px;
+  height: 36px;
+}
+Header actions:
+Copy.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-phone {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gray-100);
+  border-radius: 50%;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.menu-toggle {
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.menu-toggle span {
+  width: 20px;
+  height: 2px;
+  background: var(--gray-900);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+Add JavaScript to add "scrolled" class on scroll:
+Copywindow.addEventListener('scroll', () => {
+  const header = document.querySelector('.mobile-header');
+  if (window.scrollY > 10) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+PROFESSIONAL TRUST SIGNALS (NO EMOJIS):
+Trust indicator bar (SVG icons or Unicode symbols only):
+Copy<div class="trust-bar">
+  <div class="trust-item">
+    <svg class="trust-icon" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+    </svg>
+    <span>Paiement sécurisé</span>
+  </div>
+  <div class="trust-item">
+    <svg class="trust-icon" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+    </svg>
+    <span>Plus de 2000 clients</span>
+  </div>
+  <div class="trust-item">
+    <svg class="trust-icon" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+    </svg>
+    <span>Réponse sous 48h</span>
+  </div>
+</div>
+Styling:
+Copy.trust-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px 20px;
+  background: var(--gray-50);
+  border-top: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--gray-700);
+}
+
+.trust-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--success);
+  flex-shrink: 0;
+}
+Professional testimonial section:
+Copy<section class="testimonial-section">
+  <div class="testimonial-card">
+    <div class="rating">
+      <span class="star filled">★</span>
+      <span class="star filled">★</span>
+      <span class="star filled">★</span>
+      <span class="star filled">★</span>
+      <span class="star filled">★</span>
+    </div>
+    <p class="testimonial-text">
+      "Processus simple et rapide. Mon raccordement définitif a été effectué en moins de 3 semaines. Service professionnel et accompagnement de qualité."
+    </p>
+    <div class="testimonial-author">
+      <strong>Marie Laurent</strong>
+      <span class="author-meta">Raccordement Définitif • Paris</span>
+    </div>
+  </div>
+</section>
+Styling:
+Copy.testimonial-section {
+  padding: var(--space-xl) var(--space-md);
+  background: #FFFFFF;
+}
+
+.testimonial-card {
+  padding: 28px;
+  background: var(--gray-50);
+  border-left: 4px solid var(--primary);
+  border-radius: 0 8px 8px 0;
+}
+
+.rating {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.star {
+  font-size: 16px;
+  color: var(--gray-300);
+}
+
+.star.filled {
+  color: #F59E0B;
+}
+
+.testimonial-text {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--gray-900);
+  font-style: italic;
+  margin: 0 0 16px 0;
+}
+
+.testimonial-author strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 4px;
+}
+
+.author-meta {
+  font-size: 13px;
+  color: var(--gray-600);
+}
+PROFESSIONAL SHADOW SYSTEM:
+Define elevation levels:
+Copy/* Elevation 1 - Subtle (cards at rest) */
+.elevation-1 {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+/* Elevation 2 - Medium (cards on interaction) */
+.elevation-2 {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Elevation 3 - High (sticky header, modals) */
+.elevation-3 {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+Apply to elements:
+Cards: elevation-1 at rest, elevation-2 on active
+Sticky header when scrolled: elevation-2
+Buttons: 0 1px 3px rgba(0, 0, 0, 0.12)
+Section backgrounds with subtle gradients:
+Copy.hero-section {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%);
+}
+
+.process-section {
+  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #F9FAFB 100%);
+}
+MOBILE FORM OPTIMIZATION:
+Copy@media (max-width: 768px) {
+  .form-group {
+    margin-bottom: 24px;
+  }
+  
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  
+  input, select, textarea {
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 16px;
+    font-size: 16px; /* Prevents iOS zoom */
+    font-family: inherit;
+    color: var(--gray-900);
+    background: #FFFFFF;
+    border: 2px solid var(--gray-300);
+    border-radius: 6px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+  
+  input.error {
+    border-color: var(--error);
+  }
+  
+  .error-message {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--error);
+    text-align: left;
+  }
+  
+  .helper-text {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--gray-600);
+    text-align: left;
+  }
+}
+Mobile keyboard optimization:
+Copy<!-- Email field -->
+<input type="email" inputmode="email" autocomplete="email">
+
+<!-- Phone field -->
+<input type="tel" inputmode="tel" autocomplete="tel">
+
+<!-- Postal code -->
+<input type="text" inputmode="numeric" autocomplete="postal-code">
+
+<!-- Name -->
+<input type="text" autocomplete="name">
+Form submit button:
+Copy.form-submit {
+  margin-top: 32px;
+  width: 100%;
+  /* Same styling as .btn-primary */
+}
+
+.form-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+PROFESSIONAL PHONE NUMBER CTA:
+Copy<div class="phone-cta-section">
+  <div class="phone-cta-content">
+    <p class="phone-label">Besoin d'aide ?</p>
+    <a href="tel:0970709570" class="phone-number">09 70 70 95 70</a>
+    <p class="phone-hours">Lundi – Vendredi, 9h à 18h</p>
+  </div>
+</div>
+Styling:
+Copy.phone-cta-section {
+  padding: var(--space-xl) var(--space-md);
+  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+  border-top: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.phone-cta-content {
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.phone-label {
+  font-size: 15px;
+  color: var(--gray-700);
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.phone-number {
+  display: block;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  margin: 0 0 8px 0;
+}
+
+.phone-hours {
+  font-size: 13px;
+  color: var(--gray-600);
+  margin: 0;
+}
+═══════════════════════════════════════════════════════════
+
+CRITICAL REQUIREMENTS:
+
+✓ NO emojis anywhere on the site ✓ NO childish designs or cartoon elements ✓ NO illustrations added (keep current approach) ✓ NO external icon libraries (use inline SVG only) ✓ Enterprise/B2B professional aesthetic only ✓ Focus on MOBILE-FIRST (mobile < 768px) ✓ Prioritize SPEED over visual complexity ✓ Use system fonts for instant rendering ✓ Use CSS gradients, not image backgrounds ✓ All icons must be inline SVG (not emoji, not image files) ✓ Minimum 48px tap targets ✓ Left-align body text on mobile ✓ Professional color palette (navy, gray, professional accent) ✓ Clean, minimal shadows ✓ Modern but conservative design language
+
+═══════════════════════════════════════════════════════════
+
+TESTING CHECKLIST:
+
+After implementing, verify: □ PageSpeed mobile score >85 □ LCP <2.5s □ FCP <1.8s □ CLS <0.1 □ No horizontal scrolling □ All buttons 48px+ height □ Form fields work with mobile keyboard □ Phone number clickable (tel: link) □ Text readable without zooming □ Consistent spacing throughout □ Professional B2B appearance □ NO emojis visible anywhere □ All icons are inline SVG or Unicode symbols only
+
+═══════════════════════════════════════════════════════════
+
+EXPECTED RESULTS:
+
+PageSpeed score: 42 → 85+
+Mobile conversions: 0% → 40-60% of desktop
+Visual quality: Template → Enterprise B2B Professional
+Load time: 13.5s → <3s
+Aesthetic: Corporate, trustworthy, high-end service
+Implement all fixes in order: Performance first (1-5), then design (6-15).
+
+
+---
+
+**This is the final, enterprise-grade prompt.** It's completely professional with:
+
+- ✅ NO emojis
+- ✅ NO childish designs
+- ✅ SVG icons instead of emoji
+- ✅ Professional B2B aesthetic
+- ✅ Enterprise color palette
+- ✅ Corporate design language
