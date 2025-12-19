@@ -629,51 +629,51 @@ export default function HomePage() {
                   { initials: 'AM', color: '#EC4899', name: 'Amélie Martin', location: 'Raccordement définitif - Paris', text: '"Le formulaire en ligne est très intuitif et l\'équipe répond rapidement aux questions. Mon raccordement définitif a été effectué dans les délais."', date: 'Novembre 2025' },
                   { initials: 'TR', color: '#06B6D4', name: 'Thomas Roux', location: 'Raccordement collectif - Lille', text: '"Pour notre projet de lotissement, nous avions besoin d\'un partenaire fiable. La coordination avec Enedis a été parfaitement gérée."', date: 'Octobre 2025' },
                 ].map((testimonial, idx) => (
-                  <div key={`first-${idx}`} className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-100 shadow-sm min-w-[320px] max-w-[320px] flex-shrink-0">
+                  <div key={`first-${idx}`} className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm min-w-[320px] max-w-[320px] flex-shrink-0 border-l-4 border-l-[#EA580C]">
                     <div className="flex items-start gap-4 mb-4">
-                      <div className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-base flex-shrink-0" style={{ backgroundColor: testimonial.color }}>
+                      <div className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-base flex-shrink-0 bg-[#2563EB]">
                         {testimonial.initials}
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900 text-sm">{testimonial.name}</p>
-                        <p className="text-xs text-gray-500">{testimonial.location}</p>
+                        <p className="font-semibold text-gray-900 text-base">{testimonial.name}</p>
+                        <p className="text-sm text-gray-500">{testimonial.location}</p>
                       </div>
                     </div>
                     <div className="flex gap-0.5 mb-3">
                       {[1,2,3,4,5].map((star) => (
-                        <Star key={star} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                        <Star key={star} className="w-4 h-4 fill-[#F59E0B] text-[#F59E0B]" />
                       ))}
                     </div>
-                    <p className="text-gray-700 text-sm leading-relaxed">{testimonial.text}</p>
-                    <p className="text-xs text-gray-400 mt-3">{testimonial.date}</p>
+                    <p className="text-gray-700 text-base leading-relaxed">{testimonial.text}</p>
+                    <p className="text-sm text-gray-400 mt-4">{testimonial.date}</p>
                   </div>
                 ))}
                 {/* Duplicate set for seamless loop */}
                 {[
-                  { initials: 'SB', color: '#3B82F6', name: 'Sophie Bertrand', location: 'Raccordement maison neuve - Bordeaux', text: '"Service impeccable du début à la fin. Mon dossier de raccordement pour ma maison neuve a été traité en 3 semaines. L\'équipe m\'a tenu informé à chaque étape."', date: 'Novembre 2025' },
-                  { initials: 'MD', color: '#10B981', name: 'Marc Dupont', location: 'Raccordement provisoire - Lyon', text: '"En tant que chef de chantier, j\'ai besoin de réactivité. La demande de raccordement provisoire a été traitée rapidement et le suivi était parfait."', date: 'Octobre 2025' },
-                  { initials: 'CL', color: '#8B5CF6', name: 'Claire Laurent', location: 'Modification compteur - Nantes', text: '"Je ne savais pas par où commencer pour augmenter la puissance de mon compteur. Tout a été pris en charge, je n\'ai eu qu\'à valider. Simple et efficace."', date: 'Décembre 2025' },
-                  { initials: 'PG', color: '#F59E0B', name: 'Philippe Garcia', location: 'Viabilisation terrain - Marseille', text: '"Pour la viabilisation de mon terrain, les démarches administratives étaient complexes. Cette équipe a su gérer tout le processus avec Enedis."', date: 'Septembre 2025' },
-                  { initials: 'AM', color: '#EC4899', name: 'Amélie Martin', location: 'Raccordement définitif - Paris', text: '"Le formulaire en ligne est très intuitif et l\'équipe répond rapidement aux questions. Mon raccordement définitif a été effectué dans les délais."', date: 'Novembre 2025' },
-                  { initials: 'TR', color: '#06B6D4', name: 'Thomas Roux', location: 'Raccordement collectif - Lille', text: '"Pour notre projet de lotissement, nous avions besoin d\'un partenaire fiable. La coordination avec Enedis a été parfaitement gérée."', date: 'Octobre 2025' },
+                  { initials: 'SB', name: 'Sophie Bertrand', location: 'Raccordement maison neuve - Bordeaux', text: '"Service impeccable du début à la fin. Mon dossier de raccordement pour ma maison neuve a été traité en 3 semaines. L\'équipe m\'a tenu informé à chaque étape."', date: 'Novembre 2025' },
+                  { initials: 'MD', name: 'Marc Dupont', location: 'Raccordement provisoire - Lyon', text: '"En tant que chef de chantier, j\'ai besoin de réactivité. La demande de raccordement provisoire a été traitée rapidement et le suivi était parfait."', date: 'Octobre 2025' },
+                  { initials: 'CL', name: 'Claire Laurent', location: 'Modification compteur - Nantes', text: '"Je ne savais pas par où commencer pour augmenter la puissance de mon compteur. Tout a été pris en charge, je n\'ai eu qu\'à valider. Simple et efficace."', date: 'Décembre 2025' },
+                  { initials: 'PG', name: 'Philippe Garcia', location: 'Viabilisation terrain - Marseille', text: '"Pour la viabilisation de mon terrain, les démarches administratives étaient complexes. Cette équipe a su gérer tout le processus avec Enedis."', date: 'Septembre 2025' },
+                  { initials: 'AM', name: 'Amélie Martin', location: 'Raccordement définitif - Paris', text: '"Le formulaire en ligne est très intuitif et l\'équipe répond rapidement aux questions. Mon raccordement définitif a été effectué dans les délais."', date: 'Novembre 2025' },
+                  { initials: 'TR', name: 'Thomas Roux', location: 'Raccordement collectif - Lille', text: '"Pour notre projet de lotissement, nous avions besoin d\'un partenaire fiable. La coordination avec Enedis a été parfaitement gérée."', date: 'Octobre 2025' },
                 ].map((testimonial, idx) => (
-                  <div key={`second-${idx}`} className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-100 shadow-sm min-w-[320px] max-w-[320px] flex-shrink-0">
+                  <div key={`second-${idx}`} className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm min-w-[320px] max-w-[320px] flex-shrink-0 border-l-4 border-l-[#EA580C]">
                     <div className="flex items-start gap-4 mb-4">
-                      <div className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-base flex-shrink-0" style={{ backgroundColor: testimonial.color }}>
+                      <div className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-base flex-shrink-0 bg-[#2563EB]">
                         {testimonial.initials}
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900 text-sm">{testimonial.name}</p>
-                        <p className="text-xs text-gray-500">{testimonial.location}</p>
+                        <p className="font-semibold text-gray-900 text-base">{testimonial.name}</p>
+                        <p className="text-sm text-gray-500">{testimonial.location}</p>
                       </div>
                     </div>
                     <div className="flex gap-0.5 mb-3">
                       {[1,2,3,4,5].map((star) => (
-                        <Star key={star} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                        <Star key={star} className="w-4 h-4 fill-[#F59E0B] text-[#F59E0B]" />
                       ))}
                     </div>
-                    <p className="text-gray-700 text-sm leading-relaxed">{testimonial.text}</p>
-                    <p className="text-xs text-gray-400 mt-3">{testimonial.date}</p>
+                    <p className="text-gray-700 text-base leading-relaxed">{testimonial.text}</p>
+                    <p className="text-sm text-gray-400 mt-4">{testimonial.date}</p>
                   </div>
                 ))}
               </div>
