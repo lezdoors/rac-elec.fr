@@ -197,7 +197,7 @@ export default function HomePage() {
                     </div>
                     <div className="flex-1 flex flex-col">
                       <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 leading-snug min-h-[3.5rem] flex items-center justify-center">{step.title}</h3>
-                      <p className="text-sm md:text-base text-gray-500 leading-relaxed">{step.desc}</p>
+                      <p className="text-base text-gray-500 leading-relaxed">{step.desc}</p>
                     </div>
                   </div>
                 </div>
@@ -221,7 +221,7 @@ export default function HomePage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="text-base font-semibold text-gray-900 mb-1 leading-snug">{step.title}</h3>
-                    <p className="text-sm text-gray-500 leading-relaxed">{step.desc}</p>
+                    <p className="text-base text-gray-500 leading-relaxed">{step.desc}</p>
                   </div>
                 </div>
               ))}
