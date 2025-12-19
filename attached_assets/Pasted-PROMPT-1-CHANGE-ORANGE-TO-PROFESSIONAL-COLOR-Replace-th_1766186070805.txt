@@ -1,0 +1,224 @@
+PROMPT 1: CHANGE ORANGE TO PROFESSIONAL COLOR
+Replace the orange color (#FF5722 or similar) throughout the site with a professional color scheme:
+
+CURRENT PROBLEM:
+- Orange CTA buttons ("Démarrer ma demande", "Commencer maintenant", etc.)
+- Orange feels too aggressive and doesn't convey trust/professionalism
+
+CHOOSE ONE OF THESE OPTIONS:
+
+OPTION A - PROFESSIONAL BLUE (RECOMMENDED):
+- Primary CTA buttons: #2563EB (strong blue)
+- Hover state: #1D4ED8 (darker blue)
+- Gradient: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)
+- Shadow: 0 4px 12px rgba(37, 99, 235, 0.25)
+
+OPTION B - TRUST-BUILDING DARK PURPLE:
+- Primary CTA buttons: #7C3AED (vibrant purple)
+- Hover state: #6D28D9 (darker purple)
+- Gradient: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)
+- Shadow: 0 4px 12px rgba(124, 58, 237, 0.25)
+
+APPLY NEW COLOR TO:
+1. All "Démarrer ma demande" buttons
+2. "Commencer maintenant" button
+3. Any other orange CTAs
+4. Keep hover effects: transform: translateY(-2px) + increased shadow
+
+KEEP:
+- "Nous contacter" secondary button as blue outline (don't change)
+- Green checkmarks for trust badges
+- Blue numbered circles (1, 2, 3, 4) in process steps
+
+Replace ALL orange colors with your chosen option throughout the entire site.
+
+🔧 PROMPT 2: COMPRESS SERVICE CARDS SECTION
+Fix "Tous les Types de Raccordement Électrique Enedis" section - cards are too bulky and waste space:
+
+CURRENT PROBLEMS:
+- Cards take too much vertical space (huge padding)
+- Icons are too large
+- Excessive white space between elements
+- Section feels bloated on mobile
+
+REQUIRED CHANGES:
+
+1. CARD SPACING:
+   - Reduce padding: 20px (currently appears to be 32px+)
+   - Reduce margin between cards: 12px (currently appears to be 24px+)
+   - Tighten spacing between icon and heading: 12px
+   - Tighten spacing between heading and description: 8px
+   - Tighten spacing between description and link: 12px
+
+2. ICON SIZE:
+   - Reduce from current size to 48px (currently appears to be 60-80px)
+   - Keep icons centered
+
+3. TYPOGRAPHY:
+   - Heading: Keep at 20px but reduce margin-bottom to 8px
+   - Description: 15px (reduce from 16px), line-height: 1.5 (reduce from 1.6)
+   - Link: Keep at 16px
+
+4. OVERALL CARD HEIGHT:
+   - Target: Each card should be approximately 180-200px tall (currently ~250-280px)
+   - Remove excessive padding top and bottom
+
+5. DESKTOP LAYOUT:
+   - When screen ≥768px, display cards in 3-column grid (side by side)
+   - Max 2 rows if you have 6 cards
+   - This will make the section 50% shorter on desktop
+
+Apply these compression changes to make the section more compact and professional.
+
+🔧 PROMPT 3: COMPRESS ASSISTANCE SECTION
+Fix "Assistance pour Votre Demande de Raccordement Enedis" section - cards are too spread out and bulky:
+
+CURRENT PROBLEMS:
+- 4 contact cards stacked vertically taking massive space
+- Each card has excessive padding and spacing
+- Icons are too large
+- Feels like it goes on forever on mobile
+
+REQUIRED CHANGES:
+
+1. LAYOUT TRANSFORMATION:
+   - Desktop (≥768px): Display in 2x2 grid (2 columns, 2 rows) - this will cut height in HALF
+   - Mobile (<768px): Keep 2x2 grid but smaller cards with tighter spacing
+
+2. CARD SIZING:
+   - Reduce padding: 16px (currently appears to be 24-32px)
+   - Reduce card height: Target ~120px per card (currently ~160-180px)
+   - Gap between cards: 12px
+
+3. ICON SIZE:
+   - Reduce from current to 40px (currently appears to be 56-64px)
+   - Remove or reduce icon background circle size
+
+4. TYPOGRAPHY:
+   - Heading: 18px, bold (reduce from current size)
+   - Remove or minimize any subtitle text below heading
+   - Tighten all spacing
+
+5. SPACING BETWEEN ICON AND TEXT:
+   - Reduce to 8px (currently appears to be 12-16px)
+
+6. SECTION HEADER:
+   - "Assistance pour Votre Demande de Raccordement Enedis" - reduce font size to 28px mobile / 32px desktop
+   - "Nous sommes à votre écoute" - reduce to 16px
+   - Reduce margin-bottom to 24px (currently ~40px)
+
+This should compress the section from taking up 2+ screens to taking up less than 1 screen on mobile.
+
+🎨 PROMPT 4: ADD DESKTOP GRID LAYOUTS
+Transform mobile-stacked sections into desktop grids to dramatically reduce page length:
+
+CURRENT PROBLEM:
+- All cards are stacked vertically even on desktop
+- Page is extremely long on desktop
+- Wasted horizontal space
+
+IMPLEMENT DESKTOP GRIDS:
+
+1. "TOUS LES TYPES" SECTION (6 service cards):
+   Desktop (≥992px):
+   - 3 columns grid
+   - 2 rows (if 6 cards)
+   - Grid gap: 24px
+   - Cards equal height
+   
+   Tablet (768px-991px):
+   - 2 columns grid
+   - 3 rows
+   - Grid gap: 16px
+   
+   Mobile (<768px):
+   - 1 column (current)
+   - Gap: 12px
+
+2. "ASSISTANCE" SECTION (4 contact cards):
+   Desktop (≥768px):
+   - 2x2 grid (2 columns, 2 rows)
+   - Grid gap: 16px
+   - Equal height cards
+   
+   Mobile (<768px):
+   - 2x2 grid (keep, but tighter)
+   - Gap: 12px
+
+3. CSS IMPLEMENTATION:
+   Use CSS Grid:
+@media (min-width: 768px) {
+.assistance-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 16px;
+}
+}
+@media (min-width: 992px) {
+.service-types-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 24px;
+}
+}
+
+This will reduce overall page length by 40-50% on desktop while keeping mobile experience intact.
+
+🎨 PROMPT 5: OVERALL SPACING OPTIMIZATION
+Optimize vertical spacing throughout the site to reduce excessive scrolling:
+
+CURRENT PROBLEM:
+- Massive gaps between sections
+- Too much padding within sections
+- Page feels unnecessarily long
+
+IMPLEMENT TIGHTER SPACING:
+
+1. SECTION PADDING:
+   Desktop:
+   - Section padding-top: 48px (reduce from 64-80px)
+   - Section padding-bottom: 48px
+   
+   Mobile:
+   - Section padding-top: 32px (reduce from 48px)
+   - Section padding-bottom: 32px
+
+2. HEADING MARGINS:
+   - Section headings margin-bottom: 24px desktop / 20px mobile (reduce from 32-48px)
+   - Subtitle margin-bottom: 16px (reduce from 24px)
+
+3. PROCESS STEPS SECTIONS:
+   - "Traitement des Demandes" section: Reduce spacing between numbered steps
+   - "4 Étapes Simples" section: Reduce spacing between steps to 16px
+   - Step number to content: 12px gap
+
+4. TRUST BADGES ROW:
+   - Below hero: Reduce padding to 16px top/bottom (currently ~24-32px)
+   - Reduce spacing between badges
+
+5. REMOVE EXCESSIVE MARGINS:
+   - Between section heading and content: 24px max
+   - Between cards in vertical stack: 12px max
+   - Between icon and text in cards: 8-12px max
+
+TARGET: Reduce total page scroll length by 30% without making it feel cramped.
+
+📋 IMPLEMENTATION ORDER
+Use these 5 prompts in sequence:
+
+✅ Prompt 1 - Change orange to blue/purple (instant visual upgrade)
+✅ Prompt 4 - Add desktop grid layouts (biggest space saving)
+✅ Prompt 2 - Compress service cards section (reduce bulk)
+✅ Prompt 3 - Compress assistance section (reduce bulk)
+✅ Prompt 5 - Overall spacing optimization (final polish)
+
+After implementation, you should see:
+
+Professional blue/purple CTAs instead of aggressive orange
+Desktop shows 3-column grid for services (instead of vertical stack)
+Desktop shows 2x2 grid for assistance (instead of 4 vertical cards)
+Page length reduced by 40-50% on desktop
+Tighter, more professional spacing throughout
+Mobile remains functional but more compact
+
+Color recommendation: Go with Option A - Professional Blue (#2563EB) as it better conveys trust and authority for an electrical service, and it's already used in your numbered circles and links.
