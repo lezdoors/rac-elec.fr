@@ -6,6 +6,16 @@ import logoIllu from "@assets/logo-illu_1765394920144.png";
 
 export function ProfessionalHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Track scroll position for shadow effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -32,7 +42,7 @@ export function ProfessionalHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+    <header className={`sticky top-0 z-50 h-16 bg-white/98 backdrop-blur-md border-b border-gray-200 transition-shadow duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo Lockup: Icon | Separator | Two-line text */}
@@ -85,7 +95,7 @@ export function ProfessionalHeader() {
               onClick={handlePrimaryCta}
             >
               <Button
-                className="bg-[#3B82F6] hover:bg-[#2563EB] text-white px-4 py-2 font-semibold rounded-lg min-h-11"
+                className="bg-[#EA580C] hover:bg-[#C2410C] text-white px-6 py-2 font-semibold rounded-lg min-h-11 shadow-md hover:shadow-lg transition-all duration-150"
                 aria-label="Faire ma demande de raccordement"
               >
                 Faire ma demande

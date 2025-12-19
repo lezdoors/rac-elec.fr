@@ -117,11 +117,11 @@ export default function HomePage() {
                   Déposez votre demande en quelques minutes.
                 </p>
 
-                {/* Two CTA Buttons - Responsive - min 44px touch target */}
-                <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4 mb-4 sm:mb-8 md:mb-10">
+                {/* Enterprise CTA Buttons - Professional B2B design */}
+                <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-6 sm:mb-8 md:mb-10">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="w-full sm:w-auto bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-6 sm:px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 min-h-[48px]"
+                      className="w-full sm:w-auto bg-[#EA580C] hover:bg-[#C2410C] text-white font-semibold text-lg px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
                       data-testid="cta-hero-button"
                     >
                       Démarrer ma demande
@@ -129,7 +129,7 @@ export default function HomePage() {
                   </Link>
                   <Link href="/contact">
                     <button 
-                      className="w-full sm:w-auto bg-white hover:bg-gray-50 text-gray-700 font-semibold text-base px-6 sm:px-8 py-4 rounded-lg border border-gray-300 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2 min-h-[48px]"
+                      className="w-full sm:w-auto bg-transparent hover:bg-[#2563EB] text-[#2563EB] hover:text-white font-semibold text-lg px-8 py-4 rounded-lg border-2 border-[#2563EB] transition-all duration-150 flex items-center justify-center gap-2 min-h-[56px]"
                       data-testid="contact-hero-button"
                     >
                       <Phone className="w-5 h-5" />
@@ -155,6 +155,26 @@ export default function HomePage() {
                   />
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ENTERPRISE TRUST BAR - Professional trust signals with SVG icons */}
+        <section className="py-4 md:py-6 bg-gray-50 border-t border-b border-gray-200" data-testid="trust-bar">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-12">
+              {[
+                { text: "Paiement 100% sécurisé" },
+                { text: "Plus de 2000 clients satisfaits" },
+                { text: "Réponse sous 48h" }
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-[#059669] flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+                  </svg>
+                  <span className="text-base text-gray-700 font-medium">{item.text}</span>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -189,7 +209,7 @@ export default function HomePage() {
               ].map((step) => (
                 <div key={step.num} className="text-center h-full">
                   <div className="flex flex-col items-center h-full">
-                    <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-xl mb-5 shadow-lg flex-shrink-0">
+                    <div className="w-12 h-12 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-xl mb-5 shadow-lg flex-shrink-0">
                       {step.num}
                     </div>
                     <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center mb-5 flex-shrink-0">
@@ -213,7 +233,7 @@ export default function HomePage() {
                 { num: 4, img: step4Illustration, alt: "Suivi jusqu'à la mise en service", title: "Suivi jusqu'à la mise en service", desc: "Accompagnement personnalisé de A à Z." }
               ].map((step) => (
                 <div key={step.num} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 flex items-center gap-4">
-                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md">
+                  <div className="w-12 h-12 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md">
                     {step.num}
                   </div>
                   <div className="w-16 h-16 flex items-center justify-center flex-shrink-0">
@@ -227,11 +247,11 @@ export default function HomePage() {
               ))}
             </div>
 
-            {/* CTA Button */}
+            {/* CTA Button - Enterprise design */}
             <div className="text-center">
               <Link href="/raccordement-enedis#formulaire-raccordement">
                 <button 
-                  className="w-full sm:w-auto bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 min-h-[48px]"
+                  className="w-full sm:w-auto bg-[#EA580C] hover:bg-[#C2410C] text-white font-semibold text-lg px-10 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
                   data-testid="cta-process-button"
                 >
                   Commencer maintenant
@@ -282,7 +302,7 @@ export default function HomePage() {
                 <div className="space-y-4 md:space-y-6">
                   {/* Step 1 */}
                   <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
+                    <div className="w-11 h-11 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
                       1
                     </div>
                     <div>
@@ -293,7 +313,7 @@ export default function HomePage() {
 
                   {/* Step 2 */}
                   <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
+                    <div className="w-11 h-11 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
                       2
                     </div>
                     <div>
@@ -304,7 +324,7 @@ export default function HomePage() {
 
                   {/* Step 3 */}
                   <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
+                    <div className="w-11 h-11 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
                       3
                     </div>
                     <div>
@@ -315,7 +335,7 @@ export default function HomePage() {
 
                   {/* Step 4 */}
                   <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
+                    <div className="w-11 h-11 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
                       4
                     </div>
                     <div>
@@ -329,7 +349,7 @@ export default function HomePage() {
                 <div className="mt-6 md:mt-10">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="w-full md:w-auto bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 min-h-[48px]"
+                      className="w-full md:w-auto bg-[#EA580C] hover:bg-[#C2410C] text-white font-semibold text-lg px-10 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
                       data-testid="cta-steps-simple-button"
                     >
                       Démarrer ma demande maintenant
@@ -557,7 +577,7 @@ export default function HomePage() {
                 <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-6">
                   <a 
                     href="tel:0970709570" 
-                    className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-3"
+                    className="bg-[#EA580C] hover:bg-[#C2410C] text-white font-semibold text-lg px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 flex items-center gap-3 min-h-[56px]"
                   >
                     <Phone className="w-5 h-5" />
                     09 70 70 95 70
@@ -671,7 +691,7 @@ export default function HomePage() {
               <div className="inline-flex items-center gap-2 bg-gray-50 px-6 py-3 rounded-full">
                 <div className="flex -space-x-2">
                   {['SB', 'MD', 'CL', 'PG'].map((initials, idx) => (
-                    <div key={idx} className="w-8 h-8 rounded-full bg-[#3B82F6] border-2 border-white flex items-center justify-center text-white text-xs font-bold">
+                    <div key={idx} className="w-8 h-8 rounded-full bg-[#2563EB] border-2 border-white flex items-center justify-center text-white text-xs font-bold">
                       {initials}
                     </div>
                   ))}
@@ -810,7 +830,7 @@ export default function HomePage() {
                 source="faq_callback"
                 trigger={
                   <button 
-                    className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-sm px-6 py-3 rounded-lg transition-all duration-200"
+                    className="bg-[#EA580C] hover:bg-[#C2410C] text-white font-semibold text-base px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
                     data-testid="faq-callback-button"
                   >
                     Être rappelé
