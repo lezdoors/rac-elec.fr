@@ -1,0 +1,187 @@
+CRITICAL PERFORMANCE FIX - LCP is 13.5 seconds (FAILING):
+
+The Largest Contentful Paint is taking 13.5 seconds on mobile when it should be under 2.5 seconds. This is the #1 reason mobile conversions are zero.
+
+ROOT CAUSES FROM PAGESPEED:
+1. LCP request discovery is delayed
+2. Images are not optimized
+3. Render-blocking resources
+
+FIX REQUIRED:
+
+1. IDENTIFY THE LCP ELEMENT:
+   - It's likely the hero section heading "Demande de Raccordement Enedis" or the hero illustration
+   - Find the largest visible element in the viewport on page load
+
+2. IF IT'S TEXT (the heading):
+   - Ensure the font is preloaded: <link rel="preload" href="font-url" as="font" type="font/woff2" crossorigin>
+   - Use font-display: swap in @font-face rules
+   - Consider using system fonts for hero text
+
+3. IF IT'S AN IMAGE (the illustration):
+   - Add fetchpriority="high" to the hero image
+   - Ensure the image is not lazy-loaded (remove loading="lazy" if present)
+   - Preload the hero image: <link rel="preload" as="image" href="hero-image-url">
+   - Compress the image to WebP format, max 100KB file size
+   - Serve properly sized image (max 800px width for mobile)
+
+4. REMOVE RENDER-BLOCKING RESOURCES:
+   - Inline critical CSS for above-the-fold content
+   - Defer non-critical CSS: <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+   - Move non-critical JavaScript to end of body with defer attribute
+
+5. ADD EXPLICIT DIMENSIONS:
+   - Add width and height attributes to the hero image to prevent layout shift
+   - Example: <img src="hero.png" width="800" height="600" alt="...">
+
+VERIFY: After implementing, the LCP should drop from 13.5s to under 2.5s.
+Prompt #2: Fix First Contentful Paint (FCP)
+
+CRITICAL PERFORMANCE FIX - FCP is 6.4 seconds (FAILING):
+
+First Contentful Paint at 6.4 seconds means users see a blank white screen for over 6 seconds. On mobile, users abandon after 3 seconds.
+
+FIX REQUIRED:
+
+1. ELIMINATE RENDER-BLOCKING RESOURCES:
+   - Identify all CSS files loaded in <head>
+   - Inline critical CSS (CSS needed for above-the-fold content) directly in <head> using <style> tags
+   - Load non-critical CSS asynchronously:
+     <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+     <noscript><link rel="stylesheet" href="styles.css"></noscript>
+
+2. OPTIMIZE JAVASCRIPT LOADING:
+   - Move all <script> tags to end of <body>
+   - Add defer attribute to scripts: <script src="app.js" defer></script>
+   - If using external analytics/tracking, load them asynchronously
+
+3. REDUCE SERVER RESPONSE TIME:
+   - Ensure Replit deployment is not "sleeping" (use a paid plan if needed)
+   - Check if there's server-side rendering causing delays
+   - Consider adding a simple loading state/skeleton screen
+
+4. OPTIMIZE WEB FONTS:
+   - Preload critical fonts
+   - Use font-display: swap or font-display: optional
+   - Consider using system font stack for instant rendering:
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+5. MINIMIZE HTML SIZE:
+   - Remove unnecessary comments
+   - Minify HTML
+   - Remove unused inline styles
+
+VERIFY: FCP should drop from 6.4s to under 1.8s.
+Prompt #3: Fix Cumulative Layout Shift (CLS)
+
+PERFORMANCE FIX - CLS is 0.161 (NEEDS IMPROVEMENT):
+
+Cumulative Layout Shift of 0.161 means elements are moving around during page load, creating a janky experience. This hurts mobile conversions.
+
+FIX REQUIRED:
+
+1. ADD EXPLICIT DIMENSIONS TO ALL IMAGES:
+   - Find every <img> tag
+   - Add width and height attributes that match the image's aspect ratio
+   - Example: <img src="hero.png" width="800" height="600" alt="...">
+   - This reserves space before the image loads
+
+2. RESERVE SPACE FOR DYNAMIC CONTENT:
+   - If you have skeleton loaders or placeholders, ensure they match final content size
+   - Use aspect-ratio CSS property: aspect-ratio: 16/9;
+
+3. AVOID INSERTING CONTENT ABOVE EXISTING CONTENT:
+   - Don't inject ads, banners, or notifications above the fold after page load
+   - If you must, reserve space for them
+
+4. PRELOAD FONTS:
+   - Web fonts loading late can cause text to shift
+   - Preload critical fonts: <link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin>
+   - Use font-display: optional to prevent invisible text phase
+
+5. FIX FORCED REFLOW (mentioned in diagnostics):
+   - Avoid reading layout properties (offsetHeight, scrollTop) then immediately writing styles
+   - Batch DOM reads and writes separately
+
+VERIFY: CLS should drop from 0.161 to under 0.1.
+Prompt #4: Eliminate Unused JavaScript (436 KB)
+
+PERFORMANCE FIX - 436 KB of unused JavaScript is slowing mobile:
+
+You're shipping 436 KB of JavaScript that's not being used. On mobile networks, this takes 2-3 extra seconds to download and parse.
+
+FIX REQUIRED:
+
+1. IDENTIFY THE BLOAT:
+   - Check if you're importing entire libraries when you only need small parts
+   - Example: If using lodash, import specific functions instead of the whole library
+   - Bad: import _ from 'lodash'
+   - Good: import debounce from 'lodash/debounce'
+
+2. REMOVE UNUSED DEPENDENCIES:
+   - Check package.json for libraries you're not actually using
+   - Remove them: npm uninstall [package-name]
+
+3. CODE SPLIT:
+   - If you have route-based components, split JavaScript by route
+   - Only load JavaScript needed for the current page
+   - Use dynamic imports: const Component = () => import('./Component')
+
+4. TREE SHAKING:
+   - Ensure your build tool (Vite/Webpack) is configured for tree shaking
+   - Use ES6 modules (import/export) not CommonJS (require)
+   - Check build config for optimization settings
+
+5. DEFER NON-CRITICAL JS:
+   - Move analytics, chat widgets, social media embeds to load after page interactive
+   - Use Intersection Observer to load features only when needed
+
+VERIFY: JavaScript bundle size should drop by at least 200-300 KB.
+Prompt #5: Fix Inefficient Cache Lifetimes (230 KB)
+
+PERFORMANCE FIX - 230 KB of resources have poor caching:
+
+Static assets (CSS, JS, images) are being re-downloaded on every visit instead of cached. This destroys repeat visitor experience.
+
+FIX REQUIRED:
+
+1. CHECK REPLIT DEPLOYMENT SETTINGS:
+   - Verify if Replit is serving static assets with proper cache headers
+   - Static assets should have cache-control headers set
+
+2. ADD CACHE HEADERS (if you have control):
+   - For images, CSS, JS: Cache-Control: public, max-age=31536000, immutable
+   - For HTML: Cache-Control: no-cache (must revalidate)
+
+3. USE CONTENT HASHING:
+   - Ensure your build tool adds hashes to filenames
+   - Example: app.abc123.js instead of app.js
+   - This enables aggressive caching without staleness issues
+
+4. OPTIMIZE IMAGES FOR CACHING:
+   - Compress images (use TinyPNG or similar)
+   - Convert to WebP format
+   - Serve properly sized images (don't send 2000px image when you need 400px)
+
+5. IF YOU CAN'T CONTROL HEADERS:
+   - Consider using a CDN like Cloudflare (free plan) in front of Replit
+   - This will add proper caching automatically
+
+VERIFY: Repeat page loads should be 2-3x faster.
+Prompt #6: Optimize Images (131 KB Savings)
+
+PERFORMANCE FIX - Images are unoptimized, wasting 131 KB:
+
+Your images are too large and not in modern formats. On mobile networks, this adds 1-2 seconds of load time.
+
+FIX REQUIRED:
+
+1. CONVERT TO WEBP:
+   - Convert all PNG/JPG images to WebP format
+   - WebP is 25-35% smaller with same quality
+   - Use <picture> element for fallback:
+   ```html
+   <picture>
+     <source srcset="image.webp" type="image/webp">
+     <img src="image.jpg" alt="...">
+   </picture>
