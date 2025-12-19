@@ -1,1 +1,0 @@
-import{j as t}from"./index-CjgFkm8l.js";import{C as r,f as a}from"./french-cities-DSTZSxfG.js";import"./map-pin-E1bq4ghG.js";import"./zap-K5-x7Vqx.js";import"./building-BFdPqU8W.js";function p(){return t.jsx(r,{cityData:a.lyon})}export{p as default};

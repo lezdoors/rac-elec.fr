@@ -91,10 +91,10 @@ export default function HomePage() {
         `}</script>
       </Helmet>
 
-      <main id="main-content">
+      <main id="main-content" className="overflow-x-hidden">
         {/* HERO SECTION - Premium Design - Fully Responsive */}
         <section 
-          className="relative overflow-hidden pt-6 sm:pt-8 md:pt-12 lg:pt-16 pb-8 sm:pb-10 md:pb-14 lg:pb-16 bg-white"
+          className="relative overflow-hidden pt-4 sm:pt-8 md:pt-12 lg:pt-16 pb-4 sm:pb-10 md:pb-14 lg:pb-16 bg-white"
           data-testid="hero-section"
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-12 xl:px-20 max-w-screen-xl">
@@ -117,11 +117,11 @@ export default function HomePage() {
                   Déposez votre demande en quelques minutes.
                 </p>
 
-                {/* Two CTA Buttons - Responsive */}
-                <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4 mb-6 sm:mb-8 md:mb-10">
+                {/* Two CTA Buttons - Responsive - min 44px touch target */}
+                <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4 mb-4 sm:mb-8 md:mb-10">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="w-full sm:w-auto bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+                      className="w-full sm:w-auto bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-6 sm:px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 min-h-[48px]"
                       data-testid="cta-hero-button"
                     >
                       Démarrer ma demande
@@ -129,10 +129,10 @@ export default function HomePage() {
                   </Link>
                   <Link href="/contact">
                     <button 
-                      className="w-full sm:w-auto bg-white hover:bg-gray-50 text-gray-700 font-semibold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 rounded-lg border border-gray-300 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2"
+                      className="w-full sm:w-auto bg-white hover:bg-gray-50 text-gray-700 font-semibold text-base px-6 sm:px-8 py-4 rounded-lg border border-gray-300 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2 min-h-[48px]"
                       data-testid="contact-hero-button"
                     >
-                      <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <Phone className="w-5 h-5" />
                       Nous contacter
                     </button>
                   </Link>
@@ -140,14 +140,17 @@ export default function HomePage() {
 
               </div>
 
-              {/* Right Illustration - Responsive sizing */}
-              <div className="w-full lg:w-1/2 xl:w-[55%] flex justify-center lg:justify-end mt-4 sm:mt-6 lg:mt-0">
+              {/* Right Illustration - HIDDEN on mobile for better conversion, visible md+ */}
+              <div className="hidden md:flex w-full lg:w-1/2 xl:w-[55%] justify-center lg:justify-end mt-4 sm:mt-6 lg:mt-0">
                 <div className="relative w-full max-w-[320px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[550px] xl:max-w-[650px]">
                   <img 
                     src={heroIllustration} 
                     alt="Famille devant une maison avec panneaux solaires et voiture électrique - Raccordement électrique Enedis"
                     className="w-full h-auto"
+                    width="650"
+                    height="450"
                     loading="eager"
+                    fetchPriority="high"
                     data-testid="hero-illustration"
                   />
                 </div>
@@ -158,7 +161,7 @@ export default function HomePage() {
 
         {/* 4-STEP PROCESS SECTION - Right after Hero */}
         <section 
-          className="py-12 md:py-16"
+          className="py-8 md:py-16"
           style={{ background: 'linear-gradient(180deg, #EBF4FF 0%, #F8FAFF 100%)' }}
           id="process"
           data-animate
@@ -166,7 +169,7 @@ export default function HomePage() {
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-10 md:mb-12">
+            <div className="text-center mb-6 md:mb-12">
               <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-[#0066CC] mb-4 leading-tight">
                 Traitement des Demandes de Raccordement Électrique par Enedis
               </h2>
@@ -201,65 +204,34 @@ export default function HomePage() {
               ))}
             </div>
 
-            {/* Mobile Carousel - Visible only on mobile */}
-            <div className="sm:hidden mb-12 overflow-hidden">
-              <div 
-                className="flex gap-4"
-                style={{
-                  width: 'max-content',
-                  animation: 'scrollSteps 20s linear infinite'
-                }}
-              >
-                {/* First set */}
-                {[
-                  { num: 1, img: step1Illustration, alt: "Définir le type de raccordement", title: "Définir le type de raccordement", desc: "Utilisez notre outil pour cadrer votre demande." },
-                  { num: 2, img: step2Illustration, alt: "Compléter un formulaire simple", title: "Compléter le formulaire en ligne", desc: "Renseignez votre projet en quelques minutes." },
-                  { num: 3, img: step3Illustration, alt: "Dépôt du dossier chez Enedis", title: "Dépôt du dossier chez Enedis", desc: "Constitution et envoi de votre dossier complet." },
-                  { num: 4, img: step4Illustration, alt: "Suivi jusqu'à la mise en service", title: "Suivi jusqu'à la mise en service", desc: "Accompagnement personnalisé de A à Z." }
-                ].map((step, idx) => (
-                  <div key={`first-${idx}`} className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 min-w-[260px] max-w-[260px] flex-shrink-0 text-center">
-                    <div className="w-10 h-10 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg mb-4 shadow-md mx-auto">
-                      {step.num}
-                    </div>
-                    <div className="w-28 h-28 flex items-center justify-center mb-4 mx-auto">
-                      <img src={step.img} alt={step.alt} className="w-full h-full object-contain" loading="lazy" />
-                    </div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-snug">{step.title}</h3>
-                    <p className="text-xs text-gray-500 leading-relaxed">{step.desc}</p>
+            {/* Mobile Vertical Stack - All 4 steps visible, no horizontal scroll */}
+            <div className="sm:hidden mb-8 space-y-4">
+              {[
+                { num: 1, img: step1Illustration, alt: "Définir le type de raccordement", title: "Définir le type de raccordement", desc: "Utilisez notre outil pour cadrer votre demande." },
+                { num: 2, img: step2Illustration, alt: "Compléter un formulaire simple", title: "Compléter le formulaire en ligne", desc: "Renseignez votre projet en quelques minutes." },
+                { num: 3, img: step3Illustration, alt: "Dépôt du dossier chez Enedis", title: "Dépôt du dossier chez Enedis", desc: "Constitution et envoi de votre dossier complet." },
+                { num: 4, img: step4Illustration, alt: "Suivi jusqu'à la mise en service", title: "Suivi jusqu'à la mise en service", desc: "Accompagnement personnalisé de A à Z." }
+              ].map((step) => (
+                <div key={step.num} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 flex items-center gap-4">
+                  <div className="w-12 h-12 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md">
+                    {step.num}
                   </div>
-                ))}
-                {/* Duplicate for seamless loop */}
-                {[
-                  { num: 1, img: step1Illustration, alt: "Définir le type de raccordement", title: "Définir le type de raccordement", desc: "Utilisez notre outil pour cadrer votre demande." },
-                  { num: 2, img: step2Illustration, alt: "Compléter un formulaire simple", title: "Compléter le formulaire en ligne", desc: "Renseignez votre projet en quelques minutes." },
-                  { num: 3, img: step3Illustration, alt: "Dépôt du dossier chez Enedis", title: "Dépôt du dossier chez Enedis", desc: "Constitution et envoi de votre dossier complet." },
-                  { num: 4, img: step4Illustration, alt: "Suivi jusqu'à la mise en service", title: "Suivi jusqu'à la mise en service", desc: "Accompagnement personnalisé de A à Z." }
-                ].map((step, idx) => (
-                  <div key={`second-${idx}`} className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 min-w-[260px] max-w-[260px] flex-shrink-0 text-center">
-                    <div className="w-10 h-10 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg mb-4 shadow-md mx-auto">
-                      {step.num}
-                    </div>
-                    <div className="w-28 h-28 flex items-center justify-center mb-4 mx-auto">
-                      <img src={step.img} alt={step.alt} className="w-full h-full object-contain" loading="lazy" />
-                    </div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-snug">{step.title}</h3>
-                    <p className="text-xs text-gray-500 leading-relaxed">{step.desc}</p>
+                  <div className="w-16 h-16 flex items-center justify-center flex-shrink-0">
+                    <img src={step.img} alt={step.alt} className="w-full h-full object-contain" width="64" height="64" loading="lazy" />
                   </div>
-                ))}
-              </div>
-              <style>{`
-                @keyframes scrollSteps {
-                  0% { transform: translateX(0); }
-                  100% { transform: translateX(-50%); }
-                }
-              `}</style>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base font-semibold text-gray-900 mb-1 leading-snug">{step.title}</h3>
+                    <p className="text-sm text-gray-500 leading-relaxed">{step.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
 
             {/* CTA Button */}
             <div className="text-center">
               <Link href="/raccordement-enedis#formulaire-raccordement">
                 <button 
-                  className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+                  className="w-full sm:w-auto bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 min-h-[48px]"
                   data-testid="cta-process-button"
                 >
                   Commencer maintenant
@@ -269,9 +241,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 3 STEPS SIMPLE SECTION - Like original site */}
+        {/* 4 STEPS SIMPLE SECTION - Like original site */}
         <section 
-          className="py-12 md:py-16"
+          className="py-8 md:py-16"
           style={{ background: 'linear-gradient(180deg, #F8FAFF 0%, #FFFFFF 100%)' }}
           id="steps-simple"
           data-animate
@@ -279,9 +251,9 @@ export default function HomePage() {
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-10 md:mb-12">
+            <div className="text-center mb-6 md:mb-12">
               <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-[#0066CC] mb-4 leading-tight">
-                3 Étapes Simples Pour Votre Raccordement Enedis
+                4 Étapes Simples Pour Votre Raccordement Enedis
               </h2>
               <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
                 Remplissez notre formulaire en ligne en quelques minutes. Nous nous occupons du reste.
@@ -289,62 +261,75 @@ export default function HomePage() {
             </div>
 
             {/* Two Column Layout - Illustration + Steps */}
-            <div className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 transition-all duration-700 ${isVisible['steps-simple'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {/* Left - Large Illustration */}
-              <div className="w-full lg:w-1/2 flex justify-center">
+            <div className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-20 transition-all duration-700 ${isVisible['steps-simple'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              {/* Left - Large Illustration - Hidden on mobile */}
+              <div className="hidden md:flex w-full lg:w-1/2 justify-center">
                 <div className="w-full max-w-[450px]">
                   <img 
                     src={formIntroIllustration} 
                     alt="Femme remplissant un formulaire en ligne"
                     className="w-full h-auto"
+                    width="450"
+                    height="400"
                     loading="lazy"
                     data-testid="form-intro-illustration"
                   />
                 </div>
               </div>
 
-              {/* Right - 3 Steps List */}
+              {/* Right - 4 Steps List */}
               <div className="w-full lg:w-1/2">
-                <div className="space-y-8">
+                <div className="space-y-4 md:space-y-6">
                   {/* Step 1 */}
-                  <div className="flex items-start gap-5">
-                    <div className="w-11 h-11 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md">
+                  <div className="flex items-start gap-4">
+                    <div className="w-11 h-11 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
                       1
                     </div>
                     <div>
-                      <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2">Renseignez vos informations</h3>
-                      <p className="text-base md:text-lg text-gray-600">Coordonnées et détails de votre projet</p>
+                      <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-1">Renseignez vos informations</h3>
+                      <p className="text-base text-gray-600">Coordonnées et détails de votre projet</p>
                     </div>
                   </div>
 
                   {/* Step 2 */}
-                  <div className="flex items-start gap-5">
-                    <div className="w-11 h-11 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md">
+                  <div className="flex items-start gap-4">
+                    <div className="w-11 h-11 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
                       2
                     </div>
                     <div>
-                      <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2">Recevez votre devis</h3>
-                      <p className="text-base md:text-lg text-gray-600">Sous 48h, un devis détaillé et personnalisé</p>
+                      <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-1">Recevez votre devis</h3>
+                      <p className="text-base text-gray-600">Sous 48h, un devis détaillé et personnalisé</p>
                     </div>
                   </div>
 
                   {/* Step 3 */}
-                  <div className="flex items-start gap-5">
-                    <div className="w-11 h-11 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md">
+                  <div className="flex items-start gap-4">
+                    <div className="w-11 h-11 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
                       3
                     </div>
                     <div>
-                      <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2">Validation et raccordement</h3>
-                      <p className="text-base md:text-lg text-gray-600">Nous gérons toutes les démarches avec Enedis</p>
+                      <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-1">Dépôt du dossier chez Enedis</h3>
+                      <p className="text-base text-gray-600">Nous gérons toutes les démarches administratives</p>
+                    </div>
+                  </div>
+
+                  {/* Step 4 */}
+                  <div className="flex items-start gap-4">
+                    <div className="w-11 h-11 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
+                      4
+                    </div>
+                    <div>
+                      <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-1">Suivi jusqu'à la mise en service</h3>
+                      <p className="text-base text-gray-600">Accompagnement personnalisé de A à Z</p>
                     </div>
                   </div>
                 </div>
 
                 {/* CTA Button */}
-                <div className="mt-12">
+                <div className="mt-6 md:mt-10">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+                      className="w-full md:w-auto bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 min-h-[48px]"
                       data-testid="cta-steps-simple-button"
                     >
                       Démarrer ma demande maintenant
@@ -357,10 +342,10 @@ export default function HomePage() {
         </section>
 
         {/* SERVICE TYPES SECTION - Centered Card Layout Like Original */}
-        <section className="py-12 md:py-16 bg-white" id="types-raccordements" data-animate data-testid="service-types-section">
+        <section className="py-8 md:py-16 bg-white" id="types-raccordements" data-animate data-testid="service-types-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-10 md:mb-12">
+            <div className="text-center mb-6 md:mb-12">
               <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-4">
                 Tous les Types de Raccordement Électrique Enedis
               </h2>
@@ -471,10 +456,10 @@ export default function HomePage() {
         </section>
 
         {/* ASSISTANCE SECTION - Transparent icons like original site */}
-        <section className="py-12 md:py-16 bg-gray-50" id="assistance" data-animate data-testid="assistance-section">
+        <section className="py-8 md:py-16 bg-gray-50" id="assistance" data-animate data-testid="assistance-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-10 md:mb-12">
+            <div className="text-center mb-6 md:mb-12">
               <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-3">
                 Assistance pour Votre Demande de Raccordement Enedis
               </h2>
@@ -484,7 +469,7 @@ export default function HomePage() {
             </div>
 
             {/* 4 Assistance Icons - Transparent backgrounds like original site */}
-            <div className={`grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 transition-all duration-700 ${isVisible['assistance'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className={`grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-12 transition-all duration-700 ${isVisible['assistance'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               
               {/* Appelez-nous */}
               <a href="tel:0970709570" className="group text-center" data-testid="assistance-card-call">
@@ -542,16 +527,18 @@ export default function HomePage() {
         </section>
 
         {/* BESOIN D'AIDE SECTION - Like Original */}
-        <section className="py-12 md:py-16 bg-white" id="besoin-aide" data-animate data-testid="besoin-aide-section">
+        <section className="py-8 md:py-16 bg-white" id="besoin-aide" data-animate data-testid="besoin-aide-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
-            <div className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 transition-all duration-700 ${isVisible['besoin-aide'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {/* Left - Illustration */}
-              <div className="w-full lg:w-2/5 flex justify-center">
+            <div className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-20 transition-all duration-700 ${isVisible['besoin-aide'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              {/* Left - Illustration - Hidden on mobile */}
+              <div className="hidden md:flex w-full lg:w-2/5 justify-center">
                 <div className="w-full max-w-[350px]">
                   <img 
                     src={contactFormIllustration} 
                     alt="Support client disponible"
                     className="w-full h-auto"
+                    width="350"
+                    height="300"
                     loading="lazy"
                   />
                 </div>
@@ -559,10 +546,10 @@ export default function HomePage() {
 
               {/* Right - Content */}
               <div className="w-full lg:w-3/5 text-center lg:text-left">
-                <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-6">
+                <h2 className="text-[24px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-4">
                   Besoin d'aide ?
                 </h2>
-                <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-lg mx-auto lg:mx-0">
+                <p className="text-base md:text-xl text-gray-600 mb-6 max-w-lg mx-auto lg:mx-0">
                   Notre équipe d'experts est disponible pour répondre à toutes vos questions
                 </p>
                 
@@ -592,10 +579,10 @@ export default function HomePage() {
         </section>
 
         {/* TESTIMONIALS SECTION - Professional Design */}
-        <section className="py-12 md:py-16 bg-white" id="testimonials" data-animate data-testid="testimonials-section">
+        <section className="py-8 md:py-16 bg-white" id="testimonials" data-animate data-testid="testimonials-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-8 md:mb-10">
+            <div className="text-center mb-6 md:mb-10">
               <h2 className="text-[28px] sm:text-[32px] md:text-[42px] font-bold text-[#0066CC] mb-4">
                 Ce que nos clients disent de nous
               </h2>
@@ -696,10 +683,10 @@ export default function HomePage() {
         </section>
 
         {/* FAQ SECTION - Professional Multi-Column Design */}
-        <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white" id="faq" data-animate data-testid="faq-section">
+        <section className="py-8 md:py-16 bg-gradient-to-b from-gray-50 to-white" id="faq" data-animate data-testid="faq-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-8 md:mb-10">
+            <div className="text-center mb-6 md:mb-10">
               <h2 className="text-[28px] sm:text-[32px] md:text-[42px] font-bold text-[#0066CC] mb-4 italic">
                 Questions fréquemment posées
               </h2>
@@ -709,7 +696,7 @@ export default function HomePage() {
             </div>
 
             {/* FAQ Categories Grid - 2 columns for better balance */}
-            <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 mb-10 transition-all duration-700 ${isVisible['faq'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-10 mb-6 md:mb-10 transition-all duration-700 ${isVisible['faq'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               
               {/* Category 1: Demarches et Documents */}
               <div>
