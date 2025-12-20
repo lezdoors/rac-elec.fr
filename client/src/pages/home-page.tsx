@@ -374,96 +374,96 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Service Grid - Centered Cards with Icons Above */}
-            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 transition-all duration-700 ${isVisible['types-raccordements'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            {/* Service Grid - Compact Cards with Icons Above */}
+            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 transition-all duration-700 ${isVisible['types-raccordements'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               
               {/* Raccordement Provisoire */}
               <Link href="/raccordement-enedis" className="group">
-                <div className="bg-white rounded-2xl p-8 md:p-10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-xl border border-gray-100 h-full">
-                  <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6">
+                <div className="bg-white rounded-xl p-5 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border border-gray-200 h-full">
+                  <div className="w-12 h-12 mx-auto mb-3">
                     <img src={raccordementProvisoireIcon} alt="Raccordement Provisoire" className="w-full h-full object-contain" loading="lazy" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Raccordement Provisoire</h3>
-                  <p className="text-base md:text-lg text-gray-600 mb-6">Pour chantiers, événements temporaires et installations provisoires</p>
-                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
-                    Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <h3 className="text-lg font-semibold text-[#0072CE] mb-2">Raccordement Provisoire</h3>
+                  <p className="text-sm text-gray-600 mb-3 leading-relaxed">Pour chantiers, événements temporaires et installations provisoires</p>
+                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-sm group-hover:text-[#2563EB]">
+                    Faire une demande <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>
               </Link>
 
               {/* Raccordement Definitif */}
               <Link href="/raccordement-enedis" className="group">
-                <div className="bg-white rounded-2xl p-8 md:p-10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-xl border border-gray-100 h-full">
-                  <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6">
+                <div className="bg-white rounded-xl p-5 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border border-gray-200 h-full">
+                  <div className="w-12 h-12 mx-auto mb-3">
                     <img src={raccordementDefinitifIcon} alt="Raccordement Définitif" className="w-full h-full object-contain" loading="lazy" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Raccordement Définitif</h3>
-                  <p className="text-base md:text-lg text-gray-600 mb-6">Maisons neuves, locaux commerciaux et installations permanentes</p>
-                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
-                    Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <h3 className="text-lg font-semibold text-[#0072CE] mb-2">Raccordement Définitif</h3>
+                  <p className="text-sm text-gray-600 mb-3 leading-relaxed">Maisons neuves, locaux commerciaux et installations permanentes</p>
+                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-sm group-hover:text-[#2563EB]">
+                    Faire une demande <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>
               </Link>
 
               {/* Augmentation de Puissance */}
               <Link href="/raccordement-enedis" className="group">
-                <div className="bg-white rounded-2xl p-8 md:p-10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-xl border border-gray-100 h-full">
-                  <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6">
+                <div className="bg-white rounded-xl p-5 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border border-gray-200 h-full">
+                  <div className="w-12 h-12 mx-auto mb-3">
                     <img src={augmentationPuissanceIcon} alt="Augmentation de Puissance" className="w-full h-full object-contain" loading="lazy" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Augmentation de Puissance</h3>
-                  <p className="text-base md:text-lg text-gray-600 mb-6">Augmentez la capacité de votre raccordement électrique existant</p>
-                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
-                    Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <h3 className="text-lg font-semibold text-[#0072CE] mb-2">Augmentation de Puissance</h3>
+                  <p className="text-sm text-gray-600 mb-3 leading-relaxed">Augmentez la capacité de votre raccordement électrique existant</p>
+                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-sm group-hover:text-[#2563EB]">
+                    Faire une demande <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>
               </Link>
 
               {/* Raccordement Collectif */}
               <Link href="/raccordement-enedis" className="group">
-                <div className="bg-white rounded-2xl p-8 md:p-10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-xl border border-gray-100 h-full">
-                  <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6">
+                <div className="bg-white rounded-xl p-5 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border border-gray-200 h-full">
+                  <div className="w-12 h-12 mx-auto mb-3">
                     <img src={raccordementCollectifIcon} alt="Raccordement Collectif" className="w-full h-full object-contain" loading="lazy" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Raccordement Collectif</h3>
-                  <p className="text-base md:text-lg text-gray-600 mb-6">Immeubles résidentiels, copropriétés et bâtiments multi-logements</p>
-                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
-                    Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <h3 className="text-lg font-semibold text-[#0072CE] mb-2">Raccordement Collectif</h3>
+                  <p className="text-sm text-gray-600 mb-3 leading-relaxed">Immeubles résidentiels, copropriétés et bâtiments multi-logements</p>
+                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-sm group-hover:text-[#2563EB]">
+                    Faire une demande <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>
               </Link>
 
               {/* Viabilisation Terrain */}
               <Link href="/raccordement-enedis" className="group">
-                <div className="bg-white rounded-2xl p-8 md:p-10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-xl border border-gray-100 h-full">
-                  <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6">
+                <div className="bg-white rounded-xl p-5 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border border-gray-200 h-full">
+                  <div className="w-12 h-12 mx-auto mb-3">
                     <img src={servicesTechniquesIcon} alt="Viabilisation Terrain" className="w-full h-full object-contain" loading="lazy" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Viabilisation Terrain</h3>
-                  <p className="text-base md:text-lg text-gray-600 mb-6">Préparation électrique de votre terrain à bâtir</p>
-                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
-                    Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <h3 className="text-lg font-semibold text-[#0072CE] mb-2">Viabilisation Terrain</h3>
+                  <p className="text-sm text-gray-600 mb-3 leading-relaxed">Préparation électrique de votre terrain à bâtir</p>
+                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-sm group-hover:text-[#2563EB]">
+                    Faire une demande <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>
               </Link>
 
               {/* Modification Raccordement */}
               <Link href="/raccordement-enedis" className="group">
-                <div className="bg-white rounded-2xl p-8 md:p-10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-xl border border-gray-100 h-full">
-                  <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6">
+                <div className="bg-white rounded-xl p-5 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border border-gray-200 h-full">
+                  <div className="w-12 h-12 mx-auto mb-3">
                     <img src={raccordementEnedisIcon} alt="Maison Neuve" className="w-full h-full object-contain" loading="lazy" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-semibold text-[#0072CE] mb-4">Maison Neuve</h3>
-                  <p className="text-base md:text-lg text-gray-600 mb-6">Premier raccordement pour votre construction neuve</p>
-                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-base group-hover:text-[#2563EB]">
-                    Faire une demande <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <h3 className="text-lg font-semibold text-[#0072CE] mb-2">Maison Neuve</h3>
+                  <p className="text-sm text-gray-600 mb-3 leading-relaxed">Premier raccordement pour votre construction neuve</p>
+                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-sm group-hover:text-[#2563EB]">
+                    Faire une demande <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>
               </Link>
             </div>
 
             {/* FAQ Link */}
-            <div className="text-center mt-16">
+            <div className="text-center mt-10">
               <p className="text-lg text-gray-600 mb-4">Vous ne savez pas quel type de raccordement choisir ?</p>
               <button 
                 onClick={() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })}
