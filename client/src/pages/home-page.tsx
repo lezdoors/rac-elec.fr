@@ -475,72 +475,52 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ASSISTANCE SECTION - Transparent icons like original site */}
-        <section className="py-8 md:py-16 bg-gray-50" id="assistance" data-animate data-testid="assistance-section">
+        {/* ASSISTANCE SECTION - Compact 2x2 Grid */}
+        <section className="py-6 md:py-10 bg-gray-50" id="assistance" data-animate data-testid="assistance-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-6 md:mb-12">
-              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-3">
-                Assistance pour Votre Demande de Raccordement Enedis
+            <div className="text-center mb-4 md:mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                Assistance Raccordement
               </h2>
-              <p className="text-lg md:text-xl text-gray-600">
+              <p className="text-base text-gray-600">
                 Nous sommes à votre écoute
               </p>
             </div>
 
-            {/* 4 Assistance Icons - Transparent backgrounds like original site */}
-            <div className={`grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-12 transition-all duration-700 ${isVisible['assistance'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            {/* 4 Assistance Icons - Compact 2x2 Grid */}
+            <div className={`grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 transition-all duration-700 ${isVisible['assistance'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               
               {/* Appelez-nous */}
-              <a href="tel:0970709570" className="group text-center" data-testid="assistance-card-call">
-                <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 flex items-center justify-center group-hover:-translate-y-1 transition-all duration-200">
-                  <img 
-                    src={appelezNousIllustration} 
-                    alt="Appelez-nous" 
-                    className="w-full h-full object-contain"
-                    loading="lazy"
-                  />
+              <a href="tel:0970709570" className="group text-center bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-all" data-testid="assistance-card-call">
+                <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                  <img src={appelezNousIllustration} alt="Appelez-nous" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold text-[#0072CE]">Appelez-nous</h3>
+                <h3 className="text-sm font-semibold text-[#0072CE]">Appelez-nous</h3>
               </a>
 
               {/* Rappel gratuit */}
-              <Link href="/contact" className="group text-center" data-testid="assistance-card-callback">
-                <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 flex items-center justify-center group-hover:-translate-y-1 transition-all duration-200">
-                  <img 
-                    src={rappelGratuitIllustration} 
-                    alt="Rappel gratuit" 
-                    className="w-full h-full object-contain"
-                    loading="lazy"
-                  />
+              <Link href="/contact" className="group text-center bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-all" data-testid="assistance-card-callback">
+                <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                  <img src={rappelGratuitIllustration} alt="Rappel gratuit" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold text-[#0072CE]">Rappel gratuit</h3>
+                <h3 className="text-sm font-semibold text-[#0072CE]">Rappel gratuit</h3>
               </Link>
 
               {/* Chat */}
-              <Link href="/contact" className="group text-center" data-testid="assistance-card-chat">
-                <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 flex items-center justify-center group-hover:-translate-y-1 transition-all duration-200">
-                  <img 
-                    src={chatIllustration} 
-                    alt="Chat" 
-                    className="w-full h-full object-contain"
-                    loading="lazy"
-                  />
+              <Link href="/contact" className="group text-center bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-all" data-testid="assistance-card-chat">
+                <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                  <img src={chatIllustration} alt="Chat" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold text-[#0072CE]">Chat</h3>
+                <h3 className="text-sm font-semibold text-[#0072CE]">Chat</h3>
               </Link>
 
               {/* Formulaire de contact */}
-              <Link href="/contact" className="group text-center" data-testid="assistance-card-form">
-                <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 flex items-center justify-center group-hover:-translate-y-1 transition-all duration-200">
-                  <img 
-                    src={formulaireContactIllustration} 
-                    alt="Formulaire de contact" 
-                    className="w-full h-full object-contain"
-                    loading="lazy"
-                  />
+              <Link href="/contact" className="group text-center bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-all" data-testid="assistance-card-form">
+                <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                  <img src={formulaireContactIllustration} alt="Formulaire de contact" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold text-[#0072CE]">Formulaire de contact</h3>
+                <h3 className="text-sm font-semibold text-[#0072CE]">Formulaire</h3>
               </Link>
             </div>
           </div>
