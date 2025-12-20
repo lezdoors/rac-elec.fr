@@ -1,1 +1,0 @@
-import{j as t}from"./index-BjMBsvVP.js";import{C as a,f as e}from"./french-cities-D-OXOgY4.js";import"./map-pin-CpOUUr5o.js";import"./zap-XG9415ZI.js";import"./building-BAbyLBr_.js";function s(){return t.jsx(a,{cityData:e.nantes})}export{s as default};

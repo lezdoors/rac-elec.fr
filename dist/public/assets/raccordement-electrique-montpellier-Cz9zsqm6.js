@@ -1,1 +1,0 @@
-import{j as t}from"./index-BjMBsvVP.js";import{C as e,f as r}from"./french-cities-D-OXOgY4.js";import"./map-pin-CpOUUr5o.js";import"./zap-XG9415ZI.js";import"./building-BAbyLBr_.js";function p(){return t.jsx(e,{cityData:r.montpellier})}export{p as default};

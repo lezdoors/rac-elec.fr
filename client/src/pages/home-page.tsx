@@ -181,7 +181,7 @@ export default function HomePage() {
 
         {/* 4-STEP PROCESS SECTION - Right after Hero */}
         <section 
-          className="py-8 md:py-16"
+          className="py-6 md:py-10"
           style={{ background: 'linear-gradient(180deg, #EBF4FF 0%, #F8FAFF 100%)' }}
           id="process"
           data-animate
@@ -189,12 +189,12 @@ export default function HomePage() {
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-6 md:mb-12">
-              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-[#0066CC] mb-4 leading-tight">
-                Traitement des Demandes de Raccordement Électrique par Enedis
+            <div className="text-center mb-4 md:mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#0066CC] mb-2 leading-tight">
+                Demande de Raccordement en 4 Étapes
               </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Processus 100% en ligne en 4 étapes simples. Votre demande de raccordement Enedis traitée rapidement avec accompagnement personnalisé.
+              <p className="text-base text-gray-600 max-w-xl mx-auto">
+                Processus 100% en ligne avec accompagnement personnalisé
               </p>
             </div>
 
@@ -263,7 +263,7 @@ export default function HomePage() {
 
         {/* 4 STEPS SIMPLE SECTION - Like original site */}
         <section 
-          className="py-8 md:py-16"
+          className="py-6 md:py-10"
           style={{ background: 'linear-gradient(180deg, #F8FAFF 0%, #FFFFFF 100%)' }}
           id="steps-simple"
           data-animate
@@ -271,12 +271,12 @@ export default function HomePage() {
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-6 md:mb-12">
-              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-[#0066CC] mb-4 leading-tight">
-                4 Étapes Simples Pour Votre Raccordement Enedis
+            <div className="text-center mb-4 md:mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#0066CC] mb-2 leading-tight">
+                4 Étapes Simples
               </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Remplissez notre formulaire en ligne en quelques minutes. Nous nous occupons du reste.
+              <p className="text-base text-gray-600 max-w-xl mx-auto">
+                Remplissez notre formulaire en ligne en quelques minutes
               </p>
             </div>
 
@@ -362,15 +362,15 @@ export default function HomePage() {
         </section>
 
         {/* SERVICE TYPES SECTION - Centered Card Layout Like Original */}
-        <section className="py-8 md:py-16 bg-white" id="types-raccordements" data-animate data-testid="service-types-section">
+        <section className="py-6 md:py-10 bg-white" id="types-raccordements" data-animate data-testid="service-types-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-6 md:mb-12">
-              <h2 className="text-[28px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-4">
-                Tous les Types de Raccordement Électrique Enedis
+            <div className="text-center mb-4 md:mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                Tous les Types de Raccordement
               </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-                Quelle que soit la nature de votre projet, nous vous accompagnons dans votre demande de raccordement électrique
+              <p className="text-base text-gray-600 max-w-xl mx-auto">
+                Nous vous accompagnons dans votre demande de raccordement électrique
               </p>
             </div>
 
@@ -463,13 +463,12 @@ export default function HomePage() {
             </div>
 
             {/* FAQ Link */}
-            <div className="text-center mt-10">
-              <p className="text-lg text-gray-600 mb-4">Vous ne savez pas quel type de raccordement choisir ?</p>
+            <div className="text-center mt-6">
               <button 
                 onClick={() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })}
-                className="inline-flex items-center text-[#0072CE] font-medium text-lg hover:text-[#005eaa] cursor-pointer"
+                className="inline-flex items-center text-[#0072CE] font-medium text-base hover:text-[#005eaa] cursor-pointer"
               >
-                Consultez notre FAQ <ArrowRight className="w-5 h-5 ml-2" />
+                Consultez notre FAQ <ArrowRight className="w-4 h-4 ml-1" />
               </button>
             </div>
           </div>
@@ -527,7 +526,7 @@ export default function HomePage() {
         </section>
 
         {/* BESOIN D'AIDE SECTION - Like Original */}
-        <section className="py-8 md:py-16 bg-white" id="besoin-aide" data-animate data-testid="besoin-aide-section">
+        <section className="py-6 md:py-10 bg-white" id="besoin-aide" data-animate data-testid="besoin-aide-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             <div className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-20 transition-all duration-700 ${isVisible['besoin-aide'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               {/* Left - Illustration - Hidden on mobile */}
@@ -579,7 +578,7 @@ export default function HomePage() {
         </section>
 
         {/* TESTIMONIALS SECTION - Professional Design */}
-        <section className="py-8 md:py-16 bg-white" id="testimonials" data-animate data-testid="testimonials-section">
+        <section className="py-6 md:py-10 bg-white" id="testimonials" data-animate data-testid="testimonials-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
             <div className="text-center mb-6 md:mb-10">
@@ -683,7 +682,7 @@ export default function HomePage() {
         </section>
 
         {/* FAQ SECTION - Professional Multi-Column Design */}
-        <section className="py-8 md:py-16 bg-gradient-to-b from-gray-50 to-white" id="faq" data-animate data-testid="faq-section">
+        <section className="py-6 md:py-10 bg-gradient-to-b from-gray-50 to-white" id="faq" data-animate data-testid="faq-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
             <div className="text-center mb-6 md:mb-10">
