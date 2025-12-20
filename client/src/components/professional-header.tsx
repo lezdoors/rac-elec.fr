@@ -95,7 +95,7 @@ export function ProfessionalHeader() {
               onClick={handlePrimaryCta}
             >
               <Button
-                className="bg-[#EA580C] hover:bg-[#C2410C] text-white px-6 py-2 font-semibold rounded-lg min-h-11 shadow-md hover:shadow-lg transition-all duration-150"
+                className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white px-6 py-2 font-semibold rounded-lg min-h-11 shadow-md hover:shadow-lg transition-all duration-150"
                 aria-label="Faire ma demande de raccordement"
               >
                 Faire ma demande

@@ -121,7 +121,7 @@ export default function HomePage() {
                 <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-6 sm:mb-8 md:mb-10">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="w-full sm:w-auto bg-[#EA580C] hover:bg-[#C2410C] text-white font-semibold text-lg px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
+                      className="w-full sm:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-lg px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
                       data-testid="cta-hero-button"
                     >
                       Démarrer ma demande
@@ -251,7 +251,7 @@ export default function HomePage() {
             <div className="text-center">
               <Link href="/raccordement-enedis#formulaire-raccordement">
                 <button 
-                  className="w-full sm:w-auto bg-[#EA580C] hover:bg-[#C2410C] text-white font-semibold text-lg px-10 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
+                  className="w-full sm:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-lg px-10 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
                   data-testid="cta-process-button"
                 >
                   Commencer maintenant
@@ -349,7 +349,7 @@ export default function HomePage() {
                 <div className="mt-6 md:mt-10">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="w-full md:w-auto bg-[#EA580C] hover:bg-[#C2410C] text-white font-semibold text-lg px-10 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
+                      className="w-full md:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-lg px-10 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
                       data-testid="cta-steps-simple-button"
                     >
                       Démarrer ma demande maintenant
@@ -577,7 +577,7 @@ export default function HomePage() {
                 <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-6">
                   <a 
                     href="tel:0970709570" 
-                    className="bg-[#EA580C] hover:bg-[#C2410C] text-white font-semibold text-lg px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 flex items-center gap-3 min-h-[56px]"
+                    className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-lg px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 flex items-center gap-3 min-h-[56px]"
                   >
                     <Phone className="w-5 h-5" />
                     09 70 70 95 70
@@ -629,7 +629,7 @@ export default function HomePage() {
                   { initials: 'AM', color: '#EC4899', name: 'Amélie Martin', location: 'Raccordement définitif - Paris', text: '"Le formulaire en ligne est très intuitif et l\'équipe répond rapidement aux questions. Mon raccordement définitif a été effectué dans les délais."', date: 'Novembre 2025' },
                   { initials: 'TR', color: '#06B6D4', name: 'Thomas Roux', location: 'Raccordement collectif - Lille', text: '"Pour notre projet de lotissement, nous avions besoin d\'un partenaire fiable. La coordination avec Enedis a été parfaitement gérée."', date: 'Octobre 2025' },
                 ].map((testimonial, idx) => (
-                  <div key={`first-${idx}`} className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm min-w-[320px] max-w-[320px] flex-shrink-0 border-l-4 border-l-[#EA580C]">
+                  <div key={`first-${idx}`} className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm min-w-[320px] max-w-[320px] flex-shrink-0 border-l-4 border-l-[#2563EB]">
                     <div className="flex items-start gap-4 mb-4">
                       <div className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-base flex-shrink-0 bg-[#2563EB]">
                         {testimonial.initials}
@@ -657,7 +657,7 @@ export default function HomePage() {
                   { initials: 'AM', name: 'Amélie Martin', location: 'Raccordement définitif - Paris', text: '"Le formulaire en ligne est très intuitif et l\'équipe répond rapidement aux questions. Mon raccordement définitif a été effectué dans les délais."', date: 'Novembre 2025' },
                   { initials: 'TR', name: 'Thomas Roux', location: 'Raccordement collectif - Lille', text: '"Pour notre projet de lotissement, nous avions besoin d\'un partenaire fiable. La coordination avec Enedis a été parfaitement gérée."', date: 'Octobre 2025' },
                 ].map((testimonial, idx) => (
-                  <div key={`second-${idx}`} className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm min-w-[320px] max-w-[320px] flex-shrink-0 border-l-4 border-l-[#EA580C]">
+                  <div key={`second-${idx}`} className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm min-w-[320px] max-w-[320px] flex-shrink-0 border-l-4 border-l-[#2563EB]">
                     <div className="flex items-start gap-4 mb-4">
                       <div className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-base flex-shrink-0 bg-[#2563EB]">
                         {testimonial.initials}
@@ -830,7 +830,7 @@ export default function HomePage() {
                 source="faq_callback"
                 trigger={
                   <button 
-                    className="bg-[#EA580C] hover:bg-[#C2410C] text-white font-semibold text-base px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
+                    className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
                     data-testid="faq-callback-button"
                   >
                     Être rappelé
