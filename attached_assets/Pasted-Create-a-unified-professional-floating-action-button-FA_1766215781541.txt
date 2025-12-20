@@ -1,0 +1,181 @@
+Create a unified professional floating action button (FAB) that replaces any existing sticky bars and chatbot bubbles with a single elegant contact widget:
+
+REMOVE FIRST:
+- Any existing sticky bottom bar
+- Any separate chatbot bubble widget
+- Any other floating contact elements
+
+CREATE NEW FLOATING BUBBLE:
+
+1. BUBBLE CONTAINER (Closed State):
+   - Position: fixed, bottom-right corner
+   - Desktop: 32px from right edge, 32px from bottom edge
+   - Mobile: 20px from right edge, 20px from bottom edge
+   - Size: 56px × 56px circle
+   - Background: linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%) (navy blue gradient)
+   - Box-shadow: 0 4px 20px rgba(30, 58, 138, 0.3)
+   - Border-radius: 50%
+   - Z-index: 9999
+   - Cursor: pointer
+   - Use Lucide React or Heroicons for icons (NOT emojis)
+   - Icon: <Phone /> or <Headphones /> icon from Lucide
+   - Icon color: white
+   - Icon size: 24px
+   - Center icon perfectly using flex display
+
+2. SUBTLE ATTENTION ANIMATION (for closed bubble):
+   - Add very subtle glow pulse animation that repeats every 4 seconds
+   - Animation: box-shadow intensifies slightly
+   - From: 0 4px 20px rgba(30, 58, 138, 0.3)
+   - To: 0 6px 28px rgba(30, 58, 138, 0.5)
+   - Duration: 2s
+   - Timing: ease-in-out
+   - Infinite loop with subtle effect (professional, not distracting)
+
+3. EXPANDED MENU (appears on click):
+   When bubble is clicked, show 3 vertically stacked options above the main bubble:
+   
+   Container styling:
+   - Position: absolute, bottom: 72px (just above main bubble)
+   - Right: 0
+   - Min-width: 240px
+   - Background: white
+   - Border-radius: 12px
+   - Box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12)
+   - Border: 1px solid #E5E7EB
+   - Padding: 8px
+   
+   Each option styled as:
+   - Background: white
+   - Border-radius: 8px
+   - Padding: 14px 16px
+   - Display: flex, align-items: center, gap: 12px
+   - Cursor: pointer
+   - Transition: all 0.2s ease
+   - Border: 1px solid transparent
+   - Margin-bottom: 4px (last item has 0)
+   
+   Hover state for each option:
+   - Background: #F9FAFB
+   - Border-color: #3B82F6
+   - Transform: translateX(-2px)
+   
+   Option 1 (Top) - Phone Call:
+   - Icon: <Phone /> from Lucide (20px, color: #3B82F6)
+   - Text: "09 70 70 95 70" (15px, #1F2937, font-weight: 600)
+   - Action: <a href="tel:0970709570"> link that opens phone dialer
+   
+   Option 2 (Middle) - Live Chat:
+   - Icon: <MessageCircle /> from Lucide (20px, color: #3B82F6)
+   - Text: "Chat en direct" (15px, #1F2937, font-weight: 500)
+   - Action: Open chat widget or WhatsApp business link
+   
+   Option 3 (Bottom) - Callback Request:
+   - Icon: <PhoneCall /> from Lucide (20px, color: #3B82F6)
+   - Text: "Rappel gratuit" (15px, #1F2937, font-weight: 500)
+   - Action: Open contact form modal or scroll to contact section
+   
+4. INTERACTION BEHAVIOR:
+   - Click main bubble: Toggle expanded/collapsed state
+   - When expanded: Main bubble icon smoothly rotates to <X /> (close icon)
+   - Icon rotation: 180deg rotation with 0.3s transition
+   - Click X or click outside menu: Collapse menu
+   - Smooth slide-up animation when expanding:
+     * Transform: translateY(10px) opacity(0) → translateY(0) opacity(1)
+     * Duration: 0.3s ease-out
+   - Smooth collapse animation:
+     * Transform: translateY(0) opacity(1) → translateY(10px) opacity(0)
+     * Duration: 0.2s ease-in
+   
+5. HOVER EFFECTS (Desktop only):
+   - Main bubble hover: 
+     * Transform: scale(1.05)
+     * Box-shadow: 0 6px 28px rgba(30, 58, 138, 0.4)
+   - Each menu option hover (already defined above)
+   - Active state (click): Scale to 0.98
+   - All transitions: 0.2s ease
+
+6. BACKDROP (when expanded):
+   - Add semi-transparent backdrop overlay
+   - Background: rgba(0, 0, 0, 0.05)
+   - Position: fixed, full screen (top: 0, left: 0, right: 0, bottom: 0)
+   - Z-index: 9998 (below bubble but above content)
+   - Click backdrop: Close menu
+   - Fade in: opacity 0 → 1 over 0.2s
+   - Fade out: opacity 1 → 0 over 0.2s
+
+7. RESPONSIVE BEHAVIOR:
+   - Desktop (≥768px): 
+     * Main bubble: 56px × 56px
+     * Icon: 24px
+     * Position: 32px from edges
+     * Menu min-width: 240px
+   
+   - Mobile (<768px):
+     * Main bubble: 52px × 52px
+     * Icon: 22px
+     * Position: 20px from edges
+     * Menu min-width: 200px
+     * Ensure menu doesn't overflow screen edges
+     * Position menu to stay within viewport
+
+8. ACCESSIBILITY:
+   - Main bubble: aria-label="Options de contact"
+   - Expanded menu: role="menu", aria-expanded="true/false"
+   - Each option: role="menuitem", aria-label="[action description]"
+   - Keyboard accessible: 
+     * Tab to focus bubble
+     * Enter/Space to toggle
+     * Esc to close
+     * Arrow keys to navigate menu items
+   - Focus visible: 2px solid #3B82F6 outline with 2px offset
+
+9. TECHNICAL IMPLEMENTATION:
+   - Use React useState for expanded/collapsed state
+   - Use Lucide React or Heroicons for all icons (import at top)
+   - CSS-in-JS or Tailwind for styling
+   - Phone link format: <a href="tel:0970709570">
+   - Ensure proper z-index layering (backdrop: 9998, bubble: 9999)
+   - Use CSS transitions for all animations (not JavaScript animations)
+   - Add onClick handlers for toggle and close functionality
+   - Add useEffect for click-outside detection to close menu
+
+10. PROFESSIONAL POLISH:
+    - All borders: 1px solid with subtle colors
+    - All shadows: Soft, layered shadows (no harsh blacks)
+    - All animations: Smooth, quick (200-300ms), ease timing functions
+    - Typography: Use site's font family (Inter or current font)
+    - Icon positioning: Perfectly centered using flexbox
+    - No emojis anywhere - only professional icon library icons
+    - Color scheme: Navy blue (#1E3A8A) primary, Blue (#3B82F6) accents
+    - Consistent 8px spacing grid (8, 12, 16, 20, 24px)
+
+11. POSITIONING SAFETY:
+    - Ensure bubble never overlaps with:
+      * Form submit buttons
+      * Footer content
+      * Other fixed positioned elements
+    - Add CSS media query to adjust position if needed on very small screens
+    - Test at 375px, 768px, 1024px, 1440px widths
+
+ICONS TO USE (from Lucide React):
+- Closed state: <Phone /> or <Headphones />
+- Expanded state: <X /> (rotated from main icon)
+- Phone option: <Phone />
+- Chat option: <MessageCircle />
+- Callback option: <PhoneCall />
+
+Import statement needed:
+import { Phone, MessageCircle, PhoneCall, X } from 'lucide-react';
+
+FINAL RESULT:
+- Single professional floating bubble in bottom-right corner
+- Navy blue gradient background (administrative/professional tone)
+- Expands upward to show clean white menu with 3 contact options
+- Professional Lucide icons (no emojis)
+- Smooth, polished animations
+- Replaces all other floating contact elements
+- Looks like enterprise software (Salesforce, HubSpot style)
+- Works perfectly on mobile and desktop
+
+Implement this complete professional floating action button system now.
