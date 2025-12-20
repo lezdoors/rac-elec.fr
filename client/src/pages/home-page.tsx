@@ -117,11 +117,11 @@ export default function HomePage() {
                   Déposez votre demande en quelques minutes.
                 </p>
 
-                {/* Enterprise CTA Buttons - Professional B2B design */}
-                <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-6 sm:mb-8 md:mb-10">
+                {/* Enterprise CTA Buttons - Refined elegant design */}
+                <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 mb-6 sm:mb-8 md:mb-10">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="w-full sm:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-lg px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
+                      className="w-full sm:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-7 py-[14px] rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 min-h-[52px]"
                       data-testid="cta-hero-button"
                     >
                       Démarrer ma demande
@@ -129,10 +129,10 @@ export default function HomePage() {
                   </Link>
                   <Link href="/contact">
                     <button 
-                      className="w-full sm:w-auto bg-transparent hover:bg-[#2563EB] text-[#2563EB] hover:text-white font-semibold text-lg px-8 py-4 rounded-lg border-2 border-[#2563EB] transition-all duration-150 flex items-center justify-center gap-2 min-h-[56px]"
+                      className="w-full sm:w-auto bg-transparent hover:bg-[#EFF6FF] text-[#2563EB] font-medium text-base px-6 py-[13px] rounded-md border border-[#2563EB] transition-all duration-150 flex items-center justify-center gap-2 min-h-[48px]"
                       data-testid="contact-hero-button"
                     >
-                      <Phone className="w-5 h-5" />
+                      <Phone className="w-[18px] h-[18px]" />
                       Nous contacter
                     </button>
                   </Link>
@@ -247,11 +247,11 @@ export default function HomePage() {
               ))}
             </div>
 
-            {/* CTA Button - Enterprise design */}
+            {/* CTA Button - Refined design */}
             <div className="text-center">
               <Link href="/raccordement-enedis#formulaire-raccordement">
                 <button 
-                  className="w-full sm:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-lg px-10 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
+                  className="w-full sm:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-8 py-[14px] rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 min-h-[52px]"
                   data-testid="cta-process-button"
                 >
                   Commencer maintenant
@@ -345,14 +345,14 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* CTA Button */}
-                <div className="mt-6 md:mt-10">
+                {/* CTA Button - Refined */}
+                <div className="mt-6 md:mt-8">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="w-full md:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-lg px-10 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
+                      className="w-full md:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-8 py-[14px] rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 min-h-[52px]"
                       data-testid="cta-steps-simple-button"
                     >
-                      Démarrer ma demande maintenant
+                      Démarrer ma demande
                     </button>
                   </Link>
                 </div>
@@ -519,17 +519,17 @@ export default function HomePage() {
                 </p>
                 
                 {/* Contact Buttons */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-6">
+                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-6">
                   <a 
                     href="tel:0970709570" 
-                    className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-lg px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 flex items-center gap-3 min-h-[56px]"
+                    className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-6 py-[14px] rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 flex items-center gap-2 min-h-[52px]"
                   >
-                    <Phone className="w-5 h-5" />
+                    <Phone className="w-[18px] h-[18px]" />
                     09 70 70 95 70
                   </a>
                   <Link href="/contact">
-                    <button className="bg-white hover:bg-gray-50 text-gray-700 font-semibold text-base px-8 py-4 rounded-lg border border-gray-300 shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-3">
-                      <Mail className="w-5 h-5" />
+                    <button className="bg-white hover:bg-gray-50 text-gray-700 font-medium text-base px-6 py-[13px] rounded-md border border-gray-300 shadow-sm hover:shadow-md transition-all duration-150 flex items-center gap-2 min-h-[48px]">
+                      <Mail className="w-[18px] h-[18px]" />
                       Envoyer un email
                     </button>
                   </Link>
@@ -775,7 +775,7 @@ export default function HomePage() {
                 source="faq_callback"
                 trigger={
                   <button 
-                    className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-8 py-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-150 min-h-[56px]"
+                    className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-6 py-[14px] rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 min-h-[52px]"
                     data-testid="faq-callback-button"
                   >
                     Être rappelé
