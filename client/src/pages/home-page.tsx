@@ -16,7 +16,6 @@ import raccordementCollectifIcon from "@assets/Raccordement-Collectif_1765333395
 import augmentationPuissanceIcon from "@assets/augmentation_de_puissance_1765333395814.webp";
 import servicesTechniquesIcon from "@assets/services-techniques_1765333395814.webp";
 import raccordementEnedisIcon from "@assets/Raccordement-Enedis_1765333395814.webp";
-import formIntroIllustration from "@assets/form-intro-illustartion_(Website)_1765358383139.webp";
 import appelezNousIllustration from "@assets/Appelez-nous_1765363264301.webp";
 import rappelGratuitIllustration from "@assets/Appelez--nous_1765363489714.webp";
 import chatIllustration from "@assets/Chat_1765363276867.webp";
@@ -257,106 +256,6 @@ export default function HomePage() {
                   Commencer maintenant
                 </button>
               </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* 4 STEPS SIMPLE SECTION - Like original site */}
-        <section 
-          className="py-6 md:py-10"
-          style={{ background: 'linear-gradient(180deg, #F8FAFF 0%, #FFFFFF 100%)' }}
-          id="steps-simple"
-          data-animate
-          data-testid="steps-simple-section"
-        >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
-            {/* Header */}
-            <div className="text-center mb-4 md:mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-[#0066CC] mb-2 leading-tight">
-                4 Étapes Simples
-              </h2>
-              <p className="text-base text-gray-600 max-w-xl mx-auto">
-                Remplissez notre formulaire en ligne en quelques minutes
-              </p>
-            </div>
-
-            {/* Two Column Layout - Illustration + Steps */}
-            <div className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-20 transition-all duration-700 ${isVisible['steps-simple'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {/* Left - Large Illustration - Hidden on mobile */}
-              <div className="hidden md:flex w-full lg:w-1/2 justify-center">
-                <div className="w-full max-w-[450px]">
-                  <img 
-                    src={formIntroIllustration} 
-                    alt="Femme remplissant un formulaire en ligne"
-                    className="w-full h-auto"
-                    width="450"
-                    height="400"
-                    loading="lazy"
-                    data-testid="form-intro-illustration"
-                  />
-                </div>
-              </div>
-
-              {/* Right - 4 Steps List */}
-              <div className="w-full lg:w-1/2">
-                <div className="space-y-4 md:space-y-6">
-                  {/* Step 1 */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
-                      1
-                    </div>
-                    <div>
-                      <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-1">Renseignez vos informations</h3>
-                      <p className="text-base text-gray-600">Coordonnées et détails de votre projet</p>
-                    </div>
-                  </div>
-
-                  {/* Step 2 */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
-                      2
-                    </div>
-                    <div>
-                      <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-1">Recevez votre devis</h3>
-                      <p className="text-base text-gray-600">Sous 48h, un devis détaillé et personnalisé</p>
-                    </div>
-                  </div>
-
-                  {/* Step 3 */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
-                      3
-                    </div>
-                    <div>
-                      <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-1">Dépôt du dossier chez Enedis</h3>
-                      <p className="text-base text-gray-600">Nous gérons toutes les démarches administratives</p>
-                    </div>
-                  </div>
-
-                  {/* Step 4 */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md min-h-[44px]">
-                      4
-                    </div>
-                    <div>
-                      <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-1">Suivi jusqu'à la mise en service</h3>
-                      <p className="text-base text-gray-600">Accompagnement personnalisé de A à Z</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* CTA Button - Refined */}
-                <div className="mt-6 md:mt-8">
-                  <Link href="/raccordement-enedis#formulaire-raccordement">
-                    <button 
-                      className="w-full md:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-8 py-[14px] rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 min-h-[52px]"
-                      data-testid="cta-steps-simple-button"
-                    >
-                      Démarrer ma demande
-                    </button>
-                  </Link>
-                </div>
-              </div>
             </div>
           </div>
         </section>
