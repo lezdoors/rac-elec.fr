@@ -91,6 +91,7 @@ export function FloatingContactButton() {
               href="tel:0970709570"
               role="menuitem"
               aria-label="Appeler le 09 70 70 95 70"
+              data-testid="contact-option-phone"
               className="flex items-center gap-3 px-4 py-[14px] rounded-lg border border-transparent cursor-pointer transition-all duration-200 hover:bg-[#F9FAFB] hover:border-[#3B82F6] hover:-translate-x-0.5 mb-1 no-underline"
               onClick={() => setIsExpanded(false)}
             >
@@ -104,6 +105,7 @@ export function FloatingContactButton() {
               rel="noopener noreferrer"
               role="menuitem"
               aria-label="Démarrer un chat en direct"
+              data-testid="contact-option-chat"
               className="flex items-center gap-3 px-4 py-[14px] rounded-lg border border-transparent cursor-pointer transition-all duration-200 hover:bg-[#F9FAFB] hover:border-[#3B82F6] hover:-translate-x-0.5 mb-1 no-underline"
               onClick={() => setIsExpanded(false)}
             >
@@ -114,6 +116,7 @@ export function FloatingContactButton() {
             <button
               role="menuitem"
               aria-label="Demander un rappel gratuit"
+              data-testid="contact-option-callback"
               className="w-full flex items-center gap-3 px-4 py-[14px] rounded-lg border border-transparent cursor-pointer transition-all duration-200 hover:bg-[#F9FAFB] hover:border-[#3B82F6] hover:-translate-x-0.5 bg-transparent"
               onClick={scrollToContact}
             >
@@ -127,6 +130,7 @@ export function FloatingContactButton() {
           onClick={toggleExpanded}
           aria-label="Options de contact"
           aria-expanded={isExpanded}
+          data-testid="floating-contact-button"
           className="relative flex items-center justify-center rounded-full cursor-pointer transition-all duration-200 ease-out hover:scale-105 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2"
           style={{
             width: `${bubbleSize}px`,

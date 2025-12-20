@@ -1,27 +1,6 @@
-import { useState, useEffect, lazy, Suspense, useMemo, useCallback, useRef } from "react";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 
-// CWV OPTIMIZATION: Lazy load non-critical components for better INP
-const SupportWidget = lazy(() => {
-  // Use scheduler.postTask for low priority loading if available
-  if ('scheduler' in window && 'postTask' in (window as any).scheduler) {
-    return new Promise<{ default: React.ComponentType<any> }>(resolve => {
-      ((window as any).scheduler as any).postTask(() => {
-        import("@/components/support-widget").then(module => {
-          resolve({ default: module.SupportWidget });
-        });
-      }, { priority: 'background' });
-    });
-  } else {
-    // Fallback for browsers without scheduler
-    return new Promise<{ default: React.ComponentType<any> }>(resolve => {
-      setTimeout(() => {
-        import("@/components/support-widget").then(module => {
-          resolve({ default: module.SupportWidget });
-        });
-      }, 100);
-    });
-  }
-});
+import { FloatingContactButton } from "@/components/floating-contact-button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -1949,13 +1928,7 @@ export default function RaccordementEnedisPage() {
       )}
       
       {/* Support Widget - Lazy loaded for better performance */}
-      {isPageLoaded && (
-        <Suspense fallback={null}>
-          <div className="non-critical-content">
-            <SupportWidget />
-          </div>
-        </Suspense>
-      )}
+      <FloatingContactButton />
     </div>
     </>
   );

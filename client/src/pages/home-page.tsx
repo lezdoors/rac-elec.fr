@@ -4,7 +4,7 @@ import { Zap, ArrowRight, Building, Home as HomeIcon, BarChart, Clock, Shield, P
 import { ContactModal } from "@/components/contact-modal";
 import { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
-import { FloatingCtaButton } from "@/components/floating-cta-button";
+import { FloatingContactButton } from "@/components/floating-contact-button";
 import heroIllustration from "@assets/hero-illustration_1765320964105.webp";
 import step1Illustration from "@assets/Definir-le-type_1765357131561.webp";
 import step2Illustration from "@assets/Completer-Formulaire_1765357131561.webp";
@@ -687,8 +687,8 @@ export default function HomePage() {
 
       </main>
 
-      {/* Floating CTA Button */}
-      <FloatingCtaButton />
+      {/* Floating Contact Button */}
+      <FloatingContactButton />
     </>
   );
 }
