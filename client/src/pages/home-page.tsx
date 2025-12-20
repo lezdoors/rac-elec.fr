@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Zap, ArrowRight, Building, Home as HomeIcon, BarChart, Clock, Shield, Phone, CheckCircle, MapPin, FileText, Rocket, ChevronDown, Check, Users, Lock, Mail, Star, Plus } from "lucide-react";
+import { Zap, ArrowRight, Building, Home as HomeIcon, BarChart, Clock, Shield, Phone, CheckCircle, MapPin, FileText, Rocket, ChevronDown, ChevronRight, Check, Users, Lock, Mail, Star, Plus } from "lucide-react";
 import { ContactModal } from "@/components/contact-modal";
 import { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
@@ -374,92 +374,58 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Service Grid - Compact Cards with Icons Above */}
-            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 transition-all duration-700 ${isVisible['types-raccordements'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            {/* Service Cards - Horizontal on mobile, Grid on desktop */}
+            <div className={`transition-all duration-700 ${isVisible['types-raccordements'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               
-              {/* Raccordement Provisoire */}
-              <Link href="/raccordement-enedis" className="group">
-                <div className="bg-white rounded-xl p-5 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border border-gray-200 h-full">
-                  <div className="w-12 h-12 mx-auto mb-3">
-                    <img src={raccordementProvisoireIcon} alt="Raccordement Provisoire" className="w-full h-full object-contain" loading="lazy" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-[#0072CE] mb-2">Raccordement Provisoire</h3>
-                  <p className="text-sm text-gray-600 mb-3 leading-relaxed">Pour chantiers, événements temporaires et installations provisoires</p>
-                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-sm group-hover:text-[#2563EB]">
-                    Faire une demande <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </div>
-              </Link>
+              {/* Mobile: Horizontal compact cards */}
+              <div className="flex flex-col gap-3 sm:hidden">
+                {[
+                  { icon: raccordementProvisoireIcon, title: "Raccordement Provisoire", desc: "Chantiers et installations temporaires" },
+                  { icon: raccordementDefinitifIcon, title: "Raccordement Définitif", desc: "Maisons neuves et locaux commerciaux" },
+                  { icon: augmentationPuissanceIcon, title: "Augmentation de Puissance", desc: "Augmentez votre capacité électrique" },
+                  { icon: raccordementCollectifIcon, title: "Raccordement Collectif", desc: "Immeubles et copropriétés" },
+                  { icon: servicesTechniquesIcon, title: "Viabilisation Terrain", desc: "Préparation de votre terrain" },
+                  { icon: raccordementEnedisIcon, title: "Maison Neuve", desc: "Premier raccordement construction" }
+                ].map((service, idx) => (
+                  <Link key={idx} href="/raccordement-enedis" className="group">
+                    <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200 hover:border-[#2563EB] hover:shadow-sm active:scale-[0.99] transition-all">
+                      <div className="w-11 h-11 flex-shrink-0">
+                        <img src={service.icon} alt={service.title} className="w-full h-full object-contain" loading="lazy" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-[15px] font-semibold text-gray-900 leading-tight">{service.title}</h3>
+                        <p className="text-[13px] text-gray-500 leading-snug">{service.desc}</p>
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                    </div>
+                  </Link>
+                ))}
+              </div>
 
-              {/* Raccordement Definitif */}
-              <Link href="/raccordement-enedis" className="group">
-                <div className="bg-white rounded-xl p-5 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border border-gray-200 h-full">
-                  <div className="w-12 h-12 mx-auto mb-3">
-                    <img src={raccordementDefinitifIcon} alt="Raccordement Définitif" className="w-full h-full object-contain" loading="lazy" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-[#0072CE] mb-2">Raccordement Définitif</h3>
-                  <p className="text-sm text-gray-600 mb-3 leading-relaxed">Maisons neuves, locaux commerciaux et installations permanentes</p>
-                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-sm group-hover:text-[#2563EB]">
-                    Faire une demande <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </div>
-              </Link>
-
-              {/* Augmentation de Puissance */}
-              <Link href="/raccordement-enedis" className="group">
-                <div className="bg-white rounded-xl p-5 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border border-gray-200 h-full">
-                  <div className="w-12 h-12 mx-auto mb-3">
-                    <img src={augmentationPuissanceIcon} alt="Augmentation de Puissance" className="w-full h-full object-contain" loading="lazy" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-[#0072CE] mb-2">Augmentation de Puissance</h3>
-                  <p className="text-sm text-gray-600 mb-3 leading-relaxed">Augmentez la capacité de votre raccordement électrique existant</p>
-                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-sm group-hover:text-[#2563EB]">
-                    Faire une demande <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </div>
-              </Link>
-
-              {/* Raccordement Collectif */}
-              <Link href="/raccordement-enedis" className="group">
-                <div className="bg-white rounded-xl p-5 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border border-gray-200 h-full">
-                  <div className="w-12 h-12 mx-auto mb-3">
-                    <img src={raccordementCollectifIcon} alt="Raccordement Collectif" className="w-full h-full object-contain" loading="lazy" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-[#0072CE] mb-2">Raccordement Collectif</h3>
-                  <p className="text-sm text-gray-600 mb-3 leading-relaxed">Immeubles résidentiels, copropriétés et bâtiments multi-logements</p>
-                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-sm group-hover:text-[#2563EB]">
-                    Faire une demande <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </div>
-              </Link>
-
-              {/* Viabilisation Terrain */}
-              <Link href="/raccordement-enedis" className="group">
-                <div className="bg-white rounded-xl p-5 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border border-gray-200 h-full">
-                  <div className="w-12 h-12 mx-auto mb-3">
-                    <img src={servicesTechniquesIcon} alt="Viabilisation Terrain" className="w-full h-full object-contain" loading="lazy" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-[#0072CE] mb-2">Viabilisation Terrain</h3>
-                  <p className="text-sm text-gray-600 mb-3 leading-relaxed">Préparation électrique de votre terrain à bâtir</p>
-                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-sm group-hover:text-[#2563EB]">
-                    Faire une demande <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </div>
-              </Link>
-
-              {/* Modification Raccordement */}
-              <Link href="/raccordement-enedis" className="group">
-                <div className="bg-white rounded-xl p-5 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border border-gray-200 h-full">
-                  <div className="w-12 h-12 mx-auto mb-3">
-                    <img src={raccordementEnedisIcon} alt="Maison Neuve" className="w-full h-full object-contain" loading="lazy" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-[#0072CE] mb-2">Maison Neuve</h3>
-                  <p className="text-sm text-gray-600 mb-3 leading-relaxed">Premier raccordement pour votre construction neuve</p>
-                  <span className="inline-flex items-center text-[#3B82F6] font-medium text-sm group-hover:text-[#2563EB]">
-                    Faire une demande <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </div>
-              </Link>
+              {/* Desktop: Grid layout */}
+              <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                {[
+                  { icon: raccordementProvisoireIcon, title: "Raccordement Provisoire", desc: "Pour chantiers, événements temporaires et installations provisoires" },
+                  { icon: raccordementDefinitifIcon, title: "Raccordement Définitif", desc: "Maisons neuves, locaux commerciaux et installations permanentes" },
+                  { icon: augmentationPuissanceIcon, title: "Augmentation de Puissance", desc: "Augmentez la capacité de votre raccordement électrique existant" },
+                  { icon: raccordementCollectifIcon, title: "Raccordement Collectif", desc: "Immeubles résidentiels, copropriétés et bâtiments multi-logements" },
+                  { icon: servicesTechniquesIcon, title: "Viabilisation Terrain", desc: "Préparation électrique de votre terrain à bâtir" },
+                  { icon: raccordementEnedisIcon, title: "Maison Neuve", desc: "Premier raccordement pour votre construction neuve" }
+                ].map((service, idx) => (
+                  <Link key={idx} href="/raccordement-enedis" className="group">
+                    <div className="bg-white rounded-lg p-5 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border border-gray-200 h-full">
+                      <div className="w-12 h-12 mx-auto mb-3">
+                        <img src={service.icon} alt={service.title} className="w-full h-full object-contain" loading="lazy" />
+                      </div>
+                      <h3 className="text-base font-semibold text-[#0072CE] mb-2">{service.title}</h3>
+                      <p className="text-sm text-gray-600 mb-3 leading-relaxed">{service.desc}</p>
+                      <span className="inline-flex items-center text-[#2563EB] font-medium text-sm">
+                        Faire une demande <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {/* FAQ Link */}
