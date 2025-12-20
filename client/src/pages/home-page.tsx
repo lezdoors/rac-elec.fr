@@ -212,7 +212,7 @@ export default function HomePage() {
                       {step.num}
                     </div>
                     <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center mb-5 flex-shrink-0">
-                      <img src={step.img} alt={step.alt} className="w-full h-full object-contain" loading="lazy" data-testid={`step${step.num}-illustration`} />
+                      <img src={step.img} alt={step.alt} className="w-full h-full object-contain" width="176" height="176" loading="lazy" data-testid={`step${step.num}-illustration`} />
                     </div>
                     <div className="flex-1 flex flex-col">
                       <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 leading-snug min-h-[3.5rem] flex items-center justify-center">{step.title}</h3>
@@ -289,7 +289,7 @@ export default function HomePage() {
                   <Link key={idx} href="/raccordement-enedis" className="group">
                     <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200 hover:border-[#2563EB] hover:shadow-sm active:scale-[0.99] transition-all">
                       <div className="w-11 h-11 flex-shrink-0">
-                        <img src={service.icon} alt={service.title} className="w-full h-full object-contain" loading="lazy" />
+                        <img src={service.icon} alt={service.title} className="w-full h-full object-contain" width="44" height="44" loading="lazy" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <h3 className="text-[15px] font-semibold text-gray-900 leading-tight">{service.title}</h3>
@@ -314,7 +314,7 @@ export default function HomePage() {
                   <Link key={idx} href="/raccordement-enedis" className="group">
                     <div className="bg-white rounded-lg p-5 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border border-gray-200 h-full">
                       <div className="w-12 h-12 mx-auto mb-3">
-                        <img src={service.icon} alt={service.title} className="w-full h-full object-contain" loading="lazy" />
+                        <img src={service.icon} alt={service.title} className="w-full h-full object-contain" width="48" height="48" loading="lazy" />
                       </div>
                       <h3 className="text-base font-semibold text-[#0072CE] mb-2">{service.title}</h3>
                       <p className="text-sm text-gray-600 mb-3 leading-relaxed">{service.desc}</p>
@@ -358,7 +358,7 @@ export default function HomePage() {
               {/* Appelez-nous */}
               <a href="tel:0970709570" className="group text-center bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-all" data-testid="assistance-card-call">
                 <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
-                  <img src={appelezNousIllustration} alt="Appelez-nous" className="w-full h-full object-contain" loading="lazy" />
+                  <img src={appelezNousIllustration} alt="Appelez-nous" className="w-full h-full object-contain" width="40" height="40" loading="lazy" />
                 </div>
                 <h3 className="text-sm font-semibold text-[#0072CE]">Appelez-nous</h3>
               </a>
@@ -366,7 +366,7 @@ export default function HomePage() {
               {/* Rappel gratuit */}
               <Link href="/contact" className="group text-center bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-all" data-testid="assistance-card-callback">
                 <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
-                  <img src={rappelGratuitIllustration} alt="Rappel gratuit" className="w-full h-full object-contain" loading="lazy" />
+                  <img src={rappelGratuitIllustration} alt="Rappel gratuit" className="w-full h-full object-contain" width="40" height="40" loading="lazy" />
                 </div>
                 <h3 className="text-sm font-semibold text-[#0072CE]">Rappel gratuit</h3>
               </Link>
@@ -374,7 +374,7 @@ export default function HomePage() {
               {/* Chat */}
               <Link href="/contact" className="group text-center bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-all" data-testid="assistance-card-chat">
                 <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
-                  <img src={chatIllustration} alt="Chat" className="w-full h-full object-contain" loading="lazy" />
+                  <img src={chatIllustration} alt="Chat" className="w-full h-full object-contain" width="40" height="40" loading="lazy" />
                 </div>
                 <h3 className="text-sm font-semibold text-[#0072CE]">Chat</h3>
               </Link>
@@ -382,7 +382,7 @@ export default function HomePage() {
               {/* Formulaire de contact */}
               <Link href="/contact" className="group text-center bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-all" data-testid="assistance-card-form">
                 <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
-                  <img src={formulaireContactIllustration} alt="Formulaire de contact" className="w-full h-full object-contain" loading="lazy" />
+                  <img src={formulaireContactIllustration} alt="Formulaire de contact" className="w-full h-full object-contain" width="40" height="40" loading="lazy" />
                 </div>
                 <h3 className="text-sm font-semibold text-[#0072CE]">Formulaire</h3>
               </Link>
