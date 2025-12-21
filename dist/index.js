@@ -17922,6 +17922,15 @@ app.use(compression({
   chunkSize: 16 * 1024
   // Chunks de 16KB pour mobile
 }));
+app.use((req, res, next) => {
+  const url = req.url;
+  if (url.match(/\.(js|css|woff2?|webp|png|jpg|jpeg|svg|ico)(\?.*)?$/)) {
+    res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+  } else if (url.endsWith(".html") || url === "/") {
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  }
+  next();
+});
 app.use(express2.json({
   limit: "10mb",
   verify: (req, res, buf) => {
