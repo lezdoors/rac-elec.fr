@@ -45,6 +45,17 @@ app.use(compression({
   chunkSize: 16 * 1024, // Chunks de 16KB pour mobile
 }));
 
+// Cache-Control headers for static assets (PageSpeed optimization)
+app.use((req, res, next) => {
+  const url = req.url;
+  if (url.match(/\.(js|css|woff2?|webp|png|jpg|jpeg|svg|ico)(\?.*)?$/)) {
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+  } else if (url.endsWith('.html') || url === '/') {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  }
+  next();
+});
+
 // Parse body FIRST - required for input sanitization and security checks
 // IMPORTANT: Capture rawBody for Stripe webhook signature verification
 app.use(express.json({ 
