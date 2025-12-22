@@ -13,12 +13,11 @@ import Layout from "@/components/layout";
 import MainLayout from "@/components/layouts/MainLayout";
 import StaffProtectedRoute from "@/lib/staff-protected-route";
 
-// Import du composant d'animation principal uniquement
-import { PowerElectricLoader } from "@/components/ui/power-electric-loader";
-
 // SAFE: Keep HomePage eagerly loaded for stable layout and conversions
-import NotFound from "@/pages/not-found";
 import HomePage from "@/pages/home-page";
+
+// Lazy load NotFound to avoid loading framer-motion on initial page load
+const NotFound = lazy(() => import("@/pages/not-found").catch(() => ({ default: () => <div>Page non disponible</div> })));
 
 // Lazy loading des pages moins fréquemment utilisées avec gestion d'erreur
 const AuthPage = lazy(() => import("@/pages/auth-page").catch(() => ({ default: () => <div>Page non disponible</div> })));
@@ -141,9 +140,7 @@ function Router() {
         {/* Redirection automatique vers le formulaire principal */}
         <Route path="/demande" component={() => {
           window.location.href = `/raccordement-enedis`;
-          return <div className="min-h-screen flex items-center justify-center">
-            <PowerElectricLoader size="md" text="Redirection..." showText={true} color="blue" intensity={0.7} />
-          </div>;
+          return <LoadingFallback />;
         }} />
         
         {/* Redirections des anciennes routes vers le formulaire principal */}
@@ -630,11 +627,8 @@ function Router() {
         )} />
         
         <Route path="/particulier" component={() => {
-          // Redirection vers la page raccordement-enedis 
           window.location.href = `/raccordement-enedis`;
-          return <div className="min-h-screen flex items-center justify-center">
-            <PowerElectricLoader size="md" text="Redirection..." showText={true} color="blue" intensity={0.7} />
-          </div>;
+          return <LoadingFallback />;
         }} />
         
         <Route path="/professionnel" component={() => {
