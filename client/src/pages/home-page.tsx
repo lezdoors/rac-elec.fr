@@ -10,6 +10,10 @@ import step1Illustration from "@assets/Definir-le-type_1765357131561.webp";
 import step2Illustration from "@assets/Completer-Formulaire_1765357131561.webp";
 import step3Illustration from "@assets/Depot-du-dossier_1765357131561.webp";
 import step4Illustration from "@assets/Suivi-Dossier_1765357131561.webp";
+import step1IllustrationMobile from "@assets/Definir-le-type_1765357131561-mobile.webp";
+import step2IllustrationMobile from "@assets/Completer-Formulaire_1765357131561-mobile.webp";
+import step3IllustrationMobile from "@assets/Depot-du-dossier_1765357131561-mobile.webp";
+import step4IllustrationMobile from "@assets/Suivi-Dossier_1765357131561-mobile.webp";
 import raccordementDefinitifIcon from "@assets/Raccordement-Definitif_1765333395814.webp";
 import raccordementProvisoireIcon from "@assets/Raccordement-Provisoire_1765333395814.webp";
 import raccordementCollectifIcon from "@assets/Raccordement-Collectif_1765333395814.webp";
@@ -225,10 +229,10 @@ export default function HomePage() {
             {/* Mobile Vertical Stack - All 4 steps visible, no horizontal scroll */}
             <div className="sm:hidden mb-8 space-y-4">
               {[
-                { num: 1, img: step1Illustration, alt: "Définir le type de raccordement", title: "Définir le type de raccordement", desc: "Utilisez notre outil pour cadrer votre demande." },
-                { num: 2, img: step2Illustration, alt: "Compléter un formulaire simple", title: "Compléter le formulaire en ligne", desc: "Renseignez votre projet en quelques minutes." },
-                { num: 3, img: step3Illustration, alt: "Dépôt du dossier chez Enedis", title: "Dépôt du dossier chez Enedis", desc: "Constitution et envoi de votre dossier complet." },
-                { num: 4, img: step4Illustration, alt: "Suivi jusqu'à la mise en service", title: "Suivi jusqu'à la mise en service", desc: "Accompagnement personnalisé de A à Z." }
+                { num: 1, img: step1IllustrationMobile, alt: "Définir le type de raccordement", title: "Définir le type de raccordement", desc: "Utilisez notre outil pour cadrer votre demande." },
+                { num: 2, img: step2IllustrationMobile, alt: "Compléter un formulaire simple", title: "Compléter le formulaire en ligne", desc: "Renseignez votre projet en quelques minutes." },
+                { num: 3, img: step3IllustrationMobile, alt: "Dépôt du dossier chez Enedis", title: "Dépôt du dossier chez Enedis", desc: "Constitution et envoi de votre dossier complet." },
+                { num: 4, img: step4IllustrationMobile, alt: "Suivi jusqu'à la mise en service", title: "Suivi jusqu'à la mise en service", desc: "Accompagnement personnalisé de A à Z." }
               ].map((step) => (
                 <div key={step.num} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 flex items-center gap-4">
                   <div className="w-12 h-12 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md">
