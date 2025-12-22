@@ -132,9 +132,11 @@ export default function Layout({ children }: LayoutProps) {
             <div className="flex items-center flex-shrink-0">
               <Link href="/" className="flex items-center group transition-transform duration-200 hover:scale-105">
                 <img 
-                  src="/logo-service-raccordement.png" 
+                  src="/logo-service-raccordement.webp" 
                   alt="Service Raccordement Électricité - Expert raccordement Enedis" 
                   className="h-[40px] sm:h-[45px] lg:h-[55px] xl:h-[60px] w-auto object-contain"
+                  width="180"
+                  height="40"
                 />
               </Link>
             </div>
@@ -203,9 +205,11 @@ export default function Layout({ children }: LayoutProps) {
             <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-white">
               <Link href="/" onClick={() => setMobileMenuOpen(false)}>
                 <img 
-                  src="/logo-service-raccordement.png" 
+                  src="/logo-service-raccordement.webp" 
                   alt="Service Raccordement" 
                   className="h-9 w-auto object-contain"
+                  width="160"
+                  height="36"
                 />
               </Link>
               <button

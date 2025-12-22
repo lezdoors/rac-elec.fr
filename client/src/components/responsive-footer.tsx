@@ -43,9 +43,12 @@ export function ResponsiveFooter() {
             <div className="flex items-start">
               <div className="bg-white rounded-lg p-2">
                 <img 
-                  src="/logo-service-raccordement.png" 
+                  src="/logo-service-raccordement.webp" 
                   alt="Service Raccordement Electricite - Expert raccordement Enedis" 
                   className="h-[45px] w-auto object-contain"
+                  width="180"
+                  height="45"
+                  loading="lazy"
                 />
               </div>
             </div>
