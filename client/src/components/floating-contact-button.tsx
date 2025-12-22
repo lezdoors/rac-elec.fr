@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Phone, MessageCircle, PhoneCall, X } from 'lucide-react';
+import { Phone, PhoneCall, X } from 'lucide-react';
 
 export function FloatingContactButton() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -97,20 +97,6 @@ export function FloatingContactButton() {
             >
               <Phone size={20} className="text-[#3B82F6] flex-shrink-0" />
               <span className="text-[15px] font-semibold text-[#1F2937]">09 70 70 95 70</span>
-            </a>
-
-            <a
-              href="https://wa.me/33970709570"
-              target="_blank"
-              rel="noopener noreferrer"
-              role="menuitem"
-              aria-label="Démarrer un chat en direct"
-              data-testid="contact-option-chat"
-              className="flex items-center gap-3 px-4 py-[14px] rounded-lg border border-transparent cursor-pointer transition-all duration-200 hover:bg-[#F9FAFB] hover:border-[#3B82F6] hover:-translate-x-0.5 mb-1 no-underline"
-              onClick={() => setIsExpanded(false)}
-            >
-              <MessageCircle size={20} className="text-[#3B82F6] flex-shrink-0" />
-              <span className="text-[15px] font-medium text-[#1F2937]">Chat en direct</span>
             </a>
 
             <button
