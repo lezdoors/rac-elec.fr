@@ -6,7 +6,6 @@ import { useState, useEffect, Suspense, lazy } from "react";
 import AdminProtectedRoute from "@/components/admin/admin-protected-route";
 import { GoogleSnippetsProvider } from "@/components/google-snippets-provider";
 import GoogleAnalyticsProvider from "@/components/google-analytics-provider";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 
 // Import des constantes de rôles depuis le fichier shared constants
 import { USER_ROLES } from "@shared/constants";
@@ -761,7 +760,6 @@ function App() {
             <Router />
           </GoogleSnippetsProvider>
         </GoogleAnalyticsProvider>
-        <SpeedInsights />
       </>
     </QueryClientProvider>
   );
