@@ -35,15 +35,9 @@
     <meta property="og:locale" content="fr_FR">
     <meta property="og:site_name" content="Demande Raccordement">
     
-    <!-- MOBILE PERFORMANCE CRITICAL: Font preloading for faster FCP -->
-    <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/inter-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
-    
-    <!-- MOBILE PERFORMANCE: Preload payment icons for faster checkout -->
-    <link rel="preload" href="/visa.svg" as="image" type="image/svg+xml">
-    <link rel="preload" href="/mastercard.svg" as="image" type="image/svg+xml">
-    <link rel="preload" href="/amex.svg" as="image" type="image/svg+xml">
-    <link rel="preload" href="/cb.svg" as="image" type="image/svg+xml">
+    <!-- MOBILE: Skip font preload (uses system fonts) / DESKTOP: Preload Inter -->
+    <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin media="(min-width: 769px)">
+    <link rel="preload" href="/fonts/inter-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin media="(min-width: 769px)">
     
     <!-- Données structurées Schema.org - Organisation -->
     <script type="application/ld+json">
@@ -392,7 +386,10 @@
     <!-- PERFORMANCE FIX: Remove render-blocking polyfills for faster LCP -->
     <!-- Modern browsers don't need these polyfills, and they block rendering -->
 
-    <!-- Google Tag Manager - GTM-K597C4C2 -->
+    <!-- PERFORMANCE + TRACKING: GTM loads immediately (async), GA4/GAds deferred 1.5s -->
+    <script>window.dataLayer = window.dataLayer || [];</script>
+    
+    <!-- GTM loads immediately (async, non-blocking) to capture all visits -->
     <script>
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -400,164 +397,74 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-K597C4C2');
     </script>
-    <!-- End Google Tag Manager -->
-
-    <!-- GA4 Direct Tracking - G-D92SQT9L1P -->
-    <!-- Required because GTM container GTM-K597C4C2 lacks GA4 Configuration tag -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D92SQT9L1P"></script>
+    
+    <!-- GA4 + Google Ads deferred 1.5s OR user interaction for LCP improvement -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-D92SQT9L1P', { 'send_page_view': true });
+      (function() {
+        var gtagLoaded = false;
+        function loadGtag() {
+          if (gtagLoaded) return;
+          gtagLoaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-D92SQT9L1P';
+          s.onload = function() {
+            gtag('js', new Date());
+            gtag('config', 'G-D92SQT9L1P', { 'send_page_view': true });
+            gtag('config', 'AW-16683623620');
+          };
+          document.head.appendChild(s);
+        }
+        var t = setTimeout(loadGtag, 1500);
+        ['scroll', 'click', 'touchstart'].forEach(function(e) {
+          document.addEventListener(e, function() { clearTimeout(t); loadGtag(); }, { once: true, passive: true });
+        });
+      })();
+      window.gtag = function(){dataLayer.push(arguments);};
     </script>
 
-    <!-- Google Ads Global Site Tag - AW-16683623620 -->
-    <!-- Separate from GA4 - manages Google Ads conversions only -->
+    <!-- Google Ads Conversion Functions (deferred definitions) -->
     <script>
-      gtag('config', 'AW-16683623620');
-    </script>
-
-    <!-- Google Ads Conversion Functions -->
-    <script>
-      // Form Start Conversion - AW-16683623620/xhTDCODCy6gbEMTJr5M-
       window.gads_form_start = function(email, phone) {
-        gtag('event', 'conversion', {
-          'send_to': 'AW-16683623620/xhTDCODCy6gbEMTJr5M-',
-          'user_data': {
-            'email': email || undefined,
-            'phone_number': phone || undefined
-          }
-        });
-        console.log('Google Ads: form_start conversion fired');
+        if (window.gtag) gtag('event', 'conversion', { 'send_to': 'AW-16683623620/xhTDCODCy6gbEMTJr5M-', 'user_data': { 'email': email, 'phone_number': phone } });
       };
-
-      // Form Submit Conversion - AW-16683623620/20wfCK-NyqgbEMTJr5M-
       window.gads_form_submit = function(email, phone) {
-        gtag('event', 'conversion', {
-          'send_to': 'AW-16683623620/20wfCK-NyqgbEMTJr5M-',
-          'user_data': {
-            'email': email || undefined,
-            'phone_number': phone || undefined
-          }
-        });
-        console.log('Google Ads: form_submit conversion fired');
+        if (window.gtag) gtag('event', 'conversion', { 'send_to': 'AW-16683623620/20wfCK-NyqgbEMTJr5M-', 'user_data': { 'email': email, 'phone_number': phone } });
       };
-
-      // Purchase Conversion - AW-16683623620/b5XPCPfuirYbEMTJr5M-
       window.gads_purchase = function(transactionId, value, email, phone) {
-        gtag('event', 'conversion', {
-          'send_to': 'AW-16683623620/b5XPCPfuirYbEMTJr5M-',
-          'value': value || 129.80,
-          'currency': 'EUR',
-          'transaction_id': transactionId || '',
-          'user_data': {
-            'email': email || undefined,
-            'phone_number': phone || undefined
-          }
-        });
-        console.log('Google Ads: purchase conversion fired', { transactionId, value });
+        if (window.gtag) gtag('event', 'conversion', { 'send_to': 'AW-16683623620/b5XPCPfuirYbEMTJr5M-', 'value': value || 129.80, 'currency': 'EUR', 'transaction_id': transactionId, 'user_data': { 'email': email, 'phone_number': phone } });
       };
     </script>
 
-    <!-- DataLayer Tracking Helpers for GTM Enhanced Conversions -->
-    <!-- CRITICAL: Session storage guards at the LOWEST LEVEL to prevent duplicate fires -->
+    <!-- DataLayer Tracking Helpers with Session Guards -->
     <script>
-      // Session storage keys for deduplication
-      var GTM_GUARD_KEYS = {
-        FORM_START: 'gtm_form_start_fired',
-        FORM_SUBMIT: 'gtm_form_submit_fired'
-      };
-
-      // Track form start with Enhanced Conversions data
-      // GUARDED: Only fires ONCE per session
+      var GTM_GUARD_KEYS = { FORM_START: 'gtm_form_start_fired', FORM_SUBMIT: 'gtm_form_submit_fired' };
+      
       window.trackFormStart = function(email, phone) {
-        // Session guard: prevent duplicate fires
-        if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(GTM_GUARD_KEYS.FORM_START)) {
-          console.log('ℹ️ GTM form_start already fired this session (blocked at lowest level)');
-          return;
-        }
-        
-        // Set guard BEFORE firing to prevent race conditions
-        if (typeof sessionStorage !== 'undefined') {
-          sessionStorage.setItem(GTM_GUARD_KEYS.FORM_START, 'true');
-        }
-        
-        var eventData = {
-          event: 'form_start',
-          email: email || undefined,
-          phone: phone || undefined
-        };
-        console.log('✅ GTM: form_start event pushed to dataLayer (ONCE)', eventData);
-        dataLayer.push(eventData);
-        // Also fire Google Ads conversion
+        if (sessionStorage.getItem(GTM_GUARD_KEYS.FORM_START)) return;
+        sessionStorage.setItem(GTM_GUARD_KEYS.FORM_START, 'true');
+        dataLayer.push({ event: 'form_start', email: email, phone: phone });
         if (window.gads_form_start) window.gads_form_start(email, phone);
       };
       
-      // Track form submit with Enhanced Conversions data
-      // GUARDED: Only fires ONCE per session
       window.trackFormSubmit = function(email, phone) {
-        // Session guard: prevent duplicate fires
-        if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(GTM_GUARD_KEYS.FORM_SUBMIT)) {
-          console.log('ℹ️ GTM form_submit already fired this session (blocked at lowest level)');
-          return;
-        }
-        
-        // Set guard BEFORE firing to prevent race conditions
-        if (typeof sessionStorage !== 'undefined') {
-          sessionStorage.setItem(GTM_GUARD_KEYS.FORM_SUBMIT, 'true');
-        }
-        
-        var eventData = {
-          event: 'form_submit',
-          email: email || undefined,
-          phone: phone || undefined
-        };
-        console.log('✅ GTM: form_submit event pushed to dataLayer (ONCE)', eventData);
-        dataLayer.push(eventData);
-        // Also fire Google Ads conversion
+        if (sessionStorage.getItem(GTM_GUARD_KEYS.FORM_SUBMIT)) return;
+        sessionStorage.setItem(GTM_GUARD_KEYS.FORM_SUBMIT, 'true');
+        dataLayer.push({ event: 'form_submit', email: email, phone: phone });
         if (window.gads_form_submit) window.gads_form_submit(email, phone);
       };
       
-      // Track purchase with transaction details and Enhanced Conversions data
-      // GUARDED: Only fires ONCE per transaction ID
       window.trackPurchase = function(transactionId, email, phone) {
-        var purchaseKey = 'purchase_conversion_' + (transactionId || 'unknown');
-        // Session guard: prevent duplicate fires for same transaction
-        if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(purchaseKey)) {
-          console.log('ℹ️ GTM purchase already fired for this transaction (blocked at lowest level)');
-          return;
-        }
-        
-        // Set guard BEFORE firing
-        if (typeof sessionStorage !== 'undefined') {
-          sessionStorage.setItem(purchaseKey, 'true');
-        }
-        
-        var eventData = {
-          event: 'purchase',
-          transaction_id: transactionId || '',
-          value: 129.80,
-          currency: 'EUR',
-          email: email || undefined,
-          phone: phone || undefined
-        };
-        console.log('✅ GTM: purchase event pushed to dataLayer (ONCE)', eventData);
-        dataLayer.push(eventData);
-        // Also fire Google Ads conversion
+        var key = 'purchase_' + transactionId;
+        if (sessionStorage.getItem(key)) return;
+        sessionStorage.setItem(key, 'true');
+        dataLayer.push({ event: 'purchase', transaction_id: transactionId, value: 129.80, currency: 'EUR', email: email, phone: phone });
         if (window.gads_purchase) window.gads_purchase(transactionId, 129.80, email, phone);
       };
-      
-      console.log('GTM + Google Ads: Tracking helpers loaded with SESSION GUARDS for demande-raccordement.fr');
     </script>
 
-    <!-- PERFORMANCE FIX: Fixed preloads - removed invalid /src/main.tsx and duplicates -->
+    <!-- PERFORMANCE: Only preload favicon, skip invalid modulepreload for TSX files -->
     <link rel="preload" href="/favicon-new.svg" as="image">
-    <link rel="preload" href="/fonts/inter-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
-    
-    <!-- CWV OPTIMIZATION: Critical asset preloading for form components -->
-    <link rel="modulepreload" href="/assets/form-step-1-DyiMWMNP.tsx">
-    <link rel="modulepreload" href="/assets/enhanced-mobile-form-optimizer-LCGyeaLi.tsx">
     <link rel="preconnect" href="https://geo.api.gouv.fr" crossorigin>
     <link rel="dns-prefetch" href="//geo.api.gouv.fr">
     
@@ -585,7 +492,7 @@
     <meta name="format-detection" content="telephone=no">
     
     <!-- PERFORMANCE FIX: Removed render-blocking MutationObserver script for faster LCP -->
-    <script type="module" crossorigin src="/assets/index-g663vUVK.js"></script>
+    <script type="module" crossorigin src="/assets/index-CiBWStNR.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-ChiAdqTk.css">
   </head>
   <body>
