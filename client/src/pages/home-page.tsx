@@ -18,7 +18,6 @@ import servicesTechniquesIcon from "@assets/services-techniques_1765333395814.we
 import raccordementEnedisIcon from "@assets/Raccordement-Enedis_1765333395814.webp";
 import appelezNousIllustration from "@assets/Appelez-nous_1765363264301.webp";
 import rappelGratuitIllustration from "@assets/Appelez--nous_1765363489714.webp";
-import chatIllustration from "@assets/Chat_1765363276867.webp";
 import contactFormIllustration from "@assets/Besoin_d'aide_1765363456384.webp";
 import formulaireContactIllustration from "@assets/Rappel_gratuit0_1765589394802.webp";
 
@@ -352,8 +351,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* 4 Assistance Icons - Compact 2x2 Grid */}
-            <div className={`grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 transition-all duration-700 ${isVisible['assistance'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            {/* 3 Assistance Icons - Responsive Grid */}
+            <div className={`grid grid-cols-3 gap-3 md:gap-4 max-w-lg mx-auto transition-all duration-700 ${isVisible['assistance'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               
               {/* Appelez-nous */}
               <a href="tel:0970709570" className="group text-center bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-all" data-testid="assistance-card-call">
@@ -369,14 +368,6 @@ export default function HomePage() {
                   <img src={rappelGratuitIllustration} alt="Rappel gratuit" className="w-full h-full object-contain" width="40" height="40" loading="lazy" />
                 </div>
                 <h3 className="text-sm font-semibold text-[#0072CE]">Rappel gratuit</h3>
-              </Link>
-
-              {/* Chat */}
-              <Link href="/contact" className="group text-center bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-all" data-testid="assistance-card-chat">
-                <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
-                  <img src={chatIllustration} alt="Chat" className="w-full h-full object-contain" width="40" height="40" loading="lazy" />
-                </div>
-                <h3 className="text-sm font-semibold text-[#0072CE]">Chat</h3>
               </Link>
 
               {/* Formulaire de contact */}
