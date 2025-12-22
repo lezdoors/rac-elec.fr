@@ -1,0 +1,380 @@
+# Replit Agent: Emergency Mobile Performance Fix
+
+## PROBLEM
+Mobile PageSpeed score is terrible. This is costing money on Google Ads due to poor Quality Score.
+
+**Main issue:** 444 KiB of unused JavaScript loading on landing page.
+
+**Target:** Get mobile score from current state to 85+ immediately.
+
+---
+
+## YOUR TASK
+
+Fix mobile performance by implementing these changes in order:
+
+---
+
+### STEP 1: Implement Code Splitting (CRITICAL - 444 KiB savings)
+
+**Problem:** Entire app loads on landing page when users only need Step 1.
+
+**What to do:**
+
+1. Find your main router/page component (likely `App.tsx` or `index.tsx`)
+
+2. Convert all form steps except Step 1 to lazy loading:
+
+```typescript
+import { lazy, Suspense } from 'react';
+
+// Keep Step 1 as normal import
+import FormStep1 from './components/FormStep1';
+
+// Lazy load everything else
+const FormStep2 = lazy(() => import('./components/FormStep2'));
+const FormStep3 = lazy(() => import('./components/FormStep3'));
+const FormStep4 = lazy(() => import('./components/FormStep4'));
+const PaymentForm = lazy(() => import('./components/PaymentForm'));
+const AdminPanel = lazy(() => import('./admin/AdminPanel'));
+const Dashboard = lazy(() => import('./admin/Dashboard'));
+
+// Wrap lazy components in Suspense
+function App() {
+  return (
+    <Suspense fallback={<div>Chargement...</div>}>
+      {/* Your routes */}
+    </Suspense>
+  );
+}
+```
+
+3. **Specifically lazy load these:**
+   - All admin panel components (entire `/admin` folder)
+   - Stripe components (only load on payment step)
+   - Form steps 2, 3, 4
+   - Any PDF generation libraries
+   - Any chart/visualization libraries
+   - CRM components
+
+4. **Keep these as normal imports:**
+   - Landing page/home component
+   - FormStep1 (first step of form)
+   - Basic layout/navigation
+   - Essential CSS
+
+---
+
+### STEP 2: Defer Non-Critical Scripts (150ms savings)
+
+**What to do:**
+
+1. Find your `index.html` file
+
+2. Add these to `<head>`:
+
+```html
+<!-- Preconnect to critical domains -->
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://js.stripe.com">
+```
+
+3. Find Google Tag Manager script and add `defer`:
+
+```html
+<!-- Before -->
+<script src="https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXXX"></script>
+
+<!-- After -->
+<script defer src="https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXXX"></script>
+```
+
+4. Add defer to any other analytics/tracking scripts
+
+---
+
+### STEP 3: Optimize Images (71 KiB savings)
+
+**What to do:**
+
+1. Find all `<img>` tags in your components
+
+2. Add explicit width/height to prevent layout shift:
+
+```html
+<!-- Before -->
+<img src="/logo.png" alt="Logo">
+
+<!-- After -->
+<img 
+  src="/logo.png" 
+  alt="Logo"
+  width="320"
+  height="80"
+  loading="lazy"
+>
+```
+
+3. For images below the fold (not immediately visible), add `loading="lazy"`
+
+4. **Bonus (if time):** Convert images to WebP format and use `<picture>` element:
+
+```html
+<picture>
+  <source srcset="/logo.webp" type="image/webp">
+  <img src="/logo.png" alt="Logo" width="320" height="80">
+</picture>
+```
+
+---
+
+### STEP 4: Add Caching Headers for Vercel
+
+**What to do:**
+
+1. Create file `vercel.json` in project root
+
+2. Add this content:
+
+```json
+{
+  "headers": [
+    {
+      "source": "/(.*)\\.(?:js|css)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(?:jpg|jpeg|png|webp|svg|gif)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+### STEP 5: Inline Critical CSS
+
+**What to do:**
+
+1. Identify above-the-fold CSS (header, hero section, form step 1)
+
+2. Extract approximately 5-10 KB of critical CSS
+
+3. In `index.html`, add to `<head>`:
+
+```html
+<style>
+  /* Inline critical CSS here */
+  /* Header styles */
+  /* Hero section styles */
+  /* Form step 1 styles */
+  /* Minified */
+</style>
+
+<!-- Defer main CSS -->
+<link rel="preload" href="/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/styles.css"></noscript>
+```
+
+---
+
+### STEP 6: Remove Unused CSS (33 KiB savings)
+
+**What to do:**
+
+**If using Tailwind:**
+
+1. Check `tailwind.config.js` has proper content paths:
+
+```javascript
+module.exports = {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  // ... rest of config
+}
+```
+
+2. Run build - Tailwind will automatically purge unused classes
+
+**If NOT using Tailwind:**
+
+1. Search for any imported CSS frameworks (Bootstrap, Foundation, etc.)
+2. If you only use a few components, remove the full framework
+3. Write custom minimal CSS instead
+
+---
+
+### STEP 7: Optimize JavaScript Execution
+
+**What to do:**
+
+1. Find any `useEffect` hooks that run heavy operations on mount
+
+2. Move them to user interaction instead:
+
+```typescript
+// Before - runs on page load
+useEffect(() => {
+  validateAllFormRules();
+  calculatePricing();
+  loadAllOptions();
+}, []);
+
+// After - run only when needed
+const handleNextStep = () => {
+  validateCurrentStep();
+  calculatePricing();
+};
+```
+
+3. Add debouncing to search/filter functions:
+
+```typescript
+import { debounce } from 'lodash-es';
+
+// Before
+onChange={(e) => filterResults(e.target.value)}
+
+// After
+onChange={debounce((e) => filterResults(e.target.value), 300)}
+```
+
+---
+
+## TESTING
+
+After making changes:
+
+```bash
+# 1. Build the project
+npm run build
+
+# 2. Check bundle sizes
+ls -lh dist/assets/*.js
+# JavaScript files should be smaller than before
+
+# 3. Preview the build
+npm run preview
+
+# 4. Test in browser:
+# - Open Chrome DevTools
+# - Go to Lighthouse tab
+# - Select "Mobile"
+# - Click "Analyze page load"
+# - Check Performance score (target: 85+)
+```
+
+**Or test with PageSpeed Insights:**
+1. Go to https://pagespeed.web.dev/
+2. Enter your URL
+3. Check mobile score
+4. Should see 85+ performance score
+
+---
+
+## SUCCESS CRITERIA
+
+You've succeeded when:
+
+✅ Mobile Performance Score: 85+ (currently ~59)
+✅ Unused JavaScript: <100 KiB (currently 444 KiB)
+✅ First Contentful Paint: <1.8s
+✅ Largest Contentful Paint: <2.5s
+✅ No render-blocking resources
+✅ Build size reduced by at least 50%
+
+---
+
+## WHAT TO FOCUS ON
+
+**Priority 1 (CRITICAL):**
+- Code splitting / lazy loading (Step 1)
+- This alone should get you to 75-80 score
+
+**Priority 2 (HIGH):**
+- Defer scripts (Step 2)
+- This should get you to 80-85
+
+**Priority 3 (MEDIUM):**
+- Image optimization (Step 3)
+- Caching headers (Step 4)
+- This should get you to 85-90
+
+**Priority 4 (IF TIME):**
+- Inline critical CSS (Step 5)
+- Remove unused CSS (Step 6)
+- Optimize JS execution (Step 7)
+
+---
+
+## COMMON FILES TO MODIFY
+
+You'll likely need to edit:
+
+- `src/App.tsx` or `src/main.tsx` - Add lazy loading
+- `index.html` - Add preconnect, defer scripts, inline critical CSS
+- `vite.config.ts` or `webpack.config.js` - Check build config
+- `vercel.json` - Add caching headers (create if doesn't exist)
+- `tailwind.config.js` - Ensure proper purging (if using Tailwind)
+
+---
+
+## IMPORTANT NOTES
+
+1. **Don't add new features** - only remove/optimize
+2. **Test after each step** - verify you didn't break anything
+3. **The main problem is clear:** 444 KiB unused JavaScript
+4. **Code splitting alone** should get you to 75-80 score
+5. **Every day without this fix** costs money on Google Ads
+
+---
+
+## DELIVERABLES
+
+When complete, provide:
+
+1. **List of changes made** - which files did you modify?
+2. **Before/after bundle sizes** - show reduction in KB
+3. **PageSpeed score screenshot** - prove it's 85+
+4. **Confirmation deployed to Vercel** - changes are live
+
+---
+
+## IF YOU GET STUCK
+
+**If mobile score still isn't 85+ after Steps 1-3:**
+
+The nuclear option is to create a separate ultra-lightweight landing page:
+- Pure HTML/CSS/minimal JS
+- <10 KB total
+- Loads instantly (95+ score)
+- Redirects to main app after user clicks "Start"
+
+But try the steps above first - they should work.
+
+---
+
+## START HERE
+
+1. Run `npm run build` to see current bundle size
+2. Implement Step 1 (code splitting) - this is 80% of the fix
+3. Test with Lighthouse
+4. If not at 85+, do Step 2 (defer scripts)
+5. Test again
+6. Continue until you hit 85+
+
+Good luck! This is critical - every day with poor mobile performance costs money.
