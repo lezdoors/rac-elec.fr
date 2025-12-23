@@ -1,0 +1,141 @@
+Voici les 3 modèles JSON envoyés au CRM :
+
+1. Formulaire complété (form-submit)
+
+{
+  "referenceNumber": "REF-0024F446",
+  "lovable_request_id": "417176a4-b8c1-4ae6-b049-5fb40024f446",
+  "source": "lovable-website",
+  "event_type": "form_complete",
+  "payment_status": "pending",
+  
+  "customer": {
+    "civility": "M.",
+    "first_name": "Jean",
+    "last_name": "Dupont",
+    "email": "jean.dupont@email.com",
+    "phone": "0612345678",
+    "client_type": "particulier",
+    "company_name": null,
+    "siren": null
+  },
+  
+  "project_address": {
+    "address": "123 rue de la Paix",
+    "address2": "Bâtiment A",
+    "city": "Paris",
+    "zip_code": "75001"
+  },
+  
+  "billing_address": {
+    "address": "456 avenue des Champs",
+    "city": "Paris",
+    "zip_code": "75008"
+  },
+  
+  "request": {
+    "type_raccordement": "definitif",
+    "usage": "residential",
+    "phase": "monophase",
+    "power_kva": 12,
+    "is_viabilise": true,
+    "desired_start_date": "2025-03-01",
+    "knows_pdl": true,
+    "pdl": "12345678901234",
+    "puissance_actuelle_kva": 6
+  },
+  
+  "notes": "Commentaires du client",
+  "rgpd_consent": true,
+  
+  "tracking": {
+    "utm_source": "google",
+    "utm_medium": "cpc",
+    "utm_campaign": "raccordement-2025"
+  },
+  
+  "raw_payload": { /* copie complète du payload original */ }
+}
+2. Paiement réussi (stripe-webhook)
+
+{
+  "referenceNumber": "REF-0024F446",
+  "lovable_request_id": "417176a4-b8c1-4ae6-b049-5fb40024f446",
+  "source": "lovable-website-payment",
+  "event_type": "payment_success",
+  "payment_status": "paid",
+  "payment_amount_cents": 9900,
+  "payment_currency": "eur",
+  "payment_plan": 2,
+  "stripe_payment_intent_id": "pi_3QxYz...",
+  "payment_timestamp": "2025-01-15T14:30:00.000Z",
+  
+  "customer": {
+    "civility": "M.",
+    "first_name": "Jean",
+    "last_name": "Dupont",
+    "email": "jean.dupont@email.com",
+    "phone": "0612345678",
+    "client_type": "particulier",
+    "company_name": null,
+    "siren": null
+  },
+  
+  "project_address": {
+    "address": "123 rue de la Paix",
+    "address2": "Bâtiment A",
+    "city": "Paris",
+    "zip_code": "75001"
+  },
+  
+  "billing_address": {
+    "address": "456 avenue des Champs",
+    "city": "Paris",
+    "zip_code": "75008"
+  },
+  
+  "request": {
+    "type_raccordement": "definitif",
+    "usage": "residential",
+    "phase": "monophase",
+    "power_kva": 12,
+    "is_viabilise": true,
+    "knows_pdl": true,
+    "pdl": "12345678901234",
+    "puissance_actuelle_kva": 6
+  },
+  
+  "tracking": {
+    "utm_source": "google",
+    "utm_medium": "cpc",
+    "utm_campaign": "raccordement-2025"
+  },
+  
+  "rgpd_consent": true
+}
+3. Paiement échoué (stripe-webhook)
+
+{
+  "referenceNumber": "REF-0024F446",
+  "lovable_request_id": "417176a4-b8c1-4ae6-b049-5fb40024f446",
+  "source": "lovable-website-payment",
+  "event_type": "payment_failed",
+  "payment_status": "failed",
+  "payment_amount_cents": 9900,
+  "payment_currency": "eur",
+  "stripe_payment_intent_id": "pi_3QxYz...",
+  "failure_reason": "Your card was declined.",
+  "payment_timestamp": "2025-01-15T14:30:00.000Z",
+  
+  "customer": { /* même structure */ },
+  "project_address": { /* même structure */ },
+  "billing_address": { /* même structure */ },
+  "request": { /* même structure */ },
+  "tracking": { /* même structure */ },
+  "rgpd_consent": true
+}
+Résumé des endpoints:
+
+URL: POST https://monelec.net/api/external/requests
+Header: X-API-Key: {MONELEC_API_KEY}
+Content-Type: application/json

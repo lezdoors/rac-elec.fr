@@ -17956,43 +17956,91 @@ var leadSchema = z5.object({
   utm_medium: z5.string().nullable().optional(),
   utm_campaign: z5.string().nullable().optional()
 });
-var requestSchema = z5.object({
-  email: z5.string().email("Email invalide"),
-  phone: z5.string().min(10, "T\xE9l\xE9phone invalide"),
-  // Support both firstName/lastName OR full_name
+var lovableRequestSchema = z5.object({
+  // Unified reference from Lovable (REF-XXXXXXXX)
+  referenceNumber: z5.string().optional(),
+  lovable_request_id: z5.string().optional(),
+  source: z5.string().optional(),
+  event_type: z5.enum(["form_complete", "payment_success", "payment_failed"]).optional(),
+  payment_status: z5.string().optional(),
+  // Payment details (for payment events)
+  payment_amount_cents: z5.number().optional(),
+  payment_currency: z5.string().optional(),
+  payment_plan: z5.number().optional(),
+  stripe_payment_intent_id: z5.string().optional(),
+  payment_timestamp: z5.string().optional(),
+  failure_reason: z5.string().optional(),
+  // Customer object
+  customer: z5.object({
+    civility: z5.string().optional(),
+    first_name: z5.string().optional(),
+    last_name: z5.string().optional(),
+    email: z5.string().email(),
+    phone: z5.string(),
+    client_type: z5.string().optional(),
+    company_name: z5.string().nullable().optional(),
+    siren: z5.string().nullable().optional()
+  }).optional(),
+  // Project address
+  project_address: z5.object({
+    address: z5.string(),
+    address2: z5.string().nullable().optional(),
+    city: z5.string(),
+    zip_code: z5.string()
+  }).optional(),
+  // Billing address
+  billing_address: z5.object({
+    address: z5.string().nullable().optional(),
+    city: z5.string().nullable().optional(),
+    zip_code: z5.string().nullable().optional()
+  }).nullable().optional(),
+  // Request details
+  request: z5.object({
+    type_raccordement: z5.string().optional(),
+    usage: z5.string().optional(),
+    phase: z5.string().optional(),
+    power_kva: z5.number().or(z5.string()).optional(),
+    is_viabilise: z5.boolean().optional(),
+    desired_start_date: z5.string().nullable().optional(),
+    knows_pdl: z5.boolean().optional(),
+    pdl: z5.string().nullable().optional(),
+    puissance_actuelle_kva: z5.number().or(z5.string()).nullable().optional()
+  }).optional(),
+  notes: z5.string().nullable().optional(),
+  rgpd_consent: z5.boolean().optional(),
+  // Tracking
+  tracking: z5.object({
+    utm_source: z5.string().nullable().optional(),
+    utm_medium: z5.string().nullable().optional(),
+    utm_campaign: z5.string().nullable().optional()
+  }).optional(),
+  raw_payload: z5.any().optional(),
+  // Legacy flat fields for backward compatibility
+  email: z5.string().email().optional(),
+  phone: z5.string().optional(),
   firstName: z5.string().optional(),
   lastName: z5.string().optional(),
   full_name: z5.string().optional(),
-  address: z5.string().min(5, "Adresse requise"),
-  city: z5.string().min(1, "Ville requise"),
+  address: z5.string().optional(),
+  city: z5.string().optional(),
   postalCode: z5.string().optional(),
   zip_code: z5.string().optional(),
-  // Lovable uses zip_code
-  serviceType: z5.string().default("electricity"),
+  serviceType: z5.string().optional(),
   type_raccordement: z5.string().optional(),
-  // Lovable field
-  requestType: z5.string().default("Nouveau raccordement"),
-  clientType: z5.string().default("Particulier"),
+  requestType: z5.string().optional(),
+  clientType: z5.string().optional(),
   client_type: z5.string().optional(),
-  // Lovable field
-  buildingType: z5.string().default("Maison individuelle"),
-  projectStatus: z5.string().default("Projet"),
-  powerRequired: z5.string().default("6"),
-  power_kva: z5.string().optional(),
-  // Lovable field
+  buildingType: z5.string().optional(),
+  projectStatus: z5.string().optional(),
+  powerRequired: z5.string().optional(),
+  power_kva: z5.string().or(z5.number()).optional(),
   phase: z5.string().optional(),
-  // Lovable field
   usage: z5.string().optional(),
-  // Lovable field
   is_viabilise: z5.boolean().optional(),
-  // Lovable field
   comments: z5.string().optional(),
-  // Lovable integration fields
-  lovable_request_id: z5.string().optional(),
   company_name: z5.string().optional(),
   siren: z5.string().optional(),
-  status: z5.string().optional(),
-  payment_status: z5.string().optional()
+  status: z5.string().optional()
 });
 var paymentSessionSchema = z5.object({
   reference: z5.string().min(1, "R\xE9f\xE9rence requise"),
@@ -18059,7 +18107,7 @@ router3.post("/leads", async (req, res) => {
 });
 router3.post("/requests", async (req, res) => {
   try {
-    const validation = requestSchema.safeParse(req.body);
+    const validation = lovableRequestSchema.safeParse(req.body);
     if (!validation.success) {
       return res.status(400).json({
         success: false,
@@ -18068,62 +18116,166 @@ router3.post("/requests", async (req, res) => {
       });
     }
     const data = validation.data;
-    const referenceNumber = `DR-${(/* @__PURE__ */ new Date()).getFullYear()}-${ulid2().substring(0, 8).toUpperCase()}`;
-    const fullName = data.full_name || (data.firstName && data.lastName ? `${data.firstName} ${data.lastName}` : data.firstName || data.lastName || "Non sp\xE9cifi\xE9");
-    const postalCode = data.postalCode || data.zip_code;
-    const clientType = data.clientType || data.client_type || "Particulier";
-    const powerRequired = data.powerRequired || data.power_kva || "6";
-    let notes = data.comments || "";
-    if (data.lovable_request_id) {
-      notes += `
+    const eventType = data.event_type || "form_complete";
+    const referenceNumber = data.referenceNumber || `DR-${(/* @__PURE__ */ new Date()).getFullYear()}-${ulid2().substring(0, 8).toUpperCase()}`;
+    const customer = data.customer;
+    const projectAddress = data.project_address;
+    const billingAddress = data.billing_address;
+    const requestDetails = data.request;
+    const tracking = data.tracking;
+    const email = customer?.email || data.email || "";
+    const phone = customer?.phone || data.phone || "";
+    const firstName = customer?.first_name || data.firstName || "";
+    const lastName = customer?.last_name || data.lastName || "";
+    const civility = customer?.civility || "";
+    const fullName = data.full_name || (civility ? `${civility} ${firstName} ${lastName}`.trim() : `${firstName} ${lastName}`.trim()) || "Non sp\xE9cifi\xE9";
+    const clientType = customer?.client_type || data.client_type || data.clientType || "Particulier";
+    const companyName = customer?.company_name || data.company_name;
+    const siren = customer?.siren || data.siren;
+    const address = projectAddress?.address || data.address || "";
+    const addressComplement = projectAddress?.address2 || null;
+    const city = projectAddress?.city || data.city || "";
+    const postalCode = projectAddress?.zip_code || data.zip_code || data.postalCode || "";
+    const billingAddr = billingAddress?.address || null;
+    const billingCity = billingAddress?.city || null;
+    const billingPostal = billingAddress?.zip_code || null;
+    const typeRaccordement = requestDetails?.type_raccordement || data.type_raccordement || "definitif";
+    const phase = requestDetails?.phase || data.phase || "monophase";
+    const powerKva = String(requestDetails?.power_kva || data.power_kva || data.powerRequired || "6");
+    const usage = requestDetails?.usage || data.usage || "residential";
+    const isViabilise = requestDetails?.is_viabilise ?? data.is_viabilise;
+    const desiredDate = requestDetails?.desired_start_date || null;
+    const pdl = requestDetails?.pdl || null;
+    let notes = data.notes || data.comments || "";
+    if (data.lovable_request_id) notes += `
 [Lovable ID: ${data.lovable_request_id}]`;
-    }
-    if (data.phase) {
-      notes += `
-[Phase: ${data.phase}]`;
-    }
-    if (data.usage) {
-      notes += `
-[Usage: ${data.usage}]`;
-    }
-    if (data.is_viabilise !== void 0) {
-      notes += `
-[Viabilis\xE9: ${data.is_viabilise ? "Oui" : "Non"}]`;
-    }
-    const [request] = await db.insert(serviceRequests).values({
-      referenceNumber,
-      name: fullName,
-      email: data.email,
-      phone: data.phone,
-      clientType,
-      company: data.company_name,
-      siret: data.siren,
-      serviceType: data.type_raccordement || data.serviceType,
-      requestType: data.requestType,
-      buildingType: data.buildingType,
-      projectStatus: data.projectStatus,
-      address: data.address,
-      city: data.city,
-      postalCode,
-      powerRequired,
-      comments: notes.trim() || void 0,
-      status: data.status || "new",
-      paymentStatus: data.payment_status || "pending",
-      paymentAmount: "129.80"
-    }).returning();
-    console.log(`[EXTERNAL API] Request created: ${referenceNumber} - ${data.email}${data.lovable_request_id ? ` (Lovable: ${data.lovable_request_id})` : ""}`);
-    res.status(201).json({
-      success: true,
-      data: {
-        id: request.id,
-        referenceNumber: request.referenceNumber,
-        email: request.email,
-        paymentAmount: request.paymentAmount,
-        lovable_request_id: data.lovable_request_id
+    if (pdl) notes += `
+[PDL: ${pdl}]`;
+    if (usage) notes += `
+[Usage: ${usage}]`;
+    if (isViabilise !== void 0) notes += `
+[Viabilis\xE9: ${isViabilise ? "Oui" : "Non"}]`;
+    if (tracking?.utm_source) notes += `
+[UTM: ${tracking.utm_source}/${tracking.utm_medium}/${tracking.utm_campaign}]`;
+    if (data.rgpd_consent) notes += `
+[RGPD: Consentement donn\xE9]`;
+    if (eventType === "form_complete") {
+      const [request] = await db.insert(serviceRequests).values({
+        referenceNumber,
+        name: fullName,
+        email,
+        phone,
+        clientType,
+        company: companyName,
+        siret: siren,
+        serviceType: typeRaccordement,
+        requestType: "Nouveau raccordement",
+        buildingType: "Maison individuelle",
+        projectStatus: "Projet",
+        address,
+        addressComplement,
+        city,
+        postalCode,
+        billingAddress: billingAddr,
+        billingCity,
+        billingPostalCode: billingPostal,
+        powerRequired: powerKva,
+        phaseType: phase,
+        terrainViabilise: isViabilise ? "Oui" : "Non",
+        desiredCompletionDate: desiredDate,
+        comments: notes.trim() || void 0,
+        status: "new",
+        paymentStatus: data.payment_status || "pending",
+        paymentAmount: "129.80",
+        gclid: tracking?.utm_source === "google" ? data.lovable_request_id : null
+      }).returning();
+      console.log(`[EXTERNAL API] \u2705 Request created: ${referenceNumber} - ${email} (event: ${eventType})`);
+      return res.status(201).json({
+        success: true,
+        data: {
+          id: request.id,
+          referenceNumber: request.referenceNumber,
+          email: request.email,
+          paymentAmount: request.paymentAmount,
+          lovable_request_id: data.lovable_request_id,
+          event_type: eventType
+        }
+      });
+    } else if (eventType === "payment_success" || eventType === "payment_failed") {
+      const paymentStatus = eventType === "payment_success" ? "succeeded" : "failed";
+      const paymentAmount = data.payment_amount_cents ? (data.payment_amount_cents / 100).toFixed(2) : "129.80";
+      const [existingRequest] = await db.select().from(serviceRequests).where(eq12(serviceRequests.referenceNumber, referenceNumber)).limit(1);
+      if (existingRequest) {
+        const [updated] = await db.update(serviceRequests).set({
+          paymentStatus,
+          paymentAmount,
+          stripePaymentIntentId: data.stripe_payment_intent_id,
+          paymentDate: data.payment_timestamp ? new Date(data.payment_timestamp) : /* @__PURE__ */ new Date(),
+          paymentError: eventType === "payment_failed" ? data.failure_reason : null,
+          status: eventType === "payment_success" ? "validated" : "new",
+          updatedAt: /* @__PURE__ */ new Date()
+        }).where(eq12(serviceRequests.referenceNumber, referenceNumber)).returning();
+        console.log(`[EXTERNAL API] \u2705 Request updated: ${referenceNumber} - payment ${paymentStatus}`);
+        return res.json({
+          success: true,
+          data: {
+            id: updated.id,
+            referenceNumber: updated.referenceNumber,
+            paymentStatus: updated.paymentStatus,
+            event_type: eventType,
+            updated: true
+          }
+        });
+      } else {
+        const [request] = await db.insert(serviceRequests).values({
+          referenceNumber,
+          name: fullName,
+          email,
+          phone,
+          clientType,
+          company: companyName,
+          siret: siren,
+          serviceType: typeRaccordement,
+          requestType: "Nouveau raccordement",
+          buildingType: "Maison individuelle",
+          projectStatus: "Projet",
+          address,
+          addressComplement,
+          city,
+          postalCode,
+          billingAddress: billingAddr,
+          billingCity,
+          billingPostalCode: billingPostal,
+          powerRequired: powerKva,
+          phaseType: phase,
+          terrainViabilise: isViabilise ? "Oui" : "Non",
+          comments: notes.trim() || void 0,
+          status: eventType === "payment_success" ? "validated" : "new",
+          paymentStatus,
+          paymentAmount,
+          stripePaymentIntentId: data.stripe_payment_intent_id,
+          paymentDate: data.payment_timestamp ? new Date(data.payment_timestamp) : /* @__PURE__ */ new Date(),
+          paymentError: eventType === "payment_failed" ? data.failure_reason : null
+        }).returning();
+        console.log(`[EXTERNAL API] \u2705 Request created with payment: ${referenceNumber} - ${paymentStatus}`);
+        return res.status(201).json({
+          success: true,
+          data: {
+            id: request.id,
+            referenceNumber: request.referenceNumber,
+            paymentStatus: request.paymentStatus,
+            event_type: eventType,
+            created: true
+          }
+        });
       }
+    }
+    res.status(400).json({
+      success: false,
+      error: "Unknown event_type"
     });
   } catch (error) {
-    console.error("[EXTERNAL API] Error creating request:", error);
+    console.error("[EXTERNAL API] Error processing request:", error);
     res.status(500).json({
       success: false,
       error: "Internal server error"
