@@ -49,3 +49,4 @@ integrations = ["javascript_stripe:1.0.0"]
 
 [userenv.shared]
 GOOGLE_ADS_CONVERSION_ACTION_ID = "16683623620"
+EXTERNAL_API_KEY = "crm-api-0b6612a855725caa0ec2c1be89f9b3dc0e7496dfaab0c8b982cc142da8538597"

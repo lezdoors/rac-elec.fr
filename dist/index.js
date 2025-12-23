@@ -5391,9 +5391,9 @@ async function analyzeRecentRequests() {
   try {
     console.log("D\xE9marrage de l'analyse des demandes r\xE9centes avec Claude...");
     const recentRequests = await db.query.serviceRequests.findMany({
-      where: (serviceRequests2, { isNull: isNull2, and: and8, eq: eq12 }) => and8(
+      where: (serviceRequests2, { isNull: isNull2, and: and8, eq: eq13 }) => and8(
         isNull2(serviceRequests2.aiAnalysis),
-        eq12(serviceRequests2.status, "pending")
+        eq13(serviceRequests2.status, "pending")
       ),
       limit: 10,
       orderBy: (serviceRequests2, { desc: desc7 }) => [desc7(serviceRequests2.createdAt)]
@@ -17899,6 +17899,328 @@ var paymentEndpointSecurity = (req, res, next) => {
   next();
 };
 
+// server/external-api.ts
+init_db();
+init_schema();
+init_email_service();
+import { Router as Router5 } from "express";
+import { eq as eq12 } from "drizzle-orm";
+import { ulid as ulid2 } from "ulid";
+import Stripe4 from "stripe";
+import { z as z5 } from "zod";
+var router3 = Router5();
+var API_KEY = process.env.EXTERNAL_API_KEY;
+if (!API_KEY) {
+  console.warn("\u26A0\uFE0F EXTERNAL_API_KEY not set - external API endpoints will reject all requests");
+}
+var stripeSecretKey2 = process.env.STRIPE_SECRET_KEY;
+var stripe4 = null;
+if (stripeSecretKey2) {
+  stripe4 = new Stripe4(stripeSecretKey2, { apiVersion: "2025-05-28.basil" });
+}
+var validateApiKey = (req, res, next) => {
+  const apiKey = req.headers["x-api-key"];
+  if (!apiKey) {
+    return res.status(401).json({
+      success: false,
+      error: "API key required",
+      code: "MISSING_API_KEY"
+    });
+  }
+  if (apiKey !== API_KEY) {
+    console.warn(`[EXTERNAL API] Invalid API key attempt: ${apiKey.substring(0, 10)}...`);
+    return res.status(403).json({
+      success: false,
+      error: "Invalid API key",
+      code: "INVALID_API_KEY"
+    });
+  }
+  next();
+};
+router3.use(validateApiKey);
+var leadSchema = z5.object({
+  email: z5.string().email("Email invalide"),
+  phone: z5.string().min(10, "T\xE9l\xE9phone invalide"),
+  firstName: z5.string().min(1, "Pr\xE9nom requis"),
+  lastName: z5.string().min(1, "Nom requis"),
+  serviceType: z5.string().optional(),
+  clientType: z5.string().optional().default("Particulier"),
+  address: z5.string().optional(),
+  city: z5.string().optional(),
+  postalCode: z5.string().optional(),
+  source: z5.string().optional(),
+  notes: z5.string().optional()
+});
+var requestSchema = z5.object({
+  email: z5.string().email("Email invalide"),
+  phone: z5.string().min(10, "T\xE9l\xE9phone invalide"),
+  firstName: z5.string().min(1, "Pr\xE9nom requis"),
+  lastName: z5.string().min(1, "Nom requis"),
+  address: z5.string().min(5, "Adresse requise"),
+  city: z5.string().min(1, "Ville requise"),
+  postalCode: z5.string().min(5, "Code postal requis"),
+  serviceType: z5.string().default("electricity"),
+  requestType: z5.string().default("Nouveau raccordement"),
+  clientType: z5.string().default("Particulier"),
+  buildingType: z5.string().default("Maison individuelle"),
+  projectStatus: z5.string().default("Projet"),
+  powerRequired: z5.string().default("6"),
+  comments: z5.string().optional()
+});
+var paymentSessionSchema = z5.object({
+  reference: z5.string().min(1, "R\xE9f\xE9rence requise"),
+  amount: z5.number().positive("Montant invalide").default(129.8),
+  customerEmail: z5.string().email("Email invalide"),
+  customerName: z5.string().min(1, "Nom client requis"),
+  successUrl: z5.string().url("URL de succ\xE8s invalide"),
+  cancelUrl: z5.string().url("URL d'annulation invalide")
+});
+router3.post("/leads", async (req, res) => {
+  try {
+    const validation = leadSchema.safeParse(req.body);
+    if (!validation.success) {
+      return res.status(400).json({
+        success: false,
+        error: "Validation failed",
+        details: validation.error.errors
+      });
+    }
+    const data = validation.data;
+    const referenceNumber = `LD-${(/* @__PURE__ */ new Date()).getFullYear()}-${ulid2().substring(0, 8).toUpperCase()}`;
+    const [lead] = await db.insert(leads).values({
+      referenceNumber,
+      email: data.email,
+      phone: data.phone,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      clientType: data.clientType,
+      serviceType: data.serviceType || "electricity",
+      address: data.address,
+      city: data.city,
+      postalCode: data.postalCode,
+      status: "new"
+    }).returning();
+    try {
+      await sendLeadNotification({
+        prenom: data.firstName,
+        nom: data.lastName,
+        email: data.email,
+        telephone: data.phone,
+        typeRaccordement: data.serviceType || "Non sp\xE9cifi\xE9"
+      });
+    } catch (emailError) {
+      console.error("[EXTERNAL API] Email notification failed:", emailError);
+    }
+    console.log(`[EXTERNAL API] Lead created: ${lead.id} - ${data.email}`);
+    res.status(201).json({
+      success: true,
+      data: {
+        id: lead.id,
+        referenceNumber: lead.referenceNumber,
+        email: lead.email
+      }
+    });
+  } catch (error) {
+    console.error("[EXTERNAL API] Error creating lead:", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal server error"
+    });
+  }
+});
+router3.post("/requests", async (req, res) => {
+  try {
+    const validation = requestSchema.safeParse(req.body);
+    if (!validation.success) {
+      return res.status(400).json({
+        success: false,
+        error: "Validation failed",
+        details: validation.error.errors
+      });
+    }
+    const data = validation.data;
+    const referenceNumber = `DR-${(/* @__PURE__ */ new Date()).getFullYear()}-${ulid2().substring(0, 8).toUpperCase()}`;
+    const fullName = `${data.firstName} ${data.lastName}`;
+    const [request] = await db.insert(serviceRequests).values({
+      referenceNumber,
+      name: fullName,
+      email: data.email,
+      phone: data.phone,
+      clientType: data.clientType,
+      serviceType: data.serviceType,
+      requestType: data.requestType,
+      buildingType: data.buildingType,
+      projectStatus: data.projectStatus,
+      address: data.address,
+      city: data.city,
+      postalCode: data.postalCode,
+      powerRequired: data.powerRequired,
+      comments: data.comments,
+      status: "new",
+      paymentStatus: "pending",
+      paymentAmount: "129.80"
+    }).returning();
+    console.log(`[EXTERNAL API] Request created: ${referenceNumber} - ${data.email}`);
+    res.status(201).json({
+      success: true,
+      data: {
+        id: request.id,
+        referenceNumber: request.referenceNumber,
+        email: request.email,
+        paymentAmount: request.paymentAmount
+      }
+    });
+  } catch (error) {
+    console.error("[EXTERNAL API] Error creating request:", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal server error"
+    });
+  }
+});
+router3.post("/payment-session", async (req, res) => {
+  try {
+    if (!stripe4) {
+      return res.status(503).json({
+        success: false,
+        error: "Payment service unavailable"
+      });
+    }
+    const validation = paymentSessionSchema.safeParse(req.body);
+    if (!validation.success) {
+      return res.status(400).json({
+        success: false,
+        error: "Validation failed",
+        details: validation.error.errors
+      });
+    }
+    const data = validation.data;
+    const session = await stripe4.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: [{
+        price_data: {
+          currency: "eur",
+          product_data: {
+            name: "Demande de raccordement \xE9lectrique",
+            description: `R\xE9f\xE9rence: ${data.reference}`
+          },
+          unit_amount: Math.round(data.amount * 100)
+        },
+        quantity: 1
+      }],
+      mode: "payment",
+      success_url: data.successUrl,
+      cancel_url: data.cancelUrl,
+      customer_email: data.customerEmail,
+      metadata: {
+        reference: data.reference,
+        customerName: data.customerName,
+        source: "external_api"
+      }
+    });
+    console.log(`[EXTERNAL API] Payment session created: ${session.id} for ${data.reference}`);
+    res.json({
+      success: true,
+      data: {
+        sessionId: session.id,
+        url: session.url,
+        reference: data.reference
+      }
+    });
+  } catch (error) {
+    console.error("[EXTERNAL API] Error creating payment session:", error);
+    res.status(500).json({
+      success: false,
+      error: "Failed to create payment session"
+    });
+  }
+});
+router3.post("/payment-intent", async (req, res) => {
+  try {
+    if (!stripe4) {
+      return res.status(503).json({
+        success: false,
+        error: "Payment service unavailable"
+      });
+    }
+    const { reference, amount = 129.8, customerEmail, customerName } = req.body;
+    if (!reference || !customerEmail) {
+      return res.status(400).json({
+        success: false,
+        error: "Reference and customerEmail required"
+      });
+    }
+    const paymentIntent = await stripe4.paymentIntents.create({
+      amount: Math.round(amount * 100),
+      currency: "eur",
+      receipt_email: customerEmail,
+      metadata: {
+        reference,
+        customerName: customerName || "",
+        source: "external_api"
+      }
+    });
+    console.log(`[EXTERNAL API] Payment intent created: ${paymentIntent.id} for ${reference}`);
+    res.json({
+      success: true,
+      data: {
+        clientSecret: paymentIntent.client_secret,
+        paymentIntentId: paymentIntent.id,
+        reference
+      }
+    });
+  } catch (error) {
+    console.error("[EXTERNAL API] Error creating payment intent:", error);
+    res.status(500).json({
+      success: false,
+      error: "Failed to create payment intent"
+    });
+  }
+});
+router3.get("/payment-status/:reference", async (req, res) => {
+  try {
+    const { reference } = req.params;
+    if (!reference) {
+      return res.status(400).json({
+        success: false,
+        error: "Reference required"
+      });
+    }
+    const [request] = await db.select().from(serviceRequests).where(eq12(serviceRequests.referenceNumber, reference)).limit(1);
+    if (!request) {
+      return res.status(404).json({
+        success: false,
+        error: "Request not found"
+      });
+    }
+    res.json({
+      success: true,
+      data: {
+        referenceNumber: request.referenceNumber,
+        status: request.status,
+        paymentStatus: request.paymentStatus,
+        paymentAmount: request.paymentAmount,
+        customerEmail: request.email
+      }
+    });
+  } catch (error) {
+    console.error("[EXTERNAL API] Error fetching payment status:", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal server error"
+    });
+  }
+});
+router3.get("/health", (req, res) => {
+  res.json({
+    success: true,
+    status: "healthy",
+    timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+    stripe: !!stripe4
+  });
+});
+var external_api_default = router3;
+
 // server/index.ts
 process.on("unhandledRejection", (reason, promise) => {
   console.warn("Unhandled Rejection at:", promise, "reason:", reason);
@@ -17950,6 +18272,30 @@ app.use("/api/stripe", paymentRateLimit);
 app.use("/api/admin", generalRateLimit);
 app.use(sanitizeInput);
 app.use(paymentEndpointSecurity);
+var ALLOWED_ORIGINS = [
+  "https://demande-raccordement.fr",
+  "https://www.demande-raccordement.fr",
+  process.env.ALLOWED_ORIGIN
+  // Custom origin if needed
+].filter(Boolean);
+app.use("/api/external", (req, res, next) => {
+  const origin = req.headers.origin;
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-API-Key");
+  res.setHeader("Access-Control-Max-Age", "86400");
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
+  }
+  next();
+});
+app.use("/api/external", external_api_default);
+console.log("\u{1F310} External API mounted at /api/external");
+if (process.env.EXTERNAL_API_KEY) {
+  console.log("\u{1F511} External API key configured");
+}
 app.post("/api/notifications/lead-created", async (req, res) => {
   try {
     const leadData = req.body;
