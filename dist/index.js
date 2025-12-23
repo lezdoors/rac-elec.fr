@@ -18029,11 +18029,13 @@ router3.post("/leads", async (req, res) => {
     }).returning();
     try {
       await sendLeadNotification({
-        prenom: data.firstName,
-        nom: data.lastName,
+        referenceNumber,
+        prenom: data.firstName || "",
+        nom: data.lastName || "",
         email: data.email,
         telephone: data.phone,
-        typeRaccordement: data.serviceType || "Non sp\xE9cifi\xE9"
+        typeRaccordement: data.serviceType || "Non sp\xE9cifi\xE9",
+        source: "Lovable"
       });
     } catch (emailError) {
       console.error("[EXTERNAL API] Email notification failed:", emailError);

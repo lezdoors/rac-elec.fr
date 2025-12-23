@@ -137,11 +137,13 @@ router.post('/leads', async (req: Request, res: Response) => {
     
     try {
       await sendLeadNotification({
-        prenom: data.firstName,
-        nom: data.lastName,
+        referenceNumber: referenceNumber,
+        prenom: data.firstName || '',
+        nom: data.lastName || '',
         email: data.email,
         telephone: data.phone,
         typeRaccordement: data.serviceType || 'Non spécifié',
+        source: 'Lovable',
       });
     } catch (emailError) {
       console.error('[EXTERNAL API] Email notification failed:', emailError);
