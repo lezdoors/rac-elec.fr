@@ -82,16 +82,17 @@ const lovableRequestSchema = z.object({
   payment_timestamp: z.string().optional(),
   failure_reason: z.string().optional(),
   
-  // Customer object
+  // Customer object (per Lovable documentation)
   customer: z.object({
     civility: z.string().optional(),
     first_name: z.string().optional(),
     last_name: z.string().optional(),
     email: z.string().email(),
     phone: z.string(),
-    client_type: z.string().optional(),
+    client_type: z.enum(['particulier', 'professionnel', 'collectivite']).optional(),
     company_name: z.string().nullable().optional(),
     siren: z.string().nullable().optional(),
+    collectivite_nom: z.string().nullable().optional(),
   }).optional(),
   
   // Project address
@@ -109,13 +110,15 @@ const lovableRequestSchema = z.object({
     zip_code: z.string().nullable().optional(),
   }).nullable().optional(),
   
-  // Request details
+  // Request details (per Lovable documentation)
   request: z.object({
     type_raccordement: z.string().optional(),
+    project_type: z.string().optional(),
     usage: z.string().optional(),
     phase: z.string().optional(),
-    power_kva: z.number().or(z.string()).optional(),
-    is_viabilise: z.boolean().optional(),
+    power_kva: z.number().or(z.string()).nullable().optional(),
+    is_viabilise: z.string().or(z.boolean()).optional(),
+    terrain_viabilise: z.string().or(z.boolean()).optional(),
     desired_start_date: z.string().nullable().optional(),
     knows_pdl: z.boolean().optional(),
     pdl: z.string().nullable().optional(),
@@ -125,11 +128,12 @@ const lovableRequestSchema = z.object({
   notes: z.string().nullable().optional(),
   rgpd_consent: z.boolean().optional(),
   
-  // Tracking
+  // Tracking (per Lovable documentation)
   tracking: z.object({
     utm_source: z.string().nullable().optional(),
     utm_medium: z.string().nullable().optional(),
     utm_campaign: z.string().nullable().optional(),
+    landing_page: z.string().nullable().optional(),
   }).optional(),
   
   raw_payload: z.any().optional(),
@@ -287,28 +291,45 @@ router.post('/requests', async (req: Request, res: Response) => {
     const billingCity = billingAddress?.city || null;
     const billingPostal = billingAddress?.zip_code || null;
     
-    // Request details - raw values from Lovable
-    const typeRaccordementRaw = requestDetails?.type_raccordement || data.type_raccordement || 'definitif';
-    const phase = requestDetails?.phase || data.phase || 'monophase';
+    // Request details - raw values from Lovable (as per documentation)
+    const typeRaccordementRaw = requestDetails?.type_raccordement || data.type_raccordement || 'Non spécifié';
+    const projectTypeRaw = requestDetails?.project_type || 'Non spécifié';
+    const phaseRaw = requestDetails?.phase || data.phase || 'Non spécifié';
     const powerKva = String(requestDetails?.power_kva || data.power_kva || data.powerRequired || '6');
-    const usageRaw = requestDetails?.usage || data.usage || 'residential';
-    const isViabilise = requestDetails?.is_viabilise ?? data.is_viabilise;
+    const usageRaw = requestDetails?.usage || data.usage || 'Non spécifié';
+    // is_viabilise and terrain_viabilise are TEXT "Oui"/"Non", not boolean per Lovable docs
+    const isViabiliseText = requestDetails?.is_viabilise || requestDetails?.terrain_viabilise || data.is_viabilise || 'Non spécifié';
     const desiredDate = requestDetails?.desired_start_date || null;
     const pdl = requestDetails?.pdl || null;
+    const puissanceActuelle = requestDetails?.puissance_actuelle_kva || null;
     
-    // Map Lovable type_raccordement → CRM requestType codes
+    // Map Lovable type_raccordement (French labels) → CRM requestType codes
     const requestTypeMap: Record<string, string> = {
+      'Raccordement neuf': 'new_connection',
+      'Modification de raccordement': 'meter_upgrade',
+      'Raccordement provisoire': 'temporary_connection',
+      'Augmentation de puissance': 'power_upgrade',
+      'Passage en triphasé': 'power_upgrade',
+      'Installation photovoltaïque': 'new_connection',
+      'Non spécifié': 'new_connection',
+      // Legacy values for backward compatibility
       'definitif': 'new_connection',
       'provisoire': 'temporary_connection',
       'modification': 'meter_upgrade',
       'augmentation': 'power_upgrade',
-      'deplacement': 'relocation',
-      'visite': 'technical_visit',
     };
     const requestType = requestTypeMap[typeRaccordementRaw] || 'new_connection';
     
-    // Map Lovable usage → CRM buildingType codes
+    // Map Lovable project_type (French labels) → CRM buildingType codes
     const buildingTypeMap: Record<string, string> = {
+      'Maison individuelle': 'individual_house',
+      'Immeuble collectif': 'apartment_building',
+      'Local commercial': 'commercial',
+      'Bâtiment industriel': 'industrial',
+      'Exploitation agricole': 'agricultural',
+      'Autre': 'terrain',
+      'Non spécifié': 'individual_house',
+      // Legacy/usage values for backward compatibility
       'maison': 'individual_house',
       'residential': 'individual_house',
       'appartement': 'apartment_building',
@@ -316,21 +337,49 @@ router.post('/requests', async (req: Request, res: Response) => {
       'commercial': 'commercial',
       'industriel': 'industrial',
       'agricole': 'agricultural',
-      'public': 'public',
-      'terrain': 'terrain',
     };
-    const buildingType = buildingTypeMap[usageRaw] || 'individual_house';
+    const buildingType = buildingTypeMap[projectTypeRaw] || buildingTypeMap[usageRaw] || 'individual_house';
     
-    // Map terrain viabilise → CRM code
-    const terrainViabilise = isViabilise ? 'viabilise' : 'non_viabilise';
+    // Map Lovable phase (French labels) → CRM phaseType codes
+    const phaseMap: Record<string, string> = {
+      'Monophasé': 'monophase',
+      'Triphasé': 'triphase',
+      'Je ne connais pas': 'monophase',
+      'Non spécifié': 'monophase',
+      // Legacy values
+      'monophase': 'monophase',
+      'triphase': 'triphase',
+    };
+    const phase = phaseMap[phaseRaw] || 'monophase';
     
-    // Build notes with all metadata
+    // Map terrain viabilise text → CRM code (Lovable sends "Oui"/"Non" as text)
+    const viabiliseMap: Record<string, string> = {
+      'Oui': 'viabilise',
+      'Non': 'non_viabilise',
+      'Non spécifié': 'non_viabilise',
+      'true': 'viabilise',
+      'false': 'non_viabilise',
+    };
+    const isViabiliseBool = typeof isViabiliseText === 'boolean';
+    const terrainViabilise = isViabiliseBool 
+      ? (isViabiliseText ? 'viabilise' : 'non_viabilise')
+      : (viabiliseMap[String(isViabiliseText)] || 'non_viabilise');
+    
+    // Handle collectivite type
+    const collectiviteNom = customer?.collectivite_nom || null;
+    
+    // Build notes with all metadata (per Lovable documentation)
     let notes = data.notes || data.comments || '';
     if (data.lovable_request_id) notes += `\n[Lovable ID: ${data.lovable_request_id}]`;
     if (pdl) notes += `\n[PDL: ${pdl}]`;
-    if (usageRaw) notes += `\n[Usage: ${usageRaw}]`;
-    if (isViabilise !== undefined) notes += `\n[Viabilisé: ${isViabilise ? 'Oui' : 'Non'}]`;
+    if (puissanceActuelle) notes += `\n[Puissance actuelle: ${puissanceActuelle} kVA]`;
+    if (typeRaccordementRaw && typeRaccordementRaw !== 'Non spécifié') notes += `\n[Type: ${typeRaccordementRaw}]`;
+    if (projectTypeRaw && projectTypeRaw !== 'Non spécifié') notes += `\n[Projet: ${projectTypeRaw}]`;
+    if (usageRaw && usageRaw !== 'Non spécifié') notes += `\n[Usage: ${usageRaw}]`;
+    if (isViabiliseText && isViabiliseText !== 'Non spécifié') notes += `\n[Viabilisé: ${isViabiliseText}]`;
+    if (collectiviteNom) notes += `\n[Collectivité: ${collectiviteNom}]`;
     if (tracking?.utm_source) notes += `\n[UTM: ${tracking.utm_source}/${tracking.utm_medium}/${tracking.utm_campaign}]`;
+    if (tracking?.landing_page) notes += `\n[Landing: ${tracking.landing_page}]`;
     if (data.rgpd_consent) notes += `\n[RGPD: Consentement donné]`;
     
     // Handle different event types
