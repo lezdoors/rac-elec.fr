@@ -287,39 +287,67 @@ router.post('/requests', async (req: Request, res: Response) => {
     const billingCity = billingAddress?.city || null;
     const billingPostal = billingAddress?.zip_code || null;
     
-    // Request details
-    const typeRaccordement = requestDetails?.type_raccordement || data.type_raccordement || 'definitif';
+    // Request details - raw values from Lovable
+    const typeRaccordementRaw = requestDetails?.type_raccordement || data.type_raccordement || 'definitif';
     const phase = requestDetails?.phase || data.phase || 'monophase';
     const powerKva = String(requestDetails?.power_kva || data.power_kva || data.powerRequired || '6');
-    const usage = requestDetails?.usage || data.usage || 'residential';
+    const usageRaw = requestDetails?.usage || data.usage || 'residential';
     const isViabilise = requestDetails?.is_viabilise ?? data.is_viabilise;
     const desiredDate = requestDetails?.desired_start_date || null;
     const pdl = requestDetails?.pdl || null;
+    
+    // Map Lovable type_raccordement → CRM requestType codes
+    const requestTypeMap: Record<string, string> = {
+      'definitif': 'new_connection',
+      'provisoire': 'temporary_connection',
+      'modification': 'meter_upgrade',
+      'augmentation': 'power_upgrade',
+      'deplacement': 'relocation',
+      'visite': 'technical_visit',
+    };
+    const requestType = requestTypeMap[typeRaccordementRaw] || 'new_connection';
+    
+    // Map Lovable usage → CRM buildingType codes
+    const buildingTypeMap: Record<string, string> = {
+      'maison': 'individual_house',
+      'residential': 'individual_house',
+      'appartement': 'apartment_building',
+      'immeuble': 'apartment_building',
+      'commercial': 'commercial',
+      'industriel': 'industrial',
+      'agricole': 'agricultural',
+      'public': 'public',
+      'terrain': 'terrain',
+    };
+    const buildingType = buildingTypeMap[usageRaw] || 'individual_house';
+    
+    // Map terrain viabilise → CRM code
+    const terrainViabilise = isViabilise ? 'viabilise' : 'non_viabilise';
     
     // Build notes with all metadata
     let notes = data.notes || data.comments || '';
     if (data.lovable_request_id) notes += `\n[Lovable ID: ${data.lovable_request_id}]`;
     if (pdl) notes += `\n[PDL: ${pdl}]`;
-    if (usage) notes += `\n[Usage: ${usage}]`;
+    if (usageRaw) notes += `\n[Usage: ${usageRaw}]`;
     if (isViabilise !== undefined) notes += `\n[Viabilisé: ${isViabilise ? 'Oui' : 'Non'}]`;
     if (tracking?.utm_source) notes += `\n[UTM: ${tracking.utm_source}/${tracking.utm_medium}/${tracking.utm_campaign}]`;
     if (data.rgpd_consent) notes += `\n[RGPD: Consentement donné]`;
     
     // Handle different event types
     if (eventType === 'form_complete') {
-      // Create new request
+      // Create new request with CRM-compatible codes
       const [request] = await db.insert(serviceRequests).values({
         referenceNumber,
         name: fullName,
         email,
         phone,
-        clientType,
+        clientType: clientType === 'particulier' ? 'particulier' : clientType === 'professionnel' ? 'professionnel' : clientType,
         company: companyName,
         siret: siren,
-        serviceType: typeRaccordement,
-        requestType: 'Nouveau raccordement',
-        buildingType: 'Maison individuelle',
-        projectStatus: 'Projet',
+        serviceType: typeRaccordementRaw,
+        requestType,
+        buildingType,
+        projectStatus: 'planning',
         address,
         addressComplement,
         city,
@@ -329,7 +357,7 @@ router.post('/requests', async (req: Request, res: Response) => {
         billingPostalCode: billingPostal,
         powerRequired: powerKva,
         phaseType: phase,
-        terrainViabilise: isViabilise ? 'Oui' : 'Non',
+        terrainViabilise,
         desiredCompletionDate: desiredDate,
         comments: notes.trim() || undefined,
         status: 'new',
@@ -339,6 +367,27 @@ router.post('/requests', async (req: Request, res: Response) => {
       }).returning();
       
       console.log(`[EXTERNAL API] ✅ Request created: ${referenceNumber} - ${email} (event: ${eventType})`);
+      
+      // Send email notification for new request
+      try {
+        await sendLeadNotification({
+          referenceNumber,
+          prenom: firstName,
+          nom: lastName,
+          email,
+          telephone: phone,
+          typeRaccordement: typeRaccordementRaw,
+          source: 'Lovable',
+          adresse: address,
+          ville: city,
+          codePostal: postalCode,
+          puissance: powerKva,
+          phase: phase,
+        });
+        console.log(`[EXTERNAL API] 📧 Email notification sent for ${referenceNumber}`);
+      } catch (emailError) {
+        console.error('[EXTERNAL API] ❌ Email notification failed:', emailError);
+      }
       
       return res.status(201).json({
         success: true,
@@ -391,19 +440,19 @@ router.post('/requests', async (req: Request, res: Response) => {
           },
         });
       } else {
-        // Create new request with payment info (fallback)
+        // Create new request with payment info (fallback) using CRM codes
         const [request] = await db.insert(serviceRequests).values({
           referenceNumber,
           name: fullName,
           email,
           phone,
-          clientType,
+          clientType: clientType === 'particulier' ? 'particulier' : clientType === 'professionnel' ? 'professionnel' : clientType,
           company: companyName,
           siret: siren,
-          serviceType: typeRaccordement,
-          requestType: 'Nouveau raccordement',
-          buildingType: 'Maison individuelle',
-          projectStatus: 'Projet',
+          serviceType: typeRaccordementRaw,
+          requestType,
+          buildingType,
+          projectStatus: 'planning',
           address,
           addressComplement,
           city,
@@ -413,7 +462,7 @@ router.post('/requests', async (req: Request, res: Response) => {
           billingPostalCode: billingPostal,
           powerRequired: powerKva,
           phaseType: phase,
-          terrainViabilise: isViabilise ? 'Oui' : 'Non',
+          terrainViabilise,
           comments: notes.trim() || undefined,
           status: eventType === 'payment_success' ? 'validated' : 'new',
           paymentStatus,
