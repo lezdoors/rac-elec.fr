@@ -82,17 +82,16 @@ const lovableRequestSchema = z.object({
   payment_timestamp: z.string().optional(),
   failure_reason: z.string().optional(),
   
-  // Customer object (per Lovable documentation)
+  // Customer object
   customer: z.object({
     civility: z.string().optional(),
     first_name: z.string().optional(),
     last_name: z.string().optional(),
     email: z.string().email(),
     phone: z.string(),
-    client_type: z.enum(['particulier', 'professionnel', 'collectivite']).optional(),
+    client_type: z.string().optional(),
     company_name: z.string().nullable().optional(),
     siren: z.string().nullable().optional(),
-    collectivite_nom: z.string().nullable().optional(),
   }).optional(),
   
   // Project address
@@ -110,15 +109,13 @@ const lovableRequestSchema = z.object({
     zip_code: z.string().nullable().optional(),
   }).nullable().optional(),
   
-  // Request details (per Lovable documentation)
+  // Request details
   request: z.object({
     type_raccordement: z.string().optional(),
-    project_type: z.string().optional(),
     usage: z.string().optional(),
     phase: z.string().optional(),
-    power_kva: z.number().or(z.string()).nullable().optional(),
-    is_viabilise: z.string().or(z.boolean()).optional(),
-    terrain_viabilise: z.string().or(z.boolean()).optional(),
+    power_kva: z.number().or(z.string()).optional(),
+    is_viabilise: z.boolean().optional(),
     desired_start_date: z.string().nullable().optional(),
     knows_pdl: z.boolean().optional(),
     pdl: z.string().nullable().optional(),
@@ -128,12 +125,11 @@ const lovableRequestSchema = z.object({
   notes: z.string().nullable().optional(),
   rgpd_consent: z.boolean().optional(),
   
-  // Tracking (per Lovable documentation)
+  // Tracking
   tracking: z.object({
     utm_source: z.string().nullable().optional(),
     utm_medium: z.string().nullable().optional(),
     utm_campaign: z.string().nullable().optional(),
-    landing_page: z.string().nullable().optional(),
   }).optional(),
   
   raw_payload: z.any().optional(),
@@ -240,13 +236,9 @@ router.post('/leads', async (req: Request, res: Response) => {
 
 router.post('/requests', async (req: Request, res: Response) => {
   try {
-    // Log raw payload for debugging
-    console.log(`[EXTERNAL API] 📥 Raw payload received:`, JSON.stringify(req.body, null, 2));
-    
     const validation = lovableRequestSchema.safeParse(req.body);
     
     if (!validation.success) {
-      console.error(`[EXTERNAL API] ❌ Validation failed:`, validation.error.errors);
       return res.status(400).json({
         success: false,
         error: 'Validation failed',
@@ -291,112 +283,39 @@ router.post('/requests', async (req: Request, res: Response) => {
     const billingCity = billingAddress?.city || null;
     const billingPostal = billingAddress?.zip_code || null;
     
-    // Request details - raw values from Lovable (as per documentation)
-    const typeRaccordementRaw = requestDetails?.type_raccordement || data.type_raccordement || 'Non spécifié';
-    const projectTypeRaw = requestDetails?.project_type || 'Non spécifié';
-    const phaseRaw = requestDetails?.phase || data.phase || 'Non spécifié';
+    // Request details
+    const typeRaccordement = requestDetails?.type_raccordement || data.type_raccordement || 'definitif';
+    const phase = requestDetails?.phase || data.phase || 'monophase';
     const powerKva = String(requestDetails?.power_kva || data.power_kva || data.powerRequired || '6');
-    const usageRaw = requestDetails?.usage || data.usage || 'Non spécifié';
-    // is_viabilise and terrain_viabilise are TEXT "Oui"/"Non", not boolean per Lovable docs
-    const isViabiliseText = requestDetails?.is_viabilise || requestDetails?.terrain_viabilise || data.is_viabilise || 'Non spécifié';
+    const usage = requestDetails?.usage || data.usage || 'residential';
+    const isViabilise = requestDetails?.is_viabilise ?? data.is_viabilise;
     const desiredDate = requestDetails?.desired_start_date || null;
     const pdl = requestDetails?.pdl || null;
-    const puissanceActuelle = requestDetails?.puissance_actuelle_kva || null;
     
-    // Map Lovable type_raccordement (French labels) → CRM requestType codes
-    const requestTypeMap: Record<string, string> = {
-      'Raccordement neuf': 'new_connection',
-      'Modification de raccordement': 'meter_upgrade',
-      'Raccordement provisoire': 'temporary_connection',
-      'Augmentation de puissance': 'power_upgrade',
-      'Passage en triphasé': 'power_upgrade',
-      'Installation photovoltaïque': 'new_connection',
-      'Non spécifié': 'new_connection',
-      // Legacy values for backward compatibility
-      'definitif': 'new_connection',
-      'provisoire': 'temporary_connection',
-      'modification': 'meter_upgrade',
-      'augmentation': 'power_upgrade',
-    };
-    const requestType = requestTypeMap[typeRaccordementRaw] || 'new_connection';
-    
-    // Map Lovable project_type (French labels) → CRM buildingType codes
-    const buildingTypeMap: Record<string, string> = {
-      'Maison individuelle': 'individual_house',
-      'Immeuble collectif': 'apartment_building',
-      'Local commercial': 'commercial',
-      'Bâtiment industriel': 'industrial',
-      'Exploitation agricole': 'agricultural',
-      'Autre': 'terrain',
-      'Non spécifié': 'individual_house',
-      // Legacy/usage values for backward compatibility
-      'maison': 'individual_house',
-      'residential': 'individual_house',
-      'appartement': 'apartment_building',
-      'immeuble': 'apartment_building',
-      'commercial': 'commercial',
-      'industriel': 'industrial',
-      'agricole': 'agricultural',
-    };
-    const buildingType = buildingTypeMap[projectTypeRaw] || buildingTypeMap[usageRaw] || 'individual_house';
-    
-    // Map Lovable phase (French labels) → CRM phaseType codes
-    const phaseMap: Record<string, string> = {
-      'Monophasé': 'monophase',
-      'Triphasé': 'triphase',
-      'Je ne connais pas': 'monophase',
-      'Non spécifié': 'monophase',
-      // Legacy values
-      'monophase': 'monophase',
-      'triphase': 'triphase',
-    };
-    const phase = phaseMap[phaseRaw] || 'monophase';
-    
-    // Map terrain viabilise text → CRM code (Lovable sends "Oui"/"Non" as text)
-    const viabiliseMap: Record<string, string> = {
-      'Oui': 'viabilise',
-      'Non': 'non_viabilise',
-      'Non spécifié': 'non_viabilise',
-      'true': 'viabilise',
-      'false': 'non_viabilise',
-    };
-    const isViabiliseBool = typeof isViabiliseText === 'boolean';
-    const terrainViabilise = isViabiliseBool 
-      ? (isViabiliseText ? 'viabilise' : 'non_viabilise')
-      : (viabiliseMap[String(isViabiliseText)] || 'non_viabilise');
-    
-    // Handle collectivite type
-    const collectiviteNom = customer?.collectivite_nom || null;
-    
-    // Build notes with all metadata (per Lovable documentation)
+    // Build notes with all metadata
     let notes = data.notes || data.comments || '';
     if (data.lovable_request_id) notes += `\n[Lovable ID: ${data.lovable_request_id}]`;
     if (pdl) notes += `\n[PDL: ${pdl}]`;
-    if (puissanceActuelle) notes += `\n[Puissance actuelle: ${puissanceActuelle} kVA]`;
-    if (typeRaccordementRaw && typeRaccordementRaw !== 'Non spécifié') notes += `\n[Type: ${typeRaccordementRaw}]`;
-    if (projectTypeRaw && projectTypeRaw !== 'Non spécifié') notes += `\n[Projet: ${projectTypeRaw}]`;
-    if (usageRaw && usageRaw !== 'Non spécifié') notes += `\n[Usage: ${usageRaw}]`;
-    if (isViabiliseText && isViabiliseText !== 'Non spécifié') notes += `\n[Viabilisé: ${isViabiliseText}]`;
-    if (collectiviteNom) notes += `\n[Collectivité: ${collectiviteNom}]`;
+    if (usage) notes += `\n[Usage: ${usage}]`;
+    if (isViabilise !== undefined) notes += `\n[Viabilisé: ${isViabilise ? 'Oui' : 'Non'}]`;
     if (tracking?.utm_source) notes += `\n[UTM: ${tracking.utm_source}/${tracking.utm_medium}/${tracking.utm_campaign}]`;
-    if (tracking?.landing_page) notes += `\n[Landing: ${tracking.landing_page}]`;
     if (data.rgpd_consent) notes += `\n[RGPD: Consentement donné]`;
     
     // Handle different event types
     if (eventType === 'form_complete') {
-      // Create new request with CRM-compatible codes
+      // Create new request
       const [request] = await db.insert(serviceRequests).values({
         referenceNumber,
         name: fullName,
         email,
         phone,
-        clientType: clientType === 'particulier' ? 'particulier' : clientType === 'professionnel' ? 'professionnel' : clientType,
+        clientType,
         company: companyName,
         siret: siren,
-        serviceType: typeRaccordementRaw,
-        requestType,
-        buildingType,
-        projectStatus: 'planning',
+        serviceType: typeRaccordement,
+        requestType: 'Nouveau raccordement',
+        buildingType: 'Maison individuelle',
+        projectStatus: 'Projet',
         address,
         addressComplement,
         city,
@@ -406,7 +325,7 @@ router.post('/requests', async (req: Request, res: Response) => {
         billingPostalCode: billingPostal,
         powerRequired: powerKva,
         phaseType: phase,
-        terrainViabilise,
+        terrainViabilise: isViabilise ? 'Oui' : 'Non',
         desiredCompletionDate: desiredDate,
         comments: notes.trim() || undefined,
         status: 'new',
@@ -416,27 +335,6 @@ router.post('/requests', async (req: Request, res: Response) => {
       }).returning();
       
       console.log(`[EXTERNAL API] ✅ Request created: ${referenceNumber} - ${email} (event: ${eventType})`);
-      
-      // Send email notification for new request
-      try {
-        await sendLeadNotification({
-          referenceNumber,
-          prenom: firstName,
-          nom: lastName,
-          email,
-          telephone: phone,
-          typeRaccordement: typeRaccordementRaw,
-          source: 'Lovable',
-          adresse: address,
-          ville: city,
-          codePostal: postalCode,
-          puissance: powerKva,
-          phase: phase,
-        });
-        console.log(`[EXTERNAL API] 📧 Email notification sent for ${referenceNumber}`);
-      } catch (emailError) {
-        console.error('[EXTERNAL API] ❌ Email notification failed:', emailError);
-      }
       
       return res.status(201).json({
         success: true,
@@ -489,19 +387,19 @@ router.post('/requests', async (req: Request, res: Response) => {
           },
         });
       } else {
-        // Create new request with payment info (fallback) using CRM codes
+        // Create new request with payment info (fallback)
         const [request] = await db.insert(serviceRequests).values({
           referenceNumber,
           name: fullName,
           email,
           phone,
-          clientType: clientType === 'particulier' ? 'particulier' : clientType === 'professionnel' ? 'professionnel' : clientType,
+          clientType,
           company: companyName,
           siret: siren,
-          serviceType: typeRaccordementRaw,
-          requestType,
-          buildingType,
-          projectStatus: 'planning',
+          serviceType: typeRaccordement,
+          requestType: 'Nouveau raccordement',
+          buildingType: 'Maison individuelle',
+          projectStatus: 'Projet',
           address,
           addressComplement,
           city,
@@ -511,7 +409,7 @@ router.post('/requests', async (req: Request, res: Response) => {
           billingPostalCode: billingPostal,
           powerRequired: powerKva,
           phaseType: phase,
-          terrainViabilise,
+          terrainViabilise: isViabilise ? 'Oui' : 'Non',
           comments: notes.trim() || undefined,
           status: eventType === 'payment_success' ? 'validated' : 'new',
           paymentStatus,
