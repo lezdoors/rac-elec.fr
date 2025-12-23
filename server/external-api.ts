@@ -236,9 +236,13 @@ router.post('/leads', async (req: Request, res: Response) => {
 
 router.post('/requests', async (req: Request, res: Response) => {
   try {
+    // Log raw payload for debugging
+    console.log(`[EXTERNAL API] 📥 Raw payload received:`, JSON.stringify(req.body, null, 2));
+    
     const validation = lovableRequestSchema.safeParse(req.body);
     
     if (!validation.success) {
+      console.error(`[EXTERNAL API] ❌ Validation failed:`, validation.error.errors);
       return res.status(400).json({
         success: false,
         error: 'Validation failed',
