@@ -11,6 +11,7 @@ import { googleSnippetsService } from "./services/google-snippets-service";
 import { setupSmtpService } from "./email-service";
 import { securityHeaders, createBusinessRateLimit, sanitizeInput, paymentEndpointSecurity } from "./security-middleware";
 import { securityMonitoringMiddleware } from "./security-monitoring";
+import externalApiRouter, { getApiKey } from "./external-api";
 
 // Global error handlers to prevent deployment crashes
 process.on('unhandledRejection', (reason, promise) => {
@@ -87,6 +88,37 @@ app.use(sanitizeInput);
 // Special security for payment endpoints (AFTER body parsing)
 app.use(paymentEndpointSecurity);
 
+// CORS configuration for external API (Lovable frontend on demande-raccordement.fr)
+const ALLOWED_ORIGINS = [
+  'https://demande-raccordement.fr',
+  'https://www.demande-raccordement.fr',
+  process.env.ALLOWED_ORIGIN, // Custom origin if needed
+].filter(Boolean);
+
+app.use('/api/external', (req: Request, res: Response, next: NextFunction) => {
+  const origin = req.headers.origin;
+  
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-API-Key');
+  res.setHeader('Access-Control-Max-Age', '86400');
+  
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+  
+  next();
+});
+
+// External API routes (for Lovable frontend integration)
+app.use('/api/external', externalApiRouter);
+console.log('🌐 External API mounted at /api/external');
+if (process.env.EXTERNAL_API_KEY) {
+  console.log('🔑 External API key configured');
+}
 
 // 📧 NOTIFICATION LEAD - Étape 1 → Étape 2
 app.post("/api/notifications/lead-created", async (req, res) => {
