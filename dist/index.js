@@ -17941,31 +17941,58 @@ router3.use(validateApiKey);
 var leadSchema = z5.object({
   email: z5.string().email("Email invalide"),
   phone: z5.string().min(10, "T\xE9l\xE9phone invalide"),
-  firstName: z5.string().min(1, "Pr\xE9nom requis"),
-  lastName: z5.string().min(1, "Nom requis"),
+  firstName: z5.string().min(1, "Pr\xE9nom requis").nullable().optional(),
+  lastName: z5.string().min(1, "Nom requis").nullable().optional(),
   serviceType: z5.string().optional(),
   clientType: z5.string().optional().default("Particulier"),
   address: z5.string().optional(),
   city: z5.string().optional(),
   postalCode: z5.string().optional(),
   source: z5.string().optional(),
-  notes: z5.string().optional()
+  notes: z5.string().optional(),
+  // Lovable integration fields
+  lovable_lead_id: z5.string().optional(),
+  utm_source: z5.string().nullable().optional(),
+  utm_medium: z5.string().nullable().optional(),
+  utm_campaign: z5.string().nullable().optional()
 });
 var requestSchema = z5.object({
   email: z5.string().email("Email invalide"),
   phone: z5.string().min(10, "T\xE9l\xE9phone invalide"),
-  firstName: z5.string().min(1, "Pr\xE9nom requis"),
-  lastName: z5.string().min(1, "Nom requis"),
+  // Support both firstName/lastName OR full_name
+  firstName: z5.string().optional(),
+  lastName: z5.string().optional(),
+  full_name: z5.string().optional(),
   address: z5.string().min(5, "Adresse requise"),
   city: z5.string().min(1, "Ville requise"),
-  postalCode: z5.string().min(5, "Code postal requis"),
+  postalCode: z5.string().optional(),
+  zip_code: z5.string().optional(),
+  // Lovable uses zip_code
   serviceType: z5.string().default("electricity"),
+  type_raccordement: z5.string().optional(),
+  // Lovable field
   requestType: z5.string().default("Nouveau raccordement"),
   clientType: z5.string().default("Particulier"),
+  client_type: z5.string().optional(),
+  // Lovable field
   buildingType: z5.string().default("Maison individuelle"),
   projectStatus: z5.string().default("Projet"),
   powerRequired: z5.string().default("6"),
-  comments: z5.string().optional()
+  power_kva: z5.string().optional(),
+  // Lovable field
+  phase: z5.string().optional(),
+  // Lovable field
+  usage: z5.string().optional(),
+  // Lovable field
+  is_viabilise: z5.boolean().optional(),
+  // Lovable field
+  comments: z5.string().optional(),
+  // Lovable integration fields
+  lovable_request_id: z5.string().optional(),
+  company_name: z5.string().optional(),
+  siren: z5.string().optional(),
+  status: z5.string().optional(),
+  payment_status: z5.string().optional()
 });
 var paymentSessionSchema = z5.object({
   reference: z5.string().min(1, "R\xE9f\xE9rence requise"),
@@ -18040,34 +18067,57 @@ router3.post("/requests", async (req, res) => {
     }
     const data = validation.data;
     const referenceNumber = `DR-${(/* @__PURE__ */ new Date()).getFullYear()}-${ulid2().substring(0, 8).toUpperCase()}`;
-    const fullName = `${data.firstName} ${data.lastName}`;
+    const fullName = data.full_name || (data.firstName && data.lastName ? `${data.firstName} ${data.lastName}` : data.firstName || data.lastName || "Non sp\xE9cifi\xE9");
+    const postalCode = data.postalCode || data.zip_code;
+    const clientType = data.clientType || data.client_type || "Particulier";
+    const powerRequired = data.powerRequired || data.power_kva || "6";
+    let notes = data.comments || "";
+    if (data.lovable_request_id) {
+      notes += `
+[Lovable ID: ${data.lovable_request_id}]`;
+    }
+    if (data.phase) {
+      notes += `
+[Phase: ${data.phase}]`;
+    }
+    if (data.usage) {
+      notes += `
+[Usage: ${data.usage}]`;
+    }
+    if (data.is_viabilise !== void 0) {
+      notes += `
+[Viabilis\xE9: ${data.is_viabilise ? "Oui" : "Non"}]`;
+    }
     const [request] = await db.insert(serviceRequests).values({
       referenceNumber,
       name: fullName,
       email: data.email,
       phone: data.phone,
-      clientType: data.clientType,
-      serviceType: data.serviceType,
+      clientType,
+      company: data.company_name,
+      siret: data.siren,
+      serviceType: data.type_raccordement || data.serviceType,
       requestType: data.requestType,
       buildingType: data.buildingType,
       projectStatus: data.projectStatus,
       address: data.address,
       city: data.city,
-      postalCode: data.postalCode,
-      powerRequired: data.powerRequired,
-      comments: data.comments,
-      status: "new",
-      paymentStatus: "pending",
+      postalCode,
+      powerRequired,
+      comments: notes.trim() || void 0,
+      status: data.status || "new",
+      paymentStatus: data.payment_status || "pending",
       paymentAmount: "129.80"
     }).returning();
-    console.log(`[EXTERNAL API] Request created: ${referenceNumber} - ${data.email}`);
+    console.log(`[EXTERNAL API] Request created: ${referenceNumber} - ${data.email}${data.lovable_request_id ? ` (Lovable: ${data.lovable_request_id})` : ""}`);
     res.status(201).json({
       success: true,
       data: {
         id: request.id,
         referenceNumber: request.referenceNumber,
         email: request.email,
-        paymentAmount: request.paymentAmount
+        paymentAmount: request.paymentAmount,
+        lovable_request_id: data.lovable_request_id
       }
     });
   } catch (error) {

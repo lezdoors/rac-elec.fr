@@ -1,0 +1,164 @@
+ÉTUDE DE FAISABILITÉ : Intégration API CRM monelec.net
+1. Vue d'ensemble de l'architecture actuelle
+L'API répond correctement. Maintenant j'ai toutes les informations nécessaires pour l'étude de faisabilité.
+
+📊 ÉTUDE DE FAISABILITÉ : Intégration API CRM monelec.net
+1. Vue d'ensemble de l'architecture actuelle
+
+Diagram
+2. Points d'intégration identifiés
+Événement	Edge Function	Données à transmettre	Endpoint monelec.net
+Lead capturé (Step 1)	form-start	email, phone, firstName, lastName, serviceType, utm_*	POST /leads
+Demande complète (Step final)	form-submit	Toutes les données du formulaire + customer_id	POST /requests
+Contact/Rappel	contact-callback	full_name, phone, postal_code, source	POST /leads
+Paiement créé	create-payment-intent	request_id, amount, customer info	POST /payment-session ou POST /payment-intent
+Paiement confirmé	stripe-webhook	payment_intent_id, status, amount	POST /requests (update)
+3. Architecture proposée (avec sync API)
+2. Points d'intégration identifiés
+Événement	Edge Function	Données à transmettre	Endpoint monelec.net
+Lead capturé (Step 1)	form-start	email, phone, firstName, lastName, serviceType, utm_*	POST /leads
+Demande complète (Step final)	form-submit	Toutes les données du formulaire + customer_id	POST /requests
+Contact/Rappel	contact-callback	full_name, phone, postal_code, source	POST /leads
+Paiement créé	create-payment-intent	request_id, amount, customer info	POST /payment-session ou POST /payment-intent
+Paiement confirmé	stripe-webhook	payment_intent_id, status, amount	POST /requests (update)
+3. Architecture proposée (avec sync API)
+
+Diagram
+4. Changements requis par fichier
+Fichier	Modification	Impact	Risque
+supabase/functions/form-start/index.ts	Ajouter EdgeRuntime.waitUntil() pour POST vers /leads	✅ Nul (async non-bloquant)	🟢 Faible
+supabase/functions/form-submit/index.ts	Ajouter EdgeRuntime.waitUntil() pour POST vers /requests	✅ Nul (async non-bloquant)	🟢 Faible
+supabase/functions/contact-callback/index.ts	Ajouter EdgeRuntime.waitUntil() pour POST vers /leads	✅ Nul (async non-bloquant)	🟢 Faible
+supabase/functions/stripe-webhook/index.ts	Ajouter sync statut paiement vers /requests	✅ Nul (async non-bloquant)	🟢 Faible
+Nouveau secret	MONELEC_API_KEY	Requis	🟢 Faible
+5. Mapping des données
+POST /leads (form-start, contact-callback)
+
+// Données existantes → API monelec.net
+{
+  email: payload.email,                    // ✅ Disponible
+  phone: payload.phone,                    // ✅ Disponible
+  firstName: payload.firstname,            // ✅ Disponible
+  lastName: payload.lastname,              // ✅ Disponible
+  serviceType: payload.connection_type,    // ✅ Peut être mappé
+  postalCode: payload.postal_code,         // ✅ Disponible
+  source: 'lovable-website',               // ✅ À ajouter
+  utm_source: payload.utm_source,          // ✅ Disponible
+  utm_medium: payload.utm_medium,          // ✅ Disponible
+  utm_campaign: payload.utm_campaign       // ✅ Disponible
+}
+POST /requests (form-submit, après paiement)
+
+{
+  // Identifiants
+  lovable_request_id: dbRequestId,         // ✅ Lien avec Supabase
+  
+  // Client
+  email: customer.email,                   // ✅ Disponible
+  phone: customer.phone,                   // ✅ Disponible
+  full_name: customer.full_name,           // ✅ Disponible
+  client_type: customer.client_type,       // ✅ Disponible
+  company_name: customer.company_name,     // ✅ Disponible
+  siren: customer.siren,                   // ✅ Disponible
+  
+  // Projet
+  type_raccordement: request.type_raccordement, // ✅ Disponible
+  usage: request.usage,                    // ✅ Disponible
+  address: request.address,                // ✅ Disponible
+  city: request.city,                      // ✅ Disponible
+  zip_code: request.zip_code,              // ✅ Disponible
+  phase: request.phase,                    // ✅ Disponible
+  power_kva: request.power_kva,            // ✅ Disponible
+  is_viabilise: request.is_viabilise,      // ✅ Disponible
+  
+  // Statut
+  status: 'submitted',                     // ✅ À mapper
+  payment_status: 'paid' | 'pending'       // ✅ À mapper
+}
+6. Risques et mitigations
+Risque	Probabilité	Impact	Mitigation
+API monelec.net indisponible	Moyenne	❌ Aucun (async)	Fire-and-forget avec logging
+Erreur de format API	Moyenne	⚠️ Données manquantes	Validation côté serveur + logs
+Latence API externe	Faible	❌ Aucun	EdgeRuntime.waitUntil() non-bloquant
+API key compromise	Faible	⚠️ Sécurité	Stockage dans Supabase Secrets
+7. Changements de domaine (demande-raccordement.fr)
+Les fichiers suivants référencent le domaine actuel et devront être mis à jour :
+
+Fichier	Variable/Valeur	Nouvelle valeur
+supabase/functions/create-payment/index.ts	siteUrl fallback	https://www.demande-raccordement.fr
+supabase/functions/create-payment-intent/index.ts	siteUrl fallback	https://www.demande-raccordement.fr
+src/lib/seo.ts	CANONICAL_DOMAIN	https://demande-raccordement.fr
+Secret Supabase	SITE_URL	https://www.demande-raccordement.fr
+8. Plan d'implémentation détaillé
+Phase 1: Configuration (5 min)
+Ajouter le secret MONELEC_API_KEY = crm-api-0b6612a855725caa0ec2c1be89f9b3dc0e7496dfaab0c8b982cc142da8538597
+Mettre à jour SITE_URL = https://www.demande-raccordement.fr
+Phase 2: Modification des Edge Functions (30 min)
+form-start: Ajouter sync async vers POST /leads
+form-submit: Ajouter sync async vers POST /requests
+contact-callback: Ajouter sync async vers POST /leads
+stripe-webhook: Ajouter sync async vers POST /requests (avec payment_status)
+Phase 3: Mise à jour du domaine (10 min)
+Mettre à jour les fallbacks de domaine dans les edge functions
+Mettre à jour CANONICAL_DOMAIN dans src/lib/seo.ts
+Phase 4: Tests (15 min)
+Test lead step 1 → vérifier log API monelec.net
+Test demande complète → vérifier log API monelec.net
+Test paiement → vérifier sync statut
+9. Code exemple pour form-start
+
+// À ajouter après la création du lead dans Supabase (ligne 174)
+
+// Sync to external CRM (non-blocking)
+const monelecApiKey = Deno.env.get('MONELEC_API_KEY');
+if (monelecApiKey) {
+  EdgeRuntime.waitUntil(
+    fetch('https://monelec.net/api/external/leads', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-Key': monelecApiKey,
+      },
+      body: JSON.stringify({
+        email: email,
+        phone: payload.phone,
+        firstName: payload.firstname || null,
+        lastName: payload.lastname || null,
+        serviceType: payload.connection_type || 'non-specifie',
+        postalCode: payload.postal_code || null,
+        source: 'lovable-website',
+        lovable_lead_id: leadId, // Pour le lien retour
+        utm_source: payload.utm_source || null,
+        utm_medium: payload.utm_medium || null,
+        utm_campaign: payload.utm_campaign || null,
+      }),
+    })
+    .then(async res => {
+      if (res.ok) {
+        console.log('[form-start] ✅ CRM sync success');
+      } else {
+        const errorText = await res.text();
+        console.error('[form-start] ❌ CRM sync failed:', res.status, errorText);
+      }
+    })
+    .catch(err => {
+      console.error('[form-start] ❌ CRM sync error:', err.message);
+    })
+  );
+}
+10. Conclusion de faisabilité
+Critère	Évaluation
+Faisabilité technique	✅ 100% réalisable
+Impact sur le site	✅ Nul (modifications async non-bloquantes)
+Temps d'implémentation	⏱️ ~1 heure
+Risque de régression	🟢 Très faible (fire-and-forget)
+Réversibilité	✅ Immédiate (supprimer les appels API)
+Recommandation: ✅ Procéder à l'implémentation
+
+L'intégration utilise le pattern "fire-and-forget" avec EdgeRuntime.waitUntil(), ce qui garantit :
+
+Aucune latence ajoutée pour l'utilisateur
+Aucun risque de casser le flux existant
+Logs complets pour debug
+Résilience totale (si monelec.net est down, le site continue de fonctionner)
+Prêt à implémenter sur votre feu vert. Voulez-vous que je prépare un plan plus détaillé pour une phase spécifique, ou avez-vous des questions sur cette étude ?

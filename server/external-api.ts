@@ -49,8 +49,8 @@ router.use(validateApiKey);
 const leadSchema = z.object({
   email: z.string().email('Email invalide'),
   phone: z.string().min(10, 'Téléphone invalide'),
-  firstName: z.string().min(1, 'Prénom requis'),
-  lastName: z.string().min(1, 'Nom requis'),
+  firstName: z.string().min(1, 'Prénom requis').nullable().optional(),
+  lastName: z.string().min(1, 'Nom requis').nullable().optional(),
   serviceType: z.string().optional(),
   clientType: z.string().optional().default('Particulier'),
   address: z.string().optional(),
@@ -58,23 +58,43 @@ const leadSchema = z.object({
   postalCode: z.string().optional(),
   source: z.string().optional(),
   notes: z.string().optional(),
+  // Lovable integration fields
+  lovable_lead_id: z.string().optional(),
+  utm_source: z.string().nullable().optional(),
+  utm_medium: z.string().nullable().optional(),
+  utm_campaign: z.string().nullable().optional(),
 });
 
 const requestSchema = z.object({
   email: z.string().email('Email invalide'),
   phone: z.string().min(10, 'Téléphone invalide'),
-  firstName: z.string().min(1, 'Prénom requis'),
-  lastName: z.string().min(1, 'Nom requis'),
+  // Support both firstName/lastName OR full_name
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  full_name: z.string().optional(),
   address: z.string().min(5, 'Adresse requise'),
   city: z.string().min(1, 'Ville requise'),
-  postalCode: z.string().min(5, 'Code postal requis'),
+  postalCode: z.string().optional(),
+  zip_code: z.string().optional(), // Lovable uses zip_code
   serviceType: z.string().default('electricity'),
+  type_raccordement: z.string().optional(), // Lovable field
   requestType: z.string().default('Nouveau raccordement'),
   clientType: z.string().default('Particulier'),
+  client_type: z.string().optional(), // Lovable field
   buildingType: z.string().default('Maison individuelle'),
   projectStatus: z.string().default('Projet'),
   powerRequired: z.string().default('6'),
+  power_kva: z.string().optional(), // Lovable field
+  phase: z.string().optional(), // Lovable field
+  usage: z.string().optional(), // Lovable field
+  is_viabilise: z.boolean().optional(), // Lovable field
   comments: z.string().optional(),
+  // Lovable integration fields
+  lovable_request_id: z.string().optional(),
+  company_name: z.string().optional(),
+  siren: z.string().optional(),
+  status: z.string().optional(),
+  payment_status: z.string().optional(),
 });
 
 const paymentSessionSchema = z.object({
@@ -161,29 +181,59 @@ router.post('/requests', async (req: Request, res: Response) => {
     
     const data = validation.data;
     const referenceNumber = `DR-${new Date().getFullYear()}-${ulid().substring(0, 8).toUpperCase()}`;
-    const fullName = `${data.firstName} ${data.lastName}`;
+    
+    // Support both firstName/lastName OR full_name from Lovable
+    const fullName = data.full_name || 
+      (data.firstName && data.lastName ? `${data.firstName} ${data.lastName}` : 
+       data.firstName || data.lastName || 'Non spécifié');
+    
+    // Support both postalCode and zip_code (Lovable uses zip_code)
+    const postalCode = data.postalCode || data.zip_code;
+    
+    // Support both clientType and client_type (Lovable uses client_type)
+    const clientType = data.clientType || data.client_type || 'Particulier';
+    
+    // Support power_kva from Lovable
+    const powerRequired = data.powerRequired || data.power_kva || '6';
+    
+    // Build notes with Lovable metadata
+    let notes = data.comments || '';
+    if (data.lovable_request_id) {
+      notes += `\n[Lovable ID: ${data.lovable_request_id}]`;
+    }
+    if (data.phase) {
+      notes += `\n[Phase: ${data.phase}]`;
+    }
+    if (data.usage) {
+      notes += `\n[Usage: ${data.usage}]`;
+    }
+    if (data.is_viabilise !== undefined) {
+      notes += `\n[Viabilisé: ${data.is_viabilise ? 'Oui' : 'Non'}]`;
+    }
     
     const [request] = await db.insert(serviceRequests).values({
       referenceNumber,
       name: fullName,
       email: data.email,
       phone: data.phone,
-      clientType: data.clientType,
-      serviceType: data.serviceType,
+      clientType,
+      company: data.company_name,
+      siret: data.siren,
+      serviceType: data.type_raccordement || data.serviceType,
       requestType: data.requestType,
       buildingType: data.buildingType,
       projectStatus: data.projectStatus,
       address: data.address,
       city: data.city,
-      postalCode: data.postalCode,
-      powerRequired: data.powerRequired,
-      comments: data.comments,
-      status: 'new',
-      paymentStatus: 'pending',
+      postalCode,
+      powerRequired,
+      comments: notes.trim() || undefined,
+      status: data.status || 'new',
+      paymentStatus: data.payment_status || 'pending',
       paymentAmount: '129.80',
     }).returning();
     
-    console.log(`[EXTERNAL API] Request created: ${referenceNumber} - ${data.email}`);
+    console.log(`[EXTERNAL API] Request created: ${referenceNumber} - ${data.email}${data.lovable_request_id ? ` (Lovable: ${data.lovable_request_id})` : ''}`);
     
     res.status(201).json({
       success: true,
@@ -192,6 +242,7 @@ router.post('/requests', async (req: Request, res: Response) => {
         referenceNumber: request.referenceNumber,
         email: request.email,
         paymentAmount: request.paymentAmount,
+        lovable_request_id: data.lovable_request_id,
       },
     });
     
