@@ -133,18 +133,18 @@ const lovableRequestSchema = z.object({
   }).optional(),
   
   // Additional Lovable fields
-  project_state: z.string().nullable().optional(),
-  permit: z.string().nullable().optional(),
-  is_viabilise: z.boolean().optional(),
-  timeline: z.string().nullable().optional(),
-  temporary_dates: z.any().nullable().optional(),
-  architect: z.any().nullable().optional(),
-  landing_page: z.string().nullable().optional(),
-  submitted_at: z.string().nullable().optional(),
+  project_state: z.string().nullish(),
+  permit: z.any().nullish(),
+  is_viabilise: z.boolean().nullish(),
+  timeline: z.string().nullish(),
+  temporary_dates: z.any().nullish(),
+  architect: z.any().nullish(),
+  landing_page: z.string().nullish(),
+  submitted_at: z.string().nullish(),
   
-  notes: z.string().nullable().optional(),
-  comments: z.string().nullable().optional(),
-  rgpd_consent: z.boolean().optional(),
+  notes: z.string().nullish(),
+  comments: z.string().nullish(),
+  rgpd_consent: z.boolean().nullish(),
   
   // Tracking (original format)
   tracking: z.object({
@@ -261,6 +261,7 @@ router.post('/leads', async (req: Request, res: Response) => {
 });
 
 router.post('/requests', async (req: Request, res: Response) => {
+  console.log('[EXTERNAL API] Received request with body:', JSON.stringify(req.body).substring(0, 500));
   try {
     const validation = lovableRequestSchema.safeParse(req.body);
     

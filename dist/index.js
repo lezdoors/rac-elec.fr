@@ -17985,6 +17985,7 @@ var lovableRequestSchema = z5.object({
   project_address: z5.object({
     address: z5.string(),
     address2: z5.string().nullable().optional(),
+    complement: z5.string().nullable().optional(),
     city: z5.string(),
     zip_code: z5.string()
   }).optional(),
@@ -17994,7 +17995,7 @@ var lovableRequestSchema = z5.object({
     city: z5.string().nullable().optional(),
     zip_code: z5.string().nullable().optional()
   }).nullable().optional(),
-  // Request details
+  // Request details (original format)
   request: z5.object({
     type_raccordement: z5.string().optional(),
     usage: z5.string().optional(),
@@ -18006,13 +18007,37 @@ var lovableRequestSchema = z5.object({
     pdl: z5.string().nullable().optional(),
     puissance_actuelle_kva: z5.number().or(z5.string()).nullable().optional()
   }).optional(),
+  // Connection details (Lovable format)
+  connection_details: z5.object({
+    type: z5.string().optional(),
+    usage: z5.string().optional(),
+    power_kva: z5.number().or(z5.string()).optional(),
+    phase_type: z5.string().optional(),
+    pdl: z5.string().nullable().optional()
+  }).optional(),
+  // Additional Lovable fields
+  project_state: z5.string().nullable().optional(),
+  permit: z5.string().nullable().optional(),
+  is_viabilise: z5.boolean().optional(),
+  timeline: z5.string().nullable().optional(),
+  temporary_dates: z5.any().nullable().optional(),
+  architect: z5.any().nullable().optional(),
+  landing_page: z5.string().nullable().optional(),
+  submitted_at: z5.string().nullable().optional(),
   notes: z5.string().nullable().optional(),
+  comments: z5.string().nullable().optional(),
   rgpd_consent: z5.boolean().optional(),
-  // Tracking
+  // Tracking (original format)
   tracking: z5.object({
     utm_source: z5.string().nullable().optional(),
     utm_medium: z5.string().nullable().optional(),
     utm_campaign: z5.string().nullable().optional()
+  }).optional(),
+  // UTM (Lovable format)
+  utm: z5.object({
+    source: z5.string().nullable().optional(),
+    medium: z5.string().nullable().optional(),
+    campaign: z5.string().nullable().optional()
   }).optional(),
   raw_payload: z5.any().optional(),
   // Legacy flat fields for backward compatibility
@@ -18036,8 +18061,6 @@ var lovableRequestSchema = z5.object({
   power_kva: z5.string().or(z5.number()).optional(),
   phase: z5.string().optional(),
   usage: z5.string().optional(),
-  is_viabilise: z5.boolean().optional(),
-  comments: z5.string().optional(),
   company_name: z5.string().optional(),
   siren: z5.string().optional(),
   status: z5.string().optional()
@@ -18122,7 +18145,9 @@ router3.post("/requests", async (req, res) => {
     const projectAddress = data.project_address;
     const billingAddress = data.billing_address;
     const requestDetails = data.request;
+    const connectionDetails = data.connection_details;
     const tracking = data.tracking;
+    const utm = data.utm;
     const email = customer?.email || data.email || "";
     const phone = customer?.phone || data.phone || "";
     const firstName = customer?.first_name || data.firstName || "";
@@ -18133,19 +18158,22 @@ router3.post("/requests", async (req, res) => {
     const companyName = customer?.company_name || data.company_name;
     const siren = customer?.siren || data.siren;
     const address = projectAddress?.address || data.address || "";
-    const addressComplement = projectAddress?.address2 || null;
+    const addressComplement = projectAddress?.address2 || projectAddress?.complement || null;
     const city = projectAddress?.city || data.city || "";
     const postalCode = projectAddress?.zip_code || data.zip_code || data.postalCode || "";
     const billingAddr = billingAddress?.address || null;
     const billingCity = billingAddress?.city || null;
     const billingPostal = billingAddress?.zip_code || null;
-    const typeRaccordement = requestDetails?.type_raccordement || data.type_raccordement || "definitif";
-    const phase = requestDetails?.phase || data.phase || "monophase";
-    const powerKva = String(requestDetails?.power_kva || data.power_kva || data.powerRequired || "6");
-    const usage = requestDetails?.usage || data.usage || "residential";
+    const typeRaccordement = requestDetails?.type_raccordement || connectionDetails?.type || data.type_raccordement || "definitif";
+    const phase = requestDetails?.phase || connectionDetails?.phase_type || data.phase || "monophase";
+    const powerKva = String(requestDetails?.power_kva || connectionDetails?.power_kva || data.power_kva || data.powerRequired || "6");
+    const usage = requestDetails?.usage || connectionDetails?.usage || data.usage || "residential";
     const isViabilise = requestDetails?.is_viabilise ?? data.is_viabilise;
     const desiredDate = requestDetails?.desired_start_date || null;
-    const pdl = requestDetails?.pdl || null;
+    const pdl = requestDetails?.pdl || connectionDetails?.pdl || null;
+    const projectState = data.project_state;
+    const timeline = data.timeline;
+    const submittedAt = data.submitted_at;
     let notes = data.notes || data.comments || "";
     if (data.lovable_request_id) notes += `
 [Lovable ID: ${data.lovable_request_id}]`;
@@ -18155,8 +18183,17 @@ router3.post("/requests", async (req, res) => {
 [Usage: ${usage}]`;
     if (isViabilise !== void 0) notes += `
 [Viabilis\xE9: ${isViabilise ? "Oui" : "Non"}]`;
-    if (tracking?.utm_source) notes += `
-[UTM: ${tracking.utm_source}/${tracking.utm_medium}/${tracking.utm_campaign}]`;
+    if (projectState) notes += `
+[\xC9tat projet: ${projectState}]`;
+    if (timeline) notes += `
+[D\xE9lai: ${timeline}]`;
+    if (submittedAt) notes += `
+[Soumis: ${submittedAt}]`;
+    const utmSource = tracking?.utm_source || utm?.source;
+    const utmMedium = tracking?.utm_medium || utm?.medium;
+    const utmCampaign = tracking?.utm_campaign || utm?.campaign;
+    if (utmSource) notes += `
+[UTM: ${utmSource}/${utmMedium}/${utmCampaign}]`;
     if (data.rgpd_consent) notes += `
 [RGPD: Consentement donn\xE9]`;
     if (eventType === "form_complete") {
