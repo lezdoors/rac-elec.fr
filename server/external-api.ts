@@ -98,6 +98,7 @@ const lovableRequestSchema = z.object({
   project_address: z.object({
     address: z.string(),
     address2: z.string().nullable().optional(),
+    complement: z.string().nullable().optional(),
     city: z.string(),
     zip_code: z.string(),
   }).optional(),
@@ -109,7 +110,7 @@ const lovableRequestSchema = z.object({
     zip_code: z.string().nullable().optional(),
   }).nullable().optional(),
   
-  // Request details
+  // Request details (original format)
   request: z.object({
     type_raccordement: z.string().optional(),
     usage: z.string().optional(),
@@ -122,14 +123,41 @@ const lovableRequestSchema = z.object({
     puissance_actuelle_kva: z.number().or(z.string()).nullable().optional(),
   }).optional(),
   
+  // Connection details (Lovable format)
+  connection_details: z.object({
+    type: z.string().optional(),
+    usage: z.string().optional(),
+    power_kva: z.number().or(z.string()).optional(),
+    phase_type: z.string().optional(),
+    pdl: z.string().nullable().optional(),
+  }).optional(),
+  
+  // Additional Lovable fields
+  project_state: z.string().nullable().optional(),
+  permit: z.string().nullable().optional(),
+  is_viabilise: z.boolean().optional(),
+  timeline: z.string().nullable().optional(),
+  temporary_dates: z.any().nullable().optional(),
+  architect: z.any().nullable().optional(),
+  landing_page: z.string().nullable().optional(),
+  submitted_at: z.string().nullable().optional(),
+  
   notes: z.string().nullable().optional(),
+  comments: z.string().nullable().optional(),
   rgpd_consent: z.boolean().optional(),
   
-  // Tracking
+  // Tracking (original format)
   tracking: z.object({
     utm_source: z.string().nullable().optional(),
     utm_medium: z.string().nullable().optional(),
     utm_campaign: z.string().nullable().optional(),
+  }).optional(),
+  
+  // UTM (Lovable format)
+  utm: z.object({
+    source: z.string().nullable().optional(),
+    medium: z.string().nullable().optional(),
+    campaign: z.string().nullable().optional(),
   }).optional(),
   
   raw_payload: z.any().optional(),
@@ -155,8 +183,6 @@ const lovableRequestSchema = z.object({
   power_kva: z.string().or(z.number()).optional(),
   phase: z.string().optional(),
   usage: z.string().optional(),
-  is_viabilise: z.boolean().optional(),
-  comments: z.string().optional(),
   company_name: z.string().optional(),
   siren: z.string().optional(),
   status: z.string().optional(),
@@ -257,7 +283,9 @@ router.post('/requests', async (req: Request, res: Response) => {
     const projectAddress = data.project_address;
     const billingAddress = data.billing_address;
     const requestDetails = data.request;
+    const connectionDetails = data.connection_details;
     const tracking = data.tracking;
+    const utm = data.utm;
     
     // Build customer info
     const email = customer?.email || data.email || '';
@@ -272,9 +300,9 @@ router.post('/requests', async (req: Request, res: Response) => {
     const companyName = customer?.company_name || data.company_name;
     const siren = customer?.siren || data.siren;
     
-    // Build address info
+    // Build address info (support both address2 and complement)
     const address = projectAddress?.address || data.address || '';
-    const addressComplement = projectAddress?.address2 || null;
+    const addressComplement = projectAddress?.address2 || projectAddress?.complement || null;
     const city = projectAddress?.city || data.city || '';
     const postalCode = projectAddress?.zip_code || data.zip_code || data.postalCode || '';
     
@@ -283,14 +311,19 @@ router.post('/requests', async (req: Request, res: Response) => {
     const billingCity = billingAddress?.city || null;
     const billingPostal = billingAddress?.zip_code || null;
     
-    // Request details
-    const typeRaccordement = requestDetails?.type_raccordement || data.type_raccordement || 'definitif';
-    const phase = requestDetails?.phase || data.phase || 'monophase';
-    const powerKva = String(requestDetails?.power_kva || data.power_kva || data.powerRequired || '6');
-    const usage = requestDetails?.usage || data.usage || 'residential';
+    // Request details (support both 'request' and 'connection_details' formats)
+    const typeRaccordement = requestDetails?.type_raccordement || connectionDetails?.type || data.type_raccordement || 'definitif';
+    const phase = requestDetails?.phase || connectionDetails?.phase_type || data.phase || 'monophase';
+    const powerKva = String(requestDetails?.power_kva || connectionDetails?.power_kva || data.power_kva || data.powerRequired || '6');
+    const usage = requestDetails?.usage || connectionDetails?.usage || data.usage || 'residential';
     const isViabilise = requestDetails?.is_viabilise ?? data.is_viabilise;
     const desiredDate = requestDetails?.desired_start_date || null;
-    const pdl = requestDetails?.pdl || null;
+    const pdl = requestDetails?.pdl || connectionDetails?.pdl || null;
+    
+    // Additional Lovable fields for notes
+    const projectState = data.project_state;
+    const timeline = data.timeline;
+    const submittedAt = data.submitted_at;
     
     // Build notes with all metadata
     let notes = data.notes || data.comments || '';
@@ -298,7 +331,14 @@ router.post('/requests', async (req: Request, res: Response) => {
     if (pdl) notes += `\n[PDL: ${pdl}]`;
     if (usage) notes += `\n[Usage: ${usage}]`;
     if (isViabilise !== undefined) notes += `\n[Viabilisé: ${isViabilise ? 'Oui' : 'Non'}]`;
-    if (tracking?.utm_source) notes += `\n[UTM: ${tracking.utm_source}/${tracking.utm_medium}/${tracking.utm_campaign}]`;
+    if (projectState) notes += `\n[État projet: ${projectState}]`;
+    if (timeline) notes += `\n[Délai: ${timeline}]`;
+    if (submittedAt) notes += `\n[Soumis: ${submittedAt}]`;
+    // Support both tracking and utm formats
+    const utmSource = tracking?.utm_source || utm?.source;
+    const utmMedium = tracking?.utm_medium || utm?.medium;
+    const utmCampaign = tracking?.utm_campaign || utm?.campaign;
+    if (utmSource) notes += `\n[UTM: ${utmSource}/${utmMedium}/${utmCampaign}]`;
     if (data.rgpd_consent) notes += `\n[RGPD: Consentement donné]`;
     
     // Handle different event types
