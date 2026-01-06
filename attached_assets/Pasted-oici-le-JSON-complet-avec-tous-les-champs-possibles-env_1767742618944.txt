@@ -1,0 +1,67 @@
+oici le JSON complet avec tous les champs possibles envoyés au CRM :
+
+
+{
+  "referenceNumber": "REF-XXXXXXXX",
+  "event_type": "form_complete",
+  "customer": {
+    "first_name": "Jean",
+    "last_name": "Dupont",
+    "email": "jean.dupont@email.com",
+    "phone": "0612345678",
+    "client_type": "individual | professional",
+    "company_name": "Ma Société SARL",
+    "siren": "123456789"
+  },
+  "project_address": {
+    "address": "10 rue Victor Hugo",
+    "complement": "Bâtiment A, Appartement 12",
+    "city": "Paris",
+    "zip_code": "75001"
+  },
+  "connection_details": {
+    "type": "new_connection | temporary_connection | power_modification | collective_connection",
+    "usage": "residential_house | residential_apartment | commercial | industrial | other",
+    "power_kva": "3 | 6 | 9 | 12 | 15 | 18 | 24 | 30 | 36",
+    "phase_type": "mono | tri",
+    "pdl": "12345678901234"
+  },
+  "project_state": "terrain_nu | fondations | hors_eau | hors_air | acheve",
+  "permit": {
+    "number": "PC-075-123-456",
+    "date": "2025-01-15"
+  },
+  "is_viabilise": true,
+  "timeline": "urgent | 1_month | 3_months | 6_months | not_defined",
+  "temporary_dates": {
+    "start": "2025-02-01",
+    "end": "2025-06-30"
+  },
+  "architect": {
+    "name": "Cabinet Architecture Plus",
+    "phone": "0145678901",
+    "email": "contact@archi-plus.fr"
+  },
+  "billing_address": {
+    "address": "25 avenue des Champs-Élysées",
+    "city": "Paris",
+    "zip_code": "75008"
+  },
+  "comments": "Commentaires libres du client...",
+  "utm": {
+    "source": "google",
+    "medium": "cpc",
+    "campaign": "raccordement-2025"
+  },
+  "landing_page": "/raccordement-definitif",
+  "submitted_at": "2025-01-06T22:46:50.421Z"
+}
+Valeurs possibles par champ :
+Champ	Valeurs
+client_type	individual, professional
+connection_details.type	new_connection, temporary_connection, power_modification, collective_connection
+connection_details.usage	residential_house, residential_apartment, commercial, industrial, other
+phase_type	mono, tri
+project_state	terrain_nu, fondations, hors_eau, hors_air, acheve
+timeline	urgent, 1_month, 3_months, 6_months, not_defined
+Les champs permit, temporary_dates, architect, billing_address sont null si non renseignés.
