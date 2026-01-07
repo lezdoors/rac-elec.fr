@@ -345,7 +345,8 @@ router.post('/requests', async (req: Request, res: Response) => {
     // Handle different event types
     if (eventType === 'lead') {
       // Create lead with minimal info (first part of form)
-      const leadReferenceNumber = `LD-${new Date().getFullYear()}-${ulid().substring(0, 8).toUpperCase()}`;
+      // Use Lovable's reference if provided, otherwise generate one
+      const leadReferenceNumber = data.referenceNumber || `LD-${new Date().getFullYear()}-${ulid().substring(0, 8).toUpperCase()}`;
       
       const [lead] = await db.insert(leads).values({
         referenceNumber: leadReferenceNumber,
