@@ -376,25 +376,31 @@ export async function sendLeadNotification(leadData: any) {
     // ✅ NOTIFICATION INTERNE - ENVOI DIRECT (pas d'approbation requise)
     // Le système d'approbation ne concerne QUE les emails automatiques aux clients en anglais
     
+    const isComplete = leadData.isComplete === true;
+    const headerColor = isComplete ? '#28a745' : '#495057'; // Vert pour complet, gris pour lead
+    const headerTitle = isComplete ? 'DEMANDE COMPLÈTE' : 'NOUVEAU LEAD';
+    const stepText = isComplete ? 'Étape 2/3 - Formulaire complet' : 'Étape 1/3 - Informations recueillies';
+    const subjectPrefix = isComplete ? 'COMPLET' : '1st';
+    
     const contenuEmail = `
       <!DOCTYPE html>
       <html>
         <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Nouveau Lead - Raccordement Électrique</title>
+          <title>${headerTitle} - Raccordement Électrique</title>
         </head>
         <body style="margin: 0; padding: 15px; font-family: Arial, sans-serif; background: #f8f9fa; color: #212529;">
           
           <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 6px; overflow: hidden; border: 1px solid #dee2e6;">
             
             <!-- Header Simple -->
-            <div style="background: #495057; padding: 20px; text-align: center;">
+            <div style="background: ${headerColor}; padding: 20px; text-align: center;">
               <h1 style="color: #ffffff; margin: 0; font-size: 18px; font-weight: 600;">
-                Lead ${leadData.referenceNumber || `LEAD-${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}${String(new Date().getDate()).padStart(2, '0')}-${Math.random().toString(36).substr(2, 3).toUpperCase()}`}
+                ${headerTitle} - ${leadData.referenceNumber || 'N/A'}
               </h1>
               <p style="color: #ced4da; margin: 8px 0 0 0; font-size: 14px;">
-                Étape 1/3 - Informations recueillies
+                ${stepText}
               </p>
             </div>
         
@@ -474,7 +480,7 @@ export async function sendLeadNotification(leadData: any) {
     const mailOptions = {
       from: `"Notifications Raccordement" <kevin@monelec.net>`,
       to: 'notifications@raccordement-connect.com',
-      subject: `1st - ${leadData.prenom || ''} ${leadData.nom || ''} - ${leadData.referenceNumber || 'N/A'}`,
+      subject: `${subjectPrefix} - ${leadData.prenom || ''} ${leadData.nom || ''} - ${leadData.referenceNumber || 'N/A'}`,
       html: contenuEmail
     };
 

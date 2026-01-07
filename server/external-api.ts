@@ -421,6 +421,26 @@ router.post('/requests', async (req: Request, res: Response) => {
       
       console.log(`[EXTERNAL API] ✅ Request created: ${referenceNumber} - ${email} (event: ${eventType})`);
       
+      // Send notification for complete form
+      try {
+        await sendLeadNotification({
+          referenceNumber,
+          prenom: firstName || '',
+          nom: lastName || '',
+          email,
+          telephone: phone,
+          typeRaccordement: typeRaccordement || 'Raccordement',
+          source: data.landing_page || 'Lovable',
+          isComplete: true, // Flag to indicate complete form
+          address: `${address}, ${postalCode} ${city}`,
+          powerKva,
+          phase,
+        });
+        console.log(`[EXTERNAL API] ✅ Notification sent for form_complete: ${referenceNumber}`);
+      } catch (emailError) {
+        console.error('[EXTERNAL API] Form complete email notification failed:', emailError);
+      }
+      
       return res.status(201).json({
         success: true,
         data: {
