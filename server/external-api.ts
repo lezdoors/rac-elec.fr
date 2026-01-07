@@ -429,12 +429,20 @@ router.post('/requests', async (req: Request, res: Response) => {
           nom: lastName || '',
           email,
           telephone: phone,
+          clientType: clientType || 'Particulier',
+          societe: companyName,
+          siren: siren,
           typeRaccordement: typeRaccordement || 'Raccordement',
           source: data.landing_page || 'Lovable',
-          isComplete: true, // Flag to indicate complete form
+          isComplete: true,
           address: `${address}, ${postalCode} ${city}`,
           powerKva,
           phase,
+          usage,
+          terrainViabilise: isViabilise ? 'Oui' : 'Non',
+          projectState: data.project_state,
+          timeline: data.timeline,
+          comments: notes.trim() || null,
         });
         console.log(`[EXTERNAL API] ✅ Notification sent for form_complete: ${referenceNumber}`);
       } catch (emailError) {

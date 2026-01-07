@@ -450,10 +450,87 @@ export async function sendLeadNotification(leadData: any) {
                 </div>
               </div>
 
+              ${isComplete ? `
+              <!-- Détails du Projet (uniquement pour demande complète) -->
+              <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; margin-top: 20px;">
+                <div style="background: #28a745; padding: 12px; border-bottom: 1px solid #dee2e6;">
+                  <h3 style="margin: 0; color: #fff; font-size: 14px; font-weight: 600;">
+                    DÉTAILS DU PROJET
+                  </h3>
+                </div>
+                
+                <div style="padding: 20px;">
+                  <!-- Adresse -->
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">ADRESSE DU PROJET</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.address || 'Non fournie'}</div>
+                  </div>
+                  
+                  <!-- Type de raccordement -->
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">TYPE DE RACCORDEMENT</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.typeRaccordement || 'Non spécifié'}</div>
+                  </div>
+                  
+                  <!-- Puissance -->
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">PUISSANCE DEMANDÉE</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.powerKva || 'N/A'} kVA</div>
+                  </div>
+                  
+                  <!-- Phase -->
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">TYPE DE PHASE</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.phase || 'Non spécifié'}</div>
+                  </div>
+                  
+                  <!-- Usage -->
+                  ${leadData.usage ? `
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">USAGE</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.usage}</div>
+                  </div>
+                  ` : ''}
+                  
+                  <!-- Terrain viabilisé -->
+                  ${leadData.terrainViabilise !== undefined ? `
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">TERRAIN VIABILISÉ</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.terrainViabilise}</div>
+                  </div>
+                  ` : ''}
+                  
+                  <!-- État du projet -->
+                  ${leadData.projectState ? `
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">ÉTAT DU PROJET</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.projectState}</div>
+                  </div>
+                  ` : ''}
+                  
+                  <!-- Délai -->
+                  ${leadData.timeline ? `
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">DÉLAI SOUHAITÉ</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.timeline}</div>
+                  </div>
+                  ` : ''}
+                  
+                  <!-- Commentaires -->
+                  ${leadData.comments ? `
+                  <div>
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">COMMENTAIRES</div>
+                    <div style="color: #212529; font-size: 14px; background: #fff3cd; padding: 10px; border-radius: 4px;">${leadData.comments}</div>
+                  </div>
+                  ` : ''}
+                </div>
+              </div>
+              ` : ''}
+
               <!-- Note de Suivi Simple -->
-              <div style="background: #e9ecef; padding: 15px; border-radius: 4px; text-align: center; margin-top: 20px;">
-                <div style="color: #495057; font-size: 14px; font-weight: 600;">
-                  Lead en cours - Étape 1/3 complétée
+              <div style="background: ${isComplete ? '#d4edda' : '#e9ecef'}; padding: 15px; border-radius: 4px; text-align: center; margin-top: 20px;">
+                <div style="color: ${isComplete ? '#155724' : '#495057'}; font-size: 14px; font-weight: 600;">
+                  ${isComplete ? 'Demande complète - En attente de paiement' : 'Lead en cours - Étape 1/3 complétée'}
                 </div>
                 <div style="color: #6c757d; font-size: 12px; margin-top: 4px;">
                   ${new Date().toLocaleString('fr-FR', { 
@@ -469,7 +546,6 @@ export async function sendLeadNotification(leadData: any) {
           </div>
         </body>
       </html>
-      </div>
     `;
 
     // ENVOI DIRECT - Notifications internes en français (pas d'approbation)
