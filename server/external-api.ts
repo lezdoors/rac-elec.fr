@@ -71,7 +71,7 @@ const lovableRequestSchema = z.object({
   referenceNumber: z.string().optional(),
   lovable_request_id: z.string().optional(),
   source: z.string().optional(),
-  event_type: z.enum(['form_complete', 'payment_success', 'payment_failed']).optional(),
+  event_type: z.enum(['lead', 'form_complete', 'payment_success', 'payment_failed']).optional(),
   payment_status: z.string().optional(),
   
   // Payment details (for payment events)
@@ -343,7 +343,50 @@ router.post('/requests', async (req: Request, res: Response) => {
     if (data.rgpd_consent) notes += `\n[RGPD: Consentement donné]`;
     
     // Handle different event types
-    if (eventType === 'form_complete') {
+    if (eventType === 'lead') {
+      // Create lead with minimal info (first part of form)
+      const leadReferenceNumber = `LD-${new Date().getFullYear()}-${ulid().substring(0, 8).toUpperCase()}`;
+      
+      const [lead] = await db.insert(leads).values({
+        referenceNumber: leadReferenceNumber,
+        email,
+        phone,
+        firstName: firstName || null,
+        lastName: lastName || null,
+        clientType: clientType || 'Particulier',
+        serviceType: 'Raccordement électrique',
+        status: 'new',
+        comments: `[Source: ${data.landing_page || 'Lovable'}]\n${notes.trim()}`.trim() || undefined,
+      }).returning();
+      
+      // Send lead notification
+      try {
+        await sendLeadNotification({
+          referenceNumber: leadReferenceNumber,
+          prenom: firstName || '',
+          nom: lastName || '',
+          email,
+          telephone: phone,
+          typeRaccordement: 'Lead - Formulaire partiel',
+          source: data.landing_page || 'Lovable',
+        });
+      } catch (emailError) {
+        console.error('[EXTERNAL API] Lead email notification failed:', emailError);
+      }
+      
+      console.log(`[EXTERNAL API] ✅ Lead created: ${leadReferenceNumber} - ${email} (event: ${eventType})`);
+      
+      return res.status(201).json({
+        success: true,
+        data: {
+          id: lead.id,
+          referenceNumber: lead.referenceNumber,
+          email: lead.email,
+          event_type: eventType,
+        },
+      });
+      
+    } else if (eventType === 'form_complete') {
       // Create new request
       const [request] = await db.insert(serviceRequests).values({
         referenceNumber,
