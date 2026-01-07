@@ -49,6 +49,7 @@ const ThankYouPage = lazy(() => import("@/pages/thank-you").catch(() => ({ defau
 const RecuPage = lazy(() => import("@/pages/recu").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const SolairePage = lazy(() => import("@/pages/solaire-page").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const NosServicesPage = lazy(() => import("@/pages/nos-services").catch(() => ({ default: () => <div>Page non disponible</div> })));
+const FacturePub = lazy(() => import("@/pages/facture-pub").catch(() => ({ default: () => <div>Page non disponible</div> })));
 
 // Service pages
 const RaccordementMaisonNeuvePage = lazy(() => import("@/pages/raccordement-maison-neuve").catch(() => ({ default: () => <div>Page non disponible</div> })));
@@ -501,6 +502,11 @@ function Router() {
         <Route path="/contact" component={() => (
           <Suspense fallback={<LoadingFallback />}>
             <ContactPage />
+          </Suspense>
+        )} />
+        <Route path="/facture-pub-2025" component={() => (
+          <Suspense fallback={<LoadingFallback />}>
+            <FacturePub />
           </Suspense>
         )} />
         
