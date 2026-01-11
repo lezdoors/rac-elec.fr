@@ -68,22 +68,14 @@ export default function HomePage() {
                   Déposez votre demande en quelques minutes.
                 </p>
 
-                {/* CTA Button with Enedis Badge */}
+                {/* CTA Button */}
                 <div className="flex justify-center md:justify-start mb-4">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-sm pl-5 pr-3 py-2 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center gap-3"
+                      className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all"
                       data-testid="cta-hero-button"
                     >
-                      <span>Démarrer ma demande</span>
-                      <span className="bg-white rounded-md px-2 py-1">
-                        <img 
-                          src="/enedis-partner-badge.png?v=2" 
-                          alt="Enedis"
-                          className="h-5 sm:h-6 w-auto object-contain"
-                          loading="eager"
-                        />
-                      </span>
+                      Démarrer ma demande
                     </button>
                   </Link>
                 </div>
