@@ -57,8 +57,10 @@ const formSchema = z.object({
     // Supprimer tous les espaces, points et tirets pour la validation
     const cleanPhone = value.replace(/[\s\.\-]/g, '');
     // Vérifier le format français : 10 chiffres commençant par 0[1-9] ou +33[1-9]
-    return /^(0[1-9]\d{8}|\+33[1-9]\d{8})$/.test(cleanPhone);
-  }, "Format téléphone invalide (ex: 06 12 34 56 78)"),
+    const isValidLength = cleanPhone.length === 10 || cleanPhone.length === 12;
+    const isValidFormat = /^(0[1-9]\d{8}|\+33[1-9]\d{8})$/.test(cleanPhone);
+    return isValidLength && isValidFormat;
+  }, "Format invalide (ex: 06 12 34 56 78)"),
   raisonSociale: z.string().optional(),
   siren: z.string().optional(),
   nomCollectivite: z.string().optional(),

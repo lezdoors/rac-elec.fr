@@ -22,26 +22,19 @@ export const emailValidationRules: ValidationRule[] = [
   }
 ];
 
-// Phone validation for French numbers
+// Phone validation for French numbers - Single comprehensive rule
 export const phoneValidationRules: ValidationRule[] = [
   {
     test: (value: string) => {
       if (!value) return true;
       // Remove spaces, dots, and dashes
       const cleaned = value.replace(/[\s\.\-]/g, '');
-      // French mobile: 06, 07 or landline: 01-05, 08, 09
-      return /^(?:(?:\+33|0)[1-9])(?:[0-9]{8})$/.test(cleaned);
+      // French format: 10 digits starting with 0, or +33 format (12 chars)
+      const isValidLength = cleaned.length === 10 || cleaned.length === 12;
+      const isValidFormat = /^(?:(?:\+33|0)[1-9])(?:[0-9]{8})$/.test(cleaned);
+      return isValidLength && isValidFormat;
     },
-    message: "Numéro de téléphone français invalide",
-    type: 'error'
-  },
-  {
-    test: (value: string) => {
-      if (!value) return true;
-      const cleaned = value.replace(/[\s\.\-]/g, '');
-      return cleaned.length === 10 || cleaned.length === 12; // 10 digits or +33 format
-    },
-    message: "Le numéro doit contenir 10 chiffres",
+    message: "Format invalide (ex: 06 12 34 56 78)",
     type: 'error'
   }
 ];
