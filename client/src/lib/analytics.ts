@@ -4,10 +4,8 @@ declare global {
   }
 }
 
-const GOOGLE_ADS_ID = 'AW-16683623620';
+const GOOGLE_ADS_ID = 'AW-17849369847';
 const CONVERSION_LABELS = {
-  FORM_START: 'xhTDCODCy6gbEMTJr5M-',
-  FORM_SUBMIT: '20wfCK-NyqgbEMTJr5M-',
   PURCHASE: 'b5XPCPfuirYbEMTJr5M-',
 } as const;
 
@@ -73,15 +71,18 @@ export const trackFormStart = (email: string, phone?: string): boolean => {
 
   markFired(dedupeKey);
 
-  fireGtagConversion(CONVERSION_LABELS.FORM_START, {
-    event_name: 'form_start',
-    user_data: {
-      email: email.toLowerCase().trim(),
-      phone_number: phone?.replace(/\s/g, '') || undefined,
-    },
-  });
+  // Push to dataLayer for analytics only (NOT a conversion)
+  if (Array.isArray(window.dataLayer)) {
+    window.dataLayer.push({
+      event: 'form_start',
+      user_data: {
+        email: email.toLowerCase().trim(),
+        phone_number: phone?.replace(/\s/g, '') || undefined,
+      },
+    });
+  }
 
-  console.log(`✅ form_start fired [dedupe: ${emailHash}]`);
+  console.log(`✅ form_start fired [dedupe: ${emailHash}] (analytics only, not conversion)`);
   return true;
 };
 
@@ -108,16 +109,19 @@ export const trackFormSubmit = (reference: string, email?: string, phone?: strin
     sessionStorage.setItem('ec_phone', phone.replace(/\s/g, ''));
   }
 
-  fireGtagConversion(CONVERSION_LABELS.FORM_SUBMIT, {
-    event_name: 'form_submit',
-    transaction_id: reference,
-    user_data: {
-      email: email?.toLowerCase().trim() || undefined,
-      phone_number: phone?.replace(/\s/g, '') || undefined,
-    },
-  });
+  // Push to dataLayer for analytics only (NOT a conversion)
+  if (Array.isArray(window.dataLayer)) {
+    window.dataLayer.push({
+      event: 'form_submit',
+      transaction_id: reference,
+      user_data: {
+        email: email?.toLowerCase().trim() || undefined,
+        phone_number: phone?.replace(/\s/g, '') || undefined,
+      },
+    });
+  }
 
-  console.log(`✅ form_submit fired [ref: ${reference}]`);
+  console.log(`✅ form_submit fired [ref: ${reference}] (analytics only, not conversion)`);
   return true;
 };
 
@@ -220,6 +224,20 @@ export const trackPurchase = (
 
   console.log(`✅ purchase fired [ref: ${reference}, €${amount}, gclid: ${gclid || 'none'}]`);
   return true;
+};
+
+// Track form step progress (informational, NOT a conversion)
+export const trackFormStep = (stepNumber: number, stepName: string): void => {
+  if (typeof window === 'undefined') return;
+  
+  if (Array.isArray(window.dataLayer)) {
+    window.dataLayer.push({
+      event: 'form_step',
+      step_number: stepNumber,
+      step_name: stepName,
+    });
+    console.log(`📊 form_step fired [step ${stepNumber}: ${stepName}]`);
+  }
 };
 
 export const trackEvent = (action: string, category?: string, label?: string, value?: number) => {

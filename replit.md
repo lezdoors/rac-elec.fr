@@ -46,6 +46,15 @@ Preferred communication style: Simple, everyday language.
   - **Key Files**: client/index.html (critical CSS), client/src/pages/home-page.tsx, client/src/components/professional-header.tsx
   - **Design Philosophy**: NO emojis or childish designs - enterprise professional only, B2B conversion focus
 
+- **Google Ads Conversion Optimization (Jan 11, 2026)**: Critical update to focus on purchase-only conversions:
+  - **NEW Conversion ID**: AW-17849369847 (replaces AW-16683623620)
+  - **Purchase = ONLY primary conversion**: AW-17849369847/b5XPCPfuirYbEMTJr5M-
+  - **form_start**: Analytics event ONLY (dataLayer push, NOT a conversion)
+  - **form_submit**: Analytics event ONLY (dataLayer push, NOT a conversion)
+  - **form_step**: NEW event for funnel visibility (step_number, step_name)
+  - **Business Logic**: Paid service must optimize ONLY on real purchases, not form activity
+  - **Key File**: `client/src/lib/analytics.ts`
+
 - **Centralized Tracking Architecture (Dec 15, 2025)**: Complete refactor for stable, permanent tracking:
   - **Single Source of Truth**: All tracking logic in `client/src/lib/analytics.ts`
   - **Journey-Based Deduplication**:
@@ -56,19 +65,14 @@ Preferred communication style: Simple, everyday language.
     - `form_start`: ONLY in `/raccordement-enedis` (Step 1 → Step 2)
     - `form_submit`: ONLY in `/raccordement-enedis` (after API success)
     - `purchase`: ONLY in `/paiement-confirmation` (on payment success)
-  - **Removed Duplicates**: Stripped tracking from `service-request-form.tsx` (legacy) and `thank-you.tsx`
-  - **Conversion IDs**: AW-16683623620 with labels xhTDCODCy6gbEMTJr5M-, 20wfCK-NyqgbEMTJr5M-, b5XPCPfuirYbEMTJr5M-
   - **GA4**: Direct gtag config G-D92SQT9L1P with send_page_view:true (GTM lacks GA4 Configuration tag)
   - **Multi-page site**: Full page reloads, no SPA route tracking needed
 
-- **Google Ads & GTM Migration for demande-raccordement.fr**: Complete migration to new tracking configuration:
+- **Google Ads & GTM Configuration for demande-raccordement.fr**:
   - GTM Container: GTM-K597C4C2
-  - Google Ads Conversion ID: AW-16683623620
+  - Google Ads Conversion ID: AW-17849369847
   - GA4 Measurement ID: G-D92SQT9L1P
-  - 3 Conversion Events configured:
-    - form_start (1ère partie du lead): AW-16683623620/xhTDCODCy6gbEMTJr5M-
-    - form_submit (lead complet): AW-16683623620/20wfCK-NyqgbEMTJr5M-
-    - purchase (après paiement): AW-16683623620/b5XPCPfuirYbEMTJr5M-
+  - PRIMARY Conversion: purchase (AW-17849369847/b5XPCPfuirYbEMTJr5M-)
   - Enhanced Conversions enabled with email/phone data
   - Tracking architecture: GTM manages GA4, direct gtag for Google Ads conversions only
   
