@@ -69,10 +69,10 @@ export default function HomePage() {
                 </p>
 
                 {/* CTA Button + Enedis Badge - Professional layout */}
-                <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 sm:gap-5 mb-6">
+                <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 sm:gap-4 mb-6">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-3.5 rounded-lg shadow-md hover:shadow-lg transition-all"
+                      className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-sm px-4 sm:px-5 py-2.5 rounded-md shadow-sm hover:shadow transition-all"
                       data-testid="cta-hero-button"
                     >
                       Démarrer ma demande
@@ -80,11 +80,11 @@ export default function HomePage() {
                   </Link>
                   
                   {/* Enedis Partner Badge */}
-                  <div className="bg-white rounded-xl shadow-md border border-gray-200 px-4 sm:px-5 py-2.5 sm:py-3 inline-flex items-center">
+                  <div className="bg-white rounded-lg shadow-sm border border-gray-100 px-3 sm:px-4 py-2 inline-flex items-center">
                     <img 
                       src="/enedis-partner-badge.png?v=2" 
                       alt="Enedis - L'électricité en réseau"
-                      className="h-8 sm:h-10 md:h-11 lg:h-12 w-auto object-contain"
+                      className="h-7 sm:h-8 md:h-9 lg:h-10 w-auto object-contain"
                       loading="eager"
                     />
                   </div>
