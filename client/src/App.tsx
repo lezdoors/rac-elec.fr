@@ -7,15 +7,15 @@ import { Suspense, lazy, useEffect, useState } from "react";
 // Import des constantes de rôles depuis le fichier shared constants
 import { USER_ROLES } from "@shared/constants";
 
-// PERFORMANCE: Lazy load ALL heavy components including HomePage
-const Layout = lazy(() => import("@/components/layout"));
-const MainLayout = lazy(() => import("@/components/layouts/MainLayout"));
-const AdminProtectedRoute = lazy(() => import("@/components/admin/admin-protected-route"));
-const StaffProtectedRoute = lazy(() => import("@/lib/staff-protected-route").then(m => ({ default: m.default })));
-const GoogleSnippetsProvider = lazy(() => import("@/components/google-snippets-provider").then(m => ({ default: m.GoogleSnippetsProvider })));
-const GoogleAnalyticsProvider = lazy(() => import("@/components/google-analytics-provider"));
+// CRITICAL: Keep Layout and core wrappers eagerly loaded to prevent Suspense crashes
+import Layout from "@/components/layout";
+import MainLayout from "@/components/layouts/MainLayout";
+import AdminProtectedRoute from "@/components/admin/admin-protected-route";
+import StaffProtectedRoute from "@/lib/staff-protected-route";
+import { GoogleSnippetsProvider } from "@/components/google-snippets-provider";
+import GoogleAnalyticsProvider from "@/components/google-analytics-provider";
 
-// PERFORMANCE: HomePage now lazy loaded for faster initial bundle
+// PERFORMANCE: HomePage lazy loaded for faster initial bundle (safe - wrapped in Suspense)
 const HomePage = lazy(() => import("@/pages/home-page"));
 
 // Lazy load NotFound to avoid loading framer-motion on initial page load

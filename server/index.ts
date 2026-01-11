@@ -454,9 +454,15 @@ app.use((req, res, next) => {
   if (buildExists) {
     console.log('🚀 Serving production build...');
     
-    // PERFORMANCE: Cache index.html in memory for instant TTFB
+    // PERFORMANCE: Cache index.html in memory for instant TTFB (with fallback)
     const indexHtmlPath = path.resolve(distPath, "index.html");
-    const cachedIndexHtml = fs.readFileSync(indexHtmlPath, 'utf-8');
+    let cachedIndexHtml: string | null = null;
+    try {
+      cachedIndexHtml = fs.readFileSync(indexHtmlPath, 'utf-8');
+      console.log('✅ index.html cached in memory for fast TTFB');
+    } catch (err) {
+      console.warn('⚠️ Could not cache index.html, using sendFile fallback');
+    }
     
     // Custom static serving with aggressive caching
     app.use(express.static(distPath, {
@@ -470,7 +476,11 @@ app.use((req, res, next) => {
     app.use("*", (_req, res) => {
       res.setHeader('Content-Type', 'text/html; charset=utf-8');
       res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-      res.send(cachedIndexHtml);
+      if (cachedIndexHtml) {
+        res.send(cachedIndexHtml);
+      } else {
+        res.sendFile(indexHtmlPath);
+      }
     });
   } else if (app.get("env") === "development") {
     console.log('🔧 Serving development with Vite...');
