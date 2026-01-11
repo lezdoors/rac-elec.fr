@@ -2252,25 +2252,30 @@ T\xE9l\xE9phone: ${paiementData.clientPhone || paiementData.phone || "N/A"}
 }
 async function sendLeadNotification(leadData) {
   try {
+    const isComplete = leadData.isComplete === true;
+    const headerColor = isComplete ? "#28a745" : "#495057";
+    const headerTitle = isComplete ? "DEMANDE COMPL\xC8TE" : "NOUVEAU LEAD";
+    const stepText = isComplete ? "\xC9tape 2/3 - Formulaire complet" : "\xC9tape 1/3 - Informations recueillies";
+    const subjectPrefix = isComplete ? "COMPLET" : "1st";
     const contenuEmail = `
       <!DOCTYPE html>
       <html>
         <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Nouveau Lead - Raccordement \xC9lectrique</title>
+          <title>${headerTitle} - Raccordement \xC9lectrique</title>
         </head>
         <body style="margin: 0; padding: 15px; font-family: Arial, sans-serif; background: #f8f9fa; color: #212529;">
           
           <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 6px; overflow: hidden; border: 1px solid #dee2e6;">
             
             <!-- Header Simple -->
-            <div style="background: #495057; padding: 20px; text-align: center;">
+            <div style="background: ${headerColor}; padding: 20px; text-align: center;">
               <h1 style="color: #ffffff; margin: 0; font-size: 18px; font-weight: 600;">
-                Lead ${leadData.referenceNumber || `LEAD-${(/* @__PURE__ */ new Date()).getFullYear()}-${String((/* @__PURE__ */ new Date()).getMonth() + 1).padStart(2, "0")}${String((/* @__PURE__ */ new Date()).getDate()).padStart(2, "0")}-${Math.random().toString(36).substr(2, 3).toUpperCase()}`}
+                ${headerTitle} - ${leadData.referenceNumber || "N/A"}
               </h1>
               <p style="color: #ced4da; margin: 8px 0 0 0; font-size: 14px;">
-                \xC9tape 1/3 - Informations recueillies
+                ${stepText}
               </p>
             </div>
         
@@ -2320,10 +2325,87 @@ async function sendLeadNotification(leadData) {
                 </div>
               </div>
 
+              ${isComplete ? `
+              <!-- D\xE9tails du Projet (uniquement pour demande compl\xE8te) -->
+              <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; margin-top: 20px;">
+                <div style="background: #28a745; padding: 12px; border-bottom: 1px solid #dee2e6;">
+                  <h3 style="margin: 0; color: #fff; font-size: 14px; font-weight: 600;">
+                    D\xC9TAILS DU PROJET
+                  </h3>
+                </div>
+                
+                <div style="padding: 20px;">
+                  <!-- Adresse -->
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">ADRESSE DU PROJET</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.address || "Non fournie"}</div>
+                  </div>
+                  
+                  <!-- Type de raccordement -->
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">TYPE DE RACCORDEMENT</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.typeRaccordement || "Non sp\xE9cifi\xE9"}</div>
+                  </div>
+                  
+                  <!-- Puissance -->
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">PUISSANCE DEMAND\xC9E</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.powerKva || "N/A"} kVA</div>
+                  </div>
+                  
+                  <!-- Phase -->
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">TYPE DE PHASE</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.phase || "Non sp\xE9cifi\xE9"}</div>
+                  </div>
+                  
+                  <!-- Usage -->
+                  ${leadData.usage ? `
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">USAGE</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.usage}</div>
+                  </div>
+                  ` : ""}
+                  
+                  <!-- Terrain viabilis\xE9 -->
+                  ${leadData.terrainViabilise !== void 0 ? `
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">TERRAIN VIABILIS\xC9</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.terrainViabilise}</div>
+                  </div>
+                  ` : ""}
+                  
+                  <!-- \xC9tat du projet -->
+                  ${leadData.projectState ? `
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">\xC9TAT DU PROJET</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.projectState}</div>
+                  </div>
+                  ` : ""}
+                  
+                  <!-- D\xE9lai -->
+                  ${leadData.timeline ? `
+                  <div style="margin-bottom: 15px;">
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">D\xC9LAI SOUHAIT\xC9</div>
+                    <div style="color: #212529; font-size: 14px; font-weight: 600;">${leadData.timeline}</div>
+                  </div>
+                  ` : ""}
+                  
+                  <!-- Commentaires -->
+                  ${leadData.comments ? `
+                  <div>
+                    <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px;">COMMENTAIRES</div>
+                    <div style="color: #212529; font-size: 14px; background: #fff3cd; padding: 10px; border-radius: 4px;">${leadData.comments}</div>
+                  </div>
+                  ` : ""}
+                </div>
+              </div>
+              ` : ""}
+
               <!-- Note de Suivi Simple -->
-              <div style="background: #e9ecef; padding: 15px; border-radius: 4px; text-align: center; margin-top: 20px;">
-                <div style="color: #495057; font-size: 14px; font-weight: 600;">
-                  Lead en cours - \xC9tape 1/3 compl\xE9t\xE9e
+              <div style="background: ${isComplete ? "#d4edda" : "#e9ecef"}; padding: 15px; border-radius: 4px; text-align: center; margin-top: 20px;">
+                <div style="color: ${isComplete ? "#155724" : "#495057"}; font-size: 14px; font-weight: 600;">
+                  ${isComplete ? "Demande compl\xE8te - En attente de paiement" : "Lead en cours - \xC9tape 1/3 compl\xE9t\xE9e"}
                 </div>
                 <div style="color: #6c757d; font-size: 12px; margin-top: 4px;">
                   ${(/* @__PURE__ */ new Date()).toLocaleString("fr-FR", {
@@ -2339,7 +2421,6 @@ async function sendLeadNotification(leadData) {
           </div>
         </body>
       </html>
-      </div>
     `;
     if (!globalTransporter) {
       throw new Error("Transporteur SMTP non configur\xE9");
@@ -2347,7 +2428,7 @@ async function sendLeadNotification(leadData) {
     const mailOptions = {
       from: `"Notifications Raccordement" <kevin@monelec.net>`,
       to: "notifications@raccordement-connect.com",
-      subject: `1st - ${leadData.prenom || ""} ${leadData.nom || ""} - ${leadData.referenceNumber || "N/A"}`,
+      subject: `${subjectPrefix} - ${leadData.prenom || ""} ${leadData.nom || ""} - ${leadData.referenceNumber || "N/A"}`,
       html: contenuEmail
     };
     const result = await globalTransporter.sendMail(mailOptions);
@@ -17961,7 +18042,7 @@ var lovableRequestSchema = z5.object({
   referenceNumber: z5.string().optional(),
   lovable_request_id: z5.string().optional(),
   source: z5.string().optional(),
-  event_type: z5.enum(["form_complete", "payment_success", "payment_failed"]).optional(),
+  event_type: z5.enum(["lead", "form_complete", "payment_success", "payment_failed"]).optional(),
   payment_status: z5.string().optional(),
   // Payment details (for payment events)
   payment_amount_cents: z5.number().optional(),
@@ -18016,17 +18097,17 @@ var lovableRequestSchema = z5.object({
     pdl: z5.string().nullable().optional()
   }).optional(),
   // Additional Lovable fields
-  project_state: z5.string().nullable().optional(),
-  permit: z5.string().nullable().optional(),
-  is_viabilise: z5.boolean().optional(),
-  timeline: z5.string().nullable().optional(),
-  temporary_dates: z5.any().nullable().optional(),
-  architect: z5.any().nullable().optional(),
-  landing_page: z5.string().nullable().optional(),
-  submitted_at: z5.string().nullable().optional(),
-  notes: z5.string().nullable().optional(),
-  comments: z5.string().nullable().optional(),
-  rgpd_consent: z5.boolean().optional(),
+  project_state: z5.string().nullish(),
+  permit: z5.any().nullish(),
+  is_viabilise: z5.boolean().nullish(),
+  timeline: z5.string().nullish(),
+  temporary_dates: z5.any().nullish(),
+  architect: z5.any().nullish(),
+  landing_page: z5.string().nullish(),
+  submitted_at: z5.string().nullish(),
+  notes: z5.string().nullish(),
+  comments: z5.string().nullish(),
+  rgpd_consent: z5.boolean().nullish(),
   // Tracking (original format)
   tracking: z5.object({
     utm_source: z5.string().nullable().optional(),
@@ -18129,6 +18210,7 @@ router3.post("/leads", async (req, res) => {
   }
 });
 router3.post("/requests", async (req, res) => {
+  console.log("[EXTERNAL API] Received request with body:", JSON.stringify(req.body).substring(0, 500));
   try {
     const validation = lovableRequestSchema.safeParse(req.body);
     if (!validation.success) {
@@ -18196,7 +18278,44 @@ router3.post("/requests", async (req, res) => {
 [UTM: ${utmSource}/${utmMedium}/${utmCampaign}]`;
     if (data.rgpd_consent) notes += `
 [RGPD: Consentement donn\xE9]`;
-    if (eventType === "form_complete") {
+    if (eventType === "lead") {
+      const leadReferenceNumber = data.referenceNumber || `LD-${(/* @__PURE__ */ new Date()).getFullYear()}-${ulid2().substring(0, 8).toUpperCase()}`;
+      const [lead] = await db.insert(leads).values({
+        referenceNumber: leadReferenceNumber,
+        email,
+        phone,
+        firstName: firstName || null,
+        lastName: lastName || null,
+        clientType: clientType || "Particulier",
+        serviceType: "Raccordement \xE9lectrique",
+        status: "new",
+        comments: `[Source: ${data.landing_page || "Lovable"}]
+${notes.trim()}`.trim() || void 0
+      }).returning();
+      try {
+        await sendLeadNotification({
+          referenceNumber: leadReferenceNumber,
+          prenom: firstName || "",
+          nom: lastName || "",
+          email,
+          telephone: phone,
+          typeRaccordement: "Lead - Formulaire partiel",
+          source: data.landing_page || "Lovable"
+        });
+      } catch (emailError) {
+        console.error("[EXTERNAL API] Lead email notification failed:", emailError);
+      }
+      console.log(`[EXTERNAL API] \u2705 Lead created: ${leadReferenceNumber} - ${email} (event: ${eventType})`);
+      return res.status(201).json({
+        success: true,
+        data: {
+          id: lead.id,
+          referenceNumber: lead.referenceNumber,
+          email: lead.email,
+          event_type: eventType
+        }
+      });
+    } else if (eventType === "form_complete") {
       const [request] = await db.insert(serviceRequests).values({
         referenceNumber,
         name: fullName,
@@ -18227,6 +18346,32 @@ router3.post("/requests", async (req, res) => {
         gclid: tracking?.utm_source === "google" ? data.lovable_request_id : null
       }).returning();
       console.log(`[EXTERNAL API] \u2705 Request created: ${referenceNumber} - ${email} (event: ${eventType})`);
+      try {
+        await sendLeadNotification({
+          referenceNumber,
+          prenom: firstName || "",
+          nom: lastName || "",
+          email,
+          telephone: phone,
+          clientType: clientType || "Particulier",
+          societe: companyName,
+          siren,
+          typeRaccordement: typeRaccordement || "Raccordement",
+          source: data.landing_page || "Lovable",
+          isComplete: true,
+          address: `${address}, ${postalCode} ${city}`,
+          powerKva,
+          phase,
+          usage,
+          terrainViabilise: isViabilise ? "Oui" : "Non",
+          projectState: data.project_state,
+          timeline: data.timeline,
+          comments: notes.trim() || null
+        });
+        console.log(`[EXTERNAL API] \u2705 Notification sent for form_complete: ${referenceNumber}`);
+      } catch (emailError) {
+        console.error("[EXTERNAL API] Form complete email notification failed:", emailError);
+      }
       return res.status(201).json({
         success: true,
         data: {
