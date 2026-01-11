@@ -45,11 +45,12 @@
     </script>
     
     <!-- ENHANCED: Critical performance optimizations for Core Web Vitals -->
+    <!-- Preconnect to critical third-party origins -->
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
-    <link rel="dns-prefetch" href="//js.stripe.com">
+    <link rel="preconnect" href="https://js.stripe.com" crossorigin>
+    <link rel="preconnect" href="https://geo.api.gouv.fr" crossorigin>
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link rel="dns-prefetch" href="//geo.api.gouv.fr">
     
     <!-- Security headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
