@@ -22,7 +22,6 @@ import servicesTechniquesIcon from "@assets/services-techniques_1765333395814.we
 import raccordementEnedisIcon from "@assets/Raccordement-Enedis_1765333395814.webp";
 import appelezNousIllustration from "@assets/Appelez-nous_1765363264301.webp";
 import rappelGratuitIllustration from "@assets/Appelez--nous_1765363489714.webp";
-import contactFormIllustration from "@assets/Besoin_d'aide_1765363456384.webp";
 import formulaireContactIllustration from "@assets/Rappel_gratuit0_1765589394802.webp";
 
 const useMobileDetection = () => {
@@ -388,32 +387,18 @@ export default function HomePage() {
         {/* BESOIN D'AIDE SECTION - Like Original */}
         <section className="py-6 md:py-10 bg-white" id="besoin-aide" data-animate data-testid="besoin-aide-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
-            <div className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-20 transition-all duration-700 ${isVisible['besoin-aide'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {/* Left - Illustration - Hidden on mobile */}
-              <div className="hidden md:flex w-full lg:w-2/5 justify-center">
-                <div className="w-full max-w-[350px]">
-                  <img 
-                    src={contactFormIllustration} 
-                    alt="Support client disponible"
-                    className="w-full h-auto"
-                    width="350"
-                    height="300"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-
-              {/* Right - Content */}
-              <div className="w-full lg:w-3/5 text-center lg:text-left">
+            <div className={`flex flex-col items-center transition-all duration-700 ${isVisible['besoin-aide'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              {/* Content - Centered */}
+              <div className="w-full max-w-2xl text-center">
                 <h2 className="text-[24px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-4">
                   Besoin d'aide ?
                 </h2>
-                <p className="text-base md:text-xl text-gray-600 mb-6 max-w-lg mx-auto lg:mx-0">
+                <p className="text-base md:text-xl text-gray-600 mb-6 max-w-lg mx-auto">
                   Notre équipe d'experts est disponible pour répondre à toutes vos questions
                 </p>
                 
                 {/* Contact Buttons */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-6">
+                <div className="flex flex-wrap justify-center gap-3 mb-6">
                   <a 
                     href="tel:0970709570" 
                     className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-6 py-[14px] rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 flex items-center gap-2 min-h-[52px]"
