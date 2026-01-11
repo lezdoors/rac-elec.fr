@@ -161,75 +161,51 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 4-STEP PROCESS SECTION - Compact Professional Design */}
+        {/* 4-STEP PROCESS SECTION - Ultra Compact Timeline */}
         <section 
-          className="py-5 md:py-8"
-          style={{ background: 'linear-gradient(180deg, #EBF4FF 0%, #F8FAFF 100%)' }}
+          className="py-4 md:py-6 bg-[#F8FAFC]"
           id="process"
           data-testid="process-section"
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-screen-xl">
-            {/* Header - Compact */}
-            <div className="text-center mb-4 md:mb-6">
-              <h2 className="text-xl md:text-2xl lg:text-[28px] font-bold text-[#0066CC] mb-1 leading-tight">
-                Raccordement en 4 Étapes
+            {/* Header */}
+            <div className="text-center mb-4">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900">
+                Raccordement en 4 étapes simples
               </h2>
-              <p className="text-sm md:text-base text-gray-600">
-                Processus 100% en ligne
-              </p>
             </div>
 
-            {/* Desktop Grid - Compact layout */}
-            <div className="hidden md:grid md:grid-cols-4 gap-4 lg:gap-6 mb-6">
+            {/* Horizontal Timeline - All screens */}
+            <div className="flex flex-col md:flex-row items-stretch justify-between gap-3 md:gap-2 mb-4">
               {[
-                { num: 1, img: step1Illustration, title: "Définir le type", desc: "Cadrez votre demande" },
-                { num: 2, img: step2Illustration, title: "Compléter le formulaire", desc: "Renseignez votre projet" },
-                { num: 3, img: step3Illustration, title: "Dépôt chez Enedis", desc: "Envoi du dossier" },
-                { num: 4, img: step4Illustration, title: "Suivi & mise en service", desc: "Accompagnement A à Z" }
-              ].map((step) => (
-                <div key={step.num} className="text-center">
-                  <div className="flex flex-col items-center">
-                    <div className="w-9 h-9 md:w-10 md:h-10 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-base md:text-lg mb-3 shadow-md flex-shrink-0">
-                      {step.num}
-                    </div>
-                    <div className="w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 flex items-center justify-center mb-3 flex-shrink-0">
-                      <img src={step.img} alt={step.title} className="w-full h-full object-contain" width="128" height="128" loading="lazy" data-testid={`step${step.num}-illustration`} />
-                    </div>
-                    <h3 className="text-sm md:text-base font-semibold text-gray-900 mb-1 leading-tight">{step.title}</h3>
-                    <p className="text-xs md:text-sm text-gray-500">{step.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Mobile - Ultra compact horizontal cards */}
-            <div className="md:hidden mb-4 space-y-2">
-              {[
-                { num: 1, img: step1IllustrationMobile, title: "Définir le type", desc: "Cadrez votre demande" },
-                { num: 2, img: step2IllustrationMobile, title: "Compléter le formulaire", desc: "Renseignez votre projet" },
-                { num: 3, img: step3IllustrationMobile, title: "Dépôt chez Enedis", desc: "Envoi du dossier" },
-                { num: 4, img: step4IllustrationMobile, title: "Suivi & mise en service", desc: "Accompagnement A à Z" }
-              ].map((step) => (
-                <div key={step.num} className="bg-white rounded-lg p-3 shadow-sm border border-gray-100 flex items-center gap-3">
-                  <div className="w-8 h-8 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 shadow">
+                { num: 1, title: "Définir le type", desc: "Cadrez votre demande" },
+                { num: 2, title: "Remplir le formulaire", desc: "Renseignez votre projet" },
+                { num: 3, title: "Dépôt chez Enedis", desc: "Envoi du dossier complet" },
+                { num: 4, title: "Suivi & mise en service", desc: "Accompagnement de A à Z" }
+              ].map((step, idx) => (
+                <div key={step.num} className="flex-1 flex items-center md:flex-col md:text-center gap-3 md:gap-0 relative">
+                  {/* Connector line - Desktop only */}
+                  {idx < 3 && (
+                    <div className="hidden md:block absolute top-4 left-[60%] w-[80%] h-0.5 bg-gray-200" />
+                  )}
+                  {/* Number badge */}
+                  <div className="w-8 h-8 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 relative z-10">
                     {step.num}
                   </div>
-                  <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
-                    <img src={step.img} alt={step.title} className="w-full h-full object-contain" width="40" height="40" loading="lazy" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-semibold text-gray-900 leading-tight">{step.title}</h3>
-                    <p className="text-xs text-gray-500">{step.desc}</p>
+                  {/* Text */}
+                  <div className="md:mt-2">
+                    <h3 className="text-sm font-semibold text-gray-900">{step.title}</h3>
+                    <p className="text-xs text-gray-500 hidden sm:block">{step.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* CTA Button - Compact */}
+            {/* CTA Button */}
             <div className="text-center">
               <Link href="/raccordement-enedis#formulaire-raccordement">
                 <button 
-                  className="w-full md:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-sm md:text-base px-6 md:px-8 py-3 rounded-md shadow-sm hover:shadow-md transition-all duration-150"
+                  className="bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] hover:from-[#1D4ED8] hover:to-[#1e40af] text-white font-semibold text-sm px-6 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all"
                   data-testid="cta-process-button"
                 >
                   Commencer maintenant
