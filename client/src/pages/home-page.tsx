@@ -93,8 +93,8 @@ export default function HomePage() {
                 <div className="flex justify-center md:justify-start mt-4">
                   <div className="bg-white rounded-lg shadow-sm border border-gray-100 px-4 py-2 inline-flex items-center">
                     <img 
-                      src="/enedis-partner-badge.png" 
-                      alt="Raccordement effectué par Enedis - L'électricité en réseau"
+                      src="/enedis-partner-badge.png?v=2" 
+                      alt="Enedis - L'électricité en réseau"
                       className="h-10 sm:h-12 w-auto object-contain"
                       loading="eager"
                     />
