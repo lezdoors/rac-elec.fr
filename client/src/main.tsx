@@ -4,6 +4,7 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
+import "./styles/modal-fixes.css";
 
 // SAFARI FIX: Enhanced browser compatibility detection
 function loadPolyfillsIfNeeded(): void {
