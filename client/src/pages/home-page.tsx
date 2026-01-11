@@ -68,34 +68,23 @@ export default function HomePage() {
                   Déposez votre demande en quelques minutes.
                 </p>
 
-                {/* CTA Buttons - Compact, balanced design */}
-                <div className="flex flex-row justify-center md:justify-start gap-2 sm:gap-3 mb-4">
+                {/* CTA Button + Enedis Badge - Professional layout */}
+                <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 sm:gap-5 mb-6">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-sm px-4 sm:px-5 py-2.5 rounded-md shadow-sm hover:shadow transition-all"
+                      className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-3.5 rounded-lg shadow-md hover:shadow-lg transition-all"
                       data-testid="cta-hero-button"
                     >
                       Démarrer ma demande
                     </button>
                   </Link>
-                  <a href="tel:0970709570">
-                    <button 
-                      className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-sm px-4 sm:px-5 py-2.5 rounded-md transition-all flex items-center gap-1.5"
-                      data-testid="contact-hero-button"
-                    >
-                      <Phone className="w-3.5 h-3.5" />
-                      09 70 70 95 70
-                    </button>
-                  </a>
-                </div>
-
-                {/* Enedis Partner Badge */}
-                <div className="flex justify-center md:justify-start mt-4">
-                  <div className="bg-white rounded-lg shadow-sm border border-gray-100 px-4 py-2 inline-flex items-center">
+                  
+                  {/* Enedis Partner Badge */}
+                  <div className="bg-white rounded-xl shadow-md border border-gray-200 px-4 sm:px-5 py-2.5 sm:py-3 inline-flex items-center">
                     <img 
                       src="/enedis-partner-badge.png?v=2" 
                       alt="Enedis - L'électricité en réseau"
-                      className="h-10 sm:h-12 w-auto object-contain"
+                      className="h-8 sm:h-10 md:h-11 lg:h-12 w-auto object-contain"
                       loading="eager"
                     />
                   </div>
