@@ -118,25 +118,25 @@ export default function HomePage() {
                   Déposez votre demande en quelques minutes.
                 </p>
 
-                {/* Enterprise CTA Buttons - Refined elegant design */}
-                <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-3 mb-6 sm:mb-8 md:mb-6">
+                {/* Enterprise CTA Buttons - Professional B2B design */}
+                <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-3 mb-4 md:mb-6">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="w-full sm:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-7 py-[14px] rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 min-h-[52px]"
+                      className="w-full sm:w-auto bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] hover:from-[#1D4ED8] hover:to-[#1e40af] text-white font-semibold text-[15px] md:text-base px-6 md:px-8 py-3 md:py-3.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
                       data-testid="cta-hero-button"
                     >
                       Démarrer ma demande
                     </button>
                   </Link>
-                  <Link href="/contact">
+                  <a href="tel:0970709570">
                     <button 
-                      className="w-full sm:w-auto bg-transparent hover:bg-[#EFF6FF] text-[#2563EB] font-medium text-base px-6 py-[13px] rounded-md border border-[#2563EB] transition-all duration-150 flex items-center justify-center gap-2 min-h-[48px]"
+                      className="w-full sm:w-auto bg-white hover:bg-gray-50 text-gray-700 font-medium text-[15px] md:text-base px-5 md:px-6 py-3 md:py-3.5 rounded-lg border border-gray-300 shadow-sm hover:shadow transition-all duration-200 flex items-center justify-center gap-2"
                       data-testid="contact-hero-button"
                     >
-                      <Phone className="w-[18px] h-[18px]" />
-                      Nous contacter
+                      <Phone className="w-4 h-4 text-[#2563EB]" />
+                      09 70 70 95 70
                     </button>
-                  </Link>
+                  </a>
                 </div>
 
               </div>
@@ -180,79 +180,75 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 4-STEP PROCESS SECTION - Right after Hero */}
+        {/* 4-STEP PROCESS SECTION - Compact Professional Design */}
         <section 
-          className="py-6 md:py-10"
+          className="py-5 md:py-8"
           style={{ background: 'linear-gradient(180deg, #EBF4FF 0%, #F8FAFF 100%)' }}
           id="process"
-          data-animate
           data-testid="process-section"
         >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
-            {/* Header */}
-            <div className="text-center mb-4 md:mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-[#0066CC] mb-2 leading-tight">
-                Demande de Raccordement en 4 Étapes
+          <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-screen-xl">
+            {/* Header - Compact */}
+            <div className="text-center mb-4 md:mb-6">
+              <h2 className="text-xl md:text-2xl lg:text-[28px] font-bold text-[#0066CC] mb-1 leading-tight">
+                Raccordement en 4 Étapes
               </h2>
-              <p className="text-base text-gray-600 max-w-xl mx-auto">
-                Processus 100% en ligne avec accompagnement personnalisé
+              <p className="text-sm md:text-base text-gray-600">
+                Processus 100% en ligne
               </p>
             </div>
 
-            {/* 4 Steps - Mobile Carousel / Desktop Grid */}
-            {/* Desktop Grid - Hidden on mobile */}
-            <div className={`hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10 mb-8 md:mb-16 transition-all duration-700 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            {/* Desktop Grid - Compact layout */}
+            <div className="hidden md:grid md:grid-cols-4 gap-4 lg:gap-6 mb-6">
               {[
-                { num: 1, img: step1Illustration, alt: "Définir le type de raccordement", title: "Définir le type de raccordement", desc: "Utilisez notre outil pour cadrer votre demande." },
-                { num: 2, img: step2Illustration, alt: "Compléter un formulaire simple", title: "Compléter le formulaire en ligne", desc: "Renseignez votre projet en quelques minutes." },
-                { num: 3, img: step3Illustration, alt: "Dépôt du dossier chez Enedis", title: "Dépôt du dossier chez Enedis", desc: "Constitution et envoi de votre dossier complet." },
-                { num: 4, img: step4Illustration, alt: "Suivi jusqu'à la mise en service", title: "Suivi jusqu'à la mise en service", desc: "Accompagnement personnalisé de A à Z." }
+                { num: 1, img: step1Illustration, title: "Définir le type", desc: "Cadrez votre demande" },
+                { num: 2, img: step2Illustration, title: "Compléter le formulaire", desc: "Renseignez votre projet" },
+                { num: 3, img: step3Illustration, title: "Dépôt chez Enedis", desc: "Envoi du dossier" },
+                { num: 4, img: step4Illustration, title: "Suivi & mise en service", desc: "Accompagnement A à Z" }
               ].map((step) => (
-                <div key={step.num} className="text-center h-full">
-                  <div className="flex flex-col items-center h-full">
-                    <div className="w-12 h-12 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-xl mb-5 shadow-lg flex-shrink-0">
+                <div key={step.num} className="text-center">
+                  <div className="flex flex-col items-center">
+                    <div className="w-9 h-9 md:w-10 md:h-10 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-base md:text-lg mb-3 shadow-md flex-shrink-0">
                       {step.num}
                     </div>
-                    <div className="w-40 h-40 md:w-44 md:h-44 flex items-center justify-center mb-5 flex-shrink-0">
-                      <img src={step.img} alt={step.alt} className="w-full h-full object-contain" width="176" height="176" loading="lazy" data-testid={`step${step.num}-illustration`} />
+                    <div className="w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 flex items-center justify-center mb-3 flex-shrink-0">
+                      <img src={step.img} alt={step.title} className="w-full h-full object-contain" width="128" height="128" loading="lazy" data-testid={`step${step.num}-illustration`} />
                     </div>
-                    <div className="flex-1 flex flex-col">
-                      <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 leading-snug min-h-[3.5rem] flex items-center justify-center">{step.title}</h3>
-                      <p className="text-base text-gray-500 leading-relaxed">{step.desc}</p>
-                    </div>
+                    <h3 className="text-sm md:text-base font-semibold text-gray-900 mb-1 leading-tight">{step.title}</h3>
+                    <p className="text-xs md:text-sm text-gray-500">{step.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Mobile Vertical Stack - All 4 steps visible, no horizontal scroll */}
-            <div className="md:hidden mb-6 space-y-3">
+            {/* Mobile - Ultra compact horizontal cards */}
+            <div className="md:hidden mb-4 space-y-2">
               {[
-                { num: 1, img: step1IllustrationMobile, alt: "Définir le type de raccordement", title: "Définir le type de raccordement", desc: "Utilisez notre outil pour cadrer votre demande." },
-                { num: 2, img: step2IllustrationMobile, alt: "Compléter un formulaire simple", title: "Compléter le formulaire en ligne", desc: "Renseignez votre projet en quelques minutes." },
-                { num: 3, img: step3IllustrationMobile, alt: "Dépôt du dossier chez Enedis", title: "Dépôt du dossier chez Enedis", desc: "Constitution et envoi de votre dossier complet." },
-                { num: 4, img: step4IllustrationMobile, alt: "Suivi jusqu'à la mise en service", title: "Suivi jusqu'à la mise en service", desc: "Accompagnement personnalisé de A à Z." }
+                { num: 1, img: step1IllustrationMobile, title: "Définir le type", desc: "Cadrez votre demande" },
+                { num: 2, img: step2IllustrationMobile, title: "Compléter le formulaire", desc: "Renseignez votre projet" },
+                { num: 3, img: step3IllustrationMobile, title: "Dépôt chez Enedis", desc: "Envoi du dossier" },
+                { num: 4, img: step4IllustrationMobile, title: "Suivi & mise en service", desc: "Accompagnement A à Z" }
               ].map((step) => (
-                <div key={step.num} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 flex items-center gap-4">
-                  <div className="w-12 h-12 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md">
+                <div key={step.num} className="bg-white rounded-lg p-3 shadow-sm border border-gray-100 flex items-center gap-3">
+                  <div className="w-8 h-8 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 shadow">
                     {step.num}
                   </div>
-                  <div className="w-16 h-16 flex items-center justify-center flex-shrink-0">
-                    <img src={step.img} alt={step.alt} className="w-full h-full object-contain" width="64" height="64" loading="lazy" />
+                  <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
+                    <img src={step.img} alt={step.title} className="w-full h-full object-contain" width="40" height="40" loading="lazy" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base font-semibold text-gray-900 mb-1 leading-snug">{step.title}</h3>
-                    <p className="text-base text-gray-500 leading-relaxed">{step.desc}</p>
+                    <h3 className="text-sm font-semibold text-gray-900 leading-tight">{step.title}</h3>
+                    <p className="text-xs text-gray-500">{step.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* CTA Button - Refined design */}
+            {/* CTA Button - Compact */}
             <div className="text-center">
               <Link href="/raccordement-enedis#formulaire-raccordement">
                 <button 
-                  className="w-full md:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-8 py-[14px] rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 min-h-[52px]"
+                  className="w-full md:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-sm md:text-base px-6 md:px-8 py-3 rounded-md shadow-sm hover:shadow-md transition-all duration-150"
                   data-testid="cta-process-button"
                 >
                   Commencer maintenant
