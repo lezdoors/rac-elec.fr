@@ -113,26 +113,18 @@ export function ContactModal({
       {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
       <DialogContent className="sm:max-w-[550px] rounded-xl overflow-hidden p-0 max-h-[90vh] contact-modal-content dialog-content-custom">
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="bg-white/20 rounded-full p-2">
-                <Mail className="h-6 w-6" />
-              </div>
-              <div>
-                <DialogTitle className="text-2xl font-bold text-white">
-                  Contactez-nous
-                </DialogTitle>
-                <DialogDescription className="text-blue-100 mt-1">
-                  Réponse garantie sous 24h ouvrées
-                </DialogDescription>
-              </div>
+          <div className="flex items-center gap-3">
+            <div className="bg-white/20 rounded-full p-2">
+              <Mail className="h-6 w-6" />
             </div>
-            <button
-              onClick={() => handleOpenChange(false)}
-              className="rounded-full h-8 w-8 flex items-center justify-center bg-white/10 hover:bg-white/20 transition-colors"
-            >
-              <X className="h-4 w-4 text-white" />
-            </button>
+            <div>
+              <DialogTitle className="text-2xl font-bold text-white">
+                Contactez-nous
+              </DialogTitle>
+              <DialogDescription className="text-blue-100 mt-1">
+                Réponse garantie sous 24h ouvrées
+              </DialogDescription>
+            </div>
           </div>
         </div>
         
