@@ -1,48 +1,17 @@
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
-import { Zap, ArrowRight, Building, Home as HomeIcon, BarChart, Clock, Shield, Phone, CheckCircle, MapPin, FileText, Rocket, ChevronDown, ChevronRight, Check, Users, Lock, Mail, Star, Plus } from "lucide-react";
+import { ArrowRight, Phone, ChevronRight, Mail, Star, Plus } from "lucide-react";
 import { ContactModal } from "@/components/contact-modal";
-import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { FloatingContactButton } from "@/components/floating-contact-button";
 import heroIllustration from "@assets/hero-illustration_1765320964105.webp";
-import step1Illustration from "@assets/Definir-le-type_1765357131561.webp";
-import step2Illustration from "@assets/Completer-Formulaire_1765357131561.webp";
-import step3Illustration from "@assets/Depot-du-dossier_1765357131561.webp";
-import step4Illustration from "@assets/Suivi-Dossier_1765357131561.webp";
-import step1IllustrationMobile from "@assets/Definir-le-type_1765357131561-mobile.webp";
-import step2IllustrationMobile from "@assets/Completer-Formulaire_1765357131561-mobile.webp";
-import step3IllustrationMobile from "@assets/Depot-du-dossier_1765357131561-mobile.webp";
-import step4IllustrationMobile from "@assets/Suivi-Dossier_1765357131561-mobile.webp";
 import raccordementDefinitifIcon from "@assets/Raccordement-Definitif_1765333395814.webp";
 import raccordementProvisoireIcon from "@assets/Raccordement-Provisoire_1765333395814.webp";
 import raccordementCollectifIcon from "@assets/Raccordement-Collectif_1765333395814.webp";
 import augmentationPuissanceIcon from "@assets/augmentation_de_puissance_1765333395814.webp";
 import servicesTechniquesIcon from "@assets/services-techniques_1765333395814.webp";
 import raccordementEnedisIcon from "@assets/Raccordement-Enedis_1765333395814.webp";
-import appelezNousIllustration from "@assets/Appelez-nous_1765363264301.webp";
-import rappelGratuitIllustration from "@assets/Appelez--nous_1765363489714.webp";
-import formulaireContactIllustration from "@assets/Rappel_gratuit0_1765589394802.webp";
-
-const useMobileDetection = () => {
-  const [isMobile, setIsMobile] = useState(true);
-  
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-  
-  return isMobile;
-};
 
 export default function HomePage() {
-  const isMobile = useMobileDetection();
   
   return (
     <>
@@ -99,11 +68,11 @@ export default function HomePage() {
                   Déposez votre demande en quelques minutes.
                 </p>
 
-                {/* Enterprise CTA Buttons - Professional B2B design */}
-                <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-3 mb-4 md:mb-6">
+                {/* CTA Buttons - Compact, balanced design */}
+                <div className="flex flex-row justify-center md:justify-start gap-2 sm:gap-3 mb-4">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="w-full sm:w-auto bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] hover:from-[#1D4ED8] hover:to-[#1e40af] text-white font-semibold text-[15px] md:text-base px-6 md:px-8 py-3 md:py-3.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                      className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-sm px-4 sm:px-5 py-2.5 rounded-md shadow-sm hover:shadow transition-all"
                       data-testid="cta-hero-button"
                     >
                       Démarrer ma demande
@@ -111,10 +80,10 @@ export default function HomePage() {
                   </Link>
                   <a href="tel:0970709570">
                     <button 
-                      className="w-full sm:w-auto bg-white hover:bg-gray-50 text-gray-700 font-medium text-[15px] md:text-base px-5 md:px-6 py-3 md:py-3.5 rounded-lg border border-gray-300 shadow-sm hover:shadow transition-all duration-200 flex items-center justify-center gap-2"
+                      className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-sm px-4 sm:px-5 py-2.5 rounded-md transition-all flex items-center gap-1.5"
                       data-testid="contact-hero-button"
                     >
-                      <Phone className="w-4 h-4 text-[#2563EB]" />
+                      <Phone className="w-3.5 h-3.5" />
                       09 70 70 95 70
                     </button>
                   </a>
