@@ -130,41 +130,41 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 4-STEP PROCESS SECTION - Ultra Compact Timeline */}
+        {/* 4-STEP PROCESS SECTION - Standardized */}
         <section 
-          className="py-4 md:py-6 bg-[#F8FAFC]"
+          className="py-8 md:py-12 bg-white"
           id="process"
           data-testid="process-section"
         >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-screen-xl">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-4">
-              <h2 className="text-lg md:text-xl font-bold text-gray-900">
+            <div className="text-center mb-6 md:mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
                 Raccordement en 4 étapes simples
               </h2>
             </div>
 
             {/* Horizontal Timeline - All screens */}
-            <div className="flex flex-col md:flex-row items-stretch justify-between gap-3 md:gap-2 mb-4">
+            <div className="flex flex-col md:flex-row items-stretch justify-between gap-4 md:gap-4 mb-6">
               {[
                 { num: 1, title: "Définir le type", desc: "Cadrez votre demande" },
                 { num: 2, title: "Remplir le formulaire", desc: "Renseignez votre projet" },
                 { num: 3, title: "Dépôt chez Enedis", desc: "Envoi du dossier complet" },
                 { num: 4, title: "Suivi & mise en service", desc: "Accompagnement de A à Z" }
               ].map((step, idx) => (
-                <div key={step.num} className="flex-1 flex items-center md:flex-col md:text-center gap-3 md:gap-0 relative">
+                <div key={step.num} className="flex-1 flex items-center md:flex-col md:text-center gap-4 md:gap-0 relative">
                   {/* Connector line - Desktop only */}
                   {idx < 3 && (
-                    <div className="hidden md:block absolute top-4 left-[60%] w-[80%] h-0.5 bg-gray-200" />
+                    <div className="hidden md:block absolute top-5 left-[60%] w-[80%] h-0.5 bg-gray-200" />
                   )}
                   {/* Number badge */}
-                  <div className="w-8 h-8 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 relative z-10">
+                  <div className="w-10 h-10 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-base flex-shrink-0 relative z-10">
                     {step.num}
                   </div>
                   {/* Text */}
-                  <div className="md:mt-2">
-                    <h3 className="text-sm font-semibold text-gray-900">{step.title}</h3>
-                    <p className="text-xs text-gray-500 hidden sm:block">{step.desc}</p>
+                  <div className="md:mt-3">
+                    <h3 className="text-base font-semibold text-gray-900">{step.title}</h3>
+                    <p className="text-sm text-gray-500">{step.desc}</p>
                   </div>
                 </div>
               ))}
@@ -184,11 +184,11 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* SERVICE TYPES SECTION - Centered Card Layout Like Original */}
-        <section className="py-6 md:py-10 bg-white" id="types-raccordements" data-testid="service-types-section">
+        {/* SERVICE TYPES SECTION - Standardized */}
+        <section className="py-8 md:py-12 bg-gray-50" id="types-raccordements" data-testid="service-types-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-4 md:mb-8">
+            <div className="text-center mb-6 md:mb-8">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                 Tous les Types de Raccordement
               </h2>
@@ -263,12 +263,12 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ASSISTANCE SECTION - Professional Contact Options */}
-        <section className="py-6 md:py-8 bg-gray-50" id="assistance" data-testid="assistance-section">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-screen-xl">
+        {/* ASSISTANCE SECTION - Standardized */}
+        <section className="py-8 md:py-12 bg-white" id="assistance" data-testid="assistance-section">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-5 md:mb-6">
-              <h2 className="text-xl md:text-2xl lg:text-[28px] font-bold text-gray-900 mb-1">
+            <div className="text-center mb-6 md:mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                 Besoin d'assistance ?
               </h2>
               <p className="text-sm md:text-base text-gray-600">
@@ -319,12 +319,12 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* TESTIMONIALS SECTION - Professional Design */}
-        <section className="py-6 md:py-10 bg-white" id="testimonials" data-testid="testimonials-section">
+        {/* TESTIMONIALS SECTION - Standardized */}
+        <section className="py-8 md:py-12 bg-gray-50" id="testimonials" data-testid="testimonials-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-6 md:mb-10">
-              <h2 className="text-[28px] sm:text-[32px] md:text-[42px] font-bold text-[#0066CC] mb-4">
+            <div className="text-center mb-6 md:mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                 Ce que nos clients disent de nous
               </h2>
               <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
@@ -423,12 +423,12 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* FAQ SECTION - Professional Multi-Column Design */}
-        <section className="py-6 md:py-10 bg-gradient-to-b from-gray-50 to-white" id="faq" data-testid="faq-section">
+        {/* FAQ SECTION - Standardized */}
+        <section className="py-8 md:py-12 bg-white" id="faq" data-testid="faq-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-6 md:mb-10">
-              <h2 className="text-[28px] sm:text-[32px] md:text-[42px] font-bold text-[#0066CC] mb-4 italic">
+            <div className="text-center mb-6 md:mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                 Questions fréquemment posées
               </h2>
               <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
