@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Phone, PhoneCall, X } from 'lucide-react';
+import { ContactModal } from './contact-modal';
 
 export function FloatingContactButton() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -104,7 +106,10 @@ export function FloatingContactButton() {
               aria-label="Demander un rappel gratuit"
               data-testid="contact-option-callback"
               className="w-full flex items-center gap-3 px-4 py-[14px] rounded-lg border border-transparent cursor-pointer transition-all duration-200 hover:bg-[#F9FAFB] hover:border-[#3B82F6] hover:-translate-x-0.5 bg-transparent"
-              onClick={scrollToContact}
+              onClick={() => {
+                setIsExpanded(false);
+                setShowContactModal(true);
+              }}
             >
               <PhoneCall size={20} className="text-[#3B82F6] flex-shrink-0" />
               <span className="text-[15px] font-medium text-[#1F2937]">Rappel gratuit</span>
@@ -164,6 +169,13 @@ export function FloatingContactButton() {
           }
         }
       `}</style>
+
+      {/* Modale de rappel */}
+      <ContactModal
+        defaultOpen={showContactModal}
+        onOpenChange={setShowContactModal}
+        source="rappel_gratuit"
+      />
     </>
   );
 }
