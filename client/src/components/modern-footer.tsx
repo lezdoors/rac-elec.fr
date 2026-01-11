@@ -39,13 +39,13 @@ export function ModernFooter() {
     <footer className="w-full bg-gradient-to-b from-[#0A3A82] to-[#162042] text-white py-12 mt-auto">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         
-        {/* Section principale du footer - Design premium */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        {/* Section principale du footer - Design premium responsive */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
           
           {/* Colonne 1: Logo et contact */}
-          <div className="text-center md:text-left">
+          <div className="text-center sm:text-left">
             {/* Logo authentique */}
-            <div className="mb-6 flex justify-center md:justify-start">
+            <div className="mb-6 flex justify-center sm:justify-start">
               <div className="bg-white rounded-lg p-2">
                 <img 
                   src="/logo-service-raccordement.webp" 
@@ -59,7 +59,7 @@ export function ModernFooter() {
             </div>
             
             {/* Description courte */}
-            <p className="text-gray-300 text-sm mb-6 max-w-xs mx-auto md:mx-0">
+            <p className="text-gray-300 text-sm mb-6 max-w-xs mx-auto sm:mx-0">
               Expert raccordement électrique pour tous vos projets en France.
             </p>
             
@@ -67,7 +67,7 @@ export function ModernFooter() {
             <div className="mb-4">
               <a 
                 href="tel:0970709570" 
-                className="group inline-flex items-center justify-center md:justify-start bg-[#0072CE] hover:bg-[#005eaa] text-white rounded-lg py-3 px-6 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                className="group inline-flex items-center justify-center sm:justify-start bg-[#0072CE] hover:bg-[#005eaa] text-white rounded-lg py-3 px-6 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 <div className="flex items-center">
                   <div className="p-2 rounded-full bg-white/20 mr-3 group-hover:bg-white/30 transition-colors">
@@ -85,40 +85,40 @@ export function ModernFooter() {
           </div>
           
           {/* Colonne 2: Services spécialisés - Navigation optimisée */}
-          <div className="text-center md:text-left">
+          <div className="text-center sm:text-left">
             <h3 className="text-white font-semibold text-base mb-4">Services spécialisés</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-1">
+            <div className="grid grid-cols-1 gap-1">
               <ScrollToTopLink 
                 href="/raccordement-enedis" 
-                className="text-gray-300 hover:text-white text-sm transition-all duration-200 hover:bg-white/10 rounded px-3 py-2 flex items-center justify-center md:justify-start group"
+                className="text-gray-300 hover:text-white text-sm transition-all duration-200 hover:bg-white/10 rounded px-3 py-2 flex items-center justify-center sm:justify-start group"
               >
                 <ArrowRight className="w-3 h-3 mr-2 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200" />
                 Maison neuve
               </ScrollToTopLink>
               <ScrollToTopLink 
                 href="/raccordement-enedis" 
-                className="text-gray-300 hover:text-white text-sm transition-all duration-200 hover:bg-white/10 rounded px-3 py-2 flex items-center justify-center md:justify-start group"
+                className="text-gray-300 hover:text-white text-sm transition-all duration-200 hover:bg-white/10 rounded px-3 py-2 flex items-center justify-center sm:justify-start group"
               >
                 <ArrowRight className="w-3 h-3 mr-2 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200" />
                 Raccordement définitif
               </ScrollToTopLink>
               <ScrollToTopLink 
                 href="/raccordement-enedis" 
-                className="text-gray-300 hover:text-white text-sm transition-all duration-200 hover:bg-white/10 rounded px-3 py-2 flex items-center justify-center md:justify-start group"
+                className="text-gray-300 hover:text-white text-sm transition-all duration-200 hover:bg-white/10 rounded px-3 py-2 flex items-center justify-center sm:justify-start group"
               >
                 <ArrowRight className="w-3 h-3 mr-2 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200" />
                 Raccordement provisoire
               </ScrollToTopLink>
               <ScrollToTopLink 
                 href="/raccordement-enedis" 
-                className="text-gray-300 hover:text-white text-sm transition-all duration-200 hover:bg-white/10 rounded px-3 py-2 flex items-center justify-center md:justify-start group"
+                className="text-gray-300 hover:text-white text-sm transition-all duration-200 hover:bg-white/10 rounded px-3 py-2 flex items-center justify-center sm:justify-start group"
               >
                 <ArrowRight className="w-3 h-3 mr-2 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200" />
                 Viabilisation terrain
               </ScrollToTopLink>
               <ScrollToTopLink 
                 href="/raccordement-enedis" 
-                className="text-gray-300 hover:text-white text-sm transition-all duration-200 hover:bg-white/10 rounded px-3 py-2 flex items-center justify-center md:justify-start group"
+                className="text-gray-300 hover:text-white text-sm transition-all duration-200 hover:bg-white/10 rounded px-3 py-2 flex items-center justify-center sm:justify-start group"
               >
                 <ArrowRight className="w-3 h-3 mr-2 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200" />
                 Modification compteur
@@ -127,32 +127,32 @@ export function ModernFooter() {
           </div>
           
           {/* Colonne 3: CTA et certifications */}
-          <div className="text-center md:text-left">
+          <div className="text-center sm:text-left sm:col-span-2 lg:col-span-1">
             <h3 className="text-white font-semibold text-base mb-4">Votre projet</h3>
             
             {/* CTA principal */}
             <div className="mb-6">
               <ScrollToTopLink 
                 href="/raccordement-enedis"
-                className="inline-flex items-center justify-center w-full md:w-auto bg-gradient-to-r from-[#5BC248] to-[#4a9c3a] hover:from-[#4a9c3a] hover:to-[#3d8230] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center justify-center w-full sm:w-auto bg-gradient-to-r from-[#5BC248] to-[#4a9c3a] hover:from-[#4a9c3a] hover:to-[#3d8230] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 <span className="mr-2">Démarrer ma demande</span>
                 <ArrowRight className="h-4 w-4" />
               </ScrollToTopLink>
             </div>
             
-            {/* Labels de confiance */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-center md:justify-start text-xs">
-                <Check className="h-3 w-3 text-[#5BC248] mr-2" />
+            {/* Labels de confiance - Grid sur tablette */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-2">
+              <div className="flex items-center justify-center sm:justify-start text-xs">
+                <Check className="h-3 w-3 text-[#5BC248] mr-2 flex-shrink-0" />
                 <span className="text-gray-300">Service certifié professionnel</span>
               </div>
-              <div className="flex items-center justify-center md:justify-start text-xs">
-                <ShieldCheck className="h-3 w-3 text-[#5BC248] mr-2" />
+              <div className="flex items-center justify-center sm:justify-start text-xs">
+                <ShieldCheck className="h-3 w-3 text-[#5BC248] mr-2 flex-shrink-0" />
                 <span className="text-gray-300">Paiement 100% sécurisé</span>
               </div>
-              <div className="flex items-center justify-center md:justify-start text-xs">
-                <Clock className="h-3 w-3 text-[#5BC248] mr-2" />
+              <div className="flex items-center justify-center sm:justify-start text-xs">
+                <Clock className="h-3 w-3 text-[#5BC248] mr-2 flex-shrink-0" />
                 <span className="text-gray-300">Traitement rapide 24-48h</span>
               </div>
             </div>
@@ -163,8 +163,8 @@ export function ModernFooter() {
         <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-6"></div>
         
         {/* Footer bottom - Ligne professionnelle */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center justify-center md:justify-start text-xs text-gray-400 gap-x-4 gap-y-1">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start text-xs text-gray-400 gap-x-4 gap-y-1">
             <div className="flex items-center">
               <span className="text-[#5BC248] mr-1">©</span> {year} <span className="text-white/80 mx-1">demande-raccordement.fr</span> - Tous droits réservés
               <ScrollToTopLink 
