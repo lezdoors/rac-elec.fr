@@ -101,56 +101,125 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 4-STEP PROCESS SECTION - Standardized */}
+        {/* 3-STEP PROCESS SECTION - Matching design screenshot */}
         <section 
-          className="py-8 md:py-12 bg-white"
+          className="py-12 md:py-16 bg-[#F8FAFC]"
           id="process"
           data-testid="process-section"
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
-            <div className="text-center mb-6 md:mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-                Raccordement en 4 étapes simples
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
+                3 Étapes Simples Pour Votre Raccordement Enedis
               </h2>
+              <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+                Remplissez notre formulaire en ligne en quelques minutes. Nous nous occupons du reste.
+              </p>
             </div>
 
-            {/* Horizontal Timeline - All screens */}
-            <div className="flex flex-col md:flex-row items-stretch justify-between gap-4 md:gap-4 mb-6">
-              {[
-                { num: 1, title: "Définir le type", desc: "Cadrez votre demande" },
-                { num: 2, title: "Remplir le formulaire", desc: "Renseignez votre projet" },
-                { num: 3, title: "Dépôt chez Enedis", desc: "Envoi du dossier complet" },
-                { num: 4, title: "Suivi & mise en service", desc: "Accompagnement de A à Z" }
-              ].map((step, idx) => (
-                <div key={step.num} className="flex-1 flex items-center md:flex-col md:text-center gap-4 md:gap-0 relative">
-                  {/* Connector line - Desktop only */}
-                  {idx < 3 && (
-                    <div className="hidden md:block absolute top-5 left-[60%] w-[80%] h-0.5 bg-gray-200" />
-                  )}
-                  {/* Number badge */}
-                  <div className="w-10 h-10 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-base flex-shrink-0 relative z-10">
-                    {step.num}
-                  </div>
-                  {/* Text */}
-                  <div className="md:mt-3">
-                    <h3 className="text-base font-semibold text-gray-900">{step.title}</h3>
-                    <p className="text-sm text-gray-500">{step.desc}</p>
-                  </div>
+            {/* Two-column layout: Illustration left, Steps right */}
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
+              
+              {/* Left: Illustration */}
+              <div className="w-full md:w-1/2 flex justify-center">
+                <div className="relative w-full max-w-[350px] md:max-w-[400px]">
+                  {/* SVG Illustration - Person with laptop and form */}
+                  <svg viewBox="0 0 400 320" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                    {/* Background elements */}
+                    <circle cx="200" cy="160" r="120" fill="#E0F2FE" opacity="0.5"/>
+                    
+                    {/* Desk */}
+                    <rect x="80" y="220" width="240" height="8" rx="4" fill="#94A3B8"/>
+                    
+                    {/* Laptop */}
+                    <rect x="120" y="160" width="120" height="65" rx="4" fill="#1E293B"/>
+                    <rect x="125" y="165" width="110" height="50" rx="2" fill="#3B82F6"/>
+                    <rect x="100" y="225" width="160" height="8" rx="2" fill="#475569"/>
+                    
+                    {/* Form/Document floating */}
+                    <g transform="translate(260, 100)">
+                      <rect x="0" y="0" width="80" height="100" rx="4" fill="white" stroke="#E2E8F0" strokeWidth="2"/>
+                      <rect x="10" y="15" width="20" height="20" rx="10" fill="#3B82F6"/>
+                      <text x="17" y="30" fill="white" fontSize="12" fontWeight="bold">A</text>
+                      <circle cx="50" cy="25" r="8" fill="none" stroke="#3B82F6" strokeWidth="2"/>
+                      <text x="47" y="29" fill="#3B82F6" fontSize="10" fontWeight="bold">C</text>
+                      <rect x="10" y="45" width="20" height="20" rx="10" fill="white" stroke="#E2E8F0" strokeWidth="2"/>
+                      <text x="17" y="60" fill="#64748B" fontSize="12" fontWeight="bold">B</text>
+                      <circle cx="50" cy="55" r="8" fill="none" stroke="#E2E8F0" strokeWidth="2"/>
+                      <text x="47" y="59" fill="#64748B" fontSize="10" fontWeight="bold">D</text>
+                      <rect x="10" y="75" width="60" height="6" rx="3" fill="#E2E8F0"/>
+                    </g>
+                    
+                    {/* Clock */}
+                    <g transform="translate(60, 120)">
+                      <circle cx="25" cy="25" r="25" fill="white" stroke="#10B981" strokeWidth="3"/>
+                      <line x1="25" y1="25" x2="25" y2="12" stroke="#1E293B" strokeWidth="2" strokeLinecap="round"/>
+                      <line x1="25" y1="25" x2="35" y2="25" stroke="#1E293B" strokeWidth="2" strokeLinecap="round"/>
+                      <circle cx="25" cy="25" r="3" fill="#1E293B"/>
+                    </g>
+                    
+                    {/* Person */}
+                    <g transform="translate(140, 80)">
+                      {/* Hair */}
+                      <ellipse cx="60" cy="30" rx="35" ry="30" fill="#1E293B"/>
+                      {/* Face */}
+                      <ellipse cx="60" cy="35" rx="28" ry="25" fill="#FBBF7A"/>
+                      {/* Hair bangs */}
+                      <path d="M35 25 Q45 10 60 15 Q75 10 85 25" fill="#1E293B"/>
+                      {/* Eyes */}
+                      <circle cx="50" cy="35" r="3" fill="#1E293B"/>
+                      <circle cx="70" cy="35" r="3" fill="#1E293B"/>
+                      {/* Smile */}
+                      <path d="M50 48 Q60 55 70 48" fill="none" stroke="#1E293B" strokeWidth="2" strokeLinecap="round"/>
+                      {/* Body/Shirt */}
+                      <path d="M30 70 Q60 60 90 70 L95 140 L25 140 Z" fill="#3B82F6"/>
+                      {/* Arms */}
+                      <path d="M25 75 L-10 110" stroke="#FBBF7A" strokeWidth="12" strokeLinecap="round"/>
+                      <path d="M95 75 L130 110" stroke="#FBBF7A" strokeWidth="12" strokeLinecap="round"/>
+                    </g>
+                    
+                    {/* Dollar/Euro symbol floating */}
+                    <g transform="translate(50, 170)">
+                      <circle cx="15" cy="15" r="15" fill="#10B981"/>
+                      <text x="10" y="21" fill="white" fontSize="16" fontWeight="bold">$</text>
+                    </g>
+                  </svg>
                 </div>
-              ))}
-            </div>
-
-            {/* CTA Button */}
-            <div className="text-center">
-              <Link href="/raccordement-enedis#formulaire-raccordement">
-                <button 
-                  className="bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] hover:from-[#1D4ED8] hover:to-[#1e40af] text-white font-semibold text-sm px-6 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all"
-                  data-testid="cta-process-button"
-                >
-                  Commencer maintenant
-                </button>
-              </Link>
+              </div>
+              
+              {/* Right: 3 Steps */}
+              <div className="w-full md:w-1/2 space-y-6">
+                {[
+                  { num: 1, title: "Renseignez vos informations", desc: "Coordonnées et détails de votre projet" },
+                  { num: 2, title: "Recevez votre devis", desc: "Sous 48h, un devis détaillé et personnalisé" },
+                  { num: 3, title: "Validation et raccordement", desc: "Nous gérons toutes les démarches avec Enedis" }
+                ].map((step) => (
+                  <div key={step.num} className="flex items-start gap-4">
+                    {/* Number badge */}
+                    <div className="w-10 h-10 bg-[#2563EB] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">
+                      {step.num}
+                    </div>
+                    {/* Text */}
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900 mb-1">{step.title}</h3>
+                      <p className="text-base text-gray-600">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+                
+                {/* CTA Button */}
+                <div className="pt-4">
+                  <Link href="/raccordement-enedis#formulaire-raccordement">
+                    <button 
+                      className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-8 py-3.5 rounded-lg shadow-md hover:shadow-lg transition-all w-full md:w-auto"
+                      data-testid="cta-process-button"
+                    >
+                      Démarrer ma demande maintenant
+                    </button>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
