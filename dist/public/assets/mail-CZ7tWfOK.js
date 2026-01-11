@@ -1,1 +1,0 @@
-import{j as e,l as s,b0 as a}from"./index-BjkIFTIk.js";function t(){return e.jsxs("div",{className:"flex items-center justify-center min-h-screen",children:[e.jsx(s,{className:"h-8 w-8 animate-spin text-primary"}),e.jsx(a,{to:"/admin/emails"})]})}export{t as default};
