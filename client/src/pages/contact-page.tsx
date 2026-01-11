@@ -93,9 +93,9 @@ export default function ContactPage() {
                     <div className="flex-shrink-0 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
                       <Mail className="h-5 w-5 text-white" />
                     </div>
-                    <div className="ml-4">
+                    <div className="ml-4 min-w-0 flex-1">
                       <h3 className="text-lg font-semibold text-gray-900">Email</h3>
-                      <a href="mailto:contact@demande-raccordement.fr" className="text-blue-600 hover:text-blue-800 font-medium">
+                      <a href="mailto:contact@demande-raccordement.fr" className="text-blue-600 hover:text-blue-800 font-medium break-all sm:break-normal text-sm sm:text-base">
                         contact@demande-raccordement.fr
                       </a>
                       <p className="text-sm text-gray-600 mt-1">
@@ -109,9 +109,9 @@ export default function ContactPage() {
                     <div className="flex-shrink-0 w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
                       <Phone className="h-5 w-5 text-white" />
                     </div>
-                    <div className="ml-4">
+                    <div className="ml-4 min-w-0 flex-1">
                       <h3 className="text-lg font-semibold text-gray-900">Téléphone</h3>
-                      <a href="tel:0970709570" className="text-green-600 hover:text-green-800 font-medium text-xl">
+                      <a href="tel:0970709570" className="text-green-600 hover:text-green-800 font-medium text-lg sm:text-xl">
                         09 70 70 95 70
                       </a>
                       <p className="text-sm text-gray-600 mt-1">Lundi - Vendredi : 8h - 18h</p>
@@ -123,7 +123,7 @@ export default function ContactPage() {
                     <div className="flex-shrink-0 w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center">
                       <MapPin className="h-5 w-5 text-white" />
                     </div>
-                    <div className="ml-4">
+                    <div className="ml-4 min-w-0 flex-1">
                       <h3 className="text-lg font-semibold text-gray-900">Zone de service</h3>
                       <p className="text-gray-700 font-medium">
                         Toute la France métropolitaine
@@ -181,20 +181,22 @@ export default function ContactPage() {
                     <p className="text-sm text-gray-500 mb-6">
                       Pour toute urgence, appelez-nous au <strong>09 70 71 10 43</strong>
                     </p>
-                    <Button 
-                      onClick={() => setSubmitted(false)}
-                      variant="outline"
-                      className="mr-4"
-                    >
-                      Envoyer un autre message
-                    </Button>
-                    <Button 
-                      onClick={() => setLocation('/raccordement-enedis')}
-                      className="bg-blue-600 hover:bg-blue-700"
-                      data-testid="button-new-request"
-                    >
-                      Faire une demande de raccordement
-                    </Button>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                      <Button 
+                        onClick={() => setSubmitted(false)}
+                        variant="outline"
+                        className="w-full sm:w-auto"
+                      >
+                        Envoyer un autre message
+                      </Button>
+                      <Button 
+                        onClick={() => setLocation('/raccordement-enedis')}
+                        className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700"
+                        data-testid="button-new-request"
+                      >
+                        Faire une demande de raccordement
+                      </Button>
+                    </div>
                   </div>
                 ) : (
                   <>
