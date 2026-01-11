@@ -382,18 +382,23 @@ export default function HomePage() {
                 </div>
               </a>
 
-              {/* Rappel gratuit */}
-              <Link href="/contact" className="group bg-white rounded-xl p-4 md:p-5 border border-gray-200 hover:border-[#2563EB] hover:shadow-md transition-all flex sm:flex-col items-center sm:text-center gap-4 sm:gap-0" data-testid="assistance-card-callback">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-green-50 rounded-full flex items-center justify-center sm:mx-auto sm:mb-3 flex-shrink-0">
-                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-[#059669]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </div>
-                <div className="flex-1 sm:flex-none">
-                  <h3 className="text-base font-semibold text-gray-900 mb-0.5">Rappel gratuit</h3>
-                  <p className="text-sm text-gray-500">Nous vous rappelons</p>
-                </div>
-              </Link>
+              {/* Rappel gratuit - Opens ContactModal */}
+              <ContactModal 
+                source="assistance_callback"
+                trigger={
+                  <button className="group bg-white rounded-xl p-4 md:p-5 border border-gray-200 hover:border-[#2563EB] hover:shadow-md transition-all flex sm:flex-col items-center sm:text-center gap-4 sm:gap-0 w-full" data-testid="assistance-card-callback">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-green-50 rounded-full flex items-center justify-center sm:mx-auto sm:mb-3 flex-shrink-0">
+                      <svg className="w-5 h-5 sm:w-6 sm:h-6 text-[#059669]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 sm:flex-none">
+                      <h3 className="text-base font-semibold text-gray-900 mb-0.5">Rappel gratuit</h3>
+                      <p className="text-sm text-gray-500">Nous vous rappelons</p>
+                    </div>
+                  </button>
+                }
+              />
 
               {/* Formulaire de contact */}
               <Link href="/contact" className="group bg-white rounded-xl p-4 md:p-5 border border-gray-200 hover:border-[#2563EB] hover:shadow-md transition-all flex sm:flex-col items-center sm:text-center gap-4 sm:gap-0" data-testid="assistance-card-form">
