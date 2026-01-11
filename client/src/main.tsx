@@ -3,37 +3,7 @@
 
 import { createRoot } from "react-dom/client";
 import App from "./App";
-
-// PERFORMANCE FIX: Defer Tailwind CSS loading to unblock LCP
-// Critical CSS is already inlined in index.html <head>
-// This loads the full Tailwind CSS after initial render
-function loadDeferredStyles(): void {
-  // In development, Vite handles CSS via HMR, so import normally
-  if (import.meta.env.DEV) {
-    import("./index.css");
-    return;
-  }
-  
-  // In production, load CSS asynchronously via link preload technique
-  requestAnimationFrame(() => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'style';
-    link.href = '/assets/index.css'; // Vite will replace with hashed version
-    link.onload = function(this: HTMLLinkElement) {
-      this.rel = 'stylesheet';
-    };
-    document.head.appendChild(link);
-    
-    // Fallback: also try importing for Vite's CSS injection
-    import("./index.css").catch(() => {
-      // CSS already loaded via link tag
-    });
-  });
-}
-
-// Load styles immediately but non-blocking
-loadDeferredStyles();
+import "./index.css";
 
 // SAFARI FIX: Enhanced browser compatibility detection
 function loadPolyfillsIfNeeded(): void {
