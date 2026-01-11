@@ -237,10 +237,10 @@
     <!-- PERFORMANCE FIX: Remove render-blocking polyfills for faster LCP -->
     <!-- Modern browsers don't need these polyfills, and they block rendering -->
 
-    <!-- PERFORMANCE + TRACKING: GTM loads immediately (async), GA4/GAds deferred 1s -->
+    <!-- PERFORMANCE + TRACKING: GTM loads immediately (async), GA4/GAds deferred 1.5s -->
     <script>window.dataLayer = window.dataLayer || [];</script>
     
-    <!-- GTM loads immediately (async, non-blocking) to capture ALL visits -->
+    <!-- GTM loads immediately (async, non-blocking) to capture all visits -->
     <script>
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -249,7 +249,7 @@
     })(window,document,'script','dataLayer','GTM-K597C4C2');
     </script>
     
-    <!-- GA4 + Google Ads deferred 1s OR user interaction for LCP improvement -->
+    <!-- GA4 + Google Ads deferred 1.5s OR user interaction for LCP improvement -->
     <script>
       (function() {
         var gtagLoaded = false;
@@ -266,7 +266,7 @@
           };
           document.head.appendChild(s);
         }
-        var t = setTimeout(loadGtag, 1000);
+        var t = setTimeout(loadGtag, 1500);
         ['scroll', 'click', 'touchstart'].forEach(function(e) {
           document.addEventListener(e, function() { clearTimeout(t); loadGtag(); }, { once: true, passive: true });
         });

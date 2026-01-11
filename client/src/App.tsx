@@ -2,21 +2,19 @@ import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
-import { Suspense, lazy, useEffect, useState } from "react";
-
-// Import des constantes de rôles depuis le fichier shared constants
-import { USER_ROLES } from "@shared/constants";
-
-// CRITICAL: Keep Layout and core wrappers eagerly loaded to prevent Suspense crashes
-import Layout from "@/components/layout";
-import MainLayout from "@/components/layouts/MainLayout";
+import { useState, useEffect, Suspense, lazy } from "react";
 import AdminProtectedRoute from "@/components/admin/admin-protected-route";
-import StaffProtectedRoute from "@/lib/staff-protected-route";
 import { GoogleSnippetsProvider } from "@/components/google-snippets-provider";
 import GoogleAnalyticsProvider from "@/components/google-analytics-provider";
 
-// PERFORMANCE: HomePage lazy loaded for faster initial bundle (safe - wrapped in Suspense)
-const HomePage = lazy(() => import("@/pages/home-page"));
+// Import des constantes de rôles depuis le fichier shared constants
+import { USER_ROLES } from "@shared/constants";
+import Layout from "@/components/layout";
+import MainLayout from "@/components/layouts/MainLayout";
+import StaffProtectedRoute from "@/lib/staff-protected-route";
+
+// SAFE: Keep HomePage eagerly loaded for stable layout and conversions
+import HomePage from "@/pages/home-page";
 
 // Lazy load NotFound to avoid loading framer-motion on initial page load
 const NotFound = lazy(() => import("@/pages/not-found").catch(() => ({ default: () => <div>Page non disponible</div> })));
@@ -97,27 +95,10 @@ const GoogleSnippetsPage = lazy(() => import("@/pages/admin/google-snippets").ca
 const AnimationPreviewPage = lazy(() => import("@/pages/admin/animation-preview").catch(() => ({ default: () => <div>Page non disponible</div> })));
 const GclidTestingPage = lazy(() => import("@/pages/admin/gclid-testing").catch(() => ({ default: () => <div>Page non disponible</div> })));
 
-// PERFORMANCE: Ultra-lightweight loading skeleton matching homepage layout
+// Composant de chargement ultra-léger pour performance optimale
 const LoadingFallback = () => (
-  <div className="min-h-screen bg-white">
-    {/* Skeleton header */}
-    <div className="h-16 bg-gray-50 border-b border-gray-100"></div>
-    {/* Skeleton hero section */}
-    <div className="pt-8 pb-16 px-4">
-      <div className="max-w-screen-xl mx-auto">
-        <div className="flex flex-col md:flex-row gap-8">
-          <div className="w-full md:w-1/2 space-y-4">
-            <div className="h-10 bg-gray-100 rounded w-3/4"></div>
-            <div className="h-10 bg-gray-100 rounded w-2/3"></div>
-            <div className="h-6 bg-gray-50 rounded w-full mt-6"></div>
-            <div className="h-12 bg-blue-100 rounded w-48 mt-6"></div>
-          </div>
-          <div className="hidden md:block w-1/2">
-            <div className="h-64 bg-gray-50 rounded-lg"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full crm-essential-spinner"></div>
   </div>
 );
 
