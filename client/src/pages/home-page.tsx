@@ -95,13 +95,13 @@ export default function HomePage() {
       <main id="main-content" className="overflow-x-hidden">
         {/* HERO SECTION - Premium Design - Fully Responsive */}
         <section 
-          className="relative overflow-hidden pt-4 sm:pt-8 md:pt-12 lg:pt-16 pb-4 sm:pb-10 md:pb-14 lg:pb-16 bg-white"
+          className="relative overflow-hidden pt-4 sm:pt-8 md:pt-10 lg:pt-16 pb-4 sm:pb-8 md:pb-10 lg:pb-16 bg-white"
           data-testid="hero-section"
         >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-12 xl:px-20 max-w-screen-xl">
-            <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 max-w-screen-xl">
+            <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8 md:gap-8 lg:gap-12 xl:gap-16">
               {/* Left Content */}
-              <div className="w-full lg:w-1/2 xl:w-[45%] text-center lg:text-left">
+              <div className="w-full md:w-1/2 lg:w-1/2 xl:w-[45%] text-center md:text-left">
                 {/* Main Headline - Responsive sizing */}
                 <h1 className="mb-4 sm:mb-5 md:mb-6">
                   <span className="block text-[28px] sm:text-[32px] md:text-[40px] lg:text-[44px] xl:text-[48px] font-bold text-gray-900 leading-[1.1] tracking-tight">
@@ -113,13 +113,13 @@ export default function HomePage() {
                 </h1>
 
                 {/* Subheadline */}
-                <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-[500px] mx-auto lg:mx-0 mb-6 sm:mb-8 md:mb-10">
+                <p className="text-base sm:text-lg md:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-[500px] mx-auto md:mx-0 mb-6 sm:mb-8 md:mb-8">
                   Votre expert raccordement Enedis en ligne.<br className="hidden sm:block" />
                   Déposez votre demande en quelques minutes.
                 </p>
 
                 {/* Enterprise CTA Buttons - Refined elegant design */}
-                <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 mb-6 sm:mb-8 md:mb-10">
+                <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-3 mb-6 sm:mb-8 md:mb-6">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
                       className="w-full sm:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-7 py-[14px] rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 min-h-[52px]"
@@ -142,14 +142,14 @@ export default function HomePage() {
               </div>
 
               {/* Right Illustration - HIDDEN on mobile for better conversion, visible md+ */}
-              <div className="hidden md:flex w-full lg:w-1/2 xl:w-[55%] justify-center lg:justify-end mt-4 sm:mt-6 lg:mt-0">
-                <div className="relative w-full max-w-[320px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[550px] xl:max-w-[650px]">
+              <div className="hidden md:flex w-full md:w-1/2 lg:w-1/2 xl:w-[55%] justify-center md:justify-end mt-0">
+                <div className="relative w-full max-w-[280px] md:max-w-[350px] lg:max-w-[450px] xl:max-w-[550px]">
                   <img 
                     src={heroIllustration} 
                     alt="Famille devant une maison avec panneaux solaires et voiture électrique - Raccordement électrique Enedis"
                     className="w-full h-auto"
-                    width="650"
-                    height="450"
+                    width="550"
+                    height="380"
                     loading="eager"
                     fetchPriority="high"
                     data-testid="hero-illustration"
