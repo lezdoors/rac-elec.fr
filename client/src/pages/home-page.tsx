@@ -319,44 +319,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* BESOIN D'AIDE SECTION - Like Original */}
-        <section className="py-6 md:py-10 bg-white" id="besoin-aide" data-testid="besoin-aide-section">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
-            <div className="flex flex-col items-center">
-              {/* Content - Centered */}
-              <div className="w-full max-w-2xl text-center">
-                <h2 className="text-[24px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-4">
-                  Besoin d'aide ?
-                </h2>
-                <p className="text-base md:text-xl text-gray-600 mb-6 max-w-lg mx-auto">
-                  Notre équipe d'experts est disponible pour répondre à toutes vos questions
-                </p>
-                
-                {/* Contact Buttons */}
-                <div className="flex flex-wrap justify-center gap-3 mb-6">
-                  <a 
-                    href="tel:0970709570" 
-                    className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-6 py-[14px] rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 flex items-center gap-2 min-h-[52px]"
-                  >
-                    <Phone className="w-[18px] h-[18px]" />
-                    09 70 70 95 70
-                  </a>
-                  <Link href="/contact">
-                    <button className="bg-white hover:bg-gray-50 text-gray-700 font-medium text-base px-6 py-[13px] rounded-md border border-gray-300 shadow-sm hover:shadow-md transition-all duration-150 flex items-center gap-2 min-h-[48px]">
-                      <Mail className="w-[18px] h-[18px]" />
-                      Envoyer un email
-                    </button>
-                  </Link>
-                </div>
-                
-                <p className="text-base text-gray-500">
-                  Lundi - Vendredi, 8h à 18h
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* TESTIMONIALS SECTION - Professional Design */}
         <section className="py-6 md:py-10 bg-white" id="testimonials" data-testid="testimonials-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
