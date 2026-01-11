@@ -1,0 +1,107 @@
+1. GTM EVENTS TO IMPLEMENT (STRICT)
+
+Implement the following dataLayer events ONLY:
+
+A. Form start (informational – NOT a conversion)
+
+event: "form_start"
+
+Triggered when the user starts step 1 of the form.
+    •    Do NOT mark as conversion
+    •    For analytics/debugging only
+
+⸻
+
+B. Form step progress (informational)
+
+event: "form_step"
+
+Include:
+    •    step_number
+    •    step_name
+
+Used only for funnel visibility.
+Not a conversion.
+
+⸻
+
+C. Purchase (PRIMARY CONVERSION – CRITICAL)
+
+event: "purchase"
+
+Triggered ONLY on the Merci / confirmation page after successful payment.
+
+Required parameters:
+    •    transaction_id
+    •    value
+    •    currency (EUR)
+    •    payment_status = “paid”
+
+This is the ONLY event to be used as:
+    •    Google Ads primary conversion
+    •    Bidding optimization goal
+
+⸻
+
+2. GOOGLE ADS CONFIGURATION (MANDATORY)
+    •    Conversion action: Purchase
+    •    Source: Google Tag
+    •    Count: One
+    •    Include in “Conversions”: ON
+    •    Primary conversion: YES
+
+Explicitly confirm:
+    •    ❌ Form Start = NOT a conversion
+    •    ❌ Form Submit = NOT a conversion
+    •    ✅ Purchase = ONLY conversion
+
+⸻
+
+3. GTM CONTAINER RULES
+    •    No tags firing on Lovable preview domains
+(*.lovable.app, id-preview-*)
+    •    GTM fires ONLY on:
+    •    https://www.demande-raccordement.fr
+    •    https://www.demande-raccordement.fr/merci
+
+Implement domain filtering if needed.
+
+⸻
+
+4. TESTING REQUIREMENTS (DO NOT SKIP)
+
+Using GTM Preview Mode:
+    1.    Go through full form
+    2.    Verify:
+    •    form_start fires once
+    •    form_step fires per step
+    •    purchase fires only on Merci page
+    3.    Confirm:
+    •    Purchase appears in Google Ads → Conversions
+    •    No duplicate fires
+    •    No preview-domain noise
+
+⸻
+
+5. FINAL DELIVERABLE
+
+Provide:
+    •    Confirmation that purchase is the only primary conversion
+    •    Confirmation that campaigns can bid on purchase
+    •    Screenshot or written confirmation of successful GTM Preview test
+    •    Zero remaining diagnostics warnings
+
+⸻
+
+IMPORTANT
+This is a paid service business.
+Optimizing on form activity is unacceptable.
+The system must optimize ONLY on real purchases.
+
+Do not add, rename, or “improve” events beyond what is specified.
+
+⸻
+
+If you want, next step I can give you:
+    •    A GTM variable checklist
+    •    Or a Google Ads conversion sanity checklist before launch
