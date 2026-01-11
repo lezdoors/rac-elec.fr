@@ -10,6 +10,7 @@ import raccordementCollectifIcon from "@assets/Raccordement-Collectif_1765333395
 import augmentationPuissanceIcon from "@assets/augmentation_de_puissance_1765333395814.webp";
 import servicesTechniquesIcon from "@assets/services-techniques_1765333395814.webp";
 import raccordementEnedisIcon from "@assets/Raccordement-Enedis_1765333395814.webp";
+import stepsIllustration from "@assets/form-intro-illustartion_(Website)_1765358383139.webp";
 
 export default function HomePage() {
   
@@ -123,68 +124,15 @@ export default function HomePage() {
               
               {/* Left: Illustration */}
               <div className="w-full md:w-1/2 flex justify-center">
-                <div className="relative w-full max-w-[350px] md:max-w-[400px]">
-                  {/* SVG Illustration - Person with laptop and form */}
-                  <svg viewBox="0 0 400 320" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
-                    {/* Background elements */}
-                    <circle cx="200" cy="160" r="120" fill="#E0F2FE" opacity="0.5"/>
-                    
-                    {/* Desk */}
-                    <rect x="80" y="220" width="240" height="8" rx="4" fill="#94A3B8"/>
-                    
-                    {/* Laptop */}
-                    <rect x="120" y="160" width="120" height="65" rx="4" fill="#1E293B"/>
-                    <rect x="125" y="165" width="110" height="50" rx="2" fill="#3B82F6"/>
-                    <rect x="100" y="225" width="160" height="8" rx="2" fill="#475569"/>
-                    
-                    {/* Form/Document floating */}
-                    <g transform="translate(260, 100)">
-                      <rect x="0" y="0" width="80" height="100" rx="4" fill="white" stroke="#E2E8F0" strokeWidth="2"/>
-                      <rect x="10" y="15" width="20" height="20" rx="10" fill="#3B82F6"/>
-                      <text x="17" y="30" fill="white" fontSize="12" fontWeight="bold">A</text>
-                      <circle cx="50" cy="25" r="8" fill="none" stroke="#3B82F6" strokeWidth="2"/>
-                      <text x="47" y="29" fill="#3B82F6" fontSize="10" fontWeight="bold">C</text>
-                      <rect x="10" y="45" width="20" height="20" rx="10" fill="white" stroke="#E2E8F0" strokeWidth="2"/>
-                      <text x="17" y="60" fill="#64748B" fontSize="12" fontWeight="bold">B</text>
-                      <circle cx="50" cy="55" r="8" fill="none" stroke="#E2E8F0" strokeWidth="2"/>
-                      <text x="47" y="59" fill="#64748B" fontSize="10" fontWeight="bold">D</text>
-                      <rect x="10" y="75" width="60" height="6" rx="3" fill="#E2E8F0"/>
-                    </g>
-                    
-                    {/* Clock */}
-                    <g transform="translate(60, 120)">
-                      <circle cx="25" cy="25" r="25" fill="white" stroke="#10B981" strokeWidth="3"/>
-                      <line x1="25" y1="25" x2="25" y2="12" stroke="#1E293B" strokeWidth="2" strokeLinecap="round"/>
-                      <line x1="25" y1="25" x2="35" y2="25" stroke="#1E293B" strokeWidth="2" strokeLinecap="round"/>
-                      <circle cx="25" cy="25" r="3" fill="#1E293B"/>
-                    </g>
-                    
-                    {/* Person */}
-                    <g transform="translate(140, 80)">
-                      {/* Hair */}
-                      <ellipse cx="60" cy="30" rx="35" ry="30" fill="#1E293B"/>
-                      {/* Face */}
-                      <ellipse cx="60" cy="35" rx="28" ry="25" fill="#FBBF7A"/>
-                      {/* Hair bangs */}
-                      <path d="M35 25 Q45 10 60 15 Q75 10 85 25" fill="#1E293B"/>
-                      {/* Eyes */}
-                      <circle cx="50" cy="35" r="3" fill="#1E293B"/>
-                      <circle cx="70" cy="35" r="3" fill="#1E293B"/>
-                      {/* Smile */}
-                      <path d="M50 48 Q60 55 70 48" fill="none" stroke="#1E293B" strokeWidth="2" strokeLinecap="round"/>
-                      {/* Body/Shirt */}
-                      <path d="M30 70 Q60 60 90 70 L95 140 L25 140 Z" fill="#3B82F6"/>
-                      {/* Arms */}
-                      <path d="M25 75 L-10 110" stroke="#FBBF7A" strokeWidth="12" strokeLinecap="round"/>
-                      <path d="M95 75 L130 110" stroke="#FBBF7A" strokeWidth="12" strokeLinecap="round"/>
-                    </g>
-                    
-                    {/* Dollar/Euro symbol floating */}
-                    <g transform="translate(50, 170)">
-                      <circle cx="15" cy="15" r="15" fill="#10B981"/>
-                      <text x="10" y="21" fill="white" fontSize="16" fontWeight="bold">$</text>
-                    </g>
-                  </svg>
+                <div className="relative w-full max-w-[350px] md:max-w-[420px]">
+                  <img 
+                    src={stepsIllustration} 
+                    alt="Femme remplissant un formulaire en ligne - Raccordement Enedis simplifié"
+                    className="w-full h-auto"
+                    width="420"
+                    height="320"
+                    loading="lazy"
+                  />
                 </div>
               </div>
               
