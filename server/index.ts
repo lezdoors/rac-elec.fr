@@ -453,10 +453,24 @@ app.use((req, res, next) => {
   
   if (buildExists) {
     console.log('🚀 Serving production build...');
-    // Custom static serving to bypass restricted vite.ts serveStatic function
-    app.use(express.static(distPath));
+    
+    // PERFORMANCE: Cache index.html in memory for instant TTFB
+    const indexHtmlPath = path.resolve(distPath, "index.html");
+    const cachedIndexHtml = fs.readFileSync(indexHtmlPath, 'utf-8');
+    
+    // Custom static serving with aggressive caching
+    app.use(express.static(distPath, {
+      maxAge: '1y',
+      immutable: true,
+      etag: true,
+      lastModified: false,
+    }));
+    
+    // Serve cached HTML for all routes (instant response)
     app.use("*", (_req, res) => {
-      res.sendFile(path.resolve(distPath, "index.html"));
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.send(cachedIndexHtml);
     });
   } else if (app.get("env") === "development") {
     console.log('🔧 Serving development with Vite...');
