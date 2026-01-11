@@ -68,26 +68,24 @@ export default function HomePage() {
                   Déposez votre demande en quelques minutes.
                 </p>
 
-                {/* CTA Button + Enedis Badge */}
-                <div className="flex flex-row flex-wrap items-center justify-center md:justify-start gap-3 mb-4">
+                {/* CTA Button with Enedis Badge */}
+                <div className="flex justify-center md:justify-start mb-4">
                   <Link href="/raccordement-enedis#formulaire-raccordement">
                     <button 
-                      className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-sm px-4 py-2 rounded-md shadow-sm hover:shadow transition-all whitespace-nowrap"
+                      className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-sm pl-5 pr-3 py-2 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center gap-3"
                       data-testid="cta-hero-button"
                     >
-                      Démarrer ma demande
+                      <span>Démarrer ma demande</span>
+                      <span className="bg-white rounded-md px-2 py-1">
+                        <img 
+                          src="/enedis-partner-badge.png?v=2" 
+                          alt="Enedis"
+                          className="h-5 sm:h-6 w-auto object-contain"
+                          loading="eager"
+                        />
+                      </span>
                     </button>
                   </Link>
-                  
-                  {/* Enedis Partner Badge */}
-                  <div className="bg-white rounded-lg shadow-sm border border-gray-100 px-3 py-1.5 inline-flex items-center">
-                    <img 
-                      src="/enedis-partner-badge.png?v=2" 
-                      alt="Enedis - L'électricité en réseau"
-                      className="h-6 sm:h-7 md:h-8 w-auto object-contain"
-                      loading="eager"
-                    />
-                  </div>
                 </div>
 
               </div>
