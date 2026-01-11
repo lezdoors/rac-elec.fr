@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 /**
  * GTM Analytics Provider for demande-raccordement.fr
- * GTM: GTM-K597C4C2 | GA4: G-D92SQT9L1P | Google Ads: AW-16683623620
+ * GTM: GTM-K597C4C2 | GA4: G-D92SQT9L1P | Google Ads: AW-17849369847
  */
 export function GoogleAnalyticsProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {

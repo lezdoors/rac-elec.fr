@@ -1,5 +1,5 @@
 /**
- * GTM Google Ads Integration (GTM-K597C4C2 + Google Ads AW-16683623620)
+ * GTM Google Ads Integration (GTM-K597C4C2 + Google Ads AW-17849369847)
  * All conversion events flow through GTM dataLayer + Google Ads gtag
  */
 

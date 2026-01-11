@@ -262,7 +262,7 @@
           s.onload = function() {
             gtag('js', new Date());
             gtag('config', 'G-D92SQT9L1P', { 'send_page_view': true });
-            gtag('config', 'AW-16683623620');
+            gtag('config', 'AW-17849369847');
           };
           document.head.appendChild(s);
         }
@@ -274,16 +274,16 @@
       window.gtag = function(){dataLayer.push(arguments);};
     </script>
 
-    <!-- Google Ads Conversion Functions (deferred definitions) -->
+    <!-- Google Ads Conversion Functions (ONLY purchase is a conversion) -->
     <script>
       window.gads_form_start = function(email, phone) {
-        if (window.gtag) gtag('event', 'conversion', { 'send_to': 'AW-16683623620/xhTDCODCy6gbEMTJr5M-', 'user_data': { 'email': email, 'phone_number': phone } });
+        // form_start is NOT a conversion - analytics only via dataLayer
       };
       window.gads_form_submit = function(email, phone) {
-        if (window.gtag) gtag('event', 'conversion', { 'send_to': 'AW-16683623620/20wfCK-NyqgbEMTJr5M-', 'user_data': { 'email': email, 'phone_number': phone } });
+        // form_submit is NOT a conversion - analytics only via dataLayer
       };
       window.gads_purchase = function(transactionId, value, email, phone) {
-        if (window.gtag) gtag('event', 'conversion', { 'send_to': 'AW-16683623620/b5XPCPfuirYbEMTJr5M-', 'value': value || 129.80, 'currency': 'EUR', 'transaction_id': transactionId, 'user_data': { 'email': email, 'phone_number': phone } });
+        if (window.gtag) gtag('event', 'conversion', { 'send_to': 'AW-17849369847/b5XPCPfuirYbEMTJr5M-', 'value': value || 129.80, 'currency': 'EUR', 'transaction_id': transactionId, 'user_data': { 'email': email, 'phone_number': phone } });
       };
     </script>
 

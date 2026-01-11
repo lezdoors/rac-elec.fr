@@ -130,7 +130,7 @@ Preferred communication style: Simple, everyday language.
 ### Analytics & Marketing (demande-raccordement.fr)
 - **Google Tag Manager**: GTM-K597C4C2
 - **Google Analytics**: GA4 G-D92SQT9L1P
-- **Google Ads**: AW-16683623620 with 3 conversions (form_start, form_submit, purchase)
+- **Google Ads**: AW-17849369847 with 1 primary conversion (purchase only)
 - **Enhanced Conversions**: Enabled with email/phone data for improved attribution
 
 ### Other Integrations
