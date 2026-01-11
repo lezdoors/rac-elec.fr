@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Zap, ArrowRight, Building, Home as HomeIcon, BarChart, Clock, Shield, Phone, CheckCircle, MapPin, FileText, Rocket, ChevronDown, ChevronRight, Check, Users, Lock, Mail, Star, Plus } from "lucide-react";
 import { ContactModal } from "@/components/contact-modal";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { FloatingContactButton } from "@/components/floating-contact-button";
 import heroIllustration from "@assets/hero-illustration_1765320964105.webp";
@@ -42,26 +42,7 @@ const useMobileDetection = () => {
 };
 
 export default function HomePage() {
-  const [isVisible, setIsVisible] = useState<{[key: string]: boolean}>({});
   const isMobile = useMobileDetection();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setIsVisible(prev => ({ ...prev, [entry.target.id]: true }));
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '50px' }
-    );
-
-    const sections = document.querySelectorAll('[data-animate]');
-    sections.forEach(section => observer.observe(section));
-
-    return () => observer.disconnect();
-  }, []);
   
   return (
     <>
@@ -259,7 +240,7 @@ export default function HomePage() {
         </section>
 
         {/* SERVICE TYPES SECTION - Centered Card Layout Like Original */}
-        <section className="py-6 md:py-10 bg-white" id="types-raccordements" data-animate data-testid="service-types-section">
+        <section className="py-6 md:py-10 bg-white" id="types-raccordements" data-testid="service-types-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
             <div className="text-center mb-4 md:mb-8">
@@ -272,7 +253,7 @@ export default function HomePage() {
             </div>
 
             {/* Service Cards - Horizontal on mobile, Grid on desktop */}
-            <div className={`transition-all duration-700 ${isVisible['types-raccordements'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div>
               
               {/* Mobile: Horizontal compact cards */}
               <div className="flex flex-col gap-3 md:hidden">
@@ -394,9 +375,9 @@ export default function HomePage() {
         </section>
 
         {/* BESOIN D'AIDE SECTION - Like Original */}
-        <section className="py-6 md:py-10 bg-white" id="besoin-aide" data-animate data-testid="besoin-aide-section">
+        <section className="py-6 md:py-10 bg-white" id="besoin-aide" data-testid="besoin-aide-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
-            <div className={`flex flex-col items-center transition-all duration-700 ${isVisible['besoin-aide'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="flex flex-col items-center">
               {/* Content - Centered */}
               <div className="w-full max-w-2xl text-center">
                 <h2 className="text-[24px] sm:text-[32px] md:text-[38px] font-bold text-gray-900 mb-4">
@@ -432,7 +413,7 @@ export default function HomePage() {
         </section>
 
         {/* TESTIMONIALS SECTION - Professional Design */}
-        <section className="py-6 md:py-10 bg-white" id="testimonials" data-animate data-testid="testimonials-section">
+        <section className="py-6 md:py-10 bg-white" id="testimonials" data-testid="testimonials-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
             <div className="text-center mb-6 md:mb-10">
@@ -536,7 +517,7 @@ export default function HomePage() {
         </section>
 
         {/* FAQ SECTION - Professional Multi-Column Design */}
-        <section className="py-6 md:py-10 bg-gradient-to-b from-gray-50 to-white" id="faq" data-animate data-testid="faq-section">
+        <section className="py-6 md:py-10 bg-gradient-to-b from-gray-50 to-white" id="faq" data-testid="faq-section">
           <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-screen-xl">
             {/* Header */}
             <div className="text-center mb-6 md:mb-10">
@@ -549,7 +530,7 @@ export default function HomePage() {
             </div>
 
             {/* FAQ Categories Grid - 2 columns for better balance */}
-            <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-10 mb-6 md:mb-10 transition-all duration-700 ${isVisible['faq'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-10 mb-6 md:mb-10">
               
               {/* Category 1: Demarches et Documents */}
               <div>
