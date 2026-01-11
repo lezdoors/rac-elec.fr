@@ -201,7 +201,7 @@ export default function HomePage() {
 
             {/* 4 Steps - Mobile Carousel / Desktop Grid */}
             {/* Desktop Grid - Hidden on mobile */}
-            <div className={`hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 mb-16 transition-all duration-700 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className={`hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10 mb-8 md:mb-16 transition-all duration-700 ${isVisible['process'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               {[
                 { num: 1, img: step1Illustration, alt: "Définir le type de raccordement", title: "Définir le type de raccordement", desc: "Utilisez notre outil pour cadrer votre demande." },
                 { num: 2, img: step2Illustration, alt: "Compléter un formulaire simple", title: "Compléter le formulaire en ligne", desc: "Renseignez votre projet en quelques minutes." },
@@ -226,7 +226,7 @@ export default function HomePage() {
             </div>
 
             {/* Mobile Vertical Stack - All 4 steps visible, no horizontal scroll */}
-            <div className="sm:hidden mb-8 space-y-4">
+            <div className="md:hidden mb-6 space-y-3">
               {[
                 { num: 1, img: step1IllustrationMobile, alt: "Définir le type de raccordement", title: "Définir le type de raccordement", desc: "Utilisez notre outil pour cadrer votre demande." },
                 { num: 2, img: step2IllustrationMobile, alt: "Compléter un formulaire simple", title: "Compléter le formulaire en ligne", desc: "Renseignez votre projet en quelques minutes." },
@@ -252,7 +252,7 @@ export default function HomePage() {
             <div className="text-center">
               <Link href="/raccordement-enedis#formulaire-raccordement">
                 <button 
-                  className="w-full sm:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-8 py-[14px] rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 min-h-[52px]"
+                  className="w-full md:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-base px-8 py-[14px] rounded-md shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 min-h-[52px]"
                   data-testid="cta-process-button"
                 >
                   Commencer maintenant
@@ -279,7 +279,7 @@ export default function HomePage() {
             <div className={`transition-all duration-700 ${isVisible['types-raccordements'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               
               {/* Mobile: Horizontal compact cards */}
-              <div className="flex flex-col gap-3 sm:hidden">
+              <div className="flex flex-col gap-3 md:hidden">
                 {[
                   { icon: raccordementProvisoireIcon, title: "Raccordement Provisoire", desc: "Chantiers et installations temporaires" },
                   { icon: raccordementDefinitifIcon, title: "Raccordement Définitif", desc: "Maisons neuves et locaux commerciaux" },
@@ -304,7 +304,7 @@ export default function HomePage() {
               </div>
 
               {/* Desktop: Grid layout */}
-              <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+              <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
                 {[
                   { icon: raccordementProvisoireIcon, title: "Raccordement Provisoire", desc: "Pour chantiers, événements temporaires et installations provisoires" },
                   { icon: raccordementDefinitifIcon, title: "Raccordement Définitif", desc: "Maisons neuves, locaux commerciaux et installations permanentes" },
@@ -640,9 +640,9 @@ export default function HomePage() {
             </div>
 
             {/* Contact Bar */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-8 text-center sm:text-left">
-                <p className="text-sm sm:text-base font-semibold text-gray-900">Une question&nbsp;? Nos conseillers vous répondent.</p>
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 md:p-6 flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex flex-col md:flex-row items-center gap-3 md:gap-8 text-center md:text-left">
+                <p className="text-sm md:text-base font-semibold text-gray-900">Une question&nbsp;? Nos conseillers vous répondent.</p>
                 <div className="flex items-center text-sm text-gray-600">
                   <a href="tel:0970709570" className="flex items-center gap-2 hover:text-[#3B82F6] transition-colors">
                     <Phone className="w-4 h-4" />
