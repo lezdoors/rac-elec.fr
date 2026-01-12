@@ -122,8 +122,8 @@ export default function HomePage() {
             {/* Two-column layout: Illustration left, Steps right */}
             <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
               
-              {/* Left: Illustration */}
-              <div className="w-full md:w-1/2 flex justify-center">
+              {/* Left: Illustration - HIDDEN on mobile, visible on md+ */}
+              <div className="hidden md:flex w-full md:w-1/2 justify-center">
                 <div className="relative w-full max-w-[350px] md:max-w-[420px]">
                   <img 
                     src={stepsIllustration} 
