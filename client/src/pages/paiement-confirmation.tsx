@@ -7,11 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import Layout from "@/components/layout";
 import { ContactModal } from "@/components/contact-modal";
 import { GoogleSnippetsInitializer } from "@/components/google-snippets-initializer";
 import { Helmet } from "react-helmet";
-import BankingSecuritySection from "@/components/banking-security-section";
 import { trackPurchase, PurchaseUserData } from "@/lib/analytics";
 
 export default function PaiementConfirmationPage() {
@@ -376,8 +374,117 @@ export default function PaiementConfirmationPage() {
     }
   };
   
+  const generatePDF = () => {
+    if (!serviceRequest) return;
+    
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) return;
+    
+    const nameParts = serviceRequest.name?.split(' ') || [];
+    const firstName = serviceRequest.firstName || nameParts[0] || '';
+    const lastName = serviceRequest.lastName || nameParts.slice(1).join(' ') || '';
+    
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html lang="fr">
+      <head>
+        <meta charset="UTF-8">
+        <title>Récapitulatif de paiement - ${referenceNumber}</title>
+        <style>
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 40px; color: #1f2937; line-height: 1.6; }
+          .container { max-width: 600px; margin: 0 auto; }
+          .header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid #10b981; }
+          .success-badge { display: inline-flex; align-items: center; gap: 8px; background: #ecfdf5; color: #059669; padding: 8px 16px; border-radius: 20px; font-weight: 600; margin-bottom: 16px; }
+          .success-badge svg { width: 20px; height: 20px; }
+          h1 { font-size: 24px; color: #111827; margin-bottom: 8px; }
+          .reference { font-size: 14px; color: #6b7280; }
+          .amount-box { background: #f9fafb; border-radius: 12px; padding: 24px; margin-bottom: 32px; text-align: center; }
+          .amount-label { font-size: 14px; color: #6b7280; margin-bottom: 4px; }
+          .amount { font-size: 32px; font-weight: 700; color: #111827; }
+          .section { margin-bottom: 24px; }
+          .section-title { font-size: 14px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+          .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+          .info-item { }
+          .info-label { font-size: 12px; color: #9ca3af; margin-bottom: 2px; }
+          .info-value { font-size: 14px; color: #111827; font-weight: 500; }
+          .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e5e7eb; text-align: center; font-size: 12px; color: #9ca3af; }
+          @media print { body { padding: 20px; } }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <div class="success-badge">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Paiement réussi
+            </div>
+            <h1>Récapitulatif de votre demande</h1>
+            <p class="reference">Référence : ${referenceNumber}</p>
+          </div>
+          
+          <div class="amount-box">
+            <p class="amount-label">Montant payé</p>
+            <p class="amount">${formattedAmount} €</p>
+          </div>
+          
+          <div class="section">
+            <h2 class="section-title">Informations personnelles</h2>
+            <div class="info-grid">
+              <div class="info-item">
+                <p class="info-label">Nom</p>
+                <p class="info-value">${lastName || '-'}</p>
+              </div>
+              <div class="info-item">
+                <p class="info-label">Prénom</p>
+                <p class="info-value">${firstName || '-'}</p>
+              </div>
+              <div class="info-item">
+                <p class="info-label">Email</p>
+                <p class="info-value">${serviceRequest.email || '-'}</p>
+              </div>
+              <div class="info-item">
+                <p class="info-label">Téléphone</p>
+                <p class="info-value">${serviceRequest.phone || '-'}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="section">
+            <h2 class="section-title">Détails de la demande</h2>
+            <div class="info-grid">
+              <div class="info-item">
+                <p class="info-label">Type</p>
+                <p class="info-value">${getRequestTypeLabel(serviceRequest.requestType)}</p>
+              </div>
+              <div class="info-item">
+                <p class="info-label">Puissance</p>
+                <p class="info-value">${serviceRequest.powerRequired || '-'} kVA</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="section">
+            <h2 class="section-title">Adresse du projet</h2>
+            <div class="info-item">
+              <p class="info-value">${serviceRequest.address || '-'}</p>
+              <p class="info-value">${serviceRequest.postalCode || ''} ${serviceRequest.city || ''}</p>
+            </div>
+          </div>
+          
+          <div class="footer">
+            <p>Date : ${new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+          </div>
+        </div>
+        <script>window.onload = function() { window.print(); }</script>
+      </body>
+      </html>
+    `);
+    printWindow.document.close();
+  };
+  
   return (
-    <Layout>
+    <div className="min-h-screen bg-gray-50">
       {/* Métadonnées SEO optimisées */}
       <Helmet>
         <title>Confirmation de Paiement | Raccordement Électrique Enedis</title>
@@ -495,7 +602,7 @@ export default function PaiementConfirmationPage() {
             </CardContent>
             <CardFooter className="flex flex-col sm:flex-row justify-between gap-2">
               <p className="text-sm text-muted-foreground">Date de création: {new Date(serviceRequest.createdAt).toLocaleDateString('fr-FR')}</p>
-              <Button variant="outline" size="sm" onClick={() => window.print()}>
+              <Button variant="outline" size="sm" onClick={generatePDF}>
                 Imprimer le récapitulatif
               </Button>
             </CardFooter>
@@ -518,15 +625,12 @@ export default function PaiementConfirmationPage() {
         )}
       </div>
       
-      {/* Section d'informations de sécurité bancaire */}
-      <BankingSecuritySection />
-      
       {/* Modale de contact */}
       <ContactModal
         defaultOpen={contactModalOpen}
         onOpenChange={setContactModalOpen}
         source="payment_confirmation"
       />
-    </Layout>
+    </div>
   );
 }
