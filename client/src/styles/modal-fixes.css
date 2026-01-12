@@ -1,15 +1,5 @@
-/* Style du bouton X pour la modale de contact - visible sur fond bleu */
-.contact-modal-content > button.absolute.right-4.top-4,
-.dialog-content-custom > button.absolute.right-4.top-4 {
-  color: white !important;
-  opacity: 1 !important;
-  background: rgba(255, 255, 255, 0.15) !important;
-  border-radius: 9999px !important;
-  padding: 6px !important;
-  transition: background 0.2s !important;
-}
-
-.contact-modal-content > button.absolute.right-4.top-4:hover,
-.dialog-content-custom > button.absolute.right-4.top-4:hover {
-  background: rgba(255, 255, 255, 0.25) !important;
+/* Masquer le bouton X par défaut de DialogContent (le bouton personnalisé est dans l'en-tête) */
+.contact-modal-content > button[class*="absolute"][class*="right-4"][class*="top-4"],
+.dialog-content-custom > button[class*="absolute"][class*="right-4"][class*="top-4"] {
+  display: none !important;
 }

@@ -112,8 +112,8 @@ export function ContactModal({
     <Dialog open={open} onOpenChange={handleOpenChange}>
       {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
       <DialogContent className="sm:max-w-[550px] rounded-xl overflow-hidden p-0 max-h-[90vh] contact-modal-content dialog-content-custom">
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
-          <div className="flex items-center gap-3">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white relative">
+          <div className="flex items-center gap-3 pr-10">
             <div className="bg-white/20 rounded-full p-2">
               <Mail className="h-6 w-6" />
             </div>
@@ -126,6 +126,13 @@ export function ContactModal({
               </DialogDescription>
             </div>
           </div>
+          <button
+            onClick={() => handleOpenChange(false)}
+            className="absolute right-4 top-4 rounded-full h-8 w-8 flex items-center justify-center bg-white/15 hover:bg-white/25 transition-colors"
+            aria-label="Fermer"
+          >
+            <X className="h-4 w-4 text-white" />
+          </button>
         </div>
         
         <div className="overflow-y-auto max-h-[60vh] p-6">
