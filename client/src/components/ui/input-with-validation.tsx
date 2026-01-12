@@ -14,10 +14,11 @@ export interface InputWithValidationProps
   showValidation?: boolean;
   debounceMs?: number;
   onValidationChange?: (isValid: boolean, errors: string[]) => void;
+  hideErrorMessages?: boolean;
 }
 
 const InputWithValidation = React.forwardRef<HTMLInputElement, InputWithValidationProps>(
-  ({ className, type, validationRules = [], showValidation = true, debounceMs = 300, onValidationChange, placeholder, ...props }, ref) => {
+  ({ className, type, validationRules = [], showValidation = true, debounceMs = 300, onValidationChange, placeholder, hideErrorMessages = false, ...props }, ref) => {
     const [value, setValue] = React.useState(props.value || "");
     const [isValidating, setIsValidating] = React.useState(false);
     const [isFocused, setIsFocused] = React.useState(false);
@@ -198,7 +199,7 @@ const InputWithValidation = React.forwardRef<HTMLInputElement, InputWithValidati
           </div>
         )}
         
-        {showValidation && (validationState.errors.length > 0 || validationState.warnings.length > 0) && (
+        {showValidation && !hideErrorMessages && (validationState.errors.length > 0 || validationState.warnings.length > 0) && (
           <div className="mt-1 space-y-1">
             {validationState.errors.map((error, index) => (
               <p key={`error-${index}`} className="text-sm text-red-600 flex items-center gap-1">

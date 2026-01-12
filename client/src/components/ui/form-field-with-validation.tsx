@@ -65,6 +65,7 @@ export function FormFieldWithValidation<
               debounceMs={debounceMs}
               onValidationChange={handleValidationChange}
               disabled={disabled}
+              hideErrorMessages={true}
               data-testid={`input-${name}`}
               {...field}
             />
@@ -75,20 +76,17 @@ export function FormFieldWithValidation<
             </FormDescription>
           )}
           
-          {/* Show React Hook Form errors first, then real-time validation errors */}
-          {fieldState.error && (
-            <FormMessage>{fieldState.error.message}</FormMessage>
-          )}
-          
-          {/* Only show real-time validation if no form-level errors */}
-          {!fieldState.error && !validationState.isValid && validationState.errors.length > 0 && (
-            <div className="space-y-1">
-              {validationState.errors.map((error, index) => (
-                <p key={index} className="text-sm font-medium text-destructive">
-                  {error}
-                </p>
-              ))}
-            </div>
+          {/* Show only ONE error message - React Hook Form errors take priority */}
+          {fieldState.error ? (
+            <p className="text-sm font-medium text-destructive">
+              {fieldState.error.message}
+            </p>
+          ) : (
+            !validationState.isValid && validationState.errors.length > 0 && (
+              <p className="text-sm font-medium text-destructive">
+                {validationState.errors[0]}
+              </p>
+            )
           )}
         </FormItem>
       )}
