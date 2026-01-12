@@ -274,45 +274,17 @@
       window.gtag = function(){dataLayer.push(arguments);};
     </script>
 
-    <!-- Google Ads Conversion Functions (ONLY purchase is a conversion) -->
-    <script>
-      window.gads_form_start = function(email, phone) {
-        // form_start is NOT a conversion - analytics only via dataLayer
-      };
-      window.gads_form_submit = function(email, phone) {
-        // form_submit is NOT a conversion - analytics only via dataLayer
-      };
-      window.gads_purchase = function(transactionId, value, email, phone) {
-        if (window.gtag) gtag('event', 'conversion', { 'send_to': 'AW-17849369847/b5XPCPfuirYbEMTJr5M-', 'value': value || 129.80, 'currency': 'EUR', 'transaction_id': transactionId, 'user_data': { 'email': email, 'phone_number': phone } });
-      };
-    </script>
-
-    <!-- DataLayer Tracking Helpers with Session Guards -->
-    <script>
-      var GTM_GUARD_KEYS = { FORM_START: 'gtm_form_start_fired', FORM_SUBMIT: 'gtm_form_submit_fired' };
+    <!-- 
+      TRACKING ARCHITECTURE (January 2026):
+      =====================================
+      All tracking is handled by client/src/lib/analytics.ts
+      - form_start: Analytics event only (NOT a conversion)
+      - form_submit: Analytics event only (NOT a conversion)  
+      - purchase: PRIMARY Google Ads conversion (AW-17849369847/b5XPCPfuirYbEMTJr5M-)
       
-      window.trackFormStart = function(email, phone) {
-        if (sessionStorage.getItem(GTM_GUARD_KEYS.FORM_START)) return;
-        sessionStorage.setItem(GTM_GUARD_KEYS.FORM_START, 'true');
-        dataLayer.push({ event: 'form_start', email: email, phone: phone });
-        if (window.gads_form_start) window.gads_form_start(email, phone);
-      };
-      
-      window.trackFormSubmit = function(email, phone) {
-        if (sessionStorage.getItem(GTM_GUARD_KEYS.FORM_SUBMIT)) return;
-        sessionStorage.setItem(GTM_GUARD_KEYS.FORM_SUBMIT, 'true');
-        dataLayer.push({ event: 'form_submit', email: email, phone: phone });
-        if (window.gads_form_submit) window.gads_form_submit(email, phone);
-      };
-      
-      window.trackPurchase = function(transactionId, email, phone) {
-        var key = 'purchase_' + transactionId;
-        if (sessionStorage.getItem(key)) return;
-        sessionStorage.setItem(key, 'true');
-        dataLayer.push({ event: 'purchase', transaction_id: transactionId, value: 129.80, currency: 'EUR', email: email, phone: phone });
-        if (window.gads_purchase) window.gads_purchase(transactionId, 129.80, email, phone);
-      };
-    </script>
+      Deduplication: Session-based per email hash (form_start) or reference (form_submit/purchase)
+      Enhanced Conversions: Email + phone data sent with purchase event
+    -->
 
     <!-- PERFORMANCE: Only preload favicon, skip invalid modulepreload for TSX files -->
     <link rel="preload" href="/favicon-new.svg" as="image">
