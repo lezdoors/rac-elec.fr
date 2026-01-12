@@ -195,7 +195,7 @@ export default function PaiementConfirmationPage() {
   // Afficher un message d'erreur si pas de référence
   if (!referenceNumber) {
     return (
-      <Layout>
+      <div className="min-h-screen bg-gray-50">
         <div className="container max-w-4xl mx-auto py-10">
           <Alert variant="destructive" className="mb-8">
             <AlertCircle className="h-4 w-4" />
@@ -209,7 +209,7 @@ export default function PaiementConfirmationPage() {
             Retour à l'accueil
           </Button>
         </div>
-      </Layout>
+      </div>
     );
   }
   
