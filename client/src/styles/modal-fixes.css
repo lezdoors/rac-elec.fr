@@ -1,5 +1,12 @@
-/* Masquer le bouton X par défaut de DialogContent (le bouton personnalisé est dans l'en-tête) */
-.contact-modal-content > button[class*="absolute"][class*="right-4"][class*="top-4"],
-.dialog-content-custom > button[class*="absolute"][class*="right-4"][class*="top-4"] {
+/* Masquer le bouton X par défaut de DialogContent (pas le bouton personnalisé) */
+.contact-modal-content > button:not(.contact-modal-close-btn),
+.dialog-content-custom > button:not(.contact-modal-close-btn) {
   display: none !important;
+}
+
+/* S'assurer que le bouton X personnalisé est visible */
+.contact-modal-close-btn {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
