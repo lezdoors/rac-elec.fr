@@ -46,12 +46,12 @@ Preferred communication style: Simple, everyday language.
   - **Key Files**: client/index.html (critical CSS), client/src/pages/home-page.tsx, client/src/components/professional-header.tsx
   - **Design Philosophy**: NO emojis or childish designs - enterprise professional only, B2B conversion focus
 
-- **Google Ads Conversion Optimization (Jan 11, 2026)**: Critical update to focus on purchase-only conversions:
-  - **NEW Conversion ID**: AW-17849369847 (replaces AW-16683623620)
-  - **Purchase = ONLY primary conversion**: AW-17849369847/b5XPCPfuirYbEMTJr5M-
+- **Google Ads Conversion Optimization (Jan 12, 2026)**: Updated to active Google Ads account:
+  - **ACTIVE Conversion ID**: AW-16683623620 (replaces suspended AW-17849369847)
+  - **Purchase = ONLY primary conversion**: AW-16683623620/asGUCJix06gbEMTJr5M-
   - **form_start**: Analytics event ONLY (dataLayer push, NOT a conversion)
   - **form_submit**: Analytics event ONLY (dataLayer push, NOT a conversion)
-  - **form_step**: NEW event for funnel visibility (step_number, step_name)
+  - **form_step**: Event for funnel visibility (step_number, step_name)
   - **Business Logic**: Paid service must optimize ONLY on real purchases, not form activity
   - **Key File**: `client/src/lib/analytics.ts`
 
@@ -70,9 +70,9 @@ Preferred communication style: Simple, everyday language.
 
 - **Google Ads & GTM Configuration for demande-raccordement.fr**:
   - GTM Container: GTM-K597C4C2
-  - Google Ads Conversion ID: AW-17849369847
+  - Google Ads Conversion ID: AW-16683623620 (active account)
   - GA4 Measurement ID: G-D92SQT9L1P
-  - PRIMARY Conversion: purchase (AW-17849369847/b5XPCPfuirYbEMTJr5M-)
+  - PRIMARY Conversion: purchase (AW-16683623620/asGUCJix06gbEMTJr5M-)
   - Enhanced Conversions enabled with email/phone data
   - Tracking architecture: GTM manages GA4, direct gtag for Google Ads conversions only
   
