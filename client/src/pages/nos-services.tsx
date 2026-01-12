@@ -119,34 +119,32 @@ export default function NosServicesPage() {
       
       <Layout>
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-          {/* Hero Section - même style que la page d'accueil */}
-          <div className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0052D4 0%, #4364F7 50%, #6FB1FC 100%)' }}>
+          {/* Hero Section - Professional enterprise design */}
+          <div className="bg-gradient-to-r from-[#1E3A8A] to-[#2563EB]">
             <div className="container mx-auto px-4 py-16 md:py-20">
               <div className="max-w-4xl mx-auto text-center">
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
                   Nos Services de Raccordement Électrique
                 </h1>
-                <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-8">
+                <p className="text-lg md:text-xl lg:text-2xl text-blue-100 mb-8">
                   Solutions complètes pour tous vos besoins de raccordement au réseau Enedis
                 </p>
-                <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base text-white/90">
+                <div className="flex flex-wrap justify-center gap-6 md:gap-8 text-sm md:text-base text-white">
                   <div className="flex items-center gap-2">
-                    <CheckCircle className="h-5 w-5 text-white" />
+                    <CheckCircle className="h-5 w-5 text-green-400" />
                     <span>Service agréé Enedis</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Clock className="h-5 w-5 text-white" />
+                    <Clock className="h-5 w-5 text-blue-200" />
                     <span>Intervention rapide</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Phone className="h-5 w-5 text-white" />
+                    <Phone className="h-5 w-5 text-blue-200" />
                     <span>Support dédié</span>
                   </div>
                 </div>
               </div>
             </div>
-            {/* Subtle decorative element */}
-            <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-blue-50 to-transparent"></div>
           </div>
 
           {/* Services Grid */}
