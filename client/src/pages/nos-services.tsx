@@ -119,152 +119,153 @@ export default function NosServicesPage() {
       
       <Layout>
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Nos Services de Raccordement Électrique
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-blue-100">
-              Solutions complètes pour tous vos besoins de raccordement au réseau Enedis
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5" />
-                <span>Service agréé Enedis</span>
+          {/* Hero Section - même style que la page d'accueil */}
+          <div className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0052D4 0%, #4364F7 50%, #6FB1FC 100%)' }}>
+            <div className="container mx-auto px-4 py-16 md:py-20">
+              <div className="max-w-4xl mx-auto text-center">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+                  Nos Services de Raccordement Électrique
+                </h1>
+                <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-8">
+                  Solutions complètes pour tous vos besoins de raccordement au réseau Enedis
+                </p>
+                <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base text-white/90">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-white" />
+                    <span>Service agréé Enedis</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-5 w-5 text-white" />
+                    <span>Intervention rapide</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="h-5 w-5 text-white" />
+                    <span>Support dédié</span>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Clock className="h-5 w-5" />
-                <span>Intervention rapide</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone className="h-5 w-5" />
-                <span>Support dédié</span>
+            </div>
+            {/* Subtle decorative element */}
+            <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-blue-50 to-transparent"></div>
+          </div>
+
+          {/* Services Grid */}
+          <div className="container mx-auto px-4 py-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services.map((service) => {
+                const IconComponent = service.icon;
+                return (
+                  <Card key={service.id} className="relative hover:shadow-lg transition-all duration-300 group">
+                    <CardHeader className="pb-4">
+                      <div className="mb-2">
+                        <CardTitle className="text-lg mb-2">{service.title}</CardTitle>
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                          <Clock className="h-4 w-4" />
+                          <span>{service.duration}</span>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-sm text-gray-600 mb-4">
+                        {service.description}
+                      </CardDescription>
+                      
+                      <ul className="space-y-2 mb-6">
+                        {service.features.map((feature, index) => (
+                          <li key={index} className="flex items-center gap-2 text-sm">
+                            <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <Link href={service.link}>
+                        <Button className="w-full group/btn">
+                          En savoir plus
+                          <ArrowRight className="h-4 w-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                        </Button>
+                      </Link>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* CTA Section */}
+          <div className="bg-gray-50 py-16">
+            <div className="container mx-auto px-4 text-center">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Besoin d'aide pour choisir ?
+              </h2>
+              <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Nos experts vous conseillent pour déterminer la solution la plus adaptée à votre projet.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/contact">
+                  <Button size="lg" className="px-8">
+                    <Phone className="h-5 w-5 mr-2" />
+                    Nous contacter
+                  </Button>
+                </Link>
+                <Link href="/raccordement-enedis">
+                  <Button size="lg" variant="outline" className="px-8">
+                    Commencer ma demande
+                    <ArrowRight className="h-5 w-5 ml-2" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Services Grid */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service) => {
-            const IconComponent = service.icon;
-            return (
-              <Card key={service.id} className="relative hover:shadow-lg transition-all duration-300 group">
-                <CardHeader className="pb-4">
-                  <div className="mb-2">
-                    <CardTitle className="text-lg mb-2">{service.title}</CardTitle>
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Clock className="h-4 w-4" />
-                      <span>{service.duration}</span>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-sm text-gray-600 mb-4">
-                    {service.description}
-                  </CardDescription>
-                  
-                  <ul className="space-y-2 mb-6">
-                    {service.features.map((feature, index) => (
-                      <li key={index} className="flex items-center gap-2 text-sm">
-                        <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Link href={service.link}>
-                    <Button className="w-full group/btn">
-                      En savoir plus
-                      <ArrowRight className="h-4 w-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <div className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Besoin d'aide pour choisir ?
-          </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Nos experts vous conseillent pour déterminer la solution la plus adaptée à votre projet.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact">
-              <Button size="lg" className="px-8">
-                <Phone className="h-5 w-5 mr-2" />
-                Nous contacter
-              </Button>
-            </Link>
-            <Link href="/raccordement-enedis">
-              <Button size="lg" variant="outline" className="px-8">
-                Commencer ma demande
-                <ArrowRight className="h-5 w-5 ml-2" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Process Section */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Comment ça marche ?
-          </h2>
-          <p className="text-xl text-gray-600">
-            Un processus simple et transparent en 4 étapes
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {[
-            {
-              step: "1",
-              title: "Demande en ligne",
-              description: "Remplissez notre formulaire sécurisé en quelques minutes"
-            },
-            {
-              step: "2", 
-              title: "Étude personnalisée",
-              description: "Nos experts analysent votre projet et vous proposent la meilleure solution"
-            },
-            {
-              step: "3",
-              title: "Validation Enedis",
-              description: "Nous nous occupons de toutes les démarches administratives"
-            },
-            {
-              step: "4",
-              title: "Mise en service",
-              description: "Intervention technique et mise en service de votre installation"
-            }
-          ].map((item, index) => (
-            <div key={index} className="text-center">
-              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
-                {item.step}
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                {item.title}
-              </h3>
-              <p className="text-gray-600 text-sm">
-                {item.description}
+          {/* Process Section */}
+          <div className="container mx-auto px-4 py-16">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Comment ça marche ?
+              </h2>
+              <p className="text-xl text-gray-600">
+                Un processus simple et transparent en 4 étapes
               </p>
             </div>
-          ))}
-        </div>
-      </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              {[
+                {
+                  step: "1",
+                  title: "Demande en ligne",
+                  description: "Remplissez notre formulaire sécurisé en quelques minutes"
+                },
+                {
+                  step: "2", 
+                  title: "Étude personnalisée",
+                  description: "Nos experts analysent votre projet et vous proposent la meilleure solution"
+                },
+                {
+                  step: "3",
+                  title: "Validation Enedis",
+                  description: "Nous nous occupons de toutes les démarches administratives"
+                },
+                {
+                  step: "4",
+                  title: "Mise en service",
+                  description: "Intervention technique et mise en service de votre installation"
+                }
+              ].map((item, index) => (
+                <div key={index} className="text-center">
+                  <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                    {item.step}
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </Layout>
     </>
