@@ -4,9 +4,9 @@ declare global {
   }
 }
 
-const GOOGLE_ADS_ID = 'AW-17849369847';
+const GOOGLE_ADS_ID = 'AW-16683623620';
 const CONVERSION_LABELS = {
-  PURCHASE: 'b5XPCPfuirYbEMTJr5M-',
+  PURCHASE: 'asGUCJix06gbEMTJr5M-',
 } as const;
 
 const hashEmail = (email: string): string => {
