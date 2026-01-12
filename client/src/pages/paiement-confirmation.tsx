@@ -231,44 +231,52 @@ export default function PaiementConfirmationPage() {
     switch (paymentStatus) {
       case 'success':
         return (
-          <div className="bg-green-50 border border-green-100 rounded-xl p-8 text-center max-w-2xl mx-auto mb-8 animate-in fade-in-50 duration-500">
-            <div className="relative inline-flex mx-auto mb-6">
-              <div className="absolute -inset-3 rounded-full bg-green-200 animate-pulse opacity-30"></div>
-              <CheckCircle2 className="h-16 w-16 text-green-600 relative" />
+          <div className="bg-white border border-gray-200 rounded-2xl shadow-lg overflow-hidden max-w-2xl mx-auto mb-8 animate-in fade-in-50 duration-500">
+            <div className="bg-gradient-to-r from-green-600 to-green-500 px-6 py-8 text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-md mb-4">
+                <CheckCircle2 className="h-10 w-10 text-green-600" />
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Paiement confirmé</h2>
+              <p className="text-green-100 text-sm md:text-base">Votre transaction a été traitée avec succès</p>
             </div>
-            <h2 className="text-2xl font-bold text-green-800 mb-4">Paiement réussi !</h2>
-            <p className="text-lg text-green-700 mb-6">
-              Votre paiement de <strong>{formattedAmount} € TTC</strong> a été traité avec succès.
-              {isMultiplePayment && (
-                <span className="block text-sm text-green-600 mt-1">
-                  (Paiement multiple x{multiplier})
-                </span>
-              )}
-              <br />Référence : {referenceNumber}
-            </p>
-            <p className="text-sm text-green-600 mb-6">
-              Un email de confirmation vous sera envoyé dans les prochaines minutes.
-            </p>
-            <div className="mt-6 text-sm text-gray-600">
-              <p className="mb-4">Votre paiement a été traité de manière sécurisée.</p>
-              <div className="flex items-center justify-center space-x-6 mt-4">
-                <div className="flex flex-col items-center">
-                  <div className="bg-green-100 p-2 rounded-full mb-2">
-                    <ShieldCheck className="h-6 w-6 text-green-600" />
+            
+            <div className="p-6 md:p-8">
+              <div className="bg-gray-50 rounded-xl p-4 md:p-6 mb-6">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Montant payé</p>
+                    <p className="text-2xl md:text-3xl font-bold text-gray-900">{formattedAmount} €</p>
+                    {isMultiplePayment && (
+                      <p className="text-xs text-gray-500 mt-1">Paiement multiple x{multiplier}</p>
+                    )}
                   </div>
-                  <span className="text-xs text-gray-500">Transaction sécurisée</span>
+                  <div className="text-left sm:text-right">
+                    <p className="text-sm text-gray-500 mb-1">Référence</p>
+                    <p className="text-base md:text-lg font-semibold text-gray-900 font-mono">{referenceNumber}</p>
+                  </div>
                 </div>
-                <div className="flex flex-col items-center">
-                  <div className="bg-green-100 p-2 rounded-full mb-2">
-                    <Lock className="h-6 w-6 text-green-600" />
-                  </div>
-                  <span className="text-xs text-gray-500">Données chiffrées</span>
+              </div>
+              
+              <div className="flex items-start gap-3 bg-blue-50 border border-blue-100 rounded-lg p-4 mb-6">
+                <Mail className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm font-medium text-blue-900">Confirmation par email</p>
+                  <p className="text-sm text-blue-700">Un email récapitulatif vous sera envoyé dans les prochaines minutes.</p>
                 </div>
-                <div className="flex flex-col items-center">
-                  <div className="bg-green-100 p-2 rounded-full mb-2">
-                    <CreditCard className="h-6 w-6 text-green-600" />
-                  </div>
-                  <span className="text-xs text-gray-500">Paiement vérifié</span>
+              </div>
+              
+              <div className="grid grid-cols-3 gap-3 md:gap-4">
+                <div className="flex flex-col items-center text-center p-3 bg-gray-50 rounded-lg">
+                  <ShieldCheck className="h-5 w-5 md:h-6 md:w-6 text-green-600 mb-2" />
+                  <span className="text-xs text-gray-600 leading-tight">Transaction sécurisée</span>
+                </div>
+                <div className="flex flex-col items-center text-center p-3 bg-gray-50 rounded-lg">
+                  <Lock className="h-5 w-5 md:h-6 md:w-6 text-green-600 mb-2" />
+                  <span className="text-xs text-gray-600 leading-tight">Données chiffrées</span>
+                </div>
+                <div className="flex flex-col items-center text-center p-3 bg-gray-50 rounded-lg">
+                  <CreditCard className="h-5 w-5 md:h-6 md:w-6 text-green-600 mb-2" />
+                  <span className="text-xs text-gray-600 leading-tight">Paiement vérifié</span>
                 </div>
               </div>
             </div>
@@ -453,112 +461,59 @@ export default function PaiementConfirmationPage() {
         {/* Statut du paiement */}
         {renderPaymentStatus()}
         
-        {/* Détails de la demande */}
+        {/* Récapitulatif de la demande (affiché seulement si serviceRequest est chargé) */}
         {(paymentStatus === 'success' && serviceRequest) && (
-          <div className="mt-8">
-            <h2 className="text-2xl font-bold mb-6">Que se passe-t-il maintenant ?</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">1. Dossier créé</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground text-sm">
-                    Votre demande sera traitée par notre équipe dans les 24-48 heures ouvrables
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">2. Traitement technique</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground text-sm">
-                    Analyse technique et coordination avec Enedis pour votre raccordement
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">3. Planification</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground text-sm">
-                    Nous vous contacterons pour fixer une date d'intervention
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-            
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle>Récapitulatif de votre demande</CardTitle>
-                <CardDescription>
-                  Référence: {referenceNumber}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <h3 className="font-medium mb-2">Informations personnelles</h3>
-                    <div className="space-y-1 text-sm">
-                      <p>{serviceRequest.firstName && serviceRequest.lastName 
-                         ? `${serviceRequest.firstName} ${serviceRequest.lastName}` 
-                         : serviceRequest.name}</p>
-                      <p>{serviceRequest.email}</p>
-                      <p>{serviceRequest.phone}</p>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h3 className="font-medium mb-2">Détails de la demande</h3>
-                    <div className="space-y-1 text-sm">
-                      <p><span className="font-medium">Type:</span> {getRequestTypeLabel(serviceRequest.requestType)}</p>
-                      <p><span className="font-medium">Puissance:</span> {serviceRequest.powerRequired} kVA</p>
-                      <p><span className="font-medium">Adresse:</span> {serviceRequest.address}, {serviceRequest.postalCode} {serviceRequest.city}</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="flex justify-between">
+          <Card className="mt-8 mb-8 max-w-2xl mx-auto">
+            <CardHeader>
+              <CardTitle>Récapitulatif de votre demande</CardTitle>
+              <CardDescription>
+                Référence: {referenceNumber}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <p className="text-sm text-muted-foreground">Date de création: {new Date(serviceRequest.createdAt).toLocaleDateString('fr-FR')}</p>
+                  <h3 className="font-medium mb-2">Informations personnelles</h3>
+                  <div className="space-y-1 text-sm">
+                    <p>{serviceRequest.firstName && serviceRequest.lastName 
+                       ? `${serviceRequest.firstName} ${serviceRequest.lastName}` 
+                       : serviceRequest.name}</p>
+                    <p>{serviceRequest.email}</p>
+                    <p>{serviceRequest.phone}</p>
+                  </div>
                 </div>
-                <Button variant="outline" size="sm" onClick={() => window.print()}>
-                  Imprimer le récapitulatif
-                </Button>
-              </CardFooter>
-            </Card>
+                
+                <div>
+                  <h3 className="font-medium mb-2">Détails de la demande</h3>
+                  <div className="space-y-1 text-sm">
+                    <p><span className="font-medium">Type:</span> {getRequestTypeLabel(serviceRequest.requestType)}</p>
+                    <p><span className="font-medium">Puissance:</span> {serviceRequest.powerRequired} kVA</p>
+                    <p><span className="font-medium">Adresse:</span> {serviceRequest.address}, {serviceRequest.postalCode} {serviceRequest.city}</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+            <CardFooter className="flex flex-col sm:flex-row justify-between gap-2">
+              <p className="text-sm text-muted-foreground">Date de création: {new Date(serviceRequest.createdAt).toLocaleDateString('fr-FR')}</p>
+              <Button variant="outline" size="sm" onClick={() => window.print()}>
+                Imprimer le récapitulatif
+              </Button>
+            </CardFooter>
+          </Card>
+        )}
+        
+        {/* Boutons d'action (toujours affichés quand paiement réussi) */}
+        {paymentStatus === 'success' && (
+          <div className="flex flex-col sm:flex-row justify-center gap-3 max-w-2xl mx-auto mt-6">
+            <Button onClick={() => navigate("/")} className="w-full sm:w-auto">
+              <Home className="mr-2 h-4 w-4" />
+              Retour à l'accueil
+            </Button>
             
-            <div className="flex justify-center">
-              <Button 
-                onClick={() => {
-                  // Redirection vers la page de remerciement française avec suivi des conversions
-                  const params = new URLSearchParams();
-                  params.set('reference', referenceNumber || '');
-                  params.set('amount', finalAmount.toString());
-                  params.set('currency', 'EUR');
-                  navigate(`/merci?${params.toString()}`);
-                }} 
-                className="mr-4"
-              >
-                <CheckCircle2 className="mr-2 h-4 w-4" />
-                Voir le récapitulatif complet
-              </Button>
-              
-              <Button onClick={() => navigate("/")} variant="outline" className="mr-4">
-                <Home className="mr-2 h-4 w-4" />
-                Retour à l'accueil
-              </Button>
-              
-              <Button variant="outline" onClick={() => setContactModalOpen(true)}>
-                <Mail className="mr-2 h-4 w-4" />
-                Nous contacter
-              </Button>
-            </div>
+            <Button variant="outline" onClick={() => setContactModalOpen(true)} className="w-full sm:w-auto">
+              <Mail className="mr-2 h-4 w-4" />
+              Nous contacter
+            </Button>
           </div>
         )}
       </div>
