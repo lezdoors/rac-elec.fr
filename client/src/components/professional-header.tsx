@@ -185,14 +185,6 @@ export function ProfessionalHeader() {
                   <Briefcase className="h-5 w-5 text-gray-400" />
                   <span className="text-[15px] font-medium">Nos Services</span>
                 </Link>
-                <Link 
-                  href="/guide-raccordement" 
-                  className="flex items-center gap-4 px-4 py-3.5 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <BookOpen className="h-5 w-5 text-gray-400" />
-                  <span className="text-[15px] font-medium">Guide</span>
-                </Link>
               </div>
             </nav>
             

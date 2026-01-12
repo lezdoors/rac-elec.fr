@@ -219,13 +219,6 @@ function Router() {
           </Layout>
         )} />
         
-        <Route path="/guide-raccordement" component={() => (
-          <Layout>
-            <Suspense fallback={<LoadingFallback />}>
-              <GuidePage />
-            </Suspense>
-          </Layout>
-        )} />
         
         {/* Authentification admin */}
         <Route path="/admin" component={() => (

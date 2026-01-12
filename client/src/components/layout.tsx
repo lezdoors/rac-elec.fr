@@ -239,14 +239,6 @@ export default function Layout({ children }: LayoutProps) {
                   <span className="text-[17px] font-semibold">Nos Services</span>
                   <ChevronRight className="h-5 w-5 text-gray-400" />
                 </Link>
-                <Link 
-                  href="/guide-raccordement" 
-                  className="flex items-center justify-between py-4 text-gray-800 hover:text-[#635bff] transition-colors border-b border-dashed border-gray-200"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <span className="text-[17px] font-semibold">Guide</span>
-                  <ChevronRight className="h-5 w-5 text-gray-400" />
-                </Link>
               </div>
             </nav>
             
