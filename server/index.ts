@@ -47,13 +47,29 @@ app.use(compression({
 }));
 
 // Cache-Control headers for static assets (PageSpeed optimization)
+// CRITICAL: Assets with content hashes can be cached forever
+// HTML and API routes must never be cached
 app.use((req, res, next) => {
   const url = req.url;
-  if (url.match(/\.(js|css|woff2?|webp|png|jpg|jpeg|svg|ico)(\?.*)?$/)) {
+  
+  // Hashed static assets (Vite adds hash to filename) - cache for 1 year
+  if (url.match(/\.(js|css|woff2?|ttf|eot|webp|png|jpg|jpeg|gif|svg|ico|avif|mp4|webm)(\?.*)?$/)) {
     res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-  } else if (url.endsWith('.html') || url === '/') {
+    res.setHeader('Vary', 'Accept-Encoding');
+  } 
+  // HTML pages - no cache to always get latest version
+  else if (url.endsWith('.html') || url === '/' || url.match(/^\/[a-z-]+$/)) {
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
   }
+  // API routes - never cache
+  else if (url.startsWith('/api/')) {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+  }
+  
   next();
 });
 

@@ -18632,10 +18632,17 @@ app.use(compression({
 }));
 app.use((req, res, next) => {
   const url = req.url;
-  if (url.match(/\.(js|css|woff2?|webp|png|jpg|jpeg|svg|ico)(\?.*)?$/)) {
+  if (url.match(/\.(js|css|woff2?|ttf|eot|webp|png|jpg|jpeg|gif|svg|ico|avif|mp4|webm)(\?.*)?$/)) {
     res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
-  } else if (url.endsWith(".html") || url === "/") {
+    res.setHeader("Vary", "Accept-Encoding");
+  } else if (url.endsWith(".html") || url === "/" || url.match(/^\/[a-z-]+$/)) {
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Expires", "0");
+  } else if (url.startsWith("/api/")) {
+    res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Expires", "0");
   }
   next();
 });
