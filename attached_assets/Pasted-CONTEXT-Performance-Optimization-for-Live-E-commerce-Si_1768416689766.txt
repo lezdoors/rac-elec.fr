@@ -1,0 +1,200 @@
+CONTEXT: Performance Optimization for Live E-commerce SiteWhat we're doing:
+We're optimizing a French electrical connection service website (demande-raccordement.fr) that's currently deployed on Replit. The site is experiencing severe mobile performance issues (PageSpeed score of 58/100, was 46 before initial fixes) which is directly impacting conversion rates and revenue.Why this matters:
+
+This site generates €4,000+ daily when performing well (over €110,000 monthly)
+Mobile conversion rate dropped from 22% (on previous Lovable deployment) to 10% (current Replit deployment)
+The performance drop is costing approximately €2,000+ per day in lost revenue
+Every second of load time directly impacts whether customers complete the €129.80 purchase
+The problem:
+Current mobile performance metrics are terrible:
+
+First Contentful Paint: 4.4 seconds (should be under 1.8s)
+Largest Contentful Paint: 11.1 seconds (should be under 2.5s)
+413 KiB of unused JavaScript loading on every page
+246 KiB of improperly cached resources
+Heavy third-party scripts (Stripe: 236 KiB, Google Tag Manager: 460 KiB) blocking initial render
+Why we can't just "move fast and break things":
+This is a LIVE production site with real customer traffic and revenue. Breaking any of these systems means immediate revenue loss and customer trust damage:
+
+Stripe payments: Customers paying €129.80 - if payment breaks, we lose money and customer trust
+Email delivery: Customers and internal team need confirmation emails - if broken, customers think payment failed
+Google Ads tracking: We spend $30-180/day on ads - broken tracking means wasted ad spend and inability to optimize campaigns
+Form submissions: Lead data must reach our database - lost data means lost customers
+Conversion tracking: Google Ads needs conversion data to optimize Smart Bidding - broken tracking means inefficient ad spend
+The optimization strategy:
+We're implementing a multi-layered approach to cut page load time in half while preserving all critical business functions:
+Code splitting - Break up the monolithic 150+ KiB JavaScript bundle into route-specific chunks so users only download code for the page they're on (homepage vs form page vs payment page)
+
+Conditional resource loading - Stop loading Stripe (236 KiB) on pages that don't need it (homepage, form pages). Only load payment scripts when user reaches payment page.
+
+Lazy loading third-party scripts - Delay Google Tag Manager loading until after the page becomes interactive so it doesn't block initial render. This is tricky because we MUST ensure tracking events still fire correctly.
+
+Better caching - Set proper cache headers so browsers don't re-download unchanging assets on every page visit.
+
+Dependency optimization - Remove unused code and libraries that are being included but never executed.
+How to make changes safely:
+Think of this like surgery on a patient who's awake and walking around. We need to improve performance while the site continues operating normally.For each optimization:
+
+Understand WHAT the code currently does before changing it
+Identify which business-critical functions it touches
+Make the change in a way that preserves the critical path
+Test the critical path immediately after the change
+If anything breaks, have a quick rollback ready
+Specific safety considerations:When code splitting:
+
+Keep all Stripe-related code together (don't split Stripe libraries across chunks)
+Keep all tracking initialization code in the main bundle (can't lazy load core tracking setup)
+Ensure form validation and submission logic stays intact
+Test that route navigation doesn't break tracking events
+When conditionally loading Stripe:
+
+Stripe must be loaded AND initialized BEFORE user can click "Pay" button
+Add loading states if needed ("Loading payment form...")
+Test with Stripe test cards after implementation
+Verify webhook handling still works (backend must receive Stripe webhooks)
+When lazy loading Google Tag Manager:
+
+GTM container must load before critical tracking events fire
+Verify the dataLayer array exists and queues events if GTM isn't loaded yet
+Test that delayed GTM load doesn't cause events to be lost
+Use GTM Preview Mode to verify all events fire in correct order
+Check that Google Ads conversion tracking fires on the payment confirmation page
+Verify analytics events show up in real-time reports
+When updating caching:
+
+NEVER cache dynamic API endpoints (form submission, payment processing)
+NEVER cache HTML pages for longer than 5 minutes (need to reflect code updates)
+ONLY cache static assets with content hashes in filenames (these never change)
+Test that form submissions work after caching changes (browsers might cache POST responses incorrectly)
+MUST NOT BREAK - Critical Business Functions:1. Stripe Payment Flow
+
+User journey: Form submission → Payment page → Enter card details → Payment confirmation page
+What to preserve:
+
+Stripe SDK must load before payment form renders
+Payment form must validate before submission
+Success/failure states must display correctly
+Payment webhooks to backend must fire correctly
+Customer must reach confirmation page after successful payment
+
+
+How to test: Use Stripe test card (4242 4242 4242 4242), complete full payment flow
+2. Email Delivery System
+
+Triggers: After form submission and after successful payment
+Purpose: Send confirmation emails to customers and notifications to internal team
+What to preserve:
+
+Email sending must trigger at the correct points in the flow
+Email template data (customer info, order details) must be complete
+Both customer and internal notifications must send
+
+
+How to test: Complete test form submission and payment, verify emails arrive
+3. Google Tag Manager
+
+Purpose: Manages all tracking tags (Google Ads, Analytics, and any other marketing pixels)
+Current behavior: GTM container loads on every page, fires events based on user actions
+What to preserve:
+
+GTM container must load (even if delayed)
+dataLayer must exist and queue events properly
+All configured tags must fire at the right time
+
+
+How to test: Use GTM Preview Mode, verify tags fire on each page and user interaction
+4. Google Ads Conversion Tracking
+
+Fires on: Payment confirmation page (after successful payment)
+Purpose: Tells Google Ads a conversion happened so Smart Bidding can optimize ad campaigns
+Current behavior: Conversion fires with correct value, allows Google to attribute conversion to ad click
+What to preserve:
+
+Conversion pixel must fire on confirmation page
+Conversion value must be passed correctly
+Attribution data must pass through (gclid parameter from ad clicks)
+
+
+How to test:
+
+Click through from a Google Ad (or manually add ?gclid=test123 to URL)
+Complete payment flow
+Use browser developer tools or Google Tag Assistant to verify conversion fires
+Check Google Ads conversion reports (may take hours to show)
+
+
+5. Analytics Event Tracking
+
+Events tracked: page views, form interactions, form submissions, purchases
+Purpose: Understand user behavior, track conversion funnel, measure marketing effectiveness
+Current behavior: Analytics events fire via GTM on each user interaction
+What to preserve:
+
+All events continue firing at the right moments
+Event parameters (page info, form data, purchase value) remain intact
+
+
+How to test: Use analytics real-time or debug reports to verify events
+6. Form Submission to Database
+
+User journey: Fill out form → Submit → Data saved to backend database
+Purpose: Store lead information for CRM follow-up and order processing
+Current behavior: Form data (customer details, service type, etc.) saves to database
+What to preserve:
+
+All form fields must submit correctly
+Validation must work (required fields, email format, etc.)
+Data must reach database without corruption or data loss
+User must receive feedback (success message or error notification)
+
+
+How to test: Fill out form completely, submit, verify data appears in database
+OPTIMIZATION TASKS WITH SAFETY INSTRUCTIONS:TASK 1: Code Splitting (HIGHEST PRIORITY, MEDIUM RISK)What to do:
+Split the current monolithic JavaScript bundle into separate chunks:
+
+Homepage chunk (~30-40 KiB) - Only what's needed to display homepage
+Form page chunk (~40-50 KiB) - Form logic and validation
+Payment page chunk (~50-60 KiB + Stripe SDK) - Payment processing
+Shared/common chunk - Utilities used across multiple pages
+How to do it safely:
+
+Examine the current codebase structure - identify which code belongs to which route
+Use your build tool's code splitting feature (Webpack splitChunks, Vite manualChunks, Rollup code splitting, etc.)
+Implement route-based dynamic imports so each page loads its own chunk
+Keep critical shared code (tracking setup, navigation, error handling) in the main bundle
+Ensure Stripe code only loads on payment route
+Test each route after splitting to ensure functionality is preserved
+Safety checklist:
+
+ Homepage loads and displays correctly
+ Navigation between pages works
+ Form page loads all validation logic
+ Payment page loads Stripe correctly
+ All tracking events still fire on all pages
+ No console errors related to missing modules
+Expected result: Initial bundle reduced from 150+ KiB to ~50 KiB, pages load code on-demandTASK 2: Conditional Stripe Loading (HIGH PRIORITY, MEDIUM RISK)What to do:
+Currently Stripe SDK (236 KiB) loads on every page. Make it load ONLY on the payment page.How to do it safely:
+
+Find where Stripe SDK is currently loaded (probably in index.html or main app file)
+Remove the global Stripe script tag
+Add dynamic loading of Stripe SDK only when payment route is accessed
+Implement a loading state: "Loading payment form..." while Stripe SDK downloads
+Ensure Stripe is fully loaded and initialized BEFORE payment form becomes interactive
+Add error handling if Stripe fails to load
+Safety checklist:
+
+ Stripe does NOT load on homepage (check Network tab)
+ Stripe does NOT load on form page (check Network tab)
+ Stripe DOES load on payment page before form is shown
+ Payment form is disabled/hidden until Stripe is ready
+ Test payment completes successfully with test card
+ Webhook from Stripe to backend still fires
+ No console errors about Stripe being undefined
+Expected result: Homepage and form pages save 236 KiB, payment page loads normally with slight delay for Stripe SDKTASK 3: Lazy Load Google Tag Manager (HIGH PRIORITY, HIGH RISK)What to do:
+Delay GTM loading (460 KiB) until after initial page render to improve perceived performance.How to do it safely:
+
+Find the current GTM script tag in index.html
+Keep the dataLayer initialization in place: window.dataLayer = window.dataLayer || []
+Move GTM script loading to happen after window.onload or after First Contentful Paint
+Use a small delay (500ms-1000ms after page load) rather than aggressive lazy loading
+Ensure dataLayer pushes queue up correctly if GTM isn't loaded yet
