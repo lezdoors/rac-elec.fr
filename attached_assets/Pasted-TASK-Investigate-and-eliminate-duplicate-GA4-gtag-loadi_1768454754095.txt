@@ -1,0 +1,69 @@
+TASK: Investigate and eliminate duplicate GA4/gtag loading (keep GTM as the ONLY loader) without breaking conversions.
+
+Context:
+- Site uses GTM container: GTM-K597C4C2.
+- PageSpeed shows TWO gtag.js requests:
+  1) /gtag/js?id=G-D92SQT9L1P
+  2) /gtag/js?id=G-D92SQT9L1P&...&gtm=...
+This indicates GA4 is being loaded twice (either once directly in site code + once via GTM, or twice via GTM).
+
+Goal:
+- Exactly ONE GTM script on the site.
+- GA4 should be configured ONLY through GTM (no direct gtag snippet in the site code).
+- Conversions must continue to fire (Google Ads + Microsoft UET + Purchase).
+
+Deliverables:
+1) Evidence: show which files/scripts cause each request.
+2) Fix: remove/disable the duplicate source.
+3) Verification: after fix, confirm only one gtag.js request (or gtag loaded once via GTM) and that GTM preview still shows expected tags firing.
+
+Step-by-step Investigation (MANDATORY):
+A) In local dev (or deployed), open DevTools Network and filter for:
+   - "gtm.js"
+   - "gtag/js"
+   Record whether there are 2 gtag/js requests and their initiators (Initiator column).
+   Save the initiator stack or note which script tag triggered each.
+
+B) Search the codebase for any direct GA4/gtag install and report findings:
+   Search strings:
+   - "gtag/js"
+   - "G-D92SQT9L1P"
+   - "googletagmanager.com/gtag"
+   - "window.dataLayer"
+   - "function gtag"
+   - "GTM-K597C4C2"
+   Check typical locations:
+   - index.html / public/index.html
+   - src/main.tsx / main.jsx
+   - any Layout/App shell components
+   - any "Analytics", "Tracking", "GTM" utility
+   - vercel.json headers/inject scripts if present
+
+C) If no direct gtag snippet exists in code:
+   Then duplication is inside GTM config. Investigate tags that can load Google tag:
+   - "Google Tag G-D92SQT9L1P"
+   - any other "Google Tag" type (e.g., "thank_you_page_view" is Google Tag)
+   Identify if more than one "Google Tag" config is firing on All Pages or Initialization.
+   Report which one is redundant.
+
+Fix Rules (STRICT):
+- Do NOT change business logic, form flow, Stripe, CRM, routes, content, UI.
+- Do NOT remove GTM.
+- Do NOT add new dependencies.
+- Only remove the duplicate GA4 loader:
+  - If found in site code: delete that direct gtag snippet so GA4 is ONLY via GTM.
+  - If duplication is in GTM: ensure ONLY ONE Google Tag/GA4 config loads per page.
+- Keep Ads conversion tags and UET intact.
+
+Verification (MANDATORY):
+1) After changes, reload the site and confirm in Network:
+   - One /gtm.js request
+   - NO extra /gtag/js duplicate requests (gtag should not be loaded twice)
+2) Use GTM Preview mode to confirm these still fire as expected:
+   - Page View
+   - form_start event
+   - form_submit event
+   - purchase / thank you event
+3) Provide a short summary: what caused duplication + what exactly was changed.
+
+Proceed now.
