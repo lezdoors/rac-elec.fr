@@ -3,6 +3,7 @@ import { ArrowRight, Phone, ChevronRight, Mail, Star, Plus } from "lucide-react"
 import { ContactModal } from "@/components/contact-modal";
 import { Helmet } from "react-helmet";
 import { FloatingContactButton } from "@/components/floating-contact-button";
+import { useIsMobile } from "@/hooks/use-mobile";
 import heroIllustration from "@assets/hero-illustration_1765320964105.webp";
 import raccordementDefinitifIcon from "@assets/Raccordement-Definitif_1765333395814.webp";
 import raccordementProvisoireIcon from "@assets/Raccordement-Provisoire_1765333395814.webp";
@@ -13,6 +14,7 @@ import raccordementEnedisIcon from "@assets/Raccordement-Enedis_1765333395814.we
 import stepsIllustration from "@assets/form-intro-illustartion_(Website)_1765358383139.webp";
 
 export default function HomePage() {
+  const isMobile = useIsMobile();
   
   return (
     <>
@@ -83,21 +85,22 @@ export default function HomePage() {
 
               </div>
 
-              {/* Right Illustration - HIDDEN on mobile for better conversion, visible md+ */}
-              <div className="hidden md:flex w-full md:w-1/2 lg:w-1/2 xl:w-[55%] justify-center md:justify-end mt-0">
-                <div className="relative w-full max-w-[280px] md:max-w-[350px] lg:max-w-[450px] xl:max-w-[550px]">
-                  <img 
-                    src={heroIllustration} 
-                    alt="Famille devant une maison avec panneaux solaires et voiture électrique - Raccordement électrique Enedis"
-                    className="w-full h-auto"
-                    width="550"
-                    height="380"
-                    loading="eager"
-                    fetchPriority="high"
-                    data-testid="hero-illustration"
-                  />
+              {/* Right Illustration - NOT rendered on mobile (removed from DOM for LCP optimization) */}
+              {!isMobile && (
+                <div className="hidden md:flex w-full md:w-1/2 lg:w-1/2 xl:w-[55%] justify-center md:justify-end mt-0">
+                  <div className="relative w-full max-w-[280px] md:max-w-[350px] lg:max-w-[450px] xl:max-w-[550px]">
+                    <img 
+                      src={heroIllustration} 
+                      alt="Famille devant une maison avec panneaux solaires et voiture électrique - Raccordement électrique Enedis"
+                      className="w-full h-auto"
+                      width="550"
+                      height="380"
+                      loading="lazy"
+                      data-testid="hero-illustration"
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </section>
