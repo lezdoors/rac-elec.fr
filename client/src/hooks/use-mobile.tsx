@@ -1,21 +1,20 @@
 import { useState, useEffect } from 'react';
 
+const getInitialMobileState = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  return window.innerWidth < 768;
+};
+
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(getInitialMobileState);
 
   useEffect(() => {
-    // Vérifier si l'écran est de taille mobile au montage du composant
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
     
-    // Vérifier immédiatement
-    checkIsMobile();
-    
-    // Ajouter un écouteur d'événement pour détecter les changements de taille de l'écran
     window.addEventListener('resize', checkIsMobile);
     
-    // Nettoyer l'écouteur lors du démontage du composant
     return () => {
       window.removeEventListener('resize', checkIsMobile);
     };
