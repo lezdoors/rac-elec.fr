@@ -81,7 +81,6 @@ export function ProfessionalHeader() {
             </a>
             <Link 
               href="/raccordement-enedis#formulaire-raccordement"
-              onClick={handlePrimaryCta}
             >
               <Button
                 className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white px-6 py-2 font-semibold rounded-lg min-h-11 shadow-md hover:shadow-lg transition-all duration-150"
@@ -109,7 +108,6 @@ export function ProfessionalHeader() {
           <div className="md:hidden ml-2">
             <Link 
               href="/raccordement-enedis#formulaire-raccordement"
-              onClick={handlePrimaryCta}
             >
               <Button
                 size="sm"
@@ -185,10 +183,7 @@ export function ProfessionalHeader() {
               {/* Primary CTA */}
               <Link 
                 href="/raccordement-enedis#formulaire-raccordement"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  handlePrimaryCta();
-                }}
+                onClick={() => setIsMobileMenuOpen(false)}
                 className="block"
               >
                 <Button
