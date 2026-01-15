@@ -61,11 +61,11 @@ export const trackFormStart = (email: string, phone?: string): boolean => {
     return false;
   }
 
-  const emailHash = hashEmail(email);
-  const dedupeKey = getDedupeKey('form_start', emailHash);
+  // SIMPLIFIED: Single flag per session - form_start fires ONCE per session, regardless of email
+  const dedupeKey = 'tracking_form_start_fired';
 
   if (isDuplicate(dedupeKey)) {
-    console.log(`ℹ️ form_start already fired for ${emailHash} (skipped)`);
+    console.log(`ℹ️ form_start already fired this session (skipped)`);
     return false;
   }
 
@@ -82,7 +82,7 @@ export const trackFormStart = (email: string, phone?: string): boolean => {
     });
   }
 
-  console.log(`✅ form_start fired [dedupe: ${emailHash}] (analytics only, not conversion)`);
+  console.log(`✅ form_start fired ONCE [session dedupe] (analytics only, not conversion)`);
   return true;
 };
 

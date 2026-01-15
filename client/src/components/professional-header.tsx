@@ -29,17 +29,6 @@ export function ProfessionalHeader() {
     };
   }, [isMobileMenuOpen]);
 
-  const handlePrimaryCta = () => {
-    // Trigger Google Ads form_start conversion
-    if (typeof window !== 'undefined' && (window as any).triggerFormStartConversion) {
-      try {
-        (window as any).triggerFormStartConversion();
-        console.log('Form start conversion triggered from header CTA');
-      } catch (error) {
-        console.error('Error triggering form start conversion:', error);
-      }
-    }
-  };
 
   return (
     <header className={`sticky top-0 z-50 h-16 bg-white/98 backdrop-blur-md border-b border-gray-200 transition-shadow duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
