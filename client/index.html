@@ -270,36 +270,10 @@
     })();
     </script>
     
-    <!-- GA4 + Google Ads: deferred 1s after GTM OR user interaction -->
-    <!-- CRITICAL: gtag function queues to dataLayer, so events are never lost -->
+    <!-- GTM handles GA4 (G-D92SQT9L1P) and Google Ads (AW-16683623620) internally -->
+    <!-- CRITICAL: gtag function MUST exist immediately to queue events to dataLayer for conversions -->
     <script>
-      (function() {
-        var gtagLoaded = false;
-        function loadGtag() {
-          if (gtagLoaded) return;
-          gtagLoaded = true;
-          var s = document.createElement('script');
-          s.async = true;
-          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-D92SQT9L1P';
-          s.onload = function() {
-            gtag('js', new Date());
-            gtag('config', 'G-D92SQT9L1P', { 'send_page_view': true });
-            gtag('config', 'AW-16683623620');
-          };
-          document.head.appendChild(s);
-        }
-        // Load 1s after DOM ready
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', function() { setTimeout(loadGtag, 1000); });
-        } else {
-          setTimeout(loadGtag, 1000);
-        }
-        // Also load on user interaction
-        ['scroll', 'click', 'touchstart'].forEach(function(e) {
-          document.addEventListener(e, loadGtag, { once: true, passive: true });
-        });
-      })();
-      // CRITICAL: gtag function MUST exist immediately to queue events to dataLayer
+      window.dataLayer = window.dataLayer || [];
       window.gtag = function(){dataLayer.push(arguments);};
     </script>
 
