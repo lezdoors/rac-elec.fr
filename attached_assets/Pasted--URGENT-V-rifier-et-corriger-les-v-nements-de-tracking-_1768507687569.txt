@@ -1,0 +1,151 @@
+
+URGENT: Vérifier et corriger les événements de tracking critiques
+Contexte:
+On a fait des optimisations de performance qui ont peut-être cassé des événements de tracking importants. Il faut s'assurer que TOUS les événements critiques fonctionnent correctement.
+Problème 1: form_start fire plusieurs fois
+
+form_start fire 3+ fois au lieu d'une seule fois
+Il doit fire UNE SEULE FOIS quand l'utilisateur clique "Suivant" sur Step 1
+
+Problème 2: Vérifier que les notifications ne sont pas cassées
+On doit recevoir des notifications (probablement par email ou webhook) pour:
+
+✅ form_start (quand utilisateur commence le formulaire)
+✅ form_submit (quand utilisateur soumet le formulaire complet)
+✅ purchase/payment_success (quand paiement Stripe réussit)
+
+Ce qu'il faut faire:
+ÉTAPE 1: Auditer tous les événements dataLayer actuels
+Chercher TOUS les endroits où on push des événements au dataLayer:
+bashgrep -r "dataLayer.push" src/
+Vérifier qu'on a bien ces événements:
+
+form_start - Doit fire quand utilisateur clique "Suivant" sur Step 1
+form_submit - Doit fire quand formulaire complet est soumis
+purchase ou payment_success - Doit fire sur /paiement-confirmation après paiement Stripe réussi
+
+ÉTAPE 2: Corriger form_start
+Trouver où form_start est actuellement envoyé et le déplacer vers le onClick du bouton "Suivant":
+javascript// Dans le composant Step 1 (Informations personnelles)
+const [hasTrackedFormStart, setHasTrackedFormStart] = useState(false);
+
+const handleNextStep = async () => {
+  // Valider les champs...
+  
+  // Fire form_start UNE SEULE FOIS quand on passe de Step 1 à Step 2
+  if (currentStep === 1 && !hasTrackedFormStart && window.dataLayer) {
+    window.dataLayer.push({
+      event: 'form_start',
+      form_name: 'raccordement_electricite',
+      timestamp: new Date().toISOString()
+    });
+    setHasTrackedFormStart(true);
+  }
+  
+  // Continuer vers step suivant...
+  goToNextStep();
+};
+ÉTAPE 3: Vérifier form_submit
+S'assurer que form_submit fire quand le formulaire COMPLET est soumis (avant d'aller vers la page paiement):
+javascript// Dans le dernier step du formulaire, quand l'utilisateur soumet
+const handleFormSubmit = async (formData) => {
+  // Fire form_submit event
+  if (window.dataLayer) {
+    window.dataLayer.push({
+      event: 'form_submit',
+      form_name: 'raccordement_electricite',
+      form_data: {
+        client_type: formData.clientType,
+        // Ne PAS inclure d'infos personnelles (RGPD)
+      },
+      timestamp: new Date().toISOString()
+    });
+  }
+  
+  // Soumettre le formulaire au backend...
+  await submitToBackend(formData);
+  
+  // Rediriger vers page paiement...
+  navigate('/paiement');
+};
+ÉTAPE 4: Vérifier purchase event sur /paiement-confirmation
+S'assurer que l'événement purchase fire correctement après paiement Stripe réussi:
+javascript// Dans le composant /paiement-confirmation
+useEffect(() => {
+  // Vérifier que le paiement a réussi (via URL params ou Stripe)
+  const checkPaymentSuccess = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id');
+    
+    if (sessionId && window.dataLayer) {
+      // Fire purchase event
+      window.dataLayer.push({
+        event: 'purchase',
+        transaction_id: sessionId, // ou l'ID de transaction réel
+        value: 129.80,
+        currency: 'EUR',
+        timestamp: new Date().toISOString()
+      });
+    }
+  };
+  
+  checkPaymentSuccess();
+}, []);
+ÉTAPE 5: Vérifier les notifications backend
+Chercher le code qui envoie les notifications (email/webhook):
+bashgrep -r "notification\|email\|webhook" src/
+S'assurer qu'on a des notifications pour:
+
+form_start - Notification interne quand un nouveau lead commence
+form_submit - Notification interne + email client de confirmation
+payment_success - Notification interne + email client de confirmation de paiement
+
+Vérifier que ces notifications sont toujours en place et ne sont PAS cassées par les optimisations de performance.
+ÉTAPE 6: Tests complets
+Après les corrections, faire un test complet:
+
+Test form_start:
+
+Ouvrir la console: window.dataLayer
+Aller sur la page formulaire
+Vérifier que form_start n'est PAS dans dataLayer
+Remplir Step 1 et cliquer "Suivant"
+Vérifier que form_start apparaît EXACTEMENT 1 fois dans dataLayer
+Vérifier qu'une notification est envoyée (email/webhook)
+
+
+Test form_submit:
+
+Remplir tout le formulaire jusqu'au dernier step
+Soumettre le formulaire
+Vérifier que form_submit fire dans dataLayer
+Vérifier que notification/email est envoyé
+
+
+Test purchase:
+
+Compléter un paiement Stripe (avec carte test)
+Arriver sur /paiement-confirmation
+Vérifier que purchase event fire avec transaction_id et value: 129.80
+Vérifier que notification/email de confirmation paiement est envoyé
+
+
+
+IMPORTANT:
+
+Ne pas casser les événements existants qui fonctionnent
+Garder tous les paramètres nécessaires pour Google Ads conversion tracking
+S'assurer que les notifications backend fonctionnent toujours
+Tester CHAQUE événement après les modifications
+
+Résultat attendu:
+
+✅ form_start fire 1 seule fois au clic sur "Suivant" (Step 1)
+✅ form_submit fire 1 fois à la soumission complète du formulaire
+✅ purchase fire 1 fois sur /paiement-confirmation après paiement réussi
+✅ Toutes les notifications (email/webhook) fonctionnent correctement
+✅ Aucune duplication d'événements
+✅ Google Ads conversion tracking intact
+
+Peux-tu auditer le code, corriger form_start, et vérifier que tous les événements + notifications fonctionnent correctement?
+
