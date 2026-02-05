@@ -238,7 +238,19 @@
     <!-- PERFORMANCE + TRACKING: Deferred loading for better FCP -->
     <!-- CRITICAL: dataLayer MUST exist before any tracking calls -->
     <script>window.dataLayer = window.dataLayer || [];</script>
-    
+
+    <!-- Consent Defaults - MUST load before GTM -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'analytics_storage': 'granted',
+      'ad_storage': 'granted',
+      'ad_user_data': 'granted',
+      'ad_personalization': 'granted'
+    });
+    </script>
+
     <!-- GTM deferred: loads after DOM ready OR user interaction (whichever comes first) -->
     <!-- This improves FCP by ~150ms while ensuring all events are captured via dataLayer queue -->
     <script>
@@ -289,33 +301,20 @@
       Enhanced Conversions: Email + phone data sent with purchase event
     -->
 
-    <!-- PERFORMANCE: Only preload favicon, skip invalid modulepreload for TSX files -->
+    <!-- Favicon preload -->
     <link rel="preload" href="/favicon-new.svg" as="image">
-    <link rel="preconnect" href="https://geo.api.gouv.fr" crossorigin>
-    <link rel="dns-prefetch" href="//geo.api.gouv.fr">
     
-    <!-- SAFARI FIX: Enhanced Safari compatibility -->
+    <!-- Safari + Mobile compatibility -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-touch-fullscreen" content="yes">
-    <!-- Safari-specific optimizations -->
     <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
-    
-    
-    
-    <!-- Favicons optimisés - Logo Raccordement Enedis -->
+
+    <!-- Favicons -->
     <link rel="icon" href="/favicon-new.ico" sizes="48x48">
     <link rel="icon" href="/favicon-new.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/favicon-new.svg" sizes="180x180">
-    <link rel="shortcut icon" href="/favicon-new.svg">
     <meta name="theme-color" content="#007bff">
-    
-    <!-- Optimisations mobiles -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="format-detection" content="telephone=no">
     
     <!-- PERFORMANCE FIX: Removed render-blocking MutationObserver script for faster LCP -->
   </head>
@@ -329,42 +328,6 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     
-    <!-- PERFORMANCE FIX: Non-critical Replit cleanup moved to body end -->
-    <script>
-      // Service Worker cache message
-      console.log('✅ Ressources statiques mises en cache');
-      
-      // Non-critical Replit cleanup after page loads
-      window.addEventListener('load', function() {
-        // Observer le DOM pour éliminer les éléments Replit ajoutés dynamiquement
-        const observer = new MutationObserver((mutations) => {
-          mutations.forEach((mutation) => {
-            if (mutation.addedNodes && mutation.addedNodes.length > 0) {
-              for (let i = 0; i < mutation.addedNodes.length; i++) {
-                const node = mutation.addedNodes[i];
-                if (node.nodeType === 1) {
-                  // Vérifier si c'est un élément Replit
-                  if (node.id && (node.id.includes('replit') || node.className && node.className.includes('replit'))) {
-                    node.remove();
-                  }
-                  // Vérifier les attributs liés à Replit dans les favicon
-                  const icons = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]');
-                  icons.forEach(icon => {
-                    if (icon.href && icon.href.includes('replit.com')) {
-                      icon.href = '/favicon-new.svg';
-                    }
-                  });
-                }
-              }
-            }
-          });
-        });
-        
-        observer.observe(document.body, {
-          childList: true,
-          subtree: true
-        });
-      });
-    </script>
+    <!-- Replit cleanup removed - handled at build time for better TBT/INP -->
   </body>
 </html>
