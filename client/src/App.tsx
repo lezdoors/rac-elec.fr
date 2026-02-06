@@ -677,6 +677,24 @@ function App() {
     console.log('✅ Ressources statiques mises en cache');
   }, []);
 
+  // Track user activity to reduce polling when idle (saves Replit compute units)
+  useEffect(() => {
+    const updateActivity = () => {
+      (window as any).__LAST_USER_ACTIVITY = Date.now();
+    };
+
+    // Set initial activity
+    updateActivity();
+
+    // Track user interactions
+    const events = ['mousedown', 'keydown', 'scroll', 'touchstart'];
+    events.forEach(event => window.addEventListener(event, updateActivity, { passive: true }));
+
+    return () => {
+      events.forEach(event => window.removeEventListener(event, updateActivity));
+    };
+  }, []);
+
   // Si nous sommes sur une page admin, on ne montre pas l'animation
   // et on nettoie les données incohérentes ou périmées
   useEffect(() => {

@@ -53,7 +53,7 @@ export function useEmailUnreadCount(userId?: number) {
   const { data: userEmails, isLoading, error } = useQuery({
     queryKey: ["/api/user-emails", actualUserId, INBOX_FOLDER],
     queryFn: getQueryFn({ on401: "returnNull" }),
-    refetchInterval: 5 * 60 * 1000, // Rafraîchir toutes les 5 minutes au lieu de 2
+    refetchInterval: 30 * 60 * 1000, // Rafraîchir toutes les 30 minutes (réduit pour économiser compute units)
     staleTime: 3 * 60 * 1000,      // Considérer les données fraîches pendant 3 minutes
     gcTime: 10 * 60 * 1000,        // Garder en cache pendant 10 minutes
     refetchOnWindowFocus: false,   // Ne pas rafraîchir lors du focus de la fenêtre
@@ -72,17 +72,25 @@ export function useEmailUnreadCount(userId?: number) {
   }, [userEmails, updateCache]);
   
   // Effet pour la mise à jour périodique du compteur si le WebSocket n'est pas disponible
-  // Optimisé pour réduire les requêtes et la consommation de ressources
+  // OPTIMISÉ: Polling massivement réduit pour économiser les compute units Replit
   useEffect(() => {
+    // Ne pas activer le polling si pas de token admin
+    const token = localStorage.getItem("adminToken");
+    if (!token) return;
+
     // Vérifier si le WebSocket est actif à travers une variable globale
     const wsActive = (window as any).__WS_ACTIVE;
-    
+
     // Si le WebSocket n'est pas actif, mettre en place une mise à jour périodique
     if (!wsActive) {
       const interval = setInterval(() => {
         // Vérifier si le cache est périmé avant de forcer un rafraîchissement
         // Et vérifier que l'onglet est visible pour éviter des requêtes inutiles
-        if (isCacheStale() && document.visibilityState === 'visible') {
+        // ET vérifier que l'utilisateur est actif
+        const lastActivity = (window as any).__LAST_USER_ACTIVITY || Date.now();
+        const isUserActive = (Date.now() - lastActivity) < 5 * 60 * 1000;
+
+        if (isCacheStale() && document.visibilityState === 'visible' && isUserActive) {
           // Forcer un rafraîchissement des emails non lus avec anti-cache
           fetch(`/api/email-unread-count?userId=${actualUserId}&_t=${new Date().getTime()}`, {
             credentials: "include",
@@ -99,12 +107,11 @@ export function useEmailUnreadCount(userId?: number) {
               }
             })
             .catch(err => {
-              // Réduire le bruit dans la console en masquant l'erreur spécifique
-              console.error("Erreur lors du rafraîchissement du compteur d'emails:", {});
+              // Silence errors
             });
         }
-      }, 5 * 60 * 1000); // Vérifier toutes les 5 minutes au lieu de 2
-      
+      }, 15 * 60 * 1000); // 15 minutes au lieu de 5 (3x moins de requêtes)
+
       return () => clearInterval(interval);
     }
   }, [actualUserId, isCacheStale, updateCache]);

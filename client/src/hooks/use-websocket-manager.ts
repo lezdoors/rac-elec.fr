@@ -287,7 +287,8 @@ export function useRealtimeData(handler: UpdateHandler) {
     updateConnectionStatus();
     
     // Définir un intervalle pour vérifier périodiquement l'état de la connexion
-    const checkInterval = setInterval(updateConnectionStatus, 1000);
+    // Optimisé: 30 secondes au lieu de 1 seconde (économise compute units)
+    const checkInterval = setInterval(updateConnectionStatus, 30000);
     
     return () => {
       unsubscribe();

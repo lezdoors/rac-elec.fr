@@ -46,7 +46,7 @@ export function useNotifications() {
     gcTime: 10 * 60 * 1000,     // Garder en cache pendant 10 minutes
     refetchOnWindowFocus: false,
     refetchOnMount: false,      // Ne pas refetch lors du montage des composants
-    refetchInterval: 5 * 60 * 1000, // Rafraîchir toutes les 5 minutes comme solution de secours
+    refetchInterval: 30 * 60 * 1000, // Rafraîchir toutes les 30 minutes (réduit pour économiser compute units)
   });
   
   // Fonction pour marquer une notification comme lue
@@ -260,19 +260,28 @@ export function useNotifications() {
   }, [connectWebSocket]);
   
   // Effet pour rafraîchir périodiquement les données si WebSocket n'est pas disponible
-  // Réduit la fréquence de vérification pour améliorer les performances
+  // OPTIMISÉ: Polling réduit pour économiser les compute units Replit
   useEffect(() => {
+    // Ne pas activer le polling si pas de token admin
+    const token = localStorage.getItem("adminToken");
+    if (!token) return;
+
     // Vérifier périodiquement si les WebSockets sont actifs
     const checkInterval = setInterval(() => {
       const wsActive = (window as any).__WS_ACTIVE;
-      
+
       // Si les WebSockets ne sont pas actifs, utiliser le polling HTTP
-      // mais seulement si le composant est visible pour l'utilisateur
-      if (!wsActive && document.visibilityState === 'visible') {
+      // MAIS seulement si:
+      // 1. Le composant est visible pour l'utilisateur
+      // 2. L'utilisateur est actif (pas idle depuis plus de 5 min)
+      const lastActivity = (window as any).__LAST_USER_ACTIVITY || Date.now();
+      const isUserActive = (Date.now() - lastActivity) < 5 * 60 * 1000;
+
+      if (!wsActive && document.visibilityState === 'visible' && isUserActive) {
         refetch();
       }
-    }, 3 * 60 * 1000); // Vérifier toutes les 3 minutes au lieu d'une minute
-    
+    }, 15 * 60 * 1000); // 15 minutes au lieu de 3 (5x moins de requêtes)
+
     return () => clearInterval(checkInterval);
   }, [refetch]);
   
