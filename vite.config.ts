@@ -27,5 +27,20 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    // Code splitting for better performance
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Vendor chunks
+          'react-vendor': ['react', 'react-dom'],
+          'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-select', '@radix-ui/react-tabs'],
+          // Split heavy components
+          'form': ['./client/src/pages/raccordement-enedis.tsx'],
+          'admin': ['./client/src/pages/admin/dashboard.tsx', './client/src/pages/admin/leads.tsx'],
+        },
+      },
+    },
+    // Increase chunk size warning limit
+    chunkSizeWarningLimit: 1000,
   },
 });
