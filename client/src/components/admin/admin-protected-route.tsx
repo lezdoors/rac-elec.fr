@@ -4,7 +4,6 @@ import { Loader2, Zap, ShieldCheck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { USER_ROLES } from "@shared/constants";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { motion } from "framer-motion";
 
 // Interface pour définir les données utilisateur
 interface UserData {
