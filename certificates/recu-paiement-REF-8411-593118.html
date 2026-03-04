@@ -6,253 +6,284 @@
   <title>Reçu de paiement - REF-8411-593118</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
+
+    @page {
+      size: A4;
+      margin: 12mm 14mm;
+    }
+
+    html, body {
+      width: 210mm;
+      height: 297mm;
       font-family: Arial, sans-serif;
-      font-size: 11px;
-      color: #333;
-      padding: 8px;
+      font-size: 11.5px;
+      color: #222;
     }
-    .receipt {
-      max-width: 780px;
-      margin: 0 auto;
-      border: 1px solid #ddd;
-      padding: 12px 16px;
+
+    .page {
+      width: 182mm;
+      height: 273mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
+
+    /* HEADER */
     .header {
       text-align: center;
-      margin-bottom: 8px;
-      border-bottom: 2px solid #1e40af;
-      padding-bottom: 5px;
+      padding-bottom: 8px;
+      border-bottom: 2.5px solid #1e40af;
+      margin-bottom: 10px;
     }
-    h1 { color: #1e40af; font-size: 17px; }
-    .receipt-number { font-size: 12px; color: #666; margin-top: 2px; }
-    .section-title {
-      font-size: 11px;
-      font-weight: bold;
+    .header h1 {
+      font-size: 20px;
       color: #1e40af;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 2px;
-      margin: 7px 0 4px 0;
+      letter-spacing: 2px;
       text-transform: uppercase;
     }
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3px 15px;
+    .header .ref {
+      font-size: 12px;
+      color: #666;
+      margin-top: 2px;
     }
-    .info-grid-3 {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 3px 10px;
-    }
-    .info-grid-4 {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      gap: 3px 10px;
-    }
-    .info-item .label {
-      font-weight: bold;
-      color: #555;
-      font-size: 10px;
-    }
-    .info-item .value { font-size: 11px; }
-    .amount-row {
-      font-size: 15px;
-      color: #1e40af;
-      font-weight: bold;
-      text-align: right;
-      margin: 5px 0 4px 0;
-    }
-    .payment-box {
-      background-color: #f9fafb;
-      padding: 5px 10px;
-      border-radius: 3px;
-      margin-bottom: 5px;
-    }
-    .consent-box {
-      background-color: #f0f9ff;
-      padding: 6px 10px;
-      border-left: 3px solid #1e40af;
-      margin-top: 4px;
-    }
-    .consent-box p { margin: 1px 0; font-size: 10.5px; }
-    .consent-summary {
-      background-color: #e0f2fe;
-      padding: 5px 10px;
-      border-radius: 3px;
-      margin-top: 5px;
+
+    /* SECTION TITLES */
+    .section-title {
       font-size: 10.5px;
+      font-weight: bold;
+      color: #1e40af;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid #c7d2fe;
+      padding-bottom: 3px;
+      margin-bottom: 6px;
     }
-    .consent-summary p { margin: 1px 0; }
-    .tech-box {
-      background-color: #f8fafc;
+
+    /* GRID LAYOUTS */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 20px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px 16px; }
+    .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 5px 12px; }
+
+    .field .lbl {
+      font-size: 9.5px;
+      font-weight: bold;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 1px;
+    }
+    .field .val {
+      font-size: 11.5px;
+      color: #111;
+    }
+
+    /* AMOUNT */
+    .amount-bar {
+      background: #1e40af;
+      color: #fff;
+      text-align: right;
+      padding: 7px 14px;
+      font-size: 17px;
+      font-weight: bold;
+      border-radius: 3px;
+      margin: 6px 0;
+    }
+
+    /* CARD BOX */
+    .card-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 3px;
+      padding: 6px 12px;
+    }
+
+    /* CONSENT */
+    .consent-wrap {
+      border-left: 3px solid #1e40af;
+      background: #f0f7ff;
+      padding: 7px 12px;
+      border-radius: 0 3px 3px 0;
+    }
+    .consent-wrap p {
+      font-size: 10.5px;
+      line-height: 1.55;
+      margin: 1px 0;
+      color: #333;
+    }
+    .consent-summary {
+      background: #dbeafe;
+      border-radius: 3px;
       padding: 5px 10px;
-      border: 1px solid #e2e8f0;
+      margin-top: 6px;
+      font-size: 10.5px;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
     }
-    .sig-box {
-      background-color: #f8fafc;
+    .consent-summary span { color: #374151; }
+    .consent-summary .ok { color: #1e40af; font-weight: bold; }
+
+    /* TECHNICAL */
+    .tech-box {
+      background: #f8fafc;
       border: 1px solid #e2e8f0;
-      padding: 6px 10px;
+      border-radius: 3px;
+      padding: 6px 12px;
+    }
+
+    /* SIGNATURE */
+    .sig-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 3px;
+      padding: 8px 12px;
+    }
+    .sig-title {
+      font-size: 10.5px;
+      font-weight: bold;
+      color: #1e40af;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .sig-line {
+      font-family: 'Courier New', monospace;
+      font-size: 10.5px;
+      line-height: 1.7;
+      color: #1f2937;
+    }
+    .sig-line .hl { color: #1e40af; font-weight: bold; }
+    .sig-meta {
+      font-size: 9.5px;
+      color: #9ca3af;
+      text-align: center;
       margin-top: 4px;
     }
-    .sig-label {
-      text-align: center;
-      font-size: 10px;
-      color: #999;
-      margin-top: 3px;
-    }
+
+    /* FOOTER */
     .footer {
-      margin-top: 8px;
-      font-size: 10px;
-      color: #999;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 7px;
       text-align: center;
-      border-top: 1px solid #eee;
-      padding-top: 5px;
+      font-size: 9.5px;
+      color: #9ca3af;
+      line-height: 1.6;
     }
+    .footer strong {
+      color: #6b7280;
+      font-size: 10px;
+    }
+
+    /* BLOCK spacing helper */
+    .block { margin-bottom: 10px; }
+    .block:last-child { margin-bottom: 0; }
+
     @media print {
-      body { padding: 0; }
-      .receipt { border: none; }
-      @page { size: A4; margin: 8mm; }
+      html, body { margin: 0; padding: 0; }
     }
   </style>
 </head>
 <body>
-  <div class="receipt">
+<div class="page">
 
-    <div class="header">
-      <h1>REÇU DE PAIEMENT</h1>
-      <div class="receipt-number">N° REF-8411-593118</div>
-    </div>
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Reçu de Paiement</h1>
+    <div class="ref">N° REF-8411-593118 &nbsp;·&nbsp; Raccordement.net</div>
+  </div>
 
+  <!-- CLIENT -->
+  <div class="block">
     <div class="section-title">Informations du client</div>
-    <div class="info-grid-4" style="gap:3px 10px;">
-      <div class="info-item">
-        <div class="label">Nom et prénom</div>
-        <div class="value">Cécile Veillard</div>
-      </div>
-      <div class="info-item">
-        <div class="label">Email</div>
-        <div class="value">cecile.veillard357@orange.fr</div>
-      </div>
-      <div class="info-item">
-        <div class="label">Téléphone</div>
-        <div class="value">0676875501</div>
-      </div>
-      <div class="info-item">
-        <div class="label">Type de client</div>
-        <div class="value">Particulier</div>
-      </div>
-      <div class="info-item">
-        <div class="label">Adresse</div>
-        <div class="value">13, rue du presbytère, Castanet-le-bas</div>
-      </div>
-      <div class="info-item">
-        <div class="label">Ville / Code postal</div>
-        <div class="value">Saint-Gervais-sur-Mare – 34610</div>
-      </div>
-      <div class="info-item">
-        <div class="label">Site internet</div>
-        <div class="value">Raccordement.net</div>
-      </div>
-      <div class="info-item">
-        <div class="label">Statut</div>
-        <div class="value"><strong>Réalisé – Livré</strong></div>
-      </div>
+    <div class="grid-4">
+      <div class="field"><div class="lbl">Nom et prénom</div><div class="val">Cécile Veillard</div></div>
+      <div class="field"><div class="lbl">Email</div><div class="val">cecile.veillard357@orange.fr</div></div>
+      <div class="field"><div class="lbl">Téléphone</div><div class="val">0676875501</div></div>
+      <div class="field"><div class="lbl">Type de client</div><div class="val">Particulier</div></div>
+      <div class="field"><div class="lbl">Adresse</div><div class="val">13, rue du presbytère, Castanet-le-bas</div></div>
+      <div class="field"><div class="lbl">Ville / Code postal</div><div class="val">Saint-Gervais-sur-Mare – 34610</div></div>
+      <div class="field"><div class="lbl">Site internet</div><div class="val">Raccordement.net</div></div>
+      <div class="field"><div class="lbl">Statut dossier</div><div class="val"><strong>Réalisé – Livré</strong></div></div>
     </div>
+  </div>
 
+  <!-- PAYMENT -->
+  <div class="block">
     <div class="section-title">Détails du paiement</div>
-    <div class="info-grid-4" style="margin-bottom:4px;">
-      <div class="info-item">
-        <div class="label">Référence</div>
-        <div class="value">REF-8411-593118</div>
-      </div>
-      <div class="info-item">
-        <div class="label">Date de paiement</div>
-        <div class="value">24 déc. 2025 à 09h04</div>
-      </div>
-      <div class="info-item">
-        <div class="label">Méthode</div>
-        <div class="value">Visa Débit</div>
-      </div>
-      <div class="info-item">
-        <div class="label">Statut paiement</div>
-        <div class="value">Payé</div>
+    <div class="grid-4" style="margin-bottom:7px;">
+      <div class="field"><div class="lbl">Référence</div><div class="val">REF-8411-593118</div></div>
+      <div class="field"><div class="lbl">Date de paiement</div><div class="val">24 décembre 2025 – 09h04</div></div>
+      <div class="field"><div class="lbl">Méthode</div><div class="val">Visa Débit</div></div>
+      <div class="field"><div class="lbl">Statut</div><div class="val">Payé</div></div>
+    </div>
+    <div class="amount-bar">Montant total &nbsp;: &nbsp;129,80 €</div>
+    <div class="card-box" style="margin-top:6px;">
+      <div class="grid-3">
+        <div class="field"><div class="lbl">Type de carte</div><div class="val">Visa Débit</div></div>
+        <div class="field"><div class="lbl">Numéro (derniers chiffres)</div><div class="val">XXXX XXXX XXXX 2308</div></div>
+        <div class="field"><div class="lbl">Expiration &nbsp;/&nbsp; Pays émetteur</div><div class="val">03/2027 &nbsp;–&nbsp; France</div></div>
       </div>
     </div>
+  </div>
 
-    <div class="amount-row">Montant total&nbsp;: 129,80 €</div>
-
-    <div class="payment-box">
-      <div class="info-grid-3">
-        <div class="info-item">
-          <div class="label">Type de carte</div>
-          <div class="value">Visa Débit</div>
-        </div>
-        <div class="info-item">
-          <div class="label">Numéro (derniers chiffres)</div>
-          <div class="value">XXXX XXXX XXXX 2308</div>
-        </div>
-        <div class="info-item">
-          <div class="label">Expiration / Pays</div>
-          <div class="value">03/2027 – France</div>
-        </div>
-      </div>
+  <!-- CONSENT -->
+  <div class="block">
+    <div class="section-title">Document de consentement éclairé – Service Raccordement Électrique</div>
+    <div style="font-size:10.5px;color:#374151;margin-bottom:5px;">
+      <strong>Objet du service :</strong> Accompagnement personnalisé dans les démarches de raccordement électrique auprès d'Enedis — préparation du dossier, constitution des documents techniques et suivi administratif.
     </div>
-
-    <div class="section-title">Consentement éclairé – Service Raccordement Électrique</div>
-    <div style="background:#f8fafc;padding:4px 10px;border:1px solid #e2e8f0;margin-bottom:4px;font-size:10.5px;">
-      <strong>Objet :</strong> Accompagnement personnalisé dans les démarches de raccordement électrique auprès d'Enedis (préparation du dossier, documents techniques, suivi administratif).
-    </div>
-    <div class="consent-box">
-      <p><strong>Le client :</strong></p>
-      <p>&#9745; A accepté les CGV, CGU, et Politique de confidentialité.</p>
-      <p>&#9745; A été informé que le service commence immédiatement après paiement (art. L221-28 C. conso.) et renonce à son droit de rétractation.</p>
-      <p>&#9745; A été informé qu'il s'agit d'un accompagnement privé, non officiel Enedis.</p>
-      <p>&#9745; A fourni volontairement ses données personnelles pour le traitement de sa demande.</p>
+    <div class="consent-wrap">
+      <p>&#9745;&nbsp; A accepté les Conditions Générales de Vente (CGV), CGU et Politique de confidentialité.</p>
+      <p>&#9745;&nbsp; A été informé que le service commence immédiatement après paiement (art. L221-28 du Code de la consommation) et renonce expressément à son droit de rétractation.</p>
+      <p>&#9745;&nbsp; A été informé qu'il s'agit d'un accompagnement privé et non d'un service officiel Enedis.</p>
+      <p>&#9745;&nbsp; A fourni volontairement ses données personnelles pour le traitement de sa demande.</p>
       <div class="consent-summary">
-        <p><strong>Consentement :</strong> 24 décembre 2025 à 09:04 &nbsp;|&nbsp; <strong>Montant :</strong> 129,80 € &nbsp;|&nbsp; <strong>Référence :</strong> REF-8411-593118 &nbsp;|&nbsp; <span style="color:#1e40af;font-weight:bold;">&#10003; Validé électroniquement</span></p>
+        <span><strong>Date :</strong> 24 décembre 2025 à 09:04</span>
+        <span><strong>Montant :</strong> 129,80 €</span>
+        <span><strong>Référence :</strong> REF-8411-593118</span>
+        <span class="ok">&#10003;&nbsp; Consentement électronique validé</span>
       </div>
     </div>
+  </div>
 
+  <!-- TECHNICAL PROOF -->
+  <div class="block">
     <div class="section-title">Preuves techniques de transaction</div>
     <div class="tech-box">
-      <div class="info-grid-4" style="gap:3px 10px;">
-        <div class="info-item">
-          <div class="label">ID Transaction Stripe</div>
-          <div class="value" style="font-family:monospace;font-size:10px;">pm_1Sho6tBVU6GhVKJFud8T42dN</div>
-        </div>
-        <div class="info-item">
-          <div class="label">Horodatage</div>
-          <div class="value">24 déc. 2025 – 09:04</div>
-        </div>
-        <div class="info-item">
-          <div class="label">Méthode</div>
-          <div class="value">Visa Débit</div>
-        </div>
-        <div class="info-item">
-          <div class="label">Statut</div>
-          <div class="value">SUCCÈS – Validé par Stripe</div>
-        </div>
+      <div class="grid-4">
+        <div class="field"><div class="lbl">ID Transaction Stripe</div><div class="val" style="font-family:monospace;font-size:10px;">pm_1Sho6tBVU6GhVKJFud8T42dN</div></div>
+        <div class="field"><div class="lbl">Horodatage</div><div class="val">24 décembre 2025 – 09:04</div></div>
+        <div class="field"><div class="lbl">Méthode de paiement</div><div class="val">Visa Débit</div></div>
+        <div class="field"><div class="lbl">Statut de paiement</div><div class="val">SUCCÈS – Validé par Stripe</div></div>
       </div>
     </div>
+  </div>
 
+  <!-- ELECTRONIC SIGNATURE -->
+  <div class="block">
     <div class="section-title">Signature électronique authentique</div>
     <div class="sig-box">
-      <div style="font-weight:bold;color:#1e40af;margin-bottom:3px;font-size:11px;">SIGNATURE ÉLECTRONIQUE</div>
-      <div style="font-family:monospace;font-size:10.5px;line-height:1.6;">
-        Signataire : Cécile Veillard &nbsp;|&nbsp; Horodatage : 2025-12-24 09:04:00Z<br>
-        Hash transaction : E42FA19BA43A3545 &nbsp;|&nbsp; Signature : D0AE42FA19B<br>
-        <span style="color:#1e40af;font-weight:bold;">Conforme au règlement eIDAS (UE) 910/2014</span>
+      <div class="sig-title">Signature Électronique</div>
+      <div class="sig-line">
+        Signataire &nbsp;&nbsp;&nbsp;: Cécile Veillard<br>
+        Horodatage &nbsp;: 2025-12-24 09:04:00Z<br>
+        Hash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: E42FA19BA43A3545<br>
+        Signature &nbsp;&nbsp;: D0AE42FA19B<br>
+        <span class="hl">Conforme au règlement eIDAS (UE) 910/2014</span>
       </div>
     </div>
-    <div class="sig-label">Document généré électroniquement le 24 décembre 2025 à 09:04 &nbsp;|&nbsp; Réf. système : REF-8411-593118-pm_1Sho6tBVU6GhVKJFud8T42dN</div>
-
-    <div class="footer">
-      <p>Informations personnelles protégées, non divulguées à des tiers sans consentement explicite.</p>
-      <p style="margin-top:3px;font-weight:bold;color:#555;">Protectassur LTD – 61 Bridge Street, Kington, England, HR5 3DJ</p>
-      <p>&copy; 2025 Raccordement.net – Tous droits réservés</p>
+    <div class="sig-meta">
+      Document généré électroniquement le 24 décembre 2025 à 09:04 &nbsp;·&nbsp; Réf. système : REF-8411-593118 / pm_1Sho6tBVU6GhVKJFud8T42dN
     </div>
-
   </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div>Informations personnelles protégées conformément à la réglementation en vigueur — non divulguées à des tiers sans consentement explicite.</div>
+    <div><strong>Protectassur LTD – 61 Bridge Street, Kington, England, HR5 3DJ</strong></div>
+    <div>&copy; 2025 Raccordement.net – Tous droits réservés</div>
+  </div>
+
+</div>
 </body>
 </html>
