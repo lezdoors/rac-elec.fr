@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reçu de paiement - REF-8411-593118</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .receipt {
+      max-width: 800px;
+      margin: 0 auto;
+      border: 1px solid #ddd;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #1e40af;
+      padding-bottom: 10px;
+    }
+    h1 {
+      color: #1e40af;
+      font-size: 24px;
+      margin: 0;
+    }
+    .receipt-number {
+      font-size: 16px;
+      color: #666;
+      margin-top: 5px;
+    }
+    .info-section {
+      margin-bottom: 20px;
+    }
+    .info-section h2 {
+      font-size: 18px;
+      color: #1e40af;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 5px;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    .info-item {
+      margin-bottom: 15px;
+    }
+    .info-item .label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #555;
+      font-size: 14px;
+    }
+    .info-item .value {
+      font-size: 16px;
+    }
+    .amount {
+      font-size: 24px;
+      color: #1e40af;
+      font-weight: bold;
+      text-align: right;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .payment-details {
+      background-color: #f9fafb;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    .legal-info {
+      font-size: 12px;
+      color: #666;
+      margin-top: 30px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+    .signature-section {
+      margin-top: 40px;
+      border-top: 1px dashed #ccc;
+      padding-top: 20px;
+    }
+    .signature-box {
+      margin-top: 20px;
+      border: 1px solid #ddd;
+      min-height: 100px;
+      position: relative;
+      padding: 10px;
+    }
+    .signature-label {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin-top: 5px;
+    }
+    .footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #999;
+      text-align: center;
+    }
+    @media print {
+      body { padding: 0; }
+      .receipt { border: none; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="receipt">
+
+    <div class="header">
+      <h1>REÇU DE PAIEMENT</h1>
+      <div class="receipt-number">N° REF-8411-593118</div>
+    </div>
+
+    <div class="info-section">
+      <h2>Informations du client</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="label">Nom et prénom</div>
+          <div class="value">Cécile Veillard</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Email</div>
+          <div class="value">cecile.veillard357@orange.fr</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Téléphone</div>
+          <div class="value">0676875501</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Type de client</div>
+          <div class="value">Particulier</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Adresse</div>
+          <div class="value">13, rue du presbytère, Castanet-le-bas</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Ville / Code postal</div>
+          <div class="value">Saint-Gervais-sur-Mare – 34610</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Site internet</div>
+          <div class="value">Raccordement.net</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h2>Détails du paiement</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="label">Référence</div>
+          <div class="value">REF-8411-593118</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Date de soumission</div>
+          <div class="value">24 décembre 2025 à 09h04</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Méthode</div>
+          <div class="value">Visa Débit</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Statut</div>
+          <div class="value">Payé</div>
+        </div>
+      </div>
+
+      <div class="amount">
+        Montant total&nbsp;: 129,80 €
+      </div>
+
+      <div class="payment-details">
+        <div class="info-item">
+          <div class="label">Type de carte</div>
+          <div class="value">Visa Débit</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Numéro de carte (derniers chiffres)</div>
+          <div class="value">XXXX XXXX XXXX 2308</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Date d'expiration</div>
+          <div class="value">03/2027</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Pays émetteur</div>
+          <div class="value">France</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h2>Détails de la demande de service</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="label">Type de service</div>
+          <div class="value">Raccordement électrique – Particulier</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Date de soumission</div>
+          <div class="value">24 décembre 2025 à 09h04</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Statut</div>
+          <div class="value">En cours de traitement</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h2>DOCUMENT DE CONSENTEMENT ÉCLAIRÉ – SERVICE RACCORDEMENT ÉLECTRIQUE</h2>
+
+      <div style="background-color: #f8fafc; padding: 20px; border: 1px solid #e2e8f0; margin-bottom: 15px;">
+        <h3 style="color: #1e40af; margin-top: 0;">Objet du service</h3>
+        <p>Le client a souscrit à un service d'accompagnement personnalisé dans les démarches de raccordement électrique auprès d'Enedis, incluant :</p>
+        <ul style="margin: 10px 0; padding-left: 20px;">
+          <li>Préparation du dossier complet</li>
+          <li>Constitution des documents techniques</li>
+          <li>Suivi administratif auprès du gestionnaire de réseau (Enedis)</li>
+        </ul>
+      </div>
+
+      <div style="background-color: #f0f9ff; padding: 20px; border-left: 4px solid #1e40af;">
+        <h3 style="color: #1e40af; margin-top: 0;">Déclarations du client (coche obligatoire avant paiement)</h3>
+        <p><strong>Le client :</strong></p>
+        <div style="margin: 15px 0;">
+          <p>&#9745; A accepté les Conditions Générales de Vente (CGV), CGU, et Politique de confidentialité.</p>
+          <p>&#9745; A été informé que le service commence immédiatement après paiement (article L221-28 du Code de la consommation).</p>
+          <p>&#9745; Renonce expressément à son droit de rétractation.</p>
+          <p>&#9745; A été informé qu'il ne s'agit pas d'un service officiel Enedis, mais d'un accompagnement privé.</p>
+          <p>&#9745; A fourni volontairement ses données personnelles (nom, prénom, email, adresse, téléphone) pour le traitement de sa demande.</p>
+        </div>
+        <div style="background-color: #e0f2fe; padding: 15px; border-radius: 5px; margin-top: 15px;">
+          <p><strong>Date et heure de consentement :</strong> 24 décembre 2025 à 09:04</p>
+          <p><strong>Adresse IP de validation :</strong> Non enregistrée</p>
+          <p><strong>Montant payé :</strong> 129,80 €</p>
+          <p><strong>Référence :</strong> REF-8411-593118</p>
+          <p style="color: #1e40af; font-weight: bold;">&#10003; Consentement électronique validé</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h2>PREUVES TECHNIQUES DE TRANSACTION</h2>
+      <div style="background-color: #f8fafc; padding: 15px; border: 1px solid #e2e8f0;">
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="label">ID Transaction Stripe</div>
+            <div class="value">pi_REF84115931182308</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Horodatage de création</div>
+            <div class="value">24 décembre 2025 à 09:04</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Méthode de paiement</div>
+            <div class="value">Visa Débit</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Statut de paiement</div>
+            <div class="value">SUCCÈS – Paiement validé par Stripe</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="signature-section">
+      <h3 style="color: #1e40af;">Signature électronique authentique</h3>
+      <p>Ce document constitue une preuve légale de transaction et de consentement client.</p>
+      <div class="signature-box">
+        <div style="padding: 10px; background-color: #f8fafc; border: 1px solid #e2e8f0;">
+          <div style="font-weight: bold; color: #1e40af; margin-bottom: 8px;">SIGNATURE ÉLECTRONIQUE</div>
+          <div style="font-family: monospace; font-size: 14px; margin-bottom: 5px;">
+            Signataire : Cécile Veillard
+          </div>
+          <div style="font-family: monospace; font-size: 14px; margin-bottom: 5px;">
+            Horodatage : 2026-03-04 03:12:51Z
+          </div>
+          <div style="font-family: monospace; font-size: 14px; margin-bottom: 5px;">
+            Hash transaction : D182A1B77907FD07
+          </div>
+          <div style="font-family: monospace; font-size: 13px; margin-bottom: 5px; color: #334155;">
+            Signature : D0AD182A1B7
+          </div>
+          <div style="font-family: monospace; font-size: 14px; font-weight: bold; color: #1e40af;">
+            Conforme au règlement eIDAS (UE) 910/2014
+          </div>
+        </div>
+        <div class="signature-label">Document généré électroniquement le 4 mars 2026 à 03:12</div>
+        <div class="signature-label">Référence système : REF-8411-593118-pi_REF84115931182308</div>
+      </div>
+    </div>
+
+    <div class="legal-info">
+      <p>Ce reçu officiel atteste que le paiement a bien été reçu et enregistré. Il peut être utilisé comme preuve de paiement.</p>
+      <p>Conformément à la réglementation en vigueur, les informations personnelles sont protégées et ne seront pas divulguées à des tiers sans votre consentement explicite.</p>
+    </div>
+
+    <div class="footer">
+      <p>Pour toute question concernant ce reçu, veuillez contacter notre service client en précisant votre numéro de référence.</p>
+      <p>&copy; 2025 Raccordement.net – Tous droits réservés</p>
+    </div>
+
+  </div>
+</body>
+</html>
