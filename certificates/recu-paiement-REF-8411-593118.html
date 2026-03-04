@@ -8,118 +8,111 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: Arial, sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       color: #333;
-      padding: 15px;
+      padding: 8px;
     }
     .receipt {
       max-width: 780px;
       margin: 0 auto;
       border: 1px solid #ddd;
-      padding: 18px;
+      padding: 12px 16px;
     }
     .header {
       text-align: center;
-      margin-bottom: 14px;
+      margin-bottom: 8px;
       border-bottom: 2px solid #1e40af;
-      padding-bottom: 8px;
+      padding-bottom: 5px;
     }
-    h1 {
-      color: #1e40af;
-      font-size: 20px;
-    }
-    .receipt-number {
-      font-size: 13px;
-      color: #666;
-      margin-top: 3px;
-    }
+    h1 { color: #1e40af; font-size: 17px; }
+    .receipt-number { font-size: 12px; color: #666; margin-top: 2px; }
     .section-title {
-      font-size: 13px;
+      font-size: 11px;
       font-weight: bold;
       color: #1e40af;
       border-bottom: 1px solid #eee;
-      padding-bottom: 3px;
-      margin: 10px 0 7px 0;
+      padding-bottom: 2px;
+      margin: 7px 0 4px 0;
+      text-transform: uppercase;
     }
     .info-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6px 15px;
+      gap: 3px 15px;
     }
     .info-grid-3 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 6px 15px;
+      gap: 3px 10px;
+    }
+    .info-grid-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 3px 10px;
     }
     .info-item .label {
       font-weight: bold;
       color: #555;
-      font-size: 11px;
-      margin-bottom: 1px;
+      font-size: 10px;
     }
-    .info-item .value {
-      font-size: 12px;
-    }
+    .info-item .value { font-size: 11px; }
     .amount-row {
-      font-size: 18px;
+      font-size: 15px;
       color: #1e40af;
       font-weight: bold;
       text-align: right;
-      margin: 8px 0;
+      margin: 5px 0 4px 0;
     }
     .payment-box {
       background-color: #f9fafb;
-      padding: 8px 12px;
-      border-radius: 4px;
-      margin-bottom: 8px;
+      padding: 5px 10px;
+      border-radius: 3px;
+      margin-bottom: 5px;
     }
     .consent-box {
       background-color: #f0f9ff;
-      padding: 10px 14px;
-      border-left: 4px solid #1e40af;
-      margin-top: 6px;
+      padding: 6px 10px;
+      border-left: 3px solid #1e40af;
+      margin-top: 4px;
     }
-    .consent-box p {
-      margin: 3px 0;
-      font-size: 11.5px;
-    }
+    .consent-box p { margin: 1px 0; font-size: 10.5px; }
     .consent-summary {
       background-color: #e0f2fe;
-      padding: 8px 12px;
-      border-radius: 4px;
-      margin-top: 8px;
-      font-size: 11.5px;
+      padding: 5px 10px;
+      border-radius: 3px;
+      margin-top: 5px;
+      font-size: 10.5px;
     }
-    .consent-summary p { margin: 2px 0; }
+    .consent-summary p { margin: 1px 0; }
     .tech-box {
       background-color: #f8fafc;
-      padding: 8px 12px;
+      padding: 5px 10px;
       border: 1px solid #e2e8f0;
     }
     .sig-box {
       background-color: #f8fafc;
       border: 1px solid #e2e8f0;
-      padding: 10px 12px;
-      margin-top: 8px;
+      padding: 6px 10px;
+      margin-top: 4px;
     }
     .sig-label {
       text-align: center;
-      font-size: 11px;
+      font-size: 10px;
       color: #999;
-      margin-top: 5px;
+      margin-top: 3px;
     }
     .footer {
-      margin-top: 12px;
-      font-size: 11px;
+      margin-top: 8px;
+      font-size: 10px;
       color: #999;
       text-align: center;
       border-top: 1px solid #eee;
-      padding-top: 8px;
+      padding-top: 5px;
     }
     @media print {
       body { padding: 0; }
       .receipt { border: none; }
-      @page { size: A4; margin: 10mm; }
+      @page { size: A4; margin: 8mm; }
     }
   </style>
 </head>
@@ -132,7 +125,7 @@
     </div>
 
     <div class="section-title">Informations du client</div>
-    <div class="info-grid">
+    <div class="info-grid-4" style="gap:3px 10px;">
       <div class="info-item">
         <div class="label">Nom et prénom</div>
         <div class="value">Cécile Veillard</div>
@@ -168,14 +161,14 @@
     </div>
 
     <div class="section-title">Détails du paiement</div>
-    <div class="info-grid" style="margin-bottom:6px;">
+    <div class="info-grid-4" style="margin-bottom:4px;">
       <div class="info-item">
         <div class="label">Référence</div>
         <div class="value">REF-8411-593118</div>
       </div>
       <div class="info-item">
         <div class="label">Date de paiement</div>
-        <div class="value">24 décembre 2025 à 09h04</div>
+        <div class="value">24 déc. 2025 à 09h04</div>
       </div>
       <div class="info-item">
         <div class="label">Méthode</div>
@@ -206,64 +199,57 @@
       </div>
     </div>
 
-    <div class="section-title">DOCUMENT DE CONSENTEMENT ÉCLAIRÉ – SERVICE RACCORDEMENT ÉLECTRIQUE</div>
-    <div style="background:#f8fafc;padding:8px 12px;border:1px solid #e2e8f0;margin-bottom:6px;font-size:11.5px;">
-      <strong>Objet du service :</strong> Accompagnement personnalisé dans les démarches de raccordement électrique auprès d'Enedis (préparation du dossier, constitution des documents techniques, suivi administratif).
+    <div class="section-title">Consentement éclairé – Service Raccordement Électrique</div>
+    <div style="background:#f8fafc;padding:4px 10px;border:1px solid #e2e8f0;margin-bottom:4px;font-size:10.5px;">
+      <strong>Objet :</strong> Accompagnement personnalisé dans les démarches de raccordement électrique auprès d'Enedis (préparation du dossier, documents techniques, suivi administratif).
     </div>
     <div class="consent-box">
       <p><strong>Le client :</strong></p>
       <p>&#9745; A accepté les CGV, CGU, et Politique de confidentialité.</p>
-      <p>&#9745; A été informé que le service commence immédiatement après paiement (art. L221-28 C. conso.).</p>
-      <p>&#9745; Renonce expressément à son droit de rétractation.</p>
-      <p>&#9745; A été informé qu'il ne s'agit pas d'un service officiel Enedis, mais d'un accompagnement privé.</p>
+      <p>&#9745; A été informé que le service commence immédiatement après paiement (art. L221-28 C. conso.) et renonce à son droit de rétractation.</p>
+      <p>&#9745; A été informé qu'il s'agit d'un accompagnement privé, non officiel Enedis.</p>
       <p>&#9745; A fourni volontairement ses données personnelles pour le traitement de sa demande.</p>
       <div class="consent-summary">
-        <p><strong>Date et heure de consentement :</strong> 24 décembre 2025 à 09:04</p>
-        <p><strong>Montant payé :</strong> 129,80 €</p>
-        <p><strong>Référence :</strong> REF-8411-593118</p>
-        <p style="color:#1e40af;font-weight:bold;">&#10003; Consentement électronique validé</p>
+        <p><strong>Consentement :</strong> 24 décembre 2025 à 09:04 &nbsp;|&nbsp; <strong>Montant :</strong> 129,80 € &nbsp;|&nbsp; <strong>Référence :</strong> REF-8411-593118 &nbsp;|&nbsp; <span style="color:#1e40af;font-weight:bold;">&#10003; Validé électroniquement</span></p>
       </div>
     </div>
 
-    <div class="section-title">PREUVES TECHNIQUES DE TRANSACTION</div>
+    <div class="section-title">Preuves techniques de transaction</div>
     <div class="tech-box">
-      <div class="info-grid">
+      <div class="info-grid-4" style="gap:3px 10px;">
         <div class="info-item">
           <div class="label">ID Transaction Stripe</div>
-          <div class="value" style="font-family:monospace;font-size:11px;">pm_1Sho6tBVU6GhVKJFud8T42dN</div>
+          <div class="value" style="font-family:monospace;font-size:10px;">pm_1Sho6tBVU6GhVKJFud8T42dN</div>
         </div>
         <div class="info-item">
           <div class="label">Horodatage</div>
-          <div class="value">24 décembre 2025 à 09:04</div>
+          <div class="value">24 déc. 2025 – 09:04</div>
         </div>
         <div class="info-item">
-          <div class="label">Méthode de paiement</div>
+          <div class="label">Méthode</div>
           <div class="value">Visa Débit</div>
         </div>
         <div class="info-item">
-          <div class="label">Statut de paiement</div>
-          <div class="value">SUCCÈS – Paiement validé par Stripe</div>
+          <div class="label">Statut</div>
+          <div class="value">SUCCÈS – Validé par Stripe</div>
         </div>
       </div>
     </div>
 
     <div class="section-title">Signature électronique authentique</div>
     <div class="sig-box">
-      <div style="font-weight:bold;color:#1e40af;margin-bottom:5px;">SIGNATURE ÉLECTRONIQUE</div>
-      <div style="font-family:monospace;font-size:12px;line-height:1.8;">
-        Signataire : Cécile Veillard<br>
-        Horodatage : 2025-12-24 09:04:00Z<br>
-        Hash transaction : E42FA19BA43A3545<br>
-        Signature : D0AE42FA19B<br>
+      <div style="font-weight:bold;color:#1e40af;margin-bottom:3px;font-size:11px;">SIGNATURE ÉLECTRONIQUE</div>
+      <div style="font-family:monospace;font-size:10.5px;line-height:1.6;">
+        Signataire : Cécile Veillard &nbsp;|&nbsp; Horodatage : 2025-12-24 09:04:00Z<br>
+        Hash transaction : E42FA19BA43A3545 &nbsp;|&nbsp; Signature : D0AE42FA19B<br>
         <span style="color:#1e40af;font-weight:bold;">Conforme au règlement eIDAS (UE) 910/2014</span>
       </div>
     </div>
-    <div class="sig-label">Document généré électroniquement le 24 décembre 2025 à 09:04</div>
-    <div class="sig-label">Référence système : REF-8411-593118-pm_1Sho6tBVU6GhVKJFud8T42dN</div>
+    <div class="sig-label">Document généré électroniquement le 24 décembre 2025 à 09:04 &nbsp;|&nbsp; Réf. système : REF-8411-593118-pm_1Sho6tBVU6GhVKJFud8T42dN</div>
 
     <div class="footer">
-      <p>Conformément à la réglementation en vigueur, les informations personnelles sont protégées et ne seront pas divulguées à des tiers sans votre consentement explicite.</p>
-      <p style="margin-top:5px;font-weight:bold;">Protectassur LTD – 61 Bridge Street, Kington, England, HR5 3DJ</p>
+      <p>Informations personnelles protégées, non divulguées à des tiers sans consentement explicite.</p>
+      <p style="margin-top:3px;font-weight:bold;color:#555;">Protectassur LTD – 61 Bridge Street, Kington, England, HR5 3DJ</p>
       <p>&copy; 2025 Raccordement.net – Tous droits réservés</p>
     </div>
 
