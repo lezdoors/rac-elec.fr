@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { useState, useEffect, Suspense, lazy } from "react";
 import { GoogleSnippetsProvider } from "@/components/google-snippets-provider";
 import GoogleAnalyticsProvider from "@/components/google-analytics-provider";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 // Lazy load AdminProtectedRoute to avoid loading it on public pages
 const AdminProtectedRoute = lazy(() => import("@/components/admin/admin-protected-route"));
@@ -781,6 +782,8 @@ function App() {
             <Router />
           </GoogleSnippetsProvider>
         </GoogleAnalyticsProvider>
+        {/* Vercel Speed Insights for performance monitoring */}
+        <SpeedInsights />
       </>
     </QueryClientProvider>
   );
